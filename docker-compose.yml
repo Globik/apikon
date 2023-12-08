@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  mariadb:
+    image: mariadb
+    container_name: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: oriuu455
+      MYSQL_USER:  roulet
+      MYSQL_PASSWORD: roulet
+      MYSQL_DATABASE: roulet
+    volumes:
+     - ./db:/var/lib/mysql
+
+  rouletws:
+    image: rouletws
+    restart: always
+    ports:
+      - 40003:40003
+
+  rouletauth:
+    image: rouletauth
+    restart: always
+    environment:
+      PORT: 40002
+    ports:
+      - 40002:40002
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: no
+    ports:
+      - 40001:80
+    environment:
+      - PMA_HOST=mariadb
+      - PMA_PORT=3306
+      - PMA_ABSOLUTE_URI=https://ruletka.host/phpmyadmin
