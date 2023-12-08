@@ -1,4 +1,4 @@
-const hostname = window.location.hostname.includes('localhost') ? 'localhost' : (window.location.hostname.includes('m.') ? 'm.ruletka.host' : 'ruletka.host')
+const hostname = window.location.hostname.includes('localhost') ? 'localhost' : (window.location.hostname.includes('m.') ? 'm.ruletka.ru' : 'ruletka.ru')
 const scheme = document.location.protocol === 'https:' ? 'wss' : 'ws'
 const port = window.location.hostname.includes('localhost') ? 3000 : (scheme === 'wss' ? 443 : 80)
 const page = window.location.hostname.includes('localhost') ? '/' : '/websocket/'
@@ -15,7 +15,7 @@ if (token) {
 // Сам WebSocket сервер можешь не трогать т.к. NGINX настроенный мною уже
 // проксирует с 8081 порта на тот адрес
 
-/*
+/* gggg
 var myPeerConnection = new RTCPeerConnection({ 
  iceServers: [ 
  { urls: "stun:stun.relay.metered.ca:80", },

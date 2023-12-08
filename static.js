@@ -26,7 +26,7 @@ config();
 ]))();
 
 const app = express();
-const suka = "./web1";
+const suka = "./dist";
 app.use(express.static(suka));
 
 //app.use(cors());
