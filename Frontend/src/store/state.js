@@ -1,4 +1,4 @@
-const hostname = window.location.hostname.includes('localhost') ? 'localhost' : (window.location.hostname.includes('m.') ? 'm.ruletka.ru' : 'ruletka.ru')
+const hostname = window.location.hostname.includes('localhost') ? 'localhost' : (window.location.hostname.includes('m.') ? 'm.rouletka.ru' : 'rouletka.ru')
 const scheme = document.location.protocol === 'https:' ? 'wss' : 'ws'
 const port = window.location.hostname.includes('localhost') ? 3000 : (scheme === 'wss' ? 443 : 80)
 const page = window.location.hostname.includes('localhost') ? '/' : '/websocket/'
