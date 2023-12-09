@@ -29,7 +29,7 @@ config();
 const app = express();
 const suka = "./dist";
 const suka2 = "./Frontend/dist"
-app.use(express.static(suka));
+app.use(express.static(suka2));
 
 //app.use(cors());
 app.use(express.json());
