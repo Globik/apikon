@@ -1,12 +1,12 @@
 {
   "background_color": "#ffffff",
-  "description": "Ruletka.Host",
+  "description": "Ruletka.Ru",
   "dir": "ltr",
   "display": "standalone",
   "name": "roulet",
   "orientation": "portrait",
   "scope": "/",
-  "short_name": "Ruletka.Host",
+  "short_name": "Ruletka.Ru",
   "start_url": "/",
   "theme_color": "#204a87",
  "icons": [
@@ -31,7 +31,7 @@
    "type": "image/png"
   },
   {
-   "src": "/android-icon-144x144.png",
+   "src": "/p/android-icon-144x144.png",
    "sizes": "144x144",
    "type": "image/png"
   },

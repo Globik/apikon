@@ -6,7 +6,7 @@ import MobileHome from '../views/MobileHome.vue'
 const isMobile = () => (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
 
 Vue.use(Router)
-
+console.log('***BASE URL: ', process.env.BASE_URL)
 export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,

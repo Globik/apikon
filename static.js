@@ -1,3 +1,4 @@
+//import translate from '@vitalets/google-translate-api';
 import https from "https";
 import fs from "fs";
 import express from 'express';
@@ -27,6 +28,7 @@ config();
 
 const app = express();
 const suka = "./dist";
+const suka2 = "./Frontend/dist"
 app.use(express.static(suka));
 
 //app.use(cors());
@@ -37,13 +39,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post('/api/auth', async(req, res) => {
     const { name, password } =  req.body;
-
+console.log("name, password: ", name, password);
     if (!name || !password) {
-        return res.status(400).json({ error: true, message: 'Введите имя или пароль!' });
+        return res.json({ error: true, message: 'Введите имя или пароль!' });
     }
 
     if (!(name.length >= 2 && password.length >= 6)) {
-        return res.status(400).json({ error: true, message: 'Пароль должен содержать минимум 6 символов, а Имя минимум 2!' });
+        return res.json({ error: true, message: 'Пароль должен содержать минимум 6 символов, а Имя минимум 2!' });
     }
 
     const user = await Users.findOne({
@@ -57,7 +59,7 @@ app.post('/api/auth', async(req, res) => {
     });
 
     if (!user) {
-        return res.status(400).json({ error: true, message: 'Имя или пароль неверный!' });
+        return res.json({ error: true, message: 'Имя или пароль неверный!' });
     }
 
     user.password = undefined;
@@ -67,32 +69,32 @@ app.post('/api/auth', async(req, res) => {
 
 app.get('/api/user', async(req, res) => {
     const { headers } =  req;
-
+console.log('headers: ', headers)
     if (headers.authorization) {
         const user = await Users.findOne({
             where: { token: req.headers.authorization.replace('Bearer ', '') }
         });
     
         if (!user) {
-            return res.status(401).json({ error: true, message: 'Ошибка авторизации! Попробуйте зайти по новой.' });
+            return res.json({ error: true, message: 'Ошибка авторизации! Попробуйте зайти по новой.' });
         }
         user.password = undefined;
     
         res.json({ user: user })
     } else {
-        return res.status(400).json({ error: true, message: 'Ошибка авторизации! Попробуйте зайти по новой.' });
+        return res.json({ error: true, message: 'Ошибка авторизации! Попробуйте зайти по новой.' });
     }
 });
 
 app.post('/api/register', async(req, res) => {
     const { name, password } =  req.body;
-
+console.log("name, password: ", name, password);
     if (!name || !password) {
-        return res.status(400).json({ error: true, message: 'Введите имя или пароль!' });
+        return res.json({ error: true, message: 'Введите имя или пароль!' });
     }
 
     if (!(name.length >= 2 && password.length >= 6)) {
-        return res.status(400).json({ error: true, message: 'Пароль должен содержать минимум 6 символов, а Имя минимум 2!' });
+        return res.json({ error: true, message: 'Пароль должен содержать минимум 6 символов, а Имя минимум 2!' });
     }
 
     try {
@@ -106,23 +108,23 @@ app.post('/api/register', async(req, res) => {
 
         res.json({ user: user })
     } catch(e) {
-        console.error(e);
+        console.log("**here error ***", e.message, e.code);
         
         const { errors } = e;
         const promises = [];
 
         for(let i in errors) {
             const error = errors[i];
-            promises.push(translate(error.message, {to: 'ru'}))
+            promises.push(/*translate(*/error.message/*, {to: 'ru'})*/)
         }
 
         Promise.all(promises).then((values) => {
-            res.status(500).json({
+            res.json({
                 error: true,
-                messages: values.map((item) => item.text)
+                message: "Такой ник уже существует!"//values.map((item) => item.text)
             });
         }).catch((error) => {
-            res.status(500).json({
+            res.json({
                 error: true,
                 message: 'Произошла ошибка сервера, попробуйте чуть позже!'
             });

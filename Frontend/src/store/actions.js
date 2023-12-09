@@ -27,10 +27,65 @@ function handleGetUserMediaError (err) {
 }
 
 export default {
-  registerUser ({ commit }, user) {
+  async registerUser ({ commit }, user) {
     commit('clearError')
     commit('setLoading', true)
+console.warn('user regi:', user);
+try{
+var r=await fetch('/api/register', {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+      },
+    body: JSON.stringify(user)
+    });
+    
+  console.log('res ', r);
+    if(r.ok){
+		console.log('ok');
+		let data=await r.json();
+		console.log('data: ', data);
+		if(data.error){
+			 commit('setError', data.message);
+			 commit('setLoading', false);
+			  setTimeout(() => {
+          commit('clearError')
+        }, 3500)
+return;
+			 
+		}
+		if (data.user && data.user.token) {
+          localStorage.setItem('accessToken', data.user.token)
+          localStorage.setItem('currentUser', JSON.stringify(data.user))
+         // axios.defaults.headers.common['Authorization'] = `Bearer ${data.user.token}`
 
+          commit('setUser', data.user)
+          commit('setToken', data.user.token)
+          commit('setLoading', false)
+
+          location.reload()
+        }
+		
+	}
+}catch(error){
+	/* if (error.response && error.response.data && error.response.data.message) {
+          commit('setError', error.response.data.message)
+        } else if (error.response && error.response.data && error.response.data.messages) {
+          commit('setError', error.response.data.messages[0])
+        } else {
+          commit('setError', error.message)
+        }
+        */ 
+        commit('setLoading', false)
+
+        setTimeout(() => {
+          commit('clearError')
+        }, 3500)
+
+        console.error(error)
+	
+	}
+/*
     axios
       .post('/api/register', {
         ...user
@@ -66,22 +121,37 @@ export default {
 
         console.error(error)
       })
+      */
   },
-  loginUser ({ commit }, user) {
+  async loginUser ({ commit }, user) {
     commit('clearError')
     commit('setLoading', true)
-
-    axios
-      .post('/api/auth', {
-        ...user
+console.warn("user: ", user);
+try{
+   let r = await fetch('/api/auth', {
+	   method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+      },
+    body: JSON.stringify(user)
       })
-      .then(response => {
-        const { data } = response
-
-        if (data.user && data.user.token) {
+      if(r.ok){
+		console.log('ok');
+		let data=await r.json();
+		console.log('data: ', data);
+		if(data.error){
+			 commit('setError', data.message);
+			 commit('setLoading', false);
+			  setTimeout(() => {
+          commit('clearError')
+        }, 3500)
+return;
+			 
+		}
+		if (data.user && data.user.token) {
           localStorage.setItem('accessToken', data.user.token)
           localStorage.setItem('currentUser', JSON.stringify(data.user))
-          axios.defaults.headers.common['Authorization'] = `Bearer ${data.user.token}`
+         // axios.defaults.headers.common['Authorization'] = `Bearer ${data.user.token}`
 
           commit('setUser', data.user)
           commit('setToken', data.user.token)
@@ -89,8 +159,26 @@ export default {
 
           location.reload()
         }
-      })
-      .catch(error => {
+		
+	}
+      /*
+      .then(response => {
+        const { data } = response
+
+        if (data.user && data.user.token) {
+          localStorage.setItem('accessToken', data.user.token)
+          localStorage.setItem('currentUser', JSON.stringify(data.user))
+         // axios.defaults.headers.common['Authorization'] = `Bearer ${data.user.token}`
+
+          commit('setUser', data.user)
+          commit('setToken', data.user.token)
+          commit('setLoading', false)
+
+          location.reload()
+        }
+      })*/
+      }catch(error){
+		  /*
         if (error.response && error.response.data && error.response.data.message) {
           commit('setError', error.response.data.message)
         } else if (error.response && error.response.data && error.response.data.messages) {
@@ -98,6 +186,7 @@ export default {
         } else {
           commit('setError', error.message)
         }
+        */ 
         commit('setLoading', false)
 
         setTimeout(() => {
@@ -105,19 +194,20 @@ export default {
         }, 3500)
 
         console.error(error)
-      })
+      }
   },
   logoutUser ({ state, commit }) {
     localStorage.removeItem('access_token')
     localStorage.removeItem('current_user')
-    axios.defaults.headers.common['Authorization'] = null
+   // axios.defaults.headers.common['Authorization'] = null
 
     commit('setUser', null)
     commit('setToken', null)
 
     location.reload()
   },
-  updateUser ({ commit }, force = false) {
+ async updateUser ({ commit }, force = false) {
+	  console.error("Must updateUser()");
     const user = localStorage.getItem('currentUser')
     const token = localStorage.getItem('accessToken')
 
@@ -126,31 +216,40 @@ export default {
     }
 
     if (!token && !force) return
-
-    axios
-      .get('/api/user')
-      .then(response => {
-        const { data } = response
-
+try{
+   let r = await fetch('/api/user');
+   
+      if(r.ok){
+        const { data } = r;
+if(data.error){
+	
+	 commit('setError', data.message);
+	  setTimeout(() => {
+          commit('clearError')
+        }, 3500)
+return;
+}
         if (data.user) {
           localStorage.setItem('currentUser', JSON.stringify(data.user))
 
           commit('setUser', data.user)
         }
-      })
-      .catch(error => {
+      }
+      }catch(error) {
+		  /*
         if (error.response && error.response.data && error.response.data.message) {
           commit('setError', error.response.data.message)
         } else {
           commit('setError', error.message)
         }
-
+*/
+commit('setError', error.message);
         setTimeout(() => {
           commit('clearError')
         }, 3500)
 
         console.error(error)
-      })
+      }
   },
   /**
    * A new ICE candidate has been received from the other peer. Call

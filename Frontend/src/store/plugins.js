@@ -65,7 +65,7 @@ const webSocketPlugin = ({ state, commit, dispatch }) => {
   })
 
   rootState.socket.addEventListener('close', (evt) => {
-alert('Websocket closed!');
+//alert('Websocket closed!');
     util.log(`The websocket connection has been closed with error code ${evt.code}: ${evt.reason}`)
   })
 
