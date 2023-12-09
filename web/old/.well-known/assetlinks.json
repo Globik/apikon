@@ -1,0 +1,13 @@
+
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "host.ruletka.twa",
+      "sha256_cert_fingerprints":
+        ["6E:E3:7F:28:3E:5C:F4:7C:67:0D:DC:F0:76:28:ED:8F:3A:A9:03:E2:42:19:F3:BB:BC:C3:2B:B5:87:5D:05:70","01:98:C6:84:D3:FC:31:63:32:97:AE:46:D0:D5:09:DA:39:12:84:08:92:15:BB:AA:B8:0B:C4:ED:59:BD:FD:7B"]
+    }
+  }
+]
+

@@ -3,11 +3,11 @@
   "description": "Rouletka.Ru",
   "dir": "ltr",
   "display": "standalone",
-  "name": "roulet",
+  "name": "rouletka",
   "orientation": "portrait",
   "scope": "/",
   "short_name": "Rouletka.Ru",
-  "start_url": "/",
+  "start_url": "https://rouletka.ru",
   "theme_color": "#204a87",
  "icons": [
   {
@@ -31,7 +31,7 @@
    "type": "image/png"
   },
   {
-   "src": "/p/android-icon-144x144.png",
+   "src": "/android-icon-144x144.png",
    "sizes": "144x144",
    "type": "image/png"
   },

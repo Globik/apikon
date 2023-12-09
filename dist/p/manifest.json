@@ -1,12 +1,12 @@
 {
   "background_color": "#ffffff",
-  "description": "Ruletka.Ru",
+  "description": "Rouletka.Ru",
   "dir": "ltr",
   "display": "standalone",
   "name": "roulet",
   "orientation": "portrait",
   "scope": "/",
-  "short_name": "Ruletka.Ru",
+  "short_name": "Rouletka.Ru",
   "start_url": "/",
   "theme_color": "#204a87",
  "icons": [
