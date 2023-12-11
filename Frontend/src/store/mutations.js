@@ -29,7 +29,9 @@ function iceConnectionStateChangeHandler (event) {
     case 'closed':
     case 'failed':
     case 'disconnected':
-      closeVideoCall()
+    // и вот тут бы сигнал на сервер послать, что, мол, готов к приятию другого собеседника
+    rootState.socket.emit('search-peer');
+     // closeVideoCall()
       break
   }
 }

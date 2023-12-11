@@ -16,7 +16,7 @@ export default {
 
   watch: {
     remoteStream (stream) {
-      this.$refs.remote.srcObject = stream
+    if(this.$refs.remote)  this.$refs.remote.srcObject = stream
     },
     localStream (stream) {
       this.$refs.local.srcObject = stream

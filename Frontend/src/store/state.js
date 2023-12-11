@@ -44,6 +44,10 @@ export default {
   connectionState: 'closed',
   connectionConfig: {
 	  iceServers: [ 
+	  {
+        urls: 'stun:stun.l.google.com:19302'
+      },
+      { urls: 'turn:relay1.expressturn.com:3478', username: 'efZIKNPZ0Y17GFG3WZ', credential: 'HIYNupkIAHFXSgW8'},
  { urls: "stun:stun.relay.metered.ca:80", },
 { urls: "turn:a.relay.metered.ca:80", username: "33c88ed716afa1a802b5116a", credential: "YlI1/qfkEWya3Q4p", }, 
 { urls: "turn:a.relay.metered.ca:80?transport=tcp", username: "33c88ed716afa1a802b5116a", credential: "YlI1/qfkEWya3Q4p", },
@@ -52,6 +56,7 @@ export default {
   ]
 	  /*
     iceServers: [
+    
       {
         urls: 'stun:openrelay.metered.ca:80'
       },
