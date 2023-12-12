@@ -15,7 +15,7 @@ export default {
   },
   setup () {
     return {
-      isMobile: (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
+      isMobile: false//(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
     }
   }
 }
@@ -25,11 +25,10 @@ export default {
 #app {
   border-right: 1px solid #ddd;
   width: 90%;
-  margin-left: 5%;
-  border-right: 1px solid #ddd;
+  margin: 0.5vh auto;
+  background:red;
   border-left: 1px solid #ddd;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+ 
+  height:99vh;
 }
 </style>

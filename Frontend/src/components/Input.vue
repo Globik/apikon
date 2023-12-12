@@ -1,7 +1,7 @@
 <template>
   <div id="input" class="flex">
     <div class="input-area">
-      <input-toolbar @addEmoji="addEmoji"></input-toolbar>
+     <!-- <input-toolbar @addEmoji="addEmoji"></input-toolbar> -->
       <textarea class="textarea" ref="textarea" @keypress.stop="handleInput"></textarea>
     </div>
 
@@ -70,14 +70,14 @@ export default {
   border-top: 1px solid #ddd;
   border-left: 1px solid #ddd;
   //flex: 1 0 auto;
-
   .input-area {
     flex: 1 1 auto;
-    padding: 5px 20px;
+    padding: 0px 0px;
 
     .textarea {
       width: 100%;
-      height: 60px;
+      height: 100%;
+      
       resize: none;
       border: none;
       padding: 0;
@@ -94,6 +94,14 @@ export default {
       width: 120px;
       text-align: center;
     }
+    @media screen and (max-width: 452px) and (orientation: portrait){
+		.send{
+			width:50px;
+		}
+	}
+  }
+  @media screen and (max-width: 452px) and (orientation: portrait){
+	  
   }
 }
 </style>

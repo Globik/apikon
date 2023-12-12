@@ -22,5 +22,8 @@ export default {
 #container {
   display: block;
   height: 100%;
+  background:yellow;
+  margin:0;
+  padding:0;
 }
 </style>

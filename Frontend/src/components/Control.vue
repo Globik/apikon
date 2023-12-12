@@ -96,4 +96,28 @@ div {
   width: 100%;
   text-align: center;
 }
+@media screen and (max-width: 452px) and (orientation: portrait){
+.control{
+	display:block;
+}
+	.start{
+	font-size:4vw;
+	padding:4vw;
+		
+		margin-top:0.5rem;
+		margin-left:0.4rem;
+	}
+	.next{
+	font-size:4vw;
+	padding:4vw;
+		margin-top:0.5rem;
+	}
+	.stop{
+		font-size:4vw;
+	padding:4vw;
+		
+		margin-top:0.5rem;
+		margin-left:0.4rem;
+	}
+}
 </style>

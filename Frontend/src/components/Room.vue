@@ -27,13 +27,15 @@ export default {
   height: 40%;
   grid-template-columns: 1fr 4% 1fr;
   grid-auto-rows: 1fr 110px;
+  background:brown;
 }
 #control {
   grid-row-start: 1;
   grid-row-end: 3;
+  background:green;
 }
 #messages {
-  width: 95%;
+  width: 99%;
   height: 85%;
   grid-column-start: 3;
 }
@@ -42,5 +44,23 @@ export default {
   height: 110px;
   width: 100%;
   grid-row-end: 3;
+}
+@media screen and (max-width: 452px) and (orientation: portrait){
+	#room{
+		display:block;
+		height:10%;
+	}
+	#control{
+		height:100%;
+		width:100%;
+	}
+	#input {
+		height:44px;
+	}
+	#messages {
+		background:black;
+		height:440%;
+		width:100%;
+	}
 }
 </style>

@@ -46,27 +46,59 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less" scoped>
 #webcam {
-  display: flex;
-  flex-direction: row;
-  overflow: auto;
-  padding: 0 10px;
+  display: block;
+  position:relative;
+  background:yellow;
+  
+  padding: 0;
+  
   height: 60%;
-  margin-top: 10px;
+  margin: 0;
   box-sizing: border-box;
-  justify-content: space-between;
+  
 
   .partner, .you {
-    height: 100%;
-    width: 48%;
-    overflow: hidden;
+  box-sizing: border-box;
+  display:inline-block;
+    height: calc(100% - 2rem);
+    width: 50%;
+    verflow: hidden;
+    margin:0;
+    padding:0;
   }
+ 
 
   h2 {
     color: #767676;
-    font-size: 0.8rem;
-    margin-bottom: 5px;
+    font-size: 1rem;
+    padding-left: 0.8rem;
+    background:brown;
+    height:2rem;
+    line-height:2rem;
   }
-
+@media screen and (max-width: 452px) and (orientation: portrait){
+#webcam{
+	height:4%;
+}
+	h2{
+	background:yellow;
+	}
+	.partner{
+		display:block;
+		position:relative;
+		border:1px solid blue;
+		width:100%;
+	}
+	.you{
+		display:block;
+		position:absolute;
+		width:25%;
+		height:20%;
+		brder:1px solid green;
+		bottom:calc(0px + 3.2rem);
+		left:1.2rem;
+	}
+	}
   .online {
     position: absolute;
     top: 40px;
@@ -76,10 +108,17 @@ export default {
   }
 
   video {
+  object-fit:cover;
     width: 100%;
-    min-height: 100%;
+    order:1px solid red;
+    height: 99.9%;
     background-color: #333;
-    box-shadow: 0 12px 15px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    ox-shadow: 0 12px 15px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
   }
 }
+
+ @media screen and (max-width: 452px) and (orientation: portrait){
+#webcam{
+	height:40%;
+}}
 </style>

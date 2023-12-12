@@ -5,7 +5,7 @@ import express from 'express';
 import WebSocket , { WebSocketServer } from 'ws';
 import Users from './models/Users.js';
 import crypto from 'crypto';
-
+import cors from 'cors';
 
 import { generate } from 'rand-token';
 
@@ -31,7 +31,7 @@ const suka = "./dist";
 const suka2 = "./Frontend/dist"
 app.use(express.static(suka2));
 
-//app.use(cors());
+if(process.env.DEVELOPMENT=='yes')app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

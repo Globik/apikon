@@ -1,6 +1,6 @@
 import util from '../util'
 import axios from 'axios'
-
+const uri=process.env.NODE_ENV=='development'?'http://localhost:3000':'';
 /**
  * Handle errors which occur when trying to access the local media
  * hardware; that is, exceptions thrown by getUserMedia(). The two most
@@ -32,7 +32,7 @@ export default {
     commit('setLoading', true)
 console.warn('user regi:', user);
 try{
-var r=await fetch('/api/register', {
+var r=await fetch(uri+'/api/register', {
     method: "POST",
     headers: {
         "Content-Type": "application/json",
@@ -128,7 +128,7 @@ return;
     commit('setLoading', true)
 console.warn("user: ", user);
 try{
-   let r = await fetch('/api/auth', {
+   let r = await fetch(uri+'/api/auth', {
 	   method: "POST",
     headers: {
         "Content-Type": "application/json",

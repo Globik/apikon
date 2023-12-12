@@ -57,7 +57,7 @@ function signalingStateChangeHandler (event) {
 
   switch (event.target.signalingState) {
     case 'closed':
-      closeVideoCall()
+    //  closeVideoCall()
       break
   }
 }
