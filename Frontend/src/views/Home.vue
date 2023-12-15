@@ -28,7 +28,7 @@ export default {
   margin: 0;
   ackground:red;
   boder-left: 1px solid #ddd;
- overflow:auto;
-  height:100vh;
+ overflow-y: scroll;
+  height:110vh;
 }
 </style>

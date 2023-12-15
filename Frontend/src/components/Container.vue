@@ -21,10 +21,10 @@ export default {
 <style lang="less" scoped>
 #container {
   display: block;
-  height: 100%;
+  height: 90%;
   bckground:yellow;
   margin:0;
   padding:0;
-  overflow:auto;
+  overflow-y: scroll;
 }
 </style>
