@@ -63,9 +63,9 @@ div {
   grid-row-start: 2;
 }
 .start {
-  font-size: 50px;
+  font-size: 2vw;
   border-radius: 10px;
-  height: 100%;
+  height: 29%;
   width: 100%;
   text-align: center;
 }
@@ -74,10 +74,10 @@ div {
   grid-row-start: 2;
 }
 .stop {
-  font-size: 50px;
+  font-size: 2vw;
   border-radius: 10px;
   background: linear-gradient(#c50000,#a10000 25%,#640000);
-  height: 100%;
+  height: 29%;
   width: 100%;
   text-align: center;
 }
@@ -89,35 +89,62 @@ div {
   grid-row-start: 2;
 }
 .next {
-  font-size: 50px;
+  font-size: 2vw;
   border-radius: 10px;
   grid-column-start: 3;
-  height: 100%;
+  height: 29%;
   width: 100%;
   text-align: center;
 }
 @media screen and (max-width: 452px) and (orientation: portrait){
 .control{
 	display:block;
+	width:100%;
+	height:40px;
+	  flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    text-align:center;
 }
 	.start{
 	font-size:4vw;
 	padding:4vw;
 		
-		margin-top:0.5rem;
-		margin-left:0.4rem;
+		margin-top:0.3rem;
+		
+	}
+	.div_next{
+		display:inline-block;
+		width:45%;
+		ackground:yellow;
+		brder:10px solid green;
+	}
+	.div_start{
+		display:inline-block;
+		width:40%;
+		margin-left:6px;
+		ackground:blue;
+	}
+	.div_stop{
+		display:inline-block;
+		width:40%;
 	}
 	.next{
 	font-size:4vw;
 	padding:4vw;
-		margin-top:0.5rem;
+		margin-top:0.3rem;
+		idth:50%;
+		margin-left:5px;
+		
 	}
+	
 	.stop{
 		font-size:4vw;
 	padding:4vw;
 		
-		margin-top:0.5rem;
-		margin-left:0.4rem;
+		margin-top:0.3rem;
+	
 	}
 }
 </style>

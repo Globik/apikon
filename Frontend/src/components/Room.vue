@@ -24,26 +24,30 @@ export default {
 <style lang="less" scoped>
 #room {
   display: grid;
-  height: 40%;
+  height:calc(100% - 60%); 
   grid-template-columns: 1fr 4% 1fr;
   grid-auto-rows: 1fr 110px;
-  background:brown;
+  background:black;
 }
 #control {
   grid-row-start: 1;
   grid-row-end: 3;
-  background:green;
+  ackground:green;
 }
 #messages {
-  width: 99%;
-  height: 85%;
+  width: 100%;
+  height: 100%;
   grid-column-start: 3;
+  bckground:pink;
+  border-radius:5px;
 }
 #input {
   grid-column-start: 3;
   height: 110px;
   width: 100%;
   grid-row-end: 3;
+  background: black;
+  border-radius:5px;
 }
 @media screen and (max-width: 452px) and (orientation: portrait){
 	#room{
@@ -55,12 +59,16 @@ export default {
 		width:100%;
 	}
 	#input {
-		height:44px;
+		height:45px;
 	}
 	#messages {
-		background:black;
-		height:440%;
+	display:block;
+	position:absolute;
+	bottom:120px;
+		bckgund:gray;
+		height:60%;
 		width:100%;
+	
 	}
 }
 </style>

@@ -1,13 +1,15 @@
 <template>
   <aside id="webcam">
+  <div class="head">
     <online class="online"></online>
+    </div>
     <div class="partner">
-      <h2>Partner</h2>
+     <!-- <h2>Partner</h2> -->
       <!-- <video autoplay ref="remote" @loadedmetadata="loaded"></video> -->
       <video autoplay ref="remote"></video>
     </div>
     <div class="you">
-      <h2>You</h2>
+     <!-- <h2>You</h2> -->
       <!-- <video autoplay muted ref="local" @loadedmetadata="loaded"></video> -->
       <video autoplay muted ref="local"></video>
     </div>
@@ -48,7 +50,7 @@ export default {
 #webcam {
   display: block;
   position:relative;
-  background:yellow;
+  background:black;
   
   padding: 0;
   
@@ -60,14 +62,37 @@ export default {
   .partner, .you {
   box-sizing: border-box;
   display:inline-block;
-    height: calc(100% - 2rem);
+    height: calc(100% - 40px);
     width: 50%;
     verflow: hidden;
     margin:0;
     padding:0;
   }
- 
-
+  .partner video{
+	  background:silver;
+  }
+ .you video{
+	 background-image: url("/webcam.png");
+	 background-repeat: no-repeat;
+	 background-position: center;
+	 position:relative;
+ }
+ .you::after{
+	 position:absolute;
+	 top:339px;
+	 left:71%;
+	 content:"Please run webcam";
+	 color:white;
+	 width:auto;
+	 font-size:1vw;
+	 font-weight:bold;
+ }
+.head{
+display:block;
+position:relative;
+	height:40px;
+	background: black;
+}
   h2 {
     color: #767676;
     font-size: 1rem;
@@ -78,7 +103,7 @@ export default {
   }
 @media screen and (max-width: 452px) and (orientation: portrait){
 #webcam{
-	height:4%;
+	height:100%;
 }
 	h2{
 	background:yellow;
@@ -86,8 +111,9 @@ export default {
 	.partner{
 		display:block;
 		position:relative;
-		border:1px solid blue;
+		order:1px solid blue;
 		width:100%;
+		background:red;
 	}
 	.you{
 		display:block;
@@ -95,16 +121,28 @@ export default {
 		width:25%;
 		height:20%;
 		brder:1px solid green;
-		bottom:calc(0px + 3.2rem);
+		top:5rem;
 		left:1.2rem;
 	}
+	.you::after{
+	 position:absolute;
+	 top:100px;
+	 left:20px;
+	 content:"Please run webcam";
+	 color:white;
+	 width:auto;
+	 font-size:2vw;
+ }
 	}
   .online {
     position: absolute;
-    top: 40px;
-    right: 10px;
+    top: 25%;
+    left: 10px;
     padding: 0 10px;
     z-index: 1;
+    color:white;
+    font-weight:bold;
+    background:rgba(45,3,55);
   }
 
   video {
@@ -119,6 +157,8 @@ export default {
 
  @media screen and (max-width: 452px) and (orientation: portrait){
 #webcam{
-	height:40%;
+display:block;
+position:relative;
+	height:calc(100% - 120px);
 }}
 </style>

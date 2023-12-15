@@ -2,7 +2,7 @@
   <div id="input" class="flex">
     <div class="input-area">
      <!-- <input-toolbar @addEmoji="addEmoji"></input-toolbar> -->
-      <textarea class="textarea" ref="textarea" @keypress.stop="handleInput"></textarea>
+      <textarea class="textarea" ref="textarea" @keypress.stop="handleInput" placeholder="Your message"></textarea>
     </div>
 
     <div class="action-area">
@@ -67,8 +67,9 @@ export default {
 
 <style lang="less" scoped>
 #input {
-  border-top: 1px solid #ddd;
-  border-left: 1px solid #ddd;
+  boder-top: 1px solid #ddd;
+  borer-left: 1px solid #ddd;
+  
   //flex: 1 0 auto;
   .input-area {
     flex: 1 1 auto;
@@ -77,12 +78,15 @@ export default {
     .textarea {
       width: 100%;
       height: 100%;
-      
+      background:rgba(4,17,3,0.7);
       resize: none;
       border: none;
       padding: 0;
       outline: none;
       font-size: 1rem;
+      border-radius:10px;
+      color:white;
+      padding:10px;
     }
   }
 
@@ -98,6 +102,7 @@ export default {
 		.send{
 			width:50px;
 		}
+		.input{bakground:orange;height:15%;}
 	}
   }
   @media screen and (max-width: 452px) and (orientation: portrait){

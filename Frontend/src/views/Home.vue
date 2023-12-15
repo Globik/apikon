@@ -23,12 +23,12 @@ export default {
 
 <style scoped>
 #app {
-  border-right: 1px solid #ddd;
-  width: 90%;
-  margin: 0.5vh auto;
-  background:red;
-  border-left: 1px solid #ddd;
+  brder-right: 1px solid #ddd;
+  width: 100%;
+  margin: 0;
+  ackground:red;
+  boder-left: 1px solid #ddd;
  
-  height:99vh;
+  height:100vh;
 }
 </style>

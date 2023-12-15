@@ -22,7 +22,7 @@ export default {
 #container {
   display: block;
   height: 100%;
-  background:yellow;
+  bckground:yellow;
   margin:0;
   padding:0;
 }

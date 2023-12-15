@@ -1,5 +1,6 @@
 <template>
-  <transition-group tag="ul" id="messages" name="messages" @enter="enter">
+  <transition-group tag="ul" id="messages" name="messages" @enter="enter" ref="chat"  :class="hide"  @click="fucker(this);">
+  
     <li key="open" v-if="connectionState === 'open'" class="system message">
       <p class="text">
         <span class="tip"><i class="fas fa-check"></i></span>
@@ -14,9 +15,10 @@
       </p>
     </li>
 
-    <li v-for="(message, index) of messages" :key="`${index}`" :class="message.role" class="message">
+    <li v-for="(message, index) of messages" :key="`${index}`" :class="message.role" class="message" @click="fucker(this);">
       <p class="text"><span class="tip" v-html="message.html"></span>{{message.text}}</p>
     </li>
+   
   </transition-group>
 </template>
 
@@ -33,12 +35,22 @@ export default {
       el.scrollIntoView({ block: 'end', behavior: 'auto' })
       // let chatWrapper = el.parentNode.parentNode
       // chatWrapper.scrollTop = chatWrapper.scrollHeight - chatWrapper.clientHeight
-    }
-  }
+    },
+    fucker(el){
+   // alert(1)
+    this.$refs.chat.className="hide";
+		//alert(this.$refs.chat.className);
+	}
+ 
+}
 }
 </script>
 
 <style lang="less" scoped>
+.chatbox{
+	background:blue;
+	height:100%;
+}
 #messages {
   display: block;
   padding: 20px;
@@ -46,9 +58,14 @@ export default {
   width: 100%;
   height: 100%;
   overflow-y: auto;
-  border-left: 1px solid #ddd;
+  order-left: 1px solid #ddd;
   position: relative;
-
+  backound:yellow;
+  
+#messages.hide{
+	display:none;
+	color:red;
+}
   .messages-enter {
     opacity: 0;
     transform: translateY(20px);
@@ -64,7 +81,7 @@ export default {
     clear: both;
     max-width: 70%;
     list-style-type: none;
-    margin: 10px 0;
+    margin: 0px 0;
     transition: all 0.5s;
   }
 
@@ -83,7 +100,7 @@ export default {
     float: right;
     background-color: lawnGreen;
     position: relative;
-
+    margin-top:10px;
     .text::after {
       content: '';
       width: 0;
@@ -111,6 +128,21 @@ export default {
       left: -10px;
       border-color: whiteSmoke transparent transparent transparent;
     }
+     
+#messages.hide{
+	display:none;
+	color:red;
+}
   }
+  
+   
+#messages.hide{
+	display:none;
+	color:red;
+}
+  @media screen and (max-width: 452px) and (orientation: portrait){
+
+	
+}
 }
 </style>
