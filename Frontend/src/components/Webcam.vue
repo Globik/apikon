@@ -77,16 +77,7 @@ export default {
 	 background-position: center;
 	 position:relative;
  }
- .you::after{
-	 position:absolute;
-	 top:339px;
-	 left:71%;
-	 content:"Please run webcam";
-	 color:white;
-	 width:auto;
-	 font-size:1vw;
-	 font-weight:bold;
- }
+ 
 .head{
 display:block;
 position:relative;
@@ -104,6 +95,7 @@ position:relative;
 @media screen and (max-width: 452px) and (orientation: portrait){
 #webcam{
 	height:100%;
+	overflow:auto;
 }
 	h2{
 	background:yellow;
@@ -118,21 +110,13 @@ position:relative;
 	.you{
 		display:block;
 		position:absolute;
-		width:25%;
-		height:20%;
+		width:35%;
+		height:25%;
 		brder:1px solid green;
-		top:5rem;
-		left:1.2rem;
+		top:40px;
+			left:0;
 	}
-	.you::after{
-	 position:absolute;
-	 top:100px;
-	 left:20px;
-	 content:"Please run webcam";
-	 color:white;
-	 width:auto;
-	 font-size:2vw;
- }
+
 	}
   .online {
     position: absolute;

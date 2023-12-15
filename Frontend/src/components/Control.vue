@@ -66,7 +66,7 @@ div {
   font-size: 2vw;
   border-radius: 10px;
   height: 29%;
-  width: 100%;
+  width: auto;
   text-align: center;
 }
 .div_stop {
@@ -78,7 +78,7 @@ div {
   border-radius: 10px;
   background: linear-gradient(#c50000,#a10000 25%,#640000);
   height: 29%;
-  width: 100%;
+  width: auto;
   text-align: center;
 }
 .stop:hover {
@@ -93,7 +93,7 @@ div {
   border-radius: 10px;
   grid-column-start: 3;
   height: 29%;
-  width: 100%;
+  width: auto;
   text-align: center;
 }
 @media screen and (max-width: 452px) and (orientation: portrait){
@@ -116,19 +116,19 @@ div {
 	}
 	.div_next{
 		display:inline-block;
-		width:45%;
+		width:auto;
 		ackground:yellow;
 		brder:10px solid green;
 	}
 	.div_start{
 		display:inline-block;
-		width:40%;
+		width:auto;
 		margin-left:6px;
 		ackground:blue;
 	}
 	.div_stop{
 		display:inline-block;
-		width:40%;
+		width:auto;
 	}
 	.next{
 	font-size:4vw;
