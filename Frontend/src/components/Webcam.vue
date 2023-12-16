@@ -144,7 +144,7 @@ position:relative;
 #webcam{
 display:block;
 position:relative;
-	height:80%;
+	height:65%;
 	background:brown;
 }}
 </style>
