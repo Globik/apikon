@@ -94,8 +94,9 @@ position:relative;
   }
 @media screen and (max-width: 452px) and (orientation: portrait){
 #webcam{
-	height:90%;
+	height:10%;
 	overflow:auto;
+	background:violet;
 }
 	h2{
 	background:yellow;
@@ -143,6 +144,7 @@ position:relative;
 #webcam{
 display:block;
 position:relative;
-	height:50%;
+	height:80%;
+	background:brown;
 }}
 </style>

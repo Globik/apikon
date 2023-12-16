@@ -50,6 +50,7 @@ export default {
     },
 
     sendMessage (event) {
+    //alert(1);
       let textarea = this.$refs.textarea
       let text = textarea.value
 
@@ -74,6 +75,8 @@ export default {
   .input-area {
     flex: 1 1 auto;
     padding: 0px 0px;
+    height:100%;
+    background:black;
 
     .textarea {
       width: 100%;
@@ -98,15 +101,23 @@ export default {
       width: 120px;
       text-align: center;
     }
+    
     @media screen and (max-width: 452px) and (orientation: portrait){
 		.send{
 			width:50px;
 		}
-		.input{bakground:orange;height:15%;}
-	}
-  }
+		.input-area{
+			display:block;
+		}
+		
+		}
+		
+	}}
+  
   @media screen and (max-width: 452px) and (orientation: portrait){
-	  
+	  #input{bakground:orange;height:15%;
+		position:absolute;
+		top:-49px;
   }
 }
 </style>

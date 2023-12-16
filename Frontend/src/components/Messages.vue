@@ -142,7 +142,9 @@ export default {
 }
   @media screen and (max-width: 452px) and (orientation: portrait){
 
-	
+	.system.message{
+	clor:red;	
+	}
 }
 }
 </style>

@@ -22,9 +22,10 @@ export default {
 </script>
 
 <style lang="less" scoped>
+
 #room {
   display: grid;
-  height:calc(100% - 60%); 
+  height:30%; 
   grid-template-columns: 1fr 4% 1fr;
   grid-auto-rows: 1fr 110px;
   background:black;
@@ -46,13 +47,15 @@ export default {
   height: 110px;
   width: 100%;
   grid-row-end: 3;
-  background: black;
+  backgrund: black;
   border-radius:5px;
 }
 @media screen and (max-width: 452px) and (orientation: portrait){
 	#room{
 		display:block;
-		height:10%;
+		height:8%;
+		ackground:red;
+		position:relative;
 	}
 	#control{
 		height:100%;
@@ -65,8 +68,8 @@ export default {
 	display:block;
 	position:absolute;
 	bottom:120px;
-		bckgund:gray;
-		height:60%;
+		ackground:red;
+		height:300px;
 		width:100%;
 	
 	}

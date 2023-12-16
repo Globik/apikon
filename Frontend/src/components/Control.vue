@@ -112,7 +112,7 @@ div {
 	padding:4vw;
 		
 		margin-top:0.3rem;
-		
+		z-index:100;
 	}
 	.div_next{
 		display:inline-block;

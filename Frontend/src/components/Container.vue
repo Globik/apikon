@@ -21,7 +21,7 @@ export default {
 <style lang="less" scoped>
 #container {
   display: block;
-  height: 90%;
+  height: 100%;
   bckground:yellow;
   margin:0;
   padding:0;
