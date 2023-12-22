@@ -149,6 +149,8 @@ return `
         </div>
       
     </output>
+    <a href="#."  class="overlay" id="login"></a>
+    <output id="loginoutput" class="popi">
         <div class="modal-header">
           Авторизация / Регистрация
           <span class="model-header-label" onclick="isOpenModal();">
@@ -168,7 +170,7 @@ return `
             <button class="login-button" onclick="login">Войти</button>
           </form>
         </div>
-    
+    </output>
     
     
     

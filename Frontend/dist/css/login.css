@@ -19,6 +19,12 @@ form * {
 	overflow:scroll;
 	color:black;
 }
+#loginoutput{
+	background:white;
+}
+.modal-body{
+	background:white;
+}
 label {
   display: block;
   margin-top: 15px;
@@ -159,8 +165,13 @@ button {
   display: flex;
 }
 @media screen and (max-width: 452px) and (orientation: portrait){
-
+#loginoutput{
+	width:100%;
+}
 #regelnoutput{
+	width:100%;
+}
+.modal-body{
 	width:100%;
 }
 }
