@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <title>Чат-рулетка - видеочат для случайных знакомств в интернете.</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <style>
+		
+		html,body{
+			margin:0;
+			padding:0;
+		}
+	
+	#mediabox{
+		width:100%;
+		height:100vh;
+		background:yellow;
+		display:block;
+		position:relative;
+	}
+	#navpanel{
+		width:100%;
+		height:50px;
+		background: black;
+		display:grid;
+		grid-template-columns:1fr 50px;
+		align-self:center;
+	}
+	.nav{
+			jstify-self: center;
+	align-self:center;
+	padding-left:10px;
+	}
+	#settings{
+		bckground:blue;
+		width:100%;
+		height:100%;
+		color:brown;
+	}
+	#container{
+		width:100%;
+		height:97%;
+		background:brown;
+		display:grid;
+		grid-template-columns:50% 50%;
+		grid-template-rows: 50% 50%;
+	}
+	div{
+		order:1px solid green;
+		order-radius:10px;
+	}
+	#chatbox{
+		background: black;
+		width:100%;
+		height:85%;
+		max-height:85%;
+		border-top-right-radius:10px 10px;
+		border-top-left-radius:10px 10px;
+		overflow: auto;
+	}
+	*{box-sizing:border-box;}
+	#textarea{
+		width:100%;
+		height: calc(100% - 85%);
+
+		bckground:blue;
+		display:block;
+		position:relative;
+		border-radius:10px;
+	}
+	.send{
+		position:absolute;
+		top:0;
+		right:1px;
+		background:rgba(0,0,0,0);
+		height:100%;
+		width:70px;
+		border-top-right-radius:10px 10px;
+		brder-bottom-right-radius: 10px 10px;
+		object-fit:center;
+		
+	}
+	textarea{
+		 resize: none;
+      border: none;
+      
+      outline: none;
+		width:100%;
+		color:white;
+		background:rgb(44,5,12);
+		border-bottom-right-radius:10px 10px;
+		border-bottom-left-radius:10px 10px;
+		padding-left:10px;
+		padding-right:79px;
+		height:96.5%;
+	}
+	.send img{
+		margin:0 auto;
+	object-fit:center;
+	background:rgba(0,0,0,0);
+		width:70%;
+		padding-top:5px;
+		boder-top-right-radius:10px 10px;
+		border-bottom-right-radius: 10px 10px;
+	
+	}
+	.yourmsg{
+		line-height:2.5;
+		border-radius:10px;
+		background:rgb(44,15,12);
+		margin-top:2px;
+		margin-bottom:2px;
+		color:white;
+		padding-left:50px;
+	}
+	#remotecontainer,#localcontainer{
+		border-radius:10px;
+		background:black;
+	}
+	#remote,#local{
+		width:100%;
+		bckground:black;
+		border-radius:10px;
+		z-index:1;
+	}
+	#localcontainer{
+		psition:relative;
+	}
+	#localcontainer{
+	
+	 background-image: url("webcam.png");
+	 background-repeat: no-repeat;
+	 background-position: center;
+	 position:relative;
+	 z-index:100;
+ }
+	.ita{
+dsplay:block;
+	position:relative;
+	color:orange;
+	justify-self: center;
+	align-self:center;
+margin-right:10px;
+width:90%;
+}
+.ita svg{
+	height:90%;
+	width:50px;
+}
+#settingspanel{
+	display:block;
+	position:absolute;
+	right:-5px;
+	bottom:-46px;
+	width:50vw;
+	background:brown;
+	z-index:9999;
+	color:blue;
+	line-height:3;
+	padding-left:20px;
+	margin-right:0;
+	height:50px;
+	bodrer-bottom-right-radius:10px 10px;
+	border-bottom-left-radius: 10px 10px;
+	ont-size:1.5rem;
+	pading:5px;
+}
+.settingspanel{
+	line-height:2;
+	font-size:1.5rem;
+	color:orange;
+}
+    </style>
+    </head>
+    <body>
+	
+    <article id="mediabox">
+    <nav id="navpanel"><div class="nav"><b>Online: 1</b></div>
+    <div id="settings" class="ita" onclick="alert('yes');">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="orange" class="w-5 h-5">
+  <path fill-rule="evenodd" d="M4.25 2A2.25 2.25 0 002 4.25v2.5A2.25 2.25 0 004.25 9h2.5A2.25 2.25 0 009 6.75v-2.5A2.25 2.25 0 006.75 2h-2.5zm0 9A2.25 2.25 0 002 13.25v2.5A2.25 2.25 0 004.25 18h2.5A2.25 2.25 0 009 15.75v-2.5A2.25 2.25 0 006.75 11h-2.5zm9-9A2.25 2.25 0 0011 4.25v2.5A2.25 2.25 0 0013.25 9h2.5A2.25 2.25 0 0018 6.75v-2.5A2.25 2.25 0 0015.75 2h-2.5zm0 9A2.25 2.25 0 0011 13.25v2.5A2.25 2.25 0 0013.25 18h2.5A2.25 2.25 0 0018 15.75v-2.5A2.25 2.25 0 0015.75 11h-2.5z" clip-rule="evenodd" />
+</svg>
+<div id="settingspanel"><div class="settingspanel">В админку</div></div>
+</div></nav>
+    <section id="container">
+    <div id="remotecontainer"><video id="remote"></video></div>
+<div id="localcontainer"><video id="local"></video></div></div>
+<div>three</div>
+<div>
+<div id="chatbox">
+
+</div>
+<div id="textarea"><textarea id="txtvalue" placeholder="Your message"></textarea>
+<div class="send" data-send="one" onclick="sendi(this);"><img src="send.svg"/></div>
+</div>
+</div>
+    </section>
+    </article>
+    <script>
+    function sendi(event){
+		 let l=event.getAttribute("data-send");
+		// alert(txtvalue.value)
+		let div=document.createElement('div');
+		div.className="yourmsg";
+		div.innerHTML="<span>"+ txtvalue.value+ "</span>";
+		chatbox.appendChild(div);
+		chatbox.scrollTop = chatbox.clientHeight + chatbox.scrollHeight;
+		
+	}
+    </script>
+    </body></html>

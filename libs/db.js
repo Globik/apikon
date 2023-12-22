@@ -1,6 +1,6 @@
-import { Sequelize } from 'sequelize';
-import { config } from 'dotenv';
-import mariadb from 'mariadb';
+const { Sequelize } =require( 'sequelize');
+const { config } =require( 'dotenv');
+const mariadb =require('mariadb');
 
 config();
 
@@ -36,4 +36,4 @@ const sequelizeConnection = new Sequelize(process.env.DB_NAME, process.env.DB_US
     dialect: process.env.DB_DIALECT ?? 'mariadb'
 })
 
-export default sequelizeConnection
+module.exports= sequelizeConnection

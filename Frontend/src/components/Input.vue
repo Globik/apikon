@@ -84,7 +84,7 @@ export default {
       background:rgba(4,17,3,0.7);
       resize: none;
       border: none;
-      padding: 0;
+      
       outline: none;
       font-size: 1rem;
       border-radius:10px;

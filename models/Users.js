@@ -1,6 +1,6 @@
-import { Model, DataTypes } from 'sequelize';
-import sequelize from '../libs/db.js';
-import bcrypt from "bcrypt";
+const { Model, DataTypes } =require('sequelize');
+var sequelize =require('../libs/db.js');
+var bcrypt =require( "bcrypt");
 
 class Users extends Model {
     validPassword(password) {
@@ -63,4 +63,4 @@ Users.init({
 	tableName: 'users'
 })
 
-export default Users;
+module.exports = Users;

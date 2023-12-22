@@ -1,24 +1,3 @@
-//import translate from '@vitalets/google-translate-api';
-/*
-import https from "https";
-import fs from "fs";
-import express from 'express';
-import WebSocket , { WebSocketServer } from 'ws';
-import Users from './models/Users.js';
-import crypto from 'crypto';
-import cors from 'cors';
-
-import { generate } from 'rand-token';
-
-//import { createClient } from 'redis';
-import bodyParser from 'body-parser';
-
-
-import bcrypt from "bcrypt";
-//import cors from 'cors';
-*/
-
-
 const https=require( "https");
 var fs =require( "fs");
 const express = require('express');
@@ -37,12 +16,12 @@ const bodyParser =require('body-parser');
 
 
 const bcrypt =require( "bcrypt");
-//import cors 
+//import cors from 'cors';
 
 
-const { config } =require('dotenv');
+var config =require('dotenv');
 
-config();
+//config();
 
 
 (() => Promise.all([
@@ -58,8 +37,12 @@ if(process.env.DEVELOPMENT=='yes')app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(render({root:'views', development: true}))
 
-
+app.get("/", async(req, res)=>{
+	console.log('render main.js');
+	res.rendel('main', {});
+})
 app.post('/api/auth', async(req, res) => {
     const { name, password } =  req.body;
 console.log("name, password: ", name, password);
@@ -176,7 +159,7 @@ servi = https
   });
 }
 const wsServer= new WebSocket.Server({server: servi});
-
+//const wss = new WebSocket.Server({ server: servak })
 const idLen = 8
 let connections = []
 let waitingQueue = []
