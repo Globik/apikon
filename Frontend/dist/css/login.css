@@ -21,6 +21,8 @@ form * {
 }
 #loginoutput{
 	background:white;
+	width:25vw;
+	border-radius:10px;
 }
 .modal-body{
 	background:white;
@@ -30,6 +32,7 @@ label {
   margin-top: 15px;
   font-size: 16px;
   font-weight: 500;
+  color:black;
 }
 
 input {
@@ -66,7 +69,7 @@ span.model-header-label {
 .register-button {
   margin-top: 25px;
   width: 100%;
-  background: #4caf50;
+  background: green;/*#4caf50;*/
   color: #fff;
   padding: 8px 0;
   font-size: 16px;
@@ -97,9 +100,9 @@ span.model-header-label {
   margin-top: 8px;
   font-size: 14px;
   font-weight: 300;
-  background: #e91e4d;
+  bckground: #e91e4d;
   border: 0;
-  color: white;
+  color: red;
 }
 
 .modal-header {
@@ -107,6 +110,7 @@ span.model-header-label {
   font-size: 14px;
   font-weight: 600;
   border-bottom: 1px solid rgba(0, 0, 0, .2);
+  color:black;
 }
 
 .modal-body {

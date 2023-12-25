@@ -188,14 +188,16 @@ function getPeerSocket (peerId) {
 }
 
 function searchPeer (socket, msg) {
+	console.log("search peer 1",  waitingQueue.length, waitingQueue);
   while (waitingQueue.length) {
     let index = Math.floor(Math.random() * waitingQueue.length)
     let peerId = waitingQueue[index]
     let peerSocket = getPeerSocket(peerId)
 
     waitingQueue.splice(index, 1)
-
+console.log("search peer 2")
     if (peerSocket) {
+		console.log("search peer 3")
       matchedIds.set(socket.id, peerId)
       matchedIds.set(peerId, socket.id)
       socket.send(JSON.stringify(msg))

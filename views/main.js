@@ -7,7 +7,7 @@ return `
     <title>Чат-рулетка - видеочат для случайных знакомств в интернете.</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <link rel="icon" href="favicon.ico">
     <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
 		<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
 		<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
@@ -38,17 +38,19 @@ return `
   <meta property="og:description" content="Чат-рулетка для русскоязычных пользователей. Случайные знакомства в видеочате. Есть веб-камера? Найди пару в чат рулетке!" />
 		<link href="/css/main2.css" rel="stylesheet">
 		<link href="/css/login.css" rel="stylesheet">
+		<link href="/css/mediabox.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
-<script src="/js/globalik.js"</script>
+<script src="/js/globalik.js"></script>
+<script src="/js/adapter-latest.js"></script>
  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-QG900MX52X"></script>
+<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-QG900MX52X"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
   gtag('config', 'G-QG900MX52X');
-</script>
+</script> -->
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript" >
    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -73,6 +75,58 @@ return `
     <noscript>
       <strong>We're sorry but chatroulette doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
+    
+    
+     <article id="mediabox">
+    <nav id="navpanel"><div class="nav"><b>Online: <span id="onlineCount">0</span></b></div>
+    <div id="settings" class="ita" onclick="panelOpen(this);">
+ <img class="setimg" src="/img/set2.svg">
+</div>
+<div id="settingspanel">
+<div class="settingspanel">В админку</div>
+<div class="settingspanel">Переключить камеру</div>
+<div class="settingspanel">Скриншэринг</div>
+</div>
+</nav>
+    <section id="container">
+    <div id="remotecontainer"><video id="remote"  class="" autoplay muted></video>
+    
+ <section id="mobileChat" class="hide">
+		<div id="hidechat" onclick="hideChat(this);"><img class="chaticon" src="/img/chat.svg"/></div>
+	<div id="chatbox2"></div>
+
+<div id="textarea2"><textarea id="txtvalue2" placeholder="Your message"></textarea>
+<div class="send" data-send="two" onclick="sendi(this);"><img src="/img/send1.svg"/></div>
+
+</div>
+</section> 
+    </div>
+<div id="localcontainer"><video id="local"  class=""  autoplay muted></video></div>
+
+<div id="controlsContainer"><button id="startbtn" class="start" data-start="no" onclick="start(this);">start</button><button id="nextbtn" class="next" onclick="next(this);" disabled>next</button>
+ <div id="somespinner" class="text">
+        <span class="tip"><i class="fas fa-spinner fa-spin"></i></span>
+        Life is like a non-stop roulette. You never know who you will meet next...
+      </div>
+       <div id="somehello" class="text">
+        <span class="tip"><i class="fas fa-check"></i></span>
+        Just say hello to each other :D
+      </div>
+
+</div>
+<div id="sectionChat">
+<div id="chatbox">
+
+</div>
+<div id="textarea"><textarea id="txtvalue" placeholder="Your message"></textarea>
+<div class="send" data-send="one" onclick="sendi(this);"><img src="/img/send1.svg"/></div>
+</div>
+</div>
+    </section>
+    </article>
+    
+    
+    
     
     
     
@@ -158,16 +212,16 @@ return `
           </span>
         </div>
         <div class="modal-body">
-          <div class="error-message" ></div>
-          <form onsubmit="login();">
+          <div class="error-message" id="errormsg"></div>
+          <form name="formlogin" id="myform" onsubmit="return false;">
             <label for="name" style="margin-top: 5px;">Имя</label>
-            <input  type="text" placeholder="Введите Имя/Логин" id="name">
+            <input  name="username" type="text" placeholder="Введите Имя/Логин" id="name" required>
 
             <label for="name">Пароль</label>
-            <input  type="password" placeholder="Введите пароль" id="password">
+            <input  name="userpassword" type="password" placeholder="Введите пароль" id="password" required>
 
-            <button class="register-button" onclick="register">Зарегистрироваться</button>
-            <button class="login-button" onclick="login">Войти</button>
+            <button class="register-button" onclick="register(this);">Зарегистрироваться</button>
+            <button class="login-button" onclick="register(this);">Войти</button>
           </form>
         </div>
     </output>
@@ -184,7 +238,7 @@ return `
     
    <script src="/js/login.js"></script>
     
-    
+    <script src="/js/webrtc.js"></script>
     
     
     

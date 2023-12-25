@@ -80,7 +80,7 @@ const webSocketPlugin = ({ state, commit, dispatch }) => {
 
     switch (msg.type) {
       case 'online':
-        rootState.online = msg.online
+       // onlineCount.textContent = msg.online
         break
       case 'new-ice-candidate':
         handleNewIceCandidate(msg.data, dispatch)

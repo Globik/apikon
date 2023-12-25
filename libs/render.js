@@ -45,7 +45,7 @@ next();
 }
 function end(v,ops){
 let fn=map.get(`${v}.js`);
-console.log("***FN***", fn)
+//console.log("***FN***", fn)
 return fn[v](ops) 
 }
 function berror(n){
