@@ -80,12 +80,17 @@ function on_msg(msg) {
       case 'message':
         handleMessage(msg.data)
         break
+        case 'write':
+        printmsg2.className='write';
+        printmsg.className="write";
       default:
         break
     }
 	
 }
 function  handleMessage(msg){
+	printmsg2.className="";
+	printmsg.className="";
 	let div=document.createElement('div');
 	let div2=document.createElement('div');
 
@@ -245,7 +250,9 @@ function handleError(err){
 		mobChat = false;
 	}
 	}
-	
+	function txtInput(el){
+		wsend({type:"write"});
+	}
 	function sendi(event){
 		 let l=event.getAttribute("data-send");
 		

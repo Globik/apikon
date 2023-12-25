@@ -156,6 +156,7 @@ button {
   color: #767676;
   background-color: #fff;
 }
+/*
   button:hover {
     color: #333;
   }
@@ -164,7 +165,7 @@ button {
     color: #000;
   }
 
-
+*/
 
 .flex {
   display: flex;

@@ -278,6 +278,7 @@ console.log('token: ', token);
       case 'video-offer':
       case 'video-answer':
       case 'message':
+      case "write":
         sendToPeer(socket.id, msg)
         break
       case 'hang-up':
