@@ -89,3 +89,8 @@ window.location.href="#."
 	function logi(ev){
 		ev.preventDefault();
 	}
+function logout(){
+	localStorage.removeItem("islogin");
+	localStorage.removeItem("myCat");
+	location.reload();
+}

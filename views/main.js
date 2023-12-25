@@ -86,10 +86,11 @@ return `
 <div class="settingspanel">В админку</div>
 <div class="settingspanel">Переключить камеру</div>
 <div class="settingspanel">Скриншэринг</div>
+<div class="settingspanel" onclick="logout(this);">Выйти</div>
 </div>
 </nav>
     <section id="container">
-    <div id="remotecontainer"><video id="remote"  class="" autoplay muted></video>
+    <div id="remotecontainer"><video id="remote"  class="" autoplay></video>
     
  <section id="mobileChat" class="hide">
 		<div id="hidechat" onclick="hideChat(this);"><img class="chaticon" src="/img/chat.svg"/></div>
