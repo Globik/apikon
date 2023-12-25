@@ -2,6 +2,7 @@ html,body{
 			margin:0;
 			padding:0;
 			height:100%;
+			background:black;
 		}
 	
 	#mediabox{
@@ -306,7 +307,7 @@ section#mobileChat{
 	}
 	#container{
 		display:block;
-		height:calc(100% - 50px - 8.5%);
+		height:calc(100% - 50px - 7.8%);
 		bckground:pink;
 		eight:84%;
 	}
