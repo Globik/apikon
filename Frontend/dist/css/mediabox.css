@@ -306,7 +306,7 @@ section#mobileChat{
 	}
 	#container{
 		display:block;
-		height:calc(100% - 50px - 8%);
+		height:calc(100% - 50px - 8.5%);
 		bckground:pink;
 		eight:84%;
 	}
