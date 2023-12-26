@@ -108,7 +108,7 @@ mobileChat.className="";
 }
 
 function handleHangUp(){
-	alert("hongup");
+	//alert("hongup");
 	 printmsg2.className='';
         printmsg.className="";
 	next(nextbtn);
