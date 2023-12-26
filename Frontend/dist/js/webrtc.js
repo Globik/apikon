@@ -95,19 +95,22 @@ function  handleMessage(msg){
 	let div2=document.createElement('div');
 
 		div.className="yourmsg";
-		div.innerHTML="<span>"+ msg+ "</span>";
+		div.innerHTML="<span>"+ esci(msg) + "</span>";
 		chatbox.appendChild(div);
 		chatbox.scrollTop = chatbox.clientHeight + chatbox.scrollHeight;
 		
 mobileChat.className="";
 		div2.className="yourmsg2";
-		div2.innerHTML="<span>"+ msg+ "</span>";
+		div2.innerHTML="<span>"+ esci(msg) + "</span>";
 		chatbox2.appendChild(div2);
 		chatbox2.scrollTop = chatbox2.clientHeight + chatbox2.scrollHeight;
 		
 }
 
 function handleHangUp(){
+	alert("hongup");
+	 printmsg2.className='';
+        printmsg.className="";
 	next(nextbtn);
 }
 
@@ -222,6 +225,9 @@ function start(el){
 	mobChat = false;
 	somespinner.className="";
 		somehello.className="";
+		mobileloader.className="";
+		  printmsg2.className='';
+        printmsg.className="";
 }
 }
 
@@ -232,12 +238,14 @@ function handleError(err){
 		console.log("onloaded");
 		wsend({type:'search-peer'});
 		somespinner.className="show";
+		mobileloader.className="active";
 	}
 	remote.onloadedmetadata = function () {
 		console.log("onloaded");
 		nextbtn.disabled = false;
 		somespinner.className="";
 		somehello.className="see";
+		mobileloader.className="";
 	}
 	
 	function hideChat(el){
@@ -258,6 +266,7 @@ function handleError(err){
 		
 		let div=document.createElement('div');
 		if(l=="one"){
+			if(!txtvalue.value) return;
 		div.className="yourmsg";
 		div.innerHTML="<span>"+ txtvalue.value+ "</span>";
 		chatbox.appendChild(div);
@@ -265,6 +274,7 @@ function handleError(err){
 		wsend({type:"message", data: txtvalue.value});
 		txtvalue.value="";
 	}else if(l=="two"){
+		if(!txtvalue2.value) return;
 		div.className="yourmsg2";
 		div.innerHTML="<span>"+ txtvalue2.value+ "</span>";
 		chatbox2.appendChild(div);
@@ -300,9 +310,12 @@ function handleError(err){
 	chatbox2.innerHTML="";
 	mobileChat.className = "hide";
 	mobChat = false;
-	//somespinner.className="";
+	
+	somespinner.className="show";
 		somehello.className="";
      // el.disabled=true;
+       printmsg2.className='';
+        printmsg.className="";
     }
     
     
@@ -327,7 +340,9 @@ function iceConnectionStateChangeHandler (event) {
     case 'disconnected':
     // и вот тут бы сигнал на сервер послать, что, мол, готов к приятию другого собеседника
   //  rootState.socket.emit('search-peer');
-     closeVideoCall()
+     closeVideoCall();
+       printmsg2.className='';
+        printmsg.className="";
       break
   }
 }

@@ -90,7 +90,9 @@ return `
 </div>
 </nav>
     <section id="container">
-    <div id="remotecontainer"><video id="remote"  class="" autoplay></video>
+    <div id="remotecontainer">
+    <section id="mobileloader"><div class="loader"></div></section>
+    <video id="remote"  class="" autoplay></video>
     
  <section id="mobileChat" class="hide">
 		<div id="hidechat" onclick="hideChat(this);"><img class="chaticon" src="/img/chat.svg"/></div>
@@ -106,13 +108,14 @@ return `
 <div id="localcontainer"><video id="local"  class=""  autoplay muted></video></div>
 
 <div id="controlsContainer"><button id="startbtn" class="start" data-start="no" onclick="start(this);">start</button><button id="nextbtn" class="next" onclick="next(this);" disabled>next</button>
- <div id="somespinner" class="text">
-        <span class="tip"><i class="fas fa-spinner fa-spin"></i></span>
-        Life is like a non-stop roulette. You never know who you will meet next...
+ <div id="somespinner" class="text"><!-- https://cssloaders.github.io/ -->
+ <div class="loader"></div>
+      <span class="duka">Жизнь как рулетка. Никогда не узнаешь, кого встретишь следуюшим...</span>
+       <!-- Life is like a non-stop roulette. You never know who you will meet next...-->
       </div>
        <div id="somehello" class="text">
         <span class="tip"><i class="fas fa-check"></i></span>
-        Just say hello to each other :D
+        Просто поздоровайтесь друг с другом :D
       </div>
 
 </div>
