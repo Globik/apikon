@@ -100,8 +100,12 @@ function  handleMessage(msg){
 		chatbox.scrollTop = chatbox.clientHeight + chatbox.scrollHeight;
 		
 mobileChat.className="";
-		div2.className="yourmsg2";
-		div2.innerHTML="<span>"+ esci(msg) + "</span>";
+
+
+
+
+		div2.className="yourmsg2 he";
+		div2.innerHTML="<span><b>Собеседник: </b></span><br><span>"+ esci(msg) + "</span>";
 		chatbox2.appendChild(div2);
 		chatbox2.scrollTop = chatbox2.clientHeight + chatbox2.scrollHeight;
 		
@@ -264,9 +268,11 @@ function handleError(err){
 	function sendi(event){
 		 let l=event.getAttribute("data-send");
 		
-		let div=document.createElement('div');
+		
 		if(l=="one"){
+				
 			if(!txtvalue.value) return;
+				let div=document.createElement('div');
 		div.className="yourmsg";
 		div.innerHTML="<span>"+ txtvalue.value+ "</span>";
 		chatbox.appendChild(div);
@@ -275,9 +281,10 @@ function handleError(err){
 		txtvalue.value="";
 	}else if(l=="two"){
 		if(!txtvalue2.value) return;
-		div.className="yourmsg2";
-		div.innerHTML="<span>"+ txtvalue2.value+ "</span>";
-		chatbox2.appendChild(div);
+			let div2=document.createElement('div');
+		div2.className="yourmsg2";
+		div2.innerHTML="<span class='you'><b>Вы: </b></span><br><span>"+ txtvalue2.value+ "</span>";
+		chatbox2.appendChild(div2);
 		chatbox2.scrollTop = chatbox2.clientHeight + chatbox2.scrollHeight;
 		wsend({type:"message", data: txtvalue2.value});
 		txtvalue2.value="";
@@ -316,6 +323,7 @@ function handleError(err){
      // el.disabled=true;
        printmsg2.className='';
         printmsg.className="";
+        mobileloader.className="active";
     }
     
     

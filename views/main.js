@@ -6,7 +6,8 @@ return `
     <meta charset="utf-8">
     <title>Чат-рулетка - видеочат для случайных знакомств в интернете.</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!-- <meta name="viewport" content="width=device-width,initial-scale=1.0"> -->
+    <meta name="viewport" content="width=device-width,initial-scale=1.0", maximum-scale=1.0, user-scalable=no">
     <link rel="icon" href="favicon.ico">
     <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
 		<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
@@ -97,12 +98,10 @@ return `
  <section id="mobileChat" class="hide">
 		<div id="hidechat" onclick="hideChat(this);"><img class="chaticon" src="/img/chat.svg"/></div>
 		<div id="printmsg"><img class="printing" src="/img/print.gif"/></div>
-	<div id="chatbox2"></div>
+	<div id="chat4"><div id="chatbox2"></div></div>
 
-<div id="textarea2"><textarea id="txtvalue2" placeholder="Your message" oninput="txtInput(this);"></textarea>
-<div class="send" data-send="two" onclick="sendi(this);"><img src="/img/send1.svg"/></div>
-
-</div>
+<div id="textarea2"><textarea id="txtvalue2" placeholder="Your message" oninput="txtInput(this);" value="mama"></textarea>
+<div class="send" data-send="two" onclick="sendi(this);"><img src="/img/send1.svg"/></div></div>
 </section> 
     </div>
 <div id="localcontainer"><video id="local"  class=""  autoplay muted></video></div>
@@ -125,7 +124,7 @@ return `
 
 </div>
 <div id="textarea"><textarea id="txtvalue" placeholder="Your message" oninput="txtInput(this);"></textarea>
-<div class="send" data-send="one" onclick="sendi(this);" ><img src="/img/send1.svg"/></div>
+<div class="send" data-send="one" onclick="sendi(this);" value="papa" ><img src="/img/send1.svg"/></div>
 </div>
 </div>
     </section>
