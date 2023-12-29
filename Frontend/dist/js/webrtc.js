@@ -278,7 +278,7 @@ function handleError(err){
 	}
 	function sendi(event){
 		 let l=event.getAttribute("data-send");
-		
+		//uuu
 		
 		if(l=="one"){
 				
