@@ -17,7 +17,7 @@ mama=require(path.resolve(`${ms}/${filename}`))
 mama=require(path.resolve(`${ms}/${filename}`))
 //map.set(filename,mama);
 }
-console.log('mama ', mama)
+//console.log('mama ', mama)
 map.set(filename,mama);
 }
 });

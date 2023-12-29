@@ -114,7 +114,9 @@ background-image: linear-gradient(147deg, #000000 0%, #434343 74%);
 		color:white;
 		padding-left:50px;
 	}
-	
+	.yourmsg.he2{
+		background:rgb(40,60,24);
+	}
 	#local,#remote{
 		
 		border-bottom-right-radius:10px 10px;
@@ -297,7 +299,8 @@ section#mobileChat{
 }
  span.duka{
  coor:yellow;
- padding-left:12px;
+ padding-left:20px;
+ margin-left:20px;
 	trnsform:translate(-1000px, 190px);
 }
 #somespinner.show{
@@ -322,8 +325,8 @@ section#mobileChat{
 		top:0;
 		left:0;
 		bckground:red;
-		width:50px;
-		height:50px;
+		width:60px;
+		height:60px;
 		display: none;
 	}
 	#printmsg2.write{
@@ -332,8 +335,8 @@ section#mobileChat{
 	#printmsg2::after{
 		position:absolute;
 		right:-52px;
-		top:32px;
-		content:"printing";
+		top:34px;
+		content:"печатает";
 		color:white;
 		}
 	.printing2{
@@ -345,7 +348,7 @@ section#mobileChat{
 	}
 	
 	/*loader*/
-	
+	/*
 	
 	.loader {
   width: 48px;
@@ -399,10 +402,13 @@ section#mobileChat{
   100% {
     transform: rotate(-360deg);
   }
-}
+} */
+.loader { font-size: 10px; width: 1em; height: 1em; border-radius: 50%; position: relative; text-indent: -9999em; animation: mulShdSpin 1.1s infinite ease; transform: translateZ(0); } @Keyframes mulShdSpin { 0%, 100% { box-shadow: 0em -2.6em 0em 0em #ffffff, 1.8em -1.8em 0 0em rgba(255,255,255, 0.2), 2.5em 0em 0 0em rgba(255,255,255, 0.2), 1.75em 1.75em 0 0em rgba(255,255,255, 0.2), 0em 2.5em 0 0em rgba(255,255,255, 0.2), -1.8em 1.8em 0 0em rgba(255,255,255, 0.2), -2.6em 0em 0 0em rgba(255,255,255, 0.5), -1.8em -1.8em 0 0em rgba(255,255,255, 0.7); } 12.5% { box-shadow: 0em -2.6em 0em 0em rgba(255,255,255, 0.7), 1.8em -1.8em 0 0em #ffffff, 2.5em 0em 0 0em rgba(255,255,255, 0.2), 1.75em 1.75em 0 0em rgba(255,255,255, 0.2), 0em 2.5em 0 0em rgba(255,255,255, 0.2), -1.8em 1.8em 0 0em rgba(255,255,255, 0.2), -2.6em 0em 0 0em rgba(255,255,255, 0.2), -1.8em -1.8em 0 0em rgba(255,255,255, 0.5); } 25% { box-shadow: 0em -2.6em 0em 0em rgba(255,255,255, 0.5), 1.8em -1.8em 0 0em rgba(255,255,255, 0.7), 2.5em 0em 0 0em #ffffff, 1.75em 1.75em 0 0em rgba(255,255,255, 0.2), 0em 2.5em 0 0em rgba(255,255,255, 0.2), -1.8em 1.8em 0 0em rgba(255,255,255, 0.2), -2.6em 0em 0 0em rgba(255,255,255, 0.2), -1.8em -1.8em 0 0em rgba(255,255,255, 0.2); } 37.5% { box-shadow: 0em -2.6em 0em 0em rgba(255,255,255, 0.2), 1.8em -1.8em 0 0em rgba(255,255,255, 0.5), 2.5em 0em 0 0em rgba(255,255,255, 0.7), 1.75em 1.75em 0 0em #ffffff, 0em 2.5em 0 0em rgba(255,255,255, 0.2), -1.8em 1.8em 0 0em rgba(255,255,255, 0.2), -2.6em 0em 0 0em rgba(255,255,255, 0.2), -1.8em -1.8em 0 0em rgba(255,255,255, 0.2); } 50% { box-shadow: 0em -2.6em 0em 0em rgba(255,255,255, 0.2), 1.8em -1.8em 0 0em rgba(255,255,255, 0.2), 2.5em 0em 0 0em rgba(255,255,255, 0.5), 1.75em 1.75em 0 0em rgba(255,255,255, 0.7), 0em 2.5em 0 0em #ffffff, -1.8em 1.8em 0 0em rgba(255,255,255, 0.2), -2.6em 0em 0 0em rgba(255,255,255, 0.2), -1.8em -1.8em 0 0em rgba(255,255,255, 0.2); } 62.5% { box-shadow: 0em -2.6em 0em 0em rgba(255,255,255, 0.2), 1.8em -1.8em 0 0em rgba(255,255,255, 0.2), 2.5em 0em 0 0em rgba(255,255,255, 0.2), 1.75em 1.75em 0 0em rgba(255,255,255, 0.5), 0em 2.5em 0 0em rgba(255,255,255, 0.7), -1.8em 1.8em 0 0em #ffffff, -2.6em 0em 0 0em rgba(255,255,255, 0.2), -1.8em -1.8em 0 0em rgba(255,255,255, 0.2); } 75% { box-shadow: 0em -2.6em 0em 0em rgba(255,255,255, 0.2), 1.8em -1.8em 0 0em rgba(255,255,255, 0.2), 2.5em 0em 0 0em rgba(255,255,255, 0.2), 1.75em 1.75em 0 0em rgba(255,255,255, 0.2), 0em 2.5em 0 0em rgba(255,255,255, 0.5), -1.8em 1.8em 0 0em rgba(255,255,255, 0.7), -2.6em 0em 0 0em #ffffff, -1.8em -1.8em 0 0em rgba(255,255,255, 0.2); } 87.5% { box-shadow: 0em -2.6em 0em 0em rgba(255,255,255, 0.2), 1.8em -1.8em 0 0em rgba(255,255,255, 0.2), 2.5em 0em 0 0em rgba(255,255,255, 0.2), 1.75em 1.75em 0 0em rgba(255,255,255, 0.2), 0em 2.5em 0 0em rgba(255,255,255, 0.2), -1.8em 1.8em 0 0em rgba(255,255,255, 0.5), -2.6em 0em 0 0em rgba(255,255,255, 0.7), -1.8em -1.8em 0 0em #ffffff; } }
     /* end loader*/
 	
-	
+	#duka2{
+		display:none;
+	}
 	
 @media screen and (max-width: 452px) and (orientation: portrait){
 	#somespinner,#somehello{
@@ -435,6 +441,18 @@ section#mobileChat{
 		ackground:red;
 		border-radius:1px;
 		display:flex;
+	}
+	#duka2{
+		position:absolute;
+		width:100%;
+		color:white;
+		top:55%;
+		left:3%;
+		display:none;
+		
+	}
+	#duka2.show{
+		display:block;
 	}
 	#mobileloader{
 		position:absolute;
@@ -516,13 +534,14 @@ display:none;
 		z-inex:9999;
 	}
 	#printmsg.write{
-		display:block;
+		display:flex;
 	}
 	#printmsg::after{
 	position:absolute;
-	top:33px;
+	top:34px;
 	left:60px;
-		content:"printing";
+	color:white;
+		content:"печатает";
 		width:auto;
 	}
 	.printing{

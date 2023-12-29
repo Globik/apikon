@@ -83,6 +83,9 @@ function on_msg(msg) {
         case 'write':
         printmsg2.className='write';
         printmsg.className="write";
+        case 'unwrite':
+        printmsg2.className='';
+        printmsg.className="";
       default:
         break
     }
@@ -94,8 +97,8 @@ function  handleMessage(msg){
 	let div=document.createElement('div');
 	let div2=document.createElement('div');
 
-		div.className="yourmsg";
-		div.innerHTML="<span>"+ esci(msg) + "</span>";
+		div.className="yourmsg he2";
+		div.innerHTML="<span><b>Собеседник: </b></span><br><span>"+ esci(msg) + "</span>";
 		chatbox.appendChild(div);
 		chatbox.scrollTop = chatbox.clientHeight + chatbox.scrollHeight;
 		
@@ -232,6 +235,7 @@ function start(el){
 		mobileloader.className="";
 		  printmsg2.className='';
         printmsg.className="";
+        duka2.className="";
 }
 }
 
@@ -243,6 +247,7 @@ function handleError(err){
 		wsend({type:'search-peer'});
 		somespinner.className="show";
 		mobileloader.className="active";
+		duka2.className="show";
 	}
 	remote.onloadedmetadata = function () {
 		console.log("onloaded");
@@ -250,6 +255,7 @@ function handleError(err){
 		somespinner.className="";
 		somehello.className="see";
 		mobileloader.className="";
+		duka2.className="";
 	}
 	
 	function hideChat(el){
@@ -265,6 +271,9 @@ function handleError(err){
 	function txtInput(el){
 		wsend({type:"write"});
 	}
+	function someChange(){
+		wsend({type:"unwrite"});
+	}
 	function sendi(event){
 		 let l=event.getAttribute("data-send");
 		
@@ -274,7 +283,7 @@ function handleError(err){
 			if(!txtvalue.value) return;
 				let div=document.createElement('div');
 		div.className="yourmsg";
-		div.innerHTML="<span>"+ txtvalue.value+ "</span>";
+		div.innerHTML="<span class='you2'><b>Вы: </b></span><br><span>"+ txtvalue.value+ "</span>";
 		chatbox.appendChild(div);
 		chatbox.scrollTop = chatbox.clientHeight + chatbox.scrollHeight;
 		wsend({type:"message", data: txtvalue.value});
@@ -319,6 +328,7 @@ function handleError(err){
 	mobChat = false;
 	
 	somespinner.className="show";
+	duka2.className="show";
 		somehello.className="";
      // el.disabled=true;
        printmsg2.className='';
