@@ -81,11 +81,12 @@ function on_msg(msg) {
         handleMessage(msg.data)
         break
         case 'write':
+     //  alert(2);
         printmsg2.className='write';
         printmsg.className="write";
-        case 'unwrite':
+     /*   case 'unwrite':
         printmsg2.className='';
-        printmsg.className="";
+        printmsg.className="";*/
       default:
         break
     }
@@ -269,6 +270,7 @@ function handleError(err){
 	}
 	}
 	function txtInput(el){
+	//	alert(1);
 		wsend({type:"write"});
 	}
 	function someChange(){
@@ -282,6 +284,8 @@ function handleError(err){
 				
 			if(!txtvalue.value) return;
 				let div=document.createElement('div');
+				 printmsg2.className='';
+        printmsg.className="";
 		div.className="yourmsg";
 		div.innerHTML="<span class='you2'><b>Вы: </b></span><br><span>"+ txtvalue.value+ "</span>";
 		chatbox.appendChild(div);
@@ -289,6 +293,8 @@ function handleError(err){
 		wsend({type:"message", data: txtvalue.value});
 		txtvalue.value="";
 	}else if(l=="two"){
+		 printmsg2.className='';
+        printmsg.className="";
 		if(!txtvalue2.value) return;
 			let div2=document.createElement('div');
 		div2.className="yourmsg2";

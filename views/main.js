@@ -97,10 +97,10 @@ return `
      <div id="duka2">Жизнь как рулетка. Никогда не узнаешь, кого встретишь следуюшим...</div>
  <section id="mobileChat" class="hide">
 		<div id="hidechat" onclick="hideChat(this);"><img class="chaticon" src="/img/chat.svg"/></div>
-		<div id="printmsg"><img class="printing" src="/img/print.gif"/></div>
+		<div id="printmsg"><img class="printing2" src="/img/print.gif"/></div>
 	<div id="chat4"><div id="chatbox2"></div></div>
 
-<div id="textarea2"><textarea id="txtvalue2" placeholder="Your message" oninput="txtInput(this);" onchange="someChange();"></textarea>
+<div id="textarea2"><textarea id="txtvalue2" placeholder="Your message" oninput="txtInput(this);" ></textarea>
 <div class="send" data-send="two" onclick="sendi(this);"><img src="/img/send1.svg"/></div></div>
 </section> 
     </div>
@@ -119,11 +119,9 @@ return `
 
 </div>
 <div id="sectionChat">
-	<div id="printmsg2"><img class="printing2" src="/img/print.gif"/></div>
-<div id="chatbox">
-
-</div>
-<div id="textarea"><textarea id="txtvalue" placeholder="Your message" oninput="txtInput(this);" onchange="someChange();"></textarea>
+	<div id="printmsg2"><img class="printing" src="/img/print.gif"/></div>
+<div id="chatbox"></div>
+<div id="textarea"><textarea id="txtvalue" placeholder="Your message" oninput="txtInput(this);"></textarea>
 <div class="send" data-send="one" onclick="sendi(this);" value="papa" ><img src="/img/send1.svg"/></div>
 </div>
 </div>
