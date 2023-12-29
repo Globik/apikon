@@ -247,7 +247,7 @@ return `
     
     
     
-    
+    <footer><a href="/about"> О проекте</a></footer>
     
        </body>
 </html>`;

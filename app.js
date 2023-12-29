@@ -43,6 +43,9 @@ app.get("/", async(req, res)=>{
 	console.log('render main.js');
 	res.rendel('main', {});
 })
+app.get("/about", async(req, res)=>{
+	res.rendel('about', {});
+})
 app.post('/api/auth', async(req, res) => {
     const { name, password } =  req.body;
 console.log("name, password: ", name, password);
