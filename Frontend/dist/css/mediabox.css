@@ -414,8 +414,36 @@ section#mobileChat{
 		display:none;
 	}
 	
+	#foot{
+	display:none;
+		
+	}
+	
+	#foot2{
+	display:inline-block;
+		position:absolute;
+		bckground:green;
+		color:rgb(16,66,88);
+		left:8px;
+		bottom:4px;
+		
+}
+	
 @media screen and (max-width: 452px) and (orientation: portrait){
+#foot{
+	display:inline-block;
+		position:absolute;
+		ackground:green;
+		color:rgb(16,66,88);
+		left:8px;
+		bottom:4px;
+		
+}
+#foot2{
+	display:none;
+}
 	#somespinner,#somehello{
+	
 		display:none;
 	}
 	#container{

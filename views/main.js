@@ -116,7 +116,7 @@ return `
         <span class="tip"><i class="fas fa-check"></i></span>
         Просто поздоровайтесь друг с другом :D
       </div>
-
+<div id="foot"><a href="/about"> О проекте</a></div>
 </div>
 <div id="sectionChat">
 	<div id="printmsg2"><img class="printing" src="/img/print.gif"/></div>
@@ -124,7 +124,7 @@ return `
 <div id="textarea"><textarea id="txtvalue" placeholder="Your message" oninput="txtInput(this);" onchange="someChange();"></textarea>
 <div class="send" data-send="one" onclick="sendi(this);" value="papa" ><img src="/img/send1.svg"/></div>
 </div>
-</div>
+</div><div id="foot2"><a href="/about"> О проекте</a></div>
     </section>
     </article>
     
@@ -247,7 +247,7 @@ return `
     
     
     
-    <footer><a href="/about"> О проекте</a></footer>
+ <!--   <footer><a href="/about"> О проекте</a></footer> -->
     
        </body>
 </html>`;
