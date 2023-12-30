@@ -455,9 +455,11 @@ section#mobileChat{
 		display:none;
 		
 	}
+	/*
 	#duka2.show{
 		display:block;
 	}
+	*/ 
 	#mobileloader{
 		position:absolute;
 		top:45%;

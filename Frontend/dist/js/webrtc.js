@@ -54,7 +54,7 @@ function get_socket() {
     note({ content: "Соединение с сервером закрыто!", type: "info", time: 5 });
   };
 }
-
+var tr = undefined;
 get_socket();
 function on_msg(msg) {
 	console.log("data type: ", msg.type);
@@ -81,12 +81,22 @@ function on_msg(msg) {
         handleMessage(msg.data)
         break
         case 'write':
-     //  alert(2);
+   //  if(!tr){
         printmsg2.className='write';
         printmsg.className="write";
-     /*   case 'unwrite':
+	//}
+		tr=setTimeout(function(){
+			printmsg2.className='';
+			printmsg.className="";
+			clearTimeout(tr);
+			tr = undefined;
+		}, 1000);
+	
+        break;
+       case 'unwrite':
         printmsg2.className='';
-        printmsg.className="";*/
+        printmsg.className="";
+        break;
       default:
         break
     }
@@ -118,7 +128,7 @@ mobileChat.className="";
 function handleHangUp(){
 	//alert("hongup");
 	 printmsg2.className='';
-        printmsg.className="";
+     printmsg.className="";
 	next(nextbtn);
 }
 
@@ -229,6 +239,8 @@ function start(el){
 	if(sock) sock.close();
 	chatbox.innerHTML="";
 	chatbox2.innerHTML="";
+	txtvalue.value="";
+	txtvalue2.value="";
 	mobileChat.className="hide";
 	mobChat = false;
 	somespinner.className="";
@@ -269,11 +281,14 @@ function handleError(err){
 		mobChat = false;
 	}
 	}
+	
 	function txtInput(el){
-	//	alert(1);
+
 		wsend({type:"write"});
+	
 	}
 	function someChange(){
+		
 		wsend({type:"unwrite"});
 	}
 	function sendi(event){
@@ -329,10 +344,11 @@ function handleError(err){
       wsend({type: "hang-up"});
       wsend({type:'search-peer'});
       chatbox.innerHTML="";
-	chatbox2.innerHTML="";
+	  chatbox2.innerHTML="";
 	mobileChat.className = "hide";
 	mobChat = false;
-	
+	txtvalue.value="";
+	txtvalue2.value="";
 	somespinner.className="show";
 	duka2.className="show";
 		somehello.className="";
