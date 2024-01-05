@@ -19,6 +19,7 @@ CREATE DATABASE roulet;
 CREATE USER 'roulet' IDENTIFIED BY 'roulet';
 GRANT ALL ON *.* TO 'roulet'@localhost IDENTIFIED BY 'roulet';
 SHOW DATABASES;
+use roulet;
 \q
 sudo systemctl status nginx 
 sudo systemctl stop nginx 

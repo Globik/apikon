@@ -4,8 +4,11 @@ const express = require('express');
 //import WebSocket , { WebSocketServer } from 'ws';
 var WebSocket=require('ws');
 //import Users from './models/Users.js';
-var Users=require("./models/Users.js")
+//var Users=require("./models/Users.js")
 const crypto =require('crypto');
+const passport = require("passport");
+const session = require('express-session');
+const mariadb =require('mariadb');
 const  cors =require('cors');
 const render=require('./libs/render.js');
 
@@ -19,15 +22,23 @@ const bcrypt =require( "bcrypt");
 //import cors from 'cors';
 
 
-var config =require('dotenv');
+var {config} =require('dotenv');
 
-//config();
+config();
 
 
 (() => Promise.all([
-	Users.sync({ force: false })
+	//Users.sync({ force: false })
 ]))();
-
+console.log('user:', process.env.DB_USER); 
+const pool = mariadb.createPool({ 
+  //  host: process.env.DB_HOST, 
+    user: process.env.DB_USER, 
+    password: process.env.DB_PASSWORD,
+    connectionLimit: 5 ,
+    trace: true,
+    database:'roulet'
+});
 const app = express();
 const suka = "./dist";
 const suka2 = "./Frontend/dist"
@@ -37,15 +48,31 @@ if(process.env.DEVELOPMENT=='yes')app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(render({root:'views', development: true}))
+app.use(render({root:'views', development: true}));
+require('./auth/auth.js')(pool, passport);
 
+app.use(session({
+	secret:'blabla',
+	resave:false,
+	saveUninitialized: true,
+	cookie:{
+		secure:false
+	}
+}))
+app.use(passport.initialize());
+app.use(passport.session());
+app.use((req, res, next)=>{
+	req.app.locals.user = req.user;
+	next();
+})
 app.get("/", async(req, res)=>{
-	console.log('render main.js');
+	console.log('render main.js', req.user);
 	res.rendel('main', {});
 })
 app.get("/about", async(req, res)=>{
 	res.rendel('about', {});
 })
+/*
 app.post('/api/auth', async(req, res) => {
     const { name, password } =  req.body;
 console.log("name, password: ", name, password);
@@ -75,7 +102,36 @@ console.log("name, password: ", name, password);
 
     res.json({ user: user })
 });
+*/
 
+app.post('/api/auth',(req, res, next)=>{
+	passport.authenticate("local",(err, user, info)=>{
+		console.log("err, user, info: ", err, user, info);
+		if(err){
+			return next(err);
+		}
+		if(!user){
+			res.json(info);
+			return;
+		}
+		req.logIn(user, (err)=>{
+			if(err){
+				return next(err);
+			}
+		//	res.redirect("/");
+		res.json({ user: user });
+		});
+	})(req, res, next);
+})
+app.post('/logout', (req, res)=>{
+	req.logOut((err)=>{
+		if(err){
+			res.json({message:err, status:300});
+			return;
+		}
+	});
+	res.json({message: "ok", status:200 });
+})
 app.get('/api/user', async(req, res) => {
     const { headers } =  req;
 console.log('headers: ', headers)
@@ -94,7 +150,26 @@ console.log('headers: ', headers)
         return res.json({ error: true, message: 'Ошибка авторизации! Попробуйте зайти по новой.' });
     }
 });
-
+app.post('/api/register', (req, res, next)=>{
+	passport.authenticate("local-signup",(err, user, info)=>{
+		console.log("err, user, info: ", err, user, info);
+		if(err){
+			return next(err);
+		}
+		if(!user){
+			res.json(info);
+			return;
+		}
+		req.logIn(user, (err)=>{
+			if(err){
+				return next(err);
+			}
+		//	res.redirect("/");
+		res.json({ user: user });
+		});
+	})(req, res, next);
+})
+/*
 app.post('/api/register', async(req, res) => {
     const { name, password } =  req.body;
 console.log("name, password: ", name, password);
@@ -124,7 +199,7 @@ console.log("name, password: ", name, password);
 
         for(let i in errors) {
             const error = errors[i];
-            promises.push(/*translate(*/error.message/*, {to: 'ru'})*/)
+         
         }
 
         Promise.all(promises).then((values) => {
@@ -140,7 +215,7 @@ console.log("name, password: ", name, password);
         });
     }
 });
-
+*/
 
 const dkey = "/etc/letsencrypt/live/rouletka.ru/privkey.pem";
 const dcert = "/etc/letsencrypt/live/rouletka.ru/fullchain.pem";
@@ -255,9 +330,9 @@ console.log('token: ', token);
   if (token.length == 0) {
   //  return socket.close();
   } else {
-    user = await Users.findOne({
-        where: { token: token }
-    });
+   // user = await Users.findOne({
+    //    where: { token: token }
+   // });
 
     if (user == null) {
     //  return socket.close();

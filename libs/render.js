@@ -28,6 +28,7 @@ vov(opt.root, opt.development)
 return function(req,res,next){
 res.compile=function(v,ops){
 var context={};
+//console.log("LOCALS *** ", req.app.locals)
 Object.assign(context,req.app.locals,ops)
 var html;
 try{	

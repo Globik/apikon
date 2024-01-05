@@ -77,7 +77,28 @@ return `
       <strong>We're sorry but chatroulette doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
     
+    <!-- ${n.user? JSON.stringify(n.user):'no user'} -->
+    ${!n.user?`<script>
+     window.onload=function(){
+   const cat = localStorage.getItem("myCat");
+   if(!cat && cat !=="Tom"){
+    window.location.href="#regeln";
+}else{
+	let islogin = localStorage.getItem("islogin");
+	//if(!islogin && islogin !=="yes")
+	window.location.href="#login";
+}
+}
+   
     
+function confirmRules(){
+	localStorage.setItem("myCat", "Tom");
+	window.location.href="#login";
+}
+function isOpenModal(){
+	 window.location.href="#regeln";
+}
+    </script>`:''}
      <article id="mediabox">
     <nav id="navpanel"><div class="nav"><b>Online: <span id="onlineCount">0</span></b></div>
     <div id="settings" class="ita" onclick="panelOpen(this);">
