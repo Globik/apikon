@@ -80,6 +80,7 @@ return `
     <!-- ${n.user? JSON.stringify(n.user):'no user'} -->
     ${!n.user?`<script>
      window.onload=function(){
+		 
    const cat = localStorage.getItem("myCat");
    if(!cat && cat !=="Tom"){
     window.location.href="#regeln";
@@ -88,6 +89,7 @@ return `
 	//if(!islogin && islogin !=="yes")
 	window.location.href="#login";
 }
+in_rem_hash();
 }
    
     
@@ -98,14 +100,14 @@ function confirmRules(){
 function isOpenModal(){
 	 window.location.href="#regeln";
 }
-    </script>`:''}
+    </script>`:'<script>in_rem_hash();</script>'}
      <article id="mediabox">
     <nav id="navpanel"><div class="nav"><b>Online: <span id="onlineCount">0</span></b></div>
     <div id="settings" class="ita" onclick="panelOpen(this);">
  <img class="setimg" src="/img/set2.svg">
 </div>
 <div id="settingspanel">
-<div class="settingspanel">В админку</div>
+${n.user && n.user.brole=='admin'?'<div class="settingspanel" onclick="toAdminPanel(this);">В админку</div>':''}
 <div class="settingspanel">Переключить камеру</div>
 <div class="settingspanel">Скриншэринг</div>
 <div class="settingspanel" onclick="logout(this);">Выйти</div>
@@ -121,7 +123,7 @@ function isOpenModal(){
 		<div id="printmsg"><img class="printing2" src="/img/print.gif"/></div>
 	<div id="chat4"><div id="chatbox2"></div></div>
 
-<div id="textarea2"><textarea id="txtvalue2" placeholder="Your message" oninput="txtInput(this);" onchange="someChange();"></textarea>
+<div id="textarea2" class="hide"><textarea id="txtvalue2" placeholder="Your message" oninput="txtInput(this);" onchange="someChange();"></textarea>
 <div class="send" data-send="two" onclick="sendi(this);"><img src="/img/send1.svg"/></div></div>
 </section> 
     </div>

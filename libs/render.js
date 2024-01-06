@@ -8,7 +8,7 @@ const map=new Map();
 var mama;
 function vov(ms, pleva){
 fs.readdirSync(`./${ms}`).forEach(filename=> {
-	console.log('filename ', filename, ms);
+	//console.log('filename ', filename, ms);
 if(path.extname(filename)==='.js'){
 if(pleva){	
 // mama=reload(path.resolve(`${ms}/${filename}`));}

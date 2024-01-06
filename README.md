@@ -23,10 +23,10 @@ use roulet;
 \q
 sudo systemctl status nginx 
 sudo systemctl stop nginx 
-node static
+node app
 docker container ls -a
 docker stop my_container
 screen [ENTER]
-node static
+node app
 
 ```

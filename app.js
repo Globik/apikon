@@ -1,15 +1,14 @@
 const https=require( "https");
 var fs =require( "fs");
 const express = require('express');
-//import WebSocket , { WebSocketServer } from 'ws';
+
 var WebSocket=require('ws');
-//import Users from './models/Users.js';
-//var Users=require("./models/Users.js")
+
 const crypto =require('crypto');
 const passport = require("passport");
 const session = require('express-session');
 const mariadb =require('mariadb');
-const  cors =require('cors');
+
 const render=require('./libs/render.js');
 
 const { generate } =require('rand-token');
@@ -18,33 +17,28 @@ const { generate } =require('rand-token');
 const bodyParser =require('body-parser');
 
 
-const bcrypt =require( "bcrypt");
-//import cors from 'cors';
+
+
 
 
 var {config} =require('dotenv');
 
 config();
 
-
-(() => Promise.all([
-	//Users.sync({ force: false })
-]))();
-console.log('user:', process.env.DB_USER); 
 const pool = mariadb.createPool({ 
   //  host: process.env.DB_HOST, 
     user: process.env.DB_USER, 
     password: process.env.DB_PASSWORD,
     connectionLimit: 5 ,
-    trace: true,
+   // trace: true,
     database:'roulet'
 });
 const app = express();
-const suka = "./dist";
-const suka2 = "./Frontend/dist"
-app.use(express.static(suka2));
+const suka = "./public";
 
-if(process.env.DEVELOPMENT=='yes')app.use(cors());
+app.use(express.static(suka));
+
+
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -65,48 +59,22 @@ app.use((req, res, next)=>{
 	req.app.locals.user = req.user;
 	next();
 })
+
+app.use((req, res, next)=>{
+	req.db = pool;
+	next();
+})
+
 app.get("/", async(req, res)=>{
-	console.log('render main.js', req.user);
 	res.rendel('main', {});
 })
 app.get("/about", async(req, res)=>{
 	res.rendel('about', {});
 })
-/*
-app.post('/api/auth', async(req, res) => {
-    const { name, password } =  req.body;
-console.log("name, password: ", name, password);
-    if (!name || !password) {
-        return res.json({ error: true, message: 'Введите имя или пароль!' });
-    }
-
-    if (!(name.length >= 2 && password.length >= 6)) {
-        return res.json({ error: true, message: 'Пароль должен содержать минимум 6 символов, а Имя минимум 2!' });
-    }
-
-    const user = await Users.findOne({
-        where: { name: name }
-    }).then(async(user) => {
-        if (user?.validPassword(password)) {
-            return user;
-        } else {
-            return false;
-        }
-    });
-
-    if (!user) {
-        return res.json({ error: true, message: 'Имя или пароль неверный!' });
-    }
-
-    user.password = undefined;
-
-    res.json({ user: user })
-});
-*/
 
 app.post('/api/auth',(req, res, next)=>{
 	passport.authenticate("local",(err, user, info)=>{
-		console.log("err, user, info: ", err, user, info);
+		//console.log("err, user, info: ", err, user, info);
 		if(err){
 			return next(err);
 		}
@@ -118,7 +86,7 @@ app.post('/api/auth',(req, res, next)=>{
 			if(err){
 				return next(err);
 			}
-		//	res.redirect("/");
+	
 		res.json({ user: user });
 		});
 	})(req, res, next);
@@ -132,27 +100,10 @@ app.post('/logout', (req, res)=>{
 	});
 	res.json({message: "ok", status:200 });
 })
-app.get('/api/user', async(req, res) => {
-    const { headers } =  req;
-console.log('headers: ', headers)
-    if (headers.authorization) {
-        const user = await Users.findOne({
-            where: { token: req.headers.authorization.replace('Bearer ', '') }
-        });
-    
-        if (!user) {
-            return res.json({ error: true, message: 'Ошибка авторизации! Попробуйте зайти по новой.' });
-        }
-        user.password = undefined;
-    
-        res.json({ user: user })
-    } else {
-        return res.json({ error: true, message: 'Ошибка авторизации! Попробуйте зайти по новой.' });
-    }
-});
+
 app.post('/api/register', (req, res, next)=>{
-	passport.authenticate("local-signup",(err, user, info)=>{
-		console.log("err, user, info: ", err, user, info);
+	passport.authenticate("local-signup", (err, user, info)=>{
+	//	console.log("err, user, info: ", err, user, info);
 		if(err){
 			return next(err);
 		}
@@ -164,58 +115,51 @@ app.post('/api/register', (req, res, next)=>{
 			if(err){
 				return next(err);
 			}
-		//	res.redirect("/");
+		
 		res.json({ user: user });
 		});
 	})(req, res, next);
 })
-/*
-app.post('/api/register', async(req, res) => {
-    const { name, password } =  req.body;
-console.log("name, password: ", name, password);
-    if (!name || !password) {
-        return res.json({ error: true, message: 'Введите имя или пароль!' });
-    }
-
-    if (!(name.length >= 2 && password.length >= 6)) {
-        return res.json({ error: true, message: 'Пароль должен содержать минимум 6 символов, а Имя минимум 2!' });
-    }
-
-    try {
-        const user = await Users.create({
-            name: name,
-            token: generate(50),
-            password: bcrypt.hashSync(password, 10)
-        });
-
-        user.password = undefined;
-
-        res.json({ user: user })
-    } catch(e) {
-        console.log("**here error ***", e.message, e.code);
-        
-        const { errors } = e;
-        const promises = [];
-
-        for(let i in errors) {
-            const error = errors[i];
-         
-        }
-
-        Promise.all(promises).then((values) => {
-            res.json({
-                error: true,
-                message: "Такой ник уже существует!"//values.map((item) => item.text)
-            });
-        }).catch((error) => {
-            res.json({
-                error: true,
-                message: 'Произошла ошибка сервера, попробуйте чуть позже!'
-            });
-        });
-    }
-});
-*/
+app.get("/dashboard", secured, isAdmin(['admin']), async(req, res)=>{
+	res.rendel('dashboard', {});
+})
+app.get("/api/getUsers", checkAuth, checkRole(['admin']), async(req, res)=>{
+	let db = req.db;
+	try{
+		let a = await db.query('select name,brole, createdAt from users');
+		res.json({ content: res.compile('vUsers', { users: a })});
+	}catch(err){
+		res.status(401).send({ message: err.name });
+	}
+})
+function checkAuth(req, res, next){
+	if(req.isAuthenticated()){
+		return next();
+	}
+	return res.status(401).send({ message: 'Залогиньтесь.'});
+}
+function secured(req, res, next){
+	if(req.isAuthenticated()){
+		return next();
+	}
+	res.redirect('/');
+}
+function checkRole(roles){
+	return function(req, res, next){
+		if(roles.includes(req.user.brole)){
+			return next();
+		}
+		return res.status(401).send({ message: 'Недостаточно прав!' });
+	}
+}
+function isAdmin(roles){
+	return function(req, res, next){
+		if(roles.includes(req.user.brole)){
+			return next();
+		}
+		return res.redirect('/');
+	}
+}
 
 const dkey = "/etc/letsencrypt/live/rouletka.ru/privkey.pem";
 const dcert = "/etc/letsencrypt/live/rouletka.ru/fullchain.pem";
@@ -237,7 +181,7 @@ servi = https
   });
 }
 const wsServer= new WebSocket.Server({server: servi});
-//const wss = new WebSocket.Server({ server: servak })
+
 const idLen = 8
 let connections = []
 let waitingQueue = []
@@ -324,29 +268,15 @@ function sendToPeer (socketId, msg) {
 }
 
 wsServer.on('connection', async function (socket, req) {
-  let user;
-  const token = req.url.replace(/\/websocket\/(\?token\=|)/i, '');
-console.log('token: ', token);
-  if (token.length == 0) {
-  //  return socket.close();
-  } else {
-   // user = await Users.findOne({
-    //    where: { token: token }
-   // });
-
-    if (user == null) {
-    //  return socket.close();
-    }
-  }
-
+  
   socket.id = crypto.randomBytes(idLen / 2).toString('hex').slice(0, idLen)
   connections.push(socket)
   for (let connection of connections) {
-    // connection.send(JSON.stringify({ type: 'online', online: (connections.length + getRandomInt(450, 480)) }))
+   
 	connection.send(JSON.stringify({ type: 'online', online: (connections.length) }))
   }
 
-  console.log(`#${socket.id} [${user}] connected`)
+  console.log(`#${socket.id}  connected`)
 
   socket.on('message', (message) => {
     let msg = JSON.parse(message)
@@ -377,20 +307,12 @@ socket.on('error', function(e){
 	console.log("ERROR ***: ", e);
 })
   socket.on('close', (code, reason) => {
-    console.log(`#${socket.id} [${user}] disconnected: [${code}]${reason}`)
+    console.log(`#${socket.id} disconnected: [${code}]${reason}`)
     connections.splice(connections.indexOf(socket), 1)
     for (let connection of connections) {
-      // connection.send(JSON.stringify({ type: 'online', online: (connections.length + getRandomInt(450, 480)) }))
+      
 	  connection.send(JSON.stringify({ type: 'online', online: (connections.length) }))
     }
     hangUp(socket.id, { type: 'hang-up' })
   })
 })
-/*
-export default {
-  productionSourceMap: false,
-  devServer: {
-    disableHostCheck: true
-  }
-}
-*/

@@ -18,7 +18,7 @@ passport.serializeUser(function(user, cb){
 
 passport.deserializeUser(async function(user, cb){
 	
-	console.log("deserialize user", user);
+	//console.log("deserialize user", user);
 		try{
 			let useri = await db.query('select id,name,brole from users where id=(?)', [ user ]);
 		return cb(null, useri[0]);
@@ -37,7 +37,7 @@ new LocalStrategy({
 	passwordField : 'password'
 },
 async function(username, password, done){
-	console.log("username , paswword: ", username, password);
+	//console.log("username , paswword: ", username, password);
 	
 	 if (!username || !password) {
         return done(null, false, { error: true, message: 'Введите имя или пароль!' });
@@ -53,7 +53,7 @@ async function(username, password, done){
 	 
 	 let a = await pbkdf2(Buffer.from(password), SALT, 10000, 64, 'sha512');	
 	let b = a.toString('base64');
-		console.log('b: ',  b);
+		//console.log('b: ',  b);
 		let c = Buffer.from(b);
 		
 	 
@@ -63,7 +63,7 @@ async function(username, password, done){
 	 
 	 
 	 let wi=await db.query('select*from users where name=(?)',[username]);
-	 console.log('wi :', wi);
+	// console.log('wi :', wi);
 	 if(wi.length==0){
 		 return done(null, false, { error:true, message:'Пользователь не найден!', status:401 })
 	 }
@@ -92,7 +92,7 @@ async function(username, password, done){
 
 
 passport.use('local-signup', new LocalStrategy({usernameField: 'name', passReqToCallback: true}, async(req,username, password, done)=>{
-	console.log("username , paswword: ", username, password);
+	//console.log("username , paswword: ", username, password);
 	if(!req.body.name || !password){return done(null,false,{error: true, message: "Missing credentials", status: 401 })}	
 
  if (!username || !password) {
@@ -106,20 +106,20 @@ try{
 
 var useri = await db.query('select*from users where name=(?)', [ username ]);
 
-console.log('USER.rows[0]: ', useri)
+//console.log('USER.rows[0]: ', useri)
 if(useri.length==0) {
-	console.log("Not found user");
+	//console.log("Not found user");
 	let a = await pbkdf2(Buffer.from(password), SALT, 10000, 64, 'sha512');	
 	let b64 = a.toString('base64');
 	let qu = await db.query('insert into users(name, password) values(?,?)',[ username,  b64]);
-	console.log('qu: ', qu);
+//	console.log('qu: ', qu);
 	return done(null, qu.insertId.toString(), { username: username, status: 200, message: "Success!" });
 }else{
 return done(null, false, {error:true, message: "Ник " + username + " уже есть!", status: 401 })
 
 }
 }catch(err){
-	console.log('custom error handling in local signup auth.js: ', err.message);
+//	console.log('custom error handling in local signup auth.js: ', err.message);
 
 		
 	return done(null, false, { error: true, message: err.message, status: 401 })
