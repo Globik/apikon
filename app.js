@@ -11,7 +11,6 @@ const mariadb =require('mariadb');
 
 const render=require('./libs/render.js');
 
-const { generate } =require('rand-token');
 
 
 const bodyParser =require('body-parser');
@@ -50,8 +49,10 @@ app.use(session({
 	resave:false,
 	saveUninitialized: true,
 	cookie:{
-		secure:false
-	}
+		secure:false,
+		maxAge: 24 * 60 * 60 * 1000
+	},
+	maxAge: 24 * 60 * 60 * 1000
 }))
 app.use(passport.initialize());
 app.use(passport.session());
@@ -129,7 +130,7 @@ app.get("/api/getUsers", checkAuth, checkRole(['admin']), async(req, res)=>{
 		let a = await db.query('select name,brole, createdAt from users');
 		res.json({ content: res.compile('vUsers', { users: a })});
 	}catch(err){
-		res.status(401).send({ message: err.name });
+		res.status(400).send({ message: err.name });
 	}
 })
 function checkAuth(req, res, next){

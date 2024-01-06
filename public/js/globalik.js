@@ -37,12 +37,12 @@ open_al();
 function vax(m,u,d,o,z,pointer,bool){
 var x=new XMLHttpRequest();if(!x){return;}x.open(m,u);
 x.setRequestHeader('Cache-Control','no-cache');
-if(!bool){console.log('json');x.setRequestHeader('Content-Type','application/json','utf-8');}
+if(!bool){x.setRequestHeader('Content-Type','application/json','utf-8');}
 x.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
 x.onload=function(e){
-x.status==200?o(demiss(this.response || this.responseText),pointer):z(this.response || this.responseText,pointer)};
+x.status==200?o(demiss(this.response || this.responseText),pointer):z(demiss(this.response || this.responseText),pointer)};
 x.onerror=function(e){alert(e)};
-if(!bool){var v=miss(d);console.log('sending json');x.send(v);}else{x.send(d)}}
+if(!bool){var v=miss(d);x.send(v);}else{x.send(d)}}
 
 function miss(n){var a;try{a=JSON.stringify(n);return a;}catch(er){throw er;}}
 function demiss(n){var b;try{b=JSON.parse(n);return b;}catch(er){return n;}}
