@@ -26,9 +26,9 @@ function logi(el){
 myform.addEventListener('submit', logi, false);
 
 async function register(el){
-	//myform.preventDefault();
+	
     errormsg.textContent = "";
-   // commit('setLoading', true)
+   
    var sname = document.getElementById('name').value;
    if(!sname){
 	    note({content:"Введите имя!", type:"info", time: 5});
@@ -38,10 +38,11 @@ async function register(el){
 		note({content: "Введите пароль!", type: "info", time: 5});
 		return;
 	}
+	el.disabled = true;
 let user = {};
 user.name = sname;
 user.password = password.value;
-//alert(JSON.stringify(user))
+
 let uri = (el.className=="register-button" ? "/api/register":"/api/auth");
 try{
 var r=await fetch(uri, {
@@ -61,7 +62,7 @@ var r=await fetch(uri, {
 			 errormsg.textContent = data.message;
 			
 			  setTimeout(() => {
-        
+        el.disabled = false;
          errormsg.textContent = "";
         }, 3500)
 return;

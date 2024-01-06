@@ -108,7 +108,7 @@ function isOpenModal(){
 </div>
 <div id="settingspanel">
 ${n.user && n.user.brole=='admin'?'<div class="settingspanel" onclick="toAdminPanel(this);">В админку</div>':''}
-<div class="settingspanel">Переключить камеру</div>
+<div class="settingspanel" data-current="" onclick="toggleCam(this);">Переключить камеру</div>
 <div class="settingspanel">Скриншэринг</div>
 <div class="settingspanel" onclick="logout(this);">Выйти</div>
 </div>
@@ -239,15 +239,15 @@ ${n.user && n.user.brole=='admin'?'<div class="settingspanel" onclick="toAdminPa
         </div>
         <div class="modal-body">
           <div class="error-message" id="errormsg"></div>
-          <form name="formlogin" id="myform" onsubmit="return false;">
+          <form name="formlogin" id="myform">
             <label for="name" style="margin-top: 5px;">Имя</label>
             <input  name="username" type="text" placeholder="Введите Имя/Логин" id="name" required minlength="2" maxlength="20">
 
             <label for="name">Пароль</label>
             <input  name="userpassword" type="password" placeholder="Введите пароль" id="password" required minlength="2" maxlength="20">
 
-            <button class="register-button" onclick="register(this);">Зарегистрироваться</button>
-            <button class="login-button" onclick="register(this);">Войти</button>
+            <button type="submit" class="register-button" onclick="register(this);">Зарегистрироваться</button>
+            <button type="submit" class="login-button" onclick="register(this);">Войти</button>
           </form>
         </div>
     </output>

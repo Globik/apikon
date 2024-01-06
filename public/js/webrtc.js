@@ -2,6 +2,7 @@ var loc1 = location.hostname + ":" + location.port;
 var loc2 = location.hostname;
 var loc3 = loc1 || loc2;
 var new_uri;
+var kK = 0;
 var sock = null;
 var pc = null;
 var connectionState = "closed";
@@ -9,6 +10,99 @@ var mobChat = false;
 var isOpen = false;
 local.srcObject = null;
 remote.srcObject = null;
+var F = false;
+var isShow = false;
+
+var videoInput1, videoInput2;
+
+function toggleCam(el){
+	if(window.streami){
+		window.streami.getTracks().forEach(function(track){
+			track.stop();
+		});
+window.streami = undefined;
+	local.srcObject = null;
+
+	}else{
+		note({ content: "No cam", type: "error", time: 5 });
+		panelOpen();
+		return;
+	}
+	
+	var dura;
+	var si = el.getAttribute("data-current");
+	if(si !== videoInput2){
+	el.setAttribute("data-current", videoInput2);
+	dura = videoInput2;
+	
+	F = true;
+}else{
+	el.setAttribute("data-current", videoInput1);
+	dura = videoInput1;
+	
+	F = false;
+}
+
+		let constraints = {
+			audio:{
+      echoCancellation: {exact: true}
+    }, 
+    video:{deviceId: dura ? {exact: dura} : undefined}
+    };
+    
+    navigator.mediaDevices.getUserMedia(constraints).then(function(stream){
+		isShow = true;
+	local.srcObject = stream;	
+	window.streami = stream;
+	panelOpen();
+	
+	if(!pc) {
+		return;
+	}
+	 let videoTrack = stream.getVideoTracks()[0];
+	   var sender = pc.getSenders().find(function(s) {
+        return s.track.kind == videoTrack.kind;
+      });
+      
+      sender.replaceTrack(videoTrack).then(function(){
+		  
+	  }).catch(handleError);
+	 
+	 
+	}).catch(handleError)
+	isShow = false;
+}
+
+
+function gotDevices(deviceInfos){
+	let a = navigator.mediaDevices.getSupportedConstraints();
+	
+	for(var i=0; i !== deviceInfos.length; ++i){
+		
+		const deviceInfo = deviceInfos[i];
+		if(deviceInfo.kind === 'videoinput'){
+			if(kK == 0){
+				videoInput1 = deviceInfo.deviceId;
+			
+	
+			}else if(kK == 1){
+				
+				videoInput2 = deviceInfo.deviceId;
+			}
+			
+			kK++;
+		}
+	}
+}
+function getDevice(){
+if(!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices){
+console.warn("your browser navigator.mediaDevices not supported");
+}else{
+navigator.mediaDevices.enumerateDevices().then(gotDevices).catch(function(err){console.error(err)});
+}
+}
+
+getDevice();
 
 function panelOpen(el){
 			
@@ -31,7 +125,7 @@ if (window.location.protocol === "https:") {
 }
 
 function get_socket() {
- if(!sock) sock = new WebSocket(new_uri + "//" + loc3 + "/gesamt");
+ if(!sock) sock = new  WebSocket(new_uri + "//" + loc3 + "/gesamt");
 
   sock.onopen = function () {
     console.log("websocket opened");
@@ -185,31 +279,31 @@ function start(el){
 		get_socket();
 		}
 	if(el.getAttribute("data-start")=="no"){
-		//alert(1);
+		
 		el.disabled = true;
 			document.body.click();
 		if(local.srcObject==null){
-			//alert(2);
-	/*
-	
-	 try {
-    const stream = await navigator.mediaDevices.getUserMedia({audio: true, video: true});
-    alert(4);
-    console.log('Received local stream');
-    local.srcObject = stream;
-   // localStream = stream
-   window.streami = stream;
-    startbtn.disabled = false;
-    startbtn,className="stop"
-  } catch (e) {
-	  console.error(e);
-   alert(`getUserMedia() error: ${e.name}`);
-  }*/
+			let constraintsi = {
+		audio:{
+      echoCancellation: true,
+      autoGainControl: true,
+      noiseSuppression: true,
+      channelCount: 1,
+      sampleRate:48000,
+      sampleSize: 16
+    }, 
+	video: {deviceId: videoInput1 ? {exact: videoInput1} : undefined,
+		width:320, height:240, 
+	//	frameRate:15
+		}
+		};
 	
 	
-	navigator.mediaDevices.getUserMedia(constraints).then(function(stream){
+	
+	
+	navigator.mediaDevices.getUserMedia(constraintsi).then(function(stream){
 
-	//alert(3);
+	
 	local.srcObject = stream;	
 	window.streami = stream;
 
@@ -226,17 +320,22 @@ function start(el){
 	el.setAttribute("data-start", "no");
 	el.textContent = "start";
 	el.className = "start";
+	
+	
 	if(window.streami){
-		local.srcObject.getTracks().forEach(function(track){
+		window.streami.getTracks().forEach(function(track){
 			track.stop();
 		});
-	}
+}
+window.streami = undefined;
 	local.srcObject = null;
+	
 	closeVideoCall();
 	wsend({type: "hang-up"});
 	el.disabled = false;
 	local.style.backGround="rgba(0,0,0,0);"
 	if(sock) sock.close();
+	isShow = false;
 	chatbox.innerHTML="";
 	chatbox2.innerHTML="";
 	txtvalue.value="";
@@ -256,14 +355,15 @@ function handleError(err){
 		note({"content": err, type: "error", time: 5});
 	}
 	local.onloadedmetadata = function () {
-		console.log("onloaded");
+		console.log("local onloaded");
+		if(isShow)return;
 		wsend({type:'search-peer'});
 		somespinner.className="show";
 		mobileloader.className="active";
 		duka2.className="show";
 	}
 	remote.onloadedmetadata = function () {
-		console.log("onloaded");
+		console.log("remote onloaded");
 		nextbtn.disabled = false;
 		somespinner.className="";
 		somehello.className="see";
@@ -352,12 +452,13 @@ function handleError(err){
 	txtvalue.value="";
 	txtvalue2.value="";
 	somespinner.className="show";
+	mobileloader.className="active";
 	duka2.className="show";
 		somehello.className="";
      // el.disabled=true;
        printmsg2.className='';
         printmsg.className="";
-        mobileloader.className="active";
+        
     }
     
     

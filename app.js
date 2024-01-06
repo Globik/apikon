@@ -216,7 +216,7 @@ function searchPeer (socket, msg) {
     let index = Math.floor(Math.random() * waitingQueue.length)
     let peerId = waitingQueue[index]
     let peerSocket = getPeerSocket(peerId)
-
+ if(socket.id == peerId) return;
     waitingQueue.splice(index, 1)
 console.log("search peer 2")
     if (peerSocket) {
