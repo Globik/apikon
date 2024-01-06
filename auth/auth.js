@@ -46,6 +46,9 @@ async function(username, password, done){
     if (!(username.length >= 2 && password.length >= 6)) {
         return done(null, false, { error: true, message: 'Пароль должен содержать минимум 6 символов, а Имя минимум 2!' });
     }
+    if(username.length >=20){
+		return done(null, false, { error: true, message: 'Имя должно быть меньше 20 букв.' });
+	}
 
  try{
 	 
@@ -102,6 +105,9 @@ passport.use('local-signup', new LocalStrategy({usernameField: 'name', passReqTo
     if (!(username.length >= 2 && password.length >= 6)) {
         return done(null, false, { error: true, message: 'Пароль должен содержать минимум 6 символов, а Имя минимум 2!' });
     }
+    if(username.length >=20){
+		return done(null, false, { error: true, message: 'Имя должно быть меньше 20 букв.' });
+	}
 try{
 
 var useri = await db.query('select*from users where name=(?)', [ username ]);

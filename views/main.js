@@ -241,10 +241,10 @@ ${n.user && n.user.brole=='admin'?'<div class="settingspanel" onclick="toAdminPa
           <div class="error-message" id="errormsg"></div>
           <form name="formlogin" id="myform" onsubmit="return false;">
             <label for="name" style="margin-top: 5px;">Имя</label>
-            <input  name="username" type="text" placeholder="Введите Имя/Логин" id="name" required>
+            <input  name="username" type="text" placeholder="Введите Имя/Логин" id="name" required minlength="2" maxlength="20">
 
             <label for="name">Пароль</label>
-            <input  name="userpassword" type="password" placeholder="Введите пароль" id="password" required>
+            <input  name="userpassword" type="password" placeholder="Введите пароль" id="password" required minlength="2" maxlength="20">
 
             <button class="register-button" onclick="register(this);">Зарегистрироваться</button>
             <button class="login-button" onclick="register(this);">Войти</button>
