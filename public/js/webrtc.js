@@ -24,7 +24,7 @@ window.streami = undefined;
 	local.srcObject = null;
 
 	}else{
-		note({ content: "No cam", type: "error", time: 5 });
+		note({ content: "Нажми на старт-то!", type: "error", time: 5 });
 		panelOpen();
 		return;
 	}
@@ -73,6 +73,57 @@ window.streami = undefined;
 	isShow = false;
 }
 
+async function doSharing(el){
+	if(window.streami){
+		window.streami.getTracks().forEach(function(track){
+			track.stop();
+		});
+window.streami = undefined;
+	local.srcObject = null;
+
+	}else{
+		note({ content: "Нажми на старт-то!", type: "error", time: 5 });
+		panelOpen();
+		return;
+	}
+	try{
+		  const con = { video: { cursor: 'always' }, audio: true };
+          const screenS = await navigator.mediaDevices.getDisplayMedia(con);
+          local.srcObject = screenS;
+          window.streami = screenS;
+          panelOpen();
+          // const screenTrack = screenS.getVideoTracks()[0];
+           const screenTrack = screenS.getTracks()[0];	
+        if(!screenTrack){
+			note({ content: "No sharing works. Oops.", type: "error", time: 5 });
+			return;
+		}
+           if(screenTrack){
+			   screenTrack.onended = ()=>{
+				   panelOpen();
+				   note({ content: "Screensharing ended", type: "info", time: 5 });
+				   toggleCam(camToggle);
+				   
+			   }
+		   }
+          if(!pc){
+			  return;
+		  }
+         
+          if(screenTrack){
+			  const sender = pc.getSenders().find(sender=> sender.track.kind === screenTrack.kind);
+			  if(!sender) {
+				  note({ content: "Oops", type: "error", time: 5 });
+				  return;
+				  }
+			  sender.replaceTrack(screenTrack);
+			  isShow = true;
+		  }	  
+	  }catch(e){
+		 note({ content: e, type: "error", time: 5 });
+		 isShow = false;
+	  }
+}
 
 function gotDevices(deviceInfos){
 	let a = navigator.mediaDevices.getSupportedConstraints();

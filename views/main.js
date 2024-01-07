@@ -108,8 +108,8 @@ function isOpenModal(){
 </div>
 <div id="settingspanel">
 ${n.user && n.user.brole=='admin'?'<div class="settingspanel" onclick="toAdminPanel(this);">В админку</div>':''}
-<div class="settingspanel" data-current="" onclick="toggleCam(this);">Переключить камеру</div>
-<div class="settingspanel">Скриншэринг</div>
+<div class="settingspanel" data-current="" id="camToggle" onclick="toggleCam(this);">Переключить камеру</div>
+<div class="settingspanel" onclick="doSharing(this);">Скриншэринг</div>
 <div class="settingspanel" onclick="logout(this);">Выйти</div>
 </div>
 </nav>
