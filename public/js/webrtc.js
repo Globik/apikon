@@ -160,9 +160,28 @@ window.streami = undefined;
 	note({ content: "Отменв скриншэринга. Включаем вебку!", type: "info", time: 5 });
 						navigator.mediaDevices.getUserMedia(constraintsi).then(function(stream){
 
-	
+	isShow = true;
 	local.srcObject = stream;	
 	window.streami = stream;
+	
+	
+	if(!pc) {
+		return;
+	}
+	 let videoTrack = stream.getVideoTracks()[0];
+	   var sender = pc.getSenders().find(function(s) {
+        return s.track.kind == videoTrack.kind;
+      });
+      
+      sender.replaceTrack(videoTrack).then(function(){
+		  
+	  }).catch(handleError);
+	 
+	
+	
+	
+	
+	
 }).catch(handleError);
 					}
 				}   
