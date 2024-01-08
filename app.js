@@ -67,6 +67,7 @@ app.use((req, res, next)=>{
 })
 
 app.get("/", async(req, res)=>{
+	//console.log("*** USER *** ", req.user);
 	res.rendel('main', {});
 })
 app.get("/about", async(req, res)=>{
@@ -230,8 +231,8 @@ console.log("search peer 2")
   }
 
   waitingQueue.push(socket.id)
-  log(`#${socket.id} adds self into waiting queue`)
-  oni("Jemand is online ", " rouletka.ru");
+  log(`#${socket.id} ${socket.nick} adds self into waiting queue`)
+  oni("rouletka.ru ", socket.nick + " online: " + connections.length);
 }
 
 function hangUp (socketId, msg) {
@@ -296,6 +297,7 @@ wsServer.on('connection', async function (socket, req) {
         hangUp(socket.id, { type: 'hang-up' })
         break
       case 'search-peer':
+       socket.nick = msg.nick;
         searchPeer(socket, { type: 'peer-matched' })
         break
       case 'ping':

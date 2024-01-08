@@ -80,7 +80,7 @@ return `
     <!-- ${n.user? JSON.stringify(n.user):'no user'} -->
     ${!n.user?`<script>
      window.onload=function(){
-		 
+		 const NICK = "anon";
    const cat = localStorage.getItem("myCat");
    if(!cat && cat !=="Tom"){
     window.location.href="#regeln";
@@ -100,7 +100,7 @@ function confirmRules(){
 function isOpenModal(){
 	 window.location.href="#regeln";
 }
-    </script>`:'<script>in_rem_hash();</script>'}
+    </script>`:`<script>in_rem_hash();const NICK = "${n.user?n.user.name:'anonym'}";</script>`}
      <article id="mediabox">
     <nav id="navpanel"><div class="nav"><b>Online: <span id="onlineCount">0</span></b></div>
     <div id="settings" class="ita" onclick="panelOpen(this);">

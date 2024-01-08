@@ -72,8 +72,14 @@ window.streami = undefined;
 	}).catch(handleError)
 	isShow = false;
 }
-
+var isSharing =false;
 async function doSharing(el){
+	let ismobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+	if(ismobile){
+		note({ content: "Не работает в мобильниках!", type: "error", time: 5 });
+		panelOpen();
+		return;
+	}
 	if(window.streami){
 		window.streami.getTracks().forEach(function(track){
 			track.stop();
@@ -86,11 +92,13 @@ window.streami = undefined;
 		panelOpen();
 		return;
 	}
+	var screenS = null;
 	try{
 		  const con = { video: { cursor: 'always' }, audio: true };
-          const screenS = await navigator.mediaDevices.getDisplayMedia(con);
+           screenS = await navigator.mediaDevices.getDisplayMedia(con);
           local.srcObject = screenS;
           window.streami = screenS;
+          
           panelOpen();
           // const screenTrack = screenS.getVideoTracks()[0];
            const screenTrack = screenS.getTracks()[0];	
@@ -99,12 +107,19 @@ window.streami = undefined;
 			return;
 		}
            if(screenTrack){
+			   isSharing = true;
 			   screenTrack.onended = ()=>{
 				   panelOpen();
 				   note({ content: "Screensharing ended", type: "info", time: 5 });
 				   toggleCam(camToggle);
+				   screenS = null;
+				   isSharing = false;
 				   
 			   }
+			   
+			  
+			
+			   
 		   }
           if(!pc){
 			  return;
@@ -122,7 +137,37 @@ window.streami = undefined;
 	  }catch(e){
 		 note({ content: e, type: "error", time: 5 });
 		 isShow = false;
-	  }
+	  }finally{
+	   setTimeout(function(){
+				if(!isSharing){
+					if(!screenS) {
+						let constraintsi = {
+		audio:{
+      echoCancellation: true,
+      autoGainControl: true,
+      noiseSuppression: true,
+      channelCount: 1,
+      sampleRate:48000,
+      sampleSize: 16
+    }, 
+	video: {deviceId: videoInput1 ? {exact: videoInput1} : undefined,
+		width:320, height:240, 
+	//	frameRate:15
+		}
+		};
+	
+	panelOpen();
+	note({ content: "Отменв скриншэринга. Включаем вебку!", type: "info", time: 5 });
+						navigator.mediaDevices.getUserMedia(constraintsi).then(function(stream){
+
+	
+	local.srcObject = stream;	
+	window.streami = stream;
+}).catch(handleError);
+					}
+				}   
+			   }, 0);
+		   }
 }
 
 function gotDevices(deviceInfos){
@@ -408,7 +453,7 @@ function handleError(err){
 	local.onloadedmetadata = function () {
 		console.log("local onloaded");
 		if(isShow)return;
-		wsend({type:'search-peer'});
+		wsend({ type:'search-peer', nick: NICK });
 		somespinner.className="show";
 		mobileloader.className="active";
 		duka2.className="show";
