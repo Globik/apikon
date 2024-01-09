@@ -472,7 +472,7 @@ function handleError(err){
 	local.onloadedmetadata = function () {
 		console.log("local onloaded");
 		if(isShow)return;
-		wsend({ type:'search-peer', nick: NICK });
+		wsend({ type:'search-peer', nick: (NICK?NICK:'Anonym') });
 		somespinner.className="show";
 		mobileloader.className="active";
 		duka2.className="show";
@@ -754,3 +754,63 @@ function  addMessage(state, message) {
 function toAdminPanel(el){
 	window.location.href="/dashboard";
 }
+function pushSubscribe(el){
+	el.disabled = true;
+	el.className = "puls";
+	
+	
+	
+	let head = document.getElementsByTagName('head')[0];
+	let script = document.createElement('script');
+	script.type = 'text/javascript';
+	script.onload = function() {
+    callFunctionFromScript(el);
+}
+	script.src = "https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js";
+	head.appendChild(script);
+	
+	
+}
+	
+	
+	function callFunctionFromScript(el){
+	window.OneSignalDeferred = window.OneSignalDeferred || [];
+	OneSignalDeferred.push(function(OneSignal){
+		OneSignal.init({
+			appId:"226ceb60-4d9a-4299-8d74-b0af22809342", 
+			promtOptions:{
+			delay:{
+				pageViews: 1,
+				timeDelay: 1
+			}
+		}
+		});
+		let ifsupported = OneSignal.Notifications.isPushSupported();
+		if(!ifsupported){
+			note({ content: "Ваш браузер не поддерживает пуш-уведомления!", type: "error", time: 5 });
+			return;
+		}
+		 OneSignal.Notifications.addEventListener('permissionPromptDisplay', function (ev) {
+        console.log("The prompt displayed ", ev);
+        el.className = "";
+    });
+    
+     OneSignal.Notifications.addEventListener('permissionChange', function (permission) {
+        if(permission){
+			console.log("permission accepted");
+		}
+        el.className = "";
+    });
+    
+     OneSignal.Notifications.addEventListener('click', function (event) {
+        
+			console.log("click event ", event);
+		
+        el.className = "";
+    });
+    
+    
+	});
+}
+	
+

@@ -42,6 +42,7 @@ return `
 		<link href="/css/mediabox.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
 <script src="/js/globalik.js"></script>
+<!-- <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script> -->
 <script src="/js/adapter-latest.js"></script>
  <!-- Google tag (gtag.js) -->
 <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-QG900MX52X"></script>
@@ -103,6 +104,7 @@ function isOpenModal(){
     </script>`:`<script>in_rem_hash();const NICK = "${n.user?n.user.name:'anonym'}";</script>`}
      <article id="mediabox">
     <nav id="navpanel"><div class="nav"><b>Online: <span id="onlineCount">0</span></b></div>
+   <div id="pushDiv"><button id="pushBtn" onclick="pushSubscribe(this);">Подписка</button></div>
     <div id="settings" class="ita" onclick="panelOpen(this);">
  <img class="setimg" src="/img/set2.svg">
 </div>
