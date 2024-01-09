@@ -325,7 +325,7 @@ function  handleMessage(msg){
 mobileChat.className="";
 
 
-
+textarea2.className="";
 
 		div2.className="yourmsg2 he";
 		div2.innerHTML="<span><b>Собеседник: </b></span><br><span>"+ esci(msg) + "</span>";
