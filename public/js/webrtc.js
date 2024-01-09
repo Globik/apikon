@@ -791,6 +791,8 @@ function pushSubscribe(el){
 			promtOptions:{
 			slidedown: {
         prompts: [{
+			type:"push",
+			autoPrompt: true,
 			 delay: {
               pageViews: 1,
               timeDelay: 1
