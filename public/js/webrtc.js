@@ -788,6 +788,7 @@ function pushSubscribe(el){
 		}
 		OneSignal.init({
 			appId:"226ceb60-4d9a-4299-8d74-b0af22809342", 
+			
 			/*
 			promtOptions:{
 			slidedown: {

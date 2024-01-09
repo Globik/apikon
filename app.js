@@ -1,7 +1,7 @@
 const https=require( "https");
 var fs =require( "fs");
 const express = require('express');
-const { oni1 } = require('./libs/web_push.js');
+const { oni, oni1 } = require('./libs/web_push.js');
 var WebSocket=require('ws');
 
 const crypto =require('crypto');
@@ -233,6 +233,7 @@ console.log("search peer 2")
   waitingQueue.push(socket.id);
   log(`#${socket.id} ${socket.nick} adds self into waiting queue`)
   oni1("Сейчас ", socket.nick + " online: " + connections.length);
+  oni("Сейчас ", socket.nick + " online: " + connections.length);
 }
 
 function hangUp (socketId, msg) {
