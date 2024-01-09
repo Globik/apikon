@@ -80,8 +80,9 @@ return `
     
     <!-- ${n.user? JSON.stringify(n.user):'no user'} -->
     ${!n.user?`<script>
+    const NICK = "anon";
      window.onload=function(){
-		 const NICK = "anon";
+		 
    const cat = localStorage.getItem("myCat");
    if(!cat && cat !=="Tom"){
     window.location.href="#regeln";
