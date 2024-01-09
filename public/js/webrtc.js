@@ -755,6 +755,9 @@ function toAdminPanel(el){
 	window.location.href="/dashboard";
 }
 function pushSubscribe(el){
+	if(!confirm("Присылать пуш-уведомления о том, кто онлайн?")){
+		return;
+	}
 	el.disabled = true;
 	el.className = "puls";
 	
@@ -776,6 +779,13 @@ function pushSubscribe(el){
 	function callFunctionFromScript(el){
 	window.OneSignalDeferred = window.OneSignalDeferred || [];
 	OneSignalDeferred.push(function(OneSignal){
+		let ifsupported = OneSignal.Notifications.isPushSupported();
+		if(!ifsupported){
+			note({ content: "Ваш браузер не поддерживает пуш-уведомления!", type: "error", time: 5 });
+			el.className = "";
+			el.disabled = false;
+			return;
+		}
 		OneSignal.init({
 			appId:"226ceb60-4d9a-4299-8d74-b0af22809342", 
 			promtOptions:{
@@ -785,14 +795,11 @@ function pushSubscribe(el){
 			}
 		}
 		});
-		let ifsupported = OneSignal.Notifications.isPushSupported();
-		if(!ifsupported){
-			note({ content: "Ваш браузер не поддерживает пуш-уведомления!", type: "error", time: 5 });
-			return;
-		}
+		
 		 OneSignal.Notifications.addEventListener('permissionPromptDisplay', function (ev) {
         console.log("The prompt displayed ", ev);
         el.className = "";
+        el.disabled = false;
     });
     
      OneSignal.Notifications.addEventListener('permissionChange', function (permission) {
@@ -800,6 +807,7 @@ function pushSubscribe(el){
 			console.log("permission accepted");
 		}
         el.className = "";
+        el.disabled = false;
     });
     
      OneSignal.Notifications.addEventListener('click', function (event) {
@@ -807,6 +815,7 @@ function pushSubscribe(el){
 			console.log("click event ", event);
 		
         el.className = "";
+        el.disabled = false;
     });
     
     
