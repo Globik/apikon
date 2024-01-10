@@ -770,8 +770,8 @@ function pushSubscribe(el){
 	script.onload = function() {
     callFunctionFromScript(el);
 }
-	//script.src = "https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js";
-	script.src = "https://cdn.onesignal.com/sdks/OneSignalSDK.js"
+	script.src = "https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js";
+	//script.src = "https://cdn.onesignal.com/sdks/OneSignalSDK.js"
 	head.appendChild(script);
 	
 	
@@ -780,7 +780,7 @@ function pushSubscribe(el){
 	
 	function callFunctionFromScript(el){
 		
-		
+		/*
 		 var OneSignal = window.OneSignal || [];
     OneSignal.push(function () {
         OneSignal.init({
@@ -820,8 +820,8 @@ function pushSubscribe(el){
              el.disabled = false;
             el.className = "";
         });
-	})
-		/*
+	})*/
+		
 	window.OneSignalDeferred = window.OneSignalDeferred || [];
 	OneSignalDeferred.push(function(OneSignal){
 		let ifsupported = OneSignal.Notifications.isPushSupported();
@@ -863,7 +863,7 @@ function pushSubscribe(el){
     
     
 	});
-	*/ 
+	
 }
 	
 

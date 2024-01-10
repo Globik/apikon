@@ -118,7 +118,7 @@ app.post('/api/register', (req, res, next)=>{
 			if(err){
 				return next(err);
 			}
-		
+		oni(user.name, " registered");
 		res.json({ user: user });
 		});
 	})(req, res, next);
