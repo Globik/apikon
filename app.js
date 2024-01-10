@@ -106,7 +106,7 @@ app.post('/logout', (req, res)=>{
 
 app.post('/api/register', (req, res, next)=>{
 	passport.authenticate("local-signup", (err, user, info)=>{
-	//	console.log("err, user, info: ", err, user, info);
+		//console.log("err, user, info: ", err, user, info);
 		if(err){
 			return next(err);
 		}
@@ -118,7 +118,8 @@ app.post('/api/register', (req, res, next)=>{
 			if(err){
 				return next(err);
 			}
-		oni(user.username, " registered");
+			//console.log("USERNAME: ", info.username);
+		oni(info.username, " registered");
 		res.json({ user: user });
 		});
 	})(req, res, next);

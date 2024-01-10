@@ -8,7 +8,7 @@ const app_key = 'OTYyYzFlMDctZmU4OC00OWExLTliNjUtNTVjNTY4NWFhZWRi';
 //OTYyYzFlMDctZmU4OC00OWExLTliNjUtNTVjNTY4NWFhZWRi
 
 async function oni(us, txt){
-	if(process.env.DEVELOPMENT !="yes"){
+	//if(process.env.DEVELOPMENT !="yes"){
 
 let data = {
 		app_id: onesignal_app_id,
@@ -23,7 +23,7 @@ console.log("r: ", r.data);
 }catch(e){
 console.log("err: ", e.toString());
 }	
-}
+//}
 }
 
 
