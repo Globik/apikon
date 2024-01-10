@@ -233,7 +233,7 @@ console.log("search peer 2")
 
   waitingQueue.push(socket.id);
   log(`#${socket.id} ${socket.nick} adds self into waiting queue`)
-  oni("Сейчас ", socket.nick + " online: " + connections.length);
+ // oni("Сейчас ", socket.nick + " online: " + connections.length);
   oni1("Сейчас ", socket.nick + " online: " + connections.length);
 }
 
