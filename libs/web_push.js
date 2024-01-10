@@ -28,7 +28,7 @@ console.log("err: ", e.toString());
 
 
 async function oni1(us, txt){
-//if(process.env.DEVELOPMENT !="yes"){
+//if(process.env.DEVELOPMENT !="yes"){ iii
 
 let data = {
 		app_id: app_id,
