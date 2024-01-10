@@ -71,7 +71,7 @@ app.get("/", async(req, res)=>{
 	res.rendel('main', {});
 })
 app.get("/about", async(req, res)=>{
-	oni("Jemand on ", "about");
+	oni((req.user?req.user.name:'anonym'), " on about");
 	res.rendel('about', {});
 })
 

@@ -770,7 +770,8 @@ function pushSubscribe(el){
 	script.onload = function() {
     callFunctionFromScript(el);
 }
-	script.src = "https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js";
+	//script.src = "https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js";
+	script.src = "https://cdn.onesignal.com/sdks/OneSignalSDK.js"
 	head.appendChild(script);
 	
 	
@@ -778,6 +779,49 @@ function pushSubscribe(el){
 	
 	
 	function callFunctionFromScript(el){
+		
+		
+		 var OneSignal = window.OneSignal || [];
+    OneSignal.push(function () {
+        OneSignal.init({
+            appId: "226ceb60-4d9a-4299-8d74-b0af22809342"
+        });
+        OneSignal.setExternalUserId("1");
+    });
+    OneSignal.isPushNotificationsEnabled(function (isenabled) {
+        if (isenabled) {
+            console.log("push notifications are enabled!");
+            OneSignal.getUserId(function (userid) {
+                console.log("userid: " + userid);
+            })
+        } else {
+            console.log("push notifications are not enabled yet");
+            
+        }
+    })
+    OneSignal.on('permissionPromptDisplay', function () {
+        console.log("The prompt displayed");
+        
+    });
+    OneSignal.push(["getNotificationPermission", function (permission) {
+        console.log("Site Notification Permission:", permission);
+        
+    }]);
+    OneSignal.push(function () {
+        OneSignal.on('subscriptionChange', function (isSubscribed) {
+            console.log("The user's subscription state is now:", isSubscribed);
+             el.disabled = false;
+            el.className = "";
+        });
+    });
+    OneSignal.push(function () {
+        OneSignal.on('notificationDisplay', function (event) {
+            console.warn('OneSignal notification displayed:', event);
+             el.disabled = false;
+            el.className = "";
+        });
+	})
+		/*
 	window.OneSignalDeferred = window.OneSignalDeferred || [];
 	OneSignalDeferred.push(function(OneSignal){
 		let ifsupported = OneSignal.Notifications.isPushSupported();
@@ -788,21 +832,7 @@ function pushSubscribe(el){
 			return;
 		}
 		OneSignal.init({
-			appId:"226ceb60-4d9a-4299-8d74-b0af22809342", 
-			
-			/*
-			promtOptions:{
-			slidedown: {
-        prompts: [{
-			type:"push",
-			autoPrompt: true,
-			 delay: {
-              pageViews: 1,
-              timeDelay: 1
-            }
-		}]
-	}
-		}*/
+			appId:"226ceb60-4d9a-4299-8d74-b0af22809342"
 		});
 		
 		 OneSignal.Notifications.addEventListener('permissionPromptDisplay', function (ev) {
@@ -833,66 +863,9 @@ function pushSubscribe(el){
     
     
 	});
+	*/ 
 }
 	
 
 
-var promptOptions ={
-      slidedown: {
-        prompts: [{
-            type: "smsAndEmail",
-            autoPrompt: false,
-            text: {
-              emailLabel: "Insert Email Address",
-              smsLabel: "Insert Phone Number",
-              acceptButton: "Submit",
-              cancelButton: "No Thanks",
-              actionMessage: "Receive the latest news, updates and offers as they happen.",
-              updateMessage: "Update your push notification subscription preferences.",
-              confirmMessage: "Thank You!",
-              positiveUpdateButton: "Save Preferences",
-              negativeUpdateButton: "Cancel",
-            },
-            delay: {
-              pageViews: 1,
-              timeDelay: 20
-            },
-          },
-          {
-            type: "category",
-            autoPrompt: true,
-            text: {
-              actionMessage: "We'd like to show you notifications for the latest news and updates.",
-              acceptButton: "Allow",
-              cancelButton: "Cancel",
 
-              /* CATEGORY SLIDEDOWN SPECIFIC TEXT */
-              negativeUpdateButton: "Cancel",
-              positiveUpdateButton: "Save Preferences",
-              updateMessage: "Update your push notification subscription preferences.",
-            },
-            delay: {
-              pageViews: 3,
-              timeDelay: 20
-            },
-            categories: [{
-                tag: "politics",
-                label: "Politics"
-              },
-              {
-                tag: "local_news",
-                label: "Local News"
-              },
-              {
-                tag: "world_news",
-                label: "World News",
-              },
-              {
-                tag: "culture",
-                label: "Culture"
-              },
-            ]
-          }
-        ]
-      }
-    }
