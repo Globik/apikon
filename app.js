@@ -71,6 +71,7 @@ app.get("/", async(req, res)=>{
 	res.rendel('main', {});
 })
 app.get("/about", async(req, res)=>{
+	oni("Jemand on ", "about");
 	res.rendel('about', {});
 })
 
@@ -232,8 +233,8 @@ console.log("search peer 2")
 
   waitingQueue.push(socket.id);
   log(`#${socket.id} ${socket.nick} adds self into waiting queue`)
+  oni("Сейчас ", socket.nick + " online: " + connections.length);
   oni1("Сейчас ", socket.nick + " online: " + connections.length);
- // oni("Сейчас ", socket.nick + " online: " + connections.length);
 }
 
 function hangUp (socketId, msg) {

@@ -448,6 +448,7 @@ window.streami = undefined;
 	closeVideoCall();
 	wsend({type: "hang-up"});
 	el.disabled = false;
+	nextbtn.disabled = true;
 	local.style.backGround="rgba(0,0,0,0);"
 	if(sock) sock.close();
 	isShow = false;
@@ -559,7 +560,7 @@ function handleError(err){
     //  this.addLocalStream(this.localStream)
       closeVideoCall();
       wsend({type: "hang-up"});
-      wsend({type:'search-peer'});
+      wsend({type:'search-peer', nick: (NICK?NICK:"Anon") });
       chatbox.innerHTML="";
 	  chatbox2.innerHTML="";
 	mobileChat.className = "hide";
