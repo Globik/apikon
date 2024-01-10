@@ -105,7 +105,6 @@ function isOpenModal(){
     </script>`:`<script>in_rem_hash();const NICK = "${n.user?n.user.name:'anonym'}";</script>`}
      <article id="mediabox">
     <nav id="navpanel"><div class="nav"><b>Online: <span id="onlineCount">0</span></b></div>
-   <div id="pushDiv"><button id="pushBtn" onclick="pushSubscribe(this);">Подписка</button></div>
     <div id="settings" class="ita" onclick="panelOpen(this);">
  <img class="setimg" src="/img/set2.svg">
 </div>
@@ -113,6 +112,7 @@ function isOpenModal(){
 ${n.user && n.user.brole=='admin'?'<div class="settingspanel" onclick="toAdminPanel(this);">В админку</div>':''}
 <div class="settingspanel" data-current="" id="camToggle" onclick="toggleCam(this);">Переключить камеру</div>
 <div class="settingspanel" onclick="doSharing(this);">Скриншэринг</div>
+<div class="settingspanel"  onclick="pushSubscribe(this);">Пуш уведомления</div>
 <div class="settingspanel" onclick="logout(this);">Выйти</div>
 </div>
 </nav>

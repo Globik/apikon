@@ -757,11 +757,13 @@ function toAdminPanel(el){
 }
 function pushSubscribe(el){
 	if(!confirm("Присылать пуш-уведомления о том, кто онлайн?")){
+		
+		panelOpen();
 		return;
 	}
-	el.disabled = true;
+	//el.disabled = true;
 	el.className = "puls";
-	
+	panelOpen();
 	
 	
 	let head = document.getElementsByTagName('head')[0];
@@ -828,9 +830,11 @@ function pushSubscribe(el){
 		if(!ifsupported){
 			note({ content: "Ваш браузер не поддерживает пуш-уведомления!", type: "error", time: 5 });
 			el.className = "";
-			el.disabled = false;
+			//el.disabled = false;
 			return;
+			//panelOpen();
 		}
+		//panelOpen();
 		OneSignal.init({
 			appId:"226ceb60-4d9a-4299-8d74-b0af22809342"
 		});
@@ -838,7 +842,7 @@ function pushSubscribe(el){
 		 OneSignal.Notifications.addEventListener('permissionPromptDisplay', function (ev) {
         console.log("The prompt displayed ", ev);
         el.className = "";
-        el.disabled = false;
+       // el.disabled = false;
     });
     
      OneSignal.Notifications.addEventListener('permissionChange', function (permission) {
@@ -846,7 +850,7 @@ function pushSubscribe(el){
 			console.log("permission accepted");
 		}
         el.className = "";
-        el.disabled = false;
+      //  el.disabled = false;
     });
     
      OneSignal.Notifications.addEventListener('click', function (event) {
@@ -854,7 +858,7 @@ function pushSubscribe(el){
 			console.log("click event ", event);
 		
         el.className = "";
-        el.disabled = false;
+      //  el.disabled = false;
     });
     
     

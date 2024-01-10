@@ -1,7 +1,11 @@
 function about(n){
 return `
  <!DOCTYPE html>
-<html lang="ru"><body>
+<html lang="ru"><head><title>О проекте</title></head><body>
+<div>
+<p>Чат рулетка в интернете: <a href="https://rouletka.ru">https://rouletka.ru</a></p>
+<p>Мы в телеграм <a class="telega" href="https://t.me/chatikon2"><img class="telegaimg" alt="Telegram" src="/img/telega.png" width="50" height="50"></a>
+</div>
 Видео чат рулетка объединяет много интересных и дружелюбных людей из разных городов и стран. Здесь ты можешь не только слышать, но и видеть своего собеседника.
 
 Случайные знакомства — это весело
