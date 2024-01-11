@@ -153,7 +153,11 @@ ${n.user && n.user.brole=='admin'?'<div class="settingspanel" onclick="toAdminPa
 </div><div id="foot2"><a href="/about"> О проекте</a></div>
     </section>
     </article>
-    
+    <section id="dynamicSection">
+    <div id="dynamicNav"><div><b>Веб-камер:</b> <span id="camsCount">0</span></div><div><b>Коннектов:</b> <span id="connects">0</span></div></div>
+    <hr>
+    <div id="dynamicContainer"></div>
+    </section>
     
     
     

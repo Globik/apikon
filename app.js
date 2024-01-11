@@ -18,7 +18,7 @@ const bodyParser =require('body-parser');
 
 
 
-
+const onLine = new Map();
 
 var {config} =require('dotenv');
 
@@ -213,7 +213,7 @@ function getPeerSocket (peerId) {
   return null
 }
 
-function searchPeer (socket, msg) {
+function searchPeer (socket, msg, source) {
 	console.log("search peer 1",  waitingQueue.length, waitingQueue);
   while (waitingQueue.length) {
     let index = Math.floor(Math.random() * waitingQueue.length)
@@ -228,24 +228,38 @@ console.log("search peer 2")
       matchedIds.set(peerId, socket.id)
       socket.send(JSON.stringify(msg))
       log(`#${socket.id} matches #${peerId}`)
-      return
+       if(!onLine.has(socket.id)) {
+	 onLine.set(socket.id, { id: socket.id, src: source.src, nick: socket.nick, status: 'busy' });
+	 broadcast({ type: "dynamic", sub: "add", id: socket.id, partnerid: peerId, src: source.src, nick: socket.nick, status: 'busy', camcount: onLine.size, connects: matchedIds.size });
+ }
+      return;
     }
   }
 
   waitingQueue.push(socket.id);
+  
+ if(!onLine.has(socket.id)) {
+	 console.log("*** ONLINE *** ", onLine.has(socket.id));
+	 onLine.set(socket.id, { id: socket.id, src: source.src, nick: socket.nick, status: 'free' });
+	 broadcast({ type: "dynamic", sub: "add", id: socket.id, src: source.src, nick: socket.nick, status: 'free', camcount: onLine.size, connects: matchedIds.size });
+ }
   log(`#${socket.id} ${socket.nick} adds self into waiting queue`)
  // oni("Сейчас ", socket.nick + " online: " + connections.length);
   oni1("Сейчас ", socket.nick + " online: " + connections.length);
 }
 
 function hangUp (socketId, msg) {
+	if(onLine.has(socketId)){
+		onLine.delete(socketId);
+		broadcast({ type: "dynamic", sub: "remove", id: socketId, camcount: onLine.size });
+	}
   if (matchedIds.has(socketId)) {
     let peerId = matchedIds.get(socketId)
     let peerSocket = getPeerSocket(peerId)
 
     matchedIds.delete(socketId)
     matchedIds.delete(peerId)
-
+    broadcast({ type: "dynamic", sub: "connects", connects: matchedIds.size });
     if (peerSocket) {
       peerSocket.send(JSON.stringify(msg))
       log(`#${socketId} hangs up #${peerId}`)
@@ -283,6 +297,8 @@ wsServer.on('connection', async function (socket, req) {
   }
 
   console.log(`#${socket.id}  connected`)
+  
+  if(onLine.size !=0)wsend(socket, { type: "dynamic", sub: "total", cams: [...onLine], connects: matchedIds.size });
 
   socket.on('message', (message) => {
     let msg = JSON.parse(message)
@@ -301,7 +317,7 @@ wsServer.on('connection', async function (socket, req) {
         break
       case 'search-peer':
        socket.nick = msg.nick;
-        searchPeer(socket, { type: 'peer-matched' })
+        searchPeer(socket, { type: 'peer-matched' }, { src: msg.src })
         break
       case 'ping':
         socket.send(JSON.stringify({ type: 'pong' }))
@@ -323,3 +339,14 @@ socket.on('error', function(e){
     hangUp(socket.id, { type: 'hang-up' })
   })
 })
+function wsend(ws, obj) {
+  try {
+   let a = JSON.stringify(obj);
+    if (ws.readyState === WebSocket.OPEN) ws.send(a);
+  } catch (e) {}
+}
+function broadcast(obj){
+	for (let el of wsServer.clients) {
+		wsend(el, obj);
+	}
+}

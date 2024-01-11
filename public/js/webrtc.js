@@ -306,6 +306,9 @@ function on_msg(msg) {
         printmsg2.className='';
         printmsg.className="";
         break;
+        case 'dynamic':
+        handleDynamic(msg);
+        break;
       default:
         break
     }
@@ -438,13 +441,13 @@ function start(el){
 	
 	
 	if(window.streami){
-		window.streami.getTracks().forEach(function(track){
+		local.srcObject.getTracks().forEach(function(track){
 			track.stop();
 		});
 }
-window.streami = undefined;
+
 	local.srcObject = null;
-	
+	window.streami = undefined;
 	closeVideoCall();
 	wsend({type: "hang-up"});
 	el.disabled = false;
@@ -464,6 +467,9 @@ window.streami = undefined;
 		  printmsg2.className='';
         printmsg.className="";
         duka2.className="";
+        clearDynamicContainer();
+        camsCount.textContent = "0";
+        connects.textContent = "0";
 }
 }
 
@@ -473,7 +479,10 @@ function handleError(err){
 	local.onloadedmetadata = function () {
 		console.log("local onloaded");
 		if(isShow)return;
-		wsend({ type:'search-peer', nick: (NICK?NICK:'Anonym') });
+		setTimeout(function(){
+		let imgdata = Screenshot();
+		wsend({ type:'search-peer', nick: (NICK?NICK:'Anonym'), src: imgdata });
+	}, 100);
 		somespinner.className="show";
 		mobileloader.className="active";
 		duka2.className="show";
@@ -560,7 +569,8 @@ function handleError(err){
     //  this.addLocalStream(this.localStream)
       closeVideoCall();
       wsend({type: "hang-up"});
-      wsend({type:'search-peer', nick: (NICK?NICK:"Anon") });
+      let imgdata = Screenshot();
+      wsend({type:'search-peer', nick: (NICK?NICK:"Anon"), src: imgdata });
       chatbox.innerHTML="";
 	  chatbox2.innerHTML="";
 	mobileChat.className = "hide";
@@ -743,6 +753,68 @@ addLocalStream ();
 function  addMessage(state, message) {
     
   }
+
+
+function handleDynamic(obj){
+	console.log(obj);
+	if(obj.sub == "total"){
+		camsCount.textContent = obj.cams.length;
+		let b = Number(obj.connects);
+		//if(b != 0){
+		connects.textContent = b / 2;
+	//}
+		
+		obj.cams.forEach(function(el, i){
+		let d = document.createElement("div");
+		d.className="dynamicbox";
+		d.setAttribute("data-id", el[1].id);
+		d.innerHTML=`<caption>${el[1].nick}</caption><div class="dynamicImgHalter"><img src="${el[1].src}"/></div>`;
+		dynamicContainer.appendChild(d);
+	})
+	}else if(obj.sub == "remove"){
+		camsCount.textContent = obj.camcount;
+		let el = document.querySelector(`[data-id="${obj.id}"]`);
+		if(el)el.remove();
+	}else if(obj.sub == "add"){
+		let d = document.createElement("div");
+		d.className="dynamicbox";
+		d.setAttribute("data-id", obj.id);
+		d.innerHTML=`<caption>${obj.nick}</caption><div class="dynamicImgHalter"><img src="${obj.src}"/></div>`;
+		dynamicContainer.appendChild(d);
+		camsCount.textContent = obj.camcount;
+		let b = Number(obj.connects);
+		//if(b == 0)return;
+		connects.textContent = b / 2;
+		
+	}else if(obj.sub == "connects"){
+		let b = Number(obj.connects);
+		//if(b == 0)return;
+		connects.textContent = b / 2;
+	}else{
+		
+	}
+}
+function clearDynamicContainer(){
+	if(!dynamicContainer)return;
+	while(dynamicContainer.firstChild){
+		dynamicContainer.firstChild.remove();
+	}
+}
+function Screenshot() {
+	
+    let cnv = document.createElement('canvas');
+    let w = 180;
+    let h = 150;
+    cnv.width = w;
+    cnv.height = h;
+    var c = cnv.getContext('2d');
+    c.drawImage(local, 0, 0, w, h);
+    var imgdata = cnv.toDataURL('image/png', 1.0);
+    cnv.remove();
+    return imgdata;
+    
+}
+
 
   function wsend(obj){
 	if(!sock) return;
