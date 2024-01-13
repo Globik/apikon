@@ -112,7 +112,8 @@ function isOpenModal(){
 ${n.user && n.user.brole=='admin'?'<div class="settingspanel" onclick="toAdminPanel(this);">В админку</div>':''}
 <div class="settingspanel" data-current="" id="camToggle" onclick="toggleCam(this);">Переключить камеру</div>
 <div class="settingspanel" onclick="doSharing(this);">Скриншэринг</div>
-<div class="settingspanel"  onclick="pushSubscribe(this);">Пуш уведомления</div>
+<div class="settingspanel"><b>Вебок:</b> <span id="camsCount">0</span> | <b>Коннектов:</b> <span id="connects">0</span></div>
+<!-- <div class="settingspanel"  onclick="pushSubscribe(this);">Пуш уведомления</div> -->
 <div class="settingspanel" onclick="logout(this);">Выйти</div>
 </div>
 </nav>
@@ -153,14 +154,13 @@ ${n.user && n.user.brole=='admin'?'<div class="settingspanel" onclick="toAdminPa
 </div><div id="foot2"><a href="/about"> О проекте</a></div>
     </section>
     </article>
+    <!--
     <section id="dynamicSection">
     <div id="dynamicNav"><div><b>Веб-камер:</b> <span id="camsCount">0</span></div><div><b>Коннектов:</b> <span id="connects">0</span></div></div>
     <hr>
     <div id="dynamicContainer"></div>
     </section>
-    
-    
-    
+   -->
     
     
     

@@ -763,25 +763,28 @@ function handleDynamic(obj){
 		//if(b != 0){
 		connects.textContent = b / 2;
 	//}
-		
+		/*
 		obj.cams.forEach(function(el, i){
 		let d = document.createElement("div");
 		d.className="dynamicbox";
 		d.setAttribute("data-id", el[1].id);
 		d.innerHTML=`<caption>${el[1].nick}</caption><div class="dynamicImgHalter"><img src="${el[1].src}"/></div>`;
 		dynamicContainer.appendChild(d);
-	})
+		*/ 
+	//})
 	}else if(obj.sub == "remove"){
 		camsCount.textContent = obj.camcount;
-		let el = document.querySelector(`[data-id="${obj.id}"]`);
-		if(el)el.remove();
+		//let el = document.querySelector(`[data-id="${obj.id}"]`);
+		//if(el)el.remove();
 	}else if(obj.sub == "add"){
+		/*
 		let d = document.createElement("div");
 		d.className="dynamicbox";
 		d.setAttribute("data-id", obj.id);
 		d.innerHTML=`<caption>${obj.nick}</caption><div class="dynamicImgHalter"><img src="${obj.src}"/></div>`;
-		dynamicContainer.appendChild(d);
+		dynamicContainer.appendChild(d);*/
 		camsCount.textContent = obj.camcount;
+		 
 		let b = Number(obj.connects);
 		//if(b == 0)return;
 		connects.textContent = b / 2;
@@ -795,6 +798,7 @@ function handleDynamic(obj){
 	}
 }
 function clearDynamicContainer(){
+	return;
 	if(!dynamicContainer)return;
 	while(dynamicContainer.firstChild){
 		dynamicContainer.firstChild.remove();
