@@ -1,11 +1,11 @@
 -- source /home/globi/apikon/sql/set.sql
 -- source /root/apikon/sql/set.sql
 
-/*
+
 CREATE TABLE IF NOT EXISTS sets(
 stun varchar(1000)
 );
-*/
+
 
 insert into sets(stun) value('{"stun2": "stun:stun.relay.metered.ca:80", "turn5": "turn:relay1.expressturn.com:3478","username2":"efZIKNPZ0Y17GFG3WZ",
 "credential2":"HIYNupkIAHFXSgW8", "turn1":"turn:a.relay.metered.ca:80","username1":"33c88ed716afa1a802b5116a","credential1":"YlI1/qfkEWya3Q4p",
