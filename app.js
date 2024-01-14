@@ -54,10 +54,28 @@ app.use(session({
 	},
 	maxAge: 24 * 60 * 60 * 1000
 }))
+
+let stun = null;
+async function getstun(){
+	let a;
+try{
+		a = await pool.query('select stun from sets');
+		console.log("stun: ", a);
+		console.log('stun2 ', JSON.parse(a[0].stun).stun2);
+		stun = JSON.parse(a[0].stun);
+	}catch(err){
+		console.log(err);
+	}
+}
+getstun();
 app.use(passport.initialize());
 app.use(passport.session());
-app.use((req, res, next)=>{
+app.use(async(req, res, next)=>{
 	req.app.locals.user = req.user;
+	let s;
+	
+	req.app.locals.stun = stun;
+	console.log('req.app.locals.stun ', req.app.locals.stun);
 	next();
 })
 
@@ -125,17 +143,39 @@ app.post('/api/register', (req, res, next)=>{
 	})(req, res, next);
 })
 app.get("/dashboard", secured, isAdmin(['admin']), async(req, res)=>{
-	res.rendel('dashboard', {});
+	let db = req.db;
+	let a;
+	try{
+		a = await db.query('select COUNT(*) from users');
+	console.log("a: ", a[0]['COUNT(*)'].toString());
+	}catch(err){
+		console.log(err);
+	}
+	res.rendel('dashboard', {usercount: (a?a[0]['COUNT(*)'].toString():0) });
 })
 app.get("/api/getUsers", checkAuth, checkRole(['admin']), async(req, res)=>{
 	let db = req.db;
 	try{
-		let a = await db.query('select name,brole, createdAt from users');
+		//SELECT fields FROM table ORDER BY id DESC LIMIT 1;
+		let a = await db.query('select name,brole, createdAt from users order by id desc limit 1000');
 		res.json({ content: res.compile('vUsers', { users: a })});
 	}catch(err){
 		res.status(400).send({ message: err.name });
 	}
 })
+
+app.get("/api/stun", checkAuth, checkRole(['admin']), async(req, res)=>{
+	let db = req.db;
+	try{
+		//SELECT fields FROM table ORDER BY id DESC LIMIT 1;
+		let a = null;
+		//let a = await db.query('select name,brole, createdAt from users order by id desc limit 1000');
+		res.json({ content: res.compile('stun', {})});
+	}catch(err){
+		res.status(400).send({ message: err.name });
+	}
+})
+
 function checkAuth(req, res, next){
 	if(req.isAuthenticated()){
 		return next();

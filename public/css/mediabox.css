@@ -450,20 +450,7 @@ section#mobileChat{
 		bottom:4px;
 		
 }
-#dynamicSection{
-	background:white;
-}
-	#dynamicContainer,#dynamicNav{
-		background:white;
-		display: flex;
-		flex-wrap: wrap;
-    flex-direction: row;
-     justify-content: space-around;
-		align-items: center;
-	}
-	.dynamicbox{
-		background:white;
-	}
+
 @media screen and (max-width: 452px) and (orientation: portrait){
 #foot{
 	display:inline-block;

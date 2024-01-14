@@ -8,7 +8,7 @@ function listUsers(users){
 	users.forEach(function(el, i){
 		s+=`<div>${i+1}) <b>имя: </b>${el.name}</div>`;
 		s+=`${el.brole=='admin'?'<div>aдмин</div>':''}`;
-		s+=`<div><b>регистрация: </b>${el.createdAt}</div><hr>`;
+		s+=`<div><b>регистрация: </b>${new Date(el.createdAt).toLocaleString()}</div><hr>`;
 	});
 	return s;
 }
