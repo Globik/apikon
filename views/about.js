@@ -15,7 +15,7 @@ return `
 <p>
 <div class="f">Установить в appgallery <a href="https://appgallery.huawei.com/app/C109425847?sharePrepath=ag&locale=ru_RU&source=appshare&subsource=C109425847&shareTo=com.android.bluetooth&shareFrom=appmarket&shareIds=b582f0a3a57545f99084d72b532620c1_com.android.bluetooth&callType=SHARE" class="fic"><img src="/img/appgallery.png" style="width:250px;height:auto;"/></a></div>
 </p>
-<p>Мы в телеграм <a class="telega" href="https://t.me/chatikon2"><img class="telegaimg" alt="Telegram" src="/img/telega.png" width="150" height="150"></a>
+
 </div>
 Видео чат рулетка объединяет много интересных и дружелюбных людей из разных городов и стран. Здесь ты можешь не только слышать, но и видеть своего собеседника.
 
