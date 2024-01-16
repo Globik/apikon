@@ -6,7 +6,7 @@ return `
 </head><body>
 <div>
 <p>Чат рулетка в интернете: <a href="https://rouletka.ru">https://rouletka.ru</a></p>
-<p>
+<!-- <p>
 <div class="f">Установить в Googleplay <a class="fic" href="https://play.google.com/store/apps/details?id=ru.rouletka.pwa"><img style="width:250px;height:auto;" src="/img/googleplay.png"/></a></div>
 </p>
 <p>
@@ -17,6 +17,7 @@ return `
 </p>
 
 </div>
+-->
 Видео чат рулетка объединяет много интересных и дружелюбных людей из разных городов и стран. Здесь ты можешь не только слышать, но и видеть своего собеседника.
 
 Случайные знакомства — это весело
