@@ -120,7 +120,7 @@ function handleDynamic(obj){
 		let d = document.createElement("div");
 		d.className="dynamicbox";
 		d.setAttribute("data-id", el[1].id);
-		d.innerHTML=`<caption>${el[1].nick}</caption><div class="dynamicImgHalter"><img src="${el[1].src}"/></div>`;
+		d.innerHTML=`<caption>${el[1].nick}</caption><div class="dynamicImgHalter"><img data-pid="${el[1].id}" src="${el[1].src}"/></div>`;
 		dynamicContainer.appendChild(d);
 		
 })
@@ -133,7 +133,7 @@ function handleDynamic(obj){
 		let d = document.createElement("div");
 		d.className="dynamicbox";
 		d.setAttribute("data-id", obj.id);
-		d.innerHTML=`<caption>${obj.nick}</caption><div class="dynamicImgHalter"><img src="${obj.src}"/></div>`;
+		d.innerHTML=`<caption>${obj.nick}</caption><div class="dynamicImgHalter"><img data-pid="${obj.id}" src="${obj.src}"/></div>`;
 		dynamicContainer.appendChild(d);
 		camsCount.textContent = obj.camcount;
 		 
@@ -145,6 +145,9 @@ function handleDynamic(obj){
 		let b = Number(obj.connects);
 		
 		connects.textContent = b / 2;
+	}else if(obj.sub == "srcdata"){
+		let el = document.querySelector(`[data-pid="${obj.id}"]`);
+		if(el) el.src = obj.src;
 	}else{
 		
 	}

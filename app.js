@@ -359,6 +359,9 @@ wsServer.on('connection', async function (socket, req) {
        socket.nick = msg.nick;
         searchPeer(socket, { type: 'peer-matched' }, { src: msg.src })
         break
+        case 'srcdata':
+        broadcast({ type: "dynamic", sub: "srcdata", src: msg.src, id: socket.id });
+        break
       case 'ping':
         socket.send(JSON.stringify({ type: 'pong' }))
         break

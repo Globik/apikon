@@ -12,6 +12,7 @@ local.srcObject = null;
 remote.srcObject = null;
 var F = false;
 var isShow = false;
+var someInterval;
 
 var videoInput1, videoInput2;
 
@@ -266,7 +267,7 @@ function get_socket() {
 var tr = undefined;
 get_socket();
 function on_msg(msg) {
-	console.log("data type: ", msg.type);
+	//console.log("data type: ", msg.type);
 	 switch (msg.type) {
       case 'online':
         onlineCount.textContent = msg.online
@@ -445,7 +446,8 @@ function start(el){
 			track.stop();
 		});
 }
-
+clearInterval(someInterval);
+someInterval = null;
 	local.srcObject = null;
 	window.streami = undefined;
 	closeVideoCall();
@@ -476,6 +478,11 @@ function start(el){
 function handleError(err){
 		note({"content": err, type: "error", time: 5});
 	}
+	function doScreenshot(){
+		if(!local.srcObject) return;
+		let imgdata = Screenshot();
+		wsend({ type: "srcdata", src: imgdata});	
+	}
 	local.onloadedmetadata = function () {
 		console.log("local onloaded");
 		if(isShow)return;
@@ -483,6 +490,7 @@ function handleError(err){
 		let imgdata = Screenshot();
 		wsend({ type:'search-peer', nick: (NICK?NICK:'Anonym'), src: imgdata });
 	}, 100);
+	someInterval = setInterval(doScreenshot, 1000);
 		somespinner.className="show";
 		mobileloader.className="active";
 		duka2.className="show";
@@ -756,7 +764,7 @@ function  addMessage(state, message) {
 
 
 function handleDynamic(obj){
-	console.log(obj);
+	//console.log(obj);
 	if(obj.sub == "total"){
 		camsCount.textContent = obj.cams.length;
 		let b = Number(obj.connects);
@@ -805,7 +813,7 @@ function clearDynamicContainer(){
 	}
 }
 function Screenshot() {
-	
+	if(!local.srcObject) return;
     let cnv = document.createElement('canvas');
     let w = 180;
     let h = 150;
