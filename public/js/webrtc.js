@@ -13,8 +13,10 @@ remote.srcObject = null;
 var F = false;
 var isShow = false;
 var someInterval;
-
+var OPENCLAIM = false;
 var videoInput1, videoInput2;
+const IPS = new Map();
+var someIp = null;
 
 function toggleCam(el){
 	if(window.streami){
@@ -232,8 +234,42 @@ function panelOpen(el){
 				isOpen = false;
 			}
 		}
+function openClaim(el){
+	
+	if(!OPENCLAIM){
+			claimMenu.className = "show";
+			OPENCLAIM = true;	
+			}else{
+				claimMenu.className = "";
+				OPENCLAIM = false;
+			}
+}
 
-
+function sendClaim(el){
+	let d = el.getAttribute("data-claim");
+	if(d == "ignor"){
+		note({ content: "ОК. Добавили в игнор.", type: "info", time: 5 });
+	}else if(d == "claim"){
+		note({ content: "Спвсибо, модератор рассмотрит вашу жалобу.", type: "info", time: 5 });
+	}
+	let l = claimMenu.getAttribute("data-vip");
+	if(l)insertIgnore(l);
+}
+function insertIgnore(ip){
+	if(!remote.srcObject){
+		return;
+	}
+	if(!IPS.has(ip))IPS.set(ip, {});
+	next(nextbtn);
+}
+function closeClaim(el){
+	/*
+	if(OPENCLAIM){
+			claimMenu.className = "";
+				OPENCLAIM = false;
+	}*/
+	//openClaim();
+}
 if (window.location.protocol === "https:") {
   new_uri = "wss:";
 } else {
@@ -262,6 +298,7 @@ function get_socket() {
   sock.onclose = function () {
     sock = null;
     note({ content: "Соединение с сервером закрыто!", type: "info", time: 5 });
+    onlineCount.textContent = 0;
   };
 }
 var tr = undefined;
@@ -276,16 +313,33 @@ function on_msg(msg) {
         handleNewIceCandidate(msg.data)
         break
       case 'video-offer':
+       console.warn("IP: ", msg.vip);
+        claimMenu.setAttribute("data-vip", msg.vip);
+         let a = checkIp(msg.vip);
+        if(!a){
         handleVideoOffer(msg.data)
+	}else{
+		console.log("NO VIDEO");
+		wsend({type: "hang-up", sub: "here" });
+	}
         break
       case 'video-answer':
+     
         handleVideoAnswer(msg.data)
         break
       case 'hang-up':
         handleHangUp()
         break
       case 'peer-matched':
-        handlePeerMatched()
+        console.log(msg.vip)
+        claimMenu.setAttribute("data-vip", msg.vip);
+        let a3 = checkIp(msg.vip);
+        if(!a3){
+		handlePeerMatched()
+	}else{
+		console.error("some ignor");
+		wsend({ type: "hang-up", sub: "here" });
+	}
         break
       case 'message':
         handleMessage(msg.data)
@@ -310,10 +364,20 @@ function on_msg(msg) {
         case 'dynamic':
         handleDynamic(msg);
         break;
+        case 'vip':
+        someIp = msg.vip;
       default:
         break
     }
 	
+}
+function checkIp(ip){
+	let a = IPS.has(ip);
+	if(a){
+		return true;
+	}else{
+		return false;
+	}
 }
 function  handleMessage(msg){
 	printmsg2.className="";
@@ -346,7 +410,7 @@ function handleHangUp(){
 }
 
 function handleNewIceCandidate (msg) {
-  console.log('ice cand: ', msg);
+ // console.log('ice cand: ', msg);
 	if(pc){
 		//var cand = new RTCIceCandidate(msg);
 		pc.addIceCandidate(msg).then(function(){
@@ -356,12 +420,12 @@ function handleNewIceCandidate (msg) {
 
 }
  function handleVideoOffer(msg){
-	 console.log('handle video offer ', msg);
+	 console.log('handle video offer ');
 	 createPeerConnection();
 	pc.setRemoteDescription(msg).then(function(){
 		return pc.createAnswer().then(function(answer){
 			return pc.setLocalDescription(answer).then(function(){
-				wsend({type: 'video-answer', data: pc.localDescription /*, target: from, from: clientId*/});
+				wsend({type: 'video-answer', vip: someIp, data: pc.localDescription /*, target: from, from: clientId*/});
 				// state.socket.emit('video-answer', state.peerConnection.localDescription)
 			});
 		});
@@ -369,6 +433,7 @@ function handleNewIceCandidate (msg) {
  }
  
  function handleVideoAnswer(msg){
+	 console.log("handle video answer");
 	 	pc.setRemoteDescription(msg).then(function(){
 			
 		}).catch(handleError);
@@ -385,8 +450,7 @@ function handleNewIceCandidate (msg) {
 	pc.createOffer(offerOpts).then(function(offer){
 		return pc.setLocalDescription(offer);
 	}).then(function(){
-		
-		wsend({'type': 'video-offer', data: pc.localDescription/*, target: target, from: clientId*/});
+		wsend({'type': 'video-offer', vip: someIp, data: pc.localDescription/*, target: target, from: clientId*/});
 	}).catch(handleError);
 
  }
@@ -476,7 +540,8 @@ someInterval = null;
 }
 
 function handleError(err){
-		note({"content": err, type: "error", time: 5});
+	alert(err);
+		note({"content": err.name, type: "error", time: 15});
 	}
 	function doScreenshot(){
 		if(!local.srcObject) return;
@@ -557,7 +622,7 @@ function handleError(err){
 }
 	
 	
-	  var iceServers = {"iceServers": [ 
+	  var iceServers2 = {"iceServers": [ 
 	  {
         urls: 'stun:stun.l.google.com:19302'
       },
@@ -568,7 +633,17 @@ function handleError(err){
   { urls: "turn:a.relay.metered.ca:443", username: "33c88ed716afa1a802b5116a", credential: "YlI1/qfkEWya3Q4p", }, 
   { urls: "turn:a.relay.metered.ca:443?transport=tcp", username: "33c88ed716afa1a802b5116a", credential: "YlI1/qfkEWya3Q4p", }
   ]};
+  var iceServers = {
+	  "iceServers":[
+	  {
+        urls: 'stun:stun.l.google.com:19302'
+      }
+	  ]
+	  };
   
+  if(ICESERVERS){
+ iceServers  = ICESERVERS;
+}
    function next(el){
 	   el.disabled = true;
      // this.closePeerConnection()
@@ -639,7 +714,7 @@ function signalingStateChangeHandler (event) {
 }
 
 function negotiationNeededHandler (event) {
-  console.log('*** Negotiation needed')
+ // console.log('*** Negotiation needed')
 
   if (connectionState === 'closed') {
     connectionState = 'connecting'
@@ -726,7 +801,7 @@ function iceCandidateError(e) {
     try{
     pc = new RTCPeerConnection(iceServers);
 }catch(er){
-	note({content: err, type:"error", time: 5});
+	alert(er);
 	return;
 }
 addLocalStream ();

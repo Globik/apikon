@@ -88,9 +88,15 @@ html,body{
 .stuninp{
 	width:100%;
 }
+#gostun{
+	background:white;
+	color: blue;
+	padding: 10px;
+	font-weight:bold;
+}
     pre{
     width:100%;
-		overflow:scroll;
+		overflow:auto;
 		white-space: pre-line;
 	word-wrap: break-word;
 	overflow-wrap:break-word;

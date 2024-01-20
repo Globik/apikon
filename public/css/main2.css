@@ -257,7 +257,7 @@ body.ondialog {
     }
 }
 
-input[type=submit].puls, button.puls, div.puls {
+input[type=submit].puls,button.puls,div.puls {
     animation-name: puls;
     animation-duration: 1s;
     animation-direction: alternate;

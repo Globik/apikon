@@ -37,7 +37,7 @@ function get_socket(){
 get_socket();
 
 function on_msg(msg) {
-	console.log("data type: ", msg.type);
+	//console.log("data type: ", msg.type);
 	if(msg.type == 'dynamic'){
         handleDynamic(msg);
 	}
@@ -47,8 +47,7 @@ function getUsers(el){
 	contentBox.innerHTML = "";
 	dynamicSection.style.display = "none";
 	someSpinner.className = "show";
-	
-		vax('get','/api/getUsers', {}, on_get_users, on_error, el, false);
+	vax('get','/api/getUsers', {}, on_get_users, on_error, el, false);
 	
 	
 }
@@ -71,7 +70,6 @@ function getStun(el){
 function on_get_stun(l, el){
 	someSpinner.className = "hide";
 	contentBox.innerHTML = l.content;
-	goStun();
 }
 
 function whosOnline(el){
@@ -80,35 +78,39 @@ function whosOnline(el){
 }
 
 
-function goStun(){
-	//let f =document.forms.stun;
-	suka.addEventListener('submit', doStun, false);
-}
- function doStun(ev){
-	 try{
-	 ev.preventDefault();
-	// alert(1);
-	let data = {}
-	data.stun1 = ev.target.stun1.value;
-	data.stun2 = ev.target.stun2.value;
-	data.turn1 = ev.target.turn1.value;
-	data.turn2 = ev.target.turn2.value;
-	data.turn3 = ev.target.turn3.value;
-	data.turn4 = ev.target.turn4.value;
-	data.username1 = ev.target.username1.value;
-	data.credential1 = ev.target.credential1.value;
-	data.turn5 = ev.target.turn5.value;
-	data.username2 = ev.target.username2.value;
-	data.credential2 = ev.target.credential2.value;
-	alert(JSON.stringify(data));
- }catch{
-	 alert(2);
- }
+
+ function setStun(el){
+	 
+	 let a = preStun.textContent;
+	 if(!a){
+		 note({ content: "A, чо пусто?", type: "warnig", time: 5 });
+		 return;
+	 }
+	 let b;
+	try{
+		 b = JSON.parse(a);
+	}catch(err){
+		alert(err);
+		note({ content: err, type: "error", time: 5});
+		return;
+	}
+	vax('post','/api/setstun', b, on_set_stun, on_set_stun_error, el, false);
+	el.className = "puls";
+ 
  }
 
+function on_set_stun(l, el){
+	el.className = "";
+	note({ content: l.message, type: "info", time: 5 });
+}
+
+function on_set_stun_error(l, el){
+	el.className = "";
+	note({ content: l.message, type: "error", time: 5 });
+}
 
 function handleDynamic(obj){
-	console.log(obj);
+//	console.log(obj);
 	if(obj.sub == "total"){
 		camsCount.textContent = obj.cams.length;
 		let b = Number(obj.connects);

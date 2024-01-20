@@ -103,6 +103,9 @@ function isOpenModal(){
 	 window.location.href="#regeln";
 }
     </script>`:`<script>in_rem_hash();const NICK = "${n.user?n.user.name:'anonym'}";</script>`}
+    <script>
+    var ICESERVERS =${n.stun?n.stun:null};
+     </script>
      <article id="mediabox">
     <nav id="navpanel"><div class="nav"><b>Online: <span id="onlineCount">0</span></b></div>
     <div id="settings" class="ita" onclick="panelOpen(this);">
@@ -118,8 +121,11 @@ ${n.user && n.user.brole=='admin'?'<div class="settingspanel" onclick="toAdminPa
 </div>
 </nav>
     <section id="container">
-    <div id="remotecontainer">
+    <div id="remotecontainer" onclick="closeClaim(this);">
+    <section id="claimContainer" onclick="openClaim(this);"><div id="claimBox">!</div></section>
+    <div id="claimMenu" data-vip=""><div data-claim="ignor" onclick="sendClaim(this);">В игнор!</div><div data-claim="claim" onclick="sendClaim(this);">Пожаловаться!</div></div>
     <section id="mobileloader"><div class="loader"></div></section>
+    
     <video id="remote"  class="" autoplay></video>
      <div id="duka2">Жизнь как рулетка. Никогда не узнаешь, кого встретишь следуюшим...</div>
  <section id="mobileChat" class="hide">

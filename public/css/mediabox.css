@@ -50,6 +50,55 @@ html,body{
 			transform:none;
 		}
 	}
+	#remotecontainer{
+		position:relative;
+	}
+	#claimContainer{
+		display:flex;
+		position:absolute;
+		background:white;
+		top:10px;
+		right:15px;
+		width:25px;
+		height:25px;
+		border-radius:50%;
+		 justify-content: space-around;
+		align-items: center;
+		cursor:pointer;
+		z-index:1;
+		opacity:0.5;
+		transition: all 1s ease-out;
+	}
+	#claimContainer:hover{
+		opacity:1;
+	}
+	
+	#claimBox{
+		color:red;
+		font-size:24px;
+		font-weight:bold;
+	}
+	#claimMenu{
+		display:none;
+		position:absolute;
+		top:35px;
+		right:0;
+		z-index:1;
+	}
+	#claimMenu.show{
+		display:block;
+	}
+	#claimMenu div{
+		background: #73a6c7;
+		padding:10px;
+		font-size:1.2rem;
+		font-weight:bold;
+		transition: all 0.5s ease-out;
+	}
+	#claimMenu div:hover{
+		background:silver;
+		cursor:pointer;
+	}
 	#settings{
 		bckground:blue;
 		width:100%;
@@ -496,6 +545,20 @@ section#mobileChat{
 		border-radius:1px;
 		display:flex;
 	}
+	/*
+	#claimContainer{
+		display:inline-block;
+		position:absolute;
+		background:yellow;
+		top:10px;
+		right:15px;
+	}
+	
+	#claimBox{
+		color:red;
+		fnt-size:20px;
+	}
+	*/ 
 	#duka2{
 		position:absolute;
 		width:100%;

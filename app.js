@@ -60,9 +60,10 @@ async function getstun(){
 	let a;
 try{
 		a = await pool.query('select stun from sets');
-		console.log("stun: ", a);
-		console.log('stun2 ', JSON.parse(a[0].stun).stun2);
-		stun = JSON.parse(a[0].stun);
+	//	console.log("stun: ", a[0].stun);
+		//console.log('stun2 ', JSON.parse(a[0].stun).stun2);
+		//stun = JSON.parse(a[0].stun);
+		stun = a[0].stun;
 	}catch(err){
 		console.log(err);
 	}
@@ -75,7 +76,24 @@ app.use(async(req, res, next)=>{
 	let s;
 	
 	req.app.locals.stun = stun;
-	console.log('req.app.locals.stun ', req.app.locals.stun);
+	//console.log('req.app.locals.stun ', req.app.locals.stun);
+	
+	console.log("method ", req.method, " path ",  req.path);
+	
+	if(req.method == "POST"){
+		if(req.isAuthenticated()){
+			if(req.path == "/api/setstun"){
+				try{
+				stun = JSON.stringify(req.body, null, 2);
+				req.app.locals.stun = stun;
+			}catch(err){
+				console.log(err);
+				stun = null;
+			}
+			}
+		}
+	}
+	
 	next();
 })
 
@@ -175,7 +193,19 @@ app.get("/api/stun", checkAuth, checkRole(['admin']), async(req, res)=>{
 		res.status(400).send({ message: err.name });
 	}
 })
-
+app.post('/api/setstun', checkAuth, checkRole(['admin']), async(req, res)=>{
+	//console.log("req.body: ", req.body);
+	
+	let db = req.db;
+	try{
+		let a = JSON.stringify(req.body, null, 2);
+		await db.query('update sets set stun=(?)', [ a ]);
+		res.json({ message: "OK, saved!" });
+	}catch(err){
+		console.log("Error ", err);
+		res.status(400).send({ message: err.name });
+	}
+})
 function checkAuth(req, res, next){
 	if(req.isAuthenticated()){
 		return next();
@@ -266,9 +296,11 @@ console.log("search peer 2")
 		console.log("search peer 3")
       matchedIds.set(socket.id, peerId)
       matchedIds.set(peerId, socket.id)
+      console.log("IP: ", socket.vip);
+      msg.vip = socket.vip;
       socket.send(JSON.stringify(msg))
       log(`#${socket.id} matches #${peerId}`)
-       if(!onLine.has(socket.id)) {
+     if(!onLine.has(socket.id)) {
 	 onLine.set(socket.id, { id: socket.id, src: source.src, nick: socket.nick, status: 'busy' });
 	 broadcast({ type: "dynamic", sub: "add", id: socket.id, partnerid: peerId, src: source.src, nick: socket.nick, status: 'busy', camcount: onLine.size, connects: matchedIds.size });
  }
@@ -288,17 +320,27 @@ console.log("search peer 2")
   oni1("Сейчас ", socket.nick + " online: " + connections.length);
 }
 
-function hangUp (socketId, msg) {
+function hangUp (socketId, msg, bool) {
+	if(!bool){
 	if(onLine.has(socketId)){
 		onLine.delete(socketId);
 		broadcast({ type: "dynamic", sub: "remove", id: socketId, camcount: onLine.size });
 	}
+}
   if (matchedIds.has(socketId)) {
     let peerId = matchedIds.get(socketId)
     let peerSocket = getPeerSocket(peerId)
 
     matchedIds.delete(socketId)
     matchedIds.delete(peerId)
+    /*
+    if(onLine.has(socketId)){
+		onLine.delete(socketId);
+		broadcast({ type: "dynamic", sub: "remove", id: socketId, camcount: onLine.size });
+	}
+    
+    */
+    
     broadcast({ type: "dynamic", sub: "connects", connects: matchedIds.size });
     if (peerSocket) {
       peerSocket.send(JSON.stringify(msg))
@@ -322,13 +364,14 @@ function sendToPeer (socketId, msg) {
   let peerSocket = getPeerSocket(peerId)
 
   if (peerSocket) {
-    peerSocket.send(JSON.stringify({ type: msg.type, data: msg.data }))
+    peerSocket.send(JSON.stringify({ type: msg.type, vip: msg.vip, data: msg.data }))
     log(`#${socketId} sends ${msg.type} to #${peerId}`)
   }
 }
 
 wsServer.on('connection', async function (socket, req) {
-  
+  const ip = req.socket.remoteAddress;
+  setIp(socket, ip);
   socket.id = crypto.randomBytes(idLen / 2).toString('hex').slice(0, idLen)
   connections.push(socket)
   for (let connection of connections) {
@@ -350,10 +393,11 @@ wsServer.on('connection', async function (socket, req) {
       case 'message':
       case "write":
       case "unwrite":
+     // msg.vip = socket.vip
         sendToPeer(socket.id, msg)
         break
       case 'hang-up':
-        hangUp(socket.id, { type: 'hang-up' })
+        hangUp(socket.id, { type: 'hang-up' },(msg.sub&&msg.sub=="here"?true:false))
         break
       case 'search-peer':
        socket.nick = msg.nick;
@@ -392,4 +436,19 @@ function broadcast(obj){
 	for (let el of wsServer.clients) {
 		wsend(el, obj);
 	}
+}
+
+function setIp(ws, ip){
+	const re = /([0-9]{1,3}[\.]){3}[0-9]{1,3}/;
+	if(process.env.DEVELOPMENT == "yes"){
+	let r3 = "78.81.155.17";	
+	ws.vip = r3;
+	wsend(ws, { type: "vip", vip: ws.vip })
+	}else{
+let a = ip.match(re);
+let r = a[0];
+console.log("IP: ", r)
+ws.vip = r;
+wsend(ws, { type: "vip", vip: ws.vip })
+}
 }
