@@ -63,7 +63,7 @@ try{
 	//	console.log("stun: ", a[0].stun);
 		//console.log('stun2 ', JSON.parse(a[0].stun).stun2);
 		//stun = JSON.parse(a[0].stun);
-		stun = a[0].stun;
+		if(a.length > 0)stun = a[0].stun;
 	}catch(err){
 		console.log(err);
 	}
@@ -199,7 +199,12 @@ app.post('/api/setstun', checkAuth, checkRole(['admin']), async(req, res)=>{
 	let db = req.db;
 	try{
 		let a = JSON.stringify(req.body, null, 2);
+		let b = await pool.query('select stun from sets');
+		if(b.length > 0){
 		await db.query('update sets set stun=(?)', [ a ]);
+	}else{
+		await db.query('insert into sets(stun) values(?)', [ a ]);
+	}
 		res.json({ message: "OK, saved!" });
 	}catch(err){
 		console.log("Error ", err);

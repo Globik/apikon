@@ -82,8 +82,9 @@ function whosOnline(el){
  function setStun(el){
 	 
 	 let a = preStun.textContent;
+	// alert(a);
 	 if(!a){
-		 note({ content: "A, чо пусто?", type: "warnig", time: 5 });
+		 note({ content: "A, чо пусто?", type: "error", time: 5 });
 		 return;
 	 }
 	 let b;
