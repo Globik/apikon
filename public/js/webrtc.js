@@ -252,6 +252,7 @@ function sendClaim(el){
 	}else if(d == "claim"){
 		note({ content: "Спвсибо, модератор рассмотрит вашу жалобу.", type: "info", time: 5 });
 	}
+	openClaim(claimContainer);
 	let l = claimMenu.getAttribute("data-vip");
 	if(l)insertIgnore(l);
 }
@@ -646,10 +647,6 @@ function handleError(err){
 }
    function next(el){
 	   el.disabled = true;
-     // this.closePeerConnection()
-    //  this.hangUpCall()
-    //  this.createPeerConnection()
-    //  this.addLocalStream(this.localStream)
       closeVideoCall();
       wsend({type: "hang-up"});
       let imgdata = Screenshot();
@@ -664,10 +661,8 @@ function handleError(err){
 	mobileloader.className="active";
 	duka2.className="show";
 		somehello.className="";
-     // el.disabled=true;
        printmsg2.className='';
         printmsg.className="";
-        
     }
     
     
@@ -690,11 +685,7 @@ function iceConnectionStateChangeHandler (event) {
     case 'closed':
     case 'failed':
     case 'disconnected':
-    // и вот тут бы сигнал на сервер послать, что, мол, готов к приятию другого собеседника
-  //  rootState.socket.emit('search-peer');
-     closeVideoCall();
-       printmsg2.className='';
-        printmsg.className="";
+     next(nextbtn);
       break
   }
 }
@@ -792,7 +783,6 @@ function addStream({ track, streams }){
 
 function iceCandidateError(e) {
 	console.error("ice err: ", e.url, e.errorText );
-	
 	note({content: "ice err: " + e.url + " " + e.errorText, type: "error", time: 5});
 }
 
