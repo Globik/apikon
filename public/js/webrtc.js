@@ -228,8 +228,22 @@ function panelOpen(el){
 			if(!isOpen){
 			settingspanel.className = "open";
 			isOpen = true;	
+			
+			
+			document.addEventListener("visibilitychange", newev);
+	
+	/*
+	window.addEventListener('beforeunload', function(event) {
+    // Send a message to all other tabs that this tab is closing
+    console.log('tab-closing');
+});
+*/			
+			
+			
+			
+			
 			}else{
-				
+				 document.removeEventListener('visibilitychange', newev);
 				settingspanel.className = "";
 				isOpen = false;
 			}
@@ -276,18 +290,33 @@ if (window.location.protocol === "https:") {
 } else {
   new_uri = "ws:";
 }
+
+
+function newev(){
+	 if (document.hidden){
+        console.log("Browser tab is hidden")
+        setSignal();
+    } else {
+        console.log("Browser tab is visible")
+       //document.removeEventListener('visibilitychange', newev);
+    }
+   // document.removeEventListener('visibilitychange', newev);
+}
+
+
 function wari(el){
 	//alert('load');
+	return;
 	let s = document.querySelector('iframe');
 	s.onclick=function(){
-		alert(1);
+		//alert(1);
 	}
 	//s.contentWindow.postMessage('message', '*');
 	//s.contentWindow.onopen=function(){
 	//alert(6);
 	//}
 	
-	const channel = new BroadcastChannel('tab-activity');
+//	const channel = new BroadcastChannel('tab-activity');
 
 // Listen for messages on the channel
 /*
@@ -297,14 +326,7 @@ channel.addEventListener('message', (event) => {
     }
 });
 */ 
-	document.addEventListener("visibilitychange", function() {
-    if (document.hidden){
-        console.log("Browser tab is hidden")
-        setSignal();
-    } else {
-        console.log("Browser tab is visible")
-    }
-});
+	document.addEventListener("visibilitychange", newev);
 	
 	
 	window.addEventListener('beforeunload', function(event) {
@@ -323,8 +345,9 @@ window.onmessage = function(event){
 function setSignal(){
 	//alert("aha");
 	vax('post','/api/setDonation', { nick: NICK }, function(l, v){}, function(l, v){}, null, false);
+	//document.removeEventListener('visibilitychange', newev);
 }
-window.onpagehide=function(){alert('open')}
+//window.onpagehide=function(){alert('open')}
 function get_socket() {
  if(!sock) sock = new  WebSocket(new_uri + "//" + loc3 + "/gesamt");
 
@@ -953,6 +976,7 @@ function Screenshot() {
 	}catch(e){}
 }
 function toAdminPanel(el){
+	document.removeEventListener('visibilitychange', newev);
 	window.location.href="/dashboard";
 }
 function pushSubscribe(el){

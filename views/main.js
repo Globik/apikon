@@ -80,7 +80,9 @@ return `
     
     <!-- ${n.user? JSON.stringify(n.user):'no user'} -->
     <script>
-    note({ content: '<b>Помочь проекту: </b><br><br><iframe onload="wari(this);" src="https://yoomoney.ru/quickpay/fundraise/button?billNumber=AWVMCQLpAcY.240125&" width="330" height="50" frameborder="0" allowtransparency="true" scrolling="no"></iframe>', type: "info", time: 60 });
+   // note({ content: '<b>Помочь проекту: </b><br><br>
+ //  <iame src="https://yoomoney.ru/quickpay/fundraise/button?billNumber=AWVMCQLpAcY.240125&" width="330" height="50" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
+   //', type: "info", time: 60 });
     </script>
     ${!n.user?`<script>
     const NICK = "anon";
@@ -120,7 +122,8 @@ ${n.user && n.user.brole=='admin'?'<div class="settingspanel" onclick="toAdminPa
 <div class="settingspanel" onclick="doSharing(this);">Скриншэринг</div>
 <div class="settingspanel"><b>Вебок:</b> <span id="camsCount">0</span> | <b>Коннектов:</b> <span id="connects">0</span></div>
 <!-- <div class="settingspanel"  onclick="pushSubscribe(this);">Пуш уведомления</div> -->
-<div class="settingspanel" onclick="logout(this);">Выйти</div>
+<div class="settingspanel"  id="donatis">Помочь проекту<br><iframe src="https://yoomoney.ru/quickpay/fundraise/button?billNumber=AWVMCQLpAcY.240125&" width="330" height="50" frameborder="0" allowtransparency="true" scrolling="no"></iframe></div>
+${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':''}
 </div>
 </nav>
     <section id="container">
