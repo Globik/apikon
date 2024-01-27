@@ -307,7 +307,8 @@ console.log("search peer 2")
       log(`#${socket.id} matches #${peerId}`)
      if(!onLine.has(socket.id)) {
 	 onLine.set(socket.id, { id: socket.id, src: source.src, nick: socket.nick, status: 'busy' });
-	 broadcast({ type: "dynamic", sub: "add", id: socket.id, partnerid: peerId, src: source.src, nick: socket.nick, status: 'busy', camcount: onLine.size, connects: matchedIds.size });
+	 broadcast({ type: "dynamic", sub: "add", id: socket.id, partnerid: peerId, nick: socket.nick, status: 'busy', camcount: onLine.size, connects: matchedIds.size });
+	 broadcast_admin({ type: "dynamic", sub: "add", id: socket.id, partnerid: peerId, src: source.src, nick: socket.nick, status: 'busy', camcount: onLine.size, connects: matchedIds.size });
  }
       return;
     }
@@ -318,7 +319,8 @@ console.log("search peer 2")
  if(!onLine.has(socket.id)) {
 	 console.log("*** ONLINE *** ", onLine.has(socket.id));
 	 onLine.set(socket.id, { id: socket.id, src: source.src, nick: socket.nick, status: 'free' });
-	 broadcast({ type: "dynamic", sub: "add", id: socket.id, src: source.src, nick: socket.nick, status: 'free', camcount: onLine.size, connects: matchedIds.size });
+	 broadcast({ type: "dynamic", sub: "add", id: socket.id, nick: socket.nick, status: 'free', camcount: onLine.size, connects: matchedIds.size });
+	 broadcast_admin({ type: "dynamic", sub: "add", id: socket.id, src: source.src, nick: socket.nick, status: 'free', camcount: onLine.size, connects: matchedIds.size });
  }
   log(`#${socket.id} ${socket.nick} adds self into waiting queue`)
  // oni("Сейчас ", socket.nick + " online: " + connections.length);
@@ -375,6 +377,8 @@ function sendToPeer (socketId, msg) {
 }
 
 wsServer.on('connection', async function (socket, req) {
+	console.log("req.url ", req.url);
+	socket.burl = req.url;
   const ip = req.socket.remoteAddress;
   setIp(socket, ip);
   socket.id = crypto.randomBytes(idLen / 2).toString('hex').slice(0, idLen)
@@ -409,7 +413,7 @@ wsServer.on('connection', async function (socket, req) {
         searchPeer(socket, { type: 'peer-matched' }, { src: msg.src })
         break
         case 'srcdata':
-        broadcast({ type: "dynamic", sub: "srcdata", src: msg.src, id: socket.id });
+        broadcast_admin({ type: "dynamic", sub: "srcdata", src: msg.src, id: socket.id });
         break
       case 'ping':
         socket.send(JSON.stringify({ type: 'pong' }))
@@ -442,7 +446,13 @@ function broadcast(obj){
 		wsend(el, obj);
 	}
 }
-
+function broadcast_admin(obj){
+	for (let el of wsServer.clients) {
+		if(el.burl == "/admin"){
+		wsend(el, obj);
+	}
+	}
+}
 function setIp(ws, ip){
 	const re = /([0-9]{1,3}[\.]){3}[0-9]{1,3}/;
 	if(process.env.DEVELOPMENT == "yes"){

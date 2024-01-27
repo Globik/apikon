@@ -33,4 +33,14 @@ docker stop my_container
 screen [ENTER]
 node app
 
+
+
+docker stop mariadb
+mariadb
+root@irclfyscdg:~# docker stop app-rouletws-1 
+app-rouletws-1
+root@irclfyscdg:~# docker stop app-rouletauth-1
+
+
 ```
+

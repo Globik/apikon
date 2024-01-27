@@ -410,13 +410,15 @@ function handleHangUp(){
 	next(nextbtn);
 }
 
-function handleNewIceCandidate (msg) {
+function handleNewIceCandidate(msg) {
  // console.log('ice cand: ', msg);
 	if(pc){
 		//var cand = new RTCIceCandidate(msg);
+	if(msg){
 		pc.addIceCandidate(msg).then(function(){
 			
 		}).catch(handleError);
+	}
 	}
 
 }
@@ -434,6 +436,7 @@ function handleNewIceCandidate (msg) {
  }
  
  function handleVideoAnswer(msg){
+	 if(pc && pc.signalingState == "stable") return;
 	 console.log("handle video answer");
 	 	pc.setRemoteDescription(msg).then(function(){
 			
