@@ -10,7 +10,7 @@ if (window.location.protocol === "https:") {
 }
 
 function get_socket(){
- if(!sock) sock = new  WebSocket(new_uri + "//" + loc3 + "/admin");
+ if(!sock) sock = new  WebSocket(new_uri + "//" + loc3 + "/administrator");
 
   sock.onopen = function () {
     console.log("websocket opened");

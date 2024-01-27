@@ -15,7 +15,7 @@ const render=require('./libs/render.js');
 
 const bodyParser =require('body-parser');
 
-
+//var cors = require('cors')
 
 
 const onLine = new Map();
@@ -37,7 +37,7 @@ const suka = "./public";
 
 app.use(express.static(suka));
 
-
+//app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -159,6 +159,11 @@ app.post('/api/register', (req, res, next)=>{
 		res.json({ user: user });
 		});
 	})(req, res, next);
+})
+app.post('/api/setDonation', async(req, res)=>{
+	console.log("signal: ", req.body);
+	oni(req.body.nick, " it looks like gone donation");
+	res.json({ message: "ok"});
 })
 app.get("/dashboard", secured, isAdmin(['admin']), async(req, res)=>{
 	let db = req.db;
@@ -332,6 +337,7 @@ function hangUp (socketId, msg, bool) {
 	if(onLine.has(socketId)){
 		onLine.delete(socketId);
 		broadcast({ type: "dynamic", sub: "remove", id: socketId, camcount: onLine.size });
+		broadcast_admin({ type: "dynamic", sub: "remove", id: socketId, camcount: onLine.size });
 	}
 }
   if (matchedIds.has(socketId)) {
@@ -443,12 +449,12 @@ function wsend(ws, obj) {
 }
 function broadcast(obj){
 	for (let el of wsServer.clients) {
-		wsend(el, obj);
+		if(el.burl=="/gesamt")wsend(el, obj);
 	}
 }
 function broadcast_admin(obj){
 	for (let el of wsServer.clients) {
-		if(el.burl == "/admin"){
+		if(el.burl == "/administrator"){
 		wsend(el, obj);
 	}
 	}

@@ -276,7 +276,55 @@ if (window.location.protocol === "https:") {
 } else {
   new_uri = "ws:";
 }
+function wari(el){
+	//alert('load');
+	let s = document.querySelector('iframe');
+	s.onclick=function(){
+		alert(1);
+	}
+	//s.contentWindow.postMessage('message', '*');
+	//s.contentWindow.onopen=function(){
+	//alert(6);
+	//}
+	
+	const channel = new BroadcastChannel('tab-activity');
 
+// Listen for messages on the channel
+/*
+channel.addEventListener('message', (event) => {
+    if (event.data === 'open-new-tab') {
+        console.log('User opened another tab');
+    }
+});
+*/ 
+	document.addEventListener("visibilitychange", function() {
+    if (document.hidden){
+        console.log("Browser tab is hidden")
+        setSignal();
+    } else {
+        console.log("Browser tab is visible")
+    }
+});
+	
+	
+	window.addEventListener('beforeunload', function(event) {
+    // Send a message to all other tabs that this tab is closing
+    console.log('tab-closing');
+});
+	
+	
+}
+
+window.onmessage = function(event){
+   if (event.data == 'message') {
+        console.log('Message received!');
+    }
+};
+function setSignal(){
+	//alert("aha");
+	vax('post','/api/setDonation', { nick: NICK }, function(l, v){}, function(l, v){}, null, false);
+}
+window.onpagehide=function(){alert('open')}
 function get_socket() {
  if(!sock) sock = new  WebSocket(new_uri + "//" + loc3 + "/gesamt");
 

@@ -80,7 +80,7 @@ return `
     
     <!-- ${n.user? JSON.stringify(n.user):'no user'} -->
     <script>
-    note({ content: '<b>Помочь проекту: </b><br><br><iframe src="https://yoomoney.ru/quickpay/fundraise/button?billNumber=AWVMCQLpAcY.240125&" width="330" height="50" frameborder="0" allowtransparency="true" scrolling="no"></iframe>', type: "info", time: 60 });
+    note({ content: '<b>Помочь проекту: </b><br><br><iframe onload="wari(this);" src="https://yoomoney.ru/quickpay/fundraise/button?billNumber=AWVMCQLpAcY.240125&" width="330" height="50" frameborder="0" allowtransparency="true" scrolling="no"></iframe>', type: "info", time: 60 });
     </script>
     ${!n.user?`<script>
     const NICK = "anon";
