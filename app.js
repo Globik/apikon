@@ -294,22 +294,22 @@ function getPeerSocket (peerId) {
 }
 
 function searchPeer (socket, msg, source) {
-	console.log("search peer 1",  waitingQueue.length, waitingQueue);
+//	console.log("search peer 1",  waitingQueue.length, waitingQueue);
   while (waitingQueue.length) {
     let index = Math.floor(Math.random() * waitingQueue.length)
     let peerId = waitingQueue[index]
     let peerSocket = getPeerSocket(peerId)
  if(socket.id == peerId) return;
     waitingQueue.splice(index, 1)
-console.log("search peer 2")
+//console.log("search peer 2")
     if (peerSocket) {
-		console.log("search peer 3")
+		//console.log("search peer 3")
       matchedIds.set(socket.id, peerId)
       matchedIds.set(peerId, socket.id)
       console.log("IP: ", socket.vip);
       msg.vip = socket.vip;
       socket.send(JSON.stringify(msg))
-      log(`#${socket.id} matches #${peerId}`)
+    //  log(`#${socket.id} matches #${peerId}`)
      if(!onLine.has(socket.id)) {
 	 onLine.set(socket.id, { id: socket.id, src: source.src, nick: socket.nick, status: 'busy' });
 	 broadcast({ type: "dynamic", sub: "add", id: socket.id, partnerid: peerId, nick: socket.nick, status: 'busy', camcount: onLine.size, connects: matchedIds.size });
@@ -327,7 +327,7 @@ console.log("search peer 2")
 	 broadcast({ type: "dynamic", sub: "add", id: socket.id, nick: socket.nick, status: 'free', camcount: onLine.size, connects: matchedIds.size });
 	 broadcast_admin({ type: "dynamic", sub: "add", id: socket.id, src: source.src, nick: socket.nick, status: 'free', camcount: onLine.size, connects: matchedIds.size });
  }
-  log(`#${socket.id} ${socket.nick} adds self into waiting queue`)
+ // log(`#${socket.id} ${socket.nick} adds self into waiting queue`)
  // oni("Сейчас ", socket.nick + " online: " + connections.length);
   oni1("Сейчас ", socket.nick + " online: " + connections.length);
 }
@@ -378,12 +378,12 @@ function sendToPeer (socketId, msg) {
 
   if (peerSocket) {
     peerSocket.send(JSON.stringify({ type: msg.type, vip: msg.vip, data: msg.data }))
-    log(`#${socketId} sends ${msg.type} to #${peerId}`)
+   // log(`#${socketId} sends ${msg.type} to #${peerId}`)
   }
 }
 
 wsServer.on('connection', async function (socket, req) {
-	console.log("req.url ", req.url);
+	//console.log("req.url ", req.url);
 	socket.burl = req.url;
   const ip = req.socket.remoteAddress;
   setIp(socket, ip);
@@ -394,7 +394,7 @@ wsServer.on('connection', async function (socket, req) {
 	connection.send(JSON.stringify({ type: 'online', online: (connections.length) }))
   }
 
-  console.log(`#${socket.id}  connected`)
+ // console.log(`#${socket.id}  connected`)
   
   if(onLine.size !=0)wsend(socket, { type: "dynamic", sub: "total", cams: [...onLine], connects: matchedIds.size });
 
@@ -429,10 +429,10 @@ wsServer.on('connection', async function (socket, req) {
     }
   })
 socket.on('error', function(e){
-	console.log("ERROR ***: ", e);
+	//console.log("ERROR ***: ", e);
 })
   socket.on('close', (code, reason) => {
-    console.log(`#${socket.id} disconnected: [${code}]${reason}`)
+  //  console.log(`#${socket.id} disconnected: [${code}]${reason}`)
     connections.splice(connections.indexOf(socket), 1)
     for (let connection of connections) {
       

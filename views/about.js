@@ -222,15 +222,15 @@ return `
                 Откройте в<br> AppGallery
             </a> -->
         </div>
-        <!--
+        
         <section id="minifooter">
-        <div id="donatebox">
+       <!-- <div id="donatebox">
 <b>Помочь проекту:&nbsp;&nbsp;&nbsp;</b>
 <iframe src="https://yoomoney.ru/quickpay/fundraise/button?billNumber=AWVMCQLpAcY.240125&" width="330" height="50" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
 </div>
-<div id="rustorebox"><a href="https://apps.rustore.ru/app/ru.rouletka.pwa"><img id="rustoreimg" src="/img/rustore.png" /></a></div>
-<div id="socialbox"><b>Мы в Телеграмм:&nbsp;&nbsp;&nbsp;</b><a href="https://t.me/rouletka1"><img id="telegimg" src="/img/telega.png" /></a></div>
-        </section> -->
+<div id="rustorebox"><a href="https://apps.rustore.ru/app/ru.rouletka.pwa"><img id="rustoreimg" src="/img/rustore.png" /></a></div> -->
+<div id="socialbox"><b>Наш Телеграм:&nbsp;&nbsp;&nbsp;</b><a href="https://t.me/chatrouletka"><img id="telegimg" src="/img/telega.png" /></a></div>
+        </section> 
     </footer>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
