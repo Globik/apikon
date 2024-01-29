@@ -20,11 +20,41 @@ function isOpenModal(){
 */
 function logi(el){
 	el.preventDefault();
+	//el.stopPropogation();
 }
 
+const myform = gid("myform");
+const name = gid("name");
+const password = gid("password");
+
+myform.onchange = function(e){
+	e.preventDefault();
+	e.stopPropagation();
+	//alert(1);
+}
 
 myform.addEventListener('submit', logi, false);
+password.addEventListener('change', function(ev){
+	ev.preventDefault();
+	ev.stopPropagation();
+	//alert(1);
+}, false)
 
+name.addEventListener('change', function(ev){
+	ev.preventDefault();
+	ev.stopPropagation();
+	//alert(1);
+}, false)
+password.addEventListener('input', function(ev){
+	ev.preventDefault();
+	ev.stopPropagation();
+	//alert(1);
+}, false)
+name.addEventListener('input', function(ev){
+	ev.preventDefault();
+	ev.stopPropagation();
+	//alert(1);
+}, false)
 async function register(el){
 	
     errormsg.textContent = "";
