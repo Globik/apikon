@@ -759,13 +759,15 @@ function iceConnectionStateChangeHandler (event) {
     case 'closed':
     case 'failed':
     case 'disconnected':
-     next(nextbtn);
+  //  alert(event.target.iceConnectionState);
+  //   next(nextbtn);
       break
   }
 }
 
 function iceGatheringStateChangeHandler (event) {
   console.log('*** ICE gathering state changed to: ' + event.target.iceGatheringState)
+//  if(event.target.iceGatheringState=="complete")next(nextbtn);
 }
 
 function signalingStateChangeHandler (event) {
@@ -773,7 +775,7 @@ function signalingStateChangeHandler (event) {
 
   switch (event.target.signalingState) {
     case 'closed':
-     closeVideoCall()
+   //  closeVideoCall()
       break
   }
 }
