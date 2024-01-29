@@ -26,37 +26,14 @@ function logi(el){
 const myform = gid("myform");
 const name = gid("name");
 const password = gid("password");
+const btnlogin = gid("btnlogin");
+const btnregister = gid("btnregister");
+btnlogin.addEventListener('click', register, false);
+btnregister.addEventListener('click', register, false);
 
-myform.onchange = function(e){
-	e.preventDefault();
-	e.stopPropagation();
-	//alert(1);
-}
-
-myform.addEventListener('submit', logi, false);
-password.addEventListener('change', function(ev){
-	ev.preventDefault();
-	ev.stopPropagation();
-	//alert(1);
-}, false)
-
-name.addEventListener('change', function(ev){
-	ev.preventDefault();
-	ev.stopPropagation();
-	//alert(1);
-}, false)
-password.addEventListener('input', function(ev){
-	ev.preventDefault();
-	ev.stopPropagation();
-	//alert(1);
-}, false)
-name.addEventListener('input', function(ev){
-	ev.preventDefault();
-	ev.stopPropagation();
-	//alert(1);
-}, false)
 async function register(el){
-	
+	el.preventDefault();
+	el.stopPropagation();
     errormsg.textContent = "";
    
    var sname = document.getElementById('name').value;
@@ -68,12 +45,12 @@ async function register(el){
 		note({content: "Введите пароль!", type: "info", time: 5});
 		return;
 	}
-	el.disabled = true;
+	el.target.disabled = true;
 let user = {};
 user.name = sname;
 user.password = password.value;
 
-let uri = (el.className=="register-button" ? "/api/register":"/api/auth");
+let uri = (el.target.className=="register-button" ? "/api/register":"/api/auth");
 try{
 var r=await fetch(uri, {
     method: "POST",
@@ -92,7 +69,7 @@ var r=await fetch(uri, {
 			 errormsg.textContent = data.message;
 			
 			  setTimeout(() => {
-        el.disabled = false;
+        el.target.disabled = false;
          errormsg.textContent = "";
         }, 3500)
 return;
