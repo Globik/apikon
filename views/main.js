@@ -264,7 +264,7 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
             <input  name="username" type="text" placeholder="Введите Имя/Логин" id="name" required minlength="2" maxlength="20">
 
             <label for="name">Пароль</label>
-            <input  name="userpassword" type="password" placeholder="Введите пароль" id="password" required minlength="2" maxlength="20">
+            <input  name="userpassword" type="password" autocomplete="off" placeholder="Введите пароль" id="password" required minlength="2" maxlength="20">
 
             <button class="register-button" id="btnregister">Зарегистрироваться</button>
             <button  class="login-button" id="btnlogin">Войти</button>

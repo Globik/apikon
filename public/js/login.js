@@ -33,7 +33,7 @@ btnregister.addEventListener('click', register, false);
 
 async function register(el){
 	el.preventDefault();
-	el.stopPropagation();
+	//el.stopPropagation();
     errormsg.textContent = "";
    
    var sname = document.getElementById('name').value;
