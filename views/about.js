@@ -101,13 +101,13 @@ return `
                         d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c18-14.3 18-46.5-1.2-60.8zM104.6 499l280.8-161.2-60.1-60.1L104.6 499z">
                     </path>
                 </svg> Приложение в Google Play
-                </a>
+                </a><!--
                 <a class="btn btn_appGallery only-mobile" href="https://appgallery.huawei.com/app/C109425847?sharePrepath=ag&locale=ru_RU&source=appshare&subsource=C109425847&shareTo=com.android.bluetooth&shareFrom=appmarket&shareIds=b582f0a3a57545f99084d72b532620c1_com.android.bluetooth&callType=SHARE">
                     <div class="btn__icon">
                         <img src="/img1/icons/appgallery-icon.png" alt="AppGallery">
                     </div>
                     Откройте в<br> AppGallery
-                </a>
+                </a> -->
             </div>
             <div class="parallax-bg" id="scene">
                 <div data-depth="0.2" class="parallax-bg__face1">
@@ -165,7 +165,7 @@ return `
                     <p class="info-block__text">Помните, что каждая девушка – это достойная претендентка на ваше сердце. Здесь каждый находит то, что ищет.</p>
                     <p class="info-block__text">Теперь нет необходимости писать черные буквы на белом экране, не имеет смысла тратить много времени, на изнурительный подбор фраз, поскольку видео чат открывает совсем другие грани.</p>
                     <p class="info-block__text">
-                        Чат Рулетка — это популярный русскоязычный видеочат, ежедневно посещаемый большим количеством пользователей из России и государств СНГ.Наш сервис открыт для всех людей, которые ищут новые интригующие знакомства. Возможности такого общения намного шире,
+                        Чат Рулетка — это популярный русскоязычный видеочат, ежедневно посещаемый большим количеством пользователей из России и государств СНГ. Наш сервис открыт для всех людей, которые ищут новые интригующие знакомства. Возможности такого общения намного шире,
                         нежели при обычной интернет-переписке, ведь оно позволяет собеседникам видеть друг друга при помощи веб-камеры. Если вы ощущаете жажду общения, видеочат поможет вам реализовать эти желания.
                     </p>
                 </div>
@@ -214,14 +214,15 @@ return `
                 <p class="footer-desc__copy">
                     &copy;2021 Rouletka
                 </p>
-            </div>
+            </div><!--
             <a href="https://appgallery.huawei.com/app/C109425847?sharePrepath=ag&locale=ru_RU&source=appshare&subsource=C109425847&shareTo=com.android.bluetooth&shareFrom=appmarket&shareIds=b582f0a3a57545f99084d72b532620c1_com.android.bluetooth&callType=SHARE" class="btn btn_appGallery">
                 <div class="btn__icon">
                     <img src="/img1/icons/appgallery-icon.png" alt="AppGallery">
                 </div>
                 Откройте в<br> AppGallery
-            </a>
+            </a> -->
         </div>
+        <!--
         <section id="minifooter">
         <div id="donatebox">
 <b>Помочь проекту:&nbsp;&nbsp;&nbsp;</b>
@@ -229,7 +230,7 @@ return `
 </div>
 <div id="rustorebox"><a href="https://apps.rustore.ru/app/ru.rouletka.pwa"><img id="rustoreimg" src="/img/rustore.png" /></a></div>
 <div id="socialbox"><b>Мы в Телеграмм:&nbsp;&nbsp;&nbsp;</b><a href="https://t.me/rouletka1"><img id="telegimg" src="/img/telega.png" /></a></div>
-        </section>
+        </section> -->
     </footer>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
