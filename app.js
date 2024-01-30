@@ -174,13 +174,13 @@ app.get("/dashboard", secured, isAdmin(['admin']), async(req, res)=>{
 	}catch(err){
 		console.log(err);
 	}
-	res.rendel('dashboard', {usercount: (a?a[0]['COUNT(*)'].toString():0) });
+	res.rendel('dashboard', { usercount: (a?a[0]['COUNT(*)'].toString():0) });
 })
 app.get("/api/getUsers", checkAuth, checkRole(['admin']), async(req, res)=>{
 	let db = req.db;
 	try{
 		//SELECT fields FROM table ORDER BY id DESC LIMIT 1;
-		let a = await db.query('select name,brole, createdAt from users order by id desc limit 1000');
+		let a = await db.query('select name,brole, createdAt from users order by id desc limit 100');
 		res.json({ content: res.compile('vUsers', { users: a })});
 	}catch(err){
 		res.status(400).send({ message: err.name });
@@ -266,7 +266,7 @@ servi = https
 }
 const wsServer= new WebSocket.Server({server: servi});
 
-const idLen = 8
+//const idLen = 8
 let connections = []
 let waitingQueue = []
 let matchedIds = new Map()
@@ -275,14 +275,14 @@ function log (text) {
   const time = new Date()
   console.log('[' + time.toLocaleString() + '] ' + text)
 }
-
+/*
 function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
 
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-
+*/
 function getPeerSocket (peerId) {
   for (let client of wsServer.clients) {
     if (client.id === peerId && client.readyState === WebSocket.OPEN) {
@@ -329,7 +329,7 @@ function searchPeer (socket, msg, source) {
  }
  // log(`#${socket.id} ${socket.nick} adds self into waiting queue`)
  // oni("Сейчас ", socket.nick + " online: " + connections.length);
-  oni1("Сейчас ", socket.nick + " online: " + connections.length);
+  oni("Сейчас ", socket.nick + " online: " + connections.length);
 }
 
 function hangUp (socketId, msg, bool) {
@@ -357,13 +357,13 @@ function hangUp (socketId, msg, bool) {
     broadcast({ type: "dynamic", sub: "connects", connects: matchedIds.size });
     if (peerSocket) {
       peerSocket.send(JSON.stringify(msg))
-      log(`#${socketId} hangs up #${peerId}`)
+     // log(`#${socketId} hangs up #${peerId}`)
     }
   } else {
     let myIndex = waitingQueue.indexOf(socketId)
     if (myIndex !== -1) {
       waitingQueue.splice(myIndex, 1)
-      log(`#${socketId} removes self from waiting queue`)
+    //  log(`#${socketId} removes self from waiting queue`)
     }
   }
 }
@@ -382,25 +382,37 @@ function sendToPeer (socketId, msg) {
   }
 }
 
+let obid = function () {
+  let tst = ((new Date().getTime() / 1000) | 0).toString(16);
+  return (
+    tst +
+    "xxxxxxxxxxxxxxxx"
+      .replace(/[x]/g, function () {
+        return ((Math.random() * 16) | 0).toString(16);
+      })
+      .toLowerCase()
+  );
+};
 wsServer.on('connection', async function (socket, req) {
-	//console.log("req.url ", req.url);
+	
 	socket.burl = req.url;
   const ip = req.socket.remoteAddress;
   setIp(socket, ip);
-  socket.id = crypto.randomBytes(idLen / 2).toString('hex').slice(0, idLen)
+  socket.id = obid();
   connections.push(socket)
   for (let connection of connections) {
-   
-	connection.send(JSON.stringify({ type: 'online', online: (connections.length) }))
+   connection.send(JSON.stringify({ type: 'online', online: (connections.length) }))
   }
 
- // console.log(`#${socket.id}  connected`)
+
   
   if(onLine.size !=0)wsend(socket, { type: "dynamic", sub: "total", cams: [...onLine], connects: matchedIds.size });
 
   socket.on('message', (message) => {
-    let msg = JSON.parse(message)
-
+	  let msg;
+	  try{
+     msg = JSON.parse(message)
+}catch(e){return;}
     switch (msg.type) {
       case 'new-ice-candidate':
       case 'video-offer':

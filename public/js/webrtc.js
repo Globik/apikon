@@ -8,8 +8,7 @@ var pc = null;
 var connectionState = "closed";
 var mobChat = false;
 var isOpen = false;
-local.srcObject = null;
-remote.srcObject = null;
+
 var F = false;
 var isShow = false;
 var someInterval;
@@ -17,7 +16,13 @@ var OPENCLAIM = false;
 var videoInput1, videoInput2;
 const IPS = new Map();
 var someIp = null;
-
+const remote = gid("remote");
+const local = gid("local");
+const claimMenu = gid("claimMenu");
+const startbtn = gid("startbtn");
+const nextbtn = gid("nextbtn");
+local.srcObject = null;
+remote.srcObject = null;
 function toggleCam(el){
 	if(window.streami){
 		window.streami.getTracks().forEach(function(track){
@@ -344,7 +349,7 @@ window.onmessage = function(event){
 };
 function setSignal(){
 	//alert("aha");
-	vax('post','/api/setDonation', { nick: NICK }, function(l, v){}, function(l, v){}, null, false);
+	//vax('post','/api/setDonation', { nick: NICK }, function(l, v){}, function(l, v){}, null, false);
 	//document.removeEventListener('visibilitychange', newev);
 }
 //window.onpagehide=function(){alert('open')}
@@ -542,14 +547,15 @@ function start(el){
 			document.body.click();
 		if(local.srcObject==null){
 			let constraintsi = {
-		audio:{
+		audio:true /*{
+			
       echoCancellation: true,
       autoGainControl: true,
       noiseSuppression: true,
       channelCount: 1,
       sampleRate:48000,
       sampleSize: 16
-    }, 
+    }*/, 
 	video: {deviceId: videoInput1 ? {exact: videoInput1} : undefined,
 		width:320, height:240, 
 	//	frameRate:15

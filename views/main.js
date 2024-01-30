@@ -37,6 +37,13 @@ return `
   <meta property="og:image" content="//rouletka.ru/og_image.png" />
   <meta property="og:site_name" content="Чат-рулетка" />
   <meta property="og:description" content="Чат-рулетка для русскоязычных пользователей. Случайные знакомства в видеочате. Есть веб-камера? Найди пару в чат рулетке!" />
+  
+  <meta itemprop="name" content="Чат-рулетка - анонимный видеочат (Русский аналог ChatRoulette)" />
+<meta itemprop="description" content="Чат-рулетка — самый популярный русскоязычный чат. Ежедневно чат посещает более 500 тысяч пользователей из России и стран СНГ." />
+<meta name="description" content="Чат-рулетка — самый популярный русскоязычный чат. Ежедневно чат посещает более 500 тысяч пользователей из России и стран СНГ." />
+<script type="application/ld+json"> { "@context": "https://schema.org", "@type": "Organization", "url": "https://rouletka.ru", "logo": "https://rouletka.ru/og_image.png" } </script>
+  
+  
 		<link href="/css/main2.css" rel="stylesheet">
 		<link href="/css/login.css" rel="stylesheet">
 		<link href="/css/mediabox.css" rel="stylesheet">
@@ -265,9 +272,9 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
 
             <label for="name">Пароль</label>
             <input  name="userpassword" type="password" autocomplete="off" placeholder="Введите пароль" id="password" required minlength="2" maxlength="20">
-
+			 <button  class="login-button" id="btnlogin">Войти</button>
             <button class="register-button" id="btnregister">Зарегистрироваться</button>
-            <button  class="login-button" id="btnlogin">Войти</button>
+           
           </form>
         </div>
     </output>
