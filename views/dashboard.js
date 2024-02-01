@@ -14,7 +14,9 @@ return `
     <script src="/js/globalik.js"></script>
     </head><body>
     <a href="/">На главную</a>
-    <nav id="adminNav"><button onclick="getUsers(this);">Пользователи</button><button onclick="getStun(this)";>Stun / turn</button><button onclick="whosOnline(this);">Кто онлайн</button></nav>
+    <nav id="adminNav"><button onclick="getUsers(this);">Пользователи</button><button onclick="getStun(this)";>Stun / turn</button><button onclick="whosOnline(this);">Кто онлайн</button>
+    <button id="settings" onclick="getSettings(this);">Настройки</button>
+    </nav>
     <div id="dynamicNav"><div><b>Юзеров:</b> <span>${n.usercount?n.usercount:0}</span></div><div></div>
     <div><b>Веб-камер:</b> <span id="camsCount">0</span></div><div><b>Коннектов:</b> <span id="connects">0</span></div></div><hr>
     <section id="adminContainer">

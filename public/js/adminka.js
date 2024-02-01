@@ -44,12 +44,18 @@ function on_msg(msg) {
 }
 const someSpinner = gid("someSpinner");
 function getUsers(el){
-	contentBox.innerHTML = "";
-	dynamicSection.style.display = "none";
-	someSpinner.className = "show";
+	//contentBox.innerHTML = "";
+	//dynamicSection.style.display = "none";
+	//someSpinner.className = "show";
+	clearWindows();
 	vax('get','/api/getUsers', {}, on_get_users, on_error, el, false);
 	
 	
+}
+function clearWindows(){
+	contentBox.innerHTML = "";
+	dynamicSection.style.display = "none";
+	someSpinner.className = "show";
 }
 function on_get_users(l, el){
 	someSpinner.className = "hide";
@@ -61,9 +67,7 @@ function on_error(l, v){
 }
 
 function getStun(el){
-	contentBox.innerHTML = "";
-	dynamicSection.style.display = "none";
-	someSpinner.className = "show";
+	clearWindows();
 	vax('get','/api/stun', {}, on_get_stun, on_error, el, false);
 }
 
@@ -77,7 +81,22 @@ function whosOnline(el){
 	dynamicSection.style.display = "block";
 }
 
+function getSettings(el){
+	clearWindows();
+	vax('get','/api/getSettings', {}, on_get_settings, on_error, el, false);
+}
 
+function on_get_settings(l, el){
+	someSpinner.className = "hide";
+	contentBox.innerHTML = l.content;
+	let f = document.forms.testPayment;
+	f.addEventListener("submit", onSubmitTestPayment, false);
+}
+
+function onSubmitTestPayment(ev){
+	ev.preventDefault();
+	
+}
 
  function setStun(el){
 	 

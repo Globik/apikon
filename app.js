@@ -20,7 +20,7 @@ const bodyParser =require('body-parser');
 
 const onLine = new Map();
 
-var {config} =require('dotenv');
+var {config} = require('dotenv');
 
 config();
 
@@ -216,6 +216,14 @@ app.post('/api/setstun', checkAuth, checkRole(['admin']), async(req, res)=>{
 		res.status(400).send({ message: err.name });
 	}
 })
+
+
+app.get("/api/getSettings", checkAuth, checkRole(['admin']), async(req, res)=>{
+
+		res.json({ content: res.compile('settings', {})});
+})
+
+
 function checkAuth(req, res, next){
 	if(req.isAuthenticated()){
 		return next();
