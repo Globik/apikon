@@ -55,15 +55,24 @@ app.use(session({
 	maxAge: 24 * 60 * 60 * 1000
 }))
 
-let stun = null;
+var stun = null;
+var testshopid;
+var testshopsecret;
+
 async function getstun(){
 	let a;
 try{
-		a = await pool.query('select stun from sets');
+		a = await pool.query('select * from sets');
 	//	console.log("stun: ", a[0].stun);
 		//console.log('stun2 ', JSON.parse(a[0].stun).stun2);
 		//stun = JSON.parse(a[0].stun);
-		if(a.length > 0)stun = a[0].stun;
+		if(a.length > 0){
+			stun = a[0].stun;
+			testshopid = a[0].testshopid;
+			//testshopid='suka'
+			testshopsecret = a[0].testshopsecret;
+			//console.log("here ",testshopid, testshopsecret);
+		}
 	}catch(err){
 		console.log(err);
 	}
@@ -73,13 +82,16 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(async(req, res, next)=>{
 	req.app.locals.user = req.user;
-	let s;
+	
 	
 	req.app.locals.stun = stun;
+	req.app.locals.testshopid = testshopid;
+	req.app.locals.testshopsecret = testshopsecret;
 	//console.log('req.app.locals.stun ', req.app.locals.stun);
 	
 	console.log("method ", req.method, " path ",  req.path);
-	
+	//console.log("HERE 2 ",stun,testshopid,testshopsecret, req.app.locals.testshopid, req.app.locals.testshopsecret);
+	//console.log(testshopsecret);
 	if(req.method == "POST"){
 		if(req.isAuthenticated()){
 			if(req.path == "/api/setstun"){
@@ -90,7 +102,16 @@ app.use(async(req, res, next)=>{
 				console.log(err);
 				stun = null;
 			}
-			}
+			}else if(req.path == "/api/setTestPayment"){
+		
+				//console.log("here ",req.body);
+				if(req.body.testshopid && req.body.testshopsecret){
+					testshopid = req.body.testshopid;
+					testshopsecret = req.body.testshopsecret;
+					req.app.locals.testshopid = testshopid;
+					req.app.locals.testshopsecret = testshopsecret;
+				}
+			}else{}
 		}
 	}
 	
@@ -219,11 +240,29 @@ app.post('/api/setstun', checkAuth, checkRole(['admin']), async(req, res)=>{
 
 
 app.get("/api/getSettings", checkAuth, checkRole(['admin']), async(req, res)=>{
-
 		res.json({ content: res.compile('settings', {})});
 })
 
-
+app.post("/api/setTestPayment" , checkAuth, checkRole(['admin']), async(req, res)=>{
+	//console.log("req.body: ", req.body);
+	let { testshopid, testshopsecret } = req.body;
+	
+	if(!testshopid || !testshopsecret){
+		return res.status(400).send({ message: "No data" });
+	}
+	let db = req.db;
+	try{
+let a = await db.query(`update sets set testshopid=(?),testshopsecret=(?)`, [ testshopid, testshopsecret ]);
+		console.log('a: ', a);
+		res.json({ message: "OK! Saved!" });
+	}catch(er){
+		console.log("er: ", er);
+		res.status(400).send({ message: er.name });
+	}
+})
+app.get('/api/getTest', checkAuth, checkRole(['admin']), async(req, res)=>{
+	res.json({ content: res.compile('ytest', {})});
+})
 function checkAuth(req, res, next){
 	if(req.isAuthenticated()){
 		return next();
@@ -401,6 +440,22 @@ let obid = function () {
       .toLowerCase()
   );
 };
+
+
+function noop() {}
+
+const interval = setInterval(function ping() {
+  wsServer.clients.forEach(function each(ws) {
+    if (ws.isAlive === false) return ws.terminate();
+    ws.isAlive = false;
+    ws.ping(noop);
+  });
+}, 180000);
+
+function heartbeat() {
+  this.isAlive = true;
+}
+
 wsServer.on('connection', async function (socket, req) {
 	
 	socket.burl = req.url;
@@ -415,7 +470,8 @@ wsServer.on('connection', async function (socket, req) {
 
   
   if(onLine.size !=0)wsend(socket, { type: "dynamic", sub: "total", cams: [...onLine], connects: matchedIds.size });
-
+	socket.isAlive = true;
+  socket.on("pong", heartbeat);
   socket.on('message', (message) => {
 	  let msg;
 	  try{
@@ -452,7 +508,7 @@ socket.on('error', function(e){
 	//console.log("ERROR ***: ", e);
 })
   socket.on('close', (code, reason) => {
-  //  console.log(`#${socket.id} disconnected: [${code}]${reason}`)
+    console.log(`#${socket.id} disconnected: [${code}]${reason}`)
     connections.splice(connections.indexOf(socket), 1)
     for (let connection of connections) {
       

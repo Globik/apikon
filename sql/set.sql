@@ -1,5 +1,7 @@
 -- source /home/globi/apikon/sql/set.sql
 -- source /root/apikon/sql/set.sql
+-- sudo mysql -u root -p
+-- use roulet
 
 
 CREATE TABLE IF NOT EXISTS sets(
@@ -26,3 +28,9 @@ insert into sets(stun) value('{"stun2": "stun:stun.relay.metered.ca:80", "turn5"
   { urls: "turn:a.relay.metered.ca:443?transport=tcp", username: "33c88ed716afa1a802b5116a", credential: "YlI1/qfkEWya3Q4p", }
   ]};
   */
+alter table sets add column testshopid MEDIUMINT;
+alter table sets add column testshopsecret varchar(50);
+--alter table sets drop column testshopid;
+--alter table sets drop column testshopsecret;
+--if exists(select testshopid from sets) update sets set testshopid=3346,testshopsecret='suka' else insert into sets(testshopid,testshopsecret) value(333,'fuck');
+--update sets set testshopid=334,testshopsecret='suka';

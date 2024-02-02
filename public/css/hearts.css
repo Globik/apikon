@@ -1,0 +1,53 @@
+body{
+
+}
+.heart {
+  display: inline-block;
+  width: 200px;
+  aspect-ratio: 1;
+  border-image: radial-gradient(red 69%, #0000 70%) 84.5%/50%;
+  clip-path: polygon(-41% 0, 50% 91%, 141% 0);
+}
+
+.heart2 {
+  width:200px;
+  background:
+   radial-gradient(circle at 60% 65%, red  64%, grey 65%) top left,
+   radial-gradient(circle at 40% 65%, blue 64%, black 65%) top right,
+   linear-gradient(to bottom left, green 43%,black 43%) bottom left ,
+   linear-gradient(to bottom right,purple 43%,grey 43%) bottom right;
+  background-size:50% 50%;
+  background-repeat:no-repeat;
+  display:inline-block;
+  border:5px solid yellow;
+}
+.heart2::before {
+  content:"";
+  display:block;
+  padding-top:100%;
+}
+
+.heart3 {
+  width:200px;
+  display:inline-block;
+  -webkit-mask:
+     radial-gradient(circle at 60% 65%, red 64%, transparent 65%) top left,
+     radial-gradient(circle at 40% 65%, red 64%, transparent 65%) top right,
+     linear-gradient(to bottom left, red 43%,transparent 43%) bottom left ,
+     linear-gradient(to bottom right,red 43%,transparent 43%) bottom right;
+  -webkit-mask-size:50% 50%;
+  -webkit-mask-repeat:no-repeat;
+  mask:
+     radial-gradient(circle at 60% 65%, red 64%, transparent 65%) top left,
+     radial-gradient(circle at 40% 65%, red 64%, transparent 65%) top right,
+     linear-gradient(to bottom left, red 43%,transparent 43%) bottom left ,
+     linear-gradient(to bottom right,red 43%,transparent 43%) bottom right;
+  mask-size:50% 50%;
+  mask-repeat:no-repeat;
+  background:linear-gradient(red,blue);
+}
+.heart3::before {
+  content:"";
+  display:block;
+  padding-top:100%;
+}

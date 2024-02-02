@@ -23,6 +23,8 @@ const startbtn = gid("startbtn");
 const nextbtn = gid("nextbtn");
 local.srcObject = null;
 remote.srcObject = null;
+
+
 function toggleCam(el){
 	if(window.streami){
 		window.streami.getTracks().forEach(function(track){
@@ -32,7 +34,7 @@ window.streami = undefined;
 	local.srcObject = null;
 
 	}else{
-		note({ content: "Нажми на старт-то!", type: "error", time: 5 });
+		note({ content: "Нажми на старт-то!", type: "warn", time: 5 });
 		panelOpen();
 		return;
 	}
@@ -763,11 +765,16 @@ function iceConnectionStateChangeHandler (event) {
       connectionState = 'open'
       break
     case 'closed':
+    note({content: "Closed", type: "warn", time: 5 });
+    break;
     case 'failed':
+     note({content: "Failed! Press stop, then start", type: "warn", time: 5 });
+     break;
     case 'disconnected':
+    note({content: "Disconnected! Press stop, then start", type: "warn", time: 5 });
   //  alert(event.target.iceConnectionState);
   //   next(nextbtn);
-      break
+      break;
   }
 }
 

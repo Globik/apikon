@@ -95,9 +95,24 @@ function on_get_settings(l, el){
 
 function onSubmitTestPayment(ev){
 	ev.preventDefault();
-	
+	let d = {};
+	d.testshopid = ev.target.testshopid.value;
+	d.testshopsecret = ev.target.testshopsecret.value;
+	//alert(JSON.stringify(d)+ev.target.method+ev.target.action);
+	vax(ev.target.method, ev.target.action, d, on_set_test_payment, on_set_test_payment_error, ev.target, false);
+	ev.target.disabled = true;
+	ev.target.className = "puls";
 }
-
+function on_set_test_payment(l, el){
+	el.className = "";
+	el.disabled = false;
+	note({ content: l.message, type: "info", time: 5 });
+}
+function on_set_test_payment_error(l, el){
+	el.className = "";
+	el.disabled = false;
+	note({ content: l.message, type: "error", time: 5 });
+}
  function setStun(el){
 	 
 	 let a = preStun.textContent;
@@ -118,6 +133,14 @@ function onSubmitTestPayment(ev){
 	el.className = "puls";
  
  }
+function getTest(el){
+	clearWindows();
+	vax('get','/api/getTest', {}, on_get_test, on_error, el, false);
+}
+function on_get_test(l, el){
+	someSpinner.className = "hide";
+	contentBox.innerHTML = l.content;
+}
 
 function on_set_stun(l, el){
 	el.className = "";

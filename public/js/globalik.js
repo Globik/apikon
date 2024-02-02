@@ -1,5 +1,6 @@
 // sex_for_many
 'use strict';
+
 function is_local_storage(){return (typeof(Storage) !=='undefined'?true:false);}
 function is_dialogi(){return (typeof HTMLDialogElement==='function'?true:false);}
 function bzuka(el,n,ml){

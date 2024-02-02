@@ -98,10 +98,29 @@ return `
    const cat = localStorage.getItem("myCat");
    if(!cat && cat !=="Tom"){
     window.location.href="#regeln";
+    const faka = document.querySelector('.overlay:target');
+if(faka){
+	faka.onclick=function(e){
+		e.preventDefault();
+	//alert(1);
+	//window.location.href="#lregeln";
+	//return;
+	}
+}
 }else{
 	let islogin = localStorage.getItem("islogin");
 	//if(!islogin && islogin !=="yes")
 	window.location.href="#login";
+	
+const faka = document.querySelector('.overlay:target');
+if(faka){
+	faka.onclick=function(e){
+		e.preventDefault();
+	//alert(1);
+	//window.location.href="#login";
+	//return;
+	}
+}
 }
 in_rem_hash();
 }
@@ -113,8 +132,19 @@ function confirmRules(){
 }
 function isOpenModal(){
 	 window.location.href="#regeln";
+	 const faka = document.querySelector('.overlay:target');
+	 if(faka){
+	faka.onclick=function(e){
+		e.preventDefault();
+//	alert(1);
+	//window.location.href="#regeln";
+	
+	}
 }
-    </script>`:`<script>in_rem_hash();const NICK = "${n.user?n.user.name:'anonym'}";</script>`}
+}
+    </script>`:`<script>
+    in_rem_hash();
+    const NICK = "${n.user?n.user.name:'anonym'}";</script>`}
     <script>
     var ICESERVERS =${n.stun?n.stun:null};
      </script>
@@ -271,7 +301,7 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
             <input  name="username" type="text" placeholder="Введите Имя/Логин" id="name" required minlength="2" maxlength="20">
 
             <label for="name">Пароль</label>
-            <input  name="userpassword" type="password" autocomplete="off" placeholder="Введите пароль" id="password" required minlength="2" maxlength="20">
+            <input  name="userpassword" type="password" autocomplete="on" placeholder="Введите пароль" id="password" required minlength="2" maxlength="20">
 			 <button  class="login-button" id="btnlogin">Войти</button>
             <button class="register-button" id="btnregister">Зарегистрироваться</button>
            
