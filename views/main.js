@@ -146,7 +146,42 @@ function isOpenModal(){
     in_rem_hash();
     const NICK = "${n.user?n.user.name:'anonym'}";</script>`}
     <script>
-    var ICESERVERS =${n.stun?n.stun:null};
+  //  var ICESERVERS =n.stun?n.stun:null
+     var ICESERVERS ={
+  "iceServers": [
+    {
+      "urls": "stun:stun.l.google.com:19302"
+    },
+    {
+      "urls": "turn:relay1.expressturn.com:3478",
+      "username": "efZIKNPZ0Y17GFG3WZ",
+      "credential": "HIYNupkIAHFXSgW8"
+    },
+    {
+      "urls": "stun:stun.relay.metered.ca:80"
+    },
+    {
+      "urls": "turn:a.relay.metered.ca:80",
+      "username": "33c88ed716afa1a802b5116a",
+      "credential": "YlI1/qfkEWya3Q4p"
+    },
+    {
+      "urls": "turn:a.relay.metered.ca:80?transport=tcp",
+      "username": "33c88ed716afa1a802b5116a",
+      "credential": "YlI1/qfkEWya3Q4p"
+    },
+    {
+      "urls": "turn:a.relay.metered.ca:443",
+      "username": "33c88ed716afa1a802b5116a",
+      "credential": "YlI1/qfkEWya3Q4p"
+    },
+    {
+      "urls": "turn:a.relay.metered.ca:443?transport=tcp",
+      "username": "33c88ed716afa1a802b5116a",
+      "credential": "YlI1/qfkEWya3Q4p"
+    }
+  ]
+};
      </script>
      <article id="mediabox">
     <nav id="navpanel"><div class="nav"><b>Online: <span id="onlineCount">0</span></b></div>
