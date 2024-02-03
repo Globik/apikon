@@ -141,13 +141,35 @@ function on_get_test(l, el){
 	someSpinner.className = "hide";
 	contentBox.innerHTML = l.content;
 }
-const api_url = "https://"
+const api_url = "https://api.yookassa.ru/v3/payments";
+
 function pay(el){
 	let dcount = el.getAttribute("data-count");
 	let damount = el.getAttribute("data-amount");
-	alert(dcount+damount);
+	//alert(dcount+damount);
+	let d = {};
+	d.dcount = dcount;
+	d.damount = damount;
+	vax('post','/api/getPayUrl', d, on_get_payurl, on_payurl_error, el, false);
+	el.className = "puls";
 }
-
+function on_get_payurl(l, el){
+	el.className = "";
+	console.log(l.message);
+	note({ content: l.message, type: "info", time: 5 });
+}
+function on_payurl_error(l, el){
+	el.className = "";
+	note({ content: l.message, type: "error", time: 5 });
+}
+function takeCb(el){
+	el.className="puls";
+	vax('post','/api/takeCb', {}, on_takecb, on_error, el, false);
+}
+function on_takecb(l, el){
+	el.className = "";
+	out.innerHTML=JSON.stringify(l.message);
+}
 function on_set_stun(l, el){
 	el.className = "";
 	note({ content: l.message, type: "info", time: 5 });
