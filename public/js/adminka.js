@@ -141,6 +141,12 @@ function on_get_test(l, el){
 	someSpinner.className = "hide";
 	contentBox.innerHTML = l.content;
 }
+const api_url = "https://"
+function pay(el){
+	let dcount = el.getAttribute("data-count");
+	let damount = el.getAttribute("data-amount");
+	alert(dcount+damount);
+}
 
 function on_set_stun(l, el){
 	el.className = "";

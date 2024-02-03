@@ -156,10 +156,12 @@ function isOpenModal(){
       "urls": "turn:relay1.expressturn.com:3478",
       "username": "efZIKNPZ0Y17GFG3WZ",
       "credential": "HIYNupkIAHFXSgW8"
-    },
+    }
+    /*,
     {
       "urls": "stun:stun.relay.metered.ca:80"
     },
+    
     {
       "urls": "turn:a.relay.metered.ca:80",
       "username": "33c88ed716afa1a802b5116a",
@@ -179,7 +181,7 @@ function isOpenModal(){
       "urls": "turn:a.relay.metered.ca:443?transport=tcp",
       "username": "33c88ed716afa1a802b5116a",
       "credential": "YlI1/qfkEWya3Q4p"
-    }
+    }*/
   ]
 };
      </script>
