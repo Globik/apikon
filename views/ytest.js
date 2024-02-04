@@ -28,8 +28,14 @@ function ytest(n){
 
 	</pre>
 	<a href="https://yoomoney.ru/checkout/payments/v2/contract?orderId=2d501afb-000f-5000-a000-13913c77edea">https://yoomoney.ru/checkout/payments/v2/contract?orderId=2d501afb-000f-5000-a000-13913c77edea</a>
-	<div><button onclick="takeCb(this);">Проверить есть ли какие сообщения от вебхука</button></div>
+	<br><br><br><div><button onclick="takeCb(this);">Проверить есть ли какие сообщения от вебхука</button></div>
 	<output id="out"></output>
+	<pre>
+	[[0,{"type":"notification","event":"payment.canceled","object":{"id":"2d501afb-000f-5000-a000-13913c77edea","status":"canceled","amount":{"value":"500.00","currency":"RUB"},
+	"description":"Сердечек покупка в количестве 10 штук","recipient":{"account_id":"326070","gateway_id":"2179833"},
+	"created_at":"2024-02-03T09:28:27.916Z","test":true,"paid":false,"refundable":false,"metadata":{"alikey":"number one"},"cancellation_details":{"party":"yoo_money",
+	"reason":"expired_on_confirmation"}}}]]
+	</pre>
 	`;
 }
 module.exports = { ytest }

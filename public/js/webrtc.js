@@ -70,15 +70,17 @@ window.streami = undefined;
 		return;
 	}
 	 let videoTrack = stream.getVideoTracks()[0];
+	 if(videoTrack){
 	   var sender = pc.getSenders().find(function(s) {
         return s.track.kind == videoTrack.kind;
       });
-      
+      if(sender){
       sender.replaceTrack(videoTrack).then(function(){
 		  
 	  }).catch(handleError);
+  }
 	 
-	 
+ }
 	}).catch(handleError)
 	isShow = false;
 }
@@ -356,9 +358,15 @@ function setSignal(){
 }
 //window.onpagehide=function(){alert('open')}
 function get_socket() {
+	 if(NICK == "anon" || NICK == undefined){
+		//  sock.close();
+		  note({content: "Залогиньтесь!", type: "warn", time: 5 });
+		  return;
+	  }
  if(!sock) sock = new  WebSocket(new_uri + "//" + loc3 + "/gesamt");
 
   sock.onopen = function () {
+	 
     console.log("websocket opened");
   };
   sock.onerror = function (e) {
