@@ -367,10 +367,10 @@ servi = https
 const wsServer= new WebSocket.Server({server: servi});
 
 //const idLen = 8
-let connections = []
+//let connections = []
 let waitingQueue = []
 let matchedIds = new Map()
-
+var connected = 0;//new Map();
 function log (text) {
   const time = new Date()
   console.log('[' + time.toLocaleString() + '] ' + text)
@@ -398,22 +398,23 @@ function searchPeer (socket, msg, source) {
   while (waitingQueue.length) {
     let index = Math.floor(Math.random() * waitingQueue.length)
     let peerId = waitingQueue[index]
+    if(socket.id == peerId) return;
     let peerSocket = getPeerSocket(peerId)
- if(socket.id == peerId) return;
+ 
     waitingQueue.splice(index, 1)
 //console.log("search peer 2")
     if (peerSocket) {
 		//console.log("search peer 3")
       matchedIds.set(socket.id, peerId)
       matchedIds.set(peerId, socket.id)
-      console.log("IP: ", socket.vip);
+     // console.log("IP: ", socket.vip);
       msg.vip = socket.vip;
       socket.send(JSON.stringify(msg))
     //  log(`#${socket.id} matches #${peerId}`)
      if(!onLine.has(socket.id)) {
 	 onLine.set(socket.id, { id: socket.id, src: source.src, nick: socket.nick, status: 'busy' });
-	 broadcast({ type: "dynamic", sub: "add", id: socket.id, partnerid: peerId, nick: socket.nick, status: 'busy', camcount: onLine.size, connects: matchedIds.size });
-	 broadcast_admin({ type: "dynamic", sub: "add", id: socket.id, partnerid: peerId, src: source.src, nick: socket.nick, status: 'busy', camcount: onLine.size, connects: matchedIds.size });
+	 broadcast({ type: "dynamic", sub: "add", id: socket.id, partnerid: peerId, nick: socket.nick, status: 'busy', camcount: onLine.size, connects: connected });
+	 broadcast_admin({ type: "dynamic", sub: "add", id: socket.id, partnerid: peerId, src: source.src, nick: socket.nick, status: 'busy', camcount: onLine.size, connects: connected });
  }
       return;
     }
@@ -424,28 +425,60 @@ function searchPeer (socket, msg, source) {
  if(!onLine.has(socket.id)) {
 	 console.log("*** ONLINE *** ", onLine.has(socket.id));
 	 onLine.set(socket.id, { id: socket.id, src: source.src, nick: socket.nick, status: 'free' });
-	 broadcast({ type: "dynamic", sub: "add", id: socket.id, nick: socket.nick, status: 'free', camcount: onLine.size, connects: matchedIds.size });
-	 broadcast_admin({ type: "dynamic", sub: "add", id: socket.id, src: source.src, nick: socket.nick, status: 'free', camcount: onLine.size, connects: matchedIds.size });
+	 broadcast({ type: "dynamic", sub: "add", id: socket.id, nick: socket.nick, status: 'free', camcount: onLine.size, connects: connected });
+	 broadcast_admin({ type: "dynamic", sub: "add", id: socket.id, src: source.src, nick: socket.nick, status: 'free', camcount: onLine.size, connects: connected });
  }
- // log(`#${socket.id} ${socket.nick} adds self into waiting queue`)
- // oni("Сейчас ", socket.nick + " online: " + connections.length);
-  oni("Сейчас ", socket.nick + " online: " + connections.length);
+  console.log(`#${socket.id} ${socket.nick} adds self into waiting queue`)
+ 
+  oni("Сейчас ", socket.nick + " online: " + wsServer.clients.size);
 }
-
+function machConnected(socket){
+	if (matchedIds.has(socket.id)) {
+   /* let peerId = matchedIds.get(socket.id)
+    if(!connected.has(socket.id)){
+		connected.set(socket.id, peerId);
+		broadcast({ type: "connected2", size: connected.size });
+	}
+	*/ 
+	connected++;
+	broadcasti({ type: "connected2", size: connected });
+  //  let peerSocket = getPeerSocket(peerId)
+}
+}
+function machDisconnected(socket){
+	
+}
+function  machdisconnect(socket){
+	console.log('""""" disconnection ****');
+	if (matchedIds.has(socket.id)) {
+    let peerId = matchedIds.get(socket.id)
+  //  let peerSocket = getPeerSocket(peerId)
+if(onLine.has(peerId)){
+	connected--;
+	
+	onLine.delete(peerId);
+	broadcasti({ type: "dynamic", sub: "remove", id: peerId, camcount: onLine.size });
+	 broadcasti({ type: "connected2", size: connected });
+	//broadcast_admin({ type: "dynamic", sub: "remove", id: peerId, camcount: onLine.size });
+}
+}
+}
 function hangUp (socketId, msg, bool) {
 	if(!bool){
 	if(onLine.has(socketId)){
 		onLine.delete(socketId);
-		broadcast({ type: "dynamic", sub: "remove", id: socketId, camcount: onLine.size });
-		broadcast_admin({ type: "dynamic", sub: "remove", id: socketId, camcount: onLine.size });
+		broadcasti({ type: "dynamic", sub: "remove", id: socketId, camcount: onLine.size });
+		//broadcast_admin({ type: "dynamic", sub: "remove", id: socketId, camcount: onLine.size });
 	}
 }
   if (matchedIds.has(socketId)) {
     let peerId = matchedIds.get(socketId)
     let peerSocket = getPeerSocket(peerId)
+connected--;
 
     matchedIds.delete(socketId)
     matchedIds.delete(peerId)
+    broadcasti({ type: "connected2", size: connected });
     /*
     if(onLine.has(socketId)){
 		onLine.delete(socketId);
@@ -454,16 +487,16 @@ function hangUp (socketId, msg, bool) {
     
     */
     
-    broadcast({ type: "dynamic", sub: "connects", connects: matchedIds.size });
+  //  broadcast({ type: "dynamic", sub: "connects", connects: matchedIds.size });
     if (peerSocket) {
       peerSocket.send(JSON.stringify(msg))
-     // log(`#${socketId} hangs up #${peerId}`)
+      console.log(`#${socketId} hangs up #${peerId}`)
     }
   } else {
     let myIndex = waitingQueue.indexOf(socketId)
     if (myIndex !== -1) {
       waitingQueue.splice(myIndex, 1)
-    //  log(`#${socketId} removes self from waiting queue`)
+      console.log(`#${socketId} removes self from waiting queue`)
     }
   }
 }
@@ -503,7 +536,7 @@ const interval = setInterval(function ping() {
     ws.isAlive = false;
     ws.ping(noop);
   });
-}, 180000);
+}, 1800);
 
 function heartbeat() {
   this.isAlive = true;
@@ -515,14 +548,14 @@ wsServer.on('connection', async function (socket, req) {
   const ip = req.socket.remoteAddress;
   setIp(socket, ip);
   socket.id = obid();
-  connections.push(socket)
-  for (let connection of connections) {
-   connection.send(JSON.stringify({ type: 'online', online: (connections.length) }))
-  }
+ 
+  
+   broadcasti({ type: 'online', online: wsServer.clients.size })
+  
 
 
   
-  if(onLine.size !=0)wsend(socket, { type: "dynamic", sub: "total", cams: [...onLine], connects: matchedIds.size });
+  if(onLine.size !=0)wsend(socket, { type: "dynamic", sub: "total", cams: [...onLine], connects: connected });
 	socket.isAlive = true;
   socket.on("pong", heartbeat);
   socket.on('message', (message) => {
@@ -553,6 +586,15 @@ wsServer.on('connection', async function (socket, req) {
       case 'ping':
         socket.send(JSON.stringify({ type: 'pong' }))
         break
+        case 'disconnection':
+        machdisconnect(socket);
+        break
+        case 'connected':
+        machConnected(socket);
+        break
+        case 'disconnected':
+        machDisconnected(socket);
+        break;
       default:
         break
     }
@@ -562,11 +604,10 @@ socket.on('error', function(e){
 })
   socket.on('close', (code, reason) => {
     console.log(`#${socket.id} disconnected: [${code}]${reason}`)
-    connections.splice(connections.indexOf(socket), 1)
-    for (let connection of connections) {
+    
       
-	  connection.send(JSON.stringify({ type: 'online', online: (connections.length) }))
-    }
+	  broadcasti({ type: 'online', online: wsServer.clients.size })
+    
     hangUp(socket.id, { type: 'hang-up' })
   })
 })
@@ -579,6 +620,11 @@ function wsend(ws, obj) {
 function broadcast(obj){
 	for (let el of wsServer.clients) {
 		if(el.burl=="/gesamt")wsend(el, obj);
+	}
+}
+function broadcasti(obj){
+	for (let el of wsServer.clients) {
+		wsend(el, obj);
 	}
 }
 function broadcast_admin(obj){

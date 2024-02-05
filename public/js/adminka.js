@@ -40,6 +40,8 @@ function on_msg(msg) {
 	//console.log("data type: ", msg.type);
 	if(msg.type == 'dynamic'){
         handleDynamic(msg);
+	}else if(msg.type == "connected2"){
+		connects.textContent = msg.size;
 	}
 }
 const someSpinner = gid("someSpinner");
@@ -140,18 +142,27 @@ function getTest(el){
 function on_get_test(l, el){
 	someSpinner.className = "hide";
 	contentBox.innerHTML = l.content;
+	let s =document.forms.ordertodo;
+	s.addEventListener('submit', pay, false);
 }
 const api_url = "https://api.yookassa.ru/v3/payments";
-
+var sukasuka="10";
 function pay(el){
-	let dcount = el.getAttribute("data-count");
-	let damount = el.getAttribute("data-amount");
-	//alert(dcount+damount);
+	el.preventDefault();
+	let dcount = sukasuka
+	let damount = el.target.count.value;
+	alert(dcount+" "+damount);
+	return;
 	let d = {};
 	d.dcount = dcount;
 	d.damount = damount;
 	vax('post','/api/getPayUrl', d, on_get_payurl, on_payurl_error, el, false);
 	el.className = "puls";
+}
+
+function dodo(el){
+	//alert(el.getAttribute('data-count'));
+	sukasuka = el.getAttribute('data-count');
 }
 function on_get_payurl(l, el){
 	el.className = "";
@@ -186,7 +197,7 @@ function handleDynamic(obj){
 		camsCount.textContent = obj.cams.length;
 		let b = Number(obj.connects);
 		
-		connects.textContent = b / 2;
+		connects.textContent = obj.connects;
 	
 		
 		obj.cams.forEach(function(el, i){
@@ -212,12 +223,12 @@ function handleDynamic(obj){
 		 
 		let b = Number(obj.connects);
 		
-		connects.textContent = b / 2;
+		//connects.textContent = b / 2;
 		
 	}else if(obj.sub == "connects"){
 		let b = Number(obj.connects);
 		
-		connects.textContent = b / 2;
+	//	connects.textContent = b / 2;
 	}else if(obj.sub == "srcdata"){
 		let el = document.querySelector(`[data-pid="${obj.id}"]`);
 		if(el) el.src = obj.src;

@@ -50,7 +50,7 @@ return `
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
 <script src="/js/globalik.js"></script>
 <!-- <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script> -->
-<script src="/js/adapter-latest.js"></script>
+<!-- <script src="/js/adapter-latest.js"></script> -->
  <!-- Google tag (gtag.js) -->
 <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-QG900MX52X"></script>
 <script>
@@ -97,7 +97,7 @@ return `
 		 
    const cat = localStorage.getItem("myCat");
    if(!cat && cat !=="Tom"){
-    window.location.href="#regeln";
+    location.href="#regeln";
     const faka = document.querySelector('.overlay:target');
 if(faka){
 	faka.onclick=function(e){
@@ -129,6 +129,12 @@ in_rem_hash();
 function confirmRules(){
 	localStorage.setItem("myCat", "Tom");
 	window.location.href="#login";
+	 const faka = document.querySelector('.overlay:target');
+	 if(faka){
+	faka.onclick=function(e){
+		e.preventDefault();
+	}
+}
 }
 function isOpenModal(){
 	 window.location.href="#regeln";
@@ -136,9 +142,6 @@ function isOpenModal(){
 	 if(faka){
 	faka.onclick=function(e){
 		e.preventDefault();
-//	alert(1);
-	//window.location.href="#regeln";
-	
 	}
 }
 }
@@ -199,12 +202,13 @@ ${n.user && n.user.brole=='admin'?'<div class="settingspanel" onclick="toAdminPa
 <div class="settingspanel"><a href="https://t.me/chatrouletka">Наш Телеграм</a></div>
 <div class="settingspanel"  id="donatis">Помочь проекту<br><iframe src="https://yoomoney.ru/quickpay/fundraise/button?billNumber=AWVMCQLpAcY.240125&" width="330" height="50" frameborder="0" allowtransparency="true" scrolling="no"></iframe></div>
 ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'<div class="settingspanel"><a href="#login">Войти</a></div>'}
+<!-- <div class="settingspanel"><button onclick="mach();">mach</button></div> -->
 </div>
 </nav>
     <section id="container">
     <div id="remotecontainer" onclick="closeClaim(this);">
     <section id="claimContainer" onclick="openClaim(this);"><div id="claimBox">!</div></section>
-    <div id="claimMenu" data-vip=""><div data-claim="ignor" onclick="sendClaim(this);">В игнор!</div><div data-claim="claim" onclick="sendClaim(this);">Пожаловаться!</div></div>
+    <div id="claimMenu" data-vip=""><div data-claim="ignor" oclick="sendClaim(this);">В игнор!</div><div data-claim="claim" oclick="sendClaim(this);">Пожаловаться!</div></div>
     <section id="mobileloader"><div class="loader"></div></section>
     
     <video id="remote"  class="" autoplay></video>
