@@ -565,7 +565,9 @@ function handleNewIceCandidate(msg) {
 	if(msg){
 		pc.addIceCandidate(msg).then(function(){
 			
-		}).catch(handleError);
+		}).catch(function handleError(er){
+			console.error(er);
+		});
 	}
 	}
 
@@ -847,7 +849,7 @@ function iceConnectionStateChangeHandler (event) {
     case 'disconnected':
     console.log('ice disconnected');
     note({content: "Disconnected! Press next", type: "warn", time: 5 });
-    wsend({type:"disconnection"});
+  //  wsend({type:"disconnection"});
   //  alert(event.target.iceConnectionState);
   //  next(nextbtn);
       break;
@@ -867,7 +869,7 @@ function signalingStateChangeHandler (event) {
    //  closeVideoCall()
    console.log("signaling state closed");
    note({content: "Signaling State Closed", type: "warn", time: 5 });
-   wsend({type:"disconnection"});
+   //wsend({type:"disconnection"});
       break;
       case 'have-remote-offer':
      // if(!esWar){
