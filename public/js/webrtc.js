@@ -70,25 +70,54 @@ window.streami = undefined;
 	if(!pc) {
 		return;
 	}
-	 let videoTrack = stream.getVideoTracks()[0];
-	 console.log('videoTrack.kind ', videoTrack.kind);
-	 if(videoTrack){
+	// let videoTrack = stream.getVideoTracks()[0];
+	   const audioTrack = stream.getTracks()[0];	
+	   const videoTrack = stream.getTracks()[1];
+	 console.log('videoTrack.kind ', audioTrack.kind," ", videoTrack.kind);
+	// if(audioTrack){
 	   var sender = pc.getSenders().find(function(s) {
-		// console.log('s.track.kind ', s.track.kind);
-		  if(s.track){ 
-        return s.track.kind == videoTrack.kind;
+		 console.log('s.track.kind ', s.track.kind);
+		  if(s.track && audioTrack){ 
+        return s.track.kind == audioTrack.kind;
 	}else{
 		return undefined;
 		}
       });
+      
+ // }
+      
+       var sender2 = pc.getSenders().find(function(s) {
+		 console.log('s.track.kind2 ', s.track.kind);
+		  if(s.track && videoTrack){ 
+        return s.track.kind == videoTrack.kind;
+	
+	}else{
+		return undefined;
+		}
+      });
+      
+      
+      
+      
+      
+      
+    
       if(sender){
-      sender.replaceTrack(videoTrack).then(function(){
-		  
+      sender.replaceTrack(audioTrack).then(function(){
+		  console.log('was denn');  
 	  }).catch(handleError);
+	  
+  }
+	  
+	   if(sender2){
+      sender2.replaceTrack(videoTrack).then(function(){
+		console.log('was denn');  
+	  }).catch(handleError);
+	  
   }
 	 
  }
-	}).catch(handleError)
+	).catch(handleError)
 	isShow = false;
 }
 var isSharing =false;
