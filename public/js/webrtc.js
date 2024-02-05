@@ -695,8 +695,9 @@ someInterval = null;
 }
 
 function handleError(err){
-	alert(err);
-		note({"content": err.name, type: "error", time: 15});
+	//alert(err);
+		//note({"content": err.name, type: "error", time: 15});
+		console.error(err);
 	}
 	function doScreenshot(){
 		if(!local.srcObject) return;
@@ -901,7 +902,7 @@ function removeTrackHandler (event) {
   console.log('*** the remote peer removes a track from the connection')
   const trackList = remote.srcObject.getTracks()
   if (trackList.length === 0) {
-    closeVideoCall()
+  //  closeVideoCall()
   }
 }
   
@@ -962,7 +963,7 @@ function addStream({ track, streams }){
 
 function iceCandidateError(e) {
 	console.error("ice err: ", e.url, e.errorText );
-	note({content: "ice err: " + e.url + " " + e.errorText, type: "error", time: 5});
+//	note({content: "ice err: " + e.url + " " + e.errorText, type: "error", time: 5});
 }
 
 
