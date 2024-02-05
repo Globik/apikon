@@ -454,7 +454,7 @@ function  machdisconnect(socket){
     let peerId = matchedIds.get(socket.id)
   //  let peerSocket = getPeerSocket(peerId)
 if(onLine.has(peerId)){
-	connected--;
+	//connected--;
 	
 	onLine.delete(peerId);
 	broadcasti({ type: "dynamic", sub: "remove", id: peerId, camcount: onLine.size });
@@ -536,7 +536,7 @@ const interval = setInterval(function ping() {
     ws.isAlive = false;
     ws.ping(noop);
   });
-}, 1000*60*5);
+}, 1000*60*15);
 
 function heartbeat() {
   this.isAlive = true;
