@@ -393,14 +393,18 @@ function getPeerSocket (peerId) {
   return null
 }
 
+function isEven(n) {
+   return n % 2 == 0;
+}
+console.log(!isEven(1))
 function searchPeer (socket, msg, source) {
-//	console.log("search peer 1",  waitingQueue.length, waitingQueue);
+		console.log("search peer 1",  waitingQueue.length, waitingQueue);
   while (waitingQueue.length) {
     let index = Math.floor(Math.random() * waitingQueue.length)
     let peerId = waitingQueue[index]
     if(socket.id == peerId) return;
     let peerSocket = getPeerSocket(peerId)
- 
+  console.log("waiting 2", waitingQueue);
     waitingQueue.splice(index, 1)
 //console.log("search peer 2")
     if (peerSocket) {
@@ -409,12 +413,14 @@ function searchPeer (socket, msg, source) {
       matchedIds.set(peerId, socket.id)
      // console.log("IP: ", socket.vip);
       msg.vip = socket.vip;
+      console.log('matchedIds=>', [...matchedIds]);
       socket.send(JSON.stringify(msg))
-    //  log(`#${socket.id} matches #${peerId}`)
+      console.log(`#${socket.id} matches #${peerId}`)
      if(!onLine.has(socket.id)) {
 	 onLine.set(socket.id, { id: socket.id, src: source.src, nick: socket.nick, status: 'busy' });
-	 broadcast({ type: "dynamic", sub: "add", id: socket.id, partnerid: peerId, nick: socket.nick, status: 'busy', camcount: onLine.size, connects: connected });
-	 broadcast_admin({ type: "dynamic", sub: "add", id: socket.id, partnerid: peerId, src: source.src, nick: socket.nick, status: 'busy', camcount: onLine.size, connects: connected });
+	 broadcast({ type: "dynamic", sub: "add", id: socket.id, partnerid: peerId, nick: socket.nick, status: 'busy', camcount: onLine.size});
+	 broadcast_admin({ type: "dynamic", sub: "add", id: socket.id, partnerid: peerId, src: source.src, nick: socket.nick, status: 'busy', camcount: onLine.size});
+	 if(isEven(connected))broadcasti({ type: "connected2", size: connected/2 });
  }
       return;
     }
@@ -427,9 +433,10 @@ function searchPeer (socket, msg, source) {
 	 onLine.set(socket.id, { id: socket.id, src: source.src, nick: socket.nick, status: 'free' });
 	 broadcast({ type: "dynamic", sub: "add", id: socket.id, nick: socket.nick, status: 'free', camcount: onLine.size, connects: connected });
 	 broadcast_admin({ type: "dynamic", sub: "add", id: socket.id, src: source.src, nick: socket.nick, status: 'free', camcount: onLine.size, connects: connected });
+	 if(isEven(connected))broadcasti({ type: "connected2", size: connected/2 });
  }
   console.log(`#${socket.id} ${socket.nick} adds self into waiting queue`)
- 
+ console.log("waiting ", waitingQueue);
   oni("Сейчас ", socket.nick + " online: " + wsServer.clients.size);
 }
 function machConnected(socket){
@@ -441,29 +448,23 @@ function machConnected(socket){
 	}
 	*/ 
 	connected++;
-	broadcasti({ type: "connected2", size: connected });
+	if(isEven(connected))broadcasti({ type: "connected2", size: connected /2 });
   //  let peerSocket = getPeerSocket(peerId)
 }
 }
-function machDisconnected(socket){
-	
-}
+
 function  machdisconnect(socket){
 	console.log('""""" disconnection ****');
-	if (matchedIds.has(socket.id)) {
-    let peerId = matchedIds.get(socket.id)
-  //  let peerSocket = getPeerSocket(peerId)
-if(onLine.has(peerId)){
-	//connected--;
+	connected--;
+	 console.log('isEven(connected) ', connected, isEven(connected));
+	if(isEven(connected)) broadcasti({ type: "connected2", size: connected/2 });
 	
-	onLine.delete(peerId);
-	broadcasti({ type: "dynamic", sub: "remove", id: peerId, camcount: onLine.size });
-	 broadcasti({ type: "connected2", size: connected });
-	//broadcast_admin({ type: "dynamic", sub: "remove", id: peerId, camcount: onLine.size });
 }
-}
-}
+
 function hangUp (socketId, msg, bool) {
+	
+	
+	
 	if(!bool){
 	if(onLine.has(socketId)){
 		onLine.delete(socketId);
@@ -478,14 +479,12 @@ connected--;
 
     matchedIds.delete(socketId)
     matchedIds.delete(peerId)
-    broadcasti({ type: "connected2", size: connected });
-    /*
-    if(onLine.has(socketId)){
-		onLine.delete(socketId);
-		broadcast({ type: "dynamic", sub: "remove", id: socketId, camcount: onLine.size });
-	}
+    console.log('!isEven(connected) ', connected,!isEven(connected));
+   if(!isEven(connected)) broadcasti({ type: "connected2", size: connected });
     
-    */
+   
+    
+    
     
   //  broadcast({ type: "dynamic", sub: "connects", connects: matchedIds.size });
     if (peerSocket) {
@@ -551,7 +550,8 @@ wsServer.on('connection', async function (socket, req) {
  
   
    broadcasti({ type: 'online', online: wsServer.clients.size })
-  
+   console.log('isEven(connected) ', connected,isEven(connected));
+  if(isEven(connected)) broadcasti({ type: "connected2", size: connected/2 });
 
 
   
@@ -570,6 +570,7 @@ wsServer.on('connection', async function (socket, req) {
       case 'message':
       case "write":
       case "unwrite":
+      case "retry":
      // msg.vip = socket.vip
         sendToPeer(socket.id, msg)
         break
@@ -592,9 +593,6 @@ wsServer.on('connection', async function (socket, req) {
         case 'connected':
         machConnected(socket);
         break
-        case 'disconnected':
-        machDisconnected(socket);
-        break;
       default:
         break
     }
@@ -604,9 +602,7 @@ socket.on('error', function(e){
 })
   socket.on('close', (code, reason) => {
     console.log(`#${socket.id} disconnected: [${code}]${reason}`)
-    
-      
-	  broadcasti({ type: 'online', online: wsServer.clients.size })
+    broadcasti({ type: 'online', online: wsServer.clients.size })
     
     hangUp(socket.id, { type: 'hang-up' })
   })

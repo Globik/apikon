@@ -123,6 +123,7 @@ if(faka){
 }
 }
 in_rem_hash();
+
 }
    
     
@@ -147,7 +148,11 @@ function isOpenModal(){
 }
     </script>`:`<script>
     in_rem_hash();
-    const NICK = "${n.user?n.user.name:'anonym'}";</script>`}
+    const NICK = "${n.user?n.user.name:'anonym'}";
+    window.onload = function(){
+		get_socket();
+    }
+    </script>`}
     <script>
   //  var ICESERVERS =n.stun?n.stun:null
      var ICESERVERS ={
@@ -224,7 +229,7 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
     </div>
 <div id="localcontainer"><video id="local"  class=""  autoplay muted></video></div>
 
-<div id="controlsContainer"><button id="startbtn" class="start" data-start="no" onclick="start(this);">start</button><button id="nextbtn" class="next" onclick="next(this);" disabled>next</button>
+<div id="controlsContainer"><button id="startbtn" class="start" data-start="no" onclick="start(this);">start</button><button id="nextbtn" class="next" onclick="next(this,true);" disabled>next</button>
  <div id="somespinner" class="text"><!-- https://cssloaders.github.io/ -->
  <div class="loader"></div>
       <span class="duka">Жизнь как рулетка. Никогда не узнаешь, кого встретишь следуюшим...</span>
@@ -245,13 +250,7 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
 </div><div id="foot2"><a href="/about"> О проекте</a></div>
     </section>
     </article>
-    <!--
-    <section id="dynamicSection">
-    <div id="dynamicNav"><div><b>Веб-камер:</b> <span id="camsCount">0</span></div><div><b>Коннектов:</b> <span id="connects">0</span></div></div>
-    <hr>
-    <div id="dynamicContainer"></div>
-    </section>
-   -->
+   
     
     
     

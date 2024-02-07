@@ -24,7 +24,11 @@ const nextbtn = gid("nextbtn");
 local.srcObject = null;
 remote.srcObject = null;
 var esWar = null;
-
+var polite = true;
+var makingOffer = false;
+var ignoreOffer = false;
+var isSettingRemoteAnswerPending = false;
+var unsubscribe = false;
 
 function toggleCam(el){
 	if(window.streami){
@@ -390,10 +394,30 @@ channel.addEventListener('message', (event) => {
 }
 
 window.onmessage = function(event){
-   if (event.data == 'message') {
-        console.log('Message received!');
+	//alert(1);
+	//console.warn(event);
+   if (event.origin == 'http://localhost:3000') {
+      if(event.data == "message")  console.log('Message received! ', event.data);
+       // alert('message ');
     }
 };
+
+
+
+const channel = new BroadcastChannel('message');
+	channel.onmessage = function (ev) { 
+		console.log(ev.data); 
+		let a = ev.data.type;
+		if(a == "start"){
+			start(startbtn);
+		}else if(a == "next"){
+			next(nextbtn,true);
+		}else{}
+		}
+
+
+
+
 function setSignal(){
 	//alert("aha");
 	//vax('post','/api/setDonation', { nick: NICK }, function(l, v){}, function(l, v){}, null, false);
@@ -448,7 +472,7 @@ startbtn.setAttribute("data-start", "no");
   };
 }
 var tr = undefined;
-get_socket();
+//get_socket();
 function on_msg(msg) {
 	//console.log("data type: ", msg.type);
 	 switch (msg.type) {
@@ -475,6 +499,7 @@ function on_msg(msg) {
         break
       case 'hang-up':
         handleHangUp()
+         wsend({type:"disconnection"});
         break
       case 'peer-matched':
         console.log(msg.vip)
@@ -555,7 +580,8 @@ function handleHangUp(){
 	//alert("hongup");
 	 printmsg2.className='';
      printmsg.className="";
-	next(nextbtn);
+    // let ss = unsubscribe?false:false;
+	next(nextbtn, false);
 }
 
 function handleNewIceCandidate(msg) {
@@ -566,52 +592,106 @@ function handleNewIceCandidate(msg) {
 		pc.addIceCandidate(msg).then(function(){
 			
 		}).catch(function handleError(er){
+			console.log("ignoreOffer ? ", ignoreOffer);
 			console.error(er);
 		});
 	}
 	}
 
 }
- function handleVideoOffer(msg){
-	 console.log('handle video offer ');
+ async function handleVideoOffer(msg){
+	console.log('makingOffer: ', makingOffer);
+	if(makingOffer){
+		console.warn("already made an offer");
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	//	pc.restartIce();
+		return;
+	}
+	 console.log('handle video offer ', msg.type);
 	 createPeerConnection();
-	pc.setRemoteDescription(msg).then(function(){
-		return pc.createAnswer().then(function(answer){
-			return pc.setLocalDescription(answer).then(function(){
+	 if(pc&&pc.signalingState=="have-local-offer")return;
+	//  if(pc.signalingState == "stable") return;
+	   
+	 try{
+		// const readyForOffer = !makingOffer && (pc.signalingState == "stable" || isSettingRemoteAnswerPendingtting);
+		// const offerCollision = msg.type == "offer" && !readyForOffer;
+		// ignoreOffer = !polite && offerCollision;
+		// if(ignoreOffer){
+			// return;
+		 //}
+		// isSettingRemoteAnswerPending = msg.type == "answer";
+		
+	await pc.setRemoteDescription(msg);
+	//.then(function(){
+		//return 
+	//	isSettingRemoteAnswerPending = false;
+	const answer =	await pc.createAnswer();
+		//.then(function(answer){
+			//return 
+			await pc.setLocalDescription(answer);
+			//.then(function(){
 				wsend({type: 'video-answer', vip: someIp, data: pc.localDescription /*, target: from, from: clientId*/});
-				// state.socket.emit('video-answer', state.peerConnection.localDescription)
-			});
-		});
-	}).catch(handleError);
+				
+		//	});
+		//});
+	//}).
+	
+	}catch(err){
+		console.error(err);
+	}
  }
  
  function handleVideoAnswer(msg){
 	 if(pc && pc.signalingState == "stable") return;
 	 console.log("handle video answer");
+	 if(pc.signalingState=="have-local-offer"){
 	 	pc.setRemoteDescription(msg).then(function(){
 			
-		}).catch(handleError);
+		}).catch(function handleError(er){
+			console.error(er);
+		});
+	}
  }
  
  const offerOpts = {offerToReceiveAudio: 1, offerToReceiveVideo: 1};
- function handlePeerMatched(){
-	// vvstate.socket.emit('video-offer', state.peerConnection.localDescription)
+ async function handlePeerMatched(){
+	
 	 createPeerConnection();
-    
-    
-	//someCodec();
-	//changeVideoCodec('video/VP9');
-	pc.createOffer(offerOpts).then(function(offer){
-		return pc.setLocalDescription(offer);
-	}).then(function(){
+	//  if(makingOffer) return;
+    try{
+		makingOffer = true;
+	const offer = await pc.createOffer(offerOpts)
+	//.then(function(offer){
+		//return 
+		await pc.setLocalDescription(offer);
+	//}).then(function(){
 		wsend({'type': 'video-offer', vip: someIp, data: pc.localDescription/*, target: target, from: clientId*/});
-	}).catch(handleError);
+	//}).
+	}catch(err){
+		console.error(err);
+		makingOffer=false;
+	}finally{
+	//	makingOffer = false;
+	}
 
  }
  
  let constraints = { audio: true, video: true };
 
 function start(el){
+	 if(NICK == "anon" || NICK == undefined){
+		//  sock.close();
+		  note({content: "Залогиньтесь!", type: "warn", time: 5 });
+		  return;
+	  }
 	if(!sock) {
 		get_socket();
 		}
@@ -659,7 +739,7 @@ function start(el){
 	el.textContent = "start";
 	el.className = "start";
 	
-	
+	unsubscribe = false;
 	if(window.streami){
 		local.srcObject.getTracks().forEach(function(track){
 			track.stop();
@@ -691,6 +771,10 @@ someInterval = null;
         clearDynamicContainer();
         camsCount.textContent = "0";
         connects.textContent = "0";
+         polite = true;
+ makingOffer = false;
+ ignoreOffer = false;
+ isSettingRemoteAnswerPending = false;
 }
 }
 
@@ -800,12 +884,15 @@ function handleError(err){
   if(ICESERVERS){
  iceServers  = ICESERVERS;
 }
-   function next(el){
+   function next(el, bool){
 	   el.disabled = true;
       closeVideoCall();
-      wsend({type: "hang-up"});
+    if(bool)  {
+		wsend({type: "hang-up"});
+		unsubscribe = true;
+	}
       let imgdata = Screenshot();
-      wsend({type:'search-peer', nick: (NICK?NICK:"Anoni"), src: imgdata });
+     wsend({type:'search-peer', nick: (NICK?NICK:"Anoni"), src: imgdata });
       chatbox.innerHTML="";
 	  chatbox2.innerHTML="";
 	mobileChat.className = "hide";
@@ -818,6 +905,10 @@ function handleError(err){
 		somehello.className="";
        printmsg2.className='';
         printmsg.className="";
+         polite = true;
+ makingOffer = false;
+ ignoreOffer = false;
+ isSettingRemoteAnswerPending = false;
     }
     
     
@@ -834,7 +925,8 @@ function iceConnectionStateChangeHandler (event) {
 
   switch (event.target.iceConnectionState) {
     case 'connected':
-    if(esWar == 'remoteOffer')wsend({ type: "connected" });
+   // if(esWar == 'remoteOffer')
+    wsend({ type: "connected" });
     break;
     case 'complete':
       connectionState = 'open'
@@ -850,7 +942,7 @@ function iceConnectionStateChangeHandler (event) {
     case 'disconnected':
     console.log('ice disconnected');
     note({content: "Disconnected! Press next", type: "warn", time: 5 });
-  //  wsend({type:"disconnection"});
+   // wsend({type:"disconnection"});
   //  alert(event.target.iceConnectionState);
   //  next(nextbtn);
       break;

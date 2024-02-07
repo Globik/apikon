@@ -32,7 +32,12 @@ docker container ls -a
 docker stop my_container
 screen [ENTER]
 node app
-
+or
+npm install pm2 -g
+cd apikon
+pm2 start app.js
+or
+pm2 restart app.js
 
 
 docker stop mariadb

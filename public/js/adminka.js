@@ -190,6 +190,20 @@ function on_set_stun_error(l, el){
 	el.className = "";
 	note({ content: l.message, type: "error", time: 5 });
 }
+const channel = new BroadcastChannel('message');
+	
+
+function post_start(){
+	//alert(1);
+	//window.postMessage('message', "*");
+	//const channel = new BroadcastChannel('message');
+	channel.postMessage({"type":"start"});
+}
+
+function post_next(){
+	//const channel = new BroadcastChannel('message');
+	channel.postMessage({"type":"next"});
+}
 
 function handleDynamic(obj){
 //	console.log(obj);
