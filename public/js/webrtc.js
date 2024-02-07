@@ -427,7 +427,7 @@ function setSignal(){
 function get_socket() {
 	 if(NICK == "anon" || NICK == undefined){
 		//  sock.close();
-		 // note({content: "Залогиньтесь!", type: "warn", time: 5 });
+		  note({content: "Залогиньтесь!", type: "warn", time: 5 });
 		  return;
 	  }
  if(!sock) sock = new  WebSocket(new_uri + "//" + loc3 + "/gesamt");
@@ -603,16 +603,6 @@ function handleNewIceCandidate(msg) {
 	console.log('makingOffer: ', makingOffer);
 	if(makingOffer){
 		console.warn("already made an offer");
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	//	pc.restartIce();
 		return;
 	}
 	 console.log('handle video offer ', msg.type);
@@ -754,7 +744,7 @@ someInterval = null;
 	el.disabled = false;
 	nextbtn.disabled = true;
 	local.style.backGround="rgba(0,0,0,0);"
-	if(sock) sock.close();
+	//if(sock) sock.close();
 	isShow = false;
 	chatbox.innerHTML="";
 	chatbox2.innerHTML="";
@@ -775,6 +765,7 @@ someInterval = null;
  makingOffer = false;
  ignoreOffer = false;
  isSettingRemoteAnswerPending = false;
+ if(sock) sock.close();
 }
 }
 

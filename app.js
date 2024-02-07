@@ -366,8 +366,7 @@ servi = https
 }
 const wsServer= new WebSocket.Server({server: servi});
 
-//const idLen = 8
-//let connections = []
+
 let waitingQueue = []
 let matchedIds = new Map()
 var connected = 0;//new Map();
@@ -375,14 +374,7 @@ function log (text) {
   const time = new Date()
   console.log('[' + time.toLocaleString() + '] ' + text)
 }
-/*
-function getRandomInt(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
 
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-*/
 function getPeerSocket (peerId) {
   for (let client of wsServer.clients) {
     if (client.id === peerId && client.readyState === WebSocket.OPEN) {
@@ -409,11 +401,12 @@ function searchPeer (socket, msg, source) {
 //console.log("search peer 2")
     if (peerSocket) {
 		//console.log("search peer 3")
+		console.log('matchedIds1=>', [...matchedIds]);
       matchedIds.set(socket.id, peerId)
       matchedIds.set(peerId, socket.id)
      // console.log("IP: ", socket.vip);
       msg.vip = socket.vip;
-      console.log('matchedIds=>', [...matchedIds]);
+      console.log('matchedIds2=>', [...matchedIds]);
       socket.send(JSON.stringify(msg))
       console.log(`#${socket.id} matches #${peerId}`)
      if(!onLine.has(socket.id)) {
@@ -465,7 +458,7 @@ function hangUp (socketId, msg, bool) {
 	
 	
 	
-	if(!bool){
+	if(bool){
 	if(onLine.has(socketId)){
 		onLine.delete(socketId);
 		broadcasti({ type: "dynamic", sub: "remove", id: socketId, camcount: onLine.size });
@@ -475,12 +468,12 @@ function hangUp (socketId, msg, bool) {
   if (matchedIds.has(socketId)) {
     let peerId = matchedIds.get(socketId)
     let peerSocket = getPeerSocket(peerId)
-connected--;
+//connected--;
 
     matchedIds.delete(socketId)
     matchedIds.delete(peerId)
-    console.log('!isEven(connected) ', connected,!isEven(connected));
-   if(!isEven(connected)) broadcasti({ type: "connected2", size: connected });
+    console.log('isEven(connected) ', connected,isEven(connected));
+   if(isEven(connected)) broadcasti({ type: "connected2", size: connected /2});
     
    
     
@@ -488,6 +481,7 @@ connected--;
     
   //  broadcast({ type: "dynamic", sub: "connects", connects: matchedIds.size });
     if (peerSocket) {
+		connected--;
       peerSocket.send(JSON.stringify(msg))
       console.log(`#${socketId} hangs up #${peerId}`)
     }
@@ -604,7 +598,7 @@ socket.on('error', function(e){
     console.log(`#${socket.id} disconnected: [${code}]${reason}`)
     broadcasti({ type: 'online', online: wsServer.clients.size })
     
-    hangUp(socket.id, { type: 'hang-up' })
+    hangUp(socket.id, { type: 'hang-up' }, true)
   })
 })
 function wsend(ws, obj) {
