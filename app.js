@@ -545,7 +545,7 @@ wsServer.on('connection', async function (socket, req) {
   
    broadcasti({ type: 'online', online: wsServer.clients.size })
    console.log('isEven(connected) ', connected,isEven(connected));
-  //if(isEven(matchedIds.size /*connected)*/) broadcasti({ type: "connected2", size:matchedIds.size/2/* connected/2 */});
+  if(isEven(matchedIds.size /*connected)*/)) broadcasti({ type: "connected2", size:matchedIds.size/2/* connected/2 */});
 
 
   
