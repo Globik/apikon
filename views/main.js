@@ -213,7 +213,7 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
     <section id="container">
     <div id="remotecontainer" onclick="closeClaim(this);">
     <section id="claimContainer" onclick="openClaim(this);"><div id="claimBox">!</div></section>
-    <div id="claimMenu" data-vip=""><div data-claim="ignor" oclick="sendClaim(this);">В игнор!</div><div data-claim="claim" oclick="sendClaim(this);">Пожаловаться!</div></div>
+    <div id="claimMenu" data-vip=""><div data-claim="ignor" onclick="sendClaim(this);">В игнор!</div><div data-claim="claim" onclick="sendClaim(this);">Пожаловаться!</div></div>
     <section id="mobileloader"><div class="loader"></div></section>
     
     <video id="remote"  class="" autoplay></video>

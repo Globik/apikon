@@ -331,7 +331,7 @@ function insertIgnore(ip){
 		return;
 	}
 	if(!IPS.has(ip))IPS.set(ip, {});
-	next(nextbtn);
+	next(nextbtn, true);
 }
 function closeClaim(el){
 	/*
@@ -490,7 +490,7 @@ function on_msg(msg) {
         handleVideoOffer(msg.data)
 	}else{
 		console.log("NO VIDEO");
-		wsend({type: "hang-up", sub: "here" });
+		wsend({type: "hang-up", subi: "here" });
 	}
         break
       case 'video-answer':
@@ -509,7 +509,7 @@ function on_msg(msg) {
 		handlePeerMatched()
 	}else{
 		console.error("some ignor");
-		wsend({ type: "hang-up", sub: "here" });
+		wsend({ type: "hang-up", subi: "here" });
 	}
         break
       case 'message':
