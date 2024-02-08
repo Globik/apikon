@@ -424,8 +424,8 @@ function searchPeer (socket, msg, source) {
  if(!onLine.has(socket.id)) {
 	 console.log("*** ONLINE *** ", onLine.has(socket.id));
 	 onLine.set(socket.id, { id: socket.id, src: source.src, nick: socket.nick, status: 'free' });
-	 broadcast({ type: "dynamic", sub: "add", id: socket.id, nick: socket.nick, status: 'free', camcount: onLine.size, connects: connected });
-	 broadcast_admin({ type: "dynamic", sub: "add", id: socket.id, src: source.src, nick: socket.nick, status: 'free', camcount: onLine.size, connects: connected });
+	 broadcast({ type: "dynamic", sub: "add", id: socket.id, nick: socket.nick, status: 'free', camcount: onLine.size });
+	 broadcast_admin({ type: "dynamic", sub: "add", id: socket.id, src: source.src, nick: socket.nick, status: 'free', camcount: onLine.size });
 	 if(isEven(matchedIds.size/*connected*/))broadcasti({ type: "connected2", size: matchedIds.size/2/*connected/2*/ });
  }
   console.log(`#${socket.id} ${socket.nick} adds self into waiting queue`)
@@ -463,6 +463,7 @@ function hangUp (socketId, msg, bool) {
 		onLine.delete(socketId);
 		broadcasti({ type: "dynamic", sub: "remove", id: socketId, camcount: onLine.size });
 		//broadcast_admin({ type: "dynamic", sub: "remove", id: socketId, camcount: onLine.size });
+		 if(isEven(matchedIds.size/*connected*/)) broadcasti({ type: "connected2", size: matchedIds.size/2/*connected /2*/});
 	}
 }
   if (matchedIds.has(socketId)) {
@@ -564,7 +565,6 @@ wsServer.on('connection', async function (socket, req) {
       case 'message':
       case "write":
       case "unwrite":
-      case "retry":
      // msg.vip = socket.vip
         sendToPeer(socket.id, msg)
         break
