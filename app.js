@@ -550,7 +550,7 @@ wsServer.on('connection', async function (socket, req) {
 
 
   
-  if(onLine.size !=0)wsend(socket, { type: "dynamic", sub: "total", cams: [...onLine], connects: matchedIds.size/2 });
+  if(onLine.size !=0)wsend(socket, { type: "dynamic", sub: "total", cams: [...onLine] });
 	socket.isAlive = true;
   socket.on("pong", heartbeat);
   socket.on('message', (message) => {

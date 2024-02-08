@@ -211,7 +211,7 @@ function handleDynamic(obj){
 		camsCount.textContent = obj.cams.length;
 		let b = Number(obj.connects);
 		
-		connects.textContent = obj.connects;
+		//connects.textContent = obj.connects;
 	
 		
 		obj.cams.forEach(function(el, i){
