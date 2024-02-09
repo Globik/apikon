@@ -151,8 +151,9 @@ function isOpenModal(){
     const NICK = "${n.user?n.user.name:'anonym'}";
     window.onload = function(){
 		get_socket();
+		
     }
-    </script>`}
+    </script><input type="hidden" id="userId" value="${n.user?n.user.id:0}">`}
     <script>
   //  var ICESERVERS =n.stun?n.stun:null
      var ICESERVERS ={

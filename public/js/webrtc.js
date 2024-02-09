@@ -15,6 +15,7 @@ var someInterval;
 var OPENCLAIM = false;
 var videoInput1, videoInput2;
 const IPS = new Map();
+var partnerId;
 var someIp = null;
 var remote = gid("remote");
 var local = gid("local");
@@ -331,7 +332,8 @@ function insertIgnore(ip){
 		return;
 	}
 	if(!IPS.has(ip))IPS.set(ip, {});
-	next(nextbtn, true);
+	console.log("pressing next");
+	next(nextbtn, true, IPS, true);
 }
 function closeClaim(el){
 	/*
@@ -411,7 +413,7 @@ const channel = new BroadcastChannel('message');
 		if(a == "start"){
 			start(startbtn);
 		}else if(a == "next"){
-			next(nextbtn,true);
+			next(nextbtn, true);
 		}else{}
 		}
 
@@ -433,8 +435,8 @@ function get_socket() {
  if(!sock) sock = new  WebSocket(new_uri + "//" + loc3 + "/gesamt");
 
   sock.onopen = function () {
-	 
-    console.log("websocket opened");
+	 console.log("websocket opened");
+	 wsend({ type: "helloServer", userId: gid("userId").value });
   };
   sock.onerror = function (e) {
     note({ content: "Websocket error: " + e, type: "error", time: 5 });
@@ -483,33 +485,54 @@ function on_msg(msg) {
         handleNewIceCandidate(msg.data)
         break
       case 'video-offer':
-       console.warn("IP: ", msg.vip);
-        claimMenu.setAttribute("data-vip", msg.vip);
-         let a = checkIp(msg.vip);
+       console.log(msg.vip, " ", msg.partnerId);
+       console.log("your id: ", userId.value, "partner id ", msg.partnerId);
+       // claimMenu.setAttribute("data-vip", msg.vip);
+       claimMenu.setAttribute("data-vip", msg.partnerId);
+       //  let a = checkIp(msg.vip);
+        let a = checkIp(msg.partnerId);
         if(!a){
         handleVideoOffer(msg.data)
 	}else{
 		console.log("NO VIDEO");
-		wsend({type: "hang-up", subi: "here" });
+	//	wsend({type: "hang-up", subi: "here" });
+	let amap=[[0,{}]];
+	if(IPS.size > 0) amap = IPS;
+	next(nextbtn, true, IPS, true);
 	}
         break
       case 'video-answer':
-     
         handleVideoAnswer(msg.data)
         break
       case 'hang-up':
+      if(msg.ignore){
+		  console.warn(msg.ignore, " ", msg.partnerId);
+		  if(!IPS.has(msg.partnerId)){
+			  IPS.set(msg.partnerId, {});
+		  }
+	  }
+	  console.warn("hangup! " + msg.ignore);
         handleHangUp()
-         wsend({type:"disconnection"});
         break
       case 'peer-matched':
-        console.log(msg.vip)
-        claimMenu.setAttribute("data-vip", msg.vip);
-        let a3 = checkIp(msg.vip);
+        console.log(msg.vip, " ", msg.partnerId);
+        partnerId = msg.partnerId;
+        console.log("your id: ", userId.value, "partner id ", msg.partnerId);
+       // claimMenu.setAttribute("data-vip", msg.vip);
+        claimMenu.setAttribute("data-vip", msg.partnerId);
+       // let a3 = checkIp(msg.vip);
+        let a3 = checkIp(msg.partnerId);
+        console.warn("a3", a3);
         if(!a3){
+			console.warn("was isch");
 		handlePeerMatched()
 	}else{
 		console.error("some ignor");
-		wsend({ type: "hang-up", subi: "here" });
+		//wsend({ type: "hang-up" });
+		let amap=[[0,{}]];
+	if(IPS.size > 0) amap = IPS;
+	next(nextbtn, true, IPS, true);
+		
 	}
         break
       case 'message':
@@ -547,11 +570,7 @@ function on_msg(msg) {
 }
 function checkIp(ip){
 	let a = IPS.has(ip);
-	if(a){
-		return true;
-	}else{
-		return false;
-	}
+	return a;
 }
 function  handleMessage(msg){
 	printmsg2.className="";
@@ -581,7 +600,9 @@ function handleHangUp(){
 	 printmsg2.className='';
      printmsg.className="";
     // let ss = unsubscribe?false:false;
-	next(nextbtn, false);
+    let amma=[[0,{}]]
+    if(IPS.size > 0)amma = IPS;
+	next(nextbtn, false, amma, false);
 }
 
 function handleNewIceCandidate(msg) {
@@ -678,7 +699,7 @@ function handleNewIceCandidate(msg) {
 
 function start(el){
 	 if(NICK == "anon" || NICK == undefined){
-		//  sock.close();
+		
 		  note({content: "Залогиньтесь!", type: "warn", time: 5 });
 		  return;
 	  }
@@ -740,7 +761,7 @@ someInterval = null;
 	local.srcObject = null;
 	window.streami = undefined;
 	closeVideoCall();
-	wsend({type: "hang-up"});
+	wsend({type: "hang-up", ignore: false });
 	el.disabled = false;
 	nextbtn.disabled = true;
 	local.style.backGround="rgba(0,0,0,0);"
@@ -766,6 +787,7 @@ someInterval = null;
  ignoreOffer = false;
  isSettingRemoteAnswerPending = false;
  if(sock) sock.close();
+ partnerId = null;
 }
 }
 
@@ -784,7 +806,12 @@ function handleError(err){
 		if(isShow)return;
 		setTimeout(function(){
 		let imgdata = Screenshot();
-		wsend({ type:'search-peer', nick: (NICK?NICK:'Anonym'), src: imgdata });
+	
+
+		let amap=[['0',{}]];
+	if(IPS.size > 0) amap = IPS;
+	console.error("amap", amap, IPS);
+		wsend({ type:'search-peer', nick: (NICK?NICK:'Anonym'), src: imgdata , ignores: [...IPS] });
 	}, 100);
 	someInterval = setInterval(doScreenshot, 1000);
 		somespinner.className="show";
@@ -875,15 +902,21 @@ function handleError(err){
   if(ICESERVERS){
  iceServers  = ICESERVERS;
 }
-   function next(el, bool){
+
+
+
+
+
+   function next(el, bool, ignores, isIgnore){
 	   el.disabled = true;
       closeVideoCall();
     if(bool)  {
-		wsend({type: "hang-up"});
+		wsend({type: "hang-up", ignore: isIgnore });
 		unsubscribe = true;
 	}
       let imgdata = Screenshot();
-     wsend({type:'search-peer', nick: (NICK?NICK:"Anoni"), src: imgdata });
+     // alert(JSON.stringify({a: [...ignores]}));
+     wsend( { type:'search-peer', nick: (NICK?NICK:"Anoni"), src: imgdata, ignores: (ignores?[...ignores]:[[0,{}]]) });
       chatbox.innerHTML="";
 	  chatbox2.innerHTML="";
 	mobileChat.className = "hide";
@@ -900,6 +933,7 @@ function handleError(err){
  makingOffer = false;
  ignoreOffer = false;
  isSettingRemoteAnswerPending = false;
+ partnerId = null;
     }
     
     

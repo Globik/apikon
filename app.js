@@ -388,14 +388,43 @@ function getPeerSocket (peerId) {
 function isEven(n) {
    return n % 2 == 0;
 }
-console.log(!isEven(1))
+//console.log(!isEven(1))
+var ed=[[0,{}],[1,{}],[2,{}]]
+var eda={a:[[0,{}]]};
+console.log(JSON.stringify(eda))
+var ign=new Map(ed);
+var ed2=ign.has(3)
+console.log('suka ', ed2, " ", ign.size)
+//var bb=[...ign].some((l)=>l==2)
+//console.log("bb ", bb)
+
 function searchPeer (socket, msg, source) {
+	
+
 		console.log("search peer 1",  waitingQueue.length, waitingQueue);
+		console.log("*** MSG>IGNORES ***",  msg, " ", source.ignores);
   while (waitingQueue.length) {
+	  
     let index = Math.floor(Math.random() * waitingQueue.length)
     let peerId = waitingQueue[index]
     if(socket.id == peerId) return;
+    
+    // console.log("*** MSG>IGNORES ***",  msg, " ", source.ignores);
+    let amap = new Map(source.ignores);
+    
+   
+    
+    
     let peerSocket = getPeerSocket(peerId)
+     if(peerSocket){
+		 console.log("**** PEER SOCKET ***");
+		 
+		 if(amap.has(peerSocket.userId)){
+			 console.log("*** HAS!!! ***");
+			 amap.clear();
+			 break;
+		 }
+	 }
   console.log("waiting 2", waitingQueue);
     waitingQueue.splice(index, 1)
 //console.log("search peer 2")
@@ -405,8 +434,9 @@ function searchPeer (socket, msg, source) {
       matchedIds.set(socket.id, peerId)
       matchedIds.set(peerId, socket.id)
      // console.log("IP: ", socket.vip);
-      msg.vip = socket.vip;
+      msg.vip = peerSocket.vip;
       console.log('matchedIds2=>', [...matchedIds]);
+      	msg.partnerId = peerSocket.userId;
       socket.send(JSON.stringify(msg))
       console.log(`#${socket.id} matches #${peerId}`)
      if(!onLine.has(socket.id)) {
@@ -430,6 +460,8 @@ function searchPeer (socket, msg, source) {
  }
   console.log(`#${socket.id} ${socket.nick} adds self into waiting queue`)
  console.log("waiting ", waitingQueue);
+ console.log("*** MSG>IGNORES ***",  msg, " ", source.ignores);
+    
   oni("Сейчас ", socket.nick + " online: " + wsServer.clients.size);
 }
 function machConnected(socket){
@@ -483,6 +515,7 @@ function hangUp (socketId, msg, bool) {
   //  broadcast({ type: "dynamic", sub: "connects", connects: matchedIds.size });
     if (peerSocket) {
 		connected--;
+	
       peerSocket.send(JSON.stringify(msg))
       console.log(`#${socketId} hangs up #${peerId}`)
     }
@@ -495,6 +528,8 @@ function hangUp (socketId, msg, bool) {
   }
 }
 
+
+
 function sendToPeer (socketId, msg) {
   if (!matchedIds.has(socketId)) {
     return
@@ -504,7 +539,7 @@ function sendToPeer (socketId, msg) {
   let peerSocket = getPeerSocket(peerId)
 
   if (peerSocket) {
-    peerSocket.send(JSON.stringify({ type: msg.type, vip: msg.vip, data: msg.data }))
+    peerSocket.send(JSON.stringify({ type: msg.type, vip: msg.vip, partnerId: peerSocket.userId, data: msg.data }))
    // log(`#${socketId} sends ${msg.type} to #${peerId}`)
   }
 }
@@ -568,12 +603,15 @@ wsServer.on('connection', async function (socket, req) {
      // msg.vip = socket.vip
         sendToPeer(socket.id, msg)
         break
+        case "helloServer":
+        socket.userId = msg.userId;
+        break
       case 'hang-up':
-        hangUp(socket.id, { type: 'hang-up' },(msg.sub&&msg.sub=="here"?true:false))
+        hangUp(socket.id, { type: 'hang-up', partnerId: socket.userId, ignore: msg.ignore },(msg.sub&&msg.sub=="here"?true:false))
         break
       case 'search-peer':
        socket.nick = msg.nick;
-        searchPeer(socket, { type: 'peer-matched' }, { src: msg.src })
+        searchPeer(socket, { type: 'peer-matched' }, { src: msg.src, ignores: msg.ignores })
         break
         case 'srcdata':
         broadcast_admin({ type: "dynamic", sub: "srcdata", src: msg.src, id: socket.id });
