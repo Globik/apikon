@@ -530,16 +530,17 @@ function hangUp (socketId, msg, bool) {
 
 
 
-function sendToPeer (socketId, msg) {
-  if (!matchedIds.has(socketId)) {
+function sendToPeer (socket, msg) {
+  if (!matchedIds.has(socket.id)) {
     return
   }
 
-  let peerId = matchedIds.get(socketId)
+  let peerId = matchedIds.get(socket.id)
   let peerSocket = getPeerSocket(peerId)
 
   if (peerSocket) {
-    peerSocket.send(JSON.stringify({ type: msg.type, vip: msg.vip, partnerId: peerSocket.userId, data: msg.data }))
+	  //TODO change peerSocket.userId
+    peerSocket.send(JSON.stringify({ type: msg.type, vip: msg.vip, partnerId: socket.userId, data: msg.data }))
    // log(`#${socketId} sends ${msg.type} to #${peerId}`)
   }
 }
@@ -601,7 +602,7 @@ wsServer.on('connection', async function (socket, req) {
       case "write":
       case "unwrite":
      // msg.vip = socket.vip
-        sendToPeer(socket.id, msg)
+        sendToPeer(socket, msg)
         break
         case "helloServer":
         socket.userId = msg.userId;
@@ -636,7 +637,7 @@ socket.on('error', function(e){
     console.log(`#${socket.id} disconnected: [${code}]${reason}`)
     broadcasti({ type: 'online', online: wsServer.clients.size })
     
-    hangUp(socket.id, { type: 'hang-up' }, true)
+    hangUp(socket.id, { type: 'hang-up', partnerId: socket.userId, ignore: false }, true)
   })
 })
 function wsend(ws, obj) {
