@@ -466,7 +466,7 @@ window.streami = undefined;
 	
 }
 startbtn.setAttribute("data-start", "no");
-	startbtn.textContent = "start";
+	startbtn.textContent = "старт";
 	startbtn.className = "start";
 	sock = null;
 	startbtn.disabled = false;
@@ -478,6 +478,9 @@ var tr = undefined;
 function on_msg(msg) {
 	//console.log("data type: ", msg.type);
 	 switch (msg.type) {
+		 case 'pick':
+		// wsend({type:'pock'});
+		 break
       case 'online':
         onlineCount.textContent = msg.online
         break
@@ -540,20 +543,26 @@ function on_msg(msg) {
         break
         case 'write':
    //  if(!tr){
-        printmsg2.className='write';
-        printmsg.className="write";
+       // printmsg2.className='write';
+       // printmsg.className="write";
+       znakPrint.classList.remove("hidden");
+       znakPrint2.classList.remove("hidden");
 	//}
 		tr=setTimeout(function(){
-			printmsg2.className='';
-			printmsg.className="";
+			//printmsg2.className='';
+			//printmsg.className="";
+			znakPrint.classList.add("hidden");
+			znakPrint2.classList.add("hidden");
 			clearTimeout(tr);
 			tr = undefined;
 		}, 1000);
 	
         break;
        case 'unwrite':
-        printmsg2.className='';
-        printmsg.className="";
+       // printmsg2.className='';
+       // printmsg.className="";
+        znakPrint.classList.add("hidden");
+        znakPrint2.classList.add("hidden");
         break;
         case 'connected2':
         connects.textContent = msg.size;
@@ -573,8 +582,10 @@ function checkIp(ip){
 	return a;
 }
 function  handleMessage(msg){
-	printmsg2.className="";
-	printmsg.className="";
+	//printmsg2.className="";
+	//printmsg.className="";
+	znakPrint.classList.add("hidden");
+	znakPrint2.classList.add("hidden");
 	let div=document.createElement('div');
 	let div2=document.createElement('div');
 
@@ -597,8 +608,10 @@ textarea2.className="";
 
 function handleHangUp(){
 	//alert("hongup");
-	 printmsg2.className='';
-     printmsg.className="";
+	 //printmsg2.className='';
+     //printmsg.className="";
+     znakPrint.classList.add("hidden");
+     znakPrint2.classList.add("hidden");
     // let ss = unsubscribe?false:false;
     let amma=[[0,{}]]
     if(IPS.size > 0)amma = IPS;
@@ -742,12 +755,12 @@ function start(el){
 	el.disabled = false;
 	el.className = "stop"
 	
-	el.textContent = "stop";
+	el.textContent = "стоп";
 		}).catch(handleError);
 }
 }else{
 	el.setAttribute("data-start", "no");
-	el.textContent = "start";
+	el.textContent = "старт";
 	el.className = "start";
 	
 	unsubscribe = false;
@@ -776,8 +789,10 @@ someInterval = null;
 	somespinner.className="";
 		somehello.className="";
 		mobileloader.className="";
-		  printmsg2.className='';
-        printmsg.className="";
+		 // printmsg2.className='';
+       // printmsg.className="";
+         znakPrint.classList.add("hidden");
+      znakPrint2.classList.add("hidden");
         duka2.className="";
         clearDynamicContainer();
         camsCount.textContent = "0";
@@ -824,6 +839,9 @@ function handleError(err){
 		somespinner.className="";
 		somehello.className="see";
 		mobileloader.className="";
+		
+		//mobileChat.className = "";
+		hideChat();
 		duka2.className="";
 	}
 	
@@ -846,28 +864,63 @@ function handleError(err){
 	
 	}
 	function someChange(){
-		
 		wsend({type:"unwrite"});
 	}
+	
+	txtvalue.addEventListener('keydown', sendEnter, false);
+	txtvalue2.addEventListener('keydown', sendEnter, false);
+	function sendEnter(ev){
+		if(ev.key == "Enter"){
+			//alert(event.target.getAttribute("data-send"));
+			sendi(event.target);
+		}
+	}
+	
 	function sendi(event){
-		 let l=event.getAttribute("data-send");
-		//uuu
 		
-		if(l=="one"){
-				
+		 let l = event.getAttribute("data-send");
+		 if(l){
+		 if(l == "one"){
+			sendiOne();
+			
+	}else if(l == "two"){
+		sendiTwo();
+		
+	}
+}
+/*
+let l2 = ev.target.getAttribute("data-send");
+if(l2){
+	 if(l2 == "one"){
+			sendiOne();
+			
+	}else if(l2 == "two"){
+		sendiTwo();
+		
+	}
+}*/
+	 }
+	 
+	 
+	 function sendiOne(){	
 			if(!txtvalue.value) return;
 				let div=document.createElement('div');
-				 printmsg2.className='';
-        printmsg.className="";
+				// printmsg2.className='';
+       // printmsg.className="";
+        znakPrint.classList.add("hidden");
+      znakPrint2.classList.add("hidden");
 		div.className="yourmsg";
 		div.innerHTML="<span class='you2'><b>Вы: </b></span><br><span>"+ txtvalue.value+ "</span>";
 		chatbox.appendChild(div);
 		chatbox.scrollTop = chatbox.clientHeight + chatbox.scrollHeight;
 		wsend({type:"message", data: txtvalue.value});
 		txtvalue.value="";
-	}else if(l=="two"){
-		 printmsg2.className='';
-        printmsg.className="";
+	}
+	function sendiTwo(){
+		// printmsg2.className='';
+        //printmsg.className="";
+         znakPrint.classList.add("hidden");
+      znakPrint2.classList.add("hidden");
 		if(!txtvalue2.value) return;
 			let div2=document.createElement('div');
 		div2.className="yourmsg2";
@@ -877,7 +930,16 @@ function handleError(err){
 		wsend({type:"message", data: txtvalue2.value});
 		txtvalue2.value="";
 	}
-}
+		//uuu
+		function sendi2(l){
+		if(l=="one"){
+			sendiOne();
+			
+	}else if(l=="two"){
+		sendiTwo();
+		
+	}}
+
 	
 	
 	  var iceServers2 = {"iceServers": [ 
@@ -927,8 +989,10 @@ function handleError(err){
 	mobileloader.className="active";
 	duka2.className="show";
 		somehello.className="";
-       printmsg2.className='';
-        printmsg.className="";
+      // printmsg2.className='';
+      //  printmsg.className="";
+      znakPrint.classList.add("hidden");
+      znakPrint2.classList.add("hidden");
          polite = true;
  makingOffer = false;
  ignoreOffer = false;

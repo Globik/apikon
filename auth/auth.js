@@ -31,7 +31,7 @@ passport.deserializeUser(async function(user, cb){
 
 
 
-passport.use(
+passport.use('local',
 new LocalStrategy({
 	usernameField : 'name',
 	passwordField : 'password'

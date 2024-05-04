@@ -51,6 +51,8 @@ user.name = sname;
 user.password = password.value;
 
 let uri = (el.target.className=="register-button" ? "/api/register":"/api/auth");
+//alert(uri)
+//console.warn(uri)
 try{
 var r=await fetch(uri, {
     method: "POST",

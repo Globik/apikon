@@ -44,9 +44,9 @@ return `
 <script type="application/ld+json"> { "@context": "https://schema.org", "@type": "Organization", "url": "https://rouletka.ru", "logo": "https://rouletka.ru/og_image.png" } </script>
   
   
-		<link href="/css/main2.css" rel="stylesheet">
+		<link href="/css/main22.css" rel="stylesheet">
 		<link href="/css/login.css" rel="stylesheet">
-		<link href="/css/mediabox.css" rel="stylesheet">
+		<link href="/css/mediabox2.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
 <script src="/js/globalik.js"></script>
 <!-- <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script> -->
@@ -221,16 +221,24 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
      <div id="duka2">Жизнь как рулетка. Никогда не узнаешь, кого встретишь следуюшим...</div>
  <section id="mobileChat" class="hide">
 		<div id="hidechat" onclick="hideChat(this);"><img class="chaticon" src="/img/chat.svg"/></div>
-		<div id="printmsg"><img class="printing2" src="/img/print.gif"/></div>
+		<!-- <div id="printmsg"><img class="printing2" src="/img/print.gif"/></div> -->
+		<div id="znakChat2">
+	<div id="znakPrint2" class="typing hidden">
+    <div class="typing__dot"></div>
+    <div class="typing__dot"></div>
+    <div class="typing__dot"></div>
+  </div>
+  </div>
 	<div id="chat4"><div id="chatbox2"></div></div>
-
-<div id="textarea2" class="hide"><textarea id="txtvalue2" placeholder="Your message" oninput="txtInput(this);" onchange="someChange();"></textarea>
-<div class="send" data-send="two" onclick="sendi(this);"><img src="/img/send1.svg"/></div></div>
+<section id="sectionTextArea" class="hide">
+<div id="textarea2" class="hide"><textarea id="txtvalue2" data-send="two" placeholder="Сообщение" oninput="txtInput(this);" onchange="someChange();"></textarea>
+<div id="giftbox"><span>&#x1f381</span></div><div class="send" data-send="two" onclick="sendi(this);"><img src="/img/send1.svg"/></div>
+</div></section>
 </section> 
     </div>
 <div id="localcontainer"><video id="local"  class=""  autoplay muted></video></div>
 
-<div id="controlsContainer"><button id="startbtn" class="start" data-start="no" onclick="start(this);">start</button><button id="nextbtn" class="next" onclick="next(this,true);" disabled>next</button>
+<div id="controlsContainer"><button id="startbtn" class="start" data-start="no" onclick="start(this);">старт</button><button id="nextbtn" class="next" onclick="next(this,true);" disabled>далее</button>
  <div id="somespinner" class="text"><!-- https://cssloaders.github.io/ -->
  <div class="loader"></div>
       <span class="duka">Жизнь как рулетка. Никогда не узнаешь, кого встретишь следуюшим...</span>
@@ -243,11 +251,20 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
 <div id="foot"><a href="/about"> О проекте</a></div>
 </div>
 <div id="sectionChat">
-	<div id="printmsg2"><img class="printing" src="/img/print.gif"/></div>
+	<!-- <div id="printmsg2"><img class="printing" src="/img/print.gif"/></div> -->
+	<div id="znakChat">
+	<div id="znakPrint" class="typing hidden">
+    <div class="typing__dot"></div>
+    <div class="typing__dot"></div>
+    <div class="typing__dot"></div>
+  </div>
+  </div>
 <div id="chatbox"></div>
-<div id="textarea"><textarea id="txtvalue" placeholder="Your message" oninput="txtInput(this);" onchange="someChange();"></textarea>
+<section id="MainSectionTextArea">
+<div id="textarea"><textarea id="txtvalue" data-send="one" placeholder="Сообщение" oninput="txtInput(this);" onchange="someChange();"></textarea>
+<div id="giftbox2"><span>&#x1f381</span></div>
 <div class="send" data-send="one" onclick="sendi(this);" value="papa" ><img src="/img/send1.svg"/></div>
-</div>
+</div></section>
 </div><div id="foot2"><a href="/about"> О проекте</a></div>
     </section>
     </article>

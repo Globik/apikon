@@ -134,8 +134,8 @@ app.get("/about", async(req, res)=>{
 	res.rendel('about', {});
 })
 
-app.post('/api/auth',(req, res, next)=>{
-	passport.authenticate("local",(err, user, info)=>{
+app.post('/api/auth', (req, res, next)=>{
+	passport.authenticate("local", (err, user, info)=>{
 		//console.log("err, user, info: ", err, user, info);
 		if(err){
 			return next(err);
@@ -539,9 +539,9 @@ function sendToPeer (socket, msg) {
   let peerSocket = getPeerSocket(peerId)
 
   if (peerSocket) {
-	  //TODO change peerSocket.userId
+	 
     peerSocket.send(JSON.stringify({ type: msg.type, vip: msg.vip, partnerId: socket.userId, data: msg.data }))
-   // log(`#${socketId} sends ${msg.type} to #${peerId}`)
+   
   }
 }
 
@@ -562,14 +562,18 @@ function noop() {}
 
 const interval = setInterval(function ping() {
   wsServer.clients.forEach(function each(ws) {
+	 // console.log("ws.isAlive", ws.isAlive);
     if (ws.isAlive === false) return ws.terminate();
     ws.isAlive = false;
+   // console.log("ping");
     ws.ping(noop);
   });
-}, 1000*60*15);
+}, 1000 * 60);
 
 function heartbeat() {
+	//console.log("pong here", this.isAlive);
   this.isAlive = true;
+  this.send(JSON.stringify({type:"pick"}));
 }
 
 wsServer.on('connection', async function (socket, req) {
@@ -587,7 +591,7 @@ wsServer.on('connection', async function (socket, req) {
 
   
   if(onLine.size !=0)wsend(socket, { type: "dynamic", sub: "total", cams: [...onLine] });
-	socket.isAlive = true;
+  socket.isAlive = true;
   socket.on("pong", heartbeat);
   socket.on('message', (message) => {
 	  let msg;
