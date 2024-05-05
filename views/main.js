@@ -251,7 +251,6 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
 <div id="foot"><a href="/about"> О проекте</a></div>
 </div>
 <div id="sectionChat">
-	<!-- <div id="printmsg2"><img class="printing" src="/img/print.gif"/></div> -->
 	<div id="znakChat">
 	<div id="znakPrint" class="typing hidden">
     <div class="typing__dot"></div>
