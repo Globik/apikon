@@ -114,7 +114,8 @@ background-image: linear-gradient(315deg, #130f40 0%, #000000 74%);
 		grid-template-columns:50% 50%;
 		grid-template-rows: 50% 50%;
 		}
-	#chatbox{
+	div#chatbox{
+	position:relative;
 		background: black;
 		width:100%;
 		height:85%;
@@ -132,6 +133,19 @@ background-image: linear-gradient(315deg, #130f40 0%, #000000 74%);
 	
 		display:block;
 		boder:1px solid green;
+}
+
+section#giftsContainer{
+	background:yellow;
+	position:absolute;
+	top:50%;
+	left:0;
+	width:100%;
+	height:50%;
+	display:block;
+}
+section#giftsContainer.hidden,section#giftsContainer2.hidden{
+	display:none;
 }
 	#textarea{
 		position:relative;
@@ -767,35 +781,7 @@ section#mobileChat{
 	width:100%;
 	height:100%;
 }
-/*
-#printmsg{
-display:none;
-		position:absolute;
-		ackground:red;
-		width:40px;
-		height:40px;
-		left:30%;
-		mrgin-bottom:20px;
-		top:-60px;
-		object-fit:cover;
-		z-inex:9999;
-	}
-	#printmsg.write{
-		display:flex;
-	}
-	#printmsg::after{
-	position:absolute;
-	top:34px;
-	left:60px;
-	color:white;
-		content:"печатает";
-		width:auto;
-	}
-	.printing{
-		width:50px;
-		height:50px;
-	}
-	*/
+
 	#giftbox{
 		width:65px;
 		height:65px;
@@ -855,6 +841,7 @@ display:none;
 		height:95%;
 		in-height:60%;
 		order:1px solid brown;
+		position:relative;
 	}
 	#chatbox2{
 		bckground:red; 
@@ -864,6 +851,7 @@ display:none;
 		white-space: pre-line;
 	word-wrap: break-word;
 	overflow-wrap:break-word;
+	position:relative;
 	}
 	.yourmsg2{
 		background:rgba(255,253,255, 0.6);
@@ -891,6 +879,17 @@ display:none;
 		width:90%;
 		border-radius:10px;
 	}
+	
+	
+	section#giftsContainer2{
+	background:yellow;
+	position:absolute;
+	top:30%;
+	left:0;
+	width:100%;
+	height:50%;
+	display:block;
+}
 }
 @media screen and (max-width: 321px) and (orientation: portrait){
 html{
@@ -925,5 +924,11 @@ textarea{
 }
 #giftbox span{
 	font-size:40px;
+}
+
+section#giftsContainer2{
+
+	top:25%;
+	
 }
 }

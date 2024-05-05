@@ -1380,7 +1380,43 @@ function pushSubscribe(el){
 	});
 	
 }
-	
+const mediaBox = document.querySelector("article#mediabox");
+const giftsContainer  = document.querySelector("section#giftsContainer");
+const giftsContainer2  = document.querySelector("section#giftsContainer2");
+const giftbox2 = document.getElementById("giftbox2");
+const giftbox = document.getElementById("giftbox");
+giftbox2.addEventListener('click', openGiftBox, false);
+giftbox.addEventListener('click', openGiftBox2, false);
+giftsContainer.addEventListener('click', ongiftscontainer, false);
+giftsContainer2.addEventListener('click', ongiftscontainer2, false)
+function openGiftBox(el){
+	el.stopImmediatePropagation();
+	giftsContainer.classList.toggle("hidden");
+}
+function openGiftBox2(el){
+	el.stopImmediatePropagation();
+	giftsContainer2.classList.toggle("hidden");
+}
+	function ongiftscontainer(ev){
+	ev.stopPropagation();
+	}
+	function ongiftscontainer2(ev){
+	ev.stopPropagation();
+	}
+	giftsDiv.onclick = function(ev){
+		console.log('giftsDive clicked');
+	}
+	giftsDiv2.onclick = function(ev){
+		console.log('giftsDive clicked');
+	}
+	mediaBox.onclick = function(ev){
+		if(!giftsContainer.classList.contains("hidden")){
+			giftsContainer.classList.add("hidden");
+		}
+		if(!giftsContainer2.classList.contains("hidden")){
+			giftsContainer2.classList.add("hidden");
+		}
+	}
 
 
 

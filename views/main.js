@@ -221,7 +221,7 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
      <div id="duka2">Жизнь как рулетка. Никогда не узнаешь, кого встретишь следуюшим...</div>
  <section id="mobileChat" class="hide">
 		<div id="hidechat" onclick="hideChat(this);"><img class="chaticon" src="/img/chat.svg"/></div>
-		<!-- <div id="printmsg"><img class="printing2" src="/img/print.gif"/></div> -->
+		
 		<div id="znakChat2">
 	<div id="znakPrint2" class="typing hidden">
     <div class="typing__dot"></div>
@@ -229,7 +229,13 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
     <div class="typing__dot"></div>
   </div>
   </div>
-	<div id="chat4"><div id="chatbox2"></div></div>
+	<div id="chat4"><div id="chatbox2">
+	
+	</div>
+	<section id="giftsContainer2" class="hidde"><header><span>Подарки</span></header>
+<div id="giftsDiv2">hearts</div>
+</section>
+	</div>
 <section id="sectionTextArea" class="hide">
 <div id="textarea2" class="hide"><textarea id="txtvalue2" data-send="two" placeholder="Сообщение" oninput="txtInput(this);" onchange="someChange();"></textarea>
 <div id="giftbox"><span>&#x1f381</span></div><div class="send" data-send="two" onclick="sendi(this);"><img src="/img/send1.svg"/></div>
@@ -258,10 +264,15 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
     <div class="typing__dot"></div>
   </div>
   </div>
-<div id="chatbox"></div>
+<div id="chatbox">
+<section id="giftsContainer" class="hidden"><header><span>Подарки</span></header>
+<div id="giftsDiv">hearts</div>
+</section>
+</div>
 <section id="MainSectionTextArea">
+
 <div id="textarea"><textarea id="txtvalue" data-send="one" placeholder="Сообщение" oninput="txtInput(this);" onchange="someChange();"></textarea>
-<div id="giftbox2"><span>&#x1f381</span></div>
+<div id="giftbox2" data-state="closed"><span>&#x1f381</span></div>
 <div class="send" data-send="one" onclick="sendi(this);" value="papa" ><img src="/img/send1.svg"/></div>
 </div></section>
 </div><div id="foot2"><a href="/about"> О проекте</a></div>
