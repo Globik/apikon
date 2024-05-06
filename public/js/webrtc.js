@@ -599,7 +599,7 @@ function  handleMessage(msg, bool){
 		if(bool){
 			div.innerHTML="<span><b>Собеседник: </b></span><br><span>" + msg + "</span>";
 		}else{
-		div.innerHTML="<span><b>Собеседник: </b></span><br><span>" + esci(msg) + "</span>";
+		div.innerHTML="<span><b>Собеседник: </b></span><br><span>" + esci(msg.trim()) + "</span>";
 	}
 		chatbox.appendChild(div);
 		chatbox.scrollTop = chatbox.clientHeight + chatbox.scrollHeight;
@@ -613,7 +613,7 @@ textarea2.className="";
 		if(bool){
 			div2.innerHTML="<span><b>Собеседник: </b></span><br><span>" + msg + "</span>";
 		}else{
-		div2.innerHTML="<span><b>Собеседник: </b></span><br><span>" + esci(msg) + "</span>";
+		div2.innerHTML="<span><b>Собеседник: </b></span><br><span>" + esci(msg.trim()) + "</span>";
 	}
 		chatbox2.appendChild(div2);
 		chatbox2.scrollTop = chatbox2.clientHeight + chatbox2.scrollHeight;
@@ -909,8 +909,11 @@ function handleError(err){
 		 if(l){
 		 if(l == "one"){
 			 //for computer
-			if(!txtvalue.value)return
+			//if(!txtvalue.value)return;
 			console.warn('bu ', txtvalue.value.trim());
+			let stri = txtvalue.value.trim();
+		//console.warn("str ", str, str.length);
+		if(!stri)return;
 			sendiOne();
 		//	console.warn('bu ', txtvalue.value);
 			//textvalue2.value="";
@@ -920,7 +923,7 @@ function handleError(err){
 		//console.warn('bu2 ', txtvalue.value.trim());
 		let str = txtvalue2.value.trim();
 		console.warn("str ", str, str.length);
-		if(str.length==0)return;
+		if(!str)return;
 		sendiTwo();
 		
 	}
@@ -963,13 +966,14 @@ if(l2){
         znakPrint.classList.add("hidden");
       znakPrint2.classList.add("hidden");
 		div.className="yourmsg";
-		div.innerHTML="<span class='you2'><b>Вы: </b></span><br><span>" + txtvalue.value + "</span>";
+		div.innerHTML="<span class='you2'><b>Вы: </b></span><br><span>" + esci(txtvalue.value.trim()) + "</span>";
 		chatbox.appendChild(div);
 		chatbox.scrollTop = chatbox.clientHeight + chatbox.scrollHeight;
 		wsend({type:"message", data: txtvalue.value});
 		txtvalue.value="";
 	}
 	function sendiTwo(){
+		//for mobile
 		// printmsg2.className='';
         //printmsg.className="";
          znakPrint.classList.add("hidden");
@@ -979,7 +983,7 @@ if(l2){
 		if(!txtvalue2.value) return;
 			let div2=document.createElement('div');
 		div2.className="yourmsg2";
-		div2.innerHTML="<span class='you'><b>Вы: </b></span><br><span>" + txtvalue2.value+ "</span>";
+		div2.innerHTML="<span class='you'><b>Вы: </b></span><br><span>" + esci(txtvalue2.value.trim()) + "</span>";
 		chatbox2.appendChild(div2);
 		chatbox2.scrollTop = chatbox2.clientHeight + chatbox2.scrollHeight;
 		wsend({type:"message", data: txtvalue2.value});

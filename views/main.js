@@ -231,7 +231,6 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
   </div>
   </div>
 	<div id="chat4"><div id="chatbox2">
-	
 	</div>
 	<section id="giftsContainer2" class="hidden"><header><span>Подарки</span></header>
 <div id="giftsDiv2">
