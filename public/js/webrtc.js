@@ -897,7 +897,7 @@ function handleError(err){
 			//alert(event.target.getAttribute("data-send"));
 			//if(!txtvalue.value || !txtvalue2.value)return;
 			let str = txtvalue2.value.trim();
-			if(str.length==0)return;
+			//if(str.length==0)return;
 			sendi(event.target);
 		}
 	}
@@ -909,7 +909,7 @@ function handleError(err){
 		 if(l){
 		 if(l == "one"){
 			 //for computer
-			// if(!txtvalue2.value)return
+			if(!txtvalue.value)return
 			console.warn('bu ', txtvalue.value.trim());
 			sendiOne();
 		//	console.warn('bu ', txtvalue.value);
