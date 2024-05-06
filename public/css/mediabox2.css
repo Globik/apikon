@@ -136,7 +136,7 @@ background-image: linear-gradient(315deg, #130f40 0%, #000000 74%);
 }
 
 section#giftsContainer{
-	background:yellow;
+	background:rgba(0,0,6,0.3);
 	position:absolute;
 	top:50%;
 	left:0;
@@ -531,34 +531,7 @@ section#mobileChat{
 	
 	
 	
-	/*
 	
-	#printmsg2{
-		position:absolute;
-		top:-60px;
-		left:0;
-		bckground:red;
-		width:60px;
-		height:60px;
-		display: block;
-	}
-	#printmsg2.wrte{
-		display:block;
-	}
-	#printmsg.wrte{
-		display:block;
-	}
-	#printmsg2::after{
-		position:absolute;
-		right:-52px;
-		top:34px;
-		content:"печатает";
-		color:white;
-		}
-	.printing2,.printing{
-		width:40px;
-		height:50px;
-	}*/
 	#mobileloader{
 	display:none;
 	}
@@ -640,6 +613,46 @@ section#mobileChat{
 		left:8px;
 		bottom:4px;
 		
+}
+
+#giftsContainer header,#giftsContainer2 header{
+	text-align:center;
+	line-height:1.5;
+	font-size:1.2rem;
+ font-weight:bold;	
+ color:white;
+}
+#giftsDiv,#giftsDiv2{
+margin-top:5px;
+margin-left:5px;
+margin-right:5px;
+padding:5px;
+	display:flex;
+	flex-wrap: wrap;
+    flex-direction: row;
+     justify-content: space-between;
+		align-items: center;
+		
+}
+
+.flexgiftsitem{
+	display:flex;
+	 flex-direction: column;
+     justify-content: space-between;
+		align-items: center;
+}
+.flexgiftsitem div{
+	color:white;
+	line-height:1.5;
+	font-weight:bold;
+	padding:5px;
+}
+.heart {
+  display: inline-block;
+  width: 50px;
+  aspect-ratio: 1;
+  border-image: radial-gradient(red 69%, #0000 70%) 84.5%/50%;
+  clip-path: polygon(-41% 0, 50% 91%, 141% 0);
 }
 
 @media screen and (max-width: 452px) and (orientation: portrait){
@@ -882,7 +895,7 @@ section#mobileChat{
 	
 	
 	section#giftsContainer2{
-	background:yellow;
+	background:rgba(0,0,6,0.3);
 	position:absolute;
 	top:30%;
 	left:0;
@@ -931,4 +944,38 @@ section#giftsContainer2{
 	top:25%;
 	
 }
+
+
+
+#giftsContainer header,#giftsContainer2 header{
+	line-height:1;
+	font-size:0.8rem;
+}
+#giftsDiv,#giftsDiv2{
+margin-top:2px;
+margin-left:2px;
+margin-right:2px;
+padding:2px;
+	
+		
+}
+
+.flexgiftsitem{
+}
+.flexgiftsitem div{
+	line-height:1;
+	padding-top:3px;
+	font-size:0.7rem;
+	
+}
+.heart{
+  transform:scale(0.5 ,0.5);
+}
+
+div.bname, div.heartcount{
+transform:translate(0,-9px);
+	
+}
+
+
 }

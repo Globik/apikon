@@ -233,7 +233,13 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
 	
 	</div>
 	<section id="giftsContainer2" class="hidde"><header><span>Подарки</span></header>
-<div id="giftsDiv2">hearts</div>
+<div id="giftsDiv2">
+<div class="flexgiftsitem">
+<div class="heart" style=""></div>
+<div class="bname">Сердечко</div>
+<div class="heartcount">100</div>
+</div>
+</div>
 </section>
 	</div>
 <section id="sectionTextArea" class="hide">
@@ -266,7 +272,13 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
   </div>
 <div id="chatbox">
 <section id="giftsContainer" class="hidden"><header><span>Подарки</span></header>
-<div id="giftsDiv">hearts</div>
+<div id="giftsDiv">
+<div class="flexgiftsitem">
+<div class="heart" style=""></div>
+<div class="bname">Сердечко</div>
+<div class="heartcount">100</div>
+</div>
+</div>
 </section>
 </div>
 <section id="MainSectionTextArea">
