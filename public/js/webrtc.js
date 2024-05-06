@@ -30,6 +30,9 @@ var makingOffer = false;
 var ignoreOffer = false;
 var isSettingRemoteAnswerPending = false;
 var unsubscribe = false;
+var CONNECTED = false;
+
+const heartcountels = document.querySelectorAll("div.heartcount");
 
 function toggleCam(el){
 	if(window.streami){
@@ -541,6 +544,9 @@ function on_msg(msg) {
       case 'message':
         handleMessage(msg.data)
         break
+        case 'gift':
+        handleGift(msg);
+        break
         case 'write':
    //  if(!tr){
        // printmsg2.className='write';
@@ -581,7 +587,7 @@ function checkIp(ip){
 	let a = IPS.has(ip);
 	return a;
 }
-function  handleMessage(msg){
+function  handleMessage(msg, bool){
 	//printmsg2.className="";
 	//printmsg.className="";
 	znakPrint.classList.add("hidden");
@@ -590,7 +596,11 @@ function  handleMessage(msg){
 	let div2=document.createElement('div');
 
 		div.className="yourmsg he2";
-		div.innerHTML="<span><b>Собеседник: </b></span><br><span>"+ esci(msg) + "</span>";
+		if(bool){
+			div.innerHTML="<span><b>Собеседник: </b></span><br><span>" + msg + "</span>";
+		}else{
+		div.innerHTML="<span><b>Собеседник: </b></span><br><span>" + esci(msg) + "</span>";
+	}
 		chatbox.appendChild(div);
 		chatbox.scrollTop = chatbox.clientHeight + chatbox.scrollHeight;
 		
@@ -600,12 +610,21 @@ mobileChat.className="";
 textarea2.className="";
 
 		div2.className="yourmsg2 he";
-		div2.innerHTML="<span><b>Собеседник: </b></span><br><span>"+ esci(msg) + "</span>";
+		if(bool){
+			div2.innerHTML="<span><b>Собеседник: </b></span><br><span>" + msg + "</span>";
+		}else{
+		div2.innerHTML="<span><b>Собеседник: </b></span><br><span>" + esci(msg) + "</span>";
+	}
 		chatbox2.appendChild(div2);
 		chatbox2.scrollTop = chatbox2.clientHeight + chatbox2.scrollHeight;
 		
 }
-
+function fuckMessage(msg){
+	//mobile
+	let div2=document.createElement('div');
+	div2.className="yourmsg2 he";
+    div2.innerHTML="<span><b>Собеседник: </b></span><br><span>" + msg + "mobile?</span>";
+}
 function handleHangUp(){
 	//alert("hongup");
 	 //printmsg2.className='';
@@ -615,6 +634,8 @@ function handleHangUp(){
     // let ss = unsubscribe?false:false;
     let amma=[[0,{}]]
     if(IPS.size > 0)amma = IPS;
+    console.warn("giftsContainer.className ", giftsContainer.className);
+    //giftsContainer.className="";
 	next(nextbtn, false, amma, false);
 }
 
@@ -769,6 +790,7 @@ function start(el){
 			track.stop();
 		});
 }
+CONNECTED = false;
 clearInterval(someInterval);
 someInterval = null;
 	local.srcObject = null;
@@ -843,6 +865,7 @@ function handleError(err){
 		//mobileChat.className = "";
 		hideChat();
 		duka2.className="";
+		CONNECTED = true;
 	}
 	
 	function hideChat(el){
@@ -872,6 +895,9 @@ function handleError(err){
 	function sendEnter(ev){
 		if(ev.key == "Enter"){
 			//alert(event.target.getAttribute("data-send"));
+			//if(!txtvalue.value || !txtvalue2.value)return;
+			let str = txtvalue2.value.trim();
+			if(str.length==0)return;
 			sendi(event.target);
 		}
 	}
@@ -879,11 +905,22 @@ function handleError(err){
 	function sendi(event){
 		
 		 let l = event.getAttribute("data-send");
+		// alert(l);
 		 if(l){
 		 if(l == "one"){
+			 //for computer
+			// if(!txtvalue2.value)return
+			console.warn('bu ', txtvalue.value.trim());
 			sendiOne();
+		//	console.warn('bu ', txtvalue.value);
+			//textvalue2.value="";
 			
 	}else if(l == "two"){
+		// for mobile
+		//console.warn('bu2 ', txtvalue.value.trim());
+		let str = txtvalue2.value.trim();
+		console.warn("str ", str, str.length);
+		if(str.length==0)return;
 		sendiTwo();
 		
 	}
@@ -901,6 +938,22 @@ if(l2){
 }*/
 	 }
 	 
+	 function insertMessage(n){
+		 if(n.type == "computer"){
+		 let div=document.createElement('div');
+		
+		div.className = "yourmsg";
+		div.innerHTML="<span class='you2'><b>Вы: </b></span><br><span>" + n.msg + "</span>";
+		chatbox.appendChild(div);
+		chatbox.scrollTop = chatbox.clientHeight + chatbox.scrollHeight;
+	}else{
+		let div2=document.createElement('div');
+		div2.className="yourmsg2";
+		div2.innerHTML="<span class='you'><b>Вы: </b></span><br><span>" + n.msg + "</span>";
+		chatbox2.appendChild(div2);
+		chatbox2.scrollTop = chatbox2.clientHeight + chatbox2.scrollHeight;
+	}
+	 }
 	 
 	 function sendiOne(){	
 			if(!txtvalue.value) return;
@@ -910,7 +963,7 @@ if(l2){
         znakPrint.classList.add("hidden");
       znakPrint2.classList.add("hidden");
 		div.className="yourmsg";
-		div.innerHTML="<span class='you2'><b>Вы: </b></span><br><span>"+ txtvalue.value+ "</span>";
+		div.innerHTML="<span class='you2'><b>Вы: </b></span><br><span>" + txtvalue.value + "</span>";
 		chatbox.appendChild(div);
 		chatbox.scrollTop = chatbox.clientHeight + chatbox.scrollHeight;
 		wsend({type:"message", data: txtvalue.value});
@@ -921,10 +974,12 @@ if(l2){
         //printmsg.className="";
          znakPrint.classList.add("hidden");
       znakPrint2.classList.add("hidden");
+    //  alert(txtvalue2.value+txtvalue2.value.length);
+     // console.log(txtvalue2.value);
 		if(!txtvalue2.value) return;
 			let div2=document.createElement('div');
 		div2.className="yourmsg2";
-		div2.innerHTML="<span class='you'><b>Вы: </b></span><br><span>"+ txtvalue2.value+ "</span>";
+		div2.innerHTML="<span class='you'><b>Вы: </b></span><br><span>" + txtvalue2.value+ "</span>";
 		chatbox2.appendChild(div2);
 		chatbox2.scrollTop = chatbox2.clientHeight + chatbox2.scrollHeight;
 		wsend({type:"message", data: txtvalue2.value});
@@ -971,6 +1026,7 @@ if(l2){
 
    function next(el, bool, ignores, isIgnore){
 	   el.disabled = true;
+	   CONNECTED = false;
       closeVideoCall();
     if(bool)  {
 		wsend({type: "hang-up", ignore: isIgnore });
@@ -993,11 +1049,14 @@ if(l2){
       //  printmsg.className="";
       znakPrint.classList.add("hidden");
       znakPrint2.classList.add("hidden");
+     // sectionTextArea.classList.add('hide');
+      textarea2.classList.add('hide');
          polite = true;
  makingOffer = false;
  ignoreOffer = false;
  isSettingRemoteAnswerPending = false;
  partnerId = null;
+ //giftsContainer.style.display="block";
     }
     
     
@@ -1029,6 +1088,7 @@ function iceConnectionStateChangeHandler (event) {
      note({content: "Failed! Press stop, then start", type: "warn", time: 5 });
      break;
     case 'disconnected':
+    CONNECTED = false;
     console.log('ice disconnected');
     note({content: "Disconnected! Press next", type: "warn", time: 5 });
    // wsend({type:"disconnection"});
@@ -1385,15 +1445,35 @@ const giftsContainer  = document.querySelector("section#giftsContainer");
 const giftsContainer2  = document.querySelector("section#giftsContainer2");
 const giftbox2 = document.getElementById("giftbox2");
 const giftbox = document.getElementById("giftbox");
+const heartels = document.querySelectorAll("div.heart");
+//const heartcountels = document.querySelectorAll("div.heartcount");
+
 giftbox2.addEventListener('click', openGiftBox, false);
 giftbox.addEventListener('click', openGiftBox2, false);
 giftsContainer.addEventListener('click', ongiftscontainer, false);
-giftsContainer2.addEventListener('click', ongiftscontainer2, false)
+giftsContainer2.addEventListener('click', ongiftscontainer2, false);
+
+for(var i = 0; i < heartels.length; i++){
+	var heartel = heartels[i];
+	heartel.addEventListener('click', onHeartClick, false);
+}
 function openGiftBox(el){
+	console.log("here opengiftbox1", giftsContainer.classList);
 	el.stopImmediatePropagation();
 	giftsContainer.classList.toggle("hidden");
+	/*
+	if(giftsContainer.classList.contains("hidden")){
+		console.warn("hidden gifts");
+		giftsContainer.className="";
+		giftsContainer.style.display="block";
+		
+	}else{
+		giftsContainer.style.display="none";
+		giftsContainer.classList.add("hidden");
+	}*/
 }
 function openGiftBox2(el){
+	//console.log("here opengiftbox2");
 	el.stopImmediatePropagation();
 	giftsContainer2.classList.toggle("hidden");
 }
@@ -1403,20 +1483,68 @@ function openGiftBox2(el){
 	function ongiftscontainer2(ev){
 	ev.stopPropagation();
 	}
+	
+	/*
 	giftsDiv.onclick = function(ev){
 		console.log('giftsDive clicked');
 	}
 	giftsDiv2.onclick = function(ev){
 		console.log('giftsDive clicked');
-	}
+	}*/
 	mediaBox.onclick = function(ev){
+		//return;
 		if(!giftsContainer.classList.contains("hidden")){
 			giftsContainer.classList.add("hidden");
 		}
+		
 		if(!giftsContainer2.classList.contains("hidden")){
 			giftsContainer2.classList.add("hidden");
 		}
 	}
+function onHeartClick(ev){
+	//alert(1);
+	
+	if(!CONNECTED){
+		note({ content: "Никого нет!", type: "info", tyme: 5 });
+		return;
+	}
+	
+	
+	let quant;let g;
+	for(var i = 0; i < heartcountels.length; i++){
+		let heartcount = heartcountels[i];
+		let n = Number(heartcount.textContent);
+		if(n <= 0){
+			note({ content: "Недостаточно средств!", type: "info", time: 5 });
+			return
+		}else{
+		 quant = n - 1;
+		 g = "heart";
+		heartcount.textContent = quant;	
+		}
+	}
+	processHeart({ g: g, quant: 1 }, ev);
+}
 
+function processHeart(n, ev){
+			wsend({ type: "gift", gift: n.g, quant: n.quant });
+			let str = `Послали в подарок ${n.g=='heart'?'сердечко &#x1f496':''}`
+			console.warn(str);
+			let l = ev.target.getAttribute("data-type");
+			//alert(l);
+			
+			insertMessage({ type: l, msg: str });
+		}
+function handleGift(msg){
+	console.log(msg);
+	handleMessage(`Подарили в подарок сердечко &#x1f496`, true);
+	let n = Number(msg.quant);
+	let a = Number(heartcountels[0].textContent);
+	heartcountels[0].textContent = n + a;
+	let n1 = Number(msg.quant);
+	let a1 = Number(heartcountels[1].textContent);
+	heartcountels[1].textContent = n1 + a1;
+	
+}
 
 

@@ -219,6 +219,7 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
     
     <video id="remote"  class="" autoplay></video>
      <div id="duka2">Жизнь как рулетка. Никогда не узнаешь, кого встретишь следуюшим...</div>
+     <!-- MODILE! -->
  <section id="mobileChat" class="hide">
 		<div id="hidechat" onclick="hideChat(this);"><img class="chaticon" src="/img/chat.svg"/></div>
 		
@@ -232,10 +233,10 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
 	<div id="chat4"><div id="chatbox2">
 	
 	</div>
-	<section id="giftsContainer2" class="hidde"><header><span>Подарки</span></header>
+	<section id="giftsContainer2" class="hidden"><header><span>Подарки</span></header>
 <div id="giftsDiv2">
 <div class="flexgiftsitem">
-<div class="heart" style=""></div>
+<div class="heart" data-type="mobile" style=""></div>
 <div class="bname">Сердечко</div>
 <div class="heartcount">100</div>
 </div>
@@ -247,6 +248,7 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
 <div id="giftbox"><span>&#x1f381</span></div><div class="send" data-send="two" onclick="sendi(this);"><img src="/img/send1.svg"/></div>
 </div></section>
 </section> 
+<!-- END MOBILE! -->
     </div>
 <div id="localcontainer"><video id="local"  class=""  autoplay muted></video></div>
 
@@ -262,6 +264,7 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
       </div>
 <div id="foot"><a href="/about"> О проекте</a></div>
 </div>
+<!-- COMPUTER VERSION -->
 <div id="sectionChat">
 	<div id="znakChat">
 	<div id="znakPrint" class="typing hidden">
@@ -270,17 +273,18 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
     <div class="typing__dot"></div>
   </div>
   </div>
-<div id="chatbox">
+  
+<div id="chatbox"></div>
 <section id="giftsContainer" class="hidden"><header><span>Подарки</span></header>
 <div id="giftsDiv">
 <div class="flexgiftsitem">
-<div class="heart" style=""></div>
+<div class="heart" data-type="computer" style=""></div>
 <div class="bname">Сердечко</div>
 <div class="heartcount">100</div>
 </div>
 </div>
 </section>
-</div>
+
 <section id="MainSectionTextArea">
 
 <div id="textarea"><textarea id="txtvalue" data-send="one" placeholder="Сообщение" oninput="txtInput(this);" onchange="someChange();"></textarea>

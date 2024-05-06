@@ -134,9 +134,12 @@ background-image: linear-gradient(315deg, #130f40 0%, #000000 74%);
 		display:block;
 		boder:1px solid green;
 }
-
+#chatbox6{
+	position:relative;
+	display:block;
+}
 section#giftsContainer{
-	background:rgba(0,0,6,0.3);
+	background:rgba(0,0,6,0.9);
 	position:absolute;
 	top:50%;
 	left:0;
@@ -653,6 +656,7 @@ padding:5px;
   aspect-ratio: 1;
   border-image: radial-gradient(red 69%, #0000 70%) 84.5%/50%;
   clip-path: polygon(-41% 0, 50% 91%, 141% 0);
+  cursor:pointer;
 }
 
 @media screen and (max-width: 452px) and (orientation: portrait){
@@ -895,7 +899,7 @@ padding:5px;
 	
 	
 	section#giftsContainer2{
-	background:rgba(0,0,6,0.3);
+	background:rgba(0,0,6,0.9);
 	position:absolute;
 	top:30%;
 	left:0;

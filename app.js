@@ -539,9 +539,11 @@ function sendToPeer (socket, msg) {
   let peerSocket = getPeerSocket(peerId)
 
   if (peerSocket) {
-	 
+	 if(msg.type=="gift"){
+		 peerSocket.send(JSON.stringify(msg))
+	 }else{
     peerSocket.send(JSON.stringify({ type: msg.type, vip: msg.vip, partnerId: socket.userId, data: msg.data }))
-   
+   }
   }
 }
 
@@ -605,6 +607,7 @@ wsServer.on('connection', async function (socket, req) {
       case 'message':
       case "write":
       case "unwrite":
+      case "gift":
      // msg.vip = socket.vip
         sendToPeer(socket, msg)
         break
