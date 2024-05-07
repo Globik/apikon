@@ -16,6 +16,7 @@ var OPENCLAIM = false;
 var videoInput1, videoInput2;
 const IPS = new Map();
 var partnerId;
+
 var someIp = null;
 var remote = gid("remote");
 var local = gid("local");
@@ -439,7 +440,7 @@ function get_socket() {
 
   sock.onopen = function () {
 	 console.log("websocket opened");
-	 wsend({ type: "helloServer", userId: gid("userId").value });
+	 wsend({ type: "helloServer", userId: gid("userId").value, nick: userName.value });
   };
   sock.onerror = function (e) {
     note({ content: "Websocket error: " + e, type: "error", time: 5 });
@@ -575,6 +576,9 @@ function on_msg(msg) {
         break;
         case 'dynamic':
         handleDynamic(msg);
+        break;
+        case 'error':
+        note({ content: msg.err, type: "error", time: 5 });
         break;
         case 'vip':
         someIp = msg.vip;
@@ -1531,7 +1535,8 @@ function onHeartClick(ev){
 }
 
 function processHeart(n, ev){
-			wsend({ type: "gift", gift: n.g, quant: n.quant });
+			wsend({ type: "gift", gift: n.g, quant: n.quant, from_id: userId.value, from_name: userName.value, to_id: partnerId, 
+				istestheart: (isTestHeart.value=="true"?true:false) });
 			let str = `Послали в подарок ${n.g=='heart'?'сердечко &#x1f496':''}`
 			console.warn(str);
 			let l = ev.target.getAttribute("data-type");

@@ -251,3 +251,13 @@ function handleDynamic(obj){
 	}
 	
 }
+
+function getTestGifts(el){
+	clearWindows();
+	vax('get','/admin/getGiftTests', {}, on_get_test_gift, on_error, el, false);
+}
+
+function on_get_test_gift(l, el){
+	someSpinner.className = "hide";
+	contentBox.innerHTML = l.content;
+}

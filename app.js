@@ -2,14 +2,16 @@ const https=require( "https");
 var fs =require( "fs");
 const express = require('express');
 const { oni, oni1 } = require('./libs/web_push.js');
-var WebSocket=require('ws');
+var WebSocket = require('ws');
 
-const crypto =require('crypto');
+const crypto = require('crypto');
 const passport = require("passport");
 const session = require('express-session');
-const mariadb =require('mariadb');
+const mariadb = require('mariadb');
 
-const render=require('./libs/render.js');
+const render = require('./libs/render.js');
+const admin = require('./router/admin.js');
+
 const axios = require('axios').default;
 const { v4: uuidv4 } = require('uuid');
 //uuidv4(); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
@@ -60,6 +62,7 @@ app.use(session({
 var stun = null;
 var testshopid;
 var testshopsecret;
+var istestheart;
 
 async function getstun(){
 	let a;
@@ -74,6 +77,8 @@ try{
 			//testshopid='suka'
 			testshopsecret = a[0].testshopsecret;
 			//console.log("here ",testshopid, testshopsecret);
+			istestheart = a[0].istestHeart;
+			console.log("istest heart ",  istestheart, (istestheart==1?true:false));
 		}
 	}catch(err){
 		console.log(err);
@@ -90,6 +95,7 @@ app.use(async(req, res, next)=>{
 	req.app.locals.testshopid = testshopid;
 	req.app.locals.testshopsecret = testshopsecret;
 	//console.log('req.app.locals.stun ', req.app.locals.stun);
+	req.app.locals.istestheart = istestheart;
 	
 	console.log("method ", req.method, " path ",  req.path);
 	//console.log("HERE 2 ",stun,testshopid,testshopsecret, req.app.locals.testshopid, req.app.locals.testshopsecret);
@@ -124,7 +130,7 @@ app.use((req, res, next)=>{
 	req.db = pool;
 	next();
 })
-
+app.use('/admin', admin);
 app.get("/", async(req, res)=>{
 	//console.log("*** USER *** ", req.user);
 	res.rendel('main', {});
@@ -190,14 +196,15 @@ app.post('/api/setDonation', async(req, res)=>{
 })
 app.get("/dashboard", secured, isAdmin(['admin']), async(req, res)=>{
 	let db = req.db;
-	let a;
+	let a;let b;
 	try{
 		a = await db.query('select COUNT(*) from users');
 	console.log("a: ", a[0]['COUNT(*)'].toString());
+	b = await db.query('select COUNT(*) from processTest');
 	}catch(err){
 		console.log(err);
 	}
-	res.rendel('dashboard', { usercount: (a?a[0]['COUNT(*)'].toString():0) });
+	res.rendel('dashboard', { usercount: (a?a[0]['COUNT(*)'].toString():0), giftcount: (b?b[0]['COUNT(*)'].toString():0) });
 })
 app.get("/api/getUsers", checkAuth, checkRole(['admin']), async(req, res)=>{
 	let db = req.db;
@@ -530,7 +537,7 @@ function hangUp (socketId, msg, bool) {
 
 
 
-function sendToPeer (socket, msg) {
+async function sendToPeer (socket, msg) {
   if (!matchedIds.has(socket.id)) {
     return
   }
@@ -540,7 +547,20 @@ function sendToPeer (socket, msg) {
 
   if (peerSocket) {
 	 if(msg.type=="gift"){
-		 peerSocket.send(JSON.stringify(msg))
+		 console.log('msg*** : ', msg);
+		 console.log("userId, nick, userId , nick ", socket.userId, ' ', socket.nick, ' ', peerSocket.userId, ' ', peerSocket.nick);
+		 //peerSocket.send(JSON.stringify(msg))
+		 try{
+			 let a = (msg.istestheart?'theart':'heart');
+			 await pool.query(`update users set ${a}=${a}-(?) where id=(?)`, [ msg.quant, msg.from_id ]);
+			 await pool.query(`update users set ${a}=${a}+(?) where id=(?)`, [ msg.quant, msg.to_id ]);
+			 //insert into processTest(from_id,from_nick,to_id,to_nick,wieviel) values('1','suka','2','dima',4);
+await pool.query(`insert into processTest(from_id,from_nick,to_id,to_nick,wieviel) values((?),(?),(?),(?),(?));`, [ msg.from_id, msg.from_name, msg.to_id, peerSocket.nick, msg.quant ]);
+			 peerSocket.send(JSON.stringify(msg))
+		 }catch(err){
+			 wsend(socket, { type: " error", err: err });
+		 }
+		 
 	 }else{
     peerSocket.send(JSON.stringify({ type: msg.type, vip: msg.vip, partnerId: socket.userId, data: msg.data }))
    }
@@ -613,6 +633,7 @@ wsServer.on('connection', async function (socket, req) {
         break
         case "helloServer":
         socket.userId = msg.userId;
+        socket.nick = msg.nick;
         break
       case 'hang-up':
         hangUp(socket.id, { type: 'hang-up', partnerId: socket.userId, ignore: msg.ignore },(msg.sub&&msg.sub=="here"?true:false))

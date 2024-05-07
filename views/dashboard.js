@@ -17,11 +17,15 @@ return `
     <a href="/">На главную</a>
     <nav id="adminNav"><button onclick="getUsers(this);">Пользователи</button><button onclick="getStun(this)";>Stun / turn</button><button onclick="whosOnline(this);">Кто онлайн</button>
     <button id="settings" onclick="getSettings(this);">Настройки</button><button onclick="getTest(this);">Купить</button>
+    <button onclick="getTestGifts(this);">Сердечки тест</button>
     </nav>
   <!--  <div>
     <button onclick="post_start();">post start</button>&nbsp;&nbsp;<button onclick="post_next();">post next</button>
     </div> -->
-    <div id="dynamicNav"><div><b>Юзеров:</b> <span>${n.usercount?n.usercount:0}</span></div><div></div>
+    <div id="dynamicNav">
+    <div><b>Юзеров:</b> <span>${n.usercount?n.usercount:0}</span></div>
+    <div><b>Пересылок:</b> <span>${n.giftcount}</span></div>
+    <div></div>
     <div><b>Веб-камер:</b> <span id="camsCount">0</span></div><div><b>Коннектов:</b> <span id="connects">0</span></div></div><hr>
     <section id="adminContainer">
     <div id="someSpinner" class="hide"><div class="loader"></div></div>

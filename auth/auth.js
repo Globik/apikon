@@ -20,7 +20,8 @@ passport.deserializeUser(async function(user, cb){
 	
 	//console.log("deserialize user", user);
 		try{
-			let useri = await db.query('select id,name,brole from users where id=(?)', [ user ]);
+			let useri = await db.query('select id,name,brole,heart,theart from users where id=(?)', [ user ]);
+			//console.log("USERI ", useri[0]);
 		return cb(null, useri[0]);
 	}catch(er){
 		console.log(er);

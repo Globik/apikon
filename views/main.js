@@ -1,4 +1,5 @@
 function main(n){
+	let istestheart = (n.istestheart==1?true:false);
 return `
  <!DOCTYPE html>
 <html lang="ru">
@@ -153,7 +154,10 @@ function isOpenModal(){
 		get_socket();
 		
     }
-    </script><input type="hidden" id="userId" value="${n.user?n.user.id:0}">`}
+    </script><input type="hidden" id="userId" value="${n.user?n.user.id:0}">
+    <input type="hidden" id="userName" value="${n.user?n.user.name:undefined}">
+    <input type="hidden" id="isTestHeart" value="${istestheart}">
+    `}
     <script>
   //  var ICESERVERS =n.stun?n.stun:null
      var ICESERVERS ={
@@ -219,7 +223,7 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
     
     <video id="remote"  class="" autoplay></video>
      <div id="duka2">Жизнь как рулетка. Никогда не узнаешь, кого встретишь следуюшим...</div>
-     <!-- MODILE! -->
+     <!-- MOBILE! -->
  <section id="mobileChat" class="hide">
 		<div id="hidechat" onclick="hideChat(this);"><img class="chaticon" src="/img/chat.svg"/></div>
 		
@@ -237,7 +241,7 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
 <div class="flexgiftsitem">
 <div class="heart" data-type="mobile" style=""></div>
 <div class="bname">Сердечко</div>
-<div class="heartcount">100</div>
+<div class="heartcount">${n.user?istestheart?n.user.theart:n.userheart:0}</div>
 </div>
 </div>
 </section>
@@ -279,7 +283,7 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
 <div class="flexgiftsitem">
 <div class="heart" data-type="computer" style=""></div>
 <div class="bname">Сердечко</div>
-<div class="heartcount">100</div>
+<div class="heartcount">${n.user?istestheart?n.user.theart:n.user.heart:0}</div>
 </div>
 </div>
 </section>

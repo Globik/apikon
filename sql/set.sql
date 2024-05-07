@@ -30,6 +30,7 @@ insert into sets(stun) value('{"stun2": "stun:stun.relay.metered.ca:80", "turn5"
   */
 alter table sets add column testshopid MEDIUMINT;
 alter table sets add column testshopsecret varchar(50);
+alter table sets add column istestHeart boolean default true;
 --alter table sets drop column testshopid;
 --alter table sets drop column testshopsecret;
 --if exists(select testshopid from sets) update sets set testshopid=3346,testshopsecret='suka' else insert into sets(testshopid,testshopsecret) value(333,'fuck');

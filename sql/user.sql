@@ -12,3 +12,12 @@ updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 PRIMARY KEY (id),
 UNIQUE (name)
 );
+/*
+update users set brole='admin' where name='suka1';
+alter table users add column theart int not null default 100;
+alter table users add column heart int not null default 0;
+alter table users add constraint theartRestriction check(theart > -1);
+alter table users add constraint heartRestriction check(heart > -1);
+ERROR 4025 (23000): CONSTRAINT `heartRestriction` failed for `roulet`.`users`
+
+*/
