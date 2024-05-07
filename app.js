@@ -549,14 +549,14 @@ async function sendToPeer (socket, msg) {
 	 if(msg.type=="gift"){
 		 console.log('msg*** : ', msg);
 		 console.log("userId, nick, userId , nick ", socket.userId, ' ', socket.nick, ' ', peerSocket.userId, ' ', peerSocket.nick);
-		 //peerSocket.send(JSON.stringify(msg))
+		 peerSocket.send(JSON.stringify(msg))
 		 try{
 			 let a = (msg.istestheart?'theart':'heart');
 			 await pool.query(`update users set ${a}=${a}-(?) where id=(?)`, [ msg.quant, msg.from_id ]);
 			 await pool.query(`update users set ${a}=${a}+(?) where id=(?)`, [ msg.quant, msg.to_id ]);
 			 //insert into processTest(from_id,from_nick,to_id,to_nick,wieviel) values('1','suka','2','dima',4);
 await pool.query(`insert into processTest(from_id,from_nick,to_id,to_nick,wieviel) values((?),(?),(?),(?),(?));`, [ msg.from_id, msg.from_name, msg.to_id, peerSocket.nick, msg.quant ]);
-			 peerSocket.send(JSON.stringify(msg))
+			// peerSocket.send(JSON.stringify(msg))
 		 }catch(err){
 			 wsend(socket, { type: " error", err: err });
 		 }
