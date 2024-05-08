@@ -554,8 +554,8 @@ async function sendToPeer (socket, msg) {
 			 let a = (msg.istestheart?'theart':'heart');
 			 await pool.query(`update users set ${a}=${a}-(?) where id=(?)`, [ msg.quant, msg.from_id ]);
 			 await pool.query(`update users set ${a}=${a}+(?) where id=(?)`, [ msg.quant, msg.to_id ]);
-			 //insert into processTest(from_id,from_nick,to_id,to_nick,wieviel) values('1','suka','2','dima',4);
-await pool.query(`insert into processTest(from_id,from_nick,to_id,to_nick,wieviel) values((?),(?),(?),(?),(?));`, [ msg.from_id, msg.from_name, msg.to_id, peerSocket.nick, msg.quant ]);
+
+await pool.query(`insert into processTest(from_id,from_nick,wieviel) values((?),(?),(?)) ON DUPLICATE KEY UPDATE wieviel=wieviel+(?)`, [ msg.from_id, msg.from_name, msg.quant, msg.quant ]);
 			// peerSocket.send(JSON.stringify(msg))
 		 }catch(err){
 			 wsend(socket, { type: " error", err: err });

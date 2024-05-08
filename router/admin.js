@@ -5,11 +5,11 @@ router.get('/getGiftTests', checkAuth, checkRole(['admin']), async(req, res) => 
 	let db = req.db;
 	//console.log("/api/getGiftTests");
 	try{
-	let a = await db.query('select * from processTest order by id desc limit 200');
-	//console.log("a ", a);
+	let a = await db.query('select * from processTest');
+	console.log("a ", a);
    res.json({ content: res.compile('vSendsGift', { giftcount: a })});
    }catch(err){
-	//   console.log("here", err);
+	   console.log("here", err);
 		res.status(400).send({ message: err.name });
 	}
 })
