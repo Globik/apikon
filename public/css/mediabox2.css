@@ -619,11 +619,28 @@ section#mobileChat{
 }
 
 #giftsContainer header,#giftsContainer2 header{
-	text-align:center;
+	ext-align:center;
+	display:flex;
+	flex-wrap: wrap;
+    flex-direction: row;
+     justify-content: space-between;
+		align-items: center;
 	line-height:1.5;
-	font-size:1.2rem;
+	font-size:1rem;
  font-weight:bold;	
  color:white;
+ 
+}
+#giftsContainer header span,#giftsContainer2 header span{
+	margin-left:17px;
+}
+#giftsContainer header a,#giftsContainer2 header a{
+	margin-right:17px;
+}
+
+.purchaseSpan{
+
+	color:green;
 }
 #giftsDiv,#giftsDiv2{
 margin-top:5px;
@@ -908,6 +925,7 @@ padding:5px;
 	display:block;
 }
 }
+
 @media screen and (max-width: 321px) and (orientation: portrait){
 html{
 }
@@ -980,6 +998,47 @@ div.bname, div.heartcount{
 transform:translate(0,-9px);
 	
 }
+}
 
+#purchaseoutput{
+	width:20%;
+}
+input#t1,input#t2,input#t3{
+	width:initial;
+	height:initial;
+}
+input#purchaseInput{
+	font-size:1.9rem;
+	font-weight:bold;
+	margin-top:60px;
+		margin-bottom:6px;
+}
+.heartbx label{
+	color:white;
+}
+#heartswrapper{
+	dsplay:grid;
+	grid-template-columns: 30% 30% 30%;
+width:100%;
+}
+
+.heartbx{
+	display:flex;
+	flex-wrap: wrap;
+    flex-direction: row;
+     justify-content: space-between;
+		align-items: center;
+		justify-items:center;
+		margin-top:6px;
+		margin-bottom:6px;
+}
+
+
+@media screen and (max-width: 452px) and (orientation: portrait){
+#purchaseoutput{
+	width:98%;
+}
+	
 
 }
+

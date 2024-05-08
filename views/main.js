@@ -236,7 +236,7 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
   </div>
 	<div id="chat4"><div id="chatbox2">
 	</div>
-	<section id="giftsContainer2" class="hidden"><header><span>Подарки</span></header>
+	<section id="giftsContainer2" class="hidden"><header><span>Подарки</span><a href="#purchaseHREF"><span class="purchaseSpan">Пополнить счет</span></a></header>
 <div id="giftsDiv2">
 <div class="flexgiftsitem">
 <div class="heart" data-type="mobile" style=""></div>
@@ -244,6 +244,7 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
 <div class="heartcount">${n.user?istestheart?n.user.theart:n.userheart:0}</div>
 </div>
 </div>
+
 </section>
 	</div>
 <section id="sectionTextArea" class="hide">
@@ -278,7 +279,7 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
   </div>
   
 <div id="chatbox"></div>
-<section id="giftsContainer" class="hidden"><header><span>Подарки</span></header>
+<section id="giftsContainer" class="hidden"><header><span>Подарки</span><a href="#purchaseHREF"><span class="purchaseSpan">Пополнить счет</span></a></header>
 <div id="giftsDiv">
 <div class="flexgiftsitem">
 <div class="heart" data-type="computer" style=""></div>
@@ -298,7 +299,24 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
     </section>
     </article>
    
-    
+    <a href="#."  class="overlay" id="purchaseHREF"></a>
+    <output id="purchaseoutput" class="popi">
+    <section id="heartsContainer">
+	
+	<form id="purchaseForm" method="post" action="/api/getPayUrl" name="ordertodo" onsubmit="return false;">
+	<div id="heartswrapper">
+	<div class="heartbx"><label for="t1">&#x1f496 &nbsp;&nbsp;<b>10 сердечек = 10 руб</b></label><input id="t1" type="radio" name="count" class="ten" data-count="10" value="10.00" checked onchange="dodo(this);"></div>
+	<div class="heartbx"><label for="t2">&#x1f496 &nbsp;&nbsp;<b>50 сердечек = 50 руб</b></label>
+	<input id="t2" type="radio" name="count" data-count="50" value="50.00" onchange="dodo(this);"></div>
+	<div class="heartbx"><label for="t3">&#x1f496 &nbsp;&nbsp;<b>100 сердечек = 100 руб</b></label>
+	<input id="t3" type="radio" name="count" data-count="100" value="100.00" onchange="dodo(this);"></div>
+	</div>
+	<div>
+	<input id="purchaseInput" type="submit" value="Купить">
+	</div>
+	</form>
+	</section>
+    </output>
     
     
     <a href="#."  class="overlay" id="regeln"></a>
