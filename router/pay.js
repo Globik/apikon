@@ -3,7 +3,7 @@ const axios = require('axios').default;
 const router = express.Router()
 const api_url = "https://api.yookassa.ru/v3/payments";
 const { v4: uuidv4 } = require('uuid');
-const uu = uuidv4();
+//const uu = uuidv4();
 
 
 router.post('/api/getPayUrl',/* checkAuth, checkRole(['admin'])*/ async(req, res)=>{
@@ -30,6 +30,7 @@ let data = {
 	if(!req.app.locals.testshopid || !req.app.locals.testshopsecret){
 		return res.status(400).send({ message: "No test shop id or test secret" });
 	}
+	let uu = uuidv4();
 let headers = {'Idempotence-Key': uu };
 try{
 let r = await axios.post(api_url, data, {auth: {username: req.app.locals.testshopid, password: req.app.locals.testshopsecret } , headers: headers });
