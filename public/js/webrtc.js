@@ -1557,3 +1557,36 @@ function handleGift(msg){
 }
 
 
+	let orderform = document.forms.ordertodo;
+	orderform.addEventListener('submit', pay, false);
+
+const api_url = "https://api.yookassa.ru/v3/payments";
+var sukasuka="10";
+function pay(el){
+	el.preventDefault();
+	let dcount = sukasuka
+	let damount = el.target.count.value;
+	//alert(dcount+" "+damount);
+	//return;
+	let d = {};
+	d.dcount = dcount;
+	d.damount = damount;
+	vax('post','/pay/api/getPayUrl', d, on_get_payurl, on_payurl_error, el.target, false);
+	el.target.className = "puls";
+}
+
+
+function dodo(el){
+	//alert(el.getAttribute('data-count'));
+	sukasuka = el.getAttribute('data-count');
+}
+function on_get_payurl(l, el){
+	el.className = "";
+	console.log(l.message);
+	window.location.href=l.message;
+	//note({ content: l.message, type: "info", time: 5 });
+}
+function on_payurl_error(l, el){
+	el.className = "";
+	note({ content: l.message, type: "error", time: 5 });
+}

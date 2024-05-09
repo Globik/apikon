@@ -175,7 +175,7 @@ function on_payurl_error(l, el){
 }
 function takeCb(el){
 	el.className="puls";
-	vax('post','/api/takeCb', {}, on_takecb, on_error, el, false);
+	vax('post','/pay/api/takeCb', {}, on_takecb, on_error, el, false);
 }
 function on_takecb(l, el){
 	el.className = "";

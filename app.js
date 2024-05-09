@@ -11,9 +11,10 @@ const mariadb = require('mariadb');
 
 const render = require('./libs/render.js');
 const admin = require('./router/admin.js');
+const pay = require('./router/pay.js');
 
 const axios = require('axios').default;
-const { v4: uuidv4 } = require('uuid');
+//const { v4: uuidv4 } = require('uuid');
 //uuidv4(); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
 
 
@@ -131,8 +132,11 @@ app.use((req, res, next)=>{
 	next();
 })
 app.use('/admin', admin);
+app.use('/pay', pay);
+
 app.get("/", async(req, res)=>{
 	//console.log("*** USER *** ", req.user);
+	console.log('req.app.locals ', req.app.locals.testshopid, ' ', req.app.locals.testshopsecret);
 	res.rendel('main', {});
 })
 app.get("/about", async(req, res)=>{
@@ -272,7 +276,7 @@ let a = await db.query(`update sets set testshopid=(?),testshopsecret=(?)`, [ te
 app.get('/api/getTest', checkAuth, checkRole(['admin']), async(req, res)=>{
 	res.json({ content: res.compile('ytest', {})});
 })
-
+/*
 const api_url = "https://api.yookassa.ru/v3/payments";
 const uu = uuidv4();
 
@@ -323,6 +327,7 @@ app.post('/api/takeCb', checkAuth, checkRole(['admin']), async(req, res)=>{
 	let a = (dummy.size==0?"Nothing": [...dummy]);
 	res.json({ message: a });
 })
+*/ 
 function checkAuth(req, res, next){
 	if(req.isAuthenticated()){
 		return next();
@@ -371,7 +376,7 @@ servi = https
     console.log('Started on https://rouletka.ru:' + port);
   });
 }
-const wsServer= new WebSocket.Server({server: servi});
+const wsServer = new WebSocket.Server({server: servi});
 
 
 let waitingQueue = []
