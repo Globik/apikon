@@ -37,8 +37,8 @@ console.log("r: ", r.data);
 res.json({ message: r.data.confirmation.confirmation_url });
 // res.redirect(r.data.confirmation.confirmation_url)
 }catch(e){
-console.log("err: ", e.toString());
-res.status(400).send({ message: e.toString() });
+console.log("err: ", e);
+res.status(200).send({ message: e.toString() });
 }	
 })
 
