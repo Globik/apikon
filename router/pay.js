@@ -96,7 +96,9 @@ res.status(200).send({ error: true, message: e });
  * "refundable":false,
  * "metadata":{"alikey":"number one"},
  * "authorization_details":{"rrn":"332781340030135","auth_code":"409319","three_
- * d_secure":{"applied":true,"protocol":"v1","method_completed":false,"challenge_completed":true}}}}],[
+ * d_secure":{"applied":true,"protocol":"v1","method_completed":false,"challenge_completed":true}}
+ * }
+ * }
  */ 
 var iii = 0;
 const dummy = new Map();
@@ -114,8 +116,8 @@ router.post("/cb/testyookassa", async(req, res)=>{
 	iii++;
 	
 	if(d.event=="payment.waiting_for_capture"){
-		console.log("***************payment.waiting_for_capture *****************", d.paid);
-		if(d.paid==true){
+		console.log("***************payment.waiting_for_capture *****************", d.object.paid);
+		if(d.object.paid==true){
 			console.log("vor try");
 			try{
 				console.log('****************** ON DUPLICATE KEY UPDATE *************')
@@ -123,10 +125,10 @@ await db.query(`insert into testPurchase(id,status,nick,userid,amount,dcount) va
 [ 
 d.object.id, 
 d.object.status, 
-d.metadata.nick, 
-d.metadata.userid,
-d.amount.value,
-d.metadata.count,
+d.object.metadata.nick, 
+d.object.metadata.userid,
+d.object.amount.value,
+d.object.metadata.count,
 d.object.status
 ]);
 let a = Number(d.metadata.count);
