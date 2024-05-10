@@ -20,7 +20,7 @@ let data = {
 		"confirmation":
 		 {
 			 "type": "redirect",
-			 "return_url":"https://rouletka.ru/dashboard" 
+			 "return_url":"https://rouletka.ru" 
 			 },
 			"description": "Сердечек покупка в количестве "+dcount+" штук",
 			"metadata":{"alikey":"number one"}
@@ -44,6 +44,7 @@ res.status(200).send({ message: e.toString() });
 })
 
 /*
+ * 2200000000000004
   {
   id: '2dcf0ce8-000f-5000-a000-1ac95d0d4664',
   status: 'pending',

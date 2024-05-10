@@ -697,6 +697,7 @@ function handleNewIceCandidate(msg) {
 		console.error(err);
 	}
  }
+ // iceTransportPolicy:"relay"
  
  function handleVideoAnswer(msg){
 	 if(pc && pc.signalingState == "stable") return;
