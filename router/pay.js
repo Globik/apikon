@@ -102,7 +102,7 @@ var iii = 0;
 const dummy = new Map();
 //dummy.set(4,{name:"alik"})
 let du=true;
-if(du==true){
+if(du=='true'){
 	console.log("TRUE HERE");
 }
 router.post("/cb/testyookassa", async(req, res)=>{
@@ -114,8 +114,9 @@ router.post("/cb/testyookassa", async(req, res)=>{
 	iii++;
 	
 	if(d.event=="payment.waiting_for_capture"){
-		console.log("***************payment.waiting_for_capture *****************");
-		if(d.paid == true){
+		console.log("***************payment.waiting_for_capture *****************", d.paid);
+		if(d.paid==true){
+			console.log("vor try");
 			try{
 				console.log('****************** ON DUPLICATE KEY UPDATE *************')
 await db.query(`insert into testPurchase(id,status,nick,userid,amount,dcount) values((?),(?),(?),(?),(?),(?)) ON DUPLICATE KEY UPDATE status=(?)` , 
