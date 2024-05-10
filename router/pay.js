@@ -131,8 +131,8 @@ d.object.amount.value,
 d.object.metadata.count,
 d.object.status
 ]);
-let a = Number(d.metadata.count);
-await db.query(`update users set theart=theart+(?) where id=(?)`, [ a, d.metadata.userid ])
+let a = Number(d.object.metadata.count);
+await db.query(`update users set theart=theart+(?) where id=(?)`, [ a, d.object.metadata.userid ])
 			}catch(err){
 				console.log(err);
 			}
