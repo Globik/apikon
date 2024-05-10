@@ -101,7 +101,10 @@ res.status(200).send({ error: true, message: e });
 var iii = 0;
 const dummy = new Map();
 //dummy.set(4,{name:"alik"})
-
+let du=true;
+if(du==true){
+	console.log("TRUE HERE");
+}
 router.post("/cb/testyookassa", async(req, res)=>{
 	let d = req.body;
 	let db = req.db;
@@ -111,9 +114,10 @@ router.post("/cb/testyookassa", async(req, res)=>{
 	iii++;
 	
 	if(d.event=="payment.waiting_for_capture"){
+		console.log("***************payment.waiting_for_capture *****************");
 		if(d.paid == true){
 			try{
-				//ON DUPLICATE KEY UPDATE
+				console.log('****************** ON DUPLICATE KEY UPDATE *************')
 await db.query(`insert into testPurchase(id,status,nick,userid,amount,dcount) values((?),(?),(?),(?),(?),(?)) ON DUPLICATE KEY UPDATE status=(?)` , 
 [ 
 d.object.id, 
