@@ -305,11 +305,13 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
 	
 	<form id="purchaseForm" method="post" action="/api/getPayUrl" name="ordertodo">
 	<div id="heartswrapper">
-	<div class="heartbx"><label for="t1">&#x1f496 &nbsp;&nbsp;<b>10 сердечек = 100 руб</b></label><input id="t1" type="radio" name="count" class="ten" data-count="10" value="100.00" checked onchange="dodo(this);"></div>
+	<div class="heartbx"><label class="mechecked" for="t1">&#x1f496 &nbsp;&nbsp;<b>10 сердечек = 100 руб</b></label>
+	<input id="t1" type="radio" name="count" class="ten" data-count="10" value="100.00" checked onchange="dodo(this);"></div>
 	<div class="heartbx"><label for="t2">&#x1f496 &nbsp;&nbsp;<b>50 сердечек = 400 руб</b></label>
 	<input id="t2" type="radio" name="count" data-count="50" value="400.00" onchange="dodo(this);"></div>
-	<div class="heartbx"><label for="t3">&#x1f496 &nbsp;&nbsp;<b>100 сердечек = 700 руб</b></label>
-	<input id="t3" type="radio" name="count" data-count="100" value="700.00" onchange="dodo(this);"></div>
+	<div class="heartbx"><label for="t3">&#x1f496 &nbsp;&nbsp;<b>100 сердечек = 700 руб</b></label><input id="t3" type="radio" name="count" data-count="100" value="700.00" onchange="dodo(this);"></div>
+    <input type="hidden" name="nick" value="${n.user?n.user.name:"anon"}">
+    <input type="hidden" name="userid" value="${n.user?n.user.id:'null'}">
 	</div>
 	<div>
 	<input id="purchaseInput" type="submit" value="Купить">

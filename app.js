@@ -135,7 +135,7 @@ app.use('/admin', admin);
 app.use('/pay', pay);
 
 app.get("/", async(req, res)=>{
-	//console.log("*** USER *** ", req.user);
+	console.log("*** USER *** ", req.user);
 	console.log('req.app.locals ', req.app.locals.testshopid, ' ', req.app.locals.testshopsecret);
 	res.rendel('main', {});
 })
@@ -540,8 +540,10 @@ function hangUp (socketId, msg, bool) {
   }
 }
 
-
-
+var ww='2024-05-10T12:01:28.271Z';
+var ee=new Date(ww)
+console.log(ee.toDateString())
+console.log( new Date().toISOString().split('.')[0]+"Z" );
 async function sendToPeer (socket, msg) {
   if (!matchedIds.has(socket.id)) {
     return

@@ -1006,15 +1006,22 @@ transform:translate(0,-9px);
 input#t1,input#t2,input#t3{
 	width:initial;
 	height:initial;
+	transform:translate(0,2px);
 }
+
 input#purchaseInput{
 	font-size:1.9rem;
 	font-weight:bold;
 	margin-top:60px;
 		margin-bottom:6px;
 }
+
 .heartbx label{
 	color:white;
+	bckground:green;
+}
+label.mechecked{
+	color:lightgreen;
 }
 #heartswrapper{
 	dsplay:grid;
@@ -1023,6 +1030,7 @@ width:100%;
 }
 
 .heartbx{
+dsplay:inline-block;
 	display:flex;
 	flex-wrap: wrap;
     flex-direction: row;
