@@ -26,7 +26,7 @@ let data = {
 			"description": "Сердечек покупка в количестве " + dcount + " штук",
 			"metadata": { "userid": userid, "nick": nick, "count": dcount },
 			"receipt":{
-				customer:{"email":"gru5@yandex.ru"},
+				customer:{"email":"gafarovalik411@yandex.ru"},
 					items:[{
 					description:"Сердечек покупка в количестве " + dcount + " штук",
 					quantity:"1",

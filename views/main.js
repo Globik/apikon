@@ -209,7 +209,7 @@ ${n.user && n.user.brole=='admin'?'<div class="settingspanel" onclick="toAdminPa
 <div class="settingspanel" onclick="doSharing(this);">Скриншэринг</div>
 <div class="settingspanel"><b>Вебок:</b> <span id="camsCount">0</span> | <b>Коннектов:</b> <span id="connects">0</span></div>
 <!-- <div class="settingspanel"  onclick="pushSubscribe(this);">Пуш уведомления</div> -->
-<div class="settingspanel"><a href="https://t.me/chatrouletka">Наш Телеграм</a></div>
+<div class="settingspanel"><a href="https://t.me/rouletka3">Наш Телеграм</a></div>
 <div class="settingspanel"  id="donatis">Помочь проекту<br><iframe src="https://yoomoney.ru/quickpay/fundraise/button?billNumber=AWVMCQLpAcY.240125&" width="330" height="50" frameborder="0" allowtransparency="true" scrolling="no"></iframe></div>
 ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'<div class="settingspanel"><a href="#login">Войти</a></div>'}
 <!-- <div class="settingspanel"><button onclick="mach();">mach</button></div> -->

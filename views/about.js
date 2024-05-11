@@ -229,7 +229,7 @@ return `
 <iframe src="https://yoomoney.ru/quickpay/fundraise/button?billNumber=AWVMCQLpAcY.240125&" width="330" height="50" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
 </div>
 <div id="rustorebox"><a href="https://apps.rustore.ru/app/ru.rouletka.pwa"><img id="rustoreimg" src="/img/rustore.png" /></a></div> -->
-<div id="socialbox"><b>Наш Телеграм:&nbsp;&nbsp;&nbsp;</b><a href="https://t.me/chatrouletka"><img id="telegimg" src="/img/telega.png" /></a></div>
+<div id="socialbox"><b>Наш Телеграм:&nbsp;&nbsp;&nbsp;</b><a href="https://t.me/rouletka3"><img id="telegimg" src="/img/telega.png" /></a></div>
         </section> 
     </footer>
 </body>
