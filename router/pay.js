@@ -18,13 +18,22 @@ let data = {
 			"value": damount,
 			"currency": "RUB"
 		}, 
+		capture:true,
 		"confirmation":
-		 {
-			 "type": "redirect",
-			 "return_url":"https://rouletka.ru" 
+		 {"type": "redirect",
+		"return_url":"https://rouletka.ru" 
 			 },
 			"description": "Сердечек покупка в количестве " + dcount + " штук",
-			"metadata": { "userid": userid, "nick": nick, "count": dcount }
+			"metadata": { "userid": userid, "nick": nick, "count": dcount },
+			"receipt":{
+				customer:{"email":"gru5@yandex.ru"},
+					items:[{
+					description:"Сердечек покупка в количестве " + dcount + " штук",
+					quantity:"1",
+					vat_code:"1",
+					amount:{"value":damount,currency:"RUB"}
+					}]}
+			
 		};
 //let headers = { "Authorization": "Basic " + onesignal_app_key };
 	console.log('req.app.locals ', req.app.locals.testshopid, ' ', req.app.locals.testshopsecret);
@@ -33,8 +42,9 @@ let data = {
 	}
 	let uu = uuidv4();
 let headers = {'Idempotence-Key': uu };
+let r;
 try{
-let r = await axios.post(api_url, data, {auth: {username: req.app.locals.testshopid, password: req.app.locals.testshopsecret } , headers: headers });
+ r = await axios.post(api_url, data, {auth: {username: req.app.locals.testshopid, password: req.app.locals.testshopsecret } , headers: headers });
 console.log("r: ", r.data);
 let d = r.data;
 // insert into testPurchase(id,status,nick,userid,amount,dcount,created_at) values('44444ddffgr5','pending','dima','5','10.00',9,'2013-07-18 13:44:22.123456');
@@ -99,6 +109,34 @@ res.status(200).send({ error: true, message: e });
  * d_secure":{"applied":true,"protocol":"v1","method_completed":false,"challenge_completed":true}}
  * }
  * }
+ ================
+ {"type":"notification",
+  "event":"payment.succeeded",
+  "object":{
+  "id":"2dd14ab4-000f-5000-9000-1e1153132ef8",
+  "status":"succeeded",
+  "amount":{"value":"700.00","currency":"RUB"},
+   "income_amount":{"value":"675.50","currency":"RUB"},
+   "description":"Сердечек покупка в количестве 100 штук",
+    "recipient":{"account_id":"383452","gateway_id":"2239359"},
+    "payment_method":{"type":"bank_card","id":"2dd14ab4-000f-5000-9000-1e1153132ef8","saved":false,"title":"Bank card *0004",
+    "card":{"first6":"220000","last4":"0004","expiry_year":"2012","expiry_month":"12","card_type":"Mir"}
+    },
+    "captured_at":"2024-05-11T09:15:14.241Z",
+    "created_at":"2024-05-11T09:14:28.469Z",
+    "test":true,
+    "refunded_amount":{"value":"0.00","currency":"RUB"},
+    "paid":true,
+    "refundable":true,
+    "receipt_registration":"succeeded",
+    "metadata":{"count":"100","nick":"suka1","userid":"5"},
+    "authorization_details":{
+    "rrn":"497929218766510",
+    "auth_code":"671955",
+ "three_d_secure":{"applied":true,"protocol":"v1","method_completed":false,"challenge_completed":true}
+ }
+ }
+}
  */ 
 var iii = 0;
 const dummy = new Map();
@@ -115,11 +153,12 @@ router.post("/cb/testyookassa", async(req, res)=>{
 	console.log('body: ', d);
 	iii++;
 	
-	if(d.event=="payment.waiting_for_capture"){
-		console.log("***************payment.waiting_for_capture *****************", d.object.paid);
-		if(d.object.paid==true){
+	if(d.event=="payment.succeeded"){
+		console.log("*************** SUCCEEDED!!! *****************", d.object.paid);
+		//if(d.object.paid==true){
 			console.log("vor try");
 			try{
+				/*
 				console.log('****************** ON DUPLICATE KEY UPDATE *************')
 await db.query(`insert into testPurchase(id,status,nick,userid,amount,dcount) values((?),(?),(?),(?),(?),(?)) ON DUPLICATE KEY UPDATE status=(?)` , 
 [ 
@@ -131,12 +170,13 @@ d.object.amount.value,
 d.object.metadata.count,
 d.object.status
 ]);
+*/ 
 let a = Number(d.object.metadata.count);
 await db.query(`update users set theart=theart+(?) where id=(?)`, [ a, d.object.metadata.userid ])
 			}catch(err){
 				console.log(err);
 			}
-		}
+		//}
 	}
 	
 	
