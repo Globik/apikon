@@ -261,3 +261,23 @@ function on_get_test_gift(l, el){
 	someSpinner.className = "hide";
 	contentBox.innerHTML = l.content;
 }
+function getPayments(el){
+	clearWindows();
+	vax('get','/admin/getPayments', {}, on_get_payments, on_error, el, false);
+}
+
+function on_get_payments(l, el){
+	someSpinner.className = "hide";
+	contentBox.innerHTML = l.content;
+}
+
+
+
+
+
+
+
+
+
+
+

@@ -49,8 +49,7 @@ console.log("r: ", r.data);
 let d = r.data;
 // insert into testPurchase(id,status,nick,userid,amount,dcount,created_at) values('44444ddffgr5','pending','dima','5','10.00',9,'2013-07-18 13:44:22.123456');
 
-await db.query('insert into testPurchase(id,status,nick,userid,amount,dcount) values((?),(?),(?),(?),(?),(?))' , [ d.id, d.status, d.metadata.nick, d.metadata.userid,d.amount.value,
-d.metadata.count ]);
+//await db.query('insert into testPurchase(id,status,nick,userid,amount,dcount) values((?),(?),(?),(?),(?),(?))' , [ d.id, d.status, d.metadata.nick, d.metadata.userid,d.amount.value,d.metadata.count ]);
 if(r.data.confirmation && r.data.confirmation.confirmation_url)res.json({ message: r.data.confirmation.confirmation_url });
 }catch(e){
 console.log("err: ", e);

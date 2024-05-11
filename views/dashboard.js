@@ -17,7 +17,7 @@ return `
     <a href="/">На главную</a>
     <nav id="adminNav"><button onclick="getUsers(this);">Пользователи</button><button onclick="getStun(this)";>Stun / turn</button><button onclick="whosOnline(this);">Кто онлайн</button>
     <button id="settings" onclick="getSettings(this);">Настройки</button><button onclick="getTest(this);">Купить</button>
-    <button onclick="getTestGifts(this);">Сердечки тест</button>
+    <button onclick="getTestGifts(this);">Сердечки тест</button><button onclick="getPayments(this);">Платежи</button>
     </nav>
   <!--  <div>
     <button onclick="post_start();">post start</button>&nbsp;&nbsp;<button onclick="post_next();">post next</button>
