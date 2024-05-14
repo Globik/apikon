@@ -44,7 +44,6 @@ return `
 <meta name="description" content="Чат-рулетка — самый популярный русскоязычный чат. Ежедневно чат посещает более 500 тысяч пользователей из России и стран СНГ." />
 <script type="application/ld+json"> { "@context": "https://schema.org", "@type": "Organization", "url": "https://rouletka.ru", "logo": "https://rouletka.ru/og_image.png" } </script>
   
-  -->
 		<link href="/css/main22.css" rel="stylesheet">
 		<link href="/css/login.css" rel="stylesheet">
 		<link href="/css/mediabox2.css" rel="stylesheet">
