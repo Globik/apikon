@@ -134,12 +134,12 @@ app.use((req, res, next)=>{
 app.use('/admin', admin);
 app.use('/pay', pay);
 
-app.get("/", async(req, res)=>{
+app.get("/about", async(req, res)=>{
 	console.log("*** USER *** ", req.user);
 	console.log('req.app.locals ', req.app.locals.testshopid, ' ', req.app.locals.testshopsecret);
 	res.rendel('main', {});
 })
-app.get("/about", async(req, res)=>{
+app.get("/", async(req, res)=>{
 	oni((req.user?req.user.name:'anonym'), " on about");
 	res.rendel('about', {});
 })

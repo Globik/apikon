@@ -6,7 +6,7 @@ return `
 <head>
     <title>Чат рулетка-видеочат для общения, знакомства онлайн</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
+<!--
     <meta name="description" content="Чат рулетка ! Онлайн видеочат без регистрации для знакомства и общения" />
     <meta name="keywords" content="для онлайн знакомства, как чатрулетка,общение, видео знакомства, бесплатно, без регистрации, чат, видеочат,чат рулетка-видеочат №1, знакомства" />
     <meta name="yandex-verification" content="fda46e049783b204" />
@@ -15,11 +15,48 @@ return `
     <link rel="apple-touch-icon" sizes="120x120" href="/img1/icons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/img1/icons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/img1/icons/favicon-16x16.png">
- <!--   <link rel="manifest" href="/img/icons/site.webmanifest"> -->
+ <link rel="manifest" href="/img/icons/site.webmanifest">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
-
-
+-->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- <meta name="viewport" content="width=device-width,initial-scale=1.0"> -->
+    <meta name="viewport" content="width=device-width,user-scalable=no" />
+    <link rel="icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+		<link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+		<link rel="icon" type="image/png" sizes="144x144"  href="/android-icon-144x144.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+		<meta name="theme-color" content="#ffffff">
+		
+<meta name="description" content="Чат-рулетка — самый популярный русскоязычный чат. Ежедневно чат посещает более 500 тысяч пользователей из России и стран СНГ." />
+  <meta name="keywords" content="rouletka.ru, roulet.chat, chat.roulet, roulette, chat, Chatroulette, видеочат, чатрулетка, чатрулет, chatroulette русский, чатрулетт, анонимность, видео, чат, рулетка, чат рулет, чат рулетка, чат рулетт, chat roulette, chatroulette.com, знакомства, videochatru, videochat.ru, videochat.com" />
+ 
+  <meta property="og:title" content="Чат-рулетка - анонимный видеочат (Русский аналог ChatRoulette)" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="//rouletka.ru/" />
+  <meta property="og:image" content="//rouletka.ru/og_image.png" />
+  <meta property="og:site_name" content="Чат-рулетка" />
+  <meta property="og:description" content="Чат-рулетка для русскоязычных пользователей. Случайные знакомства в видеочате. Есть веб-камера? Найди пару в чат рулетке!" />
+  
+  <meta itemprop="name" content="Чат-рулетка - анонимный видеочат (Русский аналог ChatRoulette)" />
+<meta itemprop="description" content="Чат-рулетка — самый популярный русскоязычный чат. Ежедневно чат посещает более 500 тысяч пользователей из России и стран СНГ." />
+<meta name="description" content="Чат-рулетка — самый популярный русскоязычный чат. Ежедневно чат посещает более 500 тысяч пользователей из России и стран СНГ." />
+<script type="application/ld+json"> { "@context": "https://schema.org", "@type": "Organization", "url": "https://rouletka.ru", "logo": "https://rouletka.ru/og_image.png" } </script>
+  
     <base href="/" />
     <link rel="canonical" href="https://rouletka.ru/" />
     <link rel='stylesheet' href='/css/style.css' />
@@ -27,6 +64,8 @@ return `
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.4.0/animate.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
     <script src='https://code.jquery.com/jquery-2.1.1.min.js'></script>
+    
+    <script src="/pwabuilder-sw-register.js"></script>
 </head>
 
 <body>
@@ -229,7 +268,7 @@ return `
 <iframe src="https://yoomoney.ru/quickpay/fundraise/button?billNumber=AWVMCQLpAcY.240125&" width="330" height="50" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
 </div>
 <div id="rustorebox"><a href="https://apps.rustore.ru/app/ru.rouletka.pwa"><img id="rustoreimg" src="/img/rustore.png" /></a></div> -->
-<div id="socialbox"><b>Наш Телеграм:&nbsp;&nbsp;&nbsp;</b><a href="https://t.me/rouletka3"><img id="telegimg" src="/img/telega.png" /></a></div>
+<div id="socialbox"><!-- <b>Наш Телеграм:&nbsp;&nbsp;&nbsp;</b><a href="https://t.me/rouletka3"><img id="telegimg" src="/img/telega.png" /></a> --></div>
         </section> 
     </footer>
 </body>
@@ -245,7 +284,7 @@ let parallaxInstance = new Parallax(scene);
 let start_chat_btn = document.querySelector('#start_chat_btn');
 start_chat_btn.onclick = suka;
 function suka(){
-	window.location.href="/";
+	window.location.href="/about";
 }
 </script>
 

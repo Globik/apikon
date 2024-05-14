@@ -24,7 +24,7 @@ return `
 		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 		<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
 		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-		<link rel="manifest" href="/manifest.json">
+		<!-- <link rel="manifest" href="/manifest.json"> -->
 		<meta name="msapplication-TileColor" content="#ffffff">
 		<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
 		<meta name="theme-color" content="#ffffff">
@@ -44,7 +44,7 @@ return `
 <meta name="description" content="Чат-рулетка — самый популярный русскоязычный чат. Ежедневно чат посещает более 500 тысяч пользователей из России и стран СНГ." />
 <script type="application/ld+json"> { "@context": "https://schema.org", "@type": "Organization", "url": "https://rouletka.ru", "logo": "https://rouletka.ru/og_image.png" } </script>
   
-  
+  -->
 		<link href="/css/main22.css" rel="stylesheet">
 		<link href="/css/login.css" rel="stylesheet">
 		<link href="/css/mediabox2.css" rel="stylesheet">
@@ -78,8 +78,8 @@ return `
 </script>
 <noscript><div><img src="https://mc.yandex.ru/watch/95229410" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
-
-    <script src="/pwabuilder-sw-register.js"></script>
+<!--
+    <script src="/pwabuilder-sw-register.js"></script> -->
   </head>
   <body>
     <noscript>
@@ -206,7 +206,7 @@ function isOpenModal(){
 <div id="settingspanel">
 ${n.user && n.user.brole=='admin'?'<div class="settingspanel" onclick="toAdminPanel(this);">В админку</div>':''}
 <div class="settingspanel" data-current="" id="camToggle" onclick="toggleCam(this);">Переключить камеру</div>
-<div class="settingspanel" onclick="doSharing(this);">Скриншэринг</div>
+<!-- <div class="settingspanel" onclick="doSharing(this);">Скриншэринг</div> -->
 <div class="settingspanel"><b>Вебок:</b> <span id="camsCount">0</span> | <b>Коннектов:</b> <span id="connects">0</span></div>
 <!-- <div class="settingspanel"  onclick="pushSubscribe(this);">Пуш уведомления</div> -->
 <div class="settingspanel"><a href="https://t.me/rouletka3">Наш Телеграм</a></div>
@@ -266,7 +266,7 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
         <span class="tip"><i class="fas fa-check"></i></span>
         Просто поздоровайтесь друг с другом :D
       </div>
-<div id="foot"><a href="/about"> О проекте</a></div>
+<div id="foot"><a href="/"> О проекте</a></div>
 </div>
 <!-- COMPUTER VERSION -->
 <div id="sectionChat">
@@ -295,7 +295,7 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
 <div id="giftbox2" data-state="closed"><span>&#x1f381</span></div>
 <div class="send" data-send="one" onclick="sendi(this);" value="papa" ><img src="/img/send1.svg"/></div>
 </div></section>
-</div><div id="foot2"><a href="/about"> О проекте</a></div>
+</div><div id="foot2"><a href="/"> О проекте</a></div>
     </section>
     </article>
    
