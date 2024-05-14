@@ -14,7 +14,7 @@ return `
     <link href="/css/hearts.css" rel="stylesheet">
     <script src="/js/globalik.js"></script>
     </head><body>
-    <a href="/">На главную</a>
+    <a href="/about">На главную</a>
     <nav id="adminNav"><button onclick="getUsers(this);">Пользователи</button><button onclick="getStun(this)";>Stun / turn</button><button onclick="whosOnline(this);">Кто онлайн</button>
     <button id="settings" onclick="getSettings(this);">Настройки</button><button onclick="getTest(this);">Купить</button>
     <button onclick="getTestGifts(this);">Сердечки тест</button><button onclick="getPayments(this);">Платежи</button>

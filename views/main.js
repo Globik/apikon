@@ -159,7 +159,13 @@ function isOpenModal(){
     `}
     <script>
   //  var ICESERVERS =n.stun?n.stun:null
-     var ICESERVERS ={
+  var ICESERVERS = new RTCPeerConnection({ iceServers: [
+   { urls: "stun:stun.relay.metered.ca:80", }, 
+  { urls: "turn:standard.relay.metered.ca:80", username: "34351867ccbc6431d4ac0b65", credential: "y2DxVs2Q8bg5Q6db", },
+   { urls: "turn:standard.relay.metered.ca:80?transport=tcp", username: "34351867ccbc6431d4ac0b65", credential: "y2DxVs2Q8bg5Q6db", },
+    { urls: "turn:standard.relay.metered.ca:443", username: "34351867ccbc6431d4ac0b65", credential: "y2DxVs2Q8bg5Q6db", },
+   { urls: "turns:standard.relay.metered.ca:443?transport=tcp", username: "34351867ccbc6431d4ac0b65", credential: "y2DxVs2Q8bg5Q6db", }, ], });
+     var ICESERVERS2 ={
   "iceServers": [
     {
       "urls": "stun:stun.l.google.com:19302"
