@@ -159,7 +159,24 @@ function isOpenModal(){
     `}
     <script>
   //  var ICESERVERS =n.stun?n.stun:null
-  var ICESERVERS = new RTCPeerConnection({ iceServers: [
+  
+  
+  var ICESERVERS = {/*iceTransportPolicy:"relay",*/"iceServers":[
+	{
+      "urls": "stun:stun.l.google.com:19302"
+    },
+	{
+		urls:["stun:45.89.66.167:80"]
+		},
+	{urls:[
+	"turn:45.89.66.167:5349",
+	//	"turn:45.89.66.167:433?transport=tcp",
+		//"turn:45.89.66.167:5349"
+		]
+		,username:"alik",credential:"1234"}]};
+  
+  
+  var ICESERVERS3 = new RTCPeerConnection({ iceServers: [
    { urls: "stun:stun.relay.metered.ca:80", }, 
   { urls: "turn:standard.relay.metered.ca:80", username: "34351867ccbc6431d4ac0b65", credential: "y2DxVs2Q8bg5Q6db", },
    { urls: "turn:standard.relay.metered.ca:80?transport=tcp", username: "34351867ccbc6431d4ac0b65", credential: "y2DxVs2Q8bg5Q6db", },
