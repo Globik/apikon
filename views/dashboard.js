@@ -23,6 +23,7 @@ return `
     <button onclick="post_start();">post start</button>&nbsp;&nbsp;<button onclick="post_next();">post next</button>
     </div> -->
     <div id="dynamicNav">
+    <a href="/admin/yoomoneytest">yoomoney</a>
     <div><b>Юзеров:</b> <span>${n.usercount?n.usercount:0}</span></div>
     <div><b>Пересылок:</b> <span>${n.giftcount}</span></div>
     <div></div>

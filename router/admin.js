@@ -29,6 +29,10 @@ router.get('/getPayments', checkAuth, checkRole(['admin']), async(req, res)=>{
 	}
 })
 
+router.get('/yoomoneytest', checkAuth, checkRole(['admin']), async(req, res)=>{
+	res.rendel('yoomoneytest', {});
+})
+
 module.exports = router
 
 function checkAuth(req, res, next){
@@ -41,7 +45,7 @@ function secured(req, res, next){
 	if(req.isAuthenticated()){
 		return next();
 	}
-	res.redirect('/');
+	res.redirect('/about');
 }
 function checkRole(roles){
 	return function(req, res, next){
@@ -56,6 +60,6 @@ function isAdmin(roles){
 		if(roles.includes(req.user.brole)){
 			return next();
 		}
-		return res.redirect('/');
+		return res.redirect('/about');
 	}
 }

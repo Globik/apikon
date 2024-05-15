@@ -276,58 +276,9 @@ let a = await db.query(`update sets set testshopid=(?),testshopsecret=(?)`, [ te
 app.get('/api/getTest', checkAuth, checkRole(['admin']), async(req, res)=>{
 	res.json({ content: res.compile('ytest', {})});
 })
-/*
-const api_url = "https://api.yookassa.ru/v3/payments";
-const uu = uuidv4();
 
-app.post('/api/getPayUrl', checkAuth, checkRole(['admin']), async(req, res)=>{
-	let { damount, dcount } = req.body;
-	if(!damount || !dcount){
-		return res.status(400).send({ message: "No data" });
-	}
 
-let data = {
-		"amount": {
-			"value": damount,
-			"currency": "RUB"
-		}, 
-		"confirmation":
-		 {
-			 "type": "redirect",
-			 "return_url":"https://rouletka.ru/dashboard" 
-			 },
-			"description": "Сердечек покупка в количестве "+dcount+" штук",
-			"metadata":{"alikey":"number one"}
-		};
-//let headers = { "Authorization": "Basic " + onesignal_app_key };
-let headers = {'Idempotence-Key': uu };
-try{
-let r = await axios.post(api_url, data, {auth: {username: testshopid, password: testshopsecret } , headers: headers });
-console.log("r: ", r.data);
-res.json({ message: r.data });
-}catch(e){
-console.log("err: ", e.toString());
-res.status(400).send({ message: e.toString() });
-}	
-})
-var iii = 0;
-const dummy = new Map();
-//dummy.set(4,{name:"alik"})
 
-app.post("/cb/testyookassa", async(req, res)=>{
-	let a = req.body;
-	dummy.set(iii, a);
-	console.log('body: ', a);
-	iii++;
-	res.status(200).send({ message: "OK" });
-})
-//console.log('dummy: ', dummy)
-app.post('/api/takeCb', checkAuth, checkRole(['admin']), async(req, res)=>{
-	
-	let a = (dummy.size==0?"Nothing": [...dummy]);
-	res.json({ message: a });
-})
-*/ 
 function checkAuth(req, res, next){
 	if(req.isAuthenticated()){
 		return next();
@@ -338,7 +289,7 @@ function secured(req, res, next){
 	if(req.isAuthenticated()){
 		return next();
 	}
-	res.redirect('/');
+	res.redirect('/about');
 }
 function checkRole(roles){
 	return function(req, res, next){
@@ -353,7 +304,7 @@ function isAdmin(roles){
 		if(roles.includes(req.user.brole)){
 			return next();
 		}
-		return res.redirect('/');
+		return res.redirect('/about');
 	}
 }
 
