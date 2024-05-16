@@ -17,6 +17,12 @@ function on_save_client(l, ev){
 	ev.className = "";
 	ev.target.disabled = false;
 	note({ content: l.message, type: (l.error?"error":"info"), time: 5 });
+	if(!yform.client_secret.disabled){
+		yform.client_secret.disabled = true;
+	}
+	if(!yform.client_id.disabled){
+		yform.client_id.disabled = true;
+	}
 }
 function on_error(l, ev){
 	ev.className = "";
@@ -73,9 +79,61 @@ function on_get_info(l, el){
 }
 }
 
+function getHistory(el){
+	el.className = "puls";
+	el.disabled = true;
+	vax('post', '/admin/getYoomoneyHistory', {}, on_get_history, on_getAuth_error, el, false);
+}
+function on_get_history(l, el){
+	el.className = "";
+	el.disabled = false;
+	console.log(l.message, l.list);
+	if(l.error){
+		note({ content: l.message.code, type: 'error', time: 5 });
+		return;
+	}
+	if(Array.isArray(l.list.operations)){
+		l.list.operations.forEach(function(k, i){
+			for(let d in k){
+				let suka = Array.isArray(k[d]);
+			console.log(suka);
+			if(suka){
+				out2.innerHTML+='<b>' + d + ':</b><br>';
+				k[d].forEach(function(elem, bas){
+					console.log('eli ', elem);
+					for(let basa in elem){
+						console.log(elem);
+						out2.innerHTML+= basa + ": " + elem[basa] + "<br>";
+					}
+				});}else{
+			out2.innerHTML += d + ": " + k[d] + '<br>';
+		}
+		}
+		out2.innerHTML+='<hr>'
+		}
+		);
+	/*for(let i in l.list){
+		out2.innerHTML += i + " " + l.list[i] + '<br>';
+}*/
 
+}else{
+	out2.innerHTML = "Nothing special<br>";
+}
+}
 
-
-
-
-
+function redact(el){
+	if(yform.client_secret.disabled){
+		yform.client_secret.disabled = false;
+	}
+	if(yform.client_id.disabled){
+		yform.client_id.disabled = false;
+	}
+	yform.reset.disabled = false;
+	yform.submit.disabled = false;
+}
+function doWas(el){
+	gid('clientId').textContent = "";
+	console.error(clientId.value);
+	yform.client_secret.textContent = '';
+	
+}

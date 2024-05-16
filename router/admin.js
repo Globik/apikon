@@ -97,6 +97,24 @@ router.post('/getYoomoneyinfo',  checkAuth, checkRole(['admin']), async (req, re
 		res.json({ error: true, message: err });
 	}
 })
+
+router.post('/getYoomoneyHistory', checkAuth, checkRole(['admin']), async (req, res)=>{
+	try{
+		let r = await axios.post('https://yoomoney.ru/api/operation-history', {}, 
+		{headers: {
+    'content-type': 'application/x-www-form-urlencoded' ,
+     "Authorization": "Bearer " + req.yoomoney_token 
+    }
+    }
+		);
+		console.log("DATA : ", r.data);
+		res.json({ list: r.data });
+	}catch(err){
+		console.log(err);
+		res.json({ error: true, message: err });
+	}
+})
+
 module.exports = router
 
 function checkAuth(req, res, next){
