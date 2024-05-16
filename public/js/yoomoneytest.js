@@ -56,7 +56,20 @@ function on_get_info(l, el){
 		return;
 	}
 	for(let i in l.list){
-	out.innerHTML += l.list[i] + 'br';
+		let a = Array.isArray(l.list[i]);
+		let b = (typeof l.list[i] === 'object' && l.list[i] !== null);
+		if(a){
+			l.list[i].forEach(function(el, k){
+				out.innerHTML+='<b>bank card:</b><br>' + el.type + "<br>" + el.id + "<br>" + el.pan_fragment + "<br>";
+			});
+		}else if(b){
+			out.innerHTML+='<b>' + i + ":</b><br>";
+			for(let k in l.list[i]){
+			out.innerHTML+= k + " " + l.list[i][k] + '<br>';
+		}
+		}else{
+	out.innerHTML += i + " " + l.list[i] + '<br>';
+}
 }
 }
 
