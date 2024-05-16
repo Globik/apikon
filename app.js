@@ -65,6 +65,9 @@ var testshopid;
 var testshopsecret;
 var istestheart;
 
+var yoomoney_client_id;
+var yoomoney_secret;
+
 async function getstun(){
 	let a;
 try{
@@ -80,6 +83,9 @@ try{
 			//console.log("here ",testshopid, testshopsecret);
 			istestheart = a[0].istestHeart;
 			console.log("istest heart ",  istestheart, (istestheart==1?true:false));
+			yoomoney_client_id = a[0].yoomoney_client_id;
+			yoomoney_secret = a[0].yoomoney_secret;
+			console.log("yoomoney_client_id: ", yoomoney_client_id);
 		}
 	}catch(err){
 		console.log(err);
@@ -97,6 +103,9 @@ app.use(async(req, res, next)=>{
 	req.app.locals.testshopsecret = testshopsecret;
 	//console.log('req.app.locals.stun ', req.app.locals.stun);
 	req.app.locals.istestheart = istestheart;
+	
+	req.yoomoney_client_id = yoomoney_client_id;
+	req.yoomoney_secret = yoomoney_secret;
 	
 	console.log("method ", req.method, " path ",  req.path);
 	//console.log("HERE 2 ",stun,testshopid,testshopsecret, req.app.locals.testshopid, req.app.locals.testshopsecret);
@@ -120,6 +129,14 @@ app.use(async(req, res, next)=>{
 					req.app.locals.testshopid = testshopid;
 					req.app.locals.testshopsecret = testshopsecret;
 				}
+			}else if(req.path == "/admin/saveYoomoney"){
+				if(req.body.client_id && req.body.client_secret){
+					yoomoney_client_id = req.body.client_id;
+					yoomoney_secret = req.body.client_secret;
+					req.yoomoney_client_id = yoomoney_client_id;
+					req.yoomoney_secret = yoomoney_secret;
+				}
+				
 			}else{}
 		}
 	}

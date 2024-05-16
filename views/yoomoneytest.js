@@ -11,15 +11,15 @@ const yoomoneytest = function(n){
     <script src="/js/globalik.js"></script>
     </head><body>
     <h1>Yoomoney</h1>
-    <hr>
-    <form name="myyoomoney" action="/adminyoomoney" method="post">
+    <hr>1)
+    <form name="myyoomoney" action="/admin/saveYoomoney" method="post">
     <div>
     <label><b>client_id:</b></label><br>
-    <input type="text" name="client_id" required placeholder="client_id">
+    <input type="text" name="client_id" required placeholder="client_id" value="${n.yoomoney_client_id?n.yoomoney_client_id:''}">
     </div>
     <div>
     <label><b>client secret:</b></label><br>
-    <textarea placeholder="client_secret" required name="client_secret"></textarea>
+    <textarea placeholder="client_secret" required name="client_secret" value="${n.yoomoney_secret?n.yoomoney_secret:''}">${n.yoomoney_secret?n.yoomoney_secret:''}</textarea>
     </div>
     <div>
     <input type="submit" value="save" />
