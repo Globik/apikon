@@ -34,6 +34,7 @@ const yoomoneytest = function(n){
     <hr>3) Info
     <div>
     <button onclick="getInfo(this);">get info</button>
+    <br><br><output id="out"></output>
     </div>
     <hr>
     <script src="/js/yoomoneytest.js"></script>
