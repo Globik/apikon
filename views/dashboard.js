@@ -23,11 +23,15 @@ return `
     <button onclick="post_start();">post start</button>&nbsp;&nbsp;<button onclick="post_next();">post next</button>
     </div> -->
     <div id="dynamicNav">
-    <a href="/admin/yoomoneytest">yoomoney</a>
+    
     <div><b>Юзеров:</b> <span>${n.usercount?n.usercount:0}</span></div>
+ 
+
     <div><b>Пересылок:</b> <span>${n.giftcount}</span></div>
     <div></div>
-    <div><b>Веб-камер:</b> <span id="camsCount">0</span></div><div><b>Коннектов:</b> <span id="connects">0</span></div></div><hr>
+    <div><b>Веб-камер:</b> <span id="camsCount">0</span></div><div><b>Коннектов:</b> <span id="connects">0</span></div></div>
+    <hr> <a href="/admin/yoomoneytest">yoomoney</a>
+    <hr>
     <section id="adminContainer">
     <div id="someSpinner" class="hide"><div class="loader"></div></div>
     <section id="contentBox"></section>

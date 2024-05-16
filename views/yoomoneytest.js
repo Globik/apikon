@@ -26,6 +26,16 @@ const yoomoneytest = function(n){
     </div>
     </form>
     <hr>
+    <hr>2) Авторизация
+    <div>
+    <button onclick="goAuth(this);">go to yoomoney</button>
+    </div>
+    <hr>
+    <hr>3) Info
+    <div>
+    <button onclick="getInfo(this);">get info</button>
+    </div>
+    <hr>
     <script src="/js/yoomoneytest.js"></script>
     </body></html>
     `

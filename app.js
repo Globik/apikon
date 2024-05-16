@@ -1,5 +1,6 @@
 const https=require( "https");
 var fs =require( "fs");
+const url = require('url');
 const express = require('express');
 const { oni, oni1 } = require('./libs/web_push.js');
 var WebSocket = require('ws');
@@ -67,7 +68,7 @@ var istestheart;
 
 var yoomoney_client_id;
 var yoomoney_secret;
-
+var yoomoney_token;
 async function getstun(){
 	let a;
 try{
@@ -86,6 +87,8 @@ try{
 			yoomoney_client_id = a[0].yoomoney_client_id;
 			yoomoney_secret = a[0].yoomoney_secret;
 			console.log("yoomoney_client_id: ", yoomoney_client_id);
+			yoomoney_token = a[0].yoomoney_token;
+			console.log('token : ', yoomoney_token);
 		}
 	}catch(err){
 		console.log(err);
@@ -106,7 +109,7 @@ app.use(async(req, res, next)=>{
 	
 	req.yoomoney_client_id = yoomoney_client_id;
 	req.yoomoney_secret = yoomoney_secret;
-	
+	req.yoomoney_token = yoomoney_token;
 	console.log("method ", req.method, " path ",  req.path);
 	//console.log("HERE 2 ",stun,testshopid,testshopsecret, req.app.locals.testshopid, req.app.locals.testshopsecret);
 	//console.log(testshopsecret);
@@ -189,7 +192,42 @@ app.post('/logout', (req, res)=>{
 	});
 	res.json({message: "ok", status:200 });
 })
-
+app.get('/cb1', async(req, res)=>{
+	let db = req.db;
+	if(req.query&&req.query.code){
+		try{
+			let d = {
+				code: req.query.code,
+				client_id: req.yoomoney_client_id,
+				grant_type: 'authorization_code',
+				redirect_uri:'https://rouletka.ru/cb1',
+				client_secret: req.yoomoney_secret
+			}
+			let r = await axios.post('https://yoomoney.ru/oauth/token', d,{headers: {
+    'content-type': 'application/x-www-form-urlencoded' 
+    }
+    });
+    console.log("data : ", r.data);
+    if(r.data.access_token){
+		let a = r.data.access_token;
+		console.log("YES access_token: ", a);
+		yoomoney_token = a;
+		req.yoomoney_token = a;
+		await db.query('update sets set yoomoney_token=(?)', [ a ] );
+		res.rendel('atoken', { message: "Получили токен " + a });
+	}else{
+		console.log("no access_token");
+		res.rendel('atoken', { message: "Неудача:  " + r.data.error  });
+	}
+		}catch(err){
+			console.log(err);
+			res.rendel('atoken', { message: err });
+		}
+		
+	}else{
+	res.rendel('atoken', { message: req.query.error});
+}
+})
 app.post('/api/register', (req, res, next)=>{
 	passport.authenticate("local-signup", (err, user, info)=>{
 		//console.log("err, user, info: ", err, user, info);

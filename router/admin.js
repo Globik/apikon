@@ -50,6 +50,53 @@ router.post("/saveYoomoney", checkAuth, checkRole('admin'), async(req, res)=>{
 	
 })
 
+router.post('/getYoomoney', checkAuth, checkRole(['admin']), async (req, res)=>{
+	let client_id = req.yoomoney_client_id;
+	if(!client_id){
+		return res.status(200).send({ error: true, message: "No client_id" });
+	}
+	let d = {
+		client_id: client_id,
+		response_type: "code",
+		redirect_uri: 'https://rouletka.ru/cb1',
+		scope: 'account-info operation-history operation-details incoming-transfers payment-p2p payment-shop money-source("wallet","card")'
+	}
+	try{
+		let r=await axios.post('https://yoomoney.ru/oauth/authorize', d,
+  {headers: {
+    'content-type': 'application/x-www-form-urlencoded' 
+    }
+    }
+    );
+ console.log("***");
+ console.log(r.status, " ", r.code);
+ console.log(r.request.res.responseUrl);
+  //let a = r.data;
+  if(r.status == 200){
+	 res.json({ message: r.request.res.responseUrl });
+  }
+  //res.json({ message: "OK, redirect to yoomoney"});
+}catch(err){
+	console.log(err);
+	res.json({ error: true, message: err.toString() });
+}
+})
+router.post('/getYoomoneyinfo',  checkAuth, checkRole(['admin']), async (req, res)=>{
+	try{
+		let r = await axios.post('https://yoomoney.ru/api/account-info', {}, 
+		{headers: {
+    'content-type': 'application/x-www-form-urlencoded' ,
+     "Authorization": "Bearer " + req.yoomoney_token 
+    }
+    }
+		);
+		console.log("DATA : ", r.data);
+		res.json({ list: r.data });
+	}catch(err){
+		console.log(err);
+		res.json({ error: true, message: err });
+	}
+})
 module.exports = router
 
 function checkAuth(req, res, next){
