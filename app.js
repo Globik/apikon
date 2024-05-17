@@ -90,6 +90,9 @@ try{
 			console.log("yoomoney_client_id: ", yoomoney_client_id);
 			yoomoney_token = a[0].yoomoney_token;
 			console.log('token : ', yoomoney_token);
+			var quant_n=5;
+			var userid='5';
+			//await pool.query('update users set theart=theart+(?),heart=1 where id=(?)', [ quant_n, userid ]);
 		}
 	}catch(err){
 		console.log(err);
@@ -242,6 +245,43 @@ notification_type: 'p2p-incoming',
   operation_id: 'test-notification',
   currency: '643',
   label: ''
+  * 
+  * 
+  * 
+  * 
+  * ============\
+  *  notification_type: 'card-incoming',
+  zip: '',
+  bill_id: '',
+  amount: '1.94',
+  firstname: '',
+  codepro: 'false',
+  withdraw_amount: '2.00',
+  city: '',
+  unaccepted: 'false',
+  label: 'id=3076&c=5',
+  building: '',
+  lastname: '',
+  datetime: '2024-05-17T11:42:54Z',
+  suite: '',
+  sender: '',
+  phone: '',
+  sha1_hash: '26a45637e6dc053291d20744be20a56922999972',
+  street: '',
+  flat: '',
+  fathersname: '',
+  operation_label: '2dd95647-0011-5000-9000-1ce77551b7bd',
+  operation_id: '769261374481140080',
+  currency: '643',
+  email: ''
+}
+li:  26a45637e6dc053291d20744be20a56922999972
+sha: 26a45637e6dc053291d20744be20a56922999972
+HASH IS GUET
+SqlError: (conn=301, no: 1064, SQLState: 42000) You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '`' at line 1
+sql: update users set theart=theart+(?),heart=1 where id=(?)` - parameters:[5,'3076']
+    at module.exports.createError (/root/apikon/node_modules/mariadb/lib/misc/errors.js:64:10)
+
 */
 
 
@@ -282,7 +322,7 @@ let quant = paramStr.get('c');
 let quant_n = Number(quant);
 if(unaccepted == 'false'){
 try{
-	await db.query('update users set theart=theart+(?),heart=1 where id=(?)`', [ quant_n, userid ]);
+	await db.query('update users set theart=theart+(?),heart=1 where id=(?)', [ quant_n, userid ]);
 }catch(err){
 	console.log(err);
 	return res.status(403).send({ message: "not ok" });
