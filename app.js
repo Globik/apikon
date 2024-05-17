@@ -272,7 +272,7 @@ let str = `${notification_type}&${operation_id}&${amount}&${currency}&${datetime
 	iii2++;
 	let db = req.db;
 let sh = crypto.createHash('sha1')
-let li = sh.update(s).digest('hex')
+let li = sh.update(str).digest('hex')
 console.log('li: ',li)
 console.log('sha:', sha1_hash)
 if(li == sha1_hash){
