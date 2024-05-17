@@ -44,12 +44,17 @@ const yoomoneytest = function(n){
     <button onclick="getHistory(this);">get history</button>
     <br><br><output id="out2"></output>
     </div>
-    <hr>5) Платный вход
+    <hr>5) Проверить уведомления, есть ли
+    <div><button onclick="takeCb2(this);">check webhook</button></div>
+    <div><ooutput id="out3"></output></div>
+    
+    <hr>
+    <hr>6) Платный вход
     <form class="ymform"  method="POST" action="https://yoomoney.ru/quickpay/confirm">
     <div><label for="receiver"><b>Получатель:</b></label><br><input type="text" id="receiver" placeholder="олучатель yoomoney" name="receiver" value="4100118676103827" required/> </div>
-    <input type="hidden" name="label" value="${n.user?n.user.id:'0'}"/>
+    <input type="hidden" name="label" value="id=${n.user?n.user.id:'0'}&c=5"/>
     <input type="hidden" name="quickpay-form" value="button" />
-    <input type="hidden" name="formcomment" value="Покупка сердечек 10 штук" />
+    <input type="hidden" name="formcomment" value="Покупка сердечек 5 штук" />
     <input type="hidden" name="targets" value="Купить 10 сердечек" />
     <input type="hidden" name="successURL" value="https://rouletka.ru/about" />
     <h3>Платить будете:</h3>

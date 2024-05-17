@@ -1,6 +1,7 @@
 const https=require( "https");
 var fs =require( "fs");
 const url = require('url');
+
 const express = require('express');
 const { oni, oni1 } = require('./libs/web_push.js');
 var WebSocket = require('ws');
@@ -228,6 +229,60 @@ app.get('/cb1', async(req, res)=>{
 	res.rendel('atoken', { message: req.query.error});
 }
 })
+var iii2 = 0;
+const dummy2 = new Map();
+app.post('/testyoomoney1', async(req, res)=>{
+	console.log("*** CALLBACK! *** ", req.body);
+let { notification_type,
+		operation_id,
+		amount,
+		currency,
+		datetime,
+		sender,
+		coderpro,
+		sha1_hash, label,
+		widthdraw_amount,
+		unaccepted
+		 } = req.body;
+		const notification_secret = 'xY6P7xpSQbKBYFT0jmXtym+t';
+let str = `${notification_type}&${operation_id}&${amount}&${currency}&${datetime}&${sender}&${codepro}&${notification_secret}&${label}`
+	const paramStr = new URLSearchParams(label);
+	
+	dummy2.set(iii2, req.body);
+	
+	iii2++;
+	let db = req.db;
+let sh = crypto.createHash('sha1')
+let li = sh.update(s).digest('hex')
+console.log('li: ',li)
+console.log('sha:', sha1_hash)
+if(li == sha1_hash){
+console.log('HASH IS GUET')
+let userid = paramStr.get('id');
+let quant = paramStr.get('c');
+let quant_n = Number(quant);
+if(unaccepted == 'false'){
+try{
+	await db.query('update users set theart=theart+(?),heart=1 where id=(?)`', [ quant_n, userid ]);
+}catch(err){
+	console.log(err);
+	return res.status(403).send({ message: "not ok" });
+}
+}else{
+	return res.status(403).send({ message: "not ok" });
+}
+}else{
+	console.log("HASH IS NOT GUET");
+	return res.status(403).send({ message: "not ok" });
+}
+	res.status(200).send({ message: "OK" });
+})
+
+app.post('/api/takeCb2', async(req, res)=>{
+	let a = (dummy2.size==0?"Nothing": [...dummy2]);
+	res.json({ message: a });
+})
+
 app.post('/api/register', (req, res, next)=>{
 	passport.authenticate("local-signup", (err, user, info)=>{
 		//console.log("err, user, info: ", err, user, info);

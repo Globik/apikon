@@ -137,3 +137,11 @@ function doWas(el){
 	yform.client_secret.textContent = '';
 	
 }
+function takeCb2(el){
+	el.className="puls";
+	vax('post','/api/takeCb2', {}, on_takecb2, on_getAuth_error, el, false);
+}
+function on_takecb2(l, el){
+	el.className = "";
+	out3.innerHTML=JSON.stringify(l.message);
+}
