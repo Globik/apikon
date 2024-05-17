@@ -229,6 +229,25 @@ app.get('/cb1', async(req, res)=>{
 	res.rendel('atoken', { message: req.query.error});
 }
 })
+/*
+notification_type: 'p2p-incoming',
+  bill_id: '',
+  amount: '174.23',
+  datetime: '2024-05-17T10:36:10Z',
+  codepro: 'false',
+  sender: '41001000040',
+  sha1_hash: '03cfe527cab959f587a77085a851c3ac8b11dd19',
+  test_notification: 'true',
+  operation_label: '',
+  operation_id: 'test-notification',
+  currency: '643',
+  label: ''
+*/
+
+
+
+
+
 var iii2 = 0;
 const dummy2 = new Map();
 app.post('/testyoomoney1', async(req, res)=>{
@@ -239,7 +258,7 @@ let { notification_type,
 		currency,
 		datetime,
 		sender,
-		coderpro,
+		codepro,
 		sha1_hash, label,
 		widthdraw_amount,
 		unaccepted
