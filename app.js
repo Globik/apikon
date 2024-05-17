@@ -90,8 +90,8 @@ try{
 			console.log("yoomoney_client_id: ", yoomoney_client_id);
 			yoomoney_token = a[0].yoomoney_token;
 			console.log('token : ', yoomoney_token);
-			var quant_n=5;
-			var userid='5';
+			//var quant_n=5;
+			//var userid='5';
 			//await pool.query('update users set theart=theart+(?),heart=1 where id=(?)', [ quant_n, userid ]);
 		}
 	}catch(err){
@@ -284,10 +284,18 @@ sql: update users set theart=theart+(?),heart=1 where id=(?)` - parameters:[5,'3
 
 */
 
-
-
-
-
+//${notification_type}&${operation_id}&${amount}&${currency}&${datetime}&${sender}&${codepro}&${notification_secret}&${label}`
+const s2='card-incoming&769261374481140080&1.94&643&2024-05-17T11:42:54Z&&false&xY6P7xpSQbKBYFT0jmXtym+t&id=3076&c=5'
+let sha1_hash = '26a45637e6dc053291d20744be20a56922999972';
+let sh = crypto.createHash('sha1')
+let li = sh.update(s2).digest('hex')
+console.log('li: ',li)
+console.log('sha:', sha1_hash)
+if(li==sha1_hash){
+	console.log("OK");
+}else{
+	console.log('not ok');
+}
 var iii2 = 0;
 const dummy2 = new Map();
 app.post('/testyoomoney1', async(req, res)=>{
@@ -325,14 +333,14 @@ try{
 	await db.query('update users set theart=theart+(?),heart=1 where id=(?)', [ quant_n, userid ]);
 }catch(err){
 	console.log(err);
-	return res.status(403).send({ message: "not ok" });
+	return res.status(200).send({ message: "not ok" });
 }
 }else{
-	return res.status(403).send({ message: "not ok" });
+	return res.status(200).send({ message: "not ok" });
 }
 }else{
 	console.log("HASH IS NOT GUET");
-	return res.status(403).send({ message: "not ok" });
+	return res.status(200).send({ message: "not ok" });
 }
 	res.status(200).send({ message: "OK" });
 })
