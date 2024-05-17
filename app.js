@@ -688,7 +688,8 @@ async function sendToPeer (socket, msg) {
 		 try{
 			 let a = (msg.istestheart?'theart':'heart');
 			 await pool.query(`update users set ${a}=${a}-(?) where id=(?)`, [ msg.quant, msg.from_id ]);
-			 await pool.query(`update users set ${a}=${a}+(?) where id=(?)`, [ msg.quant, msg.to_id ]);
+			 await pool.query(`update users set ${a}=${a}+(?) where id=(?)`, [ msg.quant,/* msg.to_id */ peerSocket.userId ] );
+// rId, nick, userId , nick  3076   suka1   2276   alik8
 
 await pool.query(`insert into processTest(from_id,from_nick,wieviel) values((?),(?),(?)) ON DUPLICATE KEY UPDATE wieviel=wieviel+(?)`, [ msg.from_id, msg.from_name, msg.quant, msg.quant ]);
 			// peerSocket.send(JSON.stringify(msg))
