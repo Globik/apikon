@@ -693,6 +693,7 @@ async function sendToPeer (socket, msg) {
 await pool.query(`insert into processTest(from_id,from_nick,wieviel) values((?),(?),(?)) ON DUPLICATE KEY UPDATE wieviel=wieviel+(?)`, [ msg.from_id, msg.from_name, msg.quant, msg.quant ]);
 			// peerSocket.send(JSON.stringify(msg))
 		 }catch(err){
+			 console.log("SEND HEARTS ERROR ", err);
 			 wsend(socket, { type: " error", err: err });
 		 }
 		 
