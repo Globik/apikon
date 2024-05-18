@@ -11,7 +11,7 @@ const yoomoneytest = function(n){
     <script src="/js/globalik.js"></script>
     </head><body>
     <h1>Yoomoney</h1>
-    <hr>1)
+    <hr>1) <a href="https://yoomoney.ru/settings/oauth-services">https://yoomoney.ru/settings/oauth-services</a>
     <form name="myyoomoney" class="myyoomoney" action="/admin/saveYoomoney" method="post">
     <div>
     <label><b>client_id:</b></label><br>
@@ -24,7 +24,7 @@ const yoomoneytest = function(n){
     <div>
     <input class="sub" type="submit" disabled name="submit" value="save" />&nbsp;&nbsp;&nbsp;<input class="sub" name="reset" type="reset" disabled onclick="doWas(this);" value="Сбросить" />
     </div>
-    
+    <hr><a href="https://yoomoney.ru/transfer/myservices/http-notification?lang=ru">https://yoomoney.ru/transfer/myservices/http-notification?lang=ru</a><hr>
     </form>
     <button onclick="redact(this);">Редактировать</button>
     <hr>
@@ -65,6 +65,19 @@ const yoomoneytest = function(n){
     </form>
     <hr>
     
+    <hr>7) Получить юзеру рубль на свой счет
+    <p>То есть, пусть одно сердечко, допустим, 10 руб стоит. Мы продаем за 10 руб.
+    Юзер, который накопит 500 сердечек как минимум захочет полуучить за них бабки. 
+    Мы меняем сердечки на бабки. 10 процентов юзеру, 90% себе. То есть
+    500 сердечек по себестоимости = 5 000 руб. Отдаем деньги юзеру 500 руб</p>
+    <div>
+    <form name="mypayoutform" action="/admin/setPayout" method="post">
+    <input type="hidden" name="label" value="${n.user?n.user.id:'0'}"/>
+    <div><label for="payoutamountid">Хочу в руб:</label>&nbsp;&nbsp;<input type="number" id="payoutamountid" name="payoutamount" required min="0.00" max="100.00" value="2.00"/></div>
+    <div><label for="payoutaccountid">Счет в юмани:</label>&nbsp;&nbsp;<input type="number" id="payoutaccountid" name="payoutaccount" required  value="410016439442251"/></div>
+    <div><input type="submit" value="Получить" /></div>
+    </form>
+    </div>
     <hr>
     <script src="/js/yoomoneytest.js"></script>
     </body></html>

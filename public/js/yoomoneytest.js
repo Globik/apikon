@@ -145,3 +145,25 @@ function on_takecb2(l, el){
 	el.className = "";
 	out3.innerHTML=JSON.stringify(l.message);
 }
+const mypayout = document.forms.mypayoutform;
+mypayout.addEventListener('submit', onpayoutsubmit, false);
+function onpayoutsubmit(ev){
+	ev.preventDefault();
+	let d = {};
+	d.account = ev.target.payoutaccount.value;
+	d.amount = ev.target.payoutamount.value;
+	d.label = ev.target.label.value;
+	vax(ev.target.method, ev.target.action, d, on_payout, on_getAuth_error, ev.target, false);
+	ev.target.className = "puls";
+	ev.target.disabled = true;
+}
+
+function on_payout(l, el){
+	el.className = "";
+	el.disabled = false;
+	if(l.error){
+		note({ content: l.message, type: "error", time: 5 });
+		return;
+	}
+	note({ content: l.message, type: "info", time: 5 });
+}

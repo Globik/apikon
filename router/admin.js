@@ -114,6 +114,123 @@ router.post('/getYoomoneyHistory', checkAuth, checkRole(['admin']), async (req, 
 		res.json({ error: true, message: err });
 	}
 })
+/*
+data:  {
+  error: 'illegal_params',
+  error_description: 'Unknown reciever',
+  status: 'refused'
+}
+* 
+* data:  {
+  status: 'success',
+  request_id: '2dda8ab6-0011-5000-8000-150576dd5dc5',
+  contract_amount: 2,
+  balance: 20.4,
+  money_source: {
+    wallet: { allowed: true },
+    card: {
+      id: 'bindId:5550990689',
+      allowed: 'true',
+      csc_required: 'true',
+      pan_fragment: '220220******4638',
+      type: 'Mir'
+    },
+    cards: { allowed: true, csc_required: true, items: [Array] }
+  },
+  fees: { service: 0.02, counterparty: 0 },
+  recipient_account_status: 'identified',
+  recipient_identified: true,
+  recipient_account_type: 'personal',
+  recipient_masked_account: '41001******2251',
+  multiple_recipients_found: false
+}
+
+data:  {
+  status: 'success',
+  request_id: '2dda8dc2-0011-5000-9000-1462ec118399',
+  contract_amount: 2,
+  balance: 20.4,
+  money_source: {
+    wallet: { allowed: true },
+    card: {
+      id: 'bindId:5550990689',
+      allowed: 'true',
+      csc_required: 'true',
+      pan_fragment: '220220******4638',
+      type: 'Mir'
+    },
+    cards: { allowed: true, csc_required: true, items: [Array] }
+  },
+  fees: { service: 0.02, counterparty: 0 },
+  recipient_account_status: 'identified',
+  recipient_identified: true,
+  recipient_account_type: 'personal',
+  recipient_masked_account: '41001******2251',
+  multiple_recipients_found: false
+}
+data2:  {
+  status: 'success',
+  balance: 18.4,
+  payer: '4100118676103827',
+  payee: '410016439442251',
+  payee_uid: 613553077,
+  payment_id: '769341061919693124',
+  credit_amount: 1.98
+}
+
+*/ 
+
+router.post("/setPayout", checkAuth, checkRole(['admin']), async (req, res)=>{
+	let { account, amount, label } =req.body;
+	if(!account || !amount || !label){
+		return res.json({ error: true, message: "no data" });
+	}
+	try{
+		let data = {
+			pattern_id: 'p2p',
+			to: account,
+			amount: amount,
+			comment: "Выплата рубля",
+			message: 'Получение рубля',
+			label: label
+		}
+		let d = await axios.post('https://yoomoney.ru/api/request-payment', data, 
+		{ headers: {
+    'content-type': 'application/x-www-form-urlencoded' ,
+     "Authorization": "Bearer " + req.yoomoney_token 
+    }
+    })
+    console.log('data: ', d.data);
+    if(d.data.error){
+		return res.json({ error: true, message: d.data.error_description, status: d.data.status });
+	}
+	if(d.data.status == "success"){
+		let request_id = /*'2dda8ab6-0011-5000-8000-150576dd5dc5';//*/d.data.request_id
+		
+		try{
+			let data2 = {
+				request_id: request_id
+			}
+			let r = await axios.post('https://yoomoney.ru/api/process-payment', data2, 
+		{ headers: {
+    'content-type': 'application/x-www-form-urlencoded' ,
+     "Authorization": "Bearer " + req.yoomoney_token 
+    }
+    })
+    console.log('data2: ', r.data);
+    return res.json({ message: 'ok2' });
+		}catch(err){
+			console.log(err);
+			return res.json({ error: true, message: err });
+		}
+	}
+	res.json({ message: 'ok' });
+	}catch(err){
+		console.log(err);
+		return res.json({ error: true, message: err });
+	}
+	//res.json({ message: 'ok' });
+})
 
 module.exports = router
 
