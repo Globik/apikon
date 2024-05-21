@@ -1664,6 +1664,7 @@ function on_payout(l, el){
 	el.className = "";
 	el.disabled = false;
 	if(l.error){
+		alert(l.message);
 		note({ content: l.message, type: "error", time: 5 });
 		return;
 	}
