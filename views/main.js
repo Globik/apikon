@@ -161,7 +161,7 @@ function isOpenModal(){
   //  var ICESERVERS =n.stun?n.stun:null
   
   
-  var ICESERVERS = {/*iceTransportPolicy:"relay",*/"iceServers":[
+  var ICESERVERS66 = {/*iceTransportPolicy:"relay",*/"iceServers":[
 	{
       "urls": "stun:stun.l.google.com:19302"
     },
@@ -175,7 +175,19 @@ function isOpenModal(){
 		]
 		,username:"alik",credential:"1234"}]};
   
-  
+  var ICESERVERS = {/*iceTransportPolicy:"relay",*/"iceServers":[
+	{
+      "urls": "stun:stun.l.google.com:19302"
+    },
+	{
+		urls:["stun:45.12.18.172:3478"]
+		},
+	{urls:[
+	"turn:45.12.18.172:3479",
+	//	"turn:45.89.66.167:433?transport=tcp",
+		//"turn:45.89.66.167:5349"
+		]
+		,username:"alik",credential:"1234"}]};
   var ICESERVERS3 = new RTCPeerConnection({ iceServers: [
    { urls: "stun:stun.relay.metered.ca:80", }, 
   { urls: "turn:standard.relay.metered.ca:80", username: "34351867ccbc6431d4ac0b65", credential: "y2DxVs2Q8bg5Q6db", },
