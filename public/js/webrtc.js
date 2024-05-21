@@ -444,7 +444,14 @@ function get_socket() {
 		  return;
 	  }
 	//  alert(ifEnter());
-	if(ifEnter())window.location.href='#purchaseHREF';
+	if(ifEnter()){
+		window.location.href='#purchaseHREF';
+		 const faka = document.querySelector('.overlay:target');
+	 if(faka){
+	faka.onclick=function(e){
+		e.preventDefault();
+	}
+}}
  if(!sock) sock = new  WebSocket(new_uri + "//" + loc3 + "/gesamt");
 
   sock.onopen = function () {
