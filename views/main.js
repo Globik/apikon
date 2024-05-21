@@ -233,7 +233,7 @@ ${n.user && n.user.brole=='admin'?'<div class="settingspanel" onclick="toAdminPa
 <!-- <div class="settingspanel"  onclick="pushSubscribe(this);">Пуш уведомления</div> -->
 <div class="settingspanel">
 <div class="some doh">Ваш доход&nbsp;&nbsp;<span id="dohod">${n.user? Number.parseFloat(n.user.theart*0.10).toFixed(2):0}</span>&nbsp;&nbsp;рублей</div>
-<div class="some"><a href="#vivesti">Получить</a></div>
+<div class="some" onclick="getPayout(this);"><a href="#vivest">Получить</a></div>
 </div>
 <div class="settingspanel"><a href="https://t.me/rouletka3">Наш Телеграм</a></div>
 <!-- <div class="settingspanel"  id="donatis">Помочь проекту<br><iframe src="https://yoomoney.ru/quickpay/fundraise/button?billNumber=AWVMCQLpAcY.240125&" width="330" height="50" frameborder="0" allowtransparency="true" scrolling="no"></iframe></div>-->
@@ -388,10 +388,19 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
 	
     </output>
     
+    <a href="#."  class="overlay" id="vivest"></a>
+    <output id="payoutoutput" class="popi">
+    <form name="mypayoutform" action="/admin/setPayout" method="post">
+    
+    <input type="hidden" name="label" value="${n.user?n.user.id:'0'}"/>
+    <div><input type="hidden" id="payoutamountid" name="payoutamount"  value="${n.user? Number.parseFloat(n.user.theart*0.10).toFixed(2):0}"/></div>
+    <div class="pfo"><label for="payoutaccountid">Счет в <a  id="mpa" href="https://yoomoney.ru">yoomoney</a>:</label>&nbsp;&nbsp;<input type="number" id="payoutaccountid" name="payoutaccount" required placeholder="410016439442251"  value=""/></div>
+    <div class="pfo"><input id="payoutsub" type="submit" value="Получить" /></div>
+    </form>
+    </output>
     
     
-    
-    
+    <!-- 410016439442251 -->
     
     
     

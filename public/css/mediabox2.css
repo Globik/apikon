@@ -35,6 +35,32 @@ html,body{
 		line-height:1.5;
 		padding:5px;
 	}
+	label[for=payoutaccountid]{
+		color: white;
+		font-weight:bold;
+	}
+	#payoutsub{
+		color:black;
+		border:1px solid lightgreen;
+		eight:50px;
+		pdding:30px;
+		font-weight:bold;
+		font-size:22px;
+		line-height:1.8;
+	}
+	 div.pfo{
+		margin-top:20px;
+		margin-bottom:20px;
+	}
+	#mpa{
+		text-decoration: underline;
+	}
+	@media screen and (max-width: 452px) and (orientation: portrait){
+		#payoutoutput{
+			width:98%;
+			background:#327332;
+		}
+	}
 	#mediabox{
 		width:100%;
 		height:100%;

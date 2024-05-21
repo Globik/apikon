@@ -180,11 +180,12 @@ data2:  {
 
 */ 
 
-router.post("/setPayout", checkAuth, checkRole(['admin']), async (req, res)=>{
+router.post("/setPayout", checkAuth, async (req, res)=>{
 	let { account, amount, label } =req.body;
 	if(!account || !amount || !label){
 		return res.json({ error: true, message: "no data" });
 	}
+	let db = req.db;
 	try{
 		let data = {
 			pattern_id: 'p2p',
@@ -205,7 +206,7 @@ router.post("/setPayout", checkAuth, checkRole(['admin']), async (req, res)=>{
 		return res.json({ error: true, message: d.data.error_description, status: d.data.status });
 	}
 	if(d.data.status == "success"){
-		let request_id = /*'2dda8ab6-0011-5000-8000-150576dd5dc5';//*/d.data.request_id
+		let request_id = d.data.request_id
 		
 		try{
 			let data2 = {
@@ -218,6 +219,13 @@ router.post("/setPayout", checkAuth, checkRole(['admin']), async (req, res)=>{
     }
     })
     console.log('data2: ', r.data);
+    if(r.data.status == "success"){
+		try{
+			await db.query('update users set theart=0 where id=(?)', [ label ]);
+		}catch(err){
+			console.log(err);
+		}
+	}
     return res.json({ message: 'ok2' });
 		}catch(err){
 			console.log(err);

@@ -1528,6 +1528,8 @@ function openGiftBox2(el){
 		}
 	}
 	const dohod=gid('dohod');
+	const payoutamountid = gid("payoutamountid");
+	
 function onHeartClick(ev){
 	//alert(1);
 	
@@ -1548,7 +1550,9 @@ function onHeartClick(ev){
 		 quant = n - 1;
 		 g = "heart";
 		heartcount.textContent = quant;	
-		dohod.textContent =  Number.parseFloat(quant*0.10).toFixed(2);
+		let cc = Number.parseFloat(quant*0.10).toFixed(2);
+		dohod.textContent =  cc;
+		 payoutamountid.value = cc;
 		}
 	}
 	processHeart({ g: g, quant: 1 }, ev);
@@ -1574,13 +1578,18 @@ function handleGift(msg){
 	let n1 = Number(msg.quant);
 	let a1 = Number(heartcountels[1].textContent);
 	let b = heartcountels[1].textContent = n1 + a1;
-	dohod.textContent =  Number.parseFloat(b*0.10).toFixed(2);
+	let cd = Number.parseFloat(b*0.10).toFixed(2);
+	dohod.textContent =  cd;
+	payoutamountid.value = cd;
 	
 }
 
 
 	let orderform = document.forms.ordertodo;
+	const mypayoutform = document.forms.mypayoutform;
+	
 	orderform.addEventListener('submit', pay, false);
+	mypayoutform.addEventListener('submit', onpayoutsubmit, false);
 
 //const api_url = "https://api.yookassa.ru/v3/payments";
 var sukasuka="10";
@@ -1629,4 +1638,40 @@ function on_get_payurl(l, el){
 function on_payurl_error(l, el){
 	el.className = "";
 	note({ content: l.message, type: "error", time: 5 });
+}
+ function getPayout(el){
+	panelOpen();
+ }
+
+function onpayoutsubmit(ev){
+	ev.preventDefault();
+	let d = {};
+	d.account = ev.target.payoutaccount.value;
+	d.amount = ev.target.payoutamount.value;
+	if(Number(d.amount) == 0){
+		note({ content: "Нечего", type: "warn", time: 5 });
+		return;
+	}
+	//alert(d.amount);
+	
+	d.label = ev.target.label.value;
+	vax(ev.target.method, ev.target.action, d, on_payout, on_get_payout_error, ev.target, false);
+	ev.target.className = "puls";
+	ev.target.disabled = true;
+}
+
+function on_payout(l, el){
+	el.className = "";
+	el.disabled = false;
+	if(l.error){
+		note({ content: l.message, type: "error", time: 5 });
+		return;
+	}
+	note({ content: l.message, type: "info", time: 5 });
+	window.reload();
+}
+function on_get_payout_error(l, ev){
+	ev.disabled = false;
+	ev.className = "";
+	note({ content: l, type: "error", time: 5 });
 }
