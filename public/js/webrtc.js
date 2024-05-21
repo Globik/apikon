@@ -424,7 +424,7 @@ const channel = new BroadcastChannel('message');
 
 var isEnter = gid('isEnter');
 function ifEnter(){
-	if(isEnter == 'true'){
+	if(isEnter.value === "true"){
 		return true;
 	}else{
 		return false;
@@ -443,6 +443,7 @@ function get_socket() {
 		  note({content: "Залогиньтесь!", type: "warn", time: 5 });
 		  return;
 	  }
+	//  alert(ifEnter());
 	if(ifEnter())window.location.href='#purchaseHREF';
  if(!sock) sock = new  WebSocket(new_uri + "//" + loc3 + "/gesamt");
 
