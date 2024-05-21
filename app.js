@@ -727,7 +727,7 @@ const interval = setInterval(function ping() {
    // console.log("ping");
     ws.ping(noop);
   });
-}, 1000 * 60);
+}, 1000 * 6);
 
 function heartbeat() {
 	//console.log("pong here", this.isAlive);

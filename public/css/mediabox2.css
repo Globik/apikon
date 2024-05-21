@@ -18,6 +18,23 @@ html,body{
 		font-size:22px;
 		pading:10px;
 	}
+	.settingspanel.some{
+		margin-top:10px;
+		margin-bottom:10px;
+	}
+	.some.doh{
+		color: brown;
+		margin-bottom:10px;
+	}
+	.some.doh span{
+		color:red;
+	}
+	.some a{
+		color:green;
+		border:1px solid green;
+		line-height:1.5;
+		padding:5px;
+	}
 	#mediabox{
 		width:100%;
 		height:100%;

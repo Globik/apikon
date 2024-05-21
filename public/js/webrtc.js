@@ -1527,6 +1527,7 @@ function openGiftBox2(el){
 			giftsContainer2.classList.add("hidden");
 		}
 	}
+	const dohod=gid('dohod');
 function onHeartClick(ev){
 	//alert(1);
 	
@@ -1547,6 +1548,7 @@ function onHeartClick(ev){
 		 quant = n - 1;
 		 g = "heart";
 		heartcount.textContent = quant;	
+		dohod.textContent =  Number.parseFloat(quant*0.10).toFixed(2);
 		}
 	}
 	processHeart({ g: g, quant: 1 }, ev);
@@ -1562,6 +1564,7 @@ function processHeart(n, ev){
 			
 			insertMessage({ type: l, msg: str });
 		}
+		
 function handleGift(msg){
 	console.log(msg);
 	handleMessage(`Подарили в подарок сердечко &#x1f496`, true);
@@ -1570,7 +1573,8 @@ function handleGift(msg){
 	heartcountels[0].textContent = n + a;
 	let n1 = Number(msg.quant);
 	let a1 = Number(heartcountels[1].textContent);
-	heartcountels[1].textContent = n1 + a1;
+	let b = heartcountels[1].textContent = n1 + a1;
+	dohod.textContent =  Number.parseFloat(b*0.10).toFixed(2);
 	
 }
 

@@ -231,8 +231,12 @@ ${n.user && n.user.brole=='admin'?'<div class="settingspanel" onclick="toAdminPa
 <!-- <div class="settingspanel" onclick="doSharing(this);">Скриншэринг</div> -->
 <div class="settingspanel"><b>Вебок:</b> <span id="camsCount">0</span> | <b>Коннектов:</b> <span id="connects">0</span></div>
 <!-- <div class="settingspanel"  onclick="pushSubscribe(this);">Пуш уведомления</div> -->
+<div class="settingspanel">
+<div class="some doh">Ваш доход&nbsp;&nbsp;<span id="dohod">${n.user? Number.parseFloat(n.user.theart*0.10).toFixed(2):0}</span>&nbsp;&nbsp;рублей</div>
+<div class="some"><a href="#vivesti">Получить</a></div>
+</div>
 <div class="settingspanel"><a href="https://t.me/rouletka3">Наш Телеграм</a></div>
-<div class="settingspanel"  id="donatis">Помочь проекту<br><iframe src="https://yoomoney.ru/quickpay/fundraise/button?billNumber=AWVMCQLpAcY.240125&" width="330" height="50" frameborder="0" allowtransparency="true" scrolling="no"></iframe></div>
+<!-- <div class="settingspanel"  id="donatis">Помочь проекту<br><iframe src="https://yoomoney.ru/quickpay/fundraise/button?billNumber=AWVMCQLpAcY.240125&" width="330" height="50" frameborder="0" allowtransparency="true" scrolling="no"></iframe></div>-->
 ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'<div class="settingspanel"><a href="#login">Войти</a></div>'}
 <!-- <div class="settingspanel"><button onclick="mach();">mach</button></div> -->
 </div>
@@ -263,7 +267,7 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
 <div class="flexgiftsitem">
 <div class="heart" data-type="mobile" style=""></div>
 <div class="bname">Сердечко</div>
-<div class="heartcount">${n.user?istestheart?n.user.theart:n.userheart:0}</div>
+<div class="heartcount">${n.user?istestheart?n.user.theart:n.user.heart:0}</div>
 </div>
 </div>
 
