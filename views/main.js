@@ -357,7 +357,7 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
     <input type="hidden" name="successURL" value="https://rouletka.ru/about" />
     <input type="hidden" name="formcomment" value="Покупка сердечек 5 штук" />
     <input type="hidden" name="targets" value="Купить 5 сердечек" />
-    <div><input class="number"  type="hidden" id="sum" name="sum" value="2.00" required data-type="number"/></div>
+    <div><input class="number"  type="hidden" id="sum" name="sum" value="50.00" required data-type="number"/></div>
    <input id="ym" class="input" type="hidden" checked name="paymentType" value="PC" /></div>
    <div><input id="bc"  class="input" type="hidden" name="paymentType" value="AC" /></div>
    <div><input type="submit" value="Купить и поддержать проект"/></div>
@@ -371,7 +371,7 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
     <input type="hidden" name="label" value="id=${n.user?n.user.id:'0'}&c=5"/>
     <input type="hidden" name="quickpay-form" value="button" />
     <input type="hidden" name="formcomment" value="Покупка сердечек 5 штук" />
-    <input type="hidden" name="targets" value="Купить 10 сердечек" />
+    <input type="hidden" name="targets" value="Купить 5 сердечек" />
     <input type="hidden" name="successURL" value="https://rouletka.ru/about" />
     <h3>Платить будете:</h3>
    <div><label for="sum"><b>Cумма в рублях:</b>&nbsp;&nbsp;&nbsp;</label><input class="number"  type="text" id="sum" name="sum" value="2.00" required data-type="number"/></div>
