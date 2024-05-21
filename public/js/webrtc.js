@@ -443,7 +443,7 @@ function get_socket() {
 		  note({content: "Залогиньтесь!", type: "warn", time: 5 });
 		  return;
 	  }
-	if(!ifEnter())window.location.href='#purchaseHREF';
+	if(ifEnter())window.location.href='#purchaseHREF';
  if(!sock) sock = new  WebSocket(new_uri + "//" + loc3 + "/gesamt");
 
   sock.onopen = function () {
