@@ -422,7 +422,14 @@ const channel = new BroadcastChannel('message');
 		}
 
 
-
+var isEnter = gid('isEnter');
+function ifEnter(){
+	if(isEnter == 'true'){
+		return true;
+	}else{
+		return false;
+	}
+}
 
 function setSignal(){
 	//alert("aha");
@@ -436,6 +443,7 @@ function get_socket() {
 		  note({content: "Залогиньтесь!", type: "warn", time: 5 });
 		  return;
 	  }
+	if(!ifEnter())window.location.href='#purchaseHREF';
  if(!sock) sock = new  WebSocket(new_uri + "//" + loc3 + "/gesamt");
 
   sock.onopen = function () {
@@ -1564,6 +1572,7 @@ function handleGift(msg){
 //const api_url = "https://api.yookassa.ru/v3/payments";
 var sukasuka="10";
 function pay(el){
+	/*
 	el.preventDefault();
 	let dcount = sukasuka
 	let damount = el.target.count.value;
@@ -1581,6 +1590,7 @@ function pay(el){
 	d.userid = userid;
 	vax('post','/pay/api/getPayUrl', d, on_get_payurl, on_payurl_error, el.target, false);
 	el.target.className = "puls";
+	*/ 
 }
 
 

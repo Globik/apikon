@@ -4,7 +4,20 @@ html,body{
 			height:100%;
 			background:black;
 		}
-	
+	p.intro{
+		line-height:1.8;
+		padding:10px;
+		font-size: 22px;
+		font-weight:bold;
+	}
+	form#purchaseForm input[type=submit]{
+		height:60px;
+		background:rgb(20,23,20);
+		color:lightgreen;
+		border:1px solid lightgreen;
+		font-size:22px;
+		pading:10px;
+	}
 	#mediabox{
 		width:100%;
 		height:100%;
