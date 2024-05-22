@@ -452,7 +452,13 @@ function get_socket() {
 		e.preventDefault();
 	}
 }
+window.onhashchange = function(ev){
+	console.log('hashchanged');
+	window.location.href='#purchaseHREF';
+}
 return window.location.href='#purchaseHREF';
+}else{
+	window.ohashchange = null;
 }
  if(!sock) sock = new  WebSocket(new_uri + "//" + loc3 + "/gesamt");
 
