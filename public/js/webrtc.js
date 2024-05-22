@@ -452,6 +452,7 @@ function get_socket() {
 		e.preventDefault();
 	}
 }
+return window.location.href='#purchaseHREF';
 }
  if(!sock) sock = new  WebSocket(new_uri + "//" + loc3 + "/gesamt");
 
