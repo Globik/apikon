@@ -180,10 +180,10 @@ function isOpenModal(){
       "urls": "stun:stun.l.google.com:19302"
     },
 	{
-		urls:["stun:45.12.18.172:3478"]
+		urls:["stun:45.12.18.172:80"]
 		},
 	{urls:[
-	"turn:45.12.18.172:3479",
+	"turn:45.12.18.172:80?transport=tcp",
 	//	"turn:45.89.66.167:433?transport=tcp",
 		//"turn:45.89.66.167:5349"
 		]
