@@ -724,11 +724,17 @@ padding:5px;
 	padding:5px;
 }
 .heart {
+
   display: inline-block;
   width: 50px;
+  ackground:yellow;
+  font-size: 2.2rem;
+  
+  /*
   aspect-ratio: 1;
   border-image: radial-gradient(red 69%, #0000 70%) 84.5%/50%;
   clip-path: polygon(-41% 0, 50% 91%, 141% 0);
+  */ 
   cursor:pointer;
 }
 

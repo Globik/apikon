@@ -248,7 +248,7 @@ ${n.user && n.user.brole=='admin'?'<div class="settingspanel" onclick="toAdminPa
 <div class="some" onclick="getPayout(this);"><a href="#vivest">Получить</a></div>
 </div>
 <div class="settingspanel"><a href="https://t.me/rouletka3">Наш Телеграм</a></div>
-<!-- <div class="settingspanel"  id="donatis">Помочь проекту<br><iframe src="https://yoomoney.ru/quickpay/fundraise/button?billNumber=AWVMCQLpAcY.240125&" width="330" height="50" frameborder="0" allowtransparency="true" scrolling="no"></iframe></div>-->
+ <div class="settingspanel"  id="donatis">Помочь проекту<br><iframe src="https://yoomoney.ru/quickpay/fundraise/button?billNumber=AWVMCQLpAcY.240125&" width="330" height="50" frameborder="0" allowtransparency="true" scrolling="no"></iframe></div>
 ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'<div class="settingspanel"><a href="#login">Войти</a></div>'}
 <!-- <div class="settingspanel"><button onclick="mach();">mach</button></div> -->
 </div>
@@ -274,10 +274,10 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
   </div>
 	<div id="chat4"><div id="chatbox2">
 	</div>
-	<section id="giftsContainer2" class="hidden"><header><span>Подарки</span><a href="#purchaseHREF"><span class="purchaseSpan">Пополнить счет</span></a></header>
+	<section id="giftsContainer2" class="hidden"><header><span>Подарки</span><a href="#purchaseHREF"><span class="purchaseSpan">Купить сердечек</span></a></header>
 <div id="giftsDiv2">
 <div class="flexgiftsitem">
-<div class="heart" data-type="mobile" style=""></div>
+<div class="heart" data-type="mobile" style="">&#x1f496</div>
 <div class="bname">Сердечко</div>
 <div class="heartcount">${n.user?istestheart?n.user.theart:n.user.heart:0}</div>
 </div>
@@ -317,10 +317,10 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
   </div>
   
 <div id="chatbox"></div>
-<section id="giftsContainer" class="hidden"><header><span>Подарки</span><a href="#purchaseHREF"><span class="purchaseSpan">Пополнить счет</span></a></header>
+<section id="giftsContainer" class="hidden"><header><span>Подарки</span><a href="#purchaseHREF"><span class="purchaseSpan">Купить сердечек</span></a></header>
 <div id="giftsDiv">
 <div class="flexgiftsitem">
-<div class="heart" data-type="computer" style=""></div>
+<div class="heart" data-type="computer" style="">&#x1f496</div>
 <div class="bname">Сердечко</div>
 <div class="heartcount">${n.user?istestheart?n.user.theart:n.user.heart:0}</div>
 </div>
