@@ -129,7 +129,7 @@ return `
     end chat view -->
     <section class="hero">
         <div class="container wow fadeInUp">
-            <div class="logoЧатРулетка</div>
+            <div class="logoЧатРулетка"></div>
             <h1 class="hero__title">Видео чат — случайные знакомства</h1>
             <h2 class="hero__subtitle">Знакомьтесь с новыми людьми прямо сейчас!</h2>
             <button class="btn btn_orange" id="start_chat_btn">Начать общаться</button>

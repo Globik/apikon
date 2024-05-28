@@ -1,2 +1,2 @@
 User-agent: *
-Allow: /https://rouletka.ru
+Allow: https://rouletka.ru
