@@ -312,6 +312,7 @@ let { notification_type,
 		widthdraw_amount,
 		unaccepted
 		 } = req.body;
+		 const buka1 = 1;
 		const notification_secret = 'LXLMTe9hgGIJcBTFfClIEMR4';
 let str = `${notification_type}&${operation_id}&${amount}&${currency}&${datetime}&${sender}&${codepro}&${notification_secret}&${label}`
 	const paramStr = new URLSearchParams(label);
