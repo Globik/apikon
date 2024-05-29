@@ -445,7 +445,7 @@ function get_socket() {
 	  }
 	//  alert(ifEnter());
 	if(ifEnter()){
-		//window.location.href='#purchaseHREF';
+		window.location.href='#purchaseHREF';
 		/* const faka = document.querySelector('.overlay:target');
 	 if(faka){
 	faka.onclick=function(e){
