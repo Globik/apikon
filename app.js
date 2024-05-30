@@ -281,17 +281,47 @@ HASH IS GUET
 SqlError: (conn=301, no: 1064, SQLState: 42000) You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '`' at line 1
 sql: update users set theart=theart+(?),heart=1 where id=(?)` - parameters:[5,'3076']
     at module.exports.createError (/root/apikon/node_modules/mariadb/lib/misc/errors.js:64:10)
+ notification_type: 'p2p-incoming',
+  bill_id: '',
+  amount: '1.98',
+  codepro: 'false',
+  withdraw_amount: '2.00',
+  unaccepted: 'false',
+  label: 'id=3076&c=5',
+  datetime: '2024-05-30T10:23:03Z',
+  sender: '4100118676103827',
+  sha1_hash: '72d6ef5bbbdb1368abd1fdc2cf1ca91cd0980696',
+  operation_label: '2dea6740-0011-5000-a000-140dd82f7fa7',
+  operation_id: '770379783211600084',
+  currency: '643'
+====
+*  notification_type: 'p2p-incoming',
+  bill_id: '',
+  amount: '1.98',
+  codepro: 'false',
+  withdraw_amount: '2.00',
+  unaccepted: 'false',
+  label: 'id=3076&c=5',
+  datetime: '2024-05-30T10:52:55Z',
+  sender: '4100118676103827',
+  sha1_hash: '1a0dde6e99b17fa7ff8e6e5c41880483109a9e6a',
+  operation_label: '2dea6e3f-0011-5000-8000-1ef098a52e08',
+  operation_id: '770381575877630108',
+  currency: '643'
 
 */
 
 //${notification_type}&${operation_id}&${amount}&${currency}&${datetime}&${sender}&${codepro}&${notification_secret}&${label}`
-const s2='card-incoming&769261374481140080&1.94&643&2024-05-17T11:42:54Z&&false&xY6P7xpSQbKBYFT0jmXtym+t&id=3076&c=5'
-let sha1_hash = '26a45637e6dc053291d20744be20a56922999972';
+//const s2='card-incoming&769261374481140080&1.94&643&2024-05-17T11:42:54Z&&false&xY6P7xpSQbKBYFT0jmXtym+t&id=3076&c=5'
+const fucker = 'ZmV0Y7SBS8z1b0CIEWhKb9Qk'
+const s2 = `p2p-incoming&770381575877630108&1.98&2024-05-30T10:52:55Z&4100118676103827&false&xY6P7xpSQbKBYFT0jmXtym+t&id=3076&c=5`
+
+let sha1_ha = '1a0dde6e99b17fa7ff8e6e5c41880483109a9e6a';
 let sh = crypto.createHash('sha1')
 let li = sh.update(s2).digest('hex')
 console.log('li: ',li)
-console.log('sha:', sha1_hash)
-if(li==sha1_hash){
+console.log('sha:', sha1_ha)
+if(li==sha1_ha){
 	console.log("OK");
 }else{
 	console.log('not ok');
@@ -314,7 +344,7 @@ let { notification_type,
 		 } = req.body;
 		 const buka1 = 1;
 	//	const notification_secret = 'LXLMTe9hgGIJcBTFfClIEMR4';
-		const notification_secret = 'eaHDQQPKYYRiqWtHUVRPciVo';//xY6P7xpSQbKBYFT0jmXtym+t
+		const notification_secret = fucker;//xY6P7xpSQbKBYFT0jmXtym+t  xY6P7xpSQbKBYFT0jmXtym+t
 let str = `${notification_type}&${operation_id}&${amount}&${currency}&${datetime}&${sender}&${codepro}&${notification_secret}&${label}`
 	const paramStr = new URLSearchParams(label);
 	
