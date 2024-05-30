@@ -311,7 +311,7 @@ sql: update users set theart=theart+(?),heart=1 where id=(?)` - parameters:[5,'3
 
 */
 
-var wi = {
+var wi1 = {
   notification_type: 'p2p-incoming',
   bill_id: '',
   amount: '1.98',
@@ -326,13 +326,27 @@ var wi = {
   operation_id: '770383071555008108',
   currency: '643'
 }
-
+var wi={
+  notification_type: 'p2p-incoming',
+  bill_id: '',
+  amount: '1.98',
+  codepro: 'false',
+  withdraw_amount: '2.00',
+  unaccepted: 'false',
+  label: 'id=3076\&c=5',
+  datetime: '2024-05-30T11:33:29Z',
+  sender: '4100118676103827',
+  sha1_hash: '4b6a3a017adf45f5fa6834d653c2e2efc8832606',
+  operation_label: '2dea77c5-0011-5000-a000-125001ba8330',
+  operation_id: '770384009832968088',
+  currency: '643'
+}
 
 //${notification_type}&${operation_id}&${amount}&${currency}&${datetime}&${sender}&${codepro}&${notification_secret}&${label}`
 //const s2='card-incoming&769261374481140080&1.94&643&2024-05-17T11:42:54Z&&false&xY6P7xpSQbKBYFT0jmXtym+t&id=3076&c=5'
 const fucker = 'ZmV0Y7SBS8z1b0CIEWhKb9Qk'
-const s2 = `${wi.notification_type}&${wi.operation_id}&${wi.amount}&${wi.currency}&${wi.datetime}&${wi.sender}&${wi.codepro}&${fucker}&${wi.label}`
-
+const s2 = `${wi.notification_type}&${wi.operation_id}&${wi.amount}&${wi.currency}&${wi.datetime}&${wi.sender}&${wi.codepro}&${fucker}&${wi.label}`;
+console.log('si2 ', s2)
 let sha1_ha = wi.sha1_hash;
 let sh = crypto.createHash('sha1')
 let li = sh.update(s2).digest('hex')
