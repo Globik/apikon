@@ -70,6 +70,7 @@ var istestheart;
 var yoomoney_client_id;
 var yoomoney_secret;
 var yoomoney_token;
+var y_notif;
 async function getstun(){
 	let a;
 try{
@@ -90,6 +91,8 @@ try{
 			console.log("yoomoney_client_id: ", yoomoney_client_id);
 			yoomoney_token = a[0].yoomoney_token;
 			console.log('token : ', yoomoney_token);
+			y_notif = a[0].y_notif;
+			console.log('y_notif', y_notif);
 			//var quant_n=5;
 			//var userid='5';
 			//await pool.query('update users set theart=theart+(?),heart=1 where id=(?)', [ quant_n, userid ]);
@@ -114,6 +117,8 @@ app.use(async(req, res, next)=>{
 	req.yoomoney_client_id = yoomoney_client_id;
 	req.yoomoney_secret = yoomoney_secret;
 	req.yoomoney_token = yoomoney_token;
+	
+	req.y_notif = y_notif;
 	console.log("method ", req.method, " path ",  req.path);
 	//console.log("HERE 2 ",stun,testshopid,testshopsecret, req.app.locals.testshopid, req.app.locals.testshopsecret);
 	//console.log(testshopsecret);
@@ -142,14 +147,16 @@ app.use(async(req, res, next)=>{
 					yoomoney_secret = req.body.client_secret;
 					req.yoomoney_client_id = yoomoney_client_id;
 					req.yoomoney_secret = yoomoney_secret;
-				}
+				}}else if(req.path == "/admin/saveNotif"){
+					console.log("*** REALLY",req.body.y_notif );
+				y_notif = req.body.y_notif;
+					req.y_notif = y_notif;
+				}else{}
 				
 			}else{}
 		}
-	}
-	
-	next();
-})
+		next();
+	})
 
 app.use((req, res, next)=>{
 	req.db = pool;
@@ -360,7 +367,8 @@ var wi={
 
 //${notification_type}&${operation_id}&${amount}&${currency}&${datetime}&${sender}&${codepro}&${notification_secret}&${label}`
 //const s2='card-incoming&769261374481140080&1.94&643&2024-05-17T11:42:54Z&&false&xY6P7xpSQbKBYFT0jmXtym+t&id=3076&c=5'
-const fucker = 'ZmV0Y7SBS8z1b0CIEWhKb9Qk';//ZmV0Y7SBS8z1b0CIEWhKb9Qk
+//const fucker = 'ZmV0Y7SBS8z1b0CIEWhKb9Qk';//ZmV0Y7SBS8z1b0CIEWhKb9Qk
+const fucker = 'LXLMTe9hgGIJcBTFfClIEMR4'
 const s2 = `${wi.notification_type}&${wi.operation_id}&${wi.amount}&${wi.currency}&${wi.datetime}&${wi.sender}&${wi.codepro}&${fucker}&${wi.label}`;
 console.log('si2 ', s2)
 let sha1_ha = wi.sha1_hash;
@@ -391,7 +399,7 @@ let { notification_type,
 		 } = req.body;
 		 const buka1 = 1;
 	//	const notification_secret = 'LXLMTe9hgGIJcBTFfClIEMR4';
-		const notification_secret = fucker;//xY6P7xpSQbKBYFT0jmXtym+t  xY6P7xpSQbKBYFT0jmXtym+t
+		const notification_secret = req.y_notif;//xY6P7xpSQbKBYFT0jmXtym+t  xY6P7xpSQbKBYFT0jmXtym+t
 let str = `${notification_type}&${operation_id}&${amount}&${currency}&${datetime}&${sender}&${codepro}&${notification_secret}&${label}`
 	const paramStr = new URLSearchParams(label);
 	
@@ -403,7 +411,7 @@ let sh = crypto.createHash('sha1')
 let li = sh.update(str).digest('hex')
 console.log('li: ',li)
 console.log('sha:', sha1_hash)
-//if(li == sha1_hash){
+if(li == sha1_hash){
 console.log('HASH IS GUET')
 let userid = paramStr.get('id');
 let quant = paramStr.get('c');
@@ -418,10 +426,10 @@ try{
 }else{
 	return res.status(200).send({ message: "not ok" });
 }
-//}else{
-//	console.log("HASH IS NOT GUET");
-	//return res.status(200).send({ message: "not ok" });
-//}
+}else{
+	console.log("HASH IS NOT GUET");
+	return res.status(200).send({ message: "not ok" });
+}
 	res.status(200).send({ message: "OK" });
 })
 

@@ -28,6 +28,11 @@ const yoomoneytest = function(n){
     </form>
     <button onclick="redact(this);">Редактировать</button>
     <hr>
+    <form name="ynotif" action="/admin/saveNotif" method="post">
+    <header> yoomoney notification secret</header>
+    <div><input type="text" name="y_notif" required value="${n.y_notif?n.y_notif:'suka'}" /></div>
+    <div><input type="submit" value="save" /></div>
+    </form>
     <hr>2) Авторизация
     <div>
     <button onclick="goAuth(this);">go to yoomoney</button>

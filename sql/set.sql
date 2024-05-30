@@ -35,6 +35,7 @@ alter table sets add column istestHeart boolean default true;
 alter table sets add column yoomoney_client_id varchar(1000) not null default 'fuck id';
 alter table sets add column yoomoney_secret varchar(2000) not null default 'fuck secret';
 alter table sets add column yoomoney_token varchar(2000) not null default 'token';
+alter table sets add column y_notif varchar(100) not null default 'yoomoney notif secret';
 --alter table sets drop column testshopid;
 --alter table sets drop column testshopsecret;
 --if exists(select testshopid from sets) update sets set testshopid=3346,testshopsecret='suka' else insert into sets(testshopid,testshopsecret) value(333,'fuck');

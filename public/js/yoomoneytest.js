@@ -47,6 +47,20 @@ function on_getAuth_error(l, el){
 	el.disabled = false;
 	note({ content: l, type:"error", time: 5 });
 }
+let ynotif = document.forms.ynotif;
+ynotif.addEventListener('submit', onnotif, false);
+function onnotif(ev){
+	ev.preventDefault();
+	let data ={}
+	data.y_notif = ynotif.y_notif.value;
+	//alert(ynotif.method);
+	vax( ynotif.method, ynotif.action, data, on_set_notif, on_getAuth_error, ev.target, false);
+	ynotif.className = "puls";
+}
+function on_set_notif(l,el){
+	ynotif.className="";
+	note({ content: l.message, type:'info', time: 5 });
+}
 function getInfo(el){
 	el.className = "puls";
 	el.disabled = true;

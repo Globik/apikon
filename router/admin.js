@@ -30,7 +30,8 @@ router.get('/getPayments', checkAuth, checkRole(['admin']), async(req, res)=>{
 })
 
 router.get('/yoomoneytest', secured, isAdmin(['admin']), async(req, res)=>{
-	let d = { yoomoney_client_id: req.yoomoney_client_id, yoomoney_secret: req.yoomoney_secret }
+	let d = { yoomoney_client_id: req.yoomoney_client_id, yoomoney_secret: req.yoomoney_secret,
+		y_notif: req.y_notif }
 	console.log(d);
 	res.rendel('yoomoneytest', d);
 })
@@ -239,6 +240,20 @@ router.post("/setPayout", checkAuth, async (req, res)=>{
 	}
 	//res.json({ message: 'ok' });
 })
+
+router.post("/saveNotif", checkAuth, checkRole(['admin']), async (req, res)=>{
+	let { y_notif } = req.body;
+	let db = req.db;
+	if(!y_notif) return res.json({ error: true, message: "no data" });
+	try{
+		await db.query('update sets set y_notif=(?)', [ y_notif ]);
+	}catch(err){
+		console.log(err);
+		return res.json({ error: true, message: err});
+	}
+	res.json({ message: "OK saved!" , y_notif: req.y_notif });
+})
+
 
 module.exports = router
 
