@@ -326,7 +326,7 @@ var wi1 = {
   operation_id: '770383071555008108',
   currency: '643'
 }
-var wi={
+var wi2={
   notification_type: 'p2p-incoming',
   bill_id: '',
   amount: '1.98',
@@ -341,10 +341,26 @@ var wi={
   operation_id: '770384009832968088',
   currency: '643'
 }
+var wi={
+  notification_type: 'p2p-incoming',
+  bill_id: '',
+  amount: '1.98',
+  codepro: 'false',
+  withdraw_amount: '2.00',
+  unaccepted: 'false',
+  label: 'id=3076*c=5',
+  datetime: '2024-05-30T12:06:15Z',
+  sender: '4100118676103827',
+  sha1_hash: '7c38f10c3bad1667bb5c68a5b7074a1b37394c31',
+  operation_label: '2dea7f73-0011-5000-a000-1e665691c32e',
+  operation_id: '770385975307952108',
+  currency: '643'
+}
+
 
 //${notification_type}&${operation_id}&${amount}&${currency}&${datetime}&${sender}&${codepro}&${notification_secret}&${label}`
 //const s2='card-incoming&769261374481140080&1.94&643&2024-05-17T11:42:54Z&&false&xY6P7xpSQbKBYFT0jmXtym+t&id=3076&c=5'
-const fucker = 'ZmV0Y7SBS8z1b0CIEWhKb9Qk'
+const fucker = 'ZmV0Y7SBS8z1b0CIEWhKb9Qk';//ZmV0Y7SBS8z1b0CIEWhKb9Qk
 const s2 = `${wi.notification_type}&${wi.operation_id}&${wi.amount}&${wi.currency}&${wi.datetime}&${wi.sender}&${wi.codepro}&${fucker}&${wi.label}`;
 console.log('si2 ', s2)
 let sha1_ha = wi.sha1_hash;
@@ -387,7 +403,7 @@ let sh = crypto.createHash('sha1')
 let li = sh.update(str).digest('hex')
 console.log('li: ',li)
 console.log('sha:', sha1_hash)
-if(li == sha1_hash){
+//if(li == sha1_hash){
 console.log('HASH IS GUET')
 let userid = paramStr.get('id');
 let quant = paramStr.get('c');
@@ -402,10 +418,10 @@ try{
 }else{
 	return res.status(200).send({ message: "not ok" });
 }
-}else{
-	console.log("HASH IS NOT GUET");
-	return res.status(200).send({ message: "not ok" });
-}
+//}else{
+//	console.log("HASH IS NOT GUET");
+	//return res.status(200).send({ message: "not ok" });
+//}
 	res.status(200).send({ message: "OK" });
 })
 

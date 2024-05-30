@@ -367,8 +367,8 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
 	<form id="purchaseForm" method="post" action="https://yoomoney.ru/quickpay/confirm" name="ordertodo">
 <p class="intro">Поддержите проект, купите 5 &#x1f496 сердечек  = 50 руб. Дарите сердечки интересному собеседнику. Сердечки можно обменять на деньги.</p>
 	<div id="heartswrapper">
-	 <div><input type="hidden" id="receiver" placeholder="олучатель yoomoney" name="receiver" value="410016439442251" required/> </div>
-	<input type="hidden" name="label" value="id=${n.user?n.user.id:'0'}*c=5"/>
+	 <div><input type="hidden" id="receiver" placeholder="олучатель yoomoney" name="receiver" value="4100118676103827" required/> </div>
+	<input type="hidden" name="label" value="id=${n.user?n.user.id:'0'}&c=5"/>
     <input type="hidden" name="quickpay-form" value="button" />
     <input type="hidden" name="successURL" value="https://rouletka.ru/about" />
     <input type="hidden" name="formcomment" value="Покупка сердечек 5 штук" />
@@ -381,7 +381,7 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
 	</div>
 	</form>
 	</section> 
-	<!--4100118676103827
+	<!--4100118676103827 410016439442251
 	<form class="ymform"  method="POST" action="https://yoomoney.ru/quickpay/confirm">
     <div><label for="receiver"><b>Получатель:</b></label><br><input type="text" id="receiver" placeholder="олучатель yoomoney" name="receiver" value="4100118676103827" required/> </div>
     <input type="hidden" name="label" value="id=${n.user?n.user.id:'0'}&c=5"/>
