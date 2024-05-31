@@ -381,7 +381,7 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
 	</div>
 	</form>
 	</section> 
-	<!--4100118676103827 410016439442251
+	<!--4100118676103827 410016439442251  4100118676103827
 	<form class="ymform"  method="POST" action="https://yoomoney.ru/quickpay/confirm">
     <div><label for="receiver"><b>Получатель:</b></label><br><input type="text" id="receiver" placeholder="олучатель yoomoney" name="receiver" value="4100118676103827" required/> </div>
     <input type="hidden" name="label" value="id=${n.user?n.user.id:'0'}&c=5"/>

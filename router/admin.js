@@ -104,7 +104,7 @@ router.post('/getYoomoneyHistory', checkAuth, checkRole(['admin']), async (req, 
 		let r = await axios.post('https://yoomoney.ru/api/operation-history', {}, 
 		{headers: {
     'content-type': 'application/x-www-form-urlencoded' ,
-     "Authorization": "Bearer " + tt//req.yoomoney_token 
+     "Authorization": "Bearer " + req.yoomoney_token 
     }
     }
 		);
