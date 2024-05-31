@@ -98,13 +98,13 @@ router.post('/getYoomoneyinfo',  checkAuth, checkRole(['admin']), async (req, re
 		res.json({ error: true, message: err });
 	}
 })
-
+let tt = "4100118676103827.9B3BDB5E0714101632D123BD929408DB958034086B35C862D88428E18077203A7AFF960F64E42B34BF57DC223E5D91284E989BD659617A78625528F57A69CD38F59EC7FB6A5F83A39B06EEA3CD0B3A902737711ACF296EB7E6AB4161A71CA7EFBD88E3214ECD0C0622DB41F87777B2DC1DBA969299D9B24A43812B0B79EC7693"
 router.post('/getYoomoneyHistory', checkAuth, checkRole(['admin']), async (req, res)=>{
 	try{
 		let r = await axios.post('https://yoomoney.ru/api/operation-history', {}, 
 		{headers: {
     'content-type': 'application/x-www-form-urlencoded' ,
-     "Authorization": "Bearer " + req.yoomoney_token 
+     "Authorization": "Bearer " + tt//req.yoomoney_token 
     }
     }
 		);
