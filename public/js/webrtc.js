@@ -446,7 +446,7 @@ function get_socket() {
 	//  alert(ifEnter());
 	if(ifEnter()){
 		window.location.href='#purchaseHREF';
-		/* const faka = document.querySelector('.overlay:target');
+		 const faka = document.querySelector('.overlay:target');
 	 if(faka){
 	faka.onclick=function(e){
 		e.preventDefault();
@@ -457,9 +457,9 @@ window.onhashchange = function(ev){
 	window.location.href='#purchaseHREF';
 }
 return window.location.href='#purchaseHREF';
-*/ 
+
 }else{
-	//window.ohashchange = null;
+	window.ohashchange = null;
 }
  if(!sock) sock = new  WebSocket(new_uri + "//" + loc3 + "/gesamt");
 
