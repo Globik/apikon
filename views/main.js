@@ -274,7 +274,7 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
   </div>
 	<div id="chat4"><div id="chatbox2">
 	</div>
-	<section id="giftsContainer2" class="hidden"><header><span>Подарки</span><a href=""><span class="purchaseSpan">Купить сердечек</span></a></header>
+	<section id="giftsContainer2" class="hidden"><header><span>Подарки</span><a href="#purchaseHREF"><span class="purchaseSpan">Купить сердечек</span></a></header>
 <div id="giftsDiv2">
 <div class="flexgiftsitem">
 <div class="heart" data-type="mobile" style="">&#x1f496</div>
@@ -317,7 +317,7 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
   </div>
   
 <div id="chatbox"></div>
-<section id="giftsContainer" class="hidden"><header><span>Подарки</span><a href="#"><span class="purchaseSpan">Купить сердечек</span></a></header>
+<section id="giftsContainer" class="hidden"><header><span>Подарки</span><a href="#purchaseHREF"><span class="purchaseSpan">Купить сердечек</span></a></header>
 <div id="giftsDiv">
 <div class="flexgiftsitem">
 <div class="heart" data-type="computer" style="">&#x1f496</div>
@@ -365,7 +365,7 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
     <section id="heartsContainer">
 	
 	<form id="purchaseForm" method="post" action="https://yoomoney.ru/quickpay/confirm" name="ordertodo">
-<p class="intro">Членский взнос 50 рублей.</p>
+<p class="intro">Купить 5 сердечек &#x1f496 = 50 рублей.</p>
 	<div id="heartswrapper">
 	 <div><input type="hidden" id="receiver" placeholder="олучатель yoomoney" name="receiver" value="4100118676103827" required/> </div>
 	<input type="hidden" name="label" value="id=${n.user?n.user.id:'0'}&c=5"/>
@@ -376,7 +376,7 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
     <div><input class="number"  type="hidden" id="sum" name="sum" value="50.00" required data-type="number"/></div>
    <input id="ym" class="input" type="hidden" checked name="paymentType" value="PC" /></div>
    <div><input id="bc"  class="input" type="hidden" name="paymentType" value="AC" /></div>
-   <div><input type="submit" value="Внести взнос"/></div>
+   <div><input type="submit" value="Купить"/></div>
 	
 	</div>
 	</form>
