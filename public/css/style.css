@@ -971,7 +971,18 @@ padding-top:6px;
 p{
 	line-height:1.6;
 }
+@media screen and (max-width: 452px) and (orientation: portrait){
+#donatebox{
+	display:block;
+}
+#donatebox iframe{
+	mrgin-top:10px;
+	magin-bottom:10px;
+	margin:10px auto 10px 10px;
+}
 #donatebox b{
-	margin:0;
+	margin-top:10px;
+	margin-bottom:10px;
 	padding:0;
+}
 }
