@@ -1109,6 +1109,62 @@ dsplay:inline-block;
 	width:98%;
 }
 	
-
 }
 
+@media screen and (max-width: 452px) and (orientation: portrait){}
+output#ozenite{
+	width:25%;
+	background:white;
+	color:black;
+	padding:50px;
+}
+output#ozenite h1{
+	text-align:center;
+	line-height:1.5;
+	margin-top:5px;
+	margin-bottom:5px;
+}
+output#ozenite p{
+	margin-top:5px;
+	margin-bottom:5px;
+	font-size:18px;
+	padding:20px;
+	text-align:center;
+}
+div#ozeniteBtn{
+display:flex;
+flex-wrap: wrap;
+    flex-direction: row;
+    
+		align-items: center;
+	
+		justify-content: center;
+	border-radius: 6px;
+	background:#40c540;
+	color:rgb(250,255,230);
+	font-weight:bold;
+	text-align:center;
+	font-size:18px;
+	height:60px;
+vertical-align:20px;
+letter-spacing:2px;
+}
+div#ozeniteBtn div{
+adding-top:20px;
+	ertical-align:20px;
+	ine-height:1.5;
+	self-align:center;
+}
+p.zwezda span{
+	margin-left:5px;
+	margin-right:5px;
+}
+
+@media screen and (max-width: 452px) and (orientation: portrait){
+	output#ozenite{
+	width:98%;
+	}
+	output#ozenite p{
+		padding:10px;
+	}
+}

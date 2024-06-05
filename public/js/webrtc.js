@@ -282,7 +282,9 @@ navigator.mediaDevices.enumerateDevices().then(gotDevices).catch(function(err){c
 }
 
 getDevice();
-
+function ozenite(el){
+	panelOpen();
+}
 function panelOpen(el){
 			
 			var settingspanel = document.getElementById("settingspanel");

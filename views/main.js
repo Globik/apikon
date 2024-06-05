@@ -248,7 +248,10 @@ ${n.user && n.user.brole=='admin'?'<div class="settingspanel" onclick="toAdminPa
 <div class="some" onclick="getPayout(this);"><a href="#vivest">Получить</a></div>
 </div>
 <div class="settingspanel"><a href="https://t.me/rouletka3">Наш Телеграм</a></div>
- <div class="settingspanel"  id="donatis">Помочь проекту<br><iframe src="https://yoomoney.ru/quickpay/fundraise/button?billNumber=AWVMCQLpAcY.240125&" width="330" height="50" frameborder="0" allowtransparency="true" scrolling="no"></iframe></div>
+<div class="settingspanel" ><a href="#ozeniteHREF" onclick="ozenite(this);">Оцените приложение</a></div>
+ <!--
+ <div class="settingspanel"  id="donatis">Помочь проекту<br>
+ <iframe src="https://yoomoney.ru/quickpay/fundraise/button?billNumber=AWVMCQLpAcY.240125&" width="330" height="50" frameborder="0" allowtransparency="true" scrolling="no"></iframe></div> -->
 ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'<div class="settingspanel"><a href="#login">Войти</a></div>'}
 <!-- <div class="settingspanel"><button onclick="mach();">mach</button></div> -->
 </div>
@@ -414,7 +417,16 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
     
     <!-- 410016439442251 -->
     
-    
+     <a href="#."  class="overlay" id="ozeniteHREF"></a>
+    <output id="ozenite" class="popi">
+    <h1>Пожалуйста, оцените наше приложение</h1>
+    <p class="zwezda"><span>&#x2B50;</span><span>&#x2B50;</span><span>&#x2B50;</span><span>&#x2B50;</span><span>&#x2B50;</span></p>
+    <p>
+    Лучший способ поддержать - это рассказать другим
+    </p>
+    <p><small>Для оценки вы будете перенаправлены в Play Market</small></p>
+    <p><a href="https://play.google.com/store/apps/details?id=ru.rouletka.pwa"><div id="ozeniteBtn"><div>Оценить</div></div></a></p>
+    </output>
     
     <!-- 
     test_Yl7GFsIK2B4xGOQ_UazguZshpPDjosDeS1BN-DOqUZ4  shopId 383452
