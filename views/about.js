@@ -265,7 +265,7 @@ return `
         
         <section id="minifooter">
        <div id="donatebox">
-<div><b>Помочь проекту:&nbsp;&nbsp;&nbsp;</b></div>
+<div class="dnate"><b>Помочь проекту:&nbsp;&nbsp;&nbsp;</b></div>
 <div>
 <iframe src="https://yoomoney.ru/quickpay/fundraise/button?billNumber=AWVMCQLpAcY.240125&" width="330" height="50" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
 </div>
