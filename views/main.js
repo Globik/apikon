@@ -248,7 +248,7 @@ ${n.user && n.user.brole=='admin'?'<div class="settingspanel" onclick="toAdminPa
 <div class="some" onclick="getPayout(this);"><a href="#vivest">Получить</a></div>
 </div>
 <div class="settingspanel"><a href="https://t.me/rouletka3">Наш Телеграм</a></div>
-<div class="settingspanel" ><a href="#ozeniteHREF" onclick="ozenite(this);">Оцените приложение</a></div>
+<div class="settingspanel" ><a href="#ozeniteHREF" onclick="ozenite(this);"><span class="ozenka">Оцените приложение</span></a></div>
  <!--
  <div class="settingspanel"  id="donatis">Помочь проекту<br>
  <iframe src="https://yoomoney.ru/quickpay/fundraise/button?billNumber=AWVMCQLpAcY.240125&" width="330" height="50" frameborder="0" allowtransparency="true" scrolling="no"></iframe></div> -->

@@ -971,3 +971,7 @@ padding-top:6px;
 p{
 	line-height:1.6;
 }
+#donatebox b{
+	margin:0;
+	padding:0;
+}
