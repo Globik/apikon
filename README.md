@@ -51,14 +51,14 @@ root@irclfyscdg:~# docker stop app-rouletauth-1
 ## Coturn configuration
 
 ```
-listening-port=3478
- tls-listening-port=5349
+ listening-port=3479
+ tls-listening-port=5348
  listening-ip=45.12.18.172
  relay-ip=45.12.18.172
  fingerprint
  lt-cred-mech
  user=alik:1234
- realm=rouletka,ru
+ realm=rouletka.ru
  cert=/etc/letsencrypt/live/rouletka.ru/fullchain.pem
  pkey=/etc/letsencrypt/live/rouletka.ru/privkey.pem
  no-stdout-log
@@ -66,4 +66,41 @@ listening-port=3478
 
 ```
 
+## Allow ports listen
 
+```
+sudo ufw allow 5348/tcp
+sudo ufw allow 5348/udp
+
+sudo ufw allow 3479/udp
+sudo ufw allow 3479/tcp
+
+```
+
+## webrtc javascript addresses
+
+```
+
+ {
+	"iceServers":[
+	{
+      "urls": "stun:stun.l.google.com:19302"
+    },
+	{
+		"urls":[
+		"stun:rouletka.ru:3479",
+		"stun:rouletka.ru:5348"
+		]
+		//stun:45.12.18.172:5348
+		},
+	{urls:[
+	"turn:rouletka.ru:3479?transport=udp",
+	//turn:45.12.18.172:3479
+	//turn:45.12.18.172:5348
+		"turn:rouletka.ru:3479?transport=tcp", 
+		"turn:rouletka.ru:5348?transport=udp",
+		"turn:rouletka.ru:5348?transport=tcp" //no stun
+		]
+		,username:"alik",credential:"1234"}]};
+
+```

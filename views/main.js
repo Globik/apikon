@@ -161,76 +161,29 @@ function isOpenModal(){
   //  var ICESERVERS =n.stun?n.stun:null
   
   
-  var ICESERVERS66 = {/*iceTransportPolicy:"relay",*/"iceServers":[
-	{
-      "urls": "stun:stun.l.google.com:19302"
-    },
-	{
-		urls:["stun:45.89.66.167:80"]
-		},
-	{urls:[
-	"turn:45.89.66.167:5349",
-	//	"turn:45.89.66.167:433?transport=tcp",
-		//"turn:45.89.66.167:5349"
-		]
-		,username:"alik",credential:"1234"}]};
   
-  var ICESERVERS = {/*iceTransportPolicy:"relay",*/"iceServers":[
+  var ICESERVERS = {
+  //iceTransportPolicy:"relay",
+	"iceServers":[
 	{
       "urls": "stun:stun.l.google.com:19302"
     },
 	{
-		urls:["stun:45.12.18.172:80"]
+		"urls":[
+		"stun:rouletka.ru:3479",
+		"stun:rouletka.ru:5348"
+		]
+		//stun:45.12.18.172:3479
 		},
 	{urls:[
-	"turn:45.12.18.172:80?transport=tcp",
-	//	"turn:45.89.66.167:433?transport=tcp",
-		//"turn:45.89.66.167:5349"
+	"turn:rouletka.ru:3479?transport=udp",
+		"turn:rouletka.ru:3479?transport=tcp", 
+		"turn:rouletka.ru:5348?transport=udp",
+		"turn:rouletka.ru:5348?transport=tcp" //no stun
 		]
 		,username:"alik",credential:"1234"}]};
-  var ICESERVERS3 = new RTCPeerConnection({ iceServers: [
-   { urls: "stun:stun.relay.metered.ca:80", }, 
-  { urls: "turn:standard.relay.metered.ca:80", username: "34351867ccbc6431d4ac0b65", credential: "y2DxVs2Q8bg5Q6db", },
-   { urls: "turn:standard.relay.metered.ca:80?transport=tcp", username: "34351867ccbc6431d4ac0b65", credential: "y2DxVs2Q8bg5Q6db", },
-    { urls: "turn:standard.relay.metered.ca:443", username: "34351867ccbc6431d4ac0b65", credential: "y2DxVs2Q8bg5Q6db", },
-   { urls: "turns:standard.relay.metered.ca:443?transport=tcp", username: "34351867ccbc6431d4ac0b65", credential: "y2DxVs2Q8bg5Q6db", }, ], });
-     var ICESERVERS2 ={
-  "iceServers": [
-    {
-      "urls": "stun:stun.l.google.com:19302"
-    },
-    {
-      "urls": "turn:relay1.expressturn.com:3478",
-      "username": "efZIKNPZ0Y17GFG3WZ",
-      "credential": "HIYNupkIAHFXSgW8"
-    }
-    /*,
-    {
-      "urls": "stun:stun.relay.metered.ca:80"
-    },
-    
-    {
-      "urls": "turn:a.relay.metered.ca:80",
-      "username": "33c88ed716afa1a802b5116a",
-      "credential": "YlI1/qfkEWya3Q4p"
-    },
-    {
-      "urls": "turn:a.relay.metered.ca:80?transport=tcp",
-      "username": "33c88ed716afa1a802b5116a",
-      "credential": "YlI1/qfkEWya3Q4p"
-    },
-    {
-      "urls": "turn:a.relay.metered.ca:443",
-      "username": "33c88ed716afa1a802b5116a",
-      "credential": "YlI1/qfkEWya3Q4p"
-    },
-    {
-      "urls": "turn:a.relay.metered.ca:443?transport=tcp",
-      "username": "33c88ed716afa1a802b5116a",
-      "credential": "YlI1/qfkEWya3Q4p"
-    }*/
-  ]
-};
+
+  
      </script>
      <article id="mediabox">
     <nav id="navpanel"><div class="nav"><b>Online: <span id="onlineCount">0</span></b></div>
