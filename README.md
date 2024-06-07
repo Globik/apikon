@@ -46,6 +46,24 @@ root@irclfyscdg:~# docker stop app-rouletws-1
 app-rouletws-1
 root@irclfyscdg:~# docker stop app-rouletauth-1
 
+```
+
+## Coturn configuration
 
 ```
+listening-port=3478
+ tls-listening-port=5349
+ listening-ip=45.12.18.172
+ relay-ip=45.12.18.172
+ fingerprint
+ lt-cred-mech
+ user=alik:1234
+ realm=rouletka,ru
+ cert=/etc/letsencrypt/live/rouletka.ru/fullchain.pem
+ pkey=/etc/letsencrypt/live/rouletka.ru/privkey.pem
+ no-stdout-log
+ cli-password=qwerty
+
+```
+
 

@@ -252,7 +252,7 @@ return `
                     Мир увлекательных знакомств находится всего в одном шаге от вас. Не упустите возможность совершить множество новых открытий.
                 </p>
                 <p class="footer-desc__copy">
-                    &copy;2021 Rouletka
+                    &copy;2023 Rouletka
                 </p>
             </div><!--
             <a href="https://appgallery.huawei.com/app/C109425847?sharePrepath=ag&locale=ru_RU&source=appshare&subsource=C109425847&shareTo=com.android.bluetooth&shareFrom=appmarket&shareIds=b582f0a3a57545f99084d72b532620c1_com.android.bluetooth&callType=SHARE" class="btn btn_appGallery">
