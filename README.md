@@ -104,3 +104,5 @@ sudo ufw allow 3479/tcp
 		,username:"alik",credential:"1234"}]};
 
 ```
+
+## [https://webrtc.github.io/samples/src/content/peerconnection/trickle-ice/](check ice connetcions gather)
