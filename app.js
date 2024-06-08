@@ -418,6 +418,7 @@ let quant = paramStr.get('c');
 let quant_n = Number(quant);
 if(unaccepted == 'false'){
 try{
+	console.log("updating users in db");
 	await db.query('update users set theart=theart+(?),heart=1 where id=(?)', [ quant_n, userid ]);
 }catch(err){
 	console.log(err);

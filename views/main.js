@@ -329,7 +329,7 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
     <input type="hidden" name="successURL" value="https://rouletka.ru/about" />
     <input type="hidden" name="formcomment" value="Покупка сердечек 5 штук" />
     <input type="hidden" name="targets" value="Купить 5 сердечек" />
-    <div><input class="number"  type="hidden" id="sum" name="sum" value="50.00" required data-type="number"/></div>
+    <div><input class="number"  type="hidden" id="sum" name="sum" value="2.00" required data-type="number"/></div>
    <input id="ym" class="input" type="hidden" checked name="paymentType" value="PC" /></div>
    <div><input id="bc"  class="input" type="hidden" name="paymentType" value="AC" /></div>
    <div><input type="submit" value="Купить"/></div>
