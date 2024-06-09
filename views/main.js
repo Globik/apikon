@@ -84,7 +84,10 @@ return `
     <noscript>
       <strong>We're sorry but chatroulette doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
-    
+    <input type="hidden" id="isLogin" value="${n.user?true:false}"/>
+    <input type="hidden" id="userId" value="${n.user?n.user.id:0}">
+    <input type="hidden" id="userName" value="${n.user?n.user.name:'anon'}">
+    <input type="hidden" id="isTestHeart" value="${istestheart}">
     <!-- ${n.user? JSON.stringify(n.user):'no user'} -->
     <script>
    // note({ content: '<b>Помочь проекту: </b><br><br>
@@ -94,14 +97,14 @@ return `
     ${!n.user?`<script>
     const NICK = "anon";
     window.onload=function(){
-		 
+		get_socket(); 
    const cat = localStorage.getItem("myCat");
    if(!cat && cat !=="Tom"){
     location.href="#regeln";
     const faka = document.querySelector('.overlay:target');
 if(faka){
 	faka.onclick=function(e){
-		e.preventDefault();
+	//	e.preventDefault();
 	//alert(1);
 	//window.location.href="#lregeln";
 	//return;
@@ -115,10 +118,8 @@ if(faka){
 const faka = document.querySelector('.overlay:target');
 if(faka){
 	faka.onclick=function(e){
-		e.preventDefault();
-	//alert(1);
-	//window.location.href="#login";
-	//return;
+		//e.preventDefault();
+	
 	}
 }
 }
@@ -133,7 +134,7 @@ function confirmRules(){
 	 const faka = document.querySelector('.overlay:target');
 	 if(faka){
 	faka.onclick=function(e){
-		e.preventDefault();
+		//e.preventDefault();
 	}
 }
 }
@@ -142,10 +143,11 @@ function isOpenModal(){
 	 const faka = document.querySelector('.overlay:target');
 	 if(faka){
 	faka.onclick=function(e){
-		e.preventDefault();
+		//e.preventDefault();
 	}
 }
 }
+
     </script>`:`<script>
     in_rem_hash();
     const NICK = "${n.user?n.user.name:'anonym'}";
@@ -153,9 +155,7 @@ function isOpenModal(){
 		get_socket();
 		
     }
-    </script><input type="hidden" id="userId" value="${n.user?n.user.id:0}">
-    <input type="hidden" id="userName" value="${n.user?n.user.name:undefined}">
-    <input type="hidden" id="isTestHeart" value="${istestheart}">
+    </script>
     `}
     <script>
   //  var ICESERVERS =n.stun?n.stun:null
@@ -198,7 +198,7 @@ ${n.user && n.user.brole=='admin'?'<div class="settingspanel" onclick="toAdminPa
 <!-- <div class="settingspanel"  onclick="pushSubscribe(this);">Пуш уведомления</div> -->
 <div class="settingspanel">
 <div class="some doh">Ваш доход&nbsp;&nbsp;<span id="dohod">${n.user? Number.parseFloat(n.user.theart*0.10).toFixed(2):0}</span>&nbsp;&nbsp;рублей</div>
-<div class="some" onclick="getPayout(this);"><a href="#vivest">Получить</a></div>
+<div class="du" onclick="getPayout(this);">Получить</div>
 </div>
 <div class="settingspanel"><a href="https://t.me/rouletka3">Наш Телеграм</a></div>
 <div class="settingspanel" ><a href="#ozeniteHREF" onclick="ozenite(this);"><span class="ozenka">Оцените приложение</span></a></div>
@@ -323,7 +323,7 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
 	<form id="purchaseForm" method="post" action="https://yoomoney.ru/quickpay/confirm" name="ordertodo">
 <p class="intro">Купить 5 сердечек &#x1f496 = 50 рублей.</p>
 	<div id="heartswrapper">
-	 <div><input type="hidden" id="receiver" placeholder="олучатель yoomoney" name="receiver" value="410016439442251" required/> </div>
+	 <div><input type="hidden" id="receiver" placeholder="Получатель yoomoney" name="receiver" value="410016439442251" required/> </div>
 	<input type="hidden" name="label" value="id=${n.user?n.user.id:'0'}&c=5"/>
     <input type="hidden" name="quickpay-form" value="button" />
     <input type="hidden" name="successURL" value="https://rouletka.ru/about" />
@@ -361,7 +361,7 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
     <form name="mypayoutform" action="/admin/setPayout" method="post">
     
     <input type="hidden" name="label" value="${n.user?n.user.id:'0'}"/>
-    <div><input type="hidden" id="payoutamountid" name="payoutamount"  value="${n.user? Number.parseFloat(n.user.theart*0.10).toFixed(2):0}"/></div>
+    <div><input type="hidden" id="payoutamountid" name="payoutamount"  value="${n.user? Number(n.user.theart * 0,10).toFixed(2):0}"/></div>
     <div class="pfo"><label for="payoutaccountid">Счет в <a  id="mpa" href="https://yoomoney.ru">yoomoney</a>:</label>&nbsp;&nbsp;<input type="number" id="payoutaccountid" name="payoutaccount" required placeholder="410016439442251"  value=""/></div>
     <div class="pfo"><input id="payoutsub" type="submit" value="Получить" /></div>
     </form>

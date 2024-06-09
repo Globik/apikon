@@ -442,8 +442,8 @@ function setSignal(){
 function get_socket() {
 	 if(NICK == "anon" || NICK == undefined){
 		//  sock.close();
-		  note({content: "Залогиньтесь!", type: "warn", time: 5 });
-		  return;
+		//  note({content: "Залогиньтесь!", type: "warn", time: 5 });
+		//  return;
 	  }
 	//  alert(ifEnter());
 /*	if(ifEnter()){
@@ -467,7 +467,7 @@ return window.location.href='#purchaseHREF';
 
   sock.onopen = function () {
 	 console.log("websocket opened");
-	 wsend({ type: "helloServer", userId: gid("userId").value, nick: userName.value });
+	 wsend({ type: "helloServer", userId: gid("userId").value?gid("userId").value:'anon', nick: userName.value });
   };
   sock.onerror = function (e) {
     note({ content: "Websocket error: " + e, type: "error", time: 5 });
@@ -766,8 +766,8 @@ function handleNewIceCandidate(msg) {
 function start(el){
 	 if(NICK == "anon" || NICK == undefined){
 		
-		  note({content: "Залогиньтесь!", type: "warn", time: 5 });
-		  return;
+		 // note({content: "Залогиньтесь!", type: "warn", time: 5 });
+		//  return;
 	  }
 	if(!sock) {
 		get_socket();
@@ -1548,7 +1548,10 @@ function onHeartClick(ev){
 		return;
 	}
 	
-	
+	if(!Login()){
+		window.location.href="#login";
+		return;
+	}
 	let quant;let g;
 	for(var i = 0; i < heartcountels.length; i++){
 		let heartcount = heartcountels[i];
@@ -1651,15 +1654,30 @@ function on_payurl_error(l, el){
 }
  function getPayout(el){
 	panelOpen();
+	if(!Login()){
+		window.location.href = "#login";
+		return;
+	}
+	window.location.href = "#vivest"
  }
-
+function Login(){
+	if(isLogin.value == 'true'){
+		return true;
+	}else{
+		return false;
+	}
+}
 function onpayoutsubmit(ev){
 	ev.preventDefault();
 	let d = {};
 	d.account = ev.target.payoutaccount.value;
 	d.amount = ev.target.payoutamount.value;
-	if(Number(d.amount) == 0){
+	if(Number(d.amount) == 0 && Number(d.amount == 0.00)){
 		note({ content: "Нечего", type: "warn", time: 5 });
+		return;
+	}
+	if(!Login()){
+		window.location.href = "#login";
 		return;
 	}
 	//alert(d.amount);
