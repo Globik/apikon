@@ -348,7 +348,7 @@ var wi2={
   operation_id: '770384009832968088',
   currency: '643'
 }
-var wi={
+var wi3={
   notification_type: 'p2p-incoming',
   bill_id: '',
   amount: '1.98',
@@ -363,12 +363,39 @@ var wi={
   operation_id: '770385975307952108',
   currency: '643'
 }
+var wi={
+	 
+  notification_type: 'card-incoming',
+  zip: '',
+  bill_id: '',
+  amount: '1.94',
+  firstname: '',
+  codepro: 'false',
+  withdraw_amount: '2.00',
+  city: '',
+  unaccepted: 'false',
+  label: 'id=3076&c=5',
+  building: '',
+  lastname: '',
+  datetime: '2024-06-09T04:55:20Z',
+  suite: '',
+  sender: '',
+  phone: '',
+  sha1_hash: 'f160116ba94bdbf1be1f52627d337643e98d289e',
+  street: '',
+  flat: '',
+  fathersname: '',
+  operation_label: '2df74931-0011-5000-9000-1c62a771e8ea',
+  operation_id: '771224120343575116',
+  currency: '643',
+  email: ''
 
+}
 
 //${notification_type}&${operation_id}&${amount}&${currency}&${datetime}&${sender}&${codepro}&${notification_secret}&${label}`
 //const s2='card-incoming&769261374481140080&1.94&643&2024-05-17T11:42:54Z&&false&xY6P7xpSQbKBYFT0jmXtym+t&id=3076&c=5'
 //const fucker = 'ZmV0Y7SBS8z1b0CIEWhKb9Qk';//ZmV0Y7SBS8z1b0CIEWhKb9Qk
-const fucker = 'LXLMTe9hgGIJcBTFfClIEMR4'
+const fucker = 'ZmV0Y7SBz1b0CIEWhKb9Qk';//LXLMTe9hgGIJcBTFfClIEMR4'
 const s2 = `${wi.notification_type}&${wi.operation_id}&${wi.amount}&${wi.currency}&${wi.datetime}&${wi.sender}&${wi.codepro}&${fucker}&${wi.label}`;
 console.log('si2 ', s2)
 let sha1_ha = wi.sha1_hash;
