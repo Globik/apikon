@@ -400,6 +400,7 @@ let { notification_type,
 		 const buka1 = 1;
 	//	const notification_secret = 'LXLMTe9hgGIJcBTFfClIEMR4';
 		const notification_secret = req.y_notif;//xY6P7xpSQbKBYFT0jmXtym+t  xY6P7xpSQbKBYFT0jmXtym+t
+		console.log('notofication secret', notification_secret);
 let str = `${notification_type}&${operation_id}&${amount}&${currency}&${datetime}&${sender}&${codepro}&${notification_secret}&${label}`
 	const paramStr = new URLSearchParams(label);
 	
