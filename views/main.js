@@ -197,7 +197,7 @@ ${n.user && n.user.brole=='admin'?'<div class="settingspanel" onclick="toAdminPa
 <div class="settingspanel"><b>Вебок:</b> <span id="camsCount">0</span> | <b>Коннектов:</b> <span id="connects">0</span></div>
 <!-- <div class="settingspanel"  onclick="pushSubscribe(this);">Пуш уведомления</div> -->
 <div class="settingspanel">
-<div class="some doh">Ваш доход&nbsp;&nbsp;<span id="dohod">${n.user? Number.parseFloat(n.user.theart*0.10).toFixed(2):0}</span>&nbsp;&nbsp;рублей</div>
+<div class="some doh">Ваш доход&nbsp;&nbsp;<span id="dohod">${n.user? Number.parseFloat(n.user.theart*0.10).toFixed(2):'0.00'}</span>&nbsp;&nbsp;рублей</div>
 <div class="du" onclick="getPayout(this);">Получить</div>
 </div>
 <div class="settingspanel"><a href="https://t.me/rouletka3">Наш Телеграм</a></div>

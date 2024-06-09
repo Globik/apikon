@@ -1658,6 +1658,16 @@ function on_payurl_error(l, el){
 		window.location.href = "#login";
 		return;
 	}
+	if(Number(dohod.textContent) == 0 || Number(dohod.textContent == 0.00)){
+		note({ content: "Нечего и минимум 1000 рублей на вывод накопить", type: "warn", time: 10 });
+		//alert("Нечего и минимум 1000 рублей на вывод накопить");
+		return;
+	}
+	if(Number(dohod.textContent) <=1000 || Number(dohod.textContent <= 1000.00)){
+		note({ content: "Минимум 1000 рублей на вывод накопить", type: "warn", time: 10 });
+		//alert("Минимум 1000 рублей на вывод накопить");
+		return;
+	}
 	window.location.href = "#vivest"
  }
 function Login(){
@@ -1672,8 +1682,14 @@ function onpayoutsubmit(ev){
 	let d = {};
 	d.account = ev.target.payoutaccount.value;
 	d.amount = ev.target.payoutamount.value;
-	if(Number(d.amount) == 0 && Number(d.amount == 0.00)){
-		note({ content: "Нечего", type: "warn", time: 5 });
+	if(Number(d.amount) == 0 || Number(d.amount == 0.00)){
+		//note({ content: "Нечего и минимум 1000 рублей на вывод накопить", type: "warn", time: 10 });
+		alert("Нечего и минимум 1000 рублей на вывод накопить");
+		return;
+	}
+	if(Number(d.amount) <=1000 || Number(d.amount <= 1000.00)){
+		//note({ content: "Минимум 1000 рублей на вывод накопить", type: "warn", time: 10 });
+		alert("Минимум 1000 рублей на вывод накопить");
 		return;
 	}
 	if(!Login()){
