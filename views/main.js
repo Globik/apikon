@@ -205,7 +205,7 @@ ${n.user && n.user.brole=='admin'?'<div class="settingspanel" onclick="toAdminPa
  <!--
  <div class="settingspanel"  id="donatis">Помочь проекту<br>
  <iframe src="https://yoomoney.ru/quickpay/fundraise/button?billNumber=AWVMCQLpAcY.240125&" width="330" height="50" frameborder="0" allowtransparency="true" scrolling="no"></iframe></div> -->
-${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'<div class="settingspanel"><a href="#login">Войти</a></div>'}
+${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'<div class="settingspanel"><a href="#login" onclick="panelOpen();">Войти</a></div>'}
 <!-- <div class="settingspanel"><button onclick="mach();">mach</button></div> -->
 </div>
 </nav>
