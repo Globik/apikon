@@ -544,10 +544,10 @@ const mediasoupOptions = {
         },
       ]
   },
-  // WebRtcTransport settings
+  // WebRtcTransport settings 45.12.18.172
   webRtcTransport: {
     listenIps: [
-      { ip: (process.env.DEVELOPMENT == "yes" ? '127.0.0.1' : "45.12.18.172") , announcedIp: null }
+      { ip: (process.env.DEVELOPMENT == "yes" ? '127.0.0.1' : "45.12.18.172") , announcedIp: '45.12.18.172' }
     ],
     enableUdp: true,
     enableTcp: true,
