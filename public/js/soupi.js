@@ -477,7 +477,8 @@ async function consumeAndResume(transport, kind) {
 
 async function loadDevice(routerRtpCapabilities) {
     try {
-        device = new MediasoupClient.Device();
+       // device = new MediasoupClient.Device();
+        device = new window.mediasoup.Device();
     } catch (error) {
         if (error.name === 'UnsupportedError') {
             note({content: 'Browser not supported!', type: "error", time: 5});

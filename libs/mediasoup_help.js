@@ -558,7 +558,7 @@ const mediasoupOptions = {
 		announcedAddress: null
 	}],
     enableUdp: true,
-    enableTcp: true,
+    enableTcp: false,
     preferUdp: true,
     maxIncomingBitrate: 1500000,
     initialAvailableOutgoingBitrate: 1000000,

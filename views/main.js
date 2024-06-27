@@ -49,7 +49,7 @@ return `
 		<link href="/css/mediabox2.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
 <script src="/js/globalik.js"></script>
-<script src="/js/mediasoup-client.js"></script>
+<script src="/js/mediasoup-client.min.js"></script>
 <!-- <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script> -->
 <!-- <script src="/js/adapter-latest.js"></script> -->
  <!-- Google tag (gtag.js) -->
