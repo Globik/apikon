@@ -248,7 +248,7 @@ console.log("after sender")
         console.log('--trasnport produce');
         try {
             const {id} = await sendRequest({type: 'produce', transportId: producerTransport.id, kind, rtpParameters});
-            alert(id);
+           // alert(id);
             callback({id});
         } catch (err) {
 			console.error(err);

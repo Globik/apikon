@@ -433,12 +433,13 @@ removeAudioConsumer(id);
   if (producerSocketId === id) {
     console.log('---- cleanup producer ---');
     oni("Jemand", "have unpublished the WebRTC translation");
+    eventEmitter.emit("producer_unpublished");
     if(onLine.has(getId(ws))){
 		onLine.delete(getId(ws));
 		
 	}
     broadcast({ type: "producer_unpublished" })
-    eventEmitter.emit("producer_unpublished");
+    
     try{
 	//	await pool.query('delete from vroom');
 	
@@ -547,7 +548,7 @@ const mediasoupOptions = {
   // WebRtcTransport settings 45.12.18.172
   webRtcTransport: {
     listenIps: [
-      { ip: (process.env.DEVELOPMENT == "yes" ? '127.0.0.1' : "45.12.18.172") , announcedIp: '45.12.18.172' }
+      { ip: (process.env.DEVELOPMENT == "yes" ? '127.0.0.1' : "45.12.18.172") , announcedIp: null }
     ],
     enableUdp: true,
     enableTcp: true,

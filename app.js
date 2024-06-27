@@ -864,6 +864,7 @@ function doWas(obj){
 }
  ev.on('producer_published', doWas);
  ev.on("producer_unpublished", function doWas2(){
+	 console.log("producer unpublished event");
 	 delete imgData.img_data;
 	 delete imgData.userId;
 	 delete imgData.nick;
