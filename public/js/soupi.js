@@ -213,6 +213,7 @@ console.log("after sender")
 
     try {
         const data = await sendRequest({type: 'getRouterRtpCapabilities', vid: "publish"});
+        console.log("data ", data);
         await loadDevice(data.routerrtpCapabilities);
         // SENDER = true;
         console.log("after device load");
@@ -487,7 +488,8 @@ async function loadDevice(routerRtpCapabilities) {
     try {
         await device.load({routerRtpCapabilities});
     } catch (err) {
-        note({content: err, type: "error", time: 5});
+		console.error(err);
+        note({content: err.toString(), type: "error", time: 5});
     }
 }
 
