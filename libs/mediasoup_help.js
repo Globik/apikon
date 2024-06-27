@@ -509,7 +509,7 @@ const mediasoupOptions = {
   // Worker settings
   worker: {
     rtcMinPort: 10000,
-    rtcMaxPort: 10100,
+    rtcMaxPort: 20100,
     logLevel: 'debug',
     logTags: [
       'info',
@@ -554,14 +554,14 @@ const mediasoupOptions = {
     listenInfos:[
     {
 		protocol:"udp",
-		ip:/*(process.env.DEVELOPMENT == "yes" ? '127.0.0.1' : */"45.12.18.172",//),
+		ip:(process.env.DEVELOPMENT == "yes" ? '127.0.0.1' : "45.12.18.172"),
 		announcedAddress: "45.12.18.172"
 	}],
     enableUdp: true,
     enableTcp: false,
     preferUdp: true,
-    maxIncomingBitrate: 1500000,
-    initialAvailableOutgoingBitrate: 1000000,
+   // maxIncomingBitrate: 1500000,
+   // initialAvailableOutgoingBitrate: 1000000,
   }
 };
 
