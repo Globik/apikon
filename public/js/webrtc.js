@@ -8,7 +8,7 @@ var pc = null;
 var connectionState = "closed";
 var mobChat = false;
 var isOpen = false;
-
+var PSENDER = false;
 var F = false;
 var isShow = false;
 var someInterval;
@@ -16,7 +16,7 @@ var OPENCLAIM = false;
 var videoInput1, videoInput2;
 const IPS = new Map();
 var partnerId;
-
+var MYSOCKETID = null;
 var someIp = null;
 var remote = gid("remote");
 var local = gid("local");
@@ -509,8 +509,9 @@ var tr = undefined;
 function on_msg(msg) {
 	//console.log("data type: ", msg.type);
 	 switch (msg.type) {
-		 case 'pick':
+		 case 'helloServer':
 		// wsend({type:'pock'});
+		MYSOCKETID = msg.socketId;
 		 break
       case 'online':
         onlineCount.textContent = msg.online
@@ -609,7 +610,11 @@ function on_msg(msg) {
         break;
         case 'vip':
         someIp = msg.vip;
+        case 'media':
+      //  goMedia(msg);
+        break;
       default:
+      goMedia(msg);
         break
     }
 	
@@ -871,6 +876,7 @@ function handleError(err){
 		wsend({ type: "srcdata", src: imgdata});	
 	}
 	local.onloadedmetadata = function () {
+		
 		console.log("local onloaded");
 		if(isShow)return;
 		setTimeout(function(){
@@ -888,6 +894,10 @@ function handleError(err){
 		duka2.className="show";
 	}
 	remote.onloadedmetadata = function () {
+		if(PSENDER){
+			console.log("PSENDER!****");
+			return;
+		}
 		console.log("remote onloaded");
 		nextbtn.disabled = false;
 		somespinner.className="";

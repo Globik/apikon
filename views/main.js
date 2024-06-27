@@ -49,6 +49,7 @@ return `
 		<link href="/css/mediabox2.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
 <script src="/js/globalik.js"></script>
+<script src="/js/mediasoup-client.js"></script>
 <!-- <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script> -->
 <!-- <script src="/js/adapter-latest.js"></script> -->
  <!-- Google tag (gtag.js) -->
@@ -88,6 +89,7 @@ return `
     <input type="hidden" id="userId" value="${n.user?n.user.id:0}">
     <input type="hidden" id="userName" value="${n.user?n.user.name:'anon'}">
     <input type="hidden" id="isTestHeart" value="${istestheart}">
+    <input type="hidden" id="publishedid" value="${n.imgData && n.imgData.img_data?n.imgData.publishedId:null}" >
     <!-- ${n.user? JSON.stringify(n.user):'no user'} -->
     <script>
    // note({ content: '<b>Помочь проекту: </b><br><br>
@@ -186,7 +188,7 @@ function isOpenModal(){
   
      </script>
      <article id="mediabox">
-    <nav id="navpanel"><div class="nav"><b>Online: <span id="onlineCount">0</span></b></div>
+    <nav id="navpanel"><div class="nav"><b>Online: <span id="onlineCount">0</span></b>&nbsp;&nbsp;&nbsp;<b style="font-size:18px;">&#x1F441;</b>&nbsp;&nbsp;&nbsp;<span id="vV" style="color:orange;font-weight:bold;">${n.imgData && n.imgData.img_data?n.imgData.value:0}</span></div>
     <div id="settings" class="ita" onclick="panelOpen(this);">
  <img class="setimg" src="/img/set2.svg">
 </div>
@@ -211,6 +213,15 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
 </nav>
     <section id="container">
     <div id="remotecontainer" onclick="closeClaim(this);">
+    
+    ${n.imgData && n.imgData.img_data?'<style>div#playContainer svg{fill:rgba(234,223,244,0.6);}</style>':''}
+    <div id="playContainer" data-state="${n.imgData && n.imgData.img_data?'busy':'niemand'}" onclick="beginTranslation(this);"><!-- <img  src="/img/play2.svg"/>-->
+<svg version="1.1"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000" xml:space="preserve">
+<metadata> Svg Vector Icons : http://www.onlinewebfonts.com/icon </metadata>
+<g><path d="M500,10C229.4,10,10,229.4,10,500s219.4,490,490,490c270.6,0,490-219.4,490-490S770.6,10,500,10z M500,881.1c-210.5,0-381.1-170.6-381.1-381.1S289.5,118.9,500,118.9c210.5,0,381.1,170.6,381.1,381.1S710.5,881.1,500,881.1z"/><path d="M390.2,282.2l326.7,218.6L390.2,719.5V282.2z"/></g>
+</svg>
+<div id="kresti"><b id="kres">&#x274E;</b></div>
+    <video id="kartina" ${n.imgData && n.imgData.img_data?` poster=${n.imgData.img_data}`:''}></video></div>
     <section id="claimContainer" onclick="openClaim(this);"><div id="claimBox">!</div></section>
     <div id="claimMenu" data-vip=""><div data-claim="ignor" onclick="sendClaim(this);">В игнор!</div><div data-claim="claim" onclick="sendClaim(this);">Пожаловаться!</div></div>
     <section id="mobileloader"><div class="loader"></div></section>
@@ -292,6 +303,8 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
 </div><div id="foot2"><a href="/"> О проекте</a></div>
     </section>
     </article>
+    
+ 
    <!--
     <a href="#."  class="overlay" id="purchaseHREF"></a>
     <output id="purchaseoutput" class="popi">
@@ -492,6 +505,7 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
    <script src="/js/login.js"></script>
     
     <script src="/js/webrtc.js"></script>
+    <script src="/js/soupi.js"></script>
     
     
     

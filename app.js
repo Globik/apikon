@@ -15,6 +15,8 @@ const render = require('./libs/render.js');
 const admin = require('./router/admin.js');
 const pay = require('./router/pay.js');
 
+const { handleMediasoup, ev } = require("./libs/mediasoup_help.js")
+
 const axios = require('axios').default;
 //const { v4: uuidv4 } = require('uuid');
 //uuidv4(); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
@@ -164,11 +166,11 @@ app.use((req, res, next)=>{
 })
 app.use('/admin', admin);
 app.use('/pay', pay);
-
+var imgData = {};
 app.get("/about", async(req, res)=>{
 	console.log("*** USER *** ", req.user);
 	console.log('req.app.locals ', req.app.locals.testshopid, ' ', req.app.locals.testshopsecret);
-	res.rendel('main', {});
+	res.rendel('main', {imgData});
 })
 app.get("/", async(req, res)=>{
 	oni((req.user?req.user.name:'anonym'), " on about");
@@ -849,9 +851,28 @@ const interval = setInterval(function ping() {
 function heartbeat() {
 	//console.log("pong here", this.isAlive);
   this.isAlive = true;
-  this.send(JSON.stringify({type:"pick"}));
+ // this.send(JSON.stringify({type:"pick"}));
 }
-
+function doWas(obj){
+	console.log(" **** DO WAS!!!! ***");
+	// { img_data: data.img_data, userId: ws.userId, nick: ws.nick, value: 0, publishedId: ws.id  }
+	imgData.img_data = obj.img_data;
+	imgData.userId = obj.userId;
+	imgData.nick = obj.nick;
+	imgData.value = obj.value;
+	imgData.publishedId = obj.publishedId;
+}
+ ev.on('producer_published', doWas);
+ ev.on("producer_unpublished", function doWas2(){
+	 delete imgData.img_data;
+	 delete imgData.userId;
+	 delete imgData.nick;
+	 delete imgData.value;
+	 delete imgData.publishedId;
+ });
+ ev.on("onconsume", function doWas3(obj){
+	 imgData.value = obj.value;
+ });
 wsServer.on('connection', async function (socket, req) {
 	
 	socket.burl = req.url;
@@ -869,11 +890,28 @@ wsServer.on('connection', async function (socket, req) {
   if(onLine.size !=0)wsend(socket, { type: "dynamic", sub: "total", cams: [...onLine] });
   socket.isAlive = true;
   socket.on("pong", heartbeat);
+  
+  
+ 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  let msg;
   socket.on('message', (message) => {
-	  let msg;
+	  //var msg;
 	  try{
      msg = JSON.parse(message)
 }catch(e){return;}
+if(msg.request == "mediasoup"){
+	/*handleMediasoup.*/handleMediasoup(socket, msg, WebSocket, wsServer, pool).mediasoup_t();
+	return;
+}
     switch (msg.type) {
       case 'new-ice-candidate':
       case 'video-offer':
@@ -885,9 +923,13 @@ wsServer.on('connection', async function (socket, req) {
      // msg.vip = socket.vip
         sendToPeer(socket, msg)
         break
+      //  case "mediasoup" :
+         //       handleMediasoup.handleMediasoup(socket, msg, webSocket, wsServer, pool).mediasoup_t();
+     //  break
         case "helloServer":
         socket.userId = msg.userId;
         socket.nick = msg.nick;
+        wsend(socket, { type: "helloServer", socketId: socket.id });
         break
       case 'hang-up':
         hangUp(socket.id, { type: 'hang-up', partnerId: socket.userId, ignore: msg.ignore },(msg.sub&&msg.sub=="here"?true:false))
@@ -900,7 +942,7 @@ wsServer.on('connection', async function (socket, req) {
         broadcast_admin({ type: "dynamic", sub: "srcdata", src: msg.src, id: socket.id });
         break
       case 'ping':
-        socket.send(JSON.stringify({ type: 'pong' }))
+       // socket.send(JSON.stringify({ type: 'pong' }))
         break
         case 'disconnection':
         machdisconnect(socket);
@@ -920,6 +962,7 @@ socket.on('error', function(e){
     broadcasti({ type: 'online', online: wsServer.clients.size })
     
     hangUp(socket.id, { type: 'hang-up', partnerId: socket.userId, ignore: false }, true)
+    /* handleMediasoup.*/handleMediasoup(socket, msg, WebSocket, wsServer, pool).cleanUpPeer(socket.pubId);
   })
 })
 function wsend(ws, obj) {

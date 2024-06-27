@@ -1,4 +1,10 @@
 const { oni } = require('./web_push.js');
+var BID = undefined;
+//const { oni } = require('./libs/web_push.js');
+const EventEmitter = require('node:events');
+const eventEmitter = new EventEmitter();
+let onLine = new Map();
+
  function on_producer_transport_close(){
 		console.log("***************************************")
 		console.log("producer transport closed")
@@ -159,7 +165,7 @@ const handleMediasoup =  function(ws, data, WebSocket, sock, pool){
     if (kind === 'video') {
 		try{
       videoProducer = await producerTransport.produce({ kind, rtpParameters });
-      wsend(ws,{type: 'produce', id: videoProducer.id });
+      wsend(ws,{ type: 'produce', id: videoProducer.id });
   }catch(er){
 	  ws.publish = false;
 	  wsend(ws, {type: "error", info: er.toString()})
@@ -304,40 +310,58 @@ const handleMediasoup =  function(ws, data, WebSocket, sock, pool){
 
 						
 		}else if(data.type == 'stop'){
-			cleanUpPeer();
+			cleanUpPeer(ws.pubId);
 			}else if( data.type == "pic" ){
 				try{
 					oni("Jemand", "have published a WebRTC translation");
-  await pool.query( 'insert into vroom(us_id, poster, descr, typ) values($1,$2,$3,$4)', [ data.clientId, data.img_data, "I'm online : )", "all" ]);	
-  broadcast({ type: "producer_published", img_data: data.img_data });			
+ // await pool.query( 'insert into vroom(us_id, poster, descr, typ) values($1,$2,$3,$4)', [ data.clientId, data.img_data, "I'm online : )", "all" ]);	
+ if(!onLine.has(getId(ws)))onLine.set(getId(ws), { img_data: data.img_data, userId: ws.userId, publishedId: getId(ws), nick: ws.nick, value: 0 })
+ eventEmitter.emit('producer_published', { img_data: data.img_data, userId: ws.userId, nick: ws.nick, value: 0, publishedId: ws.id  });
+  broadcast({ type: "producer_published", img_data: data.img_data, userId: ws.userId, nick: ws.nick, value: 0, publishedId: ws.id });			
 			}catch(e){
 				console.log('db error: ', e.toString())
 				wsend(ws, { type: "perror", info: e.toString() });
 				}
 				}else if( data.type == "onconsume" ){
+					console.log(" *************** ONCONSUME ***************", data);
+					ws.pubId = data.publishedId;
 					try{
 						oni("Jemand", "have subscribed to WebRTC");
-						let v = await pool.query("update vroom set v=v+1 returning v");
-						broadcast_all({ type: data.type, value: v.rows[ 0 ].v });
+						//let v = await pool.query("update vroom set v=v+1 returning v");
+					if(onLine.has(data.publishedId)){
+						let a = onLine.get(data.publishedId);
+						a.value = a.value + 1;
+						broadcast_all({ type: data.type, value: a.value });
+						eventEmitter.emit(data.type, { value: a.value });
+					}else{
+						console.log(" ********** NO ONE !!!! *****");
+					}
 						}catch(err){
 						wsend(ws, { type: "perror", info: err.toString() })
 						}
+					}else if(data.type == "unconsume"){
+						unsubscribe(ws.pubId);
 					}else{
 				console.log("Unknown type: ", data.type);
 				}
 	}
-		
+	/*	
+	function getPub(id){
+		for (let el of sock.clients) {
+    if (el.id == id) {
+		console.log("el.target **** ", el.id, ' = ', id);
+		return el.id
+	}}
 	
+	}*/
 		
-const  cleanUpPeer = async function() {
-	console.log("SOCKET CLOSED!!*******************************")
-  const id = getId(ws);
+		function unsubscribe(pubId){
+		const id = getId(ws);
   const consumer = getVideoConsumer(id);
   if (consumer) {
 	  try{
 		  oni("Jemand", "have unsubscribed the WebRTC");
-						let v = await pool.query("update vroom set v=v-1 returning v");
-						if(v && v.rows.length) broadcast_all({ type: "onconsume", value: v.rows[ 0 ].v });
+						
 						}catch(err){
 						console.log(err.toString());
 						}
@@ -353,16 +377,71 @@ removeAudioConsumer(id);
   if (transport) {
 	  console.log("*************************")
 	  console.log("closing consumer transport ", id)
-	  console.log("*******************************")
+	  console.log("*******************************");
+	  if(onLine.has(pubId)){
+						let a = onLine.get(pubId);
+						a.value = a.value - 1;
+						broadcast_all({ type: "onconsume", value: a.value });
+						eventEmitter.emit("onconsume", { value: a.value });
+					}
     transport.close();
     removeConsumerTransport(id);
   }
+  
+}
+		
+		
+const  cleanUpPeer = async function(pubId) {
+	console.log("SOCKET CLOSED!!*******************************")
+  const id = getId(ws);
+  const consumer = getVideoConsumer(id);
+  if (consumer) {
+	  try{
+		  oni("Jemand", "have unsubscribed the WebRTC");
+						
+						}catch(err){
+						console.log(err.toString());
+						}
+    consumer.close();
+    removeVideoConsumer(id);
+  }
+const aconsumer = getAudioConsumer(id);
+if(aconsumer){
+	aconsumer.close();
+removeAudioConsumer(id);
+} 
+  const transport = getConsumerTrasnport(id);
+  if (transport) {
+	  console.log("*************************")
+	  console.log("closing consumer transport ", id)
+	  console.log("*******************************");
+	  if(onLine.has(pubId)){
+						let a = onLine.get(pubId);
+						a.value = a.value - 1;
+						broadcast_all({ type: "onconsume", value: a.value });
+						eventEmitter.emit("onconsume", { value: a.value });
+					}
+    transport.close();
+    removeConsumerTransport(id);
+  }
+  
+  
+  
+  
+  
+  
   if (producerSocketId === id) {
     console.log('---- cleanup producer ---');
     oni("Jemand", "have unpublished the WebRTC translation");
+    if(onLine.has(getId(ws))){
+		onLine.delete(getId(ws));
+		
+	}
     broadcast({ type: "producer_unpublished" })
+    eventEmitter.emit("producer_unpublished");
     try{
-		await pool.query('delete from vroom');
+	//	await pool.query('delete from vroom');
+	
 		}catch(err){
 			console.log(err.toString())
 		wsend({ type: "perror", info: err.toString() });
@@ -394,13 +473,13 @@ removeAudioConsumer(id);
   }
 }
 		
-		return { mediasoup_t, cleanUpPeer }
+		return { mediasoup_t, cleanUpPeer  }
 		
 	}
 	
  
 		
-	module.exports = { handleMediasoup: handleMediasoup }
+	module.exports = { handleMediasoup: handleMediasoup, ev: eventEmitter }
 	
 	
 		
@@ -468,7 +547,7 @@ const mediasoupOptions = {
   // WebRtcTransport settings
   webRtcTransport: {
     listenIps: [
-      { ip: (process.env.DEVELOPMENT == "yes" ? '127.0.0.1' : "45.89.66.225") , announcedIp: null }
+      { ip: (process.env.DEVELOPMENT == "yes" ? '127.0.0.1' : "45.12.18.172") , announcedIp: null }
     ],
     enableUdp: true,
     enableTcp: true,
@@ -493,7 +572,7 @@ async function startWorker() {
   const mediaCodecs = mediasoupOptions.router.mediaCodecs;
   worker = await mediasoup.createWorker();
   router = await worker.createRouter({ mediaCodecs });
-  worker.fuck();
+ // worker.fuck();
  router.on('workerclose', function(){ console.log('worker closed so router closed') })
  //router.observer.on('close', function(){console.log('router closed')})
 	  worker.observer.on('close', function(){console.log('worker closed')})
