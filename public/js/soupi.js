@@ -75,7 +75,7 @@ function sendRequest(obj) {
     });
 
 }
-function Screenshot() {
+function Screenshot2() {
 	if(!remote.srcObject) return;
     let cnv = document.createElement('canvas');
     let w = 180;
@@ -273,7 +273,7 @@ console.log("after sender")
                let a = document.querySelector('div#playContainer #kresti');
                if(a) a.classList.toggle('show');
                 setTimeout(()=>{;
-               let img_data = Screenshot();
+               let img_data = Screenshot2();
             
                 wsend({clientId: userId.value, img_data: img_data, type: "pic", request: "mediasoup"});
                }, 1000)
