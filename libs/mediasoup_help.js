@@ -312,6 +312,7 @@ const handleMediasoup =  function(ws, data, WebSocket, sock, pool){
 		}else if(data.type == 'stop'){
 			cleanUpPeer(ws.pubId);
 			}else if( data.type == "pic" ){
+				console.log(" **** PIC! ****");
 				try{
 					oni("Jemand", "have published a WebRTC translation");
  // await pool.query( 'insert into vroom(us_id, poster, descr, typ) values($1,$2,$3,$4)', [ data.clientId, data.img_data, "I'm online : )", "all" ]);	
