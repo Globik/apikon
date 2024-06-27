@@ -510,7 +510,7 @@ const mediasoupOptions = {
   worker: {
     rtcMinPort: 10000,
     rtcMaxPort: 20100,
-    logLevel: 'debug',
+    logLevel: 'error',
     logTags: [
       'info',
       'ice',
@@ -555,7 +555,7 @@ const mediasoupOptions = {
     {
 		protocol:"udp",
 		ip:(process.env.DEVELOPMENT == "yes" ? '127.0.0.1' : "45.12.18.172"),
-		announcedAddress: "45.12.18.172"
+		announcedAddress: null
 	}],
     enableUdp: true,
     enableTcp: false,
