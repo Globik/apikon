@@ -558,7 +558,7 @@ const mediasoupOptions = {
 		announcedAddress: null
 	}],
     enableUdp: true,
-    enableTcp: false,
+    enableTcp: true,
     preferUdp: true,
    // maxIncomingBitrate: 1500000,
    // initialAvailableOutgoingBitrate: 1000000,
@@ -574,11 +574,17 @@ let producerSocketId = null;
 //let consumerTransport = null;
 //let subscribeConsumer = null;
 
-
+const dkey = "/etc/letsencrypt/live/rouletka.ru/privkey.pem";
+const dcert = "/etc/letsencrypt/live/rouletka.ru/fullchain.pem";
 async function startWorker() {
 	try{
   const mediaCodecs = mediasoupOptions.router.mediaCodecs;
-  worker = await mediasoup.createWorker();
+  worker = await mediasoup.createWorker(
+  {
+  dtlsCertificateFile : dcert,
+  dtlsPrivateKeyFile  : dkey
+}
+  );
   router = await worker.createRouter({ mediaCodecs });
  // worker.fuck();
  router.on('workerclose', function(){ console.log('worker closed so router closed') })

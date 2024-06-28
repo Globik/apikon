@@ -335,7 +335,7 @@ console.log("after sender")
         if (videoTrack) {
             const trackParams = {track: videoTrack};
             try {
-				alert('videoproducer');
+				//alert('videoproducer');
                 videoProducer = await producerTransport.produce(trackParams);
             } catch (err) {
 				console.error(err);
