@@ -560,9 +560,9 @@ const mediasoupOptions = {
 		ip:"45.12.18.172"
 	}
 	],
-    enableUdp: true,
-    enableTcp: true,
-    preferUdp: true,
+   // enableUdp: true,
+   // enableTcp: true,
+   // preferUdp: true,
    // maxIncomingBitrate: 1500000,
    // initialAvailableOutgoingBitrate: 1000000,
   }
