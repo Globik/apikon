@@ -555,7 +555,7 @@ const mediasoupOptions = {
     {
 		protocol:"udp",
 		ip:(process.env.DEVELOPMENT == "yes" ? '127.0.0.1' : "45.12.18.172"),
-		announcedAddress: null
+		announcedAddress: "45.12.18.172"
 	}],
     enableUdp: true,
     enableTcp: true,
