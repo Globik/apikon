@@ -239,7 +239,8 @@ console.log("after sender")
             })
             callback();
         } catch (er) {
-            note({content: er, type: "error", time: 5});
+			console.error(er);
+            note({content: er.toString(), type: "error", time: 5});
             errback(er);
         }
         ;
@@ -248,14 +249,39 @@ console.log("after sender")
     producerTransport.on('produce', async ({kind, rtpParameters}, callback, errback) => {
         console.log('--trasnport produce');
         try {
-            const {id} = await sendRequest({type: 'produce', transportId: producerTransport.id, kind, rtpParameters});
+            const {id} = await sendRequest({type: 'transport-produce', transportId: producerTransport.id, kind, rtpParameters});
             console.log('id ', id);
-            callback(id);
+            callback({id});
         } catch (err) {
 			console.error(err);
             note({content: err.toString(), type: "error", time: 5});
             errback(err);
         }
+        
+        /*
+         transport.on("produce", async (parameters, callback, errback) =>
+{
+  // Signal parameters to the server side transport and retrieve the id of 
+  // the server side new producer.
+  try
+  {
+    const data = await mySignaling.send(
+      "transport-produce",
+      {
+        transportId   : transport.id, 
+        kind          : parameters.kind,
+        rtpParameters : parameters.rtpParameters,
+        appData       : parameters.appData
+      });
+
+    // Let's assume the server included the created producer id in the response
+    // data object.
+    const { id } = data;
+
+    // Tell the transport that parameters were transmitted and provide it with the
+    // server side producer's id.
+    callback({ id });
+         */
     });
 
     producerTransport.on('connectionstatechange', async(state) => {
