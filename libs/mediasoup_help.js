@@ -159,7 +159,7 @@ const handleMediasoup =  function(ws, data, WebSocket, sock, pool){
 	wsend(ws, {type: "error", info: e.toString()})
 	}
     
-    }else if(data.type == 'transport-produce'){
+    }else if(data.type == 'produce'){
     const { kind, rtpParameters } = data;
     console.log('-- produce --- kind=', kind);
     if (kind === 'video') {

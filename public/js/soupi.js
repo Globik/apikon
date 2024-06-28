@@ -249,7 +249,7 @@ console.log("after sender")
     producerTransport.on('produce', async ({kind, rtpParameters}, callback, errback) => {
         console.log('--trasnport produce');
         try {
-            const {id} = await sendRequest({type: 'transport-produce', transportId: producerTransport.id, kind, rtpParameters});
+            const {id} = await sendRequest({type: 'produce', transportId: producerTransport.id, kind, rtpParameters});
             console.log('id ', id);
             callback({id});
         } catch (err) {
@@ -335,6 +335,7 @@ console.log("after sender")
         if (videoTrack) {
             const trackParams = {track: videoTrack};
             try {
+				alert('videoproducer');
                 videoProducer = await producerTransport.produce(trackParams);
             } catch (err) {
 				console.error(err);
