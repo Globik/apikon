@@ -250,7 +250,7 @@ console.log("after sender")
         try {
             const {id} = await sendRequest({type: 'produce', transportId: producerTransport.id, kind, rtpParameters});
             console.log('id ', id);
-            callback({id});
+            callback(id);
         } catch (err) {
 			console.error(err);
             note({content: err.toString(), type: "error", time: 5});
