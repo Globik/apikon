@@ -557,7 +557,7 @@ const mediasoupOptions = {
 		ip:(process.env.DEVELOPMENT == "yes" ? '127.0.0.1' : "45.12.18.172"),
 	},{
 		protocol:"tcp",
-		ip:"45.12.18.172"
+		ip:(process.env.DEVELOPMENT == "yes" ? '127.0.0.1' : "45.12.18.172"),
 	}
 	],
    // enableUdp: true,
@@ -582,11 +582,12 @@ const dcert = "/etc/letsencrypt/live/rouletka.ru/fullchain.pem";
 async function startWorker() {
 	try{
   const mediaCodecs = mediasoupOptions.router.mediaCodecs;
+ 
   worker = await mediasoup.createWorker(
-  {
+/*  {
   dtlsCertificateFile : dcert,
   dtlsPrivateKeyFile  : dkey
-}
+}*/
   );
   router = await worker.createRouter({ mediaCodecs });
  // worker.fuck();
