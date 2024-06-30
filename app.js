@@ -46,13 +46,14 @@ async function ibot(){
 		 axios.post(`https://api.telegram.org/bot${tg_api}/sendMessage`, {
     chat_id: grid,
     text: 'hello alik',
-    parse_mode: 'html'
+    parse_mode: 'html',
+    disable_notification: true
   });
 	}catch(e){
 		console.log(e);
 		}
 }
-ibot();
+//ibot();
 const pool = mariadb.createPool({ 
   //  host: process.env.DB_HOST, 
     user: process.env.DB_USER, 

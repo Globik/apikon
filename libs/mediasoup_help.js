@@ -1,6 +1,10 @@
+const tg_api = '7129138329:AAGl9GvZlsK3RsL9Vb3PQGoXOdeoc97lpJ4';
+const grid = '-1002095475544';
+
 const { oni } = require('./web_push.js');
 var BID = undefined;
 //const { oni } = require('./libs/web_push.js');
+const axios = require('axios').default;
 const EventEmitter = require('node:events');
 const eventEmitter = new EventEmitter();
 let onLine = new Map();
@@ -314,7 +318,19 @@ const handleMediasoup =  function(ws, data, WebSocket, sock, pool){
 			}else if( data.type == "pic" ){
 				console.log(" **** PIC! ****");
 				try{
-					oni("Jemand", "have published a WebRTC translation");
+					oni(ws.nick, "have published a WebRTC translation");
+					try{
+		//await bot.sendMessage(gr_id, 'Hello Alik!!!');
+	axios.post(`https://api.telegram.org/bot${tg_api}/sendPhoto`, {
+    chat_id: grid,
+    photo: data.img_data,
+    caption: 	`<b>` + ws.nick + `</b>` + ` начал трансляцию\n<a href="https://rouletka.ru/about>Перейти</a>`,
+    parse_mode: 'html',
+    disable_notification: true
+  });
+	}catch(e){
+		console.log(e);
+		}
  // await pool.query( 'insert into vroom(us_id, poster, descr, typ) values($1,$2,$3,$4)', [ data.clientId, data.img_data, "I'm online : )", "all" ]);	
  if(!onLine.has(getId(ws)))onLine.set(getId(ws), { img_data: data.img_data, userId: ws.userId, publishedId: getId(ws), nick: ws.nick, value: 0 })
  eventEmitter.emit('producer_published', { img_data: data.img_data, userId: ws.userId, nick: ws.nick, value: 0, publishedId: ws.id  });
