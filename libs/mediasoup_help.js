@@ -318,7 +318,7 @@ const handleMediasoup =  function(ws, data, WebSocket, sock, pool){
 			}else if( data.type == "pic" ){
 				console.log(" **** PIC! ****");
 				try{
-					//oni(ws.nick, "have published a WebRTC translation");
+					oni(ws.nick, "have published a WebRTC translation");
 					try{
 		//await bot.sendMessage(gr_id, 'Hello Alik!!!');
 	axios.post(`https://api.telegram.org/bot${tg_api}/sendPhoto`, {
