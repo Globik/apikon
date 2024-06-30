@@ -324,7 +324,7 @@ const handleMediasoup =  function(ws, data, WebSocket, sock, pool){
 	axios.post(`https://api.telegram.org/bot${tg_api}/sendPhoto`, {
     chat_id: grid,
    // photo: data.img_data,
-   photo: './fake.jpg',
+   photo: 'https://rouletka.ru/img/tvpic.jpg',
     caption: 	`<b>` + ws.nick + `</b>` + ` начал трансляцию`,
     parse_mode: 'html',
     disable_notification: true
