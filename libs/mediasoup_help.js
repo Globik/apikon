@@ -325,7 +325,7 @@ const handleMediasoup =  function(ws, data, WebSocket, sock, pool){
     chat_id: grid,
    // photo: data.img_data,
    photo: './fake.jpg',
-    caption: 	`<b>` + ws.nick + `</b>` + ` начал трансляцию\n<a href="https://rouletka.ru/about>Перейти</a>`,
+    caption: 	`<b>` + ws.nick + `</b>` + ` начал трансляцию`,
     parse_mode: 'html',
     disable_notification: true
   });
