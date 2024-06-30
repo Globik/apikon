@@ -18,6 +18,11 @@ const pay = require('./router/pay.js');
 const { handleMediasoup, ev } = require("./libs/mediasoup_help.js")
 
 const axios = require('axios').default;
+
+//const TelegramBot = require('node-telegram-bot-api');
+const tg_api = '7129138329:AAGl9GvZlsK3RsL9Vb3PQGoXOdeoc97lpJ4';
+const grid = '-1002095475544';
+//const grid = 
 //const { v4: uuidv4 } = require('uuid');
 //uuidv4(); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
 
@@ -33,6 +38,21 @@ var {config} = require('dotenv');
 
 config();
 
+//const bot = new TelegramBot(tg_api, {});
+
+async function ibot(){
+	try{
+		//await bot.sendMessage(gr_id, 'Hello Alik!!!');
+		 axios.post(`https://api.telegram.org/bot${tg_api}/sendMessage`, {
+    chat_id: grid,
+    text: 'hello alik',
+    parse_mode: 'html'
+  });
+	}catch(e){
+		console.log(e);
+		}
+}
+ibot();
 const pool = mariadb.createPool({ 
   //  host: process.env.DB_HOST, 
     user: process.env.DB_USER, 
