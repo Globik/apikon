@@ -9,6 +9,11 @@ const EventEmitter = require('node:events');
 const eventEmitter = new EventEmitter();
 let onLine = new Map();
 
+const { Telegraf } = require('telegraf')
+//const { message } = require('telegraf/filters')
+
+const bot = new Telegraf(tg_api)
+
  function on_producer_transport_close(){
 		console.log("***************************************")
 		console.log("producer transport closed")
@@ -319,36 +324,30 @@ const handleMediasoup =  function(ws, data, WebSocket, sock, pool){
 				let f = new FormData();
 	console.log('data.file ', data.pile);
 	try{
-		//f.append('buffer', data.file,  Date.now() + '.png');
+		
 	}catch(e){console.log(e);}
 			}else if( data.type == "pic" ){
 				console.log(" **** PIC! ****");
 				try{
 					oni(ws.nick, "have published a WebRTC translation");
-					try{
-		//await bot.sendMessage(gr_id, 'Hello Alik!!!');
+		
 		let b11 = data.img_data.split(',')[1];
-		//console.log('b1 ', b1);
-		let f = new FormData();
-		//let b22 = Buffer.from(b11, 'base64');
-		let b33 = new Blob([b11]);
-		console.log(b33);
-		let b22 = Buffer.from(b11, 'base64');
-		f.append('file', b22/*,  Date.now() + '.png'*/);
-		return;
-	axios.post(`https://api.telegram.org/bot${tg_api}/sendPhoto`, {
-    chat_id: grid,
-   // photo: data.img_data,
-   photo: f,
-   file: f,
-    caption: 	`<b>` + ws.nick + `</b>` + ` запустил трансляцию. \nПосмотреть <a href="https://rouletka.ru/about">https://rouletka.ru</a>`,
-    parse_mode: 'html',
-    disable_notification: true
-  }/*, {headers:{'Content-Type':'multipart/form-data'}}*/);
-	}catch(e){
-		console.log(e);
-		}
- // await pool.query( 'insert into vroom(us_id, poster, descr, typ) values($1,$2,$3,$4)', [ data.clientId, data.img_data, "I'm online : )", "all" ]);	
+		try{
+bot.telegram.sendPhoto(grid, 
+{
+	type:"photo",
+	source: Buffer.from(b11, "base64")} ,
+ {
+	parse_mode: 'html',
+	caption: '<b>'+ws.nick+'</b>'+' запустил трансляцию. \nПосмотреть на <a href="https://rouletka.ru/about">https://rouletka.ru</a>',
+	disable_notification: true
+}
+
+	) 
+}catch(e){
+	console.log(e);
+}
+
  if(!onLine.has(getId(ws)))onLine.set(getId(ws), { img_data: data.img_data, userId: ws.userId, publishedId: getId(ws), nick: ws.nick, value: 0 })
  eventEmitter.emit('producer_published', { img_data: data.img_data, userId: ws.userId, nick: ws.nick, value: 0, publishedId: ws.id  });
   broadcast({ type: "producer_published", img_data: data.img_data, userId: ws.userId, nick: ws.nick, value: 0, publishedId: ws.id });			
@@ -468,6 +467,17 @@ removeAudioConsumer(id);
     console.log('---- cleanup producer ---');
     oni("Jemand", "have unpublished the WebRTC translation");
     eventEmitter.emit("producer_unpublished");
+    try{
+	
+		 axios.post(`https://api.telegram.org/bot${tg_api}/sendMessage`, {
+    chat_id: grid,
+    text: '<b>'+ws.nick+'</b> закончил трансляцию',
+    parse_mode: 'html',
+    disable_notification: true
+  });
+	}catch(e){
+		console.log(e);
+		}
     if(onLine.has(getId(ws))){
 		onLine.delete(getId(ws));
 		
