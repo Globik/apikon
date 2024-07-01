@@ -335,7 +335,7 @@ const handleMediasoup =  function(ws, data, WebSocket, sock, pool){
 		console.log(b33);
 		let b22 = Buffer.from(b11, 'base64');
 		f.append('file', b22/*,  Date.now() + '.png'*/);
-		//return;
+		return;
 	axios.post(`https://api.telegram.org/bot${tg_api}/sendPhoto`, {
     chat_id: grid,
    // photo: data.img_data,
