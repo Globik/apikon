@@ -334,16 +334,17 @@ const handleMediasoup =  function(ws, data, WebSocket, sock, pool){
 		let b33 = new Blob([b11]);
 		console.log(b33);
 		let b22 = Buffer.from(b11, 'base64');
-		f.append('file', new Blob(b22),  Date.now() + '.png');
-		return;
+		f.append('file', b22/*,  Date.now() + '.png'*/);
+		//return;
 	axios.post(`https://api.telegram.org/bot${tg_api}/sendPhoto`, {
     chat_id: grid,
    // photo: data.img_data,
    photo: f,
+   file: f,
     caption: 	`<b>` + ws.nick + `</b>` + ` запустил трансляцию. \nПосмотреть <a href="https://rouletka.ru/about">https://rouletka.ru</a>`,
     parse_mode: 'html',
     disable_notification: true
-  }, {headers:{'Content-Type':'multipart/form-data'}});
+  }/*, {headers:{'Content-Type':'multipart/form-data'}}*/);
 	}catch(e){
 		console.log(e);
 		}
