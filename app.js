@@ -22,6 +22,9 @@ const axios = require('axios').default;
 //const TelegramBot = require('node-telegram-bot-api');
 const tg_api = '7129138329:AAGl9GvZlsK3RsL9Vb3PQGoXOdeoc97lpJ4';
 const grid = '-1002095475544';
+//var f = new FormData()
+//let sdi = 'data:image/jpeg;base64,/u87uhuggygy';
+//console.log('sdi: ', sdi.split(',')[1])
 //const grid = 
 //const { v4: uuidv4 } = require('uuid');
 //uuidv4(); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'

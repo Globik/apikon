@@ -85,10 +85,29 @@ function Screenshot2() {
     var c = cnv.getContext('2d');
     c.drawImage(remote, 0, 0, w, h);
     var imgdata = cnv.toDataURL('image/png', 1.0);
+    
+    let file = null;
+let blob = cnv.toBlob(function(blob) {
+				file = new File([blob], 'image.png', { type: 'image/png' });
+				 console.log('file ', file);
+				 //wsend({clientId: userId.value, pile: JSON.stringify(file), type: "file", request: "mediasoup"});
+			}, 'image/png');
+console.log('blob: ', blob)
+   // wsend({clientId: userId.value, file: blob, type: "file", request: "mediasoup"});
+    
+    
     cnv.remove();
     return imgdata;
     
 }
+
+
+
+
+
+
+
+
 function addRemoteTrack(id, track) {
     //if(SENDER)return;
    

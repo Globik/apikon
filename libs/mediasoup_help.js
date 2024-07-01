@@ -1,6 +1,6 @@
 const tg_api = '7129138329:AAGl9GvZlsK3RsL9Vb3PQGoXOdeoc97lpJ4';
 const grid = '-1002095475544';
-
+const { Blob } =require('node:buffer')
 const { oni } = require('./web_push.js');
 var BID = undefined;
 //const { oni } = require('./libs/web_push.js');
@@ -315,20 +315,35 @@ const handleMediasoup =  function(ws, data, WebSocket, sock, pool){
 						
 		}else if(data.type == 'stop'){
 			cleanUpPeer(ws.pubId);
+			}else if(data.type=='file'){
+				let f = new FormData();
+	console.log('data.file ', data.pile);
+	try{
+		//f.append('buffer', data.file,  Date.now() + '.png');
+	}catch(e){console.log(e);}
 			}else if( data.type == "pic" ){
 				console.log(" **** PIC! ****");
 				try{
 					oni(ws.nick, "have published a WebRTC translation");
 					try{
 		//await bot.sendMessage(gr_id, 'Hello Alik!!!');
+		let b11 = data.img_data.split(',')[1];
+		//console.log('b1 ', b1);
+		let f = new FormData();
+		//let b22 = Buffer.from(b11, 'base64');
+		let b33 = new Blob([b11]);
+		console.log(b33);
+		let b22 = Buffer.from(b11, 'base64');
+		f.append('file', new Blob(b22),  Date.now() + '.png');
+		//return;
 	axios.post(`https://api.telegram.org/bot${tg_api}/sendPhoto`, {
     chat_id: grid,
    // photo: data.img_data,
-   photo: 'https://rouletka.ru/img/tvpic.jpg',
-    caption: 	`<b>` + ws.nick + `</b>` + ` начал трансляцию`,
+   photo: f,
+    caption: 	`<b>` + ws.nick + `</b>` + ` запустил трансляцию. \nПосмотреть <a href="https://rouletka.ru/about">https://rouletka.ru</a>`,
     parse_mode: 'html',
     disable_notification: true
-  });
+  }, {headers:{'Content-Type':'multipart/form-data'}});
 	}catch(e){
 		console.log(e);
 		}
