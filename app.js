@@ -864,7 +864,7 @@ function noop() {}
 
 const interval = setInterval(function ping() {
   wsServer.clients.forEach(function each(ws) {
-	 // console.log("ws.isAlive", ws.isAlive);
+	//  console.log("ws.isAlive", ws.isAlive);
     if (ws.isAlive === false) return ws.terminate();
     ws.isAlive = false;
    // console.log("ping");
@@ -874,8 +874,8 @@ const interval = setInterval(function ping() {
 
 function heartbeat() {
 	//console.log("pong here", this.isAlive);
-  this.isAlive = true;
- // this.send(JSON.stringify({type:"pick"}));
+ // this.isAlive = true;
+  this.send(JSON.stringify({type:"pick"}));
 }
 function doWas(obj){
 	console.log(" **** DO WAS!!!! ***");
@@ -966,8 +966,8 @@ if(msg.request == "mediasoup"){
         case 'srcdata':
         broadcast_admin({ type: "dynamic", sub: "srcdata", src: msg.src, id: socket.id });
         break
-      case 'ping':
-       // socket.send(JSON.stringify({ type: 'pong' }))
+      case 'pock':
+        socket.isAlive = true;
         break
         case 'disconnection':
         machdisconnect(socket);

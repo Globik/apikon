@@ -509,8 +509,11 @@ var tr = undefined;
 function on_msg(msg) {
 	//console.log("data type: ", msg.type);
 	 switch (msg.type) {
+		 case 'pick':
+		 wsend({type:'pock'});
+		 break
 		 case 'helloServer':
-		// wsend({type:'pock'});
+		
 		MYSOCKETID = msg.socketId;
 		 break
       case 'online':

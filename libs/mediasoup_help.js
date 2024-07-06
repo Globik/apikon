@@ -332,6 +332,7 @@ const handleMediasoup =  function(ws, data, WebSocket, sock, pool){
 					oni(ws.nick, "have published a WebRTC translation");
 		
 		let b11 = data.img_data.split(',')[1];
+		let kk = 0;
 		try{
 bot.telegram.sendPhoto(grid, 
 {
@@ -345,7 +346,34 @@ bot.telegram.sendPhoto(grid,
 
 	) 
 }catch(e){
-	console.log(e);
+	console.log('here 2 error ', e);
+	if(kk>0)return;
+		try{
+bot.telegram.sendPhoto(grid, 
+{
+	type:"photo",
+	source: Buffer.from(b11, "base64")} ,
+ {
+	parse_mode: 'html',
+	caption: '<b>'+ws.nick+'</b>'+' запустил трансляцию. \nПосмотреть на <a href="https://rouletka.ru/about">https://rouletka.ru</a>',
+	disable_notification: true
+}
+
+	) 
+	kk++;
+}catch(e){
+	console.log('here 1 error', e);
+	
+}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
 
  if(!onLine.has(getId(ws)))onLine.set(getId(ws), { img_data: data.img_data, userId: ws.userId, publishedId: getId(ws), nick: ws.nick, value: 0 })
