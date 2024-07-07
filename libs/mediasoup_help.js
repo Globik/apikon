@@ -336,7 +336,7 @@ const handleMediasoup =  function(ws, data, WebSocket, sock, pool){
 		
 		let b11 = data.img_data.split(',')[1];
 		let kk = 0;
-		let buf = Buffer.from([b11], "base64");
+		let buf = Buffer.from(b11, "base64");
 		try{
 			
 			/*
