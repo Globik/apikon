@@ -870,7 +870,7 @@ const interval = setInterval(function ping() {
    // console.log("ping");
     ws.ping(noop);
   });
-}, 3000);
+}, 1000 *30);
 
 function heartbeat() {
 	//console.log("pong here", this.isAlive);
