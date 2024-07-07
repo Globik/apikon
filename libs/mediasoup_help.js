@@ -354,38 +354,32 @@ bot.telegram.sendPhoto(grid,
 	*/
 	//Bad Request: invalid file HTTP URL specified: Wrong port number specified in the URL
 	//invalid file HTTP URL specified: Disallowed character in URL host
-function bufferToStream(myBuffer) {
-    let tmp = new Duplex();
-    tmp.push(myBuffer);
-    tmp.push(null);
-    return tmp;
-}
 
-const m2 = bufferToStream(buf);
-//console.log('m2 ', m2)
 	var f = new FormData();
 	f.append('chat_id', grid);
-	f.append('photo', buf);
-	//console.log('SUKA GET HEADERS ', f.getBuffer());
+	f.append('parse_mode', 'html');
+	f.append('caption', '<b>'+ws.nick+'</b>'+' запустил трансляцию. \nПосмотреть на <a href="https://rouletka.ru/about">https://rouletka.ru</a>');
+	f.append('disable_notification', true);
+	f.append('photo', new Blob([buf])/*, {  
+		// filename:    'someFileName.png',
+   // contentType: 'application/octet-stream',
+    
+    }
+    */ );
 	
 	
-	
-	
-	
-	
+
 	await axios.post(`https://api.telegram.org/bot${tg_api}/sendPhoto`,
-	{
+	/*{
 		chat_id: grid,
-		photo: buf,
-		filename:"f.png",
-		name:"40"
-	},
+		photo:buf
+	}*/f/*,
 	{
 		headers:  {
 		'Content-Type': 'multipart/form-data',
 			//'Content-Disposition':'form-data; name="30"; filename="f.png"'
 		 }
-	}
+	}*/
 	); 
 }catch(e){
 	console.log(e);
