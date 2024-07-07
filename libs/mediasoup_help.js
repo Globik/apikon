@@ -116,7 +116,7 @@ const handleMediasoup =  function(ws, data, WebSocket, sock, pool){
 				//console.log('router : ', router);
 				if(data.vid == "publish"){
 					if(producerTransport){
-						wsend(ws, {type: "error", info: "Busy!"})
+						wsend(ws, {type: "error", info: "Трансляция идет! Повторите ппопытку позднее."})
 						return;
 						}
 			try{
@@ -124,7 +124,7 @@ const handleMediasoup =  function(ws, data, WebSocket, sock, pool){
 			}catch(e){console.log(e);return;}
 			}else if(data.vid == "subscribe"){
 				if(!producerTransport){
-					wsend(ws, { type: "error", info: "No video translation!" });
+					wsend(ws, { type: "error", info: "Нет видеотрансляции!" });
 					return;
 					}
 				}else{}
@@ -504,6 +504,9 @@ removeAudioConsumer(id);
     console.log('---- cleanup producer ---');
     oni("Jemand", "have unpublished the WebRTC translation");
     eventEmitter.emit("producer_unpublished");
+  
+  /*
+  
     try{
 	
 		 axios.post(`https://api.telegram.org/bot${tg_api}/sendMessage`, {
@@ -515,6 +518,7 @@ removeAudioConsumer(id);
 	}catch(e){
 		console.log(e);
 		}
+		*/ 
     if(onLine.has(getId(ws))){
 		onLine.delete(getId(ws));
 		
@@ -552,6 +556,26 @@ removeAudioConsumer(id);
     if(router){router.close(); router=null;}
     
     if(worker){worker.close();worker=null;}
+    
+    
+     try{
+	
+	axios.post(`https://api.telegram.org/bot${tg_api}/sendMessage`, {
+    chat_id: grid,
+    text: '<b>'+ws.nick+'</b> закончил трансляцию',
+    parse_mode: 'html',
+    disable_notification: true
+  });
+	}catch(e){
+		console.log(e.name);
+		}
+    
+    
+    
+    
+    
+    
+    
   }
 }
 		

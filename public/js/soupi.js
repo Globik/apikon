@@ -52,7 +52,14 @@ function goMedia(data){
 function sendRequest(obj) {
     return new Promise((resolve, reject) => {
         obj.request = "mediasoup";
-       // if(!sock) sock = new  WebSocket(new_uri + "//" + loc3 + "/gesamt");
+        if(!sock) {
+			reject({ info: "Повторите попытку позднее" });
+			return;
+		}
+		if(sock.readyState === 0) {
+			reject({ info: "Повторите попытку позднее" });
+			return;
+		}
       
         sock.send(JSON.stringify(obj));
         sock.onmessage = function (e) {
@@ -185,6 +192,7 @@ function pauseVideo(element) {
 function startMedia(el) {
     if (local.srcObject) {
         console.warn('WARN: local media ALREADY started');
+        note({ content: "Нажмите сперва на стоп, а потом уже запускайте трансляцию!", type: "warn", time: 5 });
         return;
     }
 PSENDER = true;
@@ -194,7 +202,7 @@ PSENDER = true;
         .then((stream) => {
 			loci = stream;
             remote.srcObject = stream;
-            el.setAttribute("data-state", "begin");
+          
             remote.volume = 0;
              remote.play();
            // playVideo(localVideo, localStream);
@@ -238,7 +246,7 @@ console.log("after sender")
         console.log("after device load");
     } catch (e) {
 		console.error(e);
-        note({content: e.toString(), type: "error", time: 5});
+        note({content:e.info?e.info : e.toString(), type: "error", time: 5});
         SENDER = false;
         return;
     }
@@ -403,17 +411,33 @@ disableElement("stopTranslation");
 */
 
 async function subscribe(el) {
-   if (SENDER) {
-        note({content: "Вы не можете на себя подписаться!", type: "info", time: 5});
+	 if (local.srcObject) {
+        console.warn('WARN: local media ALREADY started');
+        note({ content: "Нажмите сперва на стоп, а потом уже подписывайтесь на трансляцию!", type: "warn", time: 5 });
         return;
     }
-     
+   if (SENDER) {
+        note({content: "Вы не можете на себя подписаться!", type: "warn", time: 5});
+        return;
+    }
+     if(!sock){
+		 get_socket();
+	 }
     //alert("SUBSCRIBE");
     try {
         const data = await sendRequest({type: 'getRouterRtpCapabilities', vid: 'subscribe'});
         await loadDevice(data.routerrtpCapabilities);
     } catch (err) {
-        note({content: err, type: "error", time: 5});
+		console.log(err);
+        note({content: err.info?err.info:err, type: "error", time: 5});
+        if(err == "Нет видеотрансляции!"){
+			gid('kartina').setAttribute('poster',  "");
+       publishedId = null;
+       gid("playContainer").setAttribute("data-state", "niemand");
+        //pauseVideo(remote);
+         let a = document.querySelector('div#playContainer #kresti');
+         if(a)a.className = "";
+		}
         return;
     }
 
