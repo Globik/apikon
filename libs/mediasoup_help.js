@@ -1,6 +1,9 @@
 const tg_api = '7129138329:AAGl9GvZlsK3RsL9Vb3PQGoXOdeoc97lpJ4';
 const grid = '-1002095475544';
 const { Blob } =require('node:buffer')
+const fs = require('fs');
+const {Duplex} = require('stream');
+const crypto = require('crypto');
 const { oni } = require('./web_push.js');
 var BID = undefined;
 //const { oni } = require('./libs/web_push.js');
@@ -333,7 +336,10 @@ const handleMediasoup =  function(ws, data, WebSocket, sock, pool){
 		
 		let b11 = data.img_data.split(',')[1];
 		let kk = 0;
+		let buf = Buffer.from([b11], "base64");
 		try{
+			
+			/*
 bot.telegram.sendPhoto(grid, 
 {
 	type:"photo",
@@ -345,36 +351,45 @@ bot.telegram.sendPhoto(grid,
 }
 
 	) 
-}catch(e){
-	console.log('here 2 error ', e);
-	if(kk>0)return;
-		try{
-bot.telegram.sendPhoto(grid, 
-{
-	type:"photo",
-	source: Buffer.from(b11, "base64")} ,
- {
-	parse_mode: 'html',
-	caption: '<b>'+ws.nick+'</b>'+' запустил трансляцию. \nПосмотреть на <a href="https://rouletka.ru/about">https://rouletka.ru</a>',
-	disable_notification: true
+	*/
+	//Bad Request: invalid file HTTP URL specified: Wrong port number specified in the URL
+	//invalid file HTTP URL specified: Disallowed character in URL host
+function bufferToStream(myBuffer) {
+    let tmp = new Duplex();
+    tmp.push(myBuffer);
+    tmp.push(null);
+    return tmp;
 }
 
-	) 
-	kk++;
+const m2 = bufferToStream(buf);
+//console.log('m2 ', m2)
+	var f = new FormData();
+	f.append('chat_id', grid);
+	f.append('photo', buf);
+	//console.log('SUKA GET HEADERS ', f.getBuffer());
+	
+	
+	
+	
+	
+	
+	await axios.post(`https://api.telegram.org/bot${tg_api}/sendPhoto`,
+	{
+		chat_id: grid,
+		photo: buf,
+		filename:"f.png",
+		name:"40"
+	},
+	{
+		headers:  {
+		'Content-Type': 'multipart/form-data',
+			//'Content-Disposition':'form-data; name="30"; filename="f.png"'
+		 }
+	}
+	); 
 }catch(e){
-	console.log('here 1 error', e);
-	
-}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-}
+	console.log(e);
+	}
 
  if(!onLine.has(getId(ws)))onLine.set(getId(ws), { img_data: data.img_data, userId: ws.userId, publishedId: getId(ws), nick: ws.nick, value: 0 })
  eventEmitter.emit('producer_published', { img_data: data.img_data, userId: ws.userId, nick: ws.nick, value: 0, publishedId: ws.id  });
