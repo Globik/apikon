@@ -726,7 +726,7 @@ function searchPeer (socket, msg, source) {
 	 onLine.set(socket.id, { id: socket.id, src: source.src, nick: socket.nick, status: 'busy' });
 	 broadcast({ type: "dynamic", sub: "add", id: socket.id, partnerid: peerId, nick: socket.nick, status: 'busy', camcount: onLine.size});
 	 broadcast_admin({ type: "dynamic", sub: "add", id: socket.id, partnerid: peerId, src: source.src, nick: socket.nick, status: 'busy', camcount: onLine.size});
-	// if(isEven(matchedIds.size))broadcasti({ type: "connected2", size:matchedIds.size/2 });
+	 if(isEven(matchedIds.size))broadcasti({ type: "connected2", size:matchedIds.size/2 });
  }
       return;
     }
@@ -739,7 +739,7 @@ function searchPeer (socket, msg, source) {
 	 onLine.set(socket.id, { id: socket.id, src: source.src, nick: socket.nick, status: 'free' });
 	 broadcast({ type: "dynamic", sub: "add", id: socket.id, nick: socket.nick, status: 'free', camcount: onLine.size });
 	 broadcast_admin({ type: "dynamic", sub: "add", id: socket.id, src: source.src, nick: socket.nick, status: 'free', camcount: onLine.size });
-	// if(isEven(matchedIds.size))broadcasti({ type: "connected2", size: matchedIds.size/2 });
+	if(isEven(matchedIds.size))broadcasti({ type: "connected2", size: matchedIds.size/2 });
  }
   console.log(`#${socket.id} ${socket.nick} adds self into waiting queue`)
  console.log("waiting ", waitingQueue);
@@ -870,7 +870,7 @@ const interval = setInterval(function ping() {
    // console.log("ping");
     ws.ping(noop);
   });
-}, 1000 * 2);
+}, 3000);
 
 function heartbeat() {
 	//console.log("pong here", this.isAlive);
@@ -967,6 +967,7 @@ if(msg.request == "mediasoup"){
         broadcast_admin({ type: "dynamic", sub: "srcdata", src: msg.src, id: socket.id });
         break
       case 'pock':
+     // console.log('pock');
         socket.isAlive = true;
         break
         case 'disconnection':

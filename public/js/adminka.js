@@ -16,6 +16,7 @@ function get_socket(){
     console.log("websocket opened");
   };
   sock.onerror = function (e) {
+	  console.error(e);
     note({ content: "Websocket error: " + e, type: "error", time: 5 });
   };
   sock.onmessage = function (evt) {
@@ -30,10 +31,18 @@ function get_socket(){
   };
   sock.onclose = function () {
     sock = null;
+    console.log('websocket closed');
     note({ content: "Соединение с сервером закрыто!", type: "info", time: 5 });
   };
 }
-
+function wsend(obj){
+	if(!sock) return;
+	let d;
+	try{
+		d = JSON.stringify(obj);
+		sock.send(d);
+	}catch(e){}
+}
 get_socket();
 
 function on_msg(msg) {
@@ -42,6 +51,8 @@ function on_msg(msg) {
         handleDynamic(msg);
 	}else if(msg.type == "connected2"){
 		connects.textContent = msg.size;
+	}else if(msg.type == "pick"){
+	wsend({type:'pock'});
 	}
 }
 const someSpinner = gid("someSpinner");
