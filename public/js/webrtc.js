@@ -1499,8 +1499,8 @@ const heartels = document.querySelectorAll("div.heart");
 
 giftbox2.addEventListener('click', openGiftBox, false);
 giftbox.addEventListener('click', openGiftBox2, false);
-giftsContainer.addEventListener('click', ongiftscontainer, false);
-giftsContainer2.addEventListener('click', ongiftscontainer2, false);
+if(giftsContainer)giftsContainer.addEventListener('click', ongiftscontainer, false);
+if(giftsContainer2)giftsContainer2.addEventListener('click', ongiftscontainer2, false);
 
 for(var i = 0; i < heartels.length; i++){
 	var heartel = heartels[i];
@@ -1524,7 +1524,7 @@ function openGiftBox(el){
 function openGiftBox2(el){
 	//console.log("here opengiftbox2");
 	el.stopImmediatePropagation();
-	giftsContainer2.classList.toggle("hidden");
+	if(giftsContainer2)giftsContainer2.classList.toggle("hidden");
 }
 	function ongiftscontainer(ev){
 	ev.stopPropagation();
@@ -1542,13 +1542,13 @@ function openGiftBox2(el){
 	}*/
 	mediaBox.onclick = function(ev){
 		//return;
-		if(!giftsContainer.classList.contains("hidden")){
-			giftsContainer.classList.add("hidden");
-		}
+		//if(!giftsContainer.classList.contains("hidden")){
+		//	giftsContainer.classList.add("hidden");
+		//}
 		
-		if(!giftsContainer2.classList.contains("hidden")){
-			giftsContainer2.classList.add("hidden");
-		}
+		//if(!giftsContainer2.classList.contains("hidden")){
+			//giftsContainer2.classList.add("hidden");
+		//}
 	}
 	const dohod=gid('dohod');
 	const payoutamountid = gid("payoutamountid");

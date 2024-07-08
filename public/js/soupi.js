@@ -86,11 +86,15 @@ function Screenshot2() {
 	if(!remote.srcObject) return;
     let cnv = document.createElement('canvas');
     let w = 180;
-    let h = 150;
-    cnv.width = w;
-    cnv.height = h;
+    let h = 180;
+   
     var c = cnv.getContext('2d');
-    c.drawImage(remote, 0, 0, w, h);
+    console.log(remote.videoWidth,remote.videoHeight);
+    var ww = remote.videoWidth;
+    var hh = remote.videoHeight;
+     cnv.width = ww;
+    cnv.height = hh;
+    c.drawImage(remote, 0, 0, ww, hh);
     var imgdata = cnv.toDataURL('image/png', 1.0);
     
     let file = null;

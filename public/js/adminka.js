@@ -14,6 +14,7 @@ function get_socket(){
 
   sock.onopen = function () {
     console.log("websocket opened");
+   // note({ content: "opened", type: "info", time: 5 });
   };
   sock.onerror = function (e) {
 	  console.error(e);

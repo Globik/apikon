@@ -9,7 +9,8 @@ return `
     <!-- <meta name="viewport" content="width=device-width,initial-scale=1.0"> -->
     <meta name="viewport" content="width=device-width,user-scalable=no" />
     <link rel="icon" href="favicon.ico">
-    <link href="/css/main2.css" type="text/css" rel="stylesheet">
+  <!--  <link href="/css/main2.css" type="text/css" rel="stylesheet"> -->
+    <link href="/css/main22.css" rel="stylesheet">
     <link href="/css/adminka.css" rel="stylesheet">
     <link href="/css/hearts.css" rel="stylesheet">
     <script src="/js/globalik.js"></script>

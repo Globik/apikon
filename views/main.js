@@ -241,7 +241,7 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
   </div>
 	<div id="chat4"><div id="chatbox2">
 	</div>
-	<section id="giftsContainer2" class="hidden"><header><span>Подарки</span><a href="#purchaseHREF"><span class="purchaseSpan">Купить сердечек</span></a></header>
+	<!-- <section id="giftsContainer2" class="hidden"><header><span>Подарки</span><a href="#purchaseHREF"><span class="purchaseSpan">Купить сердечек</span></a></header>
 <div id="giftsDiv2">
 <div class="flexgiftsitem">
 <div class="heart" data-type="mobile" style="">&#x1f496</div>
@@ -250,11 +250,19 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
 </div>
 </div>
 
-</section>
+</section> -->
 	</div>
 <section id="sectionTextArea" class="hide">
 <div id="textarea2" class="hide"><textarea id="txtvalue2" data-send="two" placeholder="Сообщение" oninput="txtInput(this);" onchange="someChange();"></textarea>
-<div id="giftbox"><span>&#x1f381</span></div><div class="send" data-send="two" onclick="sendi(this);"><img src="/img/send1.svg"/></div>
+<div id="giftbox">
+<!-- <span>&#x1f381</span> -->
+<div class="flexgiftsitem">
+<div class="heart" data-type="mobile">&#x1f496</div>
+<div class="heartcount">${n.user?istestheart?n.user.theart:n.user.heart:0}</div>
+
+</div>
+</div>
+<div class="send" data-send="two" onclick="sendi(this);"><img src="/img/send1.svg"/></div>
 </div></section>
 </section> 
 <!-- END MOBILE! -->
@@ -284,6 +292,7 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
   </div>
   
 <div id="chatbox"></div>
+<!--
 <section id="giftsContainer" class="hidden"><header><span>Подарки</span><a href="#purchaseHREF"><span class="purchaseSpan">Купить сердечек</span></a></header>
 <div id="giftsDiv">
 <div class="flexgiftsitem">
@@ -292,12 +301,19 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
 <div class="heartcount">${n.user?istestheart?n.user.theart:n.user.heart:0}</div>
 </div>
 </div>
-</section>
+</section> -->
 
 <section id="MainSectionTextArea">
 
 <div id="textarea"><textarea id="txtvalue" data-send="one" placeholder="Сообщение" oninput="txtInput(this);" onchange="someChange();"></textarea>
-<div id="giftbox2" data-state="closed"><span>&#x1f381</span></div>
+<div id="giftbox2" data-state="closed">
+<!-- <span>&#x1f381</span> -->
+<div class="flexgiftsitem">
+<div class="heart" data-type="computer">&#x1f496</div>
+<div class="heartcount">${n.user?istestheart?n.user.theart:n.user.heart:0}</div>
+
+</div>
+</div>
 <div class="send" data-send="one" onclick="sendi(this);" value="papa" ><img src="/img/send1.svg"/></div>
 </div></section>
 </div><div id="foot2"><a href="/"> О проекте</a></div>

@@ -721,8 +721,10 @@ padding:5px;
 	display:flex;
 	 flex-direction: column;
      justify-content: space-between;
-		align-items: center;
+	align-items: center;
+		position:relative;
 }
+
 .flexgiftsitem div{
 	color:white;
 	line-height:1.5;
@@ -742,6 +744,18 @@ padding:5px;
   clip-path: polygon(-41% 0, 50% 91%, 141% 0);
   */ 
   cursor:pointer;
+}
+
+div.heartcount{
+	color:white;
+	font-size:12px;
+	font-weight:bold;
+	height:20px;
+	bckground:yellow;
+	position:absolute;
+	left:29%;
+	top:69%;
+	text-align:center;
 }
 
 @media screen and (max-width: 452px) and (orientation: portrait){
@@ -992,6 +1006,17 @@ padding:5px;
 	height:50%;
 	display:block;
 }
+div.heartcount{
+	color:white;
+	font-size:12px;
+	font-weight:bold;
+	height:20px;
+	bckground:yellow;
+	position:absolute;
+	left:29%;
+	top:66%;
+	text-align:center;
+}
 }
 
 @media screen and (max-width: 321px) and (orientation: portrait){
@@ -1063,7 +1088,8 @@ padding:2px;
 }
 
 div.bname, div.heartcount{
-transform:translate(0,-9px);
+transform:translate(0,-1px);
+color:red;
 	
 }
 }
