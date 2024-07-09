@@ -117,7 +117,20 @@ html,body{
     transform: rotate(-360deg);
   }
 } 
-
+div.dynamicbox{
+	dsplay:block;
+	position:relative;
+	brder:10px solid brown;
+}
+.krestik{
+	bckground:green;
+	color:red;
+	position:absolute;
+	right:8px;
+	top:18px;
+	font-weight:bold;
+	font-size:22px;
+}
 #dynamicSection{
 	background:white;
 }

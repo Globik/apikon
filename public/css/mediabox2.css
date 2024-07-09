@@ -729,7 +729,7 @@ padding:5px;
 	color:white;
 	line-height:1.5;
 	font-weight:bold;
-	padding:5px;
+	padding:3px;
 }
 .heart {
 
@@ -751,10 +751,11 @@ div.heartcount{
 	font-size:12px;
 	font-weight:bold;
 	height:20px;
-	bckground:yellow;
+	ackground:yellow;
+	width:100%;
 	position:absolute;
-	left:29%;
-	top:69%;
+	left:0%;
+	top:74%;
 	text-align:center;
 }
 
@@ -1011,10 +1012,11 @@ div.heartcount{
 	font-size:12px;
 	font-weight:bold;
 	height:20px;
+	width:100%;
 	bckground:yellow;
 	position:absolute;
-	left:29%;
-	top:66%;
+	left:0%;
+	top:72%;
 	text-align:center;
 }
 }
@@ -1088,7 +1090,7 @@ padding:2px;
 }
 
 div.bname, div.heartcount{
-transform:translate(0,-1px);
+transform:translate(0,0px);
 color:red;
 	
 }

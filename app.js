@@ -194,7 +194,7 @@ var imgData = {};
 app.get("/about", async(req, res)=>{
 	console.log("*** USER *** ", req.user);
 	console.log('req.app.locals ', req.app.locals.testshopid, ' ', req.app.locals.testshopsecret);
-	res.rendel('main', {imgData});
+	res.rendel('main', { imgData: imgData });
 })
 app.get("/", async(req, res)=>{
 	oni((req.user?req.user.name:'anonym'), " on about");
@@ -889,12 +889,19 @@ function doWas(obj){
  ev.on('producer_published', doWas);
  ev.on("producer_unpublished", function doWas2(){
 	 console.log("producer unpublished event");
+	 clearProducer();
+ });
+ function clearProducer(){
+	 //console.log("*** clear producer ", imgData);
 	 delete imgData.img_data;
 	 delete imgData.userId;
 	 delete imgData.nick;
 	 delete imgData.value;
 	 delete imgData.publishedId;
- });
+	  console.log("*** clear producer ", imgData);
+	 imgData = {}
+	  console.log("*** clear producer ", imgData);
+ }
  ev.on("onconsume", function doWas3(obj){
 	 imgData.value = obj.value;
  });
@@ -976,6 +983,12 @@ if(msg.request == "mediasoup"){
         case 'connected':
         machConnected(socket);
         break
+        case 'clearproducer':
+       clearProducer();
+        break
+        case 'krestik':
+        deleteConnection(msg.id);
+        break
       default:
         break
     }
@@ -1025,7 +1038,14 @@ function getPairsCount(){
 	}}
 	return kk;
 }
-
+function deleteConnection(id){
+	for (let el of wsServer.clients) {
+		if(el.id == id){
+			el.close();
+			return;
+		}
+	}
+}
 
 function setIp(ws, ip){
 	const re = /([0-9]{1,3}[\.]){3}[0-9]{1,3}/;

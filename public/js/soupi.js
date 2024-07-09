@@ -435,6 +435,7 @@ async function subscribe(el) {
 		console.log(err);
         note({content: err.info?err.info:err, type: "error", time: 5});
         if(err == "Нет видеотрансляции!"){
+			wsend({ type: 'clearproducer' });
 			gid('kartina').setAttribute('poster',  "");
        publishedId = null;
        gid("playContainer").setAttribute("data-state", "niemand");
