@@ -217,6 +217,7 @@ function post_next(){
 	channel.postMessage({"type":"next"});
 }
 function krestik(el){
+	if(!window.confirm("Удалить?")) return;
 	let k = el.getAttribute('data-kid');
 	if(!k) return;
 	wsend({ type: "krestik", id: k });
@@ -234,7 +235,7 @@ function handleDynamic(obj){
 		let d = document.createElement("div");
 		d.className="dynamicbox";
 		d.setAttribute("data-id", el[1].id);
-		d.innerHTML=`<caption>${el[1].nick}</caption><div class="dynamicImgHalter"><div class="krestik" data-kid="${el[1].id}" onclick="krestik(this);">X</div><img data-pid="${el[1].id}" src="${el[1].src}"/></div>`;
+		d.innerHTML=`<caption>${el[1].nick}</caption><div class="dynamicImgHalter"><div class="krestik" data-kid="${el[1].id}" onclick="krestik(this);">&#x274E;</div><img data-pid="${el[1].id}" src="${el[1].src}"/></div>`;
 		dynamicContainer.appendChild(d);
 		
 })
@@ -243,13 +244,13 @@ function handleDynamic(obj){
 		let el = document.querySelector(`[data-id="${obj.id}"]`);
 		if(el)el.remove();
 	}else if(obj.sub == "add"){
-		alert('add');
+		
 		let d = document.createElement("div");
 		d.className="dynamicbox";
-		alert(obj.id);
+	
 		d.setAttribute("data-id", obj.id);
-d.innerHTML=`<caption>${obj.nick}</caption><div class="dynamicImgHalter"><div class="krestik" data-kid="${obj.id}" onclick="krestik(this);">X</div><img data-pid="${obj.id}" src="${obj.src}"/></div>`;
-		alert(d.innerHTML);
+d.innerHTML=`<caption>${obj.nick}</caption><div class="dynamicImgHalter"><div class="krestik" data-kid="${obj.id}" onclick="krestik(this);">&#x274E;</div><img data-pid="${obj.id}" src="${obj.src}"/></div>`;
+	
 		dynamicContainer.appendChild(d);
 		camsCount.textContent = obj.camcount;
 		 
