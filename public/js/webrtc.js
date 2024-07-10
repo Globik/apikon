@@ -34,9 +34,16 @@ var unsubscribe = false;
 var CONNECTED = false;
 
 const heartcountels = document.querySelectorAll("div.heartcount");
+function getPubId(){
+	let a = gid('publishedid');
+	if(!a)return;
+	return a.value == 'null'?false:true;
+}
+var publishedId = getPubId()?gid('publishedid').value:null;
 
 function toggleCam(el){
 	if(window.streami){
+		
 		window.streami.getTracks().forEach(function(track){
 			track.stop();
 		});
@@ -576,6 +583,10 @@ function on_msg(msg) {
       case 'message':
         handleMessage(msg.data)
         break
+        case "messagepublished":
+       // alert('publish');
+        insertPublished(msg);
+        break
         case 'gift':
         handleGift(msg);
         break
@@ -658,6 +669,44 @@ textarea2.className="";
 		chatbox2.scrollTop = chatbox2.clientHeight + chatbox2.scrollHeight;
 		
 }
+
+function insertPublished(obj, bool){
+	znakPrint.classList.add("hidden");
+	znakPrint2.classList.add("hidden");
+	let div=document.createElement('div');
+	div.className="yourmsg he2";
+	if(bool){
+		//alert('a');
+			div.innerHTML="<span><b>" + obj.from + ": </b></span><br><span>" + obj.data + "</span>";
+		}else{
+			//alert('b');
+		div.innerHTML="<span><b>" + obj.from + ": </b></span><br><span>" + esci(obj.data.trim()) + "</span>";
+	}
+	
+		chatbox2.appendChild(div);
+		//mobileChat.className="";
+		chatbox2.scrollTop = chatbox2.clientHeight + chatbox2.scrollHeight;
+		//textarea2.className = "";
+		hideChat();
+		
+		let div2=document.createElement('div');
+	div2.className="yourmsg he2";
+	if(bool){
+		//alert('a');
+			div2.innerHTML="<span><b>" + obj.from + ": </b></span><br><span>" + obj.data + "</span>";
+		}else{
+			//alert('b');
+		div2.innerHTML="<span><b>" + obj.from + ": </b></span><br><span>" + esci(obj.data.trim()) + "</span>";
+	}
+	
+		chatbox.appendChild(div2);
+		//mobileChat.className="";
+		chatbox.scrollTop = chatbox.clientHeight + chatbox.scrollHeight;
+}
+
+
+
+
 function fuckMessage(msg){
 	//mobile
 	let div2=document.createElement('div');
@@ -950,6 +999,20 @@ function handleError(err){
 	function sendi(event){
 		
 		 let l = event.getAttribute("data-send");
+		 let l2 = txtvalue2.getAttribute("data-publish");
+		 let l3 = txtvalue.getAttribute("data-publish");
+		 if(l2 && l2 == "publish" && l == "two"){
+			 //alert(l2);
+			 let s4 = txtvalue2.value.trim();
+			 if(!s4)return;
+			 sendiTwoTwo();
+			 return;
+		 }else if(l3 && l3 == "publish" && l == "one"){
+			  let s5 = txtvalue.value.trim();
+			 if(!s5)return;
+			 sendiTwoThree();
+			 return;
+		 }
 		// alert(l);
 		 if(l){
 		 if(l == "one"){
@@ -1034,6 +1097,26 @@ if(l2){
 		wsend({type:"message", data: txtvalue2.value});
 		txtvalue2.value="";
 	}
+	
+	function sendiTwoTwo(){
+		         znakPrint.classList.add("hidden");
+      znakPrint2.classList.add("hidden");
+      if(!txtvalue2.value) return;
+		
+		console.log('publishedId: ', publishedId);
+		wsend({ type: "messagepublished", data: txtvalue2.value, publishedId: publishedId, from: userName.value });
+		txtvalue2.value="";
+	}
+	
+	function sendiTwoThree(){
+		znakPrint.classList.add("hidden");
+      znakPrint2.classList.add("hidden");
+      if(!txtvalue.value) return;
+		
+		console.log('publishedId: ', publishedId);
+		wsend({ type: "messagepublished", data: txtvalue.value, publishedId: publishedId, from: userName.value });
+		txtvalue.value="";
+		}
 		//uuu
 		function sendi2(l){
 		if(l=="one"){

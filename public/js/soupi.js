@@ -8,13 +8,14 @@ let audioConsumer = null;
 var SENDER = false;
 let loci = null;
 let vV = gid("vV");
+/*
 function getPubId(){
 	let a = gid('publishedid');
 	if(!a)return;
 	return a.value == 'null'?false:true;
 }
-let publishedId = getPubId()?gid('publishedid').value:null;
-
+var publishedId = getPubId()?gid('publishedid').value:null;
+*/
 function goMedia(data){
 	console.log('data:', data);
  if (data.type == "onconsume") {
@@ -30,6 +31,16 @@ function goMedia(data){
                if(a){
 				 //if(a.classList.contains('show'))   a.classList.toggle('show');
 				}
+				gid("txtvalue2").setAttribute("data-publish", "none");
+				gid("txtvalue").setAttribute("data-publish", "none");
+				//mobileChat.className="";
+				hideChat();
+       while(chatbox2.firstChild){
+				   chatbox2.firstChild.remove();
+			   }
+			   while(chatbox.firstChild){
+				   chatbox.firstChild.remove();
+			   }
       //  enableElement("startMediaBtn");
        // enableElement("stopMediaBtn");
     } else if (data.type == "producer_published") {
@@ -328,6 +339,7 @@ console.log("after sender")
                 SENDER = true;
                 el.setAttribute("data-state", "published");
                 note({content: "Вы в эфире!", type: "info", time: 5});
+                publishedId = MYSOCKETID;
                let a = document.querySelector('div#playContainer #kresti');
                if(a) a.classList.toggle('show');
                 setTimeout(()=>{;
@@ -335,6 +347,8 @@ console.log("after sender")
             
                 wsend({clientId: userId.value, img_data: img_data, type: "pic", request: "mediasoup"});
                }, 1000)
+               gid("txtvalue2").setAttribute("data-publish", "publish");
+               gid("txtvalue").setAttribute("data-publish", "publish");
                // disableElement("startMediaBtn");
                // disableElement("stopMediaBtn");
                 //el.setAttribute('disabled', 1);
@@ -481,6 +495,8 @@ async function subscribe(el) {
             nextbtn.disabled = true;
                 note({content: "Вы подключились к трансляции!", type: "info", time: 5});
                 gid("playContainer").setAttribute("data-state", "subscribed");
+                gid("txtvalue2").setAttribute("data-publish", "publish");
+                gid("txtvalue").setAttribute("data-publish", "publish");
                 wsend({type: "onconsume", publishedId: publishedId, request: "mediasoup"})
                  let a = document.querySelector('div#playContainer #kresti');
                if(a) a.classList.toggle('show');
@@ -491,6 +507,13 @@ async function subscribe(el) {
        gid('kartina').setAttribute('poster',  "");
        publishedId = null;
        gid("playContainer").setAttribute("data-state", "niemand");
+       gid("txtvalue2").setAttribute("data-publish", "none");
+       gid("txtvalue").setAttribute("data-publish", "none");
+      // mobileChat.className="";
+      hideChat();
+       while(chatbox2.firstChild){
+				   chatbox2.firstChild.remove();
+			   }
         pauseVideo(remote);
          let a1 = document.querySelector('div#playContainer #kresti');
                if(a1) a1.className = ""; //a1.classList.toggle('show');
@@ -499,6 +522,8 @@ async function subscribe(el) {
             case 'failed':
                 note({content: 'Failed to subscribe!', type: "error", time: 5});
                 //  producerTransport.close();
+                gid("txtvalue2").setAttribute("data-publish", "none");
+                gid("txtvalue").setAttribute("data-publish", "none");
                 consumerTransport.close();
                 break;
 
@@ -681,10 +706,20 @@ gid("playContainer").setAttribute("data-state", "busy");
         PSENDER = false;
         startbtn.disabled = false;
    note({ content: "Вы отписались от трансляции", type: "info", time: 5 });
+   gid("txtvalue2").setAttribute("data-publish", "none");
+   gid("txtvalue").setAttribute("data-publish", "none");
     let a = document.querySelector('div#playContainer #kresti');
    if(a)a.className = "";
                if(a) {
 				// if(!a.classList.contains('show'))  a.classList.toggle('show');
+			   }
+			//   mobileChat.className="";
+			hideChat();
+			   while(chatbox2.firstChild){
+				   chatbox2.firstChild.remove();
+			   }
+			     while(chatbox.firstChild){
+				   chatbox.firstChild.remove();
 			   }
 }
 

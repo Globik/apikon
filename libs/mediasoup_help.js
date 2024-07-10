@@ -387,6 +387,7 @@ bot.telegram.sendPhoto(grid,
 
  if(!onLine.has(getId(ws)))onLine.set(getId(ws), { img_data: data.img_data, userId: ws.userId, publishedId: getId(ws), nick: ws.nick, value: 0 })
  eventEmitter.emit('producer_published', { img_data: data.img_data, userId: ws.userId, nick: ws.nick, value: 0, publishedId: ws.id  });
+ ws.pubId = ws.id;
   broadcast({ type: "producer_published", img_data: data.img_data, userId: ws.userId, nick: ws.nick, value: 0, publishedId: ws.id });			
 			}catch(e){
 				console.log('db error: ', e.toString())
@@ -451,6 +452,7 @@ removeAudioConsumer(id);
 	  if(onLine.has(pubId)){
 						let a = onLine.get(pubId);
 						a.value = a.value - 1;
+						ws.pubId = null;
 						broadcast_all({ type: "onconsume", value: a.value });
 						eventEmitter.emit("onconsume", { value: a.value });
 					}
@@ -488,6 +490,7 @@ removeAudioConsumer(id);
 	  if(onLine.has(pubId)){
 						let a = onLine.get(pubId);
 						a.value = a.value - 1;
+						ws.pubId = null;
 						broadcast_all({ type: "onconsume", value: a.value });
 						eventEmitter.emit("onconsume", { value: a.value });
 					}
@@ -524,6 +527,7 @@ removeAudioConsumer(id);
 		
 	}
     broadcast({ type: "producer_unpublished" })
+    ws.pubId = null;
     
     try{
 	//	await pool.query('delete from vroom');

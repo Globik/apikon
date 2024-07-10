@@ -253,7 +253,7 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
 </section> -->
 	</div>
 <section id="sectionTextArea" class="hide">
-<div id="textarea2" class="hide"><textarea id="txtvalue2" data-send="two" placeholder="Сообщение" oninput="txtInput(this);" onchange="someChange();"></textarea>
+<div id="textarea2" class="hide"><textarea id="txtvalue2" data-publish="none" data-send="two" placeholder="Сообщение" oninput="txtInput(this);" onchange="someChange();"></textarea>
 <div id="giftbox">
 <!-- <span>&#x1f381</span> -->
 <div class="flexgiftsitem">
@@ -305,7 +305,7 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
 
 <section id="MainSectionTextArea">
 
-<div id="textarea"><textarea id="txtvalue" data-send="one" placeholder="Сообщение" oninput="txtInput(this);" onchange="someChange();"></textarea>
+<div id="textarea"><textarea id="txtvalue" data-publish="none" data-send="one" placeholder="Сообщение" oninput="txtInput(this);" onchange="someChange();"></textarea>
 <div id="giftbox2" data-state="closed">
 <!-- <span>&#x1f381</span> -->
 <div class="flexgiftsitem">

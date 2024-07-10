@@ -911,6 +911,7 @@ wsServer.on('connection', async function (socket, req) {
   const ip = req.socket.remoteAddress;
   setIp(socket, ip);
   socket.id = obid();
+  
  
   
    broadcasti({ type: 'online', online: wsServer.clients.size })
@@ -962,6 +963,10 @@ if(msg.request == "mediasoup"){
         socket.userId = msg.userId;
         socket.nick = msg.nick;
         wsend(socket, { type: "helloServer", socketId: socket.id });
+        break
+        case "messagepublished":
+        console.log('publish ', msg);
+        broadcast_publish(msg)
         break
       case 'hang-up':
         hangUp(socket.id, { type: 'hang-up', partnerId: socket.userId, ignore: msg.ignore },(msg.sub&&msg.sub=="here"?true:false))
@@ -1015,6 +1020,16 @@ function broadcast(obj){
 		if(el.burl=="/gesamt")wsend(el, obj);
 	}
 }
+
+function broadcast_publish(obj){
+		for (let el of wsServer.clients) {
+			if(el.pubId && el.pubId == obj.publishedId){
+				console.log("GENAU!", el.pubId);
+			wsend(el, obj);
+		}
+		}
+}
+
 function broadcasti(obj){
 	for (let el of wsServer.clients) {
 		wsend(el, obj);
