@@ -722,8 +722,9 @@ function handleHangUp(){
     // let ss = unsubscribe?false:false;
     let amma=[[0,{}]]
     if(IPS.size > 0)amma = IPS;
-    console.warn("giftsContainer.className ", giftsContainer.className);
+  //  console.warn("giftsContainer.className ", giftsContainer.className);
     //giftsContainer.className="";
+    console.log("before next");
 	next(nextbtn, false, amma, false);
 }
 
@@ -1157,6 +1158,8 @@ if(l2){
 
 
    function next(el, bool, ignores, isIgnore){
+	   //next(nextbtn, false, amma, false);
+	   //alert('next');
 	   el.disabled = true;
 	   CONNECTED = false;
       closeVideoCall();
@@ -1281,9 +1284,10 @@ function removeTrackHandler (event) {
   
 
 function closeVideoCall() {
-  
-
+ // alert('videocall');
+console.log("PC*** ")
   if (!pc) {
+	  console.log("!pc return");
     return
   }
 //nextbtn.disabled = true;
@@ -1298,6 +1302,7 @@ function closeVideoCall() {
 
   if (remote.srcObject) {
     remote.srcObject.getTracks().forEach(track => {
+		console.log("track stop");
       track.stop()
     })
     remote.srcObject = null;
