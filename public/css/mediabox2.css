@@ -800,11 +800,7 @@ div.heartcount{
 		width:100%;
 		
 	}
-	#settingspanel{
-		height:90vh;
-	overflow:auto;
-	mx-height:90%;
-	}
+	
 	#remotecontainer{
 		height:100%;
 		position:relative;
@@ -1032,8 +1028,15 @@ div.heartcount{
 @media screen and (max-width: 321px) and (orientation: portrait){
 html{
 }
+
 #container{
 		height:calc(100% - 36px - 15%);
+	}
+	#settingspanel{
+		eight:calc(100% - 36px - 15%);
+		height:70vh;
+	overflow:auto;
+	
 	}
 	#nextbtn.next,#startbtn.start,#startbtn.stop{
 		font-size:1.1rem;
