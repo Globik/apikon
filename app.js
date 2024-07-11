@@ -870,12 +870,12 @@ const interval = setInterval(function ping() {
    // console.log("ping");
     ws.ping(noop);
   });
-}, 1000 *30);
+}, 1000 *3000);
 
 function heartbeat() {
 	//console.log("pong here", this.isAlive);
- // this.isAlive = true;
-  this.send(JSON.stringify({type:"pick"}));
+  this.isAlive = true;
+ // this.send(JSON.stringify({type:"pick"}));
 }
 function doWas(obj){
 	console.log(" **** DO WAS!!!! ***");
