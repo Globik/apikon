@@ -1242,6 +1242,9 @@ video#kartina{
 	border-radius:50%;
 	border:1px solid transparent;
 }
+video#kartina poster{
+	object-fit:cover;
+}
 
 div#playContainer{
 	background:rgba(0,0,0,0);

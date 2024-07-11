@@ -33,8 +33,9 @@ function goMedia(data){
 				}
 				gid("txtvalue2").setAttribute("data-publish", "none");
 				gid("txtvalue").setAttribute("data-publish", "none");
-				//mobileChat.className="";
-				hideChat();
+				mobileChat.className="hide";
+				textarea2.className = "hide";
+				//hideChat();
        while(chatbox2.firstChild){
 				   chatbox2.firstChild.remove();
 			   }
@@ -510,9 +511,14 @@ async function subscribe(el) {
        gid("txtvalue2").setAttribute("data-publish", "none");
        gid("txtvalue").setAttribute("data-publish", "none");
       // mobileChat.className="";
-      hideChat();
+      //hideChat();
+      mobileChat.className="hide";
+				textarea2.className = "hide";
        while(chatbox2.firstChild){
 				   chatbox2.firstChild.remove();
+			   }
+			   while(chatbox.firstChild){
+				   chatbox.firstChild.remove();
 			   }
         pauseVideo(remote);
          let a1 = document.querySelector('div#playContainer #kresti');
@@ -520,7 +526,7 @@ async function subscribe(el) {
                 break;
 
             case 'failed':
-                note({content: 'Failed to subscribe!', type: "error", time: 5});
+               // note({content: 'Failed to subscribe!', type: "error", time: 5});
                 //  producerTransport.close();
                 gid("txtvalue2").setAttribute("data-publish", "none");
                 gid("txtvalue").setAttribute("data-publish", "none");
@@ -713,8 +719,10 @@ gid("playContainer").setAttribute("data-state", "busy");
                if(a) {
 				// if(!a.classList.contains('show'))  a.classList.toggle('show');
 			   }
-			//   mobileChat.className="";
-			hideChat();
+			
+			 mobileChat.className="hide";
+				textarea2.className = "hide";
+       
 			   while(chatbox2.firstChild){
 				   chatbox2.firstChild.remove();
 			   }
