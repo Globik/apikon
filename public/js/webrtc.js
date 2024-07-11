@@ -676,31 +676,30 @@ function insertPublished(obj, bool){
 	let div=document.createElement('div');
 	div.className="yourmsg he2";
 	if(bool){
-		//alert('a');
+		
 			div.innerHTML="<span><b>" + obj.from + ": </b></span><br><span>" + obj.data + "</span>";
 		}else{
-			//alert('b');
+			
 		div.innerHTML="<span><b>" + obj.from + ": </b></span><br><span>" + esci(obj.data.trim()) + "</span>";
 	}
 	
 		chatbox2.appendChild(div);
-		//mobileChat.className="";
+		mobileChat.className="";
 		chatbox2.scrollTop = chatbox2.clientHeight + chatbox2.scrollHeight;
-		//textarea2.className = "";
-		hideChat();
+		textarea2.className = "";
+		
 		
 		let div2=document.createElement('div');
 	div2.className="yourmsg he2";
 	if(bool){
-		//alert('a');
+		
 			div2.innerHTML="<span><b>" + obj.from + ": </b></span><br><span>" + obj.data + "</span>";
 		}else{
-			//alert('b');
+			
 		div2.innerHTML="<span><b>" + obj.from + ": </b></span><br><span>" + esci(obj.data.trim()) + "</span>";
 	}
 	
 		chatbox.appendChild(div2);
-		//mobileChat.className="";
 		chatbox.scrollTop = chatbox.clientHeight + chatbox.scrollHeight;
 }
 

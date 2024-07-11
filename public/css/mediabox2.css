@@ -726,10 +726,12 @@ padding:5px;
 }
 
 .flexgiftsitem div{
+
 	color:white;
 	line-height:1.5;
 	font-weight:bold;
 	padding:3px;
+	
 }
 .heart {
 
@@ -796,6 +798,12 @@ div.heartcount{
 	}
 	#settingspanel,.settingspanel{
 		width:100%;
+		
+	}
+	#settingspanel{
+		height:90vh;
+	overflow:auto;
+	mx-height:90%;
 	}
 	#remotecontainer{
 		height:100%;
@@ -1079,20 +1087,30 @@ padding:2px;
 
 .flexgiftsitem{
 }
-.flexgiftsitem div{
-	line-height:1;
-	padding-top:3px;
-	font-size:0.7rem;
+.flexgiftsitem {
+	
+	
 	
 }
 .heart{
-  transform:scale(0.5 ,0.5);
+position:absolute;
+  width:20px;
+  height:20px;
+  ackground:orange;
+  font-size:1.7rem;
+  
+  left:calc(50% - 20px);
+  top:12%;
+  
+  
 }
 
 div.bname, div.heartcount{
-transform:translate(0,0px);
-color:red;
-	
+trnsform:translate(0,0px);
+coor:red;
+position:absolute;
+top:30px;
+	left:0;
 }
 }
 
