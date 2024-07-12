@@ -870,12 +870,12 @@ const interval = setInterval(function ping() {
    // console.log("ping");
     ws.ping(noop);
   });
-}, 1000 *3000);
+}, 1000 *3);
 
 function heartbeat() {
 	//console.log("pong here", this.isAlive);
   this.isAlive = true;
- // this.send(JSON.stringify({type:"pick"}));
+  this.send(JSON.stringify({type:"ping"}));
 }
 function doWas(obj){
 	console.log(" **** DO WAS!!!! ***");
@@ -1056,7 +1056,7 @@ function getPairsCount(){
 function deleteConnection(id){
 	for (let el of wsServer.clients) {
 		if(el.id == id){
-			el.close();
+			el.terminate();
 			return;
 		}
 	}
