@@ -474,7 +474,7 @@ return window.location.href='#purchaseHREF';
 
   sock.onopen = function () {
 	 console.log("websocket opened");
-	 heartbeat();
+	// heartbeat();
 	 wsend({ type: "helloServer", userId: gid("userId").value?gid("userId").value:'anon', nick: userName.value });
   };
   sock.onerror = function (e) {
@@ -492,7 +492,7 @@ return window.location.href='#purchaseHREF';
     }
   };
   sock.onclose = function () {
-	  clearTimeout(pingTimeout);
+	 // clearTimeout(pingTimeout);
     sock = null;
     note({ content: "Соединение с сервером закрыто!", type: "info", time: 5 });
     onlineCount.textContent = 0;
@@ -526,9 +526,9 @@ function heartbeat(){
 function on_msg(msg) {
 	//console.log("data type: ", msg.type);
 	 switch (msg.type) {
-		 case 'ping':
-		 heartbeat();
-		 //wsend({type:'pock'});
+		 case 'pick':
+		// heartbeat();
+		 wsend({type:'pock'});
 		 break
 		 case 'helloServer':
 		

@@ -875,7 +875,7 @@ const interval = setInterval(function ping() {
 function heartbeat() {
 	//console.log("pong here", this.isAlive);
   this.isAlive = true;
-  this.send(JSON.stringify({type:"ping"}));
+  this.send(JSON.stringify({type:"pick"}));
 }
 function doWas(obj){
 	console.log(" **** DO WAS!!!! ***");
@@ -980,7 +980,10 @@ if(msg.request == "mediasoup"){
         break
       case 'pock':
      // console.log('pock');
-        socket.isAlive = true;
+       clearTimeout(this.pingTimeout);
+	this.pingTimeout = setTimeout(function(){
+		socket.terminate();
+	}, 3000+1000);
         break
         case 'disconnection':
         machdisconnect(socket);
@@ -1002,6 +1005,7 @@ socket.on('error', function(e){
 	//console.log("ERROR ***: ", e);
 })
   socket.on('close', (code, reason) => {
+	  clearTimeout(this.pingTimeout);
     console.log(`#${socket.id} disconnected: [${code}]${reason}`)
     broadcasti({ type: 'online', online: wsServer.clients.size })
     
