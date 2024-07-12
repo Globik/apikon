@@ -875,7 +875,7 @@ const interval = setInterval(function ping() {
 function heartbeat() {
 	//console.log("pong here", this.isAlive);
   this.isAlive = true;
-  this.send(JSON.stringify({type:"pick"}));
+  //this.send(JSON.stringify({type:"pick"}));
 }
 function doWas(obj){
 	console.log(" **** DO WAS!!!! ***");
