@@ -906,7 +906,7 @@ function doWas(obj){
 	 imgData.value = obj.value;
  });
 wsServer.on('connection', async function (socket, req) {
-	
+	// jjjjj
 	socket.burl = req.url;
   const ip = req.socket.remoteAddress;
   setIp(socket, ip);
