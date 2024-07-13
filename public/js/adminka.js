@@ -53,7 +53,7 @@ function on_msg(msg) {
 	}else if(msg.type == "connected2"){
 		connects.textContent = msg.size;
 	}else if(msg.type == "pick"){
-	wsend({type:'pock'});
+	//wsend({type:'pock'});
 	}
 }
 const someSpinner = gid("someSpinner");

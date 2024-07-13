@@ -870,7 +870,7 @@ const interval = setInterval(function ping() {
    // console.log("ping");
     ws.ping(noop);
   });
-}, 1000 *3);
+}, 1000 * 600);
 
 function heartbeat() {
 	//console.log("pong here", this.isAlive);
@@ -980,10 +980,10 @@ if(msg.request == "mediasoup"){
         break
       case 'pock':
      // console.log('pock');
-       clearTimeout(this.pingTimeout);
-	this.pingTimeout = setTimeout(function(){
-		socket.terminate();
-	}, 3000+1000);
+    //   clearTimeout(this.pingTimeout);
+	//this.pingTimeout = setTimeout(function(){
+	//	socket.terminate();
+	//}, 3000+1000);
         break
         case 'disconnection':
         machdisconnect(socket);

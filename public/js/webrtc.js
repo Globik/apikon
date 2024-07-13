@@ -517,12 +517,13 @@ startbtn.setAttribute("data-start", "no");
 var tr = undefined;
 //get_socket();
 var pingTimeout;
+/*
 function heartbeat(){
 	clearTimeout(pingTimeout);
 	pingTimeout = setTimeout(function(){
 		sock.close();
 	}, 3000+5000);
-}
+}*/
 function on_msg(msg) {
 	//console.log("data type: ", msg.type);
 	 switch (msg.type) {
