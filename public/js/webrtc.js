@@ -1260,7 +1260,7 @@ function iceConnectionStateChangeHandler (event) {
 	  wsend({type: "hang-up", ignore: [[0,{}]], sub: "abrupt" });
 	  next(nextbtn, false, false, false);
    }else{
-	   if(sock)sock.close();
+	   if(sock.readyState == WebSocket.CLOSING)sock.close();
    }
       break;
   }
@@ -1489,7 +1489,7 @@ function Screenshot() {
 	let d;
 	try{
 		d = JSON.stringify(obj);
-		sock.send(d);
+		if(sock.readyState == WebSocket.OPEN)sock.send(d);
 	}catch(e){}
 }
 function toAdminPanel(el){
