@@ -496,33 +496,14 @@ return window.location.href='#purchaseHREF';
     sock = null;
     note({ content: "Соединение с сервером закрыто!", type: "info", time: 5 });
     console.log('socket closed');
-    onlineCount.textContent = 0;
-     camsCount.textContent = "0";
-     connects.textContent = "0";
-     if(window.streami){
-		window.streami.getTracks().forEach(function(track){
-			track.stop();
-		});
-window.streami = undefined;
-	local.srcObject = null;
-	if (remote.srcObject) {
-    remote.srcObject.getTracks().forEach(track => {
-		console.log("track stop");
-      track.stop()
-    })
-    remote.srcObject = null;
-    connectionState = "closed";
-  }
-
-}
-startbtn.setAttribute("data-start", "no");
-	startbtn.textContent = "старт";
-	startbtn.className = "start";
-	sock = null;
-	startbtn.disabled = false;
-	nextbtn.disabled = true;
+    closeAll(startbtn);
   };
 }
+
+
+
+
+
 var tr = undefined;
 //get_socket();
 var pingTimeout;
@@ -611,6 +592,9 @@ function on_msg(msg) {
         case 'gift':
         handleGift(msg);
         break
+        case 'gift2':
+        handleGift2(msg);
+        break
         case 'write':
    //  if(!tr){
        // printmsg2.className='write';
@@ -695,8 +679,8 @@ function insertPublished(obj, bool){
 	znakPrint.classList.add("hidden");
 	znakPrint2.classList.add("hidden");
 	let div=document.createElement('div');
-	div.className="yourmsg he2";
-	if(bool){
+	div.className="msg-publish";
+	if(obj.sub){
 		
 			div.innerHTML="<span><b>" + obj.from + ": </b></span><br><span>" + obj.data + "</span>";
 		}else{
@@ -711,8 +695,8 @@ function insertPublished(obj, bool){
 		
 		
 		let div2=document.createElement('div');
-	div2.className="yourmsg he2";
-	if(bool){
+	div2.className="msg-publish";
+	if(obj.sub){
 		
 			div2.innerHTML="<span><b>" + obj.from + ": </b></span><br><span>" + obj.data + "</span>";
 		}else{
@@ -734,7 +718,7 @@ function fuckMessage(msg){
     div2.innerHTML="<span><b>Собеседник: </b></span><br><span>" + msg + "mobile?</span>";
 }
 function handleHangUp(){
-	//alert("hongup");
+	
 	 //printmsg2.className='';
      //printmsg.className="";
      znakPrint.classList.add("hidden");
@@ -890,10 +874,19 @@ function start(el){
 		}).catch(handleError);
 }
 }else{
+	
+	closeAll(el);
+	
+
+}
+}
+function closeAll(el){
 	el.setAttribute("data-start", "no");
 	el.textContent = "старт";
 	el.className = "start";
-	
+	 onlineCount.textContent = 0;
+     camsCount.textContent = "0";
+     connects.textContent = "0";
 	unsubscribe = false;
 	if(window.streami){
 		local.srcObject.getTracks().forEach(function(track){
@@ -936,8 +929,6 @@ someInterval = null;
  if(sock) sock.close();
  partnerId = null;
 }
-}
-
 function handleError(err){
 	//alert(err);
 		//note({"content": err.name, type: "error", time: 15});
@@ -1107,8 +1098,6 @@ if(l2){
         //printmsg.className="";
          znakPrint.classList.add("hidden");
       znakPrint2.classList.add("hidden");
-    //  alert(txtvalue2.value+txtvalue2.value.length);
-     // console.log(txtvalue2.value);
 		if(!txtvalue2.value) return;
 			let div2=document.createElement('div');
 		div2.className="yourmsg2";
@@ -1178,7 +1167,7 @@ window.addEventListener("offline", function(e) {
 	console.log('ofline');
   note({ content: "offline", type: "warn", time: 5 });
 });
-note({ content: "online " + navigator.onLine, type: "info", time: 5 })
+//note({ content: "online " + navigator.onLine, type: "info", time: 5 })
 window.addEventListener("online", function(e) {
   console.log("online");
   note({ content: "online", type: "info", time: 5 });
@@ -1187,8 +1176,6 @@ window.addEventListener("online", function(e) {
 
    function next(el, bool, ignores, isIgnore){
 	   //next(nextbtn, false, amma, false);
-	   // nextbt(nextbtn, true, false, false)
-	   //alert('next');
 	   el.disabled = true;
 	   CONNECTED = false;
       closeVideoCall();
@@ -1255,14 +1242,13 @@ function iceConnectionStateChangeHandler (event) {
     CONNECTED = false;
     console.log('ice disconnected');
     note({content: "Disconnected! Press next. Online: " + navigator.onLine, type: "warn", time: 5 });
-   // wsend({type:"disconnection"});
-  //  alert(event.target.iceConnectionState);
   if(navigator.onLine){
 	  wsend({type: "hang-up", ignore: [[0,{}]], sub: "abrupt" });
 	  next(nextbtn, false, false, false);
    }else{
-	   //if(sock.readyState == WebSocket.CLOSING)
-	   sock.close();
+	   
+	 if(sock)  sock.close();
+	 closeAll(startbtn);
    }
       break;
   }
@@ -1678,7 +1664,11 @@ function openGiftBox2(el){
 	
 function onHeartClick(ev){
 	//alert(1);
-	
+	let y = playContainer.getAttribute("data-state");
+	if(y == "published"){
+		console.log("Cебе ты не можешь сердечки дарить");
+		return;
+	}
 	if(!CONNECTED){
 		note({ content: "Никого нет!", type: "info", tyme: 5 });
 		return;
@@ -1693,7 +1683,8 @@ function onHeartClick(ev){
 		let heartcount = heartcountels[i];
 		let n = Number(heartcount.textContent);
 		if(n <= 0){
-			note({ content: "Недостаточно средств!", type: "info", time: 5 });
+			//note({ content: "Недостаточно средств!", type: "info", time: 5 });
+			window.location.href = '#purchaseHREF'
 			return
 		}else{
 		 quant = n - 1;
@@ -1708,14 +1699,32 @@ function onHeartClick(ev){
 }
 
 function processHeart(n, ev){
+	let yy = playContainer.getAttribute("data-state");
+	if(yy == "subscribed"){
+		//console.log("");
+		wsend({ type: "messagepublished", sub: "gift", quant: n.quant, data: `Послал в подарок ${n.g=='heart'?'сердечко &#x1f496':''}`, publishedId: publishedId, from: userName.value,
+			istestheart: (isTestHeart.value=="true"?true:false) });
+		return;
+	}
 			wsend({ type: "gift", gift: n.g, quant: n.quant, from_id: userId.value, from_name: userName.value, to_id: partnerId, 
 				istestheart: (isTestHeart.value=="true"?true:false) });
+				//wsend({ type: "messagepublished", data: txtvalue.value, publishedId: publishedId, from: userName.value });
 			let str = `Послали в подарок ${n.g=='heart'?'сердечко &#x1f496':''}`
 			console.warn(str);
 			let l = ev.target.getAttribute("data-type");
 			//alert(l);
 			
 			insertMessage({ type: l, msg: str });
+		}
+		
+		
+		function purchaseTokens(el){
+			panelOpen();
+			if(!Login()){
+		window.location.href="#login";
+		return;
+	}
+			window.location.href = "#purchaseHREF";
 		}
 		
 function handleGift(msg){
@@ -1732,7 +1741,18 @@ function handleGift(msg){
 	payoutamountid.value = cd;
 	
 }
-
+function handleGift2(msg){
+	console.log(msg);
+	let n = Number(msg.quant);
+	let a = Number(heartcountels[0].textContent);
+	heartcountels[0].textContent = n + a;
+	let n1 = Number(msg.quant);
+	let a1 = Number(heartcountels[1].textContent);
+	let b = heartcountels[1].textContent = n1 + a1;
+	let cd = Number.parseFloat(b*0.10).toFixed(2);
+	dohod.textContent =  cd;
+	payoutamountid.value = cd;
+}
 
 	let orderform = document.forms.ordertodo;
 	const mypayoutform = document.forms.mypayoutform;

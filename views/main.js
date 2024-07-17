@@ -198,6 +198,7 @@ ${n.user && n.user.brole=='admin'?'<div class="settingspanel" onclick="toAdminPa
 <!-- <div class="settingspanel" onclick="doSharing(this);">Скриншэринг</div> -->
 <div class="settingspanel"><b>Вебок:</b> <span id="camsCount">0</span> | <b>Коннектов:</b> <span id="connects">0</span></div>
 <!-- <div class="settingspanel"  onclick="pushSubscribe(this);">Пуш уведомления</div> -->
+<div class="settingspanel"  onclick="purchaseTokens(this);">Купить сердечки &#x1f496;</div>
 <div class="settingspanel">
 <div class="some doh">Ваш доход&nbsp;&nbsp;<span id="dohod">${n.user? Number.parseFloat(n.user.theart*0.10).toFixed(2):'0.00'}</span>&nbsp;&nbsp;рублей</div>
 <div class="du" onclick="getPayout(this);">Получить</div>
@@ -350,7 +351,7 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
     <section id="heartsContainer">
 	
 	<form id="purchaseForm" method="post" action="https://yoomoney.ru/quickpay/confirm" name="ordertodo">
-<p class="intro">Купить 5 сердечек &#x1f496 = 50 рублей. Прежде залогиньтесь. Вы будете преренаправлены в yoomoney</p>
+<p class="intro">Купить 5 сердечек &#x1f496 = 50 рублей. Вы будете преренаправлены в yoomoney</p>
 	<div id="heartswrapper">
 	 <div><input type="hidden" id="receiver" placeholder="Получатель yoomoney" name="receiver" value="410016439442251" required/> </div>
 	<input type="hidden" name="label" value="id=${n.user?n.user.id:'0'}&c=5"/>

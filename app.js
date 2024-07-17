@@ -830,6 +830,10 @@ async function sendToPeer (socket, msg) {
 	 if(msg.type=="gift"){
 		 console.log('msg*** : ', msg);
 		 console.log("userId, nick, userId , nick ", socket.userId, ' ', socket.nick, ' ', peerSocket.userId, ' ', peerSocket.nick);
+		 if(peerSocket.isLogged == "no"){
+			 wsend(socket, { type: "error", err: "Собеседник не залогинен!"});
+			 return;
+		 }
 		 peerSocket.send(JSON.stringify(msg))
 		 try{
 			 let a = (msg.istestheart?'theart':'heart');
@@ -975,7 +979,7 @@ if(msg.request == "mediasoup"){
         break
         case "messagepublished":
         console.log('publish ', msg);
-        broadcast_publish(msg)
+        broadcast_publish(socket, msg)
         break
       case 'hang-up':
         hangUp(socket.id, { type: 'hang-up', partnerId: socket.userId, ignore: msg.ignore },(msg.sub&&msg.sub=="here"?true:false), (msg.sub&&msg.sub=="abrupt"?"abrupt":"noabrupt"))
@@ -1034,15 +1038,54 @@ function broadcast(obj){
 	}
 }
 
-function broadcast_publish(obj){
+async function broadcast_publish(ws, obj){
 		for (let el of wsServer.clients) {
 			if(el.pubId && el.pubId == obj.publishedId){
 				console.log("GENAU!", el.pubId);
 			wsend(el, obj);
 		}
 		}
+		 if(obj.sub =="gift"){
+		 console.log('msg gift*** : ', obj);
+		 let peerSocket = getSocket(obj.publishedId);
+		 if(peerSocket){
+		// console.log("userId, nick, userId , nick ", socket.userId, ' ', socket.nick, ' ', peerSocket.userId, ' ', peerSocket.nick);
+		 if(peerSocket.isLogged == "no"){
+			 console.log('peerSocket NO logged!!!!');
+			 wsend(ws, { type: "error", err: "Собеседник не залогинен!"});
+			 return;
+		 }
+		// peerSocket.send(JSON.stringify(msg))
+		console.log("peerSocket gift!!!!");
+		wsend(peerSocket, { type: "gift2", quant: obj.quant });
+		 try{
+			 let a = (obj.istestheart?'theart':'heart');
+			 await pool.query(`update users set ${a}=${a}-(?) where id=(?)`, [ obj.quant, obj.from_id ]);
+			 await pool.query(`update users set ${a}=${a}+(?) where id=(?)`, [ obj.quant,/* msg.to_id */ peerSocket.userId ] );
+
+
+await pool.query(`insert into processTest(from_id,from_nick,wieviel) values((?),(?),(?)) ON DUPLICATE KEY UPDATE wieviel=wieviel+(?)`, [ obj.from_id, obj.from_name, obj.quant, obj.quant ]);
+		
+		 }catch(err){
+			 console.log("SEND HEARTS ERROR ", err);
+			// wsend(socket, { type: " error", err: err });
+		 }
+		 
+	 }else{
+		 console.log('peerSocket not found!');
+	 }
+	 }
 }
 
+function getSocket(id){
+	for (let el of wsServer.clients) {
+		console.log("el.id == id ", el.id, ' = ', id);
+		if(el.id == id){
+			return el;
+		}
+	}
+	return undefined;
+}
 function broadcasti(obj){
 	for (let el of wsServer.clients) {
 		wsend(el, obj);

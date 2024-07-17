@@ -42,6 +42,7 @@ function goMedia(data){
 			   while(chatbox.firstChild){
 				   chatbox.firstChild.remove();
 			   }
+			   CONNECTED = false;
       //  enableElement("startMediaBtn");
        // enableElement("stopMediaBtn");
     } else if (data.type == "producer_published") {
@@ -341,6 +342,7 @@ console.log("after sender")
                 el.setAttribute("data-state", "published");
                 note({content: "Вы в эфире!", type: "info", time: 5});
                 publishedId = MYSOCKETID;
+               
                let a = document.querySelector('div#playContainer #kresti');
                if(a) a.classList.toggle('show');
                 setTimeout(()=>{;
@@ -492,6 +494,7 @@ async function subscribe(el) {
 
             case 'connected':
             PSENDER = true;
+            CONNECTED = true;
             startbtn.disabled = true;
             nextbtn.disabled = true;
                 note({content: "Вы подключились к трансляции!", type: "info", time: 5});
@@ -504,6 +507,7 @@ async function subscribe(el) {
                 break;
             case 'disconnected':
                 note({content: 'Disconnected!', type: 'info', time: 5});
+                CONNECTED = false;
                 if (vV) vV.textContent = 0;
        gid('kartina').setAttribute('poster',  "");
        publishedId = null;
@@ -530,6 +534,7 @@ async function subscribe(el) {
                 //  producerTransport.close();
                 gid("txtvalue2").setAttribute("data-publish", "none");
                 gid("txtvalue").setAttribute("data-publish", "none");
+                CONNECTED = false;
                 consumerTransport.close();
                 break;
 
@@ -671,6 +676,7 @@ function unpublish() {
     updateButtons();
     // updateButtons2();
     SENDER = false;
+    CONNECTED = false;
     if (vV) vV.textContent = 0;
    // disableElement("stopTranslation");
    playContainer.setAttribute("data-state", "niemand");
