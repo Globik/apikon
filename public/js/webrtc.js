@@ -1260,7 +1260,8 @@ function iceConnectionStateChangeHandler (event) {
 	  wsend({type: "hang-up", ignore: [[0,{}]], sub: "abrupt" });
 	  next(nextbtn, false, false, false);
    }else{
-	   if(sock.readyState == WebSocket.CLOSING)sock.close();
+	   //if(sock.readyState == WebSocket.CLOSING)
+	   sock.close();
    }
       break;
   }
