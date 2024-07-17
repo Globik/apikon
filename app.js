@@ -873,7 +873,11 @@ const interval = setInterval(function ping() {
    // console.log("ping");
     ws.ping(noop);
   });
-}, 1000 * 600);
+},
+ //1000 * 600
+ 1000 * 60
+ //10
+ );
 
 function heartbeat() {
 	//console.log("pong here", this.isAlive);
@@ -909,7 +913,8 @@ function doWas(obj){
 	 imgData.value = obj.value;
  });
 wsServer.on('connection', async function (socket, req) {
-	// jjjjj
+socket.isAlive = true;
+  socket.on("pong", heartbeat);
 	socket.burl = req.url;
 	socket.isLogged = "no";
   const ip = req.socket.remoteAddress;
@@ -925,8 +930,7 @@ wsServer.on('connection', async function (socket, req) {
 
   
   if(onLine.size !=0)wsend(socket, { type: "dynamic", sub: "total", cams: [...onLine] });
-  socket.isAlive = true;
-  socket.on("pong", heartbeat);
+  
   
   
  

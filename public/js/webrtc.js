@@ -495,6 +495,7 @@ return window.location.href='#purchaseHREF';
 	 // clearTimeout(pingTimeout);
     sock = null;
     note({ content: "Соединение с сервером закрыто!", type: "info", time: 5 });
+    console.log('socket closed');
     onlineCount.textContent = 0;
      camsCount.textContent = "0";
      connects.textContent = "0";
