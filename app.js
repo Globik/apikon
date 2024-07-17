@@ -769,7 +769,7 @@ function  machdisconnect(socket){
 	
 }
 
-function hangUp (socketId, msg, bool) {
+function hangUp (socketId, msg, bool, abrupt) {
 	
 	
 	
@@ -802,6 +802,9 @@ function hangUp (socketId, msg, bool) {
       peerSocket.send(JSON.stringify(msg))
       console.log(`#${socketId} hangs up #${peerId}`)
     }
+    if(abrupt && abrupt == "abrupt"){
+		peerSocket.terminate();
+	}
   } else {
     let myIndex = waitingQueue.indexOf(socketId)
     if (myIndex !== -1) {
@@ -908,6 +911,7 @@ function doWas(obj){
 wsServer.on('connection', async function (socket, req) {
 	// jjjjj
 	socket.burl = req.url;
+	socket.isLogged = "no";
   const ip = req.socket.remoteAddress;
   setIp(socket, ip);
   socket.id = obid();
@@ -962,6 +966,7 @@ if(msg.request == "mediasoup"){
         case "helloServer":
         socket.userId = msg.userId;
         socket.nick = msg.nick;
+        socket.isLogged = msg.logged;
         wsend(socket, { type: "helloServer", socketId: socket.id });
         break
         case "messagepublished":
@@ -969,7 +974,7 @@ if(msg.request == "mediasoup"){
         broadcast_publish(msg)
         break
       case 'hang-up':
-        hangUp(socket.id, { type: 'hang-up', partnerId: socket.userId, ignore: msg.ignore },(msg.sub&&msg.sub=="here"?true:false))
+        hangUp(socket.id, { type: 'hang-up', partnerId: socket.userId, ignore: msg.ignore },(msg.sub&&msg.sub=="here"?true:false), (msg.sub&&msg.sub=="abrupt"?"abrupt":"noabrupt"))
         break
       case 'search-peer':
        socket.nick = msg.nick;
@@ -1009,7 +1014,7 @@ socket.on('error', function(e){
     console.log(`#${socket.id} disconnected: [${code}]${reason}`)
     broadcasti({ type: 'online', online: wsServer.clients.size })
     
-    hangUp(socket.id, { type: 'hang-up', partnerId: socket.userId, ignore: false }, true)
+    hangUp(socket.id, { type: 'hang-up', partnerId: socket.userId, ignore: false }, true, "noabrupt")
     /* handleMediasoup.*/handleMediasoup(socket, msg, WebSocket, wsServer, pool).cleanUpPeer(socket.pubId);
   })
 })

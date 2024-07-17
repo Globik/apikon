@@ -475,7 +475,7 @@ return window.location.href='#purchaseHREF';
   sock.onopen = function () {
 	 console.log("websocket opened");
 	// heartbeat();
-	 wsend({ type: "helloServer", userId: gid("userId").value?gid("userId").value:'anon', nick: userName.value });
+	 wsend({ type: "helloServer", userId: gid("userId").value?gid("userId").value:'anon', nick: userName.value, logged:  Login()?"yes":"no" });
   };
   sock.onerror = function (e) {
     note({ content: "Websocket error: " + e, type: "error", time: 5 });
@@ -504,6 +504,14 @@ return window.location.href='#purchaseHREF';
 		});
 window.streami = undefined;
 	local.srcObject = null;
+	if (remote.srcObject) {
+    remote.srcObject.getTracks().forEach(track => {
+		console.log("track stop");
+      track.stop()
+    })
+    remote.srcObject = null;
+    connectionState = "closed";
+  }
 
 }
 startbtn.setAttribute("data-start", "no");
@@ -1165,11 +1173,20 @@ if(l2){
 }
 
 
-
+window.addEventListener("offline", function(e) {
+	console.log('ofline');
+  note({ content: "offline", type: "warn", time: 5 });
+});
+note({ content: "online " + navigator.onLine, type: "info", time: 5 })
+window.addEventListener("online", function(e) {
+  console.log("online");
+  note({ content: "online", type: "info", time: 5 });
+});
 
 
    function next(el, bool, ignores, isIgnore){
 	   //next(nextbtn, false, amma, false);
+	   // nextbt(nextbtn, true, false, false)
 	   //alert('next');
 	   el.disabled = true;
 	   CONNECTED = false;
@@ -1236,10 +1253,15 @@ function iceConnectionStateChangeHandler (event) {
     case 'disconnected':
     CONNECTED = false;
     console.log('ice disconnected');
-    note({content: "Disconnected! Press next", type: "warn", time: 5 });
+    note({content: "Disconnected! Press next. Online: " + navigator.onLine, type: "warn", time: 5 });
    // wsend({type:"disconnection"});
   //  alert(event.target.iceConnectionState);
-  //  next(nextbtn);
+  if(navigator.onLine){
+	  wsend({type: "hang-up", ignore: [[0,{}]], sub: "abrupt" });
+	  next(nextbtn, false, false, false);
+   }else{
+	   if(sock)sock.close();
+   }
       break;
   }
 }
