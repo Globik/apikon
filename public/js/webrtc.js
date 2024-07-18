@@ -951,7 +951,7 @@ function handleError(err){
 	if(IPS.size > 0) amap = IPS;
 	console.error("amap", amap, IPS);
 		wsend({ type:'search-peer', nick: (NICK?NICK:'Anonym'), src: imgdata , ignores: [...IPS] });
-	}, 100);
+	}, 3000);
 	someInterval = setInterval(doScreenshot, 1000);
 		somespinner.className="show";
 		mobileloader.className="active";
@@ -1461,10 +1461,14 @@ function Screenshot() {
     let cnv = document.createElement('canvas');
     let w = 180;
     let h = 150;
-    cnv.width = w;
-    cnv.height = h;
+   // cnv.width = w;
+    //cnv.height = h;
     var c = cnv.getContext('2d');
-    c.drawImage(local, 0, 0, w, h);
+    var ww = local.videoWidth;
+    var hh = local.videoHeight;
+     cnv.width = ww;
+    cnv.height = hh;
+    c.drawImage(local, 0, 0, ww, hh);
     var imgdata = cnv.toDataURL('image/png', 1.0);
     cnv.remove();
     return imgdata;

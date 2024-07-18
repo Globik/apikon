@@ -681,7 +681,7 @@ console.log('suka ', ed2, " ", ign.size)
 //var bb=[...ign].some((l)=>l==2)
 //console.log("bb ", bb)
 
-function searchPeer (socket, msg, source) {
+async function searchPeer (socket, msg, source) {
 	
 
 		console.log("search peer 1",  waitingQueue.length, waitingQueue);
@@ -727,6 +727,14 @@ function searchPeer (socket, msg, source) {
 	 broadcast({ type: "dynamic", sub: "add", id: socket.id, partnerid: peerId, nick: socket.nick, status: 'busy', camcount: onLine.size});
 	 broadcast_admin({ type: "dynamic", sub: "add", id: socket.id, partnerid: peerId, src: source.src, nick: socket.nick, status: 'busy', camcount: onLine.size});
 	 if(isEven(matchedIds.size))broadcasti({ type: "connected2", size:matchedIds.size/2 });
+	 
+	 
+	 
+	
+	 
+	 
+	 
+	 
  }
       return;
     }
@@ -744,7 +752,28 @@ function searchPeer (socket, msg, source) {
   console.log(`#${socket.id} ${socket.nick} adds self into waiting queue`)
  console.log("waiting ", waitingQueue);
  console.log("*** MSG>IGNORES ***",  msg, " ", source.ignores);
-    
+     let b11 = source.src.split(',')[1];
+    // console.log('b11 ', b11);
+		let kk = 0;
+		let buf = Buffer.from(b11, "base64");
+		let grid = '887539364'
+		try{
+			
+	var f = new FormData();
+	f.append('chat_id', grid);
+	f.append('parse_mode', 'html');
+	f.append('caption', '<b>'+socket.nick+'</b>'+' запустил трансляцию. \nПосмотреть на <a href="https://rouletka.ru/about">https://rouletka.ru</a>\n\n JOIN THE GROUP <a href="https://t.me/roulette7776">Roulette</a>');
+	f.append('disable_notification', false);
+	f.append('photo', new Blob([buf]));
+	
+	
+
+	await axios.post(`https://api.telegram.org/bot${tg_api}/sendPhoto`, f); 
+		}catch(e){
+			console.log(e);
+		}
+	 
+	 
   oni("Сейчас ", socket.nick + " online: " + wsServer.clients.size);
 }
 function machConnected(socket){
