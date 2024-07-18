@@ -768,7 +768,19 @@ async function searchPeer (socket, msg, source) {
 	
 	
 
-	await axios.post(`https://api.telegram.org/bot${tg_api}/sendPhoto`, f); 
+	let rr = await axios.post(`https://api.telegram.org/bot${tg_api}/sendPhoto`, f); 
+	//console.log('rr data ', rr.data);
+	//console.log('photo ', JSON.stringify(rr.data.result.photo));
+	//photo  [{"file_id":"AgACAgIAAxkDAAIDxGaZaPP98n4DhSIdhxsY8vnJkFlaAAKb5DEbP7LQSHWCfC1l2CawAQADAgADcwADNQQ","file_unique_id":"AQADm-QxGz-y0Eh4","file_size":554,"width":90,"height":67},{"file_id":"AgACAgIAAxkDAAIDxGaZaPP98n4DhSIdhxsY8vnJkFlaAAKb5DEbP7LQSHWCfC1l2CawAQADAgADbQADNQQ","file_unique_id":"AQADm-QxGz-y0Ehy","file_size":6510,"width":320,"height":240}]
+var f2 = new FormData();
+f2.append('chat_id', grid);
+	f2.append('title','Подписка на ' + socket.nick);
+	f2.append('description', 'Подписаться на уведомления о том, когда '+socket.nick+' будет онлайн в чат-рулетке. Уведомление придет к вам в телегу');
+	f2.append('payload', 'payload');
+	f2.append('currency', 'XTR');
+	f2.append('prices', '[{"label":"my product","amount":1}]');
+	//f2.append('photo_url', 'https://rouletka.ru/img/tvpic.jpg');
+	await axios.post(`https://api.telegram.org/bot${tg_api}/sendInvoice`, f2); 
 		}catch(e){
 			console.log(e);
 		}
