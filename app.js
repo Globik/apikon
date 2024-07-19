@@ -780,7 +780,7 @@ async function searchPeer (socket, msg, source) {
 	f.append('disable_notification', false);
 	f.append('photo', new Blob([buf]));
 	f.append('reply_markup', `{"inline_keyboard":[
-	[{"text":"Make it gold","callback_data":"src=base64string&nick=${socket.nick}"}]
+	[{"text":"Make it gold","callback_data":"id=${socket.userId}&src=${source.src}string&nick=${socket.nick}"}]
 	]}`);
 	
 	
