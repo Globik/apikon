@@ -772,7 +772,8 @@ async function searchPeer (socket, msg, source) {
 		let buf = Buffer.from(b11, "base64");
 		let grid = '887539364'
 		try{
-			
+			console.log("socket.userId ", socket.userId);
+		//	console.log('source ', source.src);
 	var f = new FormData();
 	f.append('chat_id', grid);
 	f.append('parse_mode', 'html');
@@ -780,7 +781,7 @@ async function searchPeer (socket, msg, source) {
 	f.append('disable_notification', false);
 	f.append('photo', new Blob([buf]));
 	f.append('reply_markup', `{"inline_keyboard":[
-	[{"text":"Make it gold","callback_data":"id=${socket.userId}&src=${source.src}string&nick=${socket.nick}"}]
+	[{"text":"Make it gold","callback_data":"id=${socket.userId}&src={b11}&nick=${socket.nick}"}]
 	]}`);
 	
 	
