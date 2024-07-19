@@ -840,6 +840,25 @@ async function hookinfo(){
 	}catch(e){console.log(e);}
 }
 //hookinfo();
+
+const file_id = "AgACAgIAAxkDAAIDxGaZaPP98n4DhSIdhxsY8vnJkFlaAAKb5DEbP7LQSHWCfC1l2CawAQADAgADcwADNQQ";
+async function getF(){
+	try{
+		let rr = await axios.post(`https://api.telegram.org/bot${tg_api}/getFile`, {file_id:file_id}); 
+	console.log('rr.data: ', rr.data)
+	}catch(e){console.log(e);}
+	/*{
+	 ok: true,
+  result: {
+    file_id: 'AgACAgIAAxkDAAIDxGaZaPP98n4DhSIdhxsY8vnJkFlaAAKb5DEbP7LQSHWCfC1l2CawAQADAgADcwADNQQ',
+    file_unique_id: 'AQADm-QxGz-y0Eh4',
+    file_size: 554,
+    file_path: 'photos/file_0.jpg'
+  }
+  * download a file https://api.telegram.org/file/bot${tg_api}/<file_path>
+}*/
+}
+//getF()
 function machConnected(socket){
 	if (matchedIds.has(socket.id)) {
    /* let peerId = matchedIds.get(socket.id)
