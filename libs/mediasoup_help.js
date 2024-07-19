@@ -1,5 +1,5 @@
 const tg_api = '7129138329:AAGl9GvZlsK3RsL9Vb3PQGoXOdeoc97lpJ4';
-const grid = '-1002095475544';
+const grid = '-1002095475544';//-1002247446123
 const { Blob } =require('node:buffer')
 const fs = require('fs');
 const {Duplex} = require('stream');

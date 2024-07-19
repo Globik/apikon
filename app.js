@@ -497,7 +497,7 @@ const dummy3 = new Map();
 var iii3 = 0;
 app.post('/cb/tgwebhook', async(req, res)=>{
 	console.log("*** CALLBACK from TELEGA! *** ", req.body);
-	//dummy3.set(iii3, req.body);
+	dummy3.set(iii3, req.body);
 	iii3++;
 	res.status(200).send({ message: "OK" });
 	})
@@ -823,14 +823,22 @@ async function setH(){
 	var f = new FormData();
 	f.append('url', 'https://rouletka.ru/cb/tgwebhook');
 	f.append('secret_token', 'alik');
+	f.append('allowed_updates',["callback_query"]);
 	
 	
-
+//deleteWebhook
 	let rr = await axios.post(`https://api.telegram.org/bot${tg_api}/setWebhook`, f); 
 	console.log('rr.data: ', rr.data)
 }catch(e){console.log(e)}
 }
 //setH()
+async function hookinfo(){
+	try{
+		let rr = await axios.post(`https://api.telegram.org/bot${tg_api}/getWebhookInfo`, {}); 
+	console.log('rr.data: ', rr.data)
+	}catch(e){console.log(e);}
+}
+//hookinfo();
 function machConnected(socket){
 	if (matchedIds.has(socket.id)) {
    /* let peerId = matchedIds.get(socket.id)
