@@ -749,9 +749,9 @@ async function searchPeer (socket, msg, source) {
 	 broadcast_admin({ type: "dynamic", sub: "add", id: socket.id, src: source.src, nick: socket.nick, status: 'free', camcount: onLine.size });
 	if(isEven(matchedIds.size))broadcasti({ type: "connected2", size: matchedIds.size/2 });
  }
-  console.log(`#${socket.id} ${socket.nick} adds self into waiting queue`)
- console.log("waiting ", waitingQueue);
- console.log("*** MSG>IGNORES ***",  msg, " ", source.ignores);
+//  console.log(`#${socket.id} ${socket.nick} adds self into waiting queue`)
+// console.log("waiting ", waitingQueue);
+ //console.log("*** MSG>IGNORES ***",  msg, " ", source.ignores);
      let b11 = source.src.split(',')[1];
     // console.log('b11 ', b11);
 		let kk = 0;
@@ -765,22 +765,39 @@ async function searchPeer (socket, msg, source) {
 	f.append('caption', '<b>'+socket.nick+'</b>'+' запустил трансляцию. \nПосмотреть на <a href="https://rouletka.ru/about">https://rouletka.ru</a>\n\n JOIN THE GROUP <a href="https://t.me/roulette7776">Roulette</a>');
 	f.append('disable_notification', false);
 	f.append('photo', new Blob([buf]));
+	/*f.append('reply_markup', `{"inline_keyboard":[
+	[{"text":"Купить за биткоины","callback_data":"buybtc"}],
+	[{"text":"Купить в yoomoney","callback_data":"buyyoomoney"}],
+	[{"text":"Купить за звездочки","callback_data":"buytgstars"}],
+	[{"text":"Купить за тонкоин","callback_data":"buyton"}]
+	]}`);*/
 	
 	
 
 	let rr = await axios.post(`https://api.telegram.org/bot${tg_api}/sendPhoto`, f); 
 	//console.log('rr data ', rr.data);
 	//console.log('photo ', JSON.stringify(rr.data.result.photo));
-	//photo  [{"file_id":"AgACAgIAAxkDAAIDxGaZaPP98n4DhSIdhxsY8vnJkFlaAAKb5DEbP7LQSHWCfC1l2CawAQADAgADcwADNQQ","file_unique_id":"AQADm-QxGz-y0Eh4","file_size":554,"width":90,"height":67},{"file_id":"AgACAgIAAxkDAAIDxGaZaPP98n4DhSIdhxsY8vnJkFlaAAKb5DEbP7LQSHWCfC1l2CawAQADAgADbQADNQQ","file_unique_id":"AQADm-QxGz-y0Ehy","file_size":6510,"width":320,"height":240}]
+	//photo  [{"file_id":"AgACAgIAAxkDAAIDxGaZaPP98n4DhSIdhxsY8vnJkFlaAAKb5DEbP7LQSHWCfC1l2CawAQADAgADcwADNQQ","file_unique_id":"AQADm-QxGz-y0Eh4","file_size":554,"width":90,"height":67},
+	//{"file_id":"AgACAgIAAxkDAAIDxGaZaPP98n4DhSIdhxsY8vnJkFlaAAKb5DEbP7LQSHWCfC1l2CawAQADAgADbQADNQQ","file_unique_id":"AQADm-QxGz-y0Ehy","file_size":6510,"width":320,"height":240}]
 var f2 = new FormData();
 f2.append('chat_id', grid);
 	f2.append('title','Подписка на ' + socket.nick);
-	f2.append('description', 'Подписаться на уведомления о том, когда '+socket.nick+' будет онлайн в чат-рулетке. Уведомление придет к вам в телегу');
+	f2.append('description', '<a href="HH.ru">test</a> Подписаться на уведомления о том, когда '+socket.nick+' будет онлайн в чат-рулетке. Уведомление придет к вам в телегу');
 	f2.append('payload', 'payload');
 	f2.append('currency', 'XTR');
 	f2.append('prices', '[{"label":"my product","amount":1}]');
-	//f2.append('photo_url', 'https://rouletka.ru/img/tvpic.jpg');
-	await axios.post(`https://api.telegram.org/bot${tg_api}/sendInvoice`, f2); 
+	f2.append('parse_mode', 'html');
+	//f2.append('photo_url', "AQADm-QxGz-y0Eh4");
+	//await axios.post(`https://api.telegram.org/bot${tg_api}/sendInvoice`, f2); 
+	/*
+	await axios.post(`https://api.telegram.org/bot${tg_api}/sendMessage`,{
+		chat_id: grid,
+		text:'Hello, buy me',
+		reply_markup:{
+			one_time_keyboard:false,
+			inline_keyboard:[[{one_time_keyboard:false,text:'loser',callback_data:'sticker'}]]
+			}
+	});*/
 		}catch(e){
 			console.log(e);
 		}
