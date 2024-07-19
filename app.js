@@ -497,7 +497,7 @@ const dummy3 = new Map();
 var iii3 = 0;
 app.post('/cb/tgwebhook', async(req, res)=>{
 	console.log("*** CALLBACK from TELEGA! *** ", req.body);
-	dummy3.set(iii3, req.body);
+	//dummy3.set(iii3, req.body);
 	iii3++;
 	res.status(200).send({ message: "OK" });
 	})
