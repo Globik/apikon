@@ -159,6 +159,18 @@ function on_takecb2(l, el){
 	el.className = "";
 	out3.innerHTML=JSON.stringify(l.message);
 }
+
+function takeCb3(el){
+	el.className="puls";
+	vax('post','/api/takeCb3', {}, on_takecb3, on_getAuth_error, el, false);
+}
+function on_takecb3(l, el){
+	el.className = "";
+	out333.innerHTML=JSON.stringify(l.message);
+}
+
+
+
 const mypayout = document.forms.mypayoutform;
 mypayout.addEventListener('submit', onpayoutsubmit, false);
 function onpayoutsubmit(ev){

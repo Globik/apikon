@@ -83,6 +83,11 @@ const yoomoneytest = function(n){
     <div><input type="submit" value="Получить" /></div>
     </form>
     </div>
+    <hr><h1>Telegram API</h1>
+    <hr>8) Проверить уведомления, есть ли from telegram bot
+    <div><button onclick="takeCb3(this);">check webhook</button></div>
+    <div><ooutput id="out333"></output></div>
+    
     <hr>
     <script src="/js/yoomoneytest.js"></script>
     </body></html>

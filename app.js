@@ -493,6 +493,20 @@ app.post('/api/takeCb2', async(req, res)=>{
 	res.json({ message: a });
 })
 
+const dummy3 = new Map();
+var iii3 = 0;
+app.post('/cb/tgwebhook', async(req, res)=>{
+	console.log("*** CALLBACK from TELEGA! *** ", req.body);
+	dummy3.set(iii3, req.body);
+	iii3++;
+	res.status(200).send({ message: "OK" });
+	})
+
+app.post('/api/takeCb3', async(req, res)=>{
+	let a = (dummy3.size==0?"Nothing": [...dummy3]);
+	res.json({ message: a });
+})
+
 app.post('/api/register', (req, res, next)=>{
 	passport.authenticate("local-signup", (err, user, info)=>{
 		//console.log("err, user, info: ", err, user, info);
@@ -765,12 +779,9 @@ async function searchPeer (socket, msg, source) {
 	f.append('caption', '<b>'+socket.nick+'</b>'+' запустил трансляцию. \nПосмотреть на <a href="https://rouletka.ru/about">https://rouletka.ru</a>\n\n JOIN THE GROUP <a href="https://t.me/roulette7776">Roulette</a>');
 	f.append('disable_notification', false);
 	f.append('photo', new Blob([buf]));
-	/*f.append('reply_markup', `{"inline_keyboard":[
-	[{"text":"Купить за биткоины","callback_data":"buybtc"}],
-	[{"text":"Купить в yoomoney","callback_data":"buyyoomoney"}],
-	[{"text":"Купить за звездочки","callback_data":"buytgstars"}],
-	[{"text":"Купить за тонкоин","callback_data":"buyton"}]
-	]}`);*/
+	f.append('reply_markup', `{"inline_keyboard":[
+	[{"text":"Make it gold","callback_data":"src=base64string&nick=${socket.nick}"}]
+	]}`);
 	
 	
 
@@ -805,6 +816,21 @@ f2.append('chat_id', grid);
 	 
   oni("Сейчас ", socket.nick + " online: " + wsServer.clients.size);
 }
+
+
+async function setH(){
+	try{
+	var f = new FormData();
+	f.append('url', 'https://rouletka.ru/cb/tgwebhook');
+	f.append('secret_token', 'alik');
+	
+	
+
+	let rr = await axios.post(`https://api.telegram.org/bot${tg_api}/setWebhook`, f); 
+	console.log('rr.data: ', rr.data)
+}catch(e){console.log(e)}
+}
+//setH()
 function machConnected(socket){
 	if (matchedIds.has(socket.id)) {
    /* let peerId = matchedIds.get(socket.id)
