@@ -523,11 +523,13 @@ app.post('/cb/tgwebhook', async(req, res)=>{
 					await downloadF({ path: file_path, file_name: name });
 					const f2 = new FormData();
 					const rouletteGroup = "-1002247446123";
-					
-	f2.append('chat_id', rouletteGroup);
+					console.log('nick ', nick);
+					let suka1 = `fotolink=${name}&usid=${usid}`;
+					console.log('suka1 ', suka1);
+	f2.append('chat_id', grid);
 	f2.append('title','Подписка на ' + nick);
 	f2.append('description', 'Подписаться на уведомления о том, когда ' + nick+' будет онлайн в чат-рулетке rouletka.ru Уведомление придет к вам в телегу');
-	f2.append('payload', `fotolink=${name}&usid=${usid}`);
+	f2.append('payload', suka1);
 	f2.append('currency', 'XTR');
 	f2.append('prices', `[{"label":"Subscribe on ${nick}","amount":1}]`);
 	f2.append('parse_mode', 'html');
