@@ -525,8 +525,8 @@ app.post('/cb/tgwebhook', async(req, res)=>{
 					const rouletteGroup = "-1002247446123";
 					
 	f2.append('chat_id', rouletteGroup);
-	f2.append('title','Подписка на ' + socket.nick);
-	f2.append('description', 'Подписаться на уведомления о том, когда ' + socket.nick+' будет онлайн в чат-рулетке https://rouletka.ru. Уведомление придет к вам в телегу');
+	f2.append('title','Подписка на ' + nick);
+	f2.append('description', 'Подписаться на уведомления о том, когда ' + nick+' будет онлайн в чат-рулетке https://rouletka.ru. Уведомление придет к вам в телегу');
 	f2.append('payload', `fotolink=${name}&usid=${usid}`);
 	f2.append('currency', 'XTR');
 	f2.append('prices', `[{"label":"Subscribe on ${nick}","amount":1}]`);
