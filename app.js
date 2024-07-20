@@ -528,13 +528,15 @@ app.post('/cb/tgwebhook', async(req, res)=>{
 					console.log('suka1 ', suka1);
 	f2.append('chat_id', grid);
 	f2.append('title','Подписка на ' + nick);
-	f2.append('description', 'Подписаться на уведомления о том, когда ' + nick+' будет онлайн в чат-рулетке rouletka.ru Уведомление придет к вам в телегу');
+	f2.append('description', 'Подписаться на уведомления о том, когда ' + nick+' будет онлайн в чат-рулетке Уведомление придет к вам в телегу');
 	f2.append('payload', suka1);
 	f2.append('currency', 'XTR');
-	f2.append('prices', `[{"label":"Subscribe on ${nick}","amount":1}]`);
-	f2.append('parse_mode', 'html');
+	f2.append('prices', `[{"label":"Subscribe on ","amount":1}]`);
+	//f2.append('parse_mode', 'html');
 	//693967662-3076.jpg
-	f2.append('photo_url', `https//rouletka.ru/img/gold/${name}`);
+	let fn1 = `https//rouletka.ru/img/gold/${name}`;
+	console.log('fn1 ', fn1);
+	f2.append('photo_url', fn1);
 	await axios.post(`https://api.telegram.org/bot${tg_api}/sendInvoice`, f2); 
 	return await axios.post(`https://api.telegram.org/bot${tg_api}/sendMessage`, {
 		chat_id: grid,
