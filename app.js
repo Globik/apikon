@@ -1,5 +1,7 @@
 const https=require( "https");
-var fs =require( "fs");
+const fs =require( "fs");
+const fsi = require('fs/promises')
+
 const url = require('url');
 
 const express = require('express');
@@ -499,6 +501,57 @@ app.post('/cb/tgwebhook', async(req, res)=>{
 	console.log("*** CALLBACK from TELEGA! *** ", req.body);
 	dummy3.set(iii3, req.body);
 	iii3++;
+	const grid = '887539364';
+	let { update_id, callback_query } = req.body;
+	try{
+	if(callback_query){
+	let { data } = callback_query;
+	if(data){
+		const paramStr = new URLSearchParams(data);
+		
+		const action = paramStr.get('action');
+		if(action){
+			if(action == 'gold'){
+				const usid = paramStr.get('usid');
+				const nick = paramStr.get('nick');
+				let ph = callback_query.message.photo;
+				const file_id = ph[ph.length - 1].file_id;
+				let fileInfo = await getF(file_id);
+				if(fileInfo){
+					let file_path = fileInfo.file_path;
+					let name = `${update_id}-${usid}.jpg`;
+					await downloadF({ path: file_path, file_name: name });
+					const f2 = new FormData();
+					const rouletteGroup = "-1002247446123";
+					
+	f2.append('chat_id', rouletteGroup);
+	f2.append('title','Подписка на ' + socket.nick);
+	f2.append('description', 'Подписаться на уведомления о том, когда ' + socket.nick+' будет онлайн в чат-рулетке https://rouletka.ru. Уведомление придет к вам в телегу');
+	f2.append('payload', `fotolink=${name}&usid=${usid}`);
+	f2.append('currency', 'XTR');
+	f2.append('prices', `[{"label":"Subscribe on ${nick}","amount":1}]`);
+	f2.append('parse_mode', 'html');
+	f2.append('photo_url', `https//rouletka.ru/img/gold/${name}`);
+	await axios.post(`https://api.telegram.org/bot${tg_api}/sendInvoice`, f2); 
+	return await axios.post(`https://api.telegram.org/bot${tg_api}/sendMessage`, {
+		chat_id: grid,
+		text: 'Получилось!'
+	});
+				}
+			}
+		}
+	}	
+	}
+	
+}catch(e){
+	console.log(e);
+	return await axios.post(`https://api.telegram.org/bot${tg_api}/sendMessage`, {
+		chat_id: grid,
+		text: 'Облом!'
+	});
+}
+	
+	
 	res.status(200).send({ message: "OK" });
 	})
 
@@ -778,10 +831,10 @@ async function searchPeer (socket, msg, source) {
 	f.append('chat_id', grid);
 	f.append('parse_mode', 'html');
 	f.append('caption', '<b>'+socket.nick+'</b>'+' запустил трансляцию. \nПосмотреть на <a href="https://rouletka.ru/about">https://rouletka.ru</a>\n\n JOIN THE GROUP <a href="https://t.me/roulette7776">Roulette</a>');
-	f.append('disable_notification', false);
+	f.append('disable_notification', true);
 	f.append('photo', new Blob([buf]));
 	f.append('reply_markup', `{"inline_keyboard":[
-	[{"text":"Make it gold","callback_data":"id=${socket.userId}&src={b11}&nick=${socket.nick}"}]
+	[{"text":"Make it gold","callback_data":"usid=${socket.userId}&action=gold&nick=${socket.nick}"}]
 	]}`);
 	
 	
@@ -841,12 +894,19 @@ async function hookinfo(){
 }
 //hookinfo();
 
-const file_id = "AgACAgIAAxkDAAIDxGaZaPP98n4DhSIdhxsY8vnJkFlaAAKb5DEbP7LQSHWCfC1l2CawAQADAgADcwADNQQ";
-async function getF(){
+//const file_id =  "AgACAgIAAxkDAAIDxGaZaPP98n4DhSIdhxsY8vnJkFlaAAKb5DEbP7LQSHWCfC1l2CawAQADAgADcwADNQQ";
+//const file_id2 = "AgACAgIAAxkDAAIDxGaZaPP98n4DhSIdhxsY8vnJkFlaAAKb5DEbP7LQSHWCfC1l2CawAQADAgADbQADNQQ";
+
+async function getF(fileid){
 	try{
-		let rr = await axios.post(`https://api.telegram.org/bot${tg_api}/getFile`, {file_id:file_id}); 
-	console.log('rr.data: ', rr.data)
-	}catch(e){console.log(e);}
+		let rr = await axios.post(`https://api.telegram.org/bot${tg_api}/getFile`, { file_id: fileid }); 
+	//console.log('rr.data: ', rr.data)
+	if(rr.data.ok == true){
+	return rr.data.result;
+}else{
+	return undefined;
+}
+	}catch(e){console.log(e);return undefined;}
 	/*{
 	 ok: true,
   result: {
@@ -859,6 +919,18 @@ async function getF(){
 }*/
 }
 //getF()
+
+async function downloadF(obj){
+	const dir = './public/img/gold';
+	try{
+	let link = `https://api.telegram.org/file/bot${tg_api}/${obj.path}`;
+	const response = await axios.get(link, { responseType: 'arraybuffer'})
+	const fileData = Buffer.from(response.data, 'binary');
+	await fsi.writeFile(`${dir}/${obj.file_name}`, fileData);
+	console.log('jpg saved');
+}catch(e){console.log(e)}
+}
+ //downloadF()
 function machConnected(socket){
 	if (matchedIds.has(socket.id)) {
    /* let peerId = matchedIds.get(socket.id)
