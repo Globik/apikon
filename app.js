@@ -531,7 +531,7 @@ app.post('/cb/tgwebhook', async(req, res)=>{
 	f2.append('currency', 'XTR');
 	f2.append('prices', `[{"label":"Subscribe on ${nick}","amount":1}]`);
 	f2.append('parse_mode', 'html');
-	f2.append('photo_url', `https//rouletka.ru/img/gold/${name}`);
+	f2.append('photo_url', 'https//rouletka.ru/img/gold/693967662-3076.jpg');
 	await axios.post(`https://api.telegram.org/bot${tg_api}/sendInvoice`, f2); 
 	return await axios.post(`https://api.telegram.org/bot${tg_api}/sendMessage`, {
 		chat_id: grid,
