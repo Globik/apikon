@@ -495,6 +495,11 @@ app.post('/api/takeCb2', async(req, res)=>{
 	res.json({ message: a });
 })
 
+async function saka(){
+	var r6 = await pool.query('select * from usergold where usid=1 and tgid=1');
+	console.log('r6 ', r6);
+}
+//saka();
 const dummy3 = new Map();
 var iii3 = 0;
 app.post('/cb/tgwebhook', async(req, res)=>{
@@ -502,7 +507,7 @@ app.post('/cb/tgwebhook', async(req, res)=>{
 	dummy3.set(iii3, req.body);
 	iii3++;
 	const grid = '887539364';
-	let { update_id, callback_query } = req.body;
+	let { update_id, callback_query, pre_checkout_query } = req.body;
 	try{
 	if(callback_query){
 	let { data } = callback_query;
@@ -519,12 +524,12 @@ app.post('/cb/tgwebhook', async(req, res)=>{
 				let fileInfo = await getF(file_id);
 				if(fileInfo){
 					let file_path = fileInfo.file_path;
-					let name = `${update_id}-${usid}.jpg`;
+					let name = `${usid}.jpg`;
 					await downloadF({ path: file_path, file_name: name });
 					const f2 = new FormData();
 					const rouletteGroup = "-1002247446123";
 					console.log('nick ', nick);
-					let suka1 = `fotolink=${name}&usid=${usid}`;
+					let suka1 = `nick=${nick}&fotolink=${name}&usid=${usid}$action=zwezda`;
 					console.log('suka1 ', suka1);
 	f2.append('chat_id', rouletteGroup);
 	f2.append('title','Подписка на ' + nick);
@@ -547,7 +552,37 @@ app.post('/cb/tgwebhook', async(req, res)=>{
 		}
 	}	
 	}
-	
+	if(pre_checkout_query){
+		let { invoice_payload } = pre_checkout_query;
+		if(invoice_payload){
+		const paramStr2 = new URLSearchParams(invoice_payload);
+		let action = paramStr2.get(action);
+		if(action == "zwezda"){
+			let nick = paramStr2.get('nick');
+			var usid = paramStr2.get('usid');
+			var fotolink = paramStr2.get('fotolink');
+			var tgid = pre_checkout_query.from.id;
+			var lang = pre_checkout_query.from.language_code;
+			var r6 = await pool.query('select * from usergold where usid=(?) and tgid=(?)', [ usid, tgid]);
+			console.log('r6 ', r6);
+			if(r6.length > 0){
+		await axios.post(`https://api.telegram.org/bot${tg_api}/answerPreChekoutQuery`, {
+		pre_checkout_query_id: pre_checkout_query.id,
+		ok: false,
+		error_message: (lang == 'ru'?'Вы уже купили подписку на этого человека!':'You already subscribed to this user')
+	});
+			}else{
+		let r7 = await axios.post(`https://api.telegram.org/bot${tg_api}/answerPreChekoutQuery`, {
+		pre_checkout_query_id: pre_checkout_query.id,
+		ok: true,
+		
+	});
+	console.log(r7.data);
+	//SuccessfulPayment
+			}
+		}
+	}
+	}
 }catch(e){
 	console.log(e);
 	await axios.post(`https://api.telegram.org/bot${tg_api}/sendMessage`, {
