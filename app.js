@@ -552,6 +552,7 @@ app.post('/cb/tgwebhook', async(req, res)=>{
 		}
 	}	
 	}
+	console.log('^^^^^^^^^^^^^^^^^^^^^^ ', pre_checkout_query );
 	if(pre_checkout_query){
 		let { invoice_payload } = pre_checkout_query;
 		if(invoice_payload){
