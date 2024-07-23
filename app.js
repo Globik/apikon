@@ -735,8 +735,11 @@ function isAdmin(roles){
 	}
 }
 
-const dkey = "/etc/letsencrypt/live/rouletka.ru/privkey.pem";
-const dcert = "/etc/letsencrypt/live/rouletka.ru/fullchain.pem";
+const dkey = "/etc/letsencrypt/live/rouletka.ru-0001/privkey.pem";
+const dcert = "/etc/letsencrypt/live/rouletka.ru-0001/fullchain.pem";
+// /etc/letsencrypt/live/rouletka.ru-0001/fullchain.pem
+//        /etc/letsencrypt/live/rouletka.ru-0001/privkey.pem
+
 const port = process.env.DEVELOPMENT=='yes'?3000:443;
 var servi;
 if(process.env.DEVELOPMENT == "yes"){
