@@ -572,14 +572,14 @@ app.post('/cb/tgwebhook', async(req, res)=>{
 			var r6 = await pool.query('select * from usergold where usid=(?) and tgid=(?)', [ usid, tgid]);
 			console.log('r6 ', r6);
 			if(r6.length > 0){
-		let a2 = await axios.post(`https://api.telegram.org/bot${tg_api}/answerPreChekoutQuery`, {
+		let a2 = await axios.post(`https://api.telegram.org/bot${tg_api}/answerPreCheckoutQuery`, {
 		pre_checkout_query_id: pre_checkout_query.id,
 		ok: false,
 		error_message: (lang == 'ru'?'Вы уже купили подписку на этого человека!':'You already subscribed to this user')
 	});
 	console.log('a ', a.data);
 			}else{
-		let r7 = await axios.post(`https://api.telegram.org/bot${tg_api}/answerPreChekoutQuery`, {
+		let r7 = await axios.post(`https://api.telegram.org/bot${tg_api}/answerPreCheckoutQuery`, {
 		pre_checkout_query_id: pre_checkout_query.id,
 		ok: true,
 		
