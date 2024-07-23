@@ -555,6 +555,7 @@ app.post('/cb/tgwebhook', async(req, res)=>{
 	console.log('^^^^^^^^^^^^^^^^^^^^^^ ', pre_checkout_query );
 	if(pre_checkout_query){
 		let { invoice_payload } = pre_checkout_query;
+		console.log('******************** invoice_payload  ', invoice_payload );
 		if(invoice_payload){
 		const paramStr2 = new URLSearchParams(invoice_payload);
 		let action = paramStr2.get('action');
