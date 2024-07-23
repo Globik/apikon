@@ -558,11 +558,14 @@ app.post('/cb/tgwebhook', async(req, res)=>{
 		const paramStr2 = new URLSearchParams(invoice_payload);
 		let action = paramStr2.get('action');
 		if(action == "zwezda"){
+			console.log("ZWEZDA!");
 			let nick = paramStr2.get('nick');
 			var usid = paramStr2.get('usid');
 			var fotolink = paramStr2.get('fotolink');
 			var tgid = pre_checkout_query.from.id;
+			
 			var lang = pre_checkout_query.from.language_code;
+			console.log('tgid language code ', tgid, ' ', lang);
 			var r6 = await pool.query('select * from usergold where usid=(?) and tgid=(?)', [ usid, tgid]);
 			console.log('r6 ', r6);
 			if(r6.length > 0){
