@@ -586,6 +586,34 @@ app.post('/cb/tgwebhook', async(req, res)=>{
 	});
 	console.log('r7 ', r7.data);
 	//SuccessfulPayment
+	/*
+	{update_id: 693967775,
+  message: {
+    message_id: 8873,
+    from: {
+      id: 887539364,
+      is_bot: false,
+      first_name: 'Alik',
+      username: 'Globik2',
+      language_code: 'ru'
+    },
+    chat: {
+      id: 887539364,
+      first_name: 'Alik',
+      username: 'Globik2',
+      type: 'private'
+    },
+    date: 1721763956,
+    successful_payment: {
+      currency: 'XTR',
+      total_amount: 1,
+      invoice_payload: 'nick=Asdfg&fotolink=6385.jpg&usid=6385&action=zwezda',
+      telegram_payment_charge_id: 'stxyUm1pZ7obVLCzjjxMIfBNjFcLOD79978Bmb_gdbIiYf5vx64zTzNJauzJJqu0ck3ay0_EssX98ypMJWq-LuopUQPqt_wh8vTzsROKT9tgxp0K7vLbt16NoKzNz7DZZGF',
+      provider_payment_charge_id: '887539364_1'
+    }
+  }
+}
+*/
 			}
 		}
 	}
@@ -869,6 +897,8 @@ async function searchPeer (socket, msg, source) {
 //  console.log(`#${socket.id} ${socket.nick} adds self into waiting queue`)
 // console.log("waiting ", waitingQueue);
  //console.log("*** MSG>IGNORES ***",  msg, " ", source.ignores);
+ oni("Сейчас ", socket.nick + " online: " + wsServer.clients.size);
+ if(!source && !source.src) return;
      let b11 = source.src.split(',')[1];
     // console.log('b11 ', b11);
 		let kk = 0;
@@ -918,7 +948,7 @@ f2.append('chat_id', grid);
 		}
 	 
 	 
-  oni("Сейчас ", socket.nick + " online: " + wsServer.clients.size);
+  
 }
 
 
