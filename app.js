@@ -529,7 +529,7 @@ app.post('/cb/tgwebhook', async(req, res)=>{
 					const f2 = new FormData();
 					const rouletteGroup = "-1002247446123";
 					console.log('nick ', nick);
-					let suka1 = `nick=${nick}&fotolink=${name}&usid=${usid}$action=zwezda`;
+					let suka1 = `nick=${nick}&fotolink=${name}&usid=${usid}&action=zwezda`;
 					console.log('suka1 ', suka1);
 	f2.append('chat_id', rouletteGroup);
 	f2.append('title','Подписка на ' + nick);
@@ -559,6 +559,7 @@ app.post('/cb/tgwebhook', async(req, res)=>{
 		if(invoice_payload){
 		const paramStr2 = new URLSearchParams(invoice_payload);
 		let action = paramStr2.get('action');
+		console.log('**** ACTION ', action);
 		if(action == "zwezda"){
 			console.log("ZWEZDA!");
 			let nick = paramStr2.get('nick');
