@@ -507,7 +507,7 @@ app.post('/cb/tgwebhook', async(req, res)=>{
 	dummy3.set(iii3, req.body);
 	iii3++;
 	const grid = '887539364';
-	let { update_id, callback_query, pre_checkout_query } = req.body;
+	let { update_id, callback_query, pre_checkout_query, message } = req.body;
 	try{
 	if(callback_query){
 	let { data } = callback_query;
@@ -548,6 +548,35 @@ app.post('/cb/tgwebhook', async(req, res)=>{
 		text: 'Получилось!'
 	});
 				}
+			}else if(action == "goldi"){
+				let usid = paramStr.get('usid');
+				let nick = paramStr.get('nick');
+				let ph = callback_query.message.photo;
+				let file_id = ph[ph.length - 1].file_id;
+				let fileInfo = await getF(file_id);
+				if(fileInfo){
+					let file_path = fileInfo.file_path;
+					let name = `${usid}.jpg`;
+					await downloadF({ path: file_path, file_name: name });
+					let f3 = new FormData();
+					const rouletteGroup = "-1002247446123";
+					console.log('nick ', nick);
+					let suka1 = `nick=${nick}&fotolink=${name}&usid=${usid}&action=zwezda`;
+					console.log('suka1 ', suka1);
+					let whom = callback_query.from.id;
+	f3.append('chat_id', whom);
+	f3.append('title','Подписка на ' + nick);
+	f3.append('description', 'Подписаться на уведомления о том, когда ' + nick+' будет онлайн в чат-рулетке https://rouletka.ru Уведомление придет к вам в телегу');
+	f3.append('payload', suka1);
+	f3.append('currency', 'XTR');
+	f3.append('prices', `[{"label":"Subscribe on ${nick}","amount":1}]`);
+	//f2.append('parse_mode', 'html');
+	//693967662-3076.jpg
+	let fn1 = `https://rouletka.ru/img/gold/${name}`;
+	console.log('fn1 ', fn1);
+	f3.append('photo_url', fn1);
+	await axios.post(`https://api.telegram.org/bot${tg_api}/sendInvoice`, f3); 
+				
 			}
 		}
 	}	
@@ -618,7 +647,28 @@ app.post('/cb/tgwebhook', async(req, res)=>{
 		}
 	}
 	}
-}catch(e){
+	if(message && message.successful_payment){
+		console.log("SUCCESSFUL PAYMENT");
+		let payload = message.successful_payment.invoice_payload;
+		const paramStr3 = new URLSearchParams(payload);
+		const fromid = message.from.id;
+		let lang = message.from.language_code;
+		let usid = paramStr3.get('usid');
+		let fotolink = paramStr3.get('fotolink');
+		let usnick = paramStr3.get('nick')
+		/*usid MEDIUMINT NOT NULL,
+nick VARCHAR (20) NOT NULL,
+tgid MEDIUMINT NOT NULL,
+photo varchar(50) not null,
+lang varchar(3) not null
+*/ 
+		await pool.query('instert into usergold(usid,nick,tgid, photo, lang) values(?,?,?,?,?)', [ usid,usnick,fromid,fotolink,lang]);
+		await axios.post(`https://api.telegram.org/bot${tg_api}/sendMessage`, {
+		chat_id: fromid,
+		text: (lang=='ru'?'Вы подписались на ' + usnick + ' Спасибо за подписку. Теперь оповещения будут поступать на ваш телеграм':'You subscribed on ' + usnick)
+	});
+	}
+}}catch(e){
 	console.log('hier error6666 ', e);
 	await axios.post(`https://api.telegram.org/bot${tg_api}/sendMessage`, {
 		chat_id: grid,

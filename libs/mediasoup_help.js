@@ -367,13 +367,10 @@ bot.telegram.sendPhoto(grid,
     }
     */ );
     f.append('reply_markup', `{"inline_keyboard":[
-	[{"text":"Купить за биткоины","callback_data":"buybtc"}],
-	[{"text":"Купить в yoomoney","callback_data":"buyyoomoney"}],
-	[{"text":"Купить за звездочки","callback_data":"buytgstars"}],
-	[{"text":"Купить за тонкоин","callback_data":"buyton"}]
+	[{"text":"Купить за звездочки","callback_data":'usid=${ws.userId}&action=goldi&nick=${ws.nick}' }]
 	]}`);
 	
-	
+	// [{"text":"Купить за тонкоин","callback_data":"buyton"}]
 
 	await axios.post(`https://api.telegram.org/bot${tg_api}/sendPhoto`,
 	/*{
