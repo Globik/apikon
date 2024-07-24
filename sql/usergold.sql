@@ -5,7 +5,7 @@ drop table if exists usergold cascade;
 CREATE TABLE IF NOT EXISTS usergold(
 usid MEDIUMINT NOT NULL,
 nick VARCHAR (20) NOT NULL,
-tgid MEDIUMINT NOT NULL,
+tgid BIGINT NOT NULL,
 photo varchar(50) not null,
 lang varchar(3) not null
 );
