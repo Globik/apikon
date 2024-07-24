@@ -960,13 +960,14 @@ async function searchPeer (socket, msg, source) {
 // console.log("waiting ", waitingQueue);
  //console.log("*** MSG>IGNORES ***",  msg, " ", source.ignores);
  oni("Сейчас ", socket.nick + " online: " + wsServer.clients.size);
- if(!source && !source.src) return;
-     let b11 = source.src.split(',')[1];
+ if(!source || !source.src) return;
+     
+		try{
+			let b11 = source.src.split(',')[1];
     // console.log('b11 ', b11);
 		let kk = 0;
 		let buf = Buffer.from(b11, "base64");
 		let grid = '887539364'
-		try{
 			console.log("socket.userId ", socket.userId);
 		//	console.log('source ', source.src);
 	var f = new FormData();
