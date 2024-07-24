@@ -396,7 +396,7 @@ bot.telegram.sendPhoto(grid,
 		caption: (val.lang=='ru'?`<b>${val.nick}</b> online в чат рулетке на <a href="https://rouletka.ru/about">https://rouletka.ru/about</a>`:`
 		<b>${val.nick}</b> is online on <a href="https://rouletka.ru/about">https://rouletka.ru/about</a>`),
 		reply_markup:`{"inline_keyboard":[
-	[{"text":"Unsubscribe","callback_data":"lang=${val.lang}&usid=${socket.userId}&action=unsub&nick=${socket.nick}&tgid=${val.tgid}"}]]}`
+	[{"text":"Unsubscribe","callback_data":"lang=${val.lang}&usid=${val.usid}&action=unsub&nick=${val.nick}&tgid=${val.tgid}"}]]}`
 })
 	}); 
 
