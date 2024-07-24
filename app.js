@@ -988,7 +988,7 @@ async function searchPeer (socket, msg, source) {
 	const notifyUsers = ra.map(async (val)=>{
     await axios.post(`https://api.telegram.org/bot${tg_api}/sendPhoto`, {
 		photo: 'https://rouletka.ru/img/gold/' + val.photo,
-		chat_id: val.tgid,
+		chat_id: val.tgid.toString(),
 		disable_notification:false,
 		parse_mode: "html",
 		caption: (val.lang=='ru'?`<b>${val.nick}</b> online в чат рулетке на <a href="https://rouletka.ru/about">https://rouletka.ru/about</a>`:`
