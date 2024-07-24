@@ -662,7 +662,7 @@ tgid MEDIUMINT NOT NULL,
 photo varchar(50) not null,
 lang varchar(3) not null
 */ 
-		await pool.query('instert into usergold(usid,nick,tgid, photo, lang) values(?,?,?,?,?)', [ usid,usnick,fromid,fotolink,lang]);
+		await pool.query('instert into usergold(usid,nick,tgid, photo, lang) values((?),(?),(?),(?),(?))', [ usid,usnick,fromid,fotolink,lang]);
 		await axios.post(`https://api.telegram.org/bot${tg_api}/sendMessage`, {
 		chat_id: fromid,
 		text: (lang=='ru'?'Вы подписались на ' + usnick + ' Спасибо за подписку. Теперь оповещения будут поступать на ваш телеграм':'You subscribed on ' + usnick)
