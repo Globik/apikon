@@ -99,7 +99,7 @@ return `
     ${!n.user?`<script>
     const NICK = "anon";
     window.onload=function(){
-		get_socket(); 
+		//get_socket(); 
    const cat = localStorage.getItem("myCat");
    if(!cat && cat !=="Tom"){
     location.href="#regeln";

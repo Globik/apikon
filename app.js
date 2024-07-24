@@ -1033,7 +1033,7 @@ f2.append('chat_id', grid);
   
 }
 
-
+console.log("TIME ", Date.now())
 async function setH(){
 	try{
 	var f = new FormData();

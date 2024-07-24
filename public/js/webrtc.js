@@ -448,10 +448,16 @@ function setSignal(){
 //window.onpagehide=function(){alert('open')}
 function get_socket() {
 	 if(NICK == "anon" || NICK == undefined){
-		//  sock.close();
-		//  note({content: "Залогиньтесь!", type: "warn", time: 5 });
-		//  return;
-	  }
+		// sock.close();
+		 note({content: "Залогиньтесь!", type: "warn", time: 5 });
+		 location.href="#login";
+	const faka = document.querySelector('.overlay:target');
+	 if(faka){
+	faka.onclick=function(e){
+		e.preventDefault();
+	}
+		  return;
+	  }}
 	//  alert(ifEnter());
 /*	if(ifEnter()){
 		window.location.href='#purchaseHREF';

@@ -121,6 +121,18 @@ div.dynamicbox{
 	dsplay:block;
 	position:relative;
 	brder:10px solid brown;
+	wdth:100px;
+}
+.dynamicImgHalter{
+	width:150px;
+	height:150px;
+	brder: 1px solid red;
+	object-fit:cover;
+}
+.dynamicImgHalter img{
+width:100%;
+height:100%;
+object-fit:cover;
 }
 .krestik{
 	bckground:green;
