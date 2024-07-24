@@ -580,7 +580,7 @@ app.post('/cb/tgwebhook', async(req, res)=>{
 			}
 		}
 	}	
-	}
+	}}
 	console.log('^^^^^^^^^^^^^^^^^^^^^^ ', pre_checkout_query );
 	if(pre_checkout_query){
 		let { invoice_payload } = pre_checkout_query;
@@ -668,7 +668,7 @@ lang varchar(3) not null
 		text: (lang=='ru'?'Вы подписались на ' + usnick + ' Спасибо за подписку. Теперь оповещения будут поступать на ваш телеграм':'You subscribed on ' + usnick)
 	});
 	}
-}}catch(e){
+}catch(e){
 	console.log('hier error6666 ', e);
 	await axios.post(`https://api.telegram.org/bot${tg_api}/sendMessage`, {
 		chat_id: grid,
