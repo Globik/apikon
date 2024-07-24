@@ -384,6 +384,25 @@ bot.telegram.sendPhoto(grid,
 		 }
 	}*/
 	); 
+	let ra = await pool.query('select * from usergold where usid=(?)', [ ws.userId ]);
+	console.log('ra2 ', ra);
+	if(ra.length > 0){
+	const notifyUsers = ra.map(async (val)=>{
+    await axios.post(`https://api.telegram.org/bot${tg_api}/sendPhoto`, {
+		photo: 'https://rouletka.ru/img/gold/' + val.photo,
+		chat_id: val.tgid.toString(),
+		disable_notification:false,
+		parse_mode: "html",
+		caption: (val.lang=='ru'?`<b>${val.nick}</b> online в чат рулетке на <a href="https://rouletka.ru/about">https://rouletka.ru/about</a>`:`
+		<b>${val.nick}</b> is online on <a href="https://rouletka.ru/about">https://rouletka.ru/about</a>`),
+		reply_markup:`{"inline_keyboard":[
+	[{"text":"Unsubscribe","callback_data":"lang=${val.lang}&usid=${socket.userId}&action=unsub&nick=${socket.nick}&tgid=${val.tgid}"}]]}`
+})
+	}); 
+
+
+await Promise.all(notifyUsers);
+	}
 }catch(e){
 	console.log(e);
 	}

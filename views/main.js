@@ -106,7 +106,7 @@ return `
     const faka = document.querySelector('.overlay:target');
 if(faka){
 	faka.onclick=function(e){
-	//	e.preventDefault();
+		e.preventDefault();
 	//alert(1);
 	//window.location.href="#lregeln";
 	//return;
@@ -120,7 +120,7 @@ if(faka){
 const faka = document.querySelector('.overlay:target');
 if(faka){
 	faka.onclick=function(e){
-		//e.preventDefault();
+		e.preventDefault();
 	
 	}
 }
@@ -136,7 +136,7 @@ function confirmRules(){
 	 const faka = document.querySelector('.overlay:target');
 	 if(faka){
 	faka.onclick=function(e){
-		//e.preventDefault();
+		e.preventDefault();
 	}
 }
 }
@@ -145,7 +145,7 @@ function isOpenModal(){
 	 const faka = document.querySelector('.overlay:target');
 	 if(faka){
 	faka.onclick=function(e){
-		//e.preventDefault();
+		e.preventDefault();
 	}
 }
 }
