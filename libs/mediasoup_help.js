@@ -367,7 +367,7 @@ bot.telegram.sendPhoto(grid,
     }
     */ );
     f.append('reply_markup', `{"inline_keyboard":[
-	[{"text":"Купить за звездочки","callback_data":'usid=${ws.userId}&action=goldi&nick=${ws.nick}' }]
+	[{"text":"Купить за звездочки","callback_data":"usid=${ws.userId}&action=goldi&nick=${ws.nick}" }]
 	]}`);
 	
 	// [{"text":"Купить за тонкоин","callback_data":"buyton"}]
