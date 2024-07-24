@@ -578,6 +578,18 @@ app.post('/cb/tgwebhook', async(req, res)=>{
 	await axios.post(`https://api.telegram.org/bot${tg_api}/sendInvoice`, f3); 
 				
 			}
+		}else if(action == "unsub"){
+			let usid = paramStr.get('usid');
+			let tgid = paramStr.get('tgid');
+			let nick = paramStr.get('nick');
+			let lang = paramStr.get('lang');
+			try{
+			await pool.query('delete from from usergold where tgid=(?) and usid=(?)', [ tgid, usid ]);
+			await axios.post(`https://api.telegram.org/bot${tg_api}/sendMessage`, {
+		chat_id: tgid,
+		text: (lang=='ru'?'Вы отписались от ' + nick : 'You unsubscribed from ' + nick)
+	});
+		}catch(e){console.log(e);}
 		}
 	}	
 	}}
@@ -970,6 +982,25 @@ async function searchPeer (socket, msg, source) {
 	
 
 	let rr = await axios.post(`https://api.telegram.org/bot${tg_api}/sendPhoto`, f); 
+	let ra = await pool.query('select * from usergold where usid=(?)', [ socket.userId ]);
+	console.log('ra ', ra);
+	if(ra.length > 0){
+	const notifyUsers = ra.map(async (val)=>{
+    await axios.post(`https://api.telegram.org/bot${tg_api}/sendPhoto`, {
+		photo: 'https://rouletka.ru/img/gold/' + val.photo,
+		chat_id: val.tgid,
+		disable_notification:false,
+		parse_mode: "html",
+		caption: (val.lang=='ru'?`<b>${val.nick}</b> online в чат рулетке на <a href="https://rouletka.ru/about">https://rouletka.ru/about</a>`:`
+		<b>${val.nick}</b> is online on <a href="https://rouletka.ru/about">https://rouletka.ru/about</a>`),
+		reply_markup:`{"inline_keyboard":[
+	[{"text":"Unsubscribe","callback_data":"lang=${val.lang}&usid=${socket.userId}&action=unsub&nick=${socket.nick}&tgid=${val.tgid}"}]]}`
+})
+	}); 
+
+
+await Promise.all(notifyUsers);
+	}
 	//console.log('rr data ', rr.data);
 	//console.log('photo ', JSON.stringify(rr.data.result.photo));
 	//photo  [{"file_id":"AgACAgIAAxkDAAIDxGaZaPP98n4DhSIdhxsY8vnJkFlaAAKb5DEbP7LQSHWCfC1l2CawAQADAgADcwADNQQ","file_unique_id":"AQADm-QxGz-y0Eh4","file_size":554,"width":90,"height":67},
