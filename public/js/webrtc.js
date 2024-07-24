@@ -439,6 +439,28 @@ function ifEnter(){
 		return false;
 	}
 }
+function checkMonth(){
+	let monthmilliseconds = 2592000000;
+	let heute = Date.now();
+	let mon = Mon.value;
+	if(mon=="null")return;
+	let mon2 = Number(mon)
+	//alert(mon2);
+	let ab = heute - mon2;
+	if(ab < monthmilliseconds){
+		//alert("premium account!");
+	}else if(ab > monthmilliseconds){
+		//alert("not a premium account");
+		if(Login()){
+			let d = {};
+			d.usid = userId.value;
+			vax('post','/api/removePremium', d, on_remove_prem, on_remprem_error, null, false);
+		}
+	}
+}
+checkMonth();
+	function on_remove_prem(l, v){}
+	function on_remprem_error(){};
 
 function setSignal(){
 	//alert("aha");
@@ -1792,6 +1814,8 @@ function pay(el){
 	vax('post','/pay/api/getPayUrl', d, on_get_payurl, on_payurl_error, el.target, false);
 	el.target.className = "puls";
 	*/ 
+	
+	
 }
 
 

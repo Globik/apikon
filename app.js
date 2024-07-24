@@ -436,6 +436,18 @@ if(li==sha1_ha){
 }else{
 	console.log('not ok');
 }
+
+
+async function setPrem(){
+	try{
+//	let a = await pool.query(`update users set prem="y", mon=(?) where id=5`, [ Date.now() ]);
+	let a = await pool.query('select prem, mon from users');
+	//let a = await pool.query('update users set prem="n", mon=null where id=5', [])
+	console.log(a);
+}catch(e){console.log(e)}
+}
+//setPrem()
+
 var iii2 = 0;
 const dummy2 = new Map();
 
@@ -448,7 +460,8 @@ let { notification_type,
 		datetime,
 		sender,
 		codepro,
-		sha1_hash, label,
+		sha1_hash, 
+		label,
 		widthdraw_amount,
 		unaccepted
 		 } = req.body;
@@ -471,12 +484,22 @@ if(li == sha1_hash){
 console.log('HASH IS GUET')
 let userid = paramStr.get('id');
 let quant = paramStr.get('c');
+let prem = paramStr.get('p');
 let quant_n = Number(quant);
 if(unaccepted == 'false'){
 try{
 	console.log("updating users in db");
+	if(quant){
 	await db.query('update users set theart=theart+(?),heart=1 where id=(?)', [ quant_n, userid ]);
-}catch(err){
+}
+	if(prem){
+	try{
+		await db.query(`update users set prem="y",mon=(?) where id=(?)`, [ Date.now(), userid ]);
+	}catch(e){
+		console.log(e);
+		return res.status(200).send({ message: "not ok" });
+		}
+}}catch(err){
 	console.log(err);
 	return res.status(200).send({ message: "not ok" });
 }
@@ -487,6 +510,7 @@ try{
 	console.log("HASH IS NOT GUET");
 	return res.status(200).send({ message: "not ok" });
 }
+
 	res.status(200).send({ message: "OK" });
 })
 
@@ -494,7 +518,14 @@ app.post('/api/takeCb2', async(req, res)=>{
 	let a = (dummy2.size==0?"Nothing": [...dummy2]);
 	res.json({ message: a });
 })
-
+app.post('/api/removePremium', checkAuth, async(req, res)=>{
+	let { usid } = req.body;
+	if(usid){
+		let db = req.db;
+		await db.query('update users set prem="n", mon=null where id=(?)', [ usid ]);
+	}
+	res.json({ message: 'ok' });
+})
 async function saka(){
 	var r6 = await pool.query('select * from usergold where usid=1 and tgid=1');
 	console.log('r6 ', r6);
@@ -684,7 +715,7 @@ lang varchar(3) not null
 	console.log('hier error6666 ', e);
 	await axios.post(`https://api.telegram.org/bot${tg_api}/sendMessage`, {
 		chat_id: grid,
-		text: 'Облом!'
+		text: 'Облом! ' + e.toString()
 	});
 }
 	

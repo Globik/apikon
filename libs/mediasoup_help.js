@@ -327,7 +327,7 @@ const handleMediasoup =  function(ws, data, WebSocket, sock, pool){
 				let f = new FormData();
 	console.log('data.file ', data.pile);
 	try{
-		
+	
 	}catch(e){console.log(e);}
 			}else if( data.type == "pic" ){
 				console.log(" **** PIC! ****");
@@ -338,34 +338,14 @@ const handleMediasoup =  function(ws, data, WebSocket, sock, pool){
 		let kk = 0;
 		let buf = Buffer.from(b11, "base64");
 		try{
-			
-			/*
-bot.telegram.sendPhoto(grid, 
-{
-	type:"photo",
-	source: Buffer.from(b11, "base64")} ,
- {
-	parse_mode: 'html',
-	caption: '<b>'+ws.nick+'</b>'+' запустил трансляцию. \nПосмотреть на <a href="https://rouletka.ru/about">https://rouletka.ru</a>',
-	disable_notification: true
-}
-
-	) 
-	*/
-	//Bad Request: invalid file HTTP URL specified: Wrong port number specified in the URL
-	//invalid file HTTP URL specified: Disallowed character in URL host
+	let bot='887539364';
 
 	var f = new FormData();
-	f.append('chat_id', grid);
+	f.append('chat_id', (data.isprem=="y"?grid:bot));
 	f.append('parse_mode', 'html');
 	f.append('caption', '<b>'+ws.nick+'</b>'+' запустил трансляцию. \nПосмотреть на <a href="https://rouletka.ru/about">https://rouletka.ru</a>\nВы можете купить подписку на уведомления о том, когда <b>' + ws.nick + '</b> онлайн');
-	f.append('disable_notification', true);
-	f.append('photo', new Blob([buf])/*, {  
-		// filename:    'someFileName.png',
-   // contentType: 'application/octet-stream',
-    
-    }
-    */ );
+	f.append('disable_notification', (data.isprem=="y"?true:false));
+	f.append('photo', new Blob([buf]));
     f.append('reply_markup', `{"inline_keyboard":[
 	[{"text":"Купить за звездочки","callback_data":"usid=${ws.userId}&action=goldi&nick=${ws.nick}" }]
 	]}`);

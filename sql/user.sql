@@ -20,5 +20,6 @@ alter table users add column heart int not null default 0;
 alter table users add constraint theartRestriction check(theart > -1);
 alter table users add constraint heartRestriction check(heart > -1);
 ERROR 4025 (23000): CONSTRAINT `heartRestriction` failed for `roulet`.`users`
-
+alter table users add column prem varchar(1) not null default 'n';
+alter table users add column mon bigint;
 */

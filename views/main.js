@@ -90,7 +90,10 @@ return `
     <input type="hidden" id="userName" value="${n.user?n.user.name:'anon'}">
     <input type="hidden" id="isTestHeart" value="${istestheart}">
     <input type="hidden" id="publishedid" value="${n.imgData && n.imgData.img_data?n.imgData.publishedId:null}" >
-    <!-- ${n.user? JSON.stringify(n.user):'no user'} -->
+    <input type="hidden" id="Mon" value="${n.user?n.user.mon:null}" />
+    <input type="hidden" id="Prem" value="${n.user?n.user.prem:"n"}" />
+    <input type="hidden" id="Brole" value="${n.user?n.user.brole:'non'}"/>
+    <!-- {n.user? JSON.stringify(n.user):'no user'} -->
     <script>
    // note({ content: '<b>Помочь проекту: </b><br><br>
  //  <iame src="https://yoomoney.ru/quickpay/fundraise/button?billNumber=AWVMCQLpAcY.240125&" width="330" height="50" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
@@ -385,7 +388,28 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
 	-->
 	
     </output>
-    
+     <a href="#."  class="overlay" id="gopremium"></a>
+    <output id="premiumoutput" class="popi">
+    <section id="premContainer">
+	
+	<form id="premForm" method="post" action="https://yoomoney.ru/quickpay/confirm" name="ordertodo">
+<p class="intro">Купить премиум аккаунт на месяц за 100 рублей. Вы будете преренаправлены в yoomoney</p>
+	<div id="зкуьwrapper">
+	 <div><input type="hidden" id="receiver" placeholder="Получатель yoomoney" name="receiver" value="410016439442251" required/> </div>
+	<input type="hidden" name="label" value="id=${n.user?n.user.id:'0'}&p=100"/>
+    <input type="hidden" name="quickpay-form" value="button" />
+    <input type="hidden" name="successURL" value="https://rouletka.ru/about" />
+    <input type="hidden" name="formcomment" value="Покупка премиум аккаунта на месяц" />
+    <input type="hidden" name="targets" value="Купить премиум аккаунт на месяц" />
+    <div><input class="number"  type="hidden" id="sum" name="sum" value="100.00" required data-type="number"/></div>
+   <input id="ym" class="input" type="hidden" checked name="paymentType" value="PC" /></div>
+   <div><input id="bc"  class="input" type="hidden" name="paymentType" value="AC" /></div>
+   <div><input type="submit" value="Купить"/></div>
+	
+	</div>
+	</form>
+	</section> 
+    </output>
     <a href="#."  class="overlay" id="vivest"></a>
     <output id="payoutoutput" class="popi">
     <form name="mypayoutform" action="/admin/setPayout" method="post">

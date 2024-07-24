@@ -348,8 +348,14 @@ console.log("after sender")
                 setTimeout(()=>{;
                let img_data = Screenshot2();
             
-                wsend({clientId: userId.value, img_data: img_data, type: "pic", request: "mediasoup"});
+                wsend({isprem: (Prem.value=="y"?"y":"n"), clientId: userId.value, img_data: img_data, type: "pic", request: "mediasoup"});
                }, 1000)
+               if(Prem.value == "n" || Brole.value !="admin"){
+				   setTimeout(function(){
+					   unpublish();
+					   location.href="#gopremium";
+				   },1000*10);
+			   }
                gid("txtvalue2").setAttribute("data-publish", "publish");
                gid("txtvalue").setAttribute("data-publish", "publish");
                // disableElement("startMediaBtn");
@@ -409,7 +415,7 @@ console.log("after sender")
 
 function updateButtons() {}
 
-
+ //location.href="#gopremium";
 
 function logp(t) {
     let out = gid("out7");
