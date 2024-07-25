@@ -401,7 +401,7 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
     <input type="hidden" name="successURL" value="https://rouletka.ru/about" />
     <input type="hidden" name="formcomment" value="Покупка премиум аккаунта на месяц" />
     <input type="hidden" name="targets" value="Купить премиум аккаунт на месяц" />
-    <div><input class="number"  type="hidden" id="sum2" name="sum" value="2.00" required data-type="number"/></div>
+    <div><input class="number"  type="hidden" id="sum2" name="sum" value="100.00" required data-type="number"/></div>
    <input id="ym2" class="input" type="hidden" checked name="paymentType" value="PC" /></div>
    <div><input id="bc2"  class="input" type="hidden" name="paymentType" value="AC" /></div>
    <div><input type="submit" id="premBtn" value="Купить"/></div>
