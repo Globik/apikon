@@ -354,7 +354,7 @@ console.log("after sender")
 				   setTimeout(function(){
 					   unpublish();
 					   location.href="#gopremium";
-				   },1000*10);
+				   },1000*3);
 			   }
                gid("txtvalue2").setAttribute("data-publish", "publish");
                gid("txtvalue").setAttribute("data-publish", "publish");
@@ -415,7 +415,7 @@ console.log("after sender")
 
 function updateButtons() {}
 
- //location.href="#gopremium";
+ location.href="#gopremium";
 
 function logp(t) {
     let out = gid("out7");

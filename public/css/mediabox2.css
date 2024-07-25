@@ -67,6 +67,29 @@ html,body{
 			background:#327332;
 		}
 	}
+	
+	#premiumoutput{
+		background:black;
+		color:whie;
+		
+	}
+	#premBtn{
+		color:black;
+		background:lightgreen;
+		font-size:1.3rem;
+		font-weight:bold;
+	}
+	
+	@media screen and (max-width: 452px) and (orientation: portrait){
+		#premiumoutput{
+width:100%;
+			bckground:#327332;
+		}
+		#premForm p{
+			font-size:1rem;
+		}
+	}
+	
 	#mediabox{
 		width:100%;
 		height:100%;

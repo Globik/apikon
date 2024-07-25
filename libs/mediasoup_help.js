@@ -564,7 +564,7 @@ removeAudioConsumer(id);
     if(worker){worker.close();worker=null;}
     
     
-     try{
+     /*try{
 	
 	axios.post(`https://api.telegram.org/bot${tg_api}/sendMessage`, {
     chat_id: grid,
@@ -574,7 +574,7 @@ removeAudioConsumer(id);
   });
 	}catch(e){
 		console.log(e.name);
-		}
+		}*/
     
     
     
