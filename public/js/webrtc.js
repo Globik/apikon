@@ -42,6 +42,11 @@ function getPubId(){
 var publishedId = getPubId()?gid('publishedid').value:null;
 
 function toggleCam(el){
+	if(Prem.value == "n"){
+		window.location.href = "#gopremium";
+		panelOpen();
+		return;
+	}
 	if(window.streami){
 		
 		window.streami.getTracks().forEach(function(track){

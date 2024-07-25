@@ -414,9 +414,20 @@ console.log("after sender")
 }
 
 function updateButtons() {}
-
+function premi(){
+let a = localStorage.getItem("prem");
+if(!a&&a!=="0"){
  location.href="#gopremium";
-
+ let faka = document.querySelector('.overlay:target');
+if(faka){
+	faka.onclick=function(e){
+		//e.preventDefault();
+	localStorage.setItem("prem", "0");
+	window.location.href="#";
+	
+	}
+}}}
+premi();
 function logp(t) {
     let out = gid("out7");
     if (out) {
