@@ -615,7 +615,7 @@ app.post('/cb/tgwebhook', async(req, res)=>{
 			let nick = paramStr.get('nick');
 			let lang = paramStr.get('lang');
 			try{
-			await pool.query('delete from from usergold where tgid=(?) and usid=(?)', [ tgid, usid ]);
+			await pool.query('delete from usergold where tgid=(?) and usid=(?)', [ tgid, usid ]);
 			await axios.post(`https://api.telegram.org/bot${tg_api}/sendMessage`, {
 		chat_id: tgid,
 		text: (lang=='ru'?'Вы отписались от ' + nick : 'You unsubscribed from ' + nick)
