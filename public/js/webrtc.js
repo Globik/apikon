@@ -34,6 +34,10 @@ var unsubscribe = false;
 var CONNECTED = false;
 
 const heartcountels = document.querySelectorAll("div.heartcount");
+var context = new (window.AudioContext || window.webkitAudioContext)();
+var notes = new Sound(context);
+var nows = context.currentTime;
+
 function getPubId(){
 	let a = gid('publishedid');
 	if(!a)return;
@@ -857,7 +861,15 @@ function handleNewIceCandidate(msg) {
  }
  
  let constraints = { audio: true, video: true };
+ 
 
+function pl(){
+	
+var nows = context.currentTime;
+	console.log(notes);
+	notes.play(261.63, nows);
+	//notes.stop();
+}
 function start(el){
 	 if(NICK == "anon" || NICK == undefined){
 		
@@ -867,8 +879,9 @@ function start(el){
 	if(!sock) {
 		get_socket();
 		}
+	
 	if(el.getAttribute("data-start")=="no"){
-		
+		pl();
 		el.disabled = true;
 			document.body.click();
 		if(local.srcObject==null){
@@ -973,7 +986,7 @@ function handleError(err){
 		wsend({ type: "srcdata", src: imgdata});	
 	}
 	local.onloadedmetadata = function () {
-		
+		notes.play(261.63, nows);
 		console.log("local onloaded");
 		if(isShow)return;
 		setTimeout(function(){
@@ -1206,9 +1219,10 @@ window.addEventListener("online", function(e) {
   note({ content: "online", type: "info", time: 5 });
 });
 
-
+notes.play(261.63, nows);
    function next(el, bool, ignores, isIgnore){
 	   //next(nextbtn, false, amma, false);
+	   pl();
 	   el.disabled = true;
 	   CONNECTED = false;
       closeVideoCall();

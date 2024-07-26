@@ -52,6 +52,7 @@ return `
 <script src="/js/mediasoup-client.min.js"></script>
 <!-- <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script> -->
 <!-- <script src="/js/adapter-latest.js"></script> -->
+<script src="/js/sound.js"></script>
  <!-- Google tag (gtag.js) -->
 <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-QG900MX52X"></script>
 <script>
@@ -191,7 +192,10 @@ function isOpenModal(){
   
      </script>
      <article id="mediabox">
-    <nav id="navpanel"><div class="nav"><b>Online: <span id="onlineCount">0</span></b>&nbsp;&nbsp;&nbsp;<b style="font-size:18px;">&#x1F441;</b>&nbsp;&nbsp;&nbsp;<span id="vV" style="color:orange;font-weight:bold;">${n.imgData && n.imgData.img_data?n.imgData.value:0}</span></div>
+    <nav id="navpanel"><div class="nav"><b>Online: <span id="onlineCount">0</span></b>&nbsp;&nbsp;&nbsp;<b style="font-size:18px;">&#x1F441;</b>&nbsp;&nbsp;&nbsp;
+    <span id="vV" style="color:orange;font-weight:bold;">${n.imgData && n.imgData.img_data?n.imgData.value:0}</span>
+   ${n.user && n.user.prem=="y"? '&nbsp;&nbsp;&nbsp;<span style="color:#d5a8a8;">Premium &nbsp;&nbsp;&#x1F451;</span>':''} 
+    </div>
     <div id="settings" class="ita" onclick="panelOpen(this);">
  <img class="setimg" src="/img/set2.svg">
 </div>
@@ -323,7 +327,7 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
 </div><div id="foot2"><a href="/"> О проекте</a></div>
     </section>
     </article>
-    
+   <!-- <button onclick="pl(this);">play</button> -->
  
    <!--
     <a href="#."  class="overlay" id="purchaseHREF"></a>

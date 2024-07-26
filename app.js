@@ -1004,7 +1004,7 @@ async function searchPeer (socket, msg, source) {
 	var f = new FormData();
 	f.append('chat_id', grid);
 	f.append('parse_mode', 'html');
-	f.append('caption', '<b>'+socket.nick+'</b>'+' запустил трансляцию. \nПосмотреть на <a href="https://rouletka.ru/about">https://rouletka.ru</a>\n\n JOIN THE GROUP <a href="https://t.me/roulette7776">Roulette</a>');
+	f.append('caption', '<b>'+ socket.nick + '(' + socket.userId + ')</b>'+' запустил трансляцию. \nПосмотреть на <a href="https://rouletka.ru/about">https://rouletka.ru</a>\n\n JOIN THE GROUP <a href="https://t.me/roulette7776">Roulette</a>');
 	f.append('disable_notification', true);
 	f.append('photo', new Blob([buf]));
 	f.append('reply_markup', `{"inline_keyboard":[
