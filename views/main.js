@@ -397,8 +397,8 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
     <section id="premContainer">
 	
 	<form id="premForm" method="post" action="https://yoomoney.ru/quickpay/confirm" name="ordertodo">
-<p class="intro">Чтобы пользоваться дополнительным функционалом приобретайте премиум аккаунт  за 10 рублей в месяц. <br>Вы будете преренаправлены в yoomoney</p>
-	<div id="premrapper">
+<p class="intro">Чтобы пользоваться дополнительным функционалом приобретайте премиум аккаунт  &#x1F451; за 10 рублей в месяц. <br>Вы будете преренаправлены в yoomoney</p>
+	<div id="premrapper"> 
 	 <div><input type="hidden" id="receiver2" placeholder="Получатель yoomoney" name="receiver" value="410016439442251" required/> </div>
 	<input type="hidden" name="label" value="id=${n.user?n.user.id:'0'}&p=100"/>
     <input type="hidden" name="quickpay-form" value="button" />

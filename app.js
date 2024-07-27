@@ -472,7 +472,7 @@ let { notification_type,
 let str = `${notification_type}&${operation_id}&${amount}&${currency}&${datetime}&${sender}&${codepro}&${notification_secret}&${label}`
 	const paramStr = new URLSearchParams(label);
 	
-	dummy2.set(iii2, req.body);
+	//dummy2.set(iii2, req.body);
 	
 	iii2++;
 	let db = req.db;
@@ -535,7 +535,7 @@ const dummy3 = new Map();
 var iii3 = 0;
 app.post('/cb/tgwebhook', async(req, res)=>{
 	console.log("*** CALLBACK from TELEGA! *** ", req.body);
-	dummy3.set(iii3, req.body);
+	//dummy3.set(iii3, req.body);
 	iii3++;
 	const grid = '887539364';
 	let { update_id, callback_query, pre_checkout_query, message } = req.body;
@@ -1004,7 +1004,7 @@ async function searchPeer (socket, msg, source) {
 	var f = new FormData();
 	f.append('chat_id', grid);
 	f.append('parse_mode', 'html');
-	f.append('caption', '<b>'+ socket.nick + '(' + socket.userId + ')</b>'+' запустил трансляцию. \nПосмотреть на <a href="https://rouletka.ru/about">https://rouletka.ru</a>\n\n JOIN THE GROUP <a href="https://t.me/roulette7776">Roulette</a>');
+	f.append('caption', '<b>'+ socket.nick + ' (' + socket.userId + ')</b>'+' запустил трансляцию. \nПосмотреть на <a href="https://rouletka.ru/about">https://rouletka.ru</a>\n\n JOIN THE GROUP <a href="https://t.me/roulette7776">Roulette</a>');
 	f.append('disable_notification', true);
 	f.append('photo', new Blob([buf]));
 	f.append('reply_markup', `{"inline_keyboard":[

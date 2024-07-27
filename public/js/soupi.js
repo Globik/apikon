@@ -415,6 +415,7 @@ console.log("after sender")
 
 function updateButtons() {}
 function premi(){
+	 if(Prem.value == "y") return;
 let a = localStorage.getItem("prem");
 if(!a&&a!=="0"){
  location.href="#gopremium";
