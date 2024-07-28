@@ -509,7 +509,7 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
           <p>Администрация видеочата не несёт ответственности за действия посетителей, но всеми силами старается бороться с нарушителями. Физически невозможно уследить за всеми нарушениями в чат рулетке, поэтому настоятельно просим вас жаловаться на нарушителей. Ваши жалобы помогают нам делать чат чище и лучше.</p>
           <p>Пользуясь чатом, вы принимаете и соглашаетесь выполнять установленные правила. Если вы не согласны с действующими правилами, вам следует прекратить пользоваться чатом.</p>
           <div class="center-button">
-            <button class="register-button" onclick="confirmRules();">Принять</button>
+            <button class="register-button" onclick="confirmRules();">Принять | Agree | 同意</button>
           </div>
         </div>
       
@@ -518,14 +518,15 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
     <output id="loginoutput" class="popi">
         <div class="modal-header">
           Авторизация / Регистрация | Login / Sign up | 授权/注册
-          <span class="model-header-label" onclick="isOpenModal();">
+          <br><br><span class="model-header-label" onclick="isOpenModal();">
             Правила чата
           </span>
         </div>
+        
         <div class="modal-body">
           <div class="error-message" id="errormsg"></div>
           <form name="formlogin" id="myform">
-            <label for="name" style="margin-top: 5px;">Имя | Nick | 姓名 </label>
+            <label for="name" style="margin-top: 5px;">Welcome to chat roulette!<br>Имя | Nick | 姓名 </label>
             <input  name="username" type="text" placeholder="Введите Имя/Логин Login | 姓名" id="name" required minlength="2" maxlength="20">
 
             <label for="name">Пароль | Password | 密码</label>
