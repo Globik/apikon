@@ -517,7 +517,7 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
     <a href="#."  class="overlay" id="login"></a>
     <output id="loginoutput" class="popi">
         <div class="modal-header">
-          Авторизация / Регистрация
+          Авторизация / Регистрация | Login / Sign up | 授权/注册
           <span class="model-header-label" onclick="isOpenModal();">
             Правила чата
           </span>
@@ -525,13 +525,13 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
         <div class="modal-body">
           <div class="error-message" id="errormsg"></div>
           <form name="formlogin" id="myform">
-            <label for="name" style="margin-top: 5px;">Имя</label>
-            <input  name="username" type="text" placeholder="Введите Имя/Логин" id="name" required minlength="2" maxlength="20">
+            <label for="name" style="margin-top: 5px;">Имя | Nick | 姓名 </label>
+            <input  name="username" type="text" placeholder="Введите Имя/Логин Login | 姓名" id="name" required minlength="2" maxlength="20">
 
-            <label for="name">Пароль</label>
-            <input  name="userpassword" type="password" autocomplete="on" placeholder="Введите пароль" id="password" required minlength="2" maxlength="20">
-			 <button  class="login-button" id="btnlogin">Войти</button>
-            <button class="register-button" id="btnregister">Зарегистрироваться</button>
+            <label for="name">Пароль | Password | 密码</label>
+            <input  name="userpassword" type="password" autocomplete="on" placeholder="Введите пароль password 密码" id="password" required minlength="2" maxlength="20">
+			 <button  class="login-button" id="btnlogin">Войти | Login | 登录</button>
+            <button class="register-button" id="btnregister">Зарегистрироваться | Sign up | 报名</button>
            
           </form>
         </div>

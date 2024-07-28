@@ -1521,8 +1521,16 @@ function Screenshot() {
     return imgdata;
     
 }
-
-
+/*
+window.addEventListener('beforeunload', function(e){
+	e.preventDefault();
+	e.returnValue = 'suka';
+	console.log('X ', 1+1);
+})
+window.onunload = function(e){
+	//e.preventDefault();
+	console.log('unload');
+}*/
   function wsend(obj){
 	if(!sock) return;
 	let d;
