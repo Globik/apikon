@@ -976,8 +976,12 @@ el.textContent = "стоп";
 	recorder.onstart=function(){
 		dtimer = setInterval(function(){
 			DURATION++;
+			if(DURATION == 10) {
+			alert('hura');
+			recorder.stop();
+		}
 		}, 1000);
-		if(DURATION == 30) recorder.stop();
+		
 		console.log('start');
 		console.log('state ', recorder.state)
 		window.addEventListener('beforeunload', mama, false)
