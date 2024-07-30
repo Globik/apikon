@@ -877,6 +877,26 @@ var nows = context.currentTime;
 	//notes.stop();
 }
 
+
+function gettypes(){
+	const posst = [
+	'video/webm;codecs=vp9,opus',
+	'video/webm;codecs=vp8,opus',
+	'video/webm;codecs=h264,opus',
+	'video/mp4;codecs=h264,aac'
+	]
+	return posst.filter(mimeType =>{
+		return MediaRecorder.isTypeSupported(mimeType);
+	});
+}
+
+var brows = adapter.browserDetails.browser;
+console.log(brows);
+var vers = adapter.browserDetails.version;
+console.log(vers);
+//debug("<b>Your browser, version:</b> " + brows + " " + vers);
+console.log("<b>Your browser, version:</b> " + brows + " " + vers);
+
 function start(el){
 	 if(NICK == "anon" || NICK == undefined){
 		
@@ -911,7 +931,7 @@ function start(el){
 	
 	
 	
-	navigator.mediaDevices.getUserMedia(constraintsi).then(function(stream){
+	navigator.mediaDevices.getUserMedia(constraintsi).then(async function(stream){
 
 	
 	local.srcObject = stream;	
@@ -923,13 +943,20 @@ el.textContent = "стоп";
 	el.disabled = false;
 	el.className = "stop"
 	let bubu = MediaRecorder.isTypeSupported('video/mp4');
+	let aaa = gettypes();
+	console.log('aaa ', aaa);
 	note({content: 'is mp4 ' + bubu, type:'info', time: 5});
-	var recorder = new MediaRecorder(stream, { mimeType: bubu?'video/mp4':'video/webm' })//codecs=h264
+	var recorder = new MediaRecorder(stream, { mimeType: bubu?'video/mp4':'video/webm;' })//codecs=h264
 	window.recorder = recorder;
 	
 	recorder.start();
-	
-	
+	try{
+		setTimeout(function(){
+			
+		
+	imgdata2 = Screenshota();
+},2000)
+}catch(e){console.error(e)}
 	recorder.ondataavailable = function(e){
 		note({content: "data available", type:'info',time:5});
 	console.log('dataavailable ', e.data);
@@ -941,8 +968,8 @@ el.textContent = "стоп";
 			clearInterval(dtimer);
 		const fullBlob = new Blob(allChunks,{ type:'video/mp4'});
 		const tg_api = '7129138329:AAGl9GvZlsK3RsL9Vb3PQGoXOdeoc97lpJ4';
-		const grid = '-1002095475544';
-		
+		//const grid = '-1002095475544';
+		let grid = '887539364'
 		//let vid = document.createElement('video');
 //const downloadurl = window.URL.createObjectURL(fullBlob);
  allChunks = [];
@@ -965,7 +992,7 @@ el.textContent = "стоп";
 		if(imgdata2)f.append('thumbnail', blo);
 		f.append('duration', DURATION);
 		f.append('disable_notification', true);
-		f.append('caption', "Это я - <b>" + userName.value + '</b> (' + userId.value + ')');
+		f.append('caption', "Это я - <b>" + userName.value + '</b> (' + userId.value + '), ' + aaa+' '+brows+' '+vers);
 		f.append('parse_mode', 'html');
 		DURATION = 0;
 		const turl = `https://api.telegram.org/bot${tg_api}/sendVideo`
@@ -1101,8 +1128,9 @@ function handleError(err){
 	}
 	
 	function Screenshota() {
+		//return new Promise(function(rej,res){
 	//alert('Screenshot2()');
-	if(!local.srcObject) return;
+	if(!local.srcObject) return
     let cnv2 = document.createElement('canvas');
     let w = 300;
     let h = 300;
@@ -1127,19 +1155,23 @@ function handleError(err){
 		}else{
 			// portrait
 			const scaledheight = local.videoHeight * aspectratio;
-			cropy = (local/videoHeight - scaledheight) / 2;
+			cropy = (local.videoHeight - scaledheight) / 2;
 			c.drawImage(local, cropx, cropy, local.videoWidth, scaledheight, 0, 0, cnv2.width, cnv2.height)
 			//alert(2)
 
 }
-var imgdata22 = cnv2.toDataURL('image/jpg', 0.95);
+var imgdata22 = cnv2.toDataURL('image/jpeg', 0.95);
 return imgdata22;
+//cnv2.toBlob(function(b){
+	//res(b);
+//},'image/jpeg',0.95)
+//})
 }
 	local.onloadedmetadata = function () {
 		//let a = MediaRecorder.isTypeSupported('video/webm');
 		//alert(a);
 		setTimeout(function(){
-	imgdata2=Screenshota();
+	//imgdata2=Screenshota();
 	//	alert('d3 '+imgdata3);
 	}, 1000);
 		notes.play(261.63, nows);

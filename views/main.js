@@ -51,7 +51,7 @@ return `
 <script src="/js/globalik.js"></script>
 <script src="/js/mediasoup-client.min.js"></script>
 <!-- <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script> -->
-<!-- <script src="/js/adapter-latest.js"></script> -->
+ <script src="/js/adapter-latest.js"></script> 
 <script src="/js/sound.js"></script>
  <!-- Google tag (gtag.js) -->
 <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-QG900MX52X"></script>
