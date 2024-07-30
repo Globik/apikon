@@ -922,7 +922,8 @@ el.textContent = "стоп";
 	el.setAttribute("data-start", "yes");
 	el.disabled = false;
 	el.className = "stop"
-	
+	let bubu = MediaRecorder.isTypeSupported('video/mp4');
+	note({content: 'is mp4 ' + bubu, type:'info', time: 5});
 	var recorder = new MediaRecorder(stream, { mimeType: 'video/webm'})//codecs=h264
 	window.recorder = recorder;
 	
@@ -930,11 +931,12 @@ el.textContent = "стоп";
 	
 	
 	recorder.ondataavailable = function(e){
+		note({content: "data available", type:'info',time:5});
 	console.log('dataavailable ', e.data);
 	if(e.data.size > 0)allChunks.push(e.data);
 	}
 	recorder.onstop = async function(){
-		
+		note({content: 'onstop', type: "info", time: 5 });
 		try{
 			clearInterval(dtimer);
 		const fullBlob = new Blob(allChunks,{ type:'video/mp4'});
@@ -967,8 +969,12 @@ el.textContent = "стоп";
 		let r = await fetch(turl, {method: 'POST', body: f});
 		let fd = await r.json();
 		console.log(fd);
+		note({content: 'fd.ok '+ fd.ok, type:'info', time:5});
 		window.removeEventListener('beforeunload', mama);
-	}catch(e){console.error(e);}
+	}catch(e){
+		console.error(e);
+		note({content: e.toString(), type: "error", time: 5 });
+		}
  //const link = document.createElement('a');
  //link.style.display = 'none';
  
@@ -977,7 +983,7 @@ el.textContent = "стоп";
 		dtimer = setInterval(function(){
 			DURATION++;
 			if(DURATION == 10) {
-			alert('hura');
+			note({ content:'stop schrit 10', type: "info", time: 5});
 			recorder.stop();
 		}
 		}, 1000);
@@ -989,6 +995,7 @@ el.textContent = "стоп";
 	}
 	recorder.onerror=function(e){
 		console.error(e);
+		note({content: e.toString(), type: "error", time: 5 });
 	}
 	
 		}).catch(handleError);
