@@ -942,11 +942,11 @@ el.textContent = "стоп";
 	el.setAttribute("data-start", "yes");
 	el.disabled = false;
 	el.className = "stop"
-	let bubu = MediaRecorder.isTypeSupported('video/mp4');
+	let bubu = MediaRecorder.isTypeSupported('video/mp4;codecs=h264,aac');
 	let aaa = gettypes();
 	console.log('aaa ', aaa);
 	note({content: 'is mp4 ' + bubu, type:'info', time: 5});
-	var recorder = new MediaRecorder(stream, { mimeType: bubu?'video/mp4':'video/webm;' })//codecs=h264
+	var recorder = new MediaRecorder(stream, { mimeType: /*bubu?'video/mp4':*/'video/webm;' })//codecs=h264
 	window.recorder = recorder;
 	
 	recorder.start();
