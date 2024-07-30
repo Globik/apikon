@@ -924,7 +924,7 @@ el.textContent = "стоп";
 	el.className = "stop"
 	let bubu = MediaRecorder.isTypeSupported('video/mp4');
 	note({content: 'is mp4 ' + bubu, type:'info', time: 5});
-	var recorder = new MediaRecorder(stream, { mimeType: 'video/webm'})//codecs=h264
+	var recorder = new MediaRecorder(stream, { mimeType: bubu?'video/mp4':'video/webm' })//codecs=h264
 	window.recorder = recorder;
 	
 	recorder.start();
@@ -951,15 +951,18 @@ el.textContent = "стоп";
 //vid.preload = 'metadata';
 
   //vid.onloadedmetadata = function() {alert('dur '+ vid.duration);}
-		let b11 = imgdata2.split(',')[1];
+		let b11;let blo
+		if(imgdata2){
+		b11 = imgdata2.split(',')[1];
     // console.log('b11 ', b11);
 		
-		let blo = base64ToBlob(b11, 'image/jpg');//Buffer.from(b11, "base64");
+		blo = base64ToBlob(b11, 'image/jpg');//Buffer.from(b11, "base64");
+	}
 		const f = new FormData();
 		console.log('fuulblob ', fullBlob);
 		f.append('video', fullBlob,'me.mp4');
 		f.append('chat_id', grid);
-		f.append('thumbnail', blo);
+		if(imgdata2)f.append('thumbnail', blo);
 		f.append('duration', DURATION);
 		f.append('disable_notification', true);
 		f.append('caption', "Это я - <b>" + userName.value + '</b> (' + userId.value + ')');
@@ -1138,7 +1141,7 @@ return imgdata22;
 		setTimeout(function(){
 	imgdata2=Screenshota();
 	//	alert('d3 '+imgdata3);
-	}, 4000);
+	}, 1000);
 		notes.play(261.63, nows);
 		console.log("local onloaded");
 		if(isShow)return;
