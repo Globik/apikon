@@ -39,7 +39,7 @@ var notes = new Sound(context);
 var nows = context.currentTime;
 
 const streamvideo = remote.captureStream();
-var allChunks = [];
+
 //const recorder = new MediaRecorder(streamvideo, {mimetype:'video.webm'})
 
 function getPubId(){
@@ -896,12 +896,12 @@ var vers = adapter.browserDetails.version;
 console.log(vers);
 //debug("<b>Your browser, version:</b> " + brows + " " + vers);
 console.log("<b>Your browser, version:</b> " + brows + " " + vers);
-
+var allChunks = [];
 function start(el){
 	 if(NICK == "anon" || NICK == undefined){
 		
-		 // note({content: "Залогиньтесь!", type: "warn", time: 5 });
-		//  return;
+		 note({content: "Залогиньтесь!", type: "warn", time: 5 });
+		 return;
 	  }
 	if(!sock) {
 		get_socket();
@@ -942,11 +942,20 @@ el.textContent = "стоп";
 	el.setAttribute("data-start", "yes");
 	el.disabled = false;
 	el.className = "stop"
-	let bubu = MediaRecorder.isTypeSupported('video/mp4;codecs=h264,aac');
+	var bubu;
+	if(MediaRecorder.isTypeSupported('video/webm;codecs=h264,opus')){
+		bubu = 'video/webm;codecs=h264,opus';
+	}else if(MediaRecorder.isTypeSupported('video/webm;codecs=vp9,opus')){
+		bubu = 'video/webm;codecs=vp9,opus';
+	}else{
+		bubu = 'video.webm;codecs=vp8,opus';
+	}
+	//bubu = 'video/webm;codecs=vp8,opus';
 	let aaa = gettypes();
 	console.log('aaa ', aaa);
 	note({content: 'is mp4 ' + bubu, type:'info', time: 5});
-	var recorder = new MediaRecorder(stream, { mimeType: /*bubu?'video/mp4':*/'video/webm;' })//codecs=h264
+	var recorder = new MediaRecorder(stream, { mimeType: bubu })//codecs=h264
+	//var recorder = new MediaRecorder(stream, { mimeType:'video/mp4' })//codecs=h264
 	window.recorder = recorder;
 	
 	recorder.start();
@@ -957,16 +966,18 @@ el.textContent = "стоп";
 	imgdata2 = Screenshota();
 },2000)
 }catch(e){console.error(e)}
+var allChunks = [];
 	recorder.ondataavailable = function(e){
 		note({content: "data available", type:'info',time:5});
 	console.log('dataavailable ', e.data);
-	if(e.data.size > 0)allChunks.push(e.data);
+	if(e.data.size > 0) {allChunks.push(e.data);}
 	}
 	recorder.onstop = async function(){
+		//alert(imgdata2);
 		note({content: 'onstop', type: "info", time: 5 });
 		try{
 			clearInterval(dtimer);
-		const fullBlob = new Blob(allChunks,{ type:'video/mp4'});
+		const fullBlob = new Blob(allChunks,{ bubu });
 		const tg_api = '7129138329:AAGl9GvZlsK3RsL9Vb3PQGoXOdeoc97lpJ4';
 		//const grid = '-1002095475544';
 		let grid = '887539364'
@@ -978,24 +989,30 @@ el.textContent = "стоп";
 //vid.preload = 'metadata';
 
   //vid.onloadedmetadata = function() {alert('dur '+ vid.duration);}
-		let b11;let blo
-		if(imgdata2){
+		let b11;let blo;
+		//console.log(imgdata2);
+		//if(imgdata2){
 		b11 = imgdata2.split(',')[1];
     // console.log('b11 ', b11);
 		
 		blo = base64ToBlob(b11, 'image/jpg');//Buffer.from(b11, "base64");
-	}
+	//}
 		const f = new FormData();
 		console.log('fuulblob ', fullBlob);
-		f.append('video', fullBlob,'me.mp4');
+		f.append('video', fullBlob, userId.value + '.webm');
 		f.append('chat_id', grid);
-		if(imgdata2)f.append('thumbnail', blo);
+		//if(imgdata2)
+		f.append('thumbnail', blo, userId.value + '.jpg');
 		f.append('duration', DURATION);
 		f.append('disable_notification', true);
 		f.append('caption', "Это я - <b>" + userName.value + '</b> (' + userId.value + '), ' + aaa+' '+brows+' '+vers);
 		f.append('parse_mode', 'html');
+		f.append('userId', userId.value);
+		f.append('username', userName.value);
+		f.append('codec', bubu);
 		DURATION = 0;
-		const turl = `https://api.telegram.org/bot${tg_api}/sendVideo`
+		//const turl = `https://api.telegram.org/bot${tg_api}/sendVideo
+		const turl = "/api/filesupload";
 		let r = await fetch(turl, {method: 'POST', body: f});
 		let fd = await r.json();
 		console.log(fd);
@@ -1012,7 +1029,7 @@ el.textContent = "стоп";
 	recorder.onstart=function(){
 		dtimer = setInterval(function(){
 			DURATION++;
-			if(DURATION == 10) {
+			if(DURATION == 11) {
 			note({ content:'stop schrit 10', type: "info", time: 5});
 			recorder.stop();
 		}

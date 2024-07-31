@@ -12,6 +12,9 @@ const crypto = require('crypto');
 const passport = require("passport");
 const session = require('express-session');
 const mariadb = require('mariadb');
+const fileUpload = require('express-fileupload');
+const path = require('path');
+const { spawn } = require('child_process')
 
 const render = require('./libs/render.js');
 const admin = require('./router/admin.js');
@@ -76,6 +79,7 @@ app.use(express.static(suka));
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(fileUpload());
 app.use(render({root:'views', development: true}));
 require('./auth/auth.js')(pool, passport);
 
@@ -831,8 +835,112 @@ let a = await db.query(`update sets set testshopid=(?),testshopsecret=(?)`, [ te
 app.get('/api/getTest', checkAuth, checkRole(['admin']), async(req, res)=>{
 	res.json({ content: res.compile('ytest', {})});
 })
+const fsa = require('node:fs/promises');
+app.post('/api/filesupload', checkAuth, async(req, res)=>{
+	if(!req.files){
+		return res.status(400).send('no files were uploaded.');
+	}
+	const file = req.files.video;
+	const thumb = req.files.thumbnail
+	//console.log('file ', file, ' ', thumb);
+	console.log('fields ', req.body);
+	const { duration, userId, username, codec } = req.body;
+	let p ="./public/img/files/"+file.name;
+	let pp ="./public/img/files/" + thumb.name;
+	try{
+		console.log('suka');
+	let a = await setFile(file, p);
+	console.log('*****************a ', a);
+	let b = await setFile(thumb, pp);
+	console.log('b ****************** ', b);
+	let c = await convertTomp({ p: a, user_id: userId, codec: codec });
+	console.log('c ', c);
+	
+	const f = new FormData();
+		let grid = '887539364';
+		//let ru =  fs.createReadStream(c);
+		//let ru = await fucki(c);
+		let ru = await fsa.readFile(c);
+	//console.log('ru ', ru);
+let ab = await fsa.readFile(b);
+		f.append('video', new Blob([ru]));
+		f.append('chat_id', grid);
+		//if(imgdata2)
+		f.append('thumbnail', new Blob([ab]));
+		f.append('duration', duration);
+		f.append('disable_notification', true);
+		f.append('caption', "Это я - <b>" + username + '</b> (' + userId + ') Купите подписку на меня');
+		f.append('parse_mode', 'html');
+		
+		const turl = `https://api.telegram.org/bot${tg_api}/sendVideo`;
+		//const turl2 = `https://api.telegram.org/bot${tg_api}/sendVideoNote`;
+		let rr = await axios.post(turl, f); 
+		console.log('rr ', rr.data);
+		if(rr.data.ok== true){
+			try{
+			await fsa.unlink(a);
+			await fsa.unlink(b);
+			await fsa.unlink(c);
+		}catch(er){
+			console.log('here err ', err);
+		}
+		}
+		//let su = rr.data.result.video.file_id;
+		//const f2 = new FormData();
+		//f2.append('video_note', su);
+		//f2.append('chat_id', grid);
+		//f2.append('thumbnail', new Blob([ab]));
+		//let vu = await axios.post(turl2,f2);
+		//console.log('vv ', vu);
+	//	});
+}catch(er){
+	if(er.response){
+		
+	console.log('error ', er.response.data);}else{console.log(er);}
+}
+	res.json({ ok: true, message: "OK! Saved!" });
+})
 
-
+function setFile(file,p){
+	return new Promise(function(resolve, rej){
+		file.mv(p, (err)=>{
+		if(err){
+			console.log(err);
+			return rej(err);
+			//return res.status(500).send(err);
+		}
+		//console.log(p);
+return resolve(p);
+		//return res.send({status:"ok", path:p});
+	});
+	});
+}
+function convertTomp(obj){
+	return new Promise(function(resolve, rej){
+		var du;
+		if(obj.codec == 'video/webm;codecs=h264,opus'){
+		 du = ['-y','-i',obj.p,'-c:v','copy','./public/img/files/'+ obj.user_id+'.mp4'];
+	 }else if(obj.codec == 'video/webm;codecs=vp9,opus'){
+		 du = ['-y', '-i',obj.p,'-movflags','faststart','-profile:v','high','-level','4.2','./public/img/files/'+obj.user_id +'.mp4'];
+	 }else if(obj.codec == 'video/webm;codecs=vp8,opus'){
+		 du = ['-y', '-i',obj.p,'-movflags','faststart','-profile:v','high','-level','4.2','./public/img/files/'+obj.user_id +'.mp4'];
+	 }else{}
+		const ls = spawn('ffmpeg', du);
+		ls.stderr.on('data', data=>{
+			//console.log(data.toString())
+			});
+		ls.stdout.on('data', data=>{
+		//	console.log(data.toString())
+			});
+		ls.on('close', code=>{
+			if(code == 0){
+				 resolve('./public/img/files/'+ obj.user_id+'.mp4');
+			}else{  rej('error');}
+			ls.on('exit', code=>{console.log('child process exit ', code)
+				resolve('suka')});
+		});
+	});
+}
 
 function checkAuth(req, res, next){
 	if(req.isAuthenticated()){
