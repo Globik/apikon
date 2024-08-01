@@ -896,7 +896,7 @@ var vers = adapter.browserDetails.version;
 console.log(vers);
 //debug("<b>Your browser, version:</b> " + brows + " " + vers);
 console.log("<b>Your browser, version:</b> " + brows + " " + vers);
-var allChunks = [];
+
 function start(el){
 	 if(NICK == "anon" || NICK == undefined){
 		
@@ -936,115 +936,17 @@ function start(el){
 	
 	local.srcObject = stream;	
 	window.streami = stream;
-
 el.textContent = "стоп";
-
 	el.setAttribute("data-start", "yes");
 	el.disabled = false;
-	el.className = "stop"
-	var bubu;
-	if(MediaRecorder.isTypeSupported('video/webm;codecs=h264,opus')){
-		bubu = 'video/webm;codecs=h264,opus';
-	}else if(MediaRecorder.isTypeSupported('video/webm;codecs=vp9,opus')){
-		bubu = 'video/webm;codecs=vp9,opus';
-	}else{
-		bubu = 'video.webm;codecs=vp8,opus';
-	}
-	//bubu = 'video/webm;codecs=vp8,opus';
-	let aaa = gettypes();
-	console.log('aaa ', aaa);
-	note({content: 'is mp4 ' + bubu, type:'info', time: 5});
-	var recorder = new MediaRecorder(stream, { mimeType: bubu })//codecs=h264
-	//var recorder = new MediaRecorder(stream, { mimeType:'video/mp4' })//codecs=h264
-	window.recorder = recorder;
+	el.className = "stop";
 	
-	recorder.start();
-	try{
-		setTimeout(function(){
-			
-		
-	imgdata2 = Screenshota();
-},2000)
-}catch(e){console.error(e)}
-var allChunks = [];
-	recorder.ondataavailable = function(e){
-		note({content: "data available", type:'info',time:5});
-	console.log('dataavailable ', e.data);
-	if(e.data.size > 0) {allChunks.push(e.data);}
-	}
-	recorder.onstop = async function(){
-		//alert(imgdata2);
-		note({content: 'onstop', type: "info", time: 5 });
-		try{
-			clearInterval(dtimer);
-		const fullBlob = new Blob(allChunks,{ bubu });
-		const tg_api = '7129138329:AAGl9GvZlsK3RsL9Vb3PQGoXOdeoc97lpJ4';
-		//const grid = '-1002095475544';
-		let grid = '887539364'
-		//let vid = document.createElement('video');
-//const downloadurl = window.URL.createObjectURL(fullBlob);
- allChunks = [];
- 
-// vid.src=downloadurl;
-//vid.preload = 'metadata';
-
-  //vid.onloadedmetadata = function() {alert('dur '+ vid.duration);}
-		let b11;let blo;
-		//console.log(imgdata2);
-		//if(imgdata2){
-		b11 = imgdata2.split(',')[1];
-    // console.log('b11 ', b11);
-		
-		blo = base64ToBlob(b11, 'image/jpg');//Buffer.from(b11, "base64");
-	//}
-		const f = new FormData();
-		console.log('fuulblob ', fullBlob);
-		f.append('video', fullBlob, userId.value + '.webm');
-		f.append('chat_id', grid);
-		//if(imgdata2)
-		f.append('thumbnail', blo, userId.value + '.jpg');
-		f.append('duration', DURATION);
-		f.append('disable_notification', true);
-		f.append('caption', "Это я - <b>" + userName.value + '</b> (' + userId.value + '), ' + aaa+' '+brows+' '+vers);
-		f.append('parse_mode', 'html');
-		f.append('userId', userId.value);
-		f.append('username', userName.value);
-		f.append('codec', bubu);
-		DURATION = 0;
-		//const turl = `https://api.telegram.org/bot${tg_api}/sendVideo
-		const turl = "/api/filesupload";
-		let r = await fetch(turl, {method: 'POST', body: f});
-		let fd = await r.json();
-		console.log(fd);
-		note({content: 'fd.ok '+ fd.ok, type:'info', time:5});
-		window.removeEventListener('beforeunload', mama);
-	}catch(e){
-		console.error(e);
-		note({content: e.toString(), type: "error", time: 5 });
-		}
- //const link = document.createElement('a');
- //link.style.display = 'none';
- 
-	}
-	recorder.onstart=function(){
-		dtimer = setInterval(function(){
-			DURATION++;
-			if(DURATION == 11) {
-			note({ content:'stop schrit 10', type: "info", time: 5});
-			recorder.stop();
-		}
-		}, 1000);
-		
-		console.log('start');
-		console.log('state ', recorder.state)
-		window.addEventListener('beforeunload', mama, false)
-
-	}
-	recorder.onerror=function(e){
-		console.error(e);
-		note({content: e.toString(), type: "error", time: 5 });
-	}
+		makeRecord(stream);
 	
+
+
+
+
 		}).catch(handleError);
 }
 }else{
@@ -1059,6 +961,86 @@ var allChunks = [];
 	e.returnValue = 'suka';
 	if(window.recorder.state == 'recording')window.recorder.stop();
 }
+
+var allChunks = [];
+var bubu;
+function makeRecord(stream){
+	
+	if(MediaRecorder.isTypeSupported('video/webm;codecs=h264,opus')){
+		bubu = 'video/webm;codecs=h264,opus';
+	}else if(MediaRecorder.isTypeSupported('video/webm;codecs=vp9,opus')){
+		bubu = 'video/webm;codecs=vp9,opus';
+	}else{
+		bubu = 'video.webm;codecs=vp8,opus';
+	}
+	
+	let aaa = gettypes();
+	console.log('aaa ', aaa);
+	var recorder = new MediaRecorder(stream, { mimeType: bubu });
+	window.recorder = recorder;
+	recorder.start();
+		setTimeout(function(){
+		imgdata2 = Screenshota();
+	},2000)
+
+	
+	recorder.ondataavailable = dataAvailable; 
+	recorder.onstop = onStop;
+	recorder.onstart = recordStart; 
+	recorder.onerror = recordError;
+}	
+
+ function recordStart(){
+		dtimer = setInterval(function(){
+			DURATION++;
+			if(DURATION == 11) {
+				window.recorder.stop();
+		}
+		}, 1000);
+		console.log('state ', recorder.state)
+		window.addEventListener('beforeunload', mama, false)
+	}
+
+function recordError(e){
+		console.error(e);
+		window.removeEventListener('beforeunload', mama);
+	}
+function dataAvailable(e){
+	console.log('dataavailable ', e.data);
+	if(e.data.size > 0) {
+		allChunks.push(e.data);
+		}
+	}
+ async function onStop(){
+		try{
+			clearInterval(dtimer);
+		const fullBlob = new Blob(allChunks, { bubu });
+		allChunks = [];
+		let b11;let blo;
+		b11 = imgdata2.split(',')[1];
+    
+		
+		blo = base64ToBlob(b11, 'image/jpg');
+		const f = new FormData();
+		console.log('fuulblob ', fullBlob);
+		f.append('video', fullBlob, userId.value + '.webm');
+		f.append('thumbnail', blo, userId.value + '.jpg');
+		f.append('duration', DURATION);
+		f.append('userId', userId.value);
+		f.append('username', userName.value);
+		f.append('codec', bubu);
+		DURATION = 0;
+		
+		const turl = "/api/filesupload";
+		let r = await fetch(turl, {method: 'POST', body: f});
+		let fd = await r.json();
+		console.log(fd);
+		window.removeEventListener('beforeunload', mama);
+	}catch(e){
+		console.error(e);
+		note({content: e.toString(), type: "error", time: 5 });
+		}
+	}
 
 function base64ToBlob(base64String, contentType = '') {
     const byteCharacters = atob(base64String);

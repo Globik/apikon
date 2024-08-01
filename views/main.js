@@ -230,6 +230,9 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
 </svg>
 <div id="kresti"><b id="kres">&#x274E;</b></div>
     <video id="kartina" ${n.imgData && n.imgData.img_data?` poster=${n.imgData.img_data}`:''}></video></div>
+    
+    <section id="recordSection"><div>&#x1F4F8;</div></section>
+    
     <section id="claimContainer" onclick="openClaim(this);"><div id="claimBox">!</div></section>
     <div id="claimMenu" data-vip=""><div data-claim="ignor" onclick="sendClaim(this);">В игнор!</div><div data-claim="claim" onclick="sendClaim(this);">Пожаловаться!</div></div>
     <section id="mobileloader"><div class="loader"></div></section>

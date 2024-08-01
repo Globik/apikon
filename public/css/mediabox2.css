@@ -1352,3 +1352,36 @@ fill:rgba(34,23,44,0.6);
 cursor:pointer;
 z-index:1;
 }
+section#recordSection{
+	display:flex;
+	position:absolute;
+	top:30%;
+	right:5.4%;
+	font-size:35px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
