@@ -869,7 +869,7 @@ let ab = await fsa.readFile(b);
 		f.append('thumbnail', new Blob([ab]));
 		f.append('duration', duration);
 		f.append('disable_notification', true);
-		f.append('caption', "Это я - <b>" + username + '</b> (' + userId + ') - сосу не по-детски в чат рулетке \n на <a href="https://rouletka.ru/about">https://rouletka.ru</a>\n  Больше эротики в группе <a href="https://t.me/roulette7776">Рулетка</a>');
+		f.append('caption', "Это я - <b>" + username + '</b> (' + userId + ') - зажигаю не по-детски в чат рулетке  на <a href="https://rouletka.ru/about">https://rouletka.ru</a>\n  Больше эротики в группе <a href="https://t.me/roulette7776">Рулетка</a>');
 		f.append('parse_mode', 'html');
 		
 		const turl = `https://api.telegram.org/bot${tg_api}/sendVideo`;
