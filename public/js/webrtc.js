@@ -971,7 +971,7 @@ function makeRecord(stream){
 	}else if(MediaRecorder.isTypeSupported('video/webm;codecs=vp9,opus')){
 		bubu = 'video/webm;codecs=vp9,opus';
 	}else{
-		bubu = 'video.webm;codecs=vp8,opus';
+		bubu = 'video/webm;codecs=vp8,opus';
 	}
 	
 	let aaa = gettypes();

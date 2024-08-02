@@ -428,7 +428,7 @@ if(faka){
 	
 	}
 }}}
-premi();
+//premi();
 function logp(t) {
     let out = gid("out7");
     if (out) {

@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+	<style>canvas{
+		border:1px solid green;
+	}
+	video{
+		border:2px solid brown;
+	}
+	</style>
+<body>
+  <canvas id="my-canvas" width="640" height="480"></canvas><video id="video" width="640" height="480"></video><br>
+  <button onclick="record();">record</button>
+  <script>
+const mediaSource = new MediaSource();
+var sourceBuffer;
+//mediaSource.addEventListener('sourceopen', handleSourceOpen, false);
+
+function handleSourceOpen(event) {
+  console.log('MediaSource opened');
+  sourceBuffer = mediaSource.addSourceBuffer('video/webm; codecs="vp8"');
+  console.log('Source buffer: ', sourceBuffer);
+}
+
+    function playStream(canvas, stream) {
+        var video = document.createElement('video');
+        video.addEventListener('loadedmetadata', function() {
+            const context = canvas.getContext('2d');
+            var drawFrame = function() {
+                context.drawImage(video, 0, 0);
+                window.requestAnimationFrame(drawFrame);
+            };
+            drawFrame();
+        });
+        video.autoplay = true;
+        video.srcObject = stream;
+    }
+    
+    function playCamera(canvas, preferedWidth, preferedHeight) {
+        var devices = navigator.mediaDevices;
+        if (devices && 'getUserMedia' in devices) {
+            var constraints = {
+                video: {
+                    width: preferedWidth,
+                    height: preferedHeight
+                }
+                ,
+                audio:true
+                // you can use microphone adding `audio: true` property here
+            };
+            var promise = devices.getUserMedia(constraints);
+            promise
+                .then(function(stream) {
+                    playStream(canvas, stream);
+                })
+                .catch(function(error) {
+                    console.error(error.name + ': ' + error.message);
+                });
+        } else {
+            console.error('Camera API is not supported.');
+        }
+    }
+    
+    
+    // Usage example:
+    
+    var canvas = document.querySelector('#my-canvas');
+    
+    playCamera(canvas, canvas.width, canvas.height);
+    function record(){
+		var vstream = canvas.captureStream();
+		//vstream.getVideoTracks()[0].requestFrame();
+		var mediaRecorder = new MediaRecorder(vstream, { mimeType: 'video/webm;codecs=vp8,opus' });
+		mediaRecorder.start(100)
+		setTimeout(function(){
+			mediaRecorder.stop()
+			video.controls = true;
+		}, 5000)
+		var chunks = [];
+		mediaRecorder.ondataavailable = function(e){
+			//alert(1)
+			if(e.data && e.data.size > 0) chunks.push(e.data);
+		}
+		mediaRecorder.onstop = function(e){
+			var blob = new Blob(chunks, {
+				'type':'video/webm'
+			})
+			chunks = [];
+			var videourl = window.URL.createObjectURL(blob)
+			video.src = videourl;
+		}
+	}
+function download() {
+  const blob = new Blob(recordedBlobs, {type: 'video/webm'});
+  const url = window.URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.style.display = 'none';
+  a.href = url;
+  a.download = 'test.webm';
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(() => {
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+  }, 100);
+}
+  </script>
+</body>
+</html>
