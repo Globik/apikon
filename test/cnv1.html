@@ -13,7 +13,7 @@
   <script>
 const mediaSource = new MediaSource();
 var sourceBuffer;
-//mediaSource.addEventListener('sourceopen', handleSourceOpen, false);
+//#D77070#D77070mediaSource.addEventListener('sourceopen', handleSourceOpen, false);
 
 function handleSourceOpen(event) {
   console.log('MediaSource opened');
@@ -33,6 +33,7 @@ function handleSourceOpen(event) {
         });
         video.autoplay = true;
         video.srcObject = stream;
+        window.stream = stream;
     }
     
     function playCamera(canvas, preferedWidth, preferedHeight) {
@@ -68,6 +69,17 @@ function handleSourceOpen(event) {
     playCamera(canvas, canvas.width, canvas.height);
     function record(){
 		var vstream = canvas.captureStream();
+		//var ax = new AudioContext()
+		//var adest = ax.createMediaStreamDestination()
+		//var ms = new MediaStream()
+	//	var sn = ax.createMediaElementSource(window.stream)//video
+		//sn.connect(adest)
+		//sn.connect(ax.destination)
+		//var atrack = adest.stream.getAudioTracks()[0]
+		var atrack = window.stream.getAudioTracks()[0];
+		//ms.addTrack(atrack)
+		var ms = new MediaStream([atrack])
+		vstream.addTrack(atrack);
 		//vstream.getVideoTracks()[0].requestFrame();
 		var mediaRecorder = new MediaRecorder(vstream, { mimeType: 'video/webm;codecs=vp8,opus' });
 		mediaRecorder.start(100)
