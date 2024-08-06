@@ -43,6 +43,13 @@ header,
 section {
     display: block;
 }
+.langs{
+display:block;
+position:relative;
+	text-align:center;
+	margin-top:6px;
+	padding-top:6px;
+}
 
 body {
     line-height: 1;
@@ -90,6 +97,7 @@ h5,
 h6 {
     font-weight: inherit;
     font-size: inherit;
+    line-height:1.4;
 }
 #minifooter{
 	
@@ -972,6 +980,12 @@ p{
 	line-height:1.6;
 }
 @media screen and (max-width: 452px) and (orientation: portrait){
+.hero .hero__title , .info-description__title{
+	margin-top:10rem;
+}
+.hero__mobile-btn .only-mobile{
+	transform:translateY(-100px);
+}
 #donatebox{
 	display:block;
 }

@@ -70,79 +70,16 @@ return `
 </head>
 
 <body>
-<style>
-.langs{
-	text-align:center;
-	margin-top:5px;
-}
-</style>
-
-    <!-- chat view gbhthnthnthn
-    <div class="container">
-        <div class="index_video_line">
-            <div class="index_video_line_video">
-                <div class="video_block">
-                    <div class="video_block_inner">
-                        <div class="video_block_grey_block">
-                            <div class="donut hide">
-                            </div>
-                            <video id="remoteVideo"></video>
-                            <img src="/img1/preloader1.svg" class="video_preloader">
-                        </div>
-
-                    </div>
-                    <div class="index_buttons_line">
-                        <div class="index_header_button button_start btn" ng-click="main.toggleCam()">
-                            <span>{{main.cameraIsOn ? "Отключиться" : "Подключиться"}}</span>
-                        </div>
-
-                        <div id="button_next" class="index_header_button buttons_next btn" ng-click="main.next()">
-                            <span>Следующий</span>
-                        </div>
-                        <div class="users_online">
-                            <span class="online_order"></span>
-                            <span id="online">0</span>
-                            <span>Пользователей онлайн</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="video_block">
-                    <div class="video_block_inner">
-                        <div class="video_block_grey_block video-block__mobile">
-                            <video id="localVideo" muted="muted" autoplay="true"></video>
-                        </div>
-                    </div>
-                    <div class="chat_block">
-                        <div class="chat_block_row">
-
-
-                            <div class="chat_block_text">
-
-                            </div>
-
-                            <div class="input_chat_block">
-                                <input type="text" id="input_text" placeholder="Сообщение...">
-                                <div class="input_chat_block_button" ng-click="main.sendMsg()">
-                                    <img src="/img1/enter.svg" alt="enetr button" width="25px">
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    end chat view -->
-    <section class="hero">
     <div class="langs">
 ${lang=='en'?'':'<a href="/about/en" hreflang="en">'} <img alt="English Version" src="/img/en.png" width="35" height="22"> ${n.ln=='en'?'':'</a>'}
 ${n.ln=='ru'?'':'<a href="/about" hreflang="ru">'} <img alt="Русская версия" src="/img/ru.png"  width="35" height="22">${n.ln=='ru'?'':'</a>'}
 </div>
+    <section class="hero">
+    
         <div class="container wow fadeInUp">
             <div class="logoЧатРулетка"></div>
             <h1 class="hero__title">Видео чат — случайные знакомства</h1>
-            <h2 class="hero__subtitle">Знакомьтесь с новыми людьми прямо сейчас!</h2>
+            <h2 id="sukaK" class="hero__subtitle">Знакомьтесь с новыми людьми прямо сейчас!</h2>
             <button class="btn btn_orange" id="start_chat_btn">Начать общаться</button>
             <div class="hero__mobile-btn only-mobile">
                 <a href="https://play.google.com/store/apps/details?id=ru.rouletka.pwa" class="btn btn_play-market only-mobile">
