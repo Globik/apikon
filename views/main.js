@@ -628,5 +628,5 @@ const rules_ru =` <ol>
           <p>By using the chat, you accept and agree to abide by the established rules. If you do not agree with the current rules, you should stop using the chat.</p>
           `;
 function get_rules(lang){
-	return lang=='ru'?rules_ru:rules_ru
+	return lang=='ru'?rules_ru:rules_en
 }
