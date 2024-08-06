@@ -66,11 +66,13 @@ function sendRequest(obj) {
     return new Promise((resolve, reject) => {
         obj.request = "mediasoup";
         if(!sock) {
-			reject({ info: "Повторите попытку позднее" });
+			let s = L()=="ru"?"Повторите попытку позднее":"Try later"
+			reject({ info: s });
 			return;
 		}
 		if(sock.readyState === 0) {
-			reject({ info: "Повторите попытку позднее" });
+			let s = L()=="ru"?"Повторите попытку позднее":"Try later"
+			reject({ info: s });
 			return;
 		}
       
@@ -209,7 +211,8 @@ function pauseVideo(element) {
 function startMedia(el) {
     if (local.srcObject) {
         console.warn('WARN: local media ALREADY started');
-        note({ content: "Нажмите сперва на стоп, а потом уже запускайте трансляцию!", type: "warn", time: 5 });
+        let s = L()=="ru"?"Нажмите сперва на стоп, а потом уже запускайте трансляцию!":"Press first 'stop' then go translation"
+        note({ content: s, type: "warn", time: 5 });
         return;
     }
 PSENDER = true;
@@ -340,7 +343,8 @@ console.log("after sender")
             nextbtn.disabled = true;
                 SENDER = true;
                 el.setAttribute("data-state", "published");
-                note({content: "Вы в эфире!", type: "info", time: 5});
+                let s = L()=="ru"?"Вы в эфире!":"On air!"
+                note({content: s, type: "info", time: 5});
                 publishedId = MYSOCKETID;
                
                let a = document.querySelector('div#playContainer #kresti');
@@ -350,7 +354,7 @@ console.log("after sender")
             
                 wsend({isprem: (Prem.value=="y"?"y":"n"), clientId: userId.value, img_data: img_data, type: "pic", request: "mediasoup"});
                }, 1000)
-               if(Prem.value == "n" || Brole.value !="admin"){
+               if(Prem.value == "n" || Brole.value !="admin" && Lang.value == "ru"){
 				   setTimeout(function(){
 					   unpublish();
 					   location.href="#gopremium";
@@ -372,7 +376,8 @@ console.log("after sender")
                 break;
 
             case 'failed':
-                note({content: "Не удалось сконнектиться с сервером!", type: "error", time: 5});
+             s = L()=="ru"?"Не удалось сконнектиться с сервером!":"No luck connect to server"
+                note({content: s, type: "error", time: 5});
                 if (producerTransport) producerTransport.close();
                 unpublish();
                 break;
@@ -415,6 +420,7 @@ console.log("after sender")
 
 function updateButtons() {}
 function premi(){
+	if(Lang.value !=="ru") return;
 	 if(Prem.value == "y") return;
 let a = localStorage.getItem("prem");
 if(!a&&a!=="0"){
@@ -428,7 +434,7 @@ if(faka){
 	
 	}
 }}}
-//premi();
+premi();
 function logp(t) {
     let out = gid("out7");
     if (out) {
@@ -452,11 +458,13 @@ disableElement("stopTranslation");
 async function subscribe(el) {
 	 if (local.srcObject) {
         console.warn('WARN: local media ALREADY started');
-        note({ content: "Нажмите сперва на стоп, а потом уже подписывайтесь на трансляцию!", type: "warn", time: 5 });
+        let s = L()=="ru"?"Нажмите сперва на стоп, а потом уже подписывайтесь на трансляцию!":"First press 'stop' then subscribe to translation"
+        note({ content: s, type: "warn", time: 5 });
         return;
     }
    if (SENDER) {
-        note({content: "Вы не можете на себя подписаться!", type: "warn", time: 5});
+	   let s = L()=="ru"?"Вы не можете на себя подписаться!":"You cannot subscribe to yourself!"
+        note({content: s, type: "warn", time: 5});
         return;
     }
      if(!sock){
@@ -515,7 +523,8 @@ async function subscribe(el) {
             CONNECTED = true;
             startbtn.disabled = true;
             nextbtn.disabled = true;
-                note({content: "Вы подключились к трансляции!", type: "info", time: 5});
+            let s = L()=="ru"?"Вы подключились к трансляции!":"You subscribed to translation!"
+                note({content: s, type: "info", time: 5});
                 gid("playContainer").setAttribute("data-state", "subscribed");
                 gid("txtvalue2").setAttribute("data-publish", "publish");
                 gid("txtvalue").setAttribute("data-publish", "publish");
@@ -699,7 +708,8 @@ function unpublish() {
    // disableElement("stopTranslation");
    playContainer.setAttribute("data-state", "niemand");
    PSENDER = false;
-    note({content: "Вы закончили трансляцию.", type: "info", time: 5});
+   let s = L()=="ru"?"Вы закончили трансляцию.":"You finished translation!"
+    note({content: s, type: "info", time: 5});
      let a = document.querySelector('div#playContainer #kresti');
                if(a) a.classList.toggle('show');
     startbtn.disabled = false;
@@ -735,7 +745,8 @@ gid("playContainer").setAttribute("data-state", "busy");
         loci = null;
         PSENDER = false;
         startbtn.disabled = false;
-   note({ content: "Вы отписались от трансляции", type: "info", time: 5 });
+        let s = L()=="ru"?"Вы отписались от трансляции":"You unsubscribed from translation"
+   note({ content: s, type: "info", time: 5 });
    gid("txtvalue2").setAttribute("data-publish", "none");
    gid("txtvalue").setAttribute("data-publish", "none");
     let a = document.querySelector('div#playContainer #kresti');
@@ -819,7 +830,9 @@ function disableElement(id) {
 function beginTranslation(el){
 	//alert(1);
 	if(el.getAttribute("data-state") == "niemand"){
-		if(window.confirm('Запустить трансляцию? Вас увидят множество зрителей!')){
+		let s = (L()=="ru"?'Запустить трансляцию? Вас увидят множество зрителей!':'Enable the stream? Many viewers will watch you!')
+	//	alert(L());
+		if(window.confirm(s)){
 			startMedia(el);
 			//el.setAttribute("data-state", "begin");
 		}

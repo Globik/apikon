@@ -16,7 +16,9 @@
         <button id="callButton">Call</button>
         <button id="hangupButton">Hang Up</button>
         <button onclick="playStream();">zusammen in canvas</button>
+        <button onclick="record();">record</button>
         <br><br><canvas id="cnv" width="600" height="600"></canvas>
+        <video id="videos"></video>
     </div>
     <script>
     'use strict';
@@ -245,7 +247,33 @@ function hangup() {
        // window.stream = stream;
     }
     
- 
+ function record(){
+	var vstream = canvas.captureStream()
+	 var atrack = localStream.getAudioTracks()[0];
+		//ms.addTrack(atrack)
+	//	var ms = new MediaStream([atrack])
+vstream.addTrack(atrack);
+		//vstream.getVideoTracks()[0].requestFrame();
+		var mediaRecorder = new MediaRecorder(vstream, { mimeType: 'video/webm;codecs=vp8,opus' });
+		mediaRecorder.start(100)
+		setTimeout(function(){
+			mediaRecorder.stop()
+			videos.controls = true;
+		}, 5000)
+		var chunks = [];
+		mediaRecorder.ondataavailable = function(e){
+			//alert(1)
+			if(e.data && e.data.size > 0) chunks.push(e.data);
+		}
+		mediaRecorder.onstop = function(e){
+			var blob = new Blob(chunks, {
+				'type':'video/webm'
+			})
+			chunks = [];
+			var videourl = window.URL.createObjectURL(blob)
+			videos.src = videourl;
+		}
+ }
  
  
  

@@ -1,15 +1,16 @@
 function main(n){
 	let istestheart = (n.istestheart==1?true:false);
+	const { lang } = n;
 return `
  <!DOCTYPE html>
 <html lang="ru">
   <head>
     <meta charset="utf-8">
-    <title>Чат-рулетка - видеочат для случайных знакомств в интернете.</title>
+    <title>${lang=="ru"?"Чат-рулетка - видеочат для случайных знакомств в интернете":"Chatslider: Free Random Video Chat with Strangers"}.</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- <meta name="viewport" content="width=device-width,initial-scale=1.0"> -->
     <meta name="viewport" content="width=device-width,user-scalable=no" />
-    <link rel="icon" href="favicon.ico">
+    <link rel="icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
 		<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
 		<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
@@ -29,19 +30,23 @@ return `
 		<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
 		<meta name="theme-color" content="#ffffff">
 		
-<meta name="description" content="Чат-рулетка — самый популярный русскоязычный чат. Ежедневно чат посещает более 500 тысяч пользователей из России и стран СНГ." />
+<meta name="description" content="${lang=="ru"?"Чат-рулетка — самый популярный русскоязычный чат. Ежедневно чат посещает более 500 тысяч пользователей из России и стран СНГ.":
+"Chat roulette video chat dating online dating roulette random acquaintance casual viewer"}" />
   <meta name="keywords" content="rouletka.ru, roulet.chat, chat.roulet, roulette, chat, Chatroulette, видеочат, чатрулетка, чатрулет, chatroulette русский, чатрулетт, анонимность, видео, чат, рулетка, чат рулет, чат рулетка, чат рулетт, chat roulette, chatroulette.com, знакомства, videochatru, videochat.ru, videochat.com" />
  
-  <meta property="og:title" content="Чат-рулетка - анонимный видеочат (Русский аналог ChatRoulette)" />
+  <meta property="og:title" content="${lang=="ru"?"Чат-рулетка - анонимный видеочат (Русский аналог ChatRoulette)":"Chatslider: Free Random Video Chat with Strangers"}" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="//rouletka.ru/" />
   <meta property="og:image" content="//rouletka.ru/og_image.png" />
-  <meta property="og:site_name" content="Чат-рулетка" />
-  <meta property="og:description" content="Чат-рулетка для русскоязычных пользователей. Случайные знакомства в видеочате. Есть веб-камера? Найди пару в чат рулетке!" />
+  <meta property="og:site_name" content="${lang=="ru"?"Чат-рулетка":"Chat roulette"}" />
+  <meta property="og:description" content="${lang=="ru"?"Чат-рулетка для русскоязычных пользователей. Случайные знакомства в видеочате. Есть веб-камера? Найди пару в чат рулетке!":
+  "Open the world of communication and new acquaintances both for body and soul, and for commercial business. Choose the language of the interlocutor, country, city and plunge into the world of full contact with the interlocutor, selected at random according to your criteria."}" />
   
-  <meta itemprop="name" content="Чат-рулетка - анонимный видеочат (Русский аналог ChatRoulette)" />
-<meta itemprop="description" content="Чат-рулетка — самый популярный русскоязычный чат. Ежедневно чат посещает более 500 тысяч пользователей из России и стран СНГ." />
-<meta name="description" content="Чат-рулетка — самый популярный русскоязычный чат. Ежедневно чат посещает более 500 тысяч пользователей из России и стран СНГ." />
+  <meta itemprop="name" content="${lang=="ru"?"Чат-рулетка - анонимный видеочат (Русский аналог ChatRoulette)":"Chat Roulette"} />
+<meta itemprop="description" content="${lang=="ru"?"Чат-рулетка — самый популярный русскоязычный чат. Ежедневно чат посещает более 500 тысяч пользователей из России и стран СНГ.":
+"Open the world of communication and new acquaintances both for body and soul, and for commercial business. Choose the language of the interlocutor, country, city and plunge into the world of full contact with the interlocutor, selected at random according to your criteria."}" />
+<meta name="description" content="${lang=="ru"?"Чат-рулетка — самый популярный русскоязычный чат. Ежедневно чат посещает более 500 тысяч пользователей из России и стран СНГ." :
+"Open the world of communication and new acquaintances both for body and soul, and for commercial business. Choose the language of the interlocutor, country, city and plunge into the world of full contact with the interlocutor, selected at random according to your criteria."}"/>
 <script type="application/ld+json"> { "@context": "https://schema.org", "@type": "Organization", "url": "https://rouletka.ru", "logo": "https://rouletka.ru/og_image.png" } </script>
   
 		<link href="/css/main22.css" rel="stylesheet">
@@ -94,6 +99,7 @@ return `
     <input type="hidden" id="Mon" value="${n.user?n.user.mon:null}" />
     <input type="hidden" id="Prem" value="${n.user?n.user.prem:"n"}" />
     <input type="hidden" id="Brole" value="${n.user?n.user.brole:'non'}"/>
+    <input type="hidden" id="Lang" value="${n.lang}" />
     <!-- {n.user? JSON.stringify(n.user):'no user'} -->
     <script>
    // note({ content: '<b>Помочь проекту: </b><br><br>
@@ -201,21 +207,22 @@ function isOpenModal(){
 </div>
 <div id="settingspanel">
 ${n.user && n.user.brole=='admin'?'<div class="settingspanel" onclick="toAdminPanel(this);">В админку</div>':''}
-<div class="settingspanel" data-current="" id="camToggle" onclick="toggleCam(this);">Переключить камеру</div>
+<div class="settingspanel" data-current="" id="camToggle" onclick="toggleCam(this);">${lang=='ru'?'Переключить камеру':'Toggle cam'}</div>
 <!-- <div class="settingspanel" onclick="doSharing(this);">Скриншэринг</div> -->
-<div class="settingspanel"><b>Вебок:</b> <span id="camsCount">0</span> | <b>Коннектов:</b> <span id="connects">0</span></div>
+<div class="settingspanel"><b>${lang=='ru'?'Вебок':'Cams'}:</b> <span id="camsCount">0</span> | <b>${lang=='ru'?'Коннектов':'Connects'}:</b> <span id="connects">0</span></div>
 <!-- <div class="settingspanel"  onclick="pushSubscribe(this);">Пуш уведомления</div> -->
-<div class="settingspanel"  onclick="purchaseTokens(this);">Купить сердечки &#x1f496;</div>
+${lang=='ru'?`<div class="settingspanel"  onclick="purchaseTokens(this);">Купить сердечки &#x1f496;</div>
 <div class="settingspanel">
 <div class="some doh">Ваш доход&nbsp;&nbsp;<span id="dohod">${n.user? Number.parseFloat(n.user.theart*0.10).toFixed(2):'0.00'}</span>&nbsp;&nbsp;рублей</div>
 <div class="du" onclick="getPayout(this);">Получить</div>
-</div>
-<div class="settingspanel"><a href="https://t.me/rouletka3">Наш Телеграм</a></div>
-<div class="settingspanel" ><a href="#ozeniteHREF" onclick="ozenite(this);"><span class="ozenka">Оцените приложение</span></a></div>
+</div>`:''}
+<div class="settingspanel"><a href="https://t.me/rouletka3">${lang=='ru'?'Наш Телеграм':'Our Telegram'}</a></div>
+${lang=='ru'?`<div class="settingspanel" ><a href="#ozeniteHREF" onclick="ozenite(this);"><span class="ozenka">Оцените приложение</span></a></div>`:''}
  <!--
  <div class="settingspanel"  id="donatis">Помочь проекту<br>
  <iframe src="https://yoomoney.ru/quickpay/fundraise/button?billNumber=AWVMCQLpAcY.240125&" width="330" height="50" frameborder="0" allowtransparency="true" scrolling="no"></iframe></div> -->
-${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'<div class="settingspanel"><a href="#login" onclick="panelOpen();">Войти</a></div>'}
+${n.user?`<div class="settingspanel" onclick="logout(this);">${lang=='ru'?'Выйти':'Logout'}</div>`:
+`<div class="settingspanel"><a href="#login" onclick="panelOpen();">${lang=='ru'?'Войти':'Log in'}</a></div>`}
 <!-- <div class="settingspanel"><button onclick="mach();">mach</button></div> -->
 </div>
 </nav>
@@ -223,7 +230,7 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
     <div id="remotecontainer" onclick="closeClaim(this);">
     
     ${n.imgData && n.imgData.img_data?'<style>div#playContainer svg{fill:rgba(234,223,244,0.6);}</style>':''}
-    <div id="playContainer" data-state="${n.imgData && n.imgData.img_data?'busy':'niemand'}" onclick="beginTranslation(this);"><!-- <img  src="/img/play2.svg"/>-->
+    <div id="playContainer" class="${lang=='en'?'eng':''}" data-state="${n.imgData && n.imgData.img_data?'busy':'niemand'}" onclick="beginTranslation(this);"><!-- <img  src="/img/play2.svg"/>-->
 <svg version="1.1"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000" xml:space="preserve">
 <metadata> Svg Vector Icons : http://www.onlinewebfonts.com/icon </metadata>
 <g><path d="M500,10C229.4,10,10,229.4,10,500s219.4,490,490,490c270.6,0,490-219.4,490-490S770.6,10,500,10z M500,881.1c-210.5,0-381.1-170.6-381.1-381.1S289.5,118.9,500,118.9c210.5,0,381.1,170.6,381.1,381.1S710.5,881.1,500,881.1z"/><path d="M390.2,282.2l326.7,218.6L390.2,719.5V282.2z"/></g>
@@ -234,7 +241,8 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
   <!--  <section id="recordSection"><div>&#x1F4F8;</div></section> -->
     
     <section id="claimContainer" onclick="openClaim(this);"><div id="claimBox">!</div></section>
-    <div id="claimMenu" data-vip=""><div data-claim="ignor" onclick="sendClaim(this);">В игнор!</div><div data-claim="claim" onclick="sendClaim(this);">Пожаловаться!</div></div>
+    <div id="claimMenu" data-vip=""><div data-claim="ignor" onclick="sendClaim(this);">${lang=='ru'?'В игнор':'To ignore'}!</div>
+    <div data-claim="claim" onclick="sendClaim(this);">${lang=='ru'?'Пожаловаться':'Abuse'}!</div></div>
     <section id="mobileloader"><div class="loader"></div></section>
     
     <video id="remote"  class="" autoplay></video>
@@ -264,7 +272,7 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
 </section> -->
 	</div>
 <section id="sectionTextArea" class="hide">
-<div id="textarea2" class="hide"><textarea id="txtvalue2" data-publish="none" data-send="two" placeholder="Сообщение" oninput="txtInput(this);" onchange="someChange();"></textarea>
+<div id="textarea2" class="hide"><textarea id="txtvalue2" data-publish="none" data-send="two" placeholder="${lang=='ru'?'Сообщение':'Message'}" oninput="txtInput(this);" onchange="someChange();"></textarea>
 <div id="giftbox">
 <!-- <span>&#x1f381</span> -->
 <div class="flexgiftsitem">
@@ -280,17 +288,18 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
     </div>
 <div id="localcontainer"><video id="local"  class=""  autoplay muted></video></div>
 
-<div id="controlsContainer"><button id="startbtn" class="start" data-start="no" onclick="start(this);">старт</button><button id="nextbtn" class="next" onclick="next(this,true);" disabled>далее</button>
+<div id="controlsContainer"><button id="startbtn" class="start" data-start="no" onclick="start(this);">${lang=='ru'?'старт':'start'}</button>
+<button id="nextbtn" class="next" onclick="next(this,true);" disabled>${lang=='ru'?'далее':'next'}</button>
  <div id="somespinner" class="text"><!-- https://cssloaders.github.io/ -->
  <div class="loader"></div>
-      <span class="duka">Жизнь как рулетка. Никогда не узнаешь, кого встретишь следуюшим...</span>
+      <span class="duka">${lang=='ru'?'Жизнь как рулетка. Никогда не узнаешь, кого встретишь следуюшим':'Life is like roulette. You never know who you\'ll meet next...'}...</span>
        <!-- Life is like a non-stop roulette. You never know who you will meet next...-->
       </div>
        <div id="somehello" class="text">
         <span class="tip"><i class="fas fa-check"></i></span>
-        Просто поздоровайтесь друг с другом :D
+        ${lang=='ru'?'Просто поздоровайтесь друг с другом':'Just say hello to each other'} :D
       </div>
-<div id="foot"><a href="/"> О проекте</a></div>
+<div id="foot"><a href="/"> ${lang=='ru'?'О проекте':'About us'}</a></div>
 </div>
 <!-- COMPUTER VERSION -->
 <div id="sectionChat">
@@ -316,7 +325,7 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
 
 <section id="MainSectionTextArea">
 
-<div id="textarea"><textarea id="txtvalue" data-publish="none" data-send="one" placeholder="Сообщение" oninput="txtInput(this);" onchange="someChange();"></textarea>
+<div id="textarea"><textarea id="txtvalue" data-publish="none" data-send="one" placeholder="${lang=='ru'?'Сообщение':'Message'}" oninput="txtInput(this);" onchange="someChange();"></textarea>
 <div id="giftbox2" data-state="closed">
 <!-- <span>&#x1f381</span> -->
 <div class="flexgiftsitem">
@@ -448,10 +457,67 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
     <a href="#."  class="overlay" id="regeln"></a>
     <output id="regelnoutput" class="popi">
     <div class="modal-header">
-          <h1>Правила видеочата</h1>
+          <h1>${lang=='ru'?'Правила видеочата':'Chat rules'}</h1>
         </div>
         <div class="modal-body">
-          <ol>
+         ${get_rules(lang)}
+          <div class="center-button">
+            <button class="register-button" onclick="confirmRules();">${lang=='ru'?'Принять':lang=='en'?'Agree':'同意'}</button>
+          </div>
+        </div>
+      
+    </output>
+    <a href="#."  class="overlay" id="login"></a>
+    <output id="loginoutput" class="popi">
+        <div class="modal-header">
+          ${lang=='ru'?'Авторизация / Регистрация':lang=='en'?'Login / Sign up':'授权/注册'}
+          <br><br><span class="model-header-label" onclick="isOpenModal();">
+            ${lang == 'ru'?'Правила чата':'Chat rules'}
+          </span>
+        </div>
+        
+        <div class="modal-body">
+          <div class="error-message" id="errormsg"></div>
+          <form name="formlogin" id="myform">
+            <label for="name" style="margin-top: 5px;"><b>${lang=='ru'?'Добро пожаловать в чат рулетку':'Welcome to chat roulette'}!</b><br>${lang=='ru'?'Имя':lang=='en'?'Nick' :'姓名'} </label>
+            <input  name="username" type="text" placeholder="${lang=='ru'?'Введите Логин':lang=='en'?'Login':'姓名'}" id="name" required minlength="2" maxlength="20">
+
+            <label for="name">${lang=='ru'?'Пароль':lang=='en'?'Password':'密码'}</label>
+            <input  name="userpassword" type="password" autocomplete="on" placeholder="${lang=='ru'?'Введите пароль':lang=='en'?'password':'密码'}" id="password" required minlength="2" maxlength="20">
+			 <button  class="login-button" id="btnlogin">${lang=='ru'?'Войти':lang=='en'?'Login':'登录'}</button>
+            <button class="register-button" id="btnregister">${lang=='ru'?'Зарегистрироваться':lang=='en'?'Sign up':'报名'}</button>
+           
+          </form>
+        </div>
+    </output>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+   <script src="/js/login.js"></script>
+    
+    <script src="/js/webrtc.js"></script>
+    <script src="/js/soupi.js"></script>
+    
+    
+    
+    
+    
+ <!--   <footer><a href="/about"> О проекте</a></footer> -->
+    
+       </body>
+</html>`;
+}
+module.exports=  {main:main};
+
+const rules_ru =` <ol>
             <li id="1">
               <h4>Запрещено проявлять неуважительное отношение к собеседнику:</h4>
               <ul>
@@ -511,58 +577,56 @@ ${n.user?'<div class="settingspanel" onclick="logout(this);">Выйти</div>':'
           </ol>
           <p>Администрация видеочата не несёт ответственности за действия посетителей, но всеми силами старается бороться с нарушителями. Физически невозможно уследить за всеми нарушениями в чат рулетке, поэтому настоятельно просим вас жаловаться на нарушителей. Ваши жалобы помогают нам делать чат чище и лучше.</p>
           <p>Пользуясь чатом, вы принимаете и соглашаетесь выполнять установленные правила. Если вы не согласны с действующими правилами, вам следует прекратить пользоваться чатом.</p>
-          <div class="center-button">
-            <button class="register-button" onclick="confirmRules();">Принять | Agree | 同意</button>
-          </div>
-        </div>
-      
-    </output>
-    <a href="#."  class="overlay" id="login"></a>
-    <output id="loginoutput" class="popi">
-        <div class="modal-header">
-          Авторизация / Регистрация | Login / Sign up | 授权/注册
-          <br><br><span class="model-header-label" onclick="isOpenModal();">
-            Правила чата
-          </span>
-        </div>
-        
-        <div class="modal-body">
-          <div class="error-message" id="errormsg"></div>
-          <form name="formlogin" id="myform">
-            <label for="name" style="margin-top: 5px;">Welcome to chat roulette!<br>Имя | Nick | 姓名 </label>
-            <input  name="username" type="text" placeholder="Введите Имя/Логин Login | 姓名" id="name" required minlength="2" maxlength="20">
-
-            <label for="name">Пароль | Password | 密码</label>
-            <input  name="userpassword" type="password" autocomplete="on" placeholder="Введите пароль password 密码" id="password" required minlength="2" maxlength="20">
-			 <button  class="login-button" id="btnlogin">Войти | Login | 登录</button>
-            <button class="register-button" id="btnregister">Зарегистрироваться | Sign up | 报名</button>
-           
-          </form>
-        </div>
-    </output>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-   <script src="/js/login.js"></script>
-    
-    <script src="/js/webrtc.js"></script>
-    <script src="/js/soupi.js"></script>
-    
-    
-    
-    
-    
- <!--   <footer><a href="/about"> О проекте</a></footer> -->
-    
-       </body>
-</html>`;
+          `;
+          const rules_en = `
+          <h4>It is forbidden to show disrespect to the interlocutor:</h4>
+          <ul>
+                <li>behave rudely and use profanity;</li>
+                <li>offend on national, racial and religious grounds;</li>
+                <li>threaten the interlocutor.</li>
+              </ul>
+            </li>
+            <li id="2">
+              <h4>Vulgar behavior is prohibited:</h4>
+              <ul>
+                <li><u>being bare-chested in a chat without showing your face</u>;</li>
+                <li>offer virtual sex;</li>
+                <li>use words that may have indecent sexual connotations (virt, naughty, and
+                  etc.);
+                </li>
+                <li>being in chat roulette without clothes or in underwear;</li>
+                <li>exhibit genitals and other intimate parts of the body;</li>
+                <li>touch the genitals even through clothing;</li>
+                <li>point the camera below your chest (try to keep your face in the frame);</li>
+                <li>commit any actions that may be considered obscene.</li>
+              </ul>
+            </li>
+            <li id="3">
+              <h4>It is prohibited to show other images instead of yourself:</h4>
+              <ul>
+                <li>point the camera at the screen of a monitor, tablet, phone or TV;</li>
+                <li>point the camera at photos;</li>
+                <li>point the camera at any text messages;</li>
+                <li>use webcam emulators.</li>
+              </ul>
+            </li>
+            <li id="5">
+              <h4>Complaint system</h4>
+              <ul>
+                <li>Any video chat visitor can send a complaint against their interlocutor. Attached to the complaint
+                  the user's image and his message, on the basis of which the moderator makes a decision about
+                  bath. Moderators respond to complaints 24/7, 7 days a week.
+                </li>
+                <li>If a large number of users often complain about a person who violates chat rules, he
+                  gets banned automatically. The complex mechanism of the complaint system excludes accidental or unfair
+                  bans.
+                </li>
+              </ul>
+            </li>
+          </ol>
+          <p>The video chat administration is not responsible for the actions of visitors, but does its best to combat violators. It is physically impossible to keep track of all violations in chat roulette, so we urge you to report violators. Your complaints help us make the chat cleaner and better.</p>
+          <p>By using the chat, you accept and agree to abide by the established rules. If you do not agree with the current rules, you should stop using the chat.</p>
+          `;
+function get_rules(lang){
+	return lang=='ru'?rules_ru:rules_ru
 }
-module.exports=  {main:main};

@@ -1307,7 +1307,8 @@ div#playContainer{
 	z-index:1;
 	display:flex;
 }
-div#playContainer:hover::after{
+
+ div#playContainer:hover::after{
 position:absolute;
 left:-100px;
 top:60px;
@@ -1315,6 +1316,9 @@ letter-spacing:1px;
 content:"Трансляция";
 color: orange;
 width:50px;	
+}
+div#playContainer.eng:hover::after{
+	content:"Translation";
 }
 div#playContainer svg{
 position:absolute;

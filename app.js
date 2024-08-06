@@ -199,8 +199,11 @@ app.use('/pay', pay);
 var imgData = {};
 app.get("/about", async(req, res)=>{
 	console.log("*** USER *** ", req.user);
-	console.log('req.app.locals ', req.app.locals.testshopid, ' ', req.app.locals.testshopsecret);
-	res.rendel('main', { imgData: imgData });
+	//console.log('req.app.locals ', req.app.locals.testshopid, ' ', req.app.locals.testshopsecret);
+	res.rendel('main', { imgData: imgData, lang: 'ru' });
+})
+app.get('/about/en', async(req, res)=>{
+	res.rendel('main', { imgData: imgData, lang: 'en' });
 })
 app.get("/", async(req, res)=>{
 	oni((req.user?req.user.name:'anonym'), " on about");
@@ -1461,6 +1464,7 @@ if(msg.request == "mediasoup"){
         socket.userId = msg.userId;
         socket.nick = msg.nick;
         socket.isLogged = msg.logged;
+        socket.lang = msg.LANG;
         wsend(socket, { type: "helloServer", socketId: socket.id });
         break
         case "messagepublished":

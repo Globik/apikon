@@ -1,4 +1,5 @@
 function about(n){
+	const { lang } = n;
 return `
  <!DOCTYPE html>
 <html ng-app="projectRtc">
@@ -69,6 +70,12 @@ return `
 </head>
 
 <body>
+<style>
+.langs{
+	text-align:center;
+	margin-top:5px;
+}
+</style>
 
     <!-- chat view gbhthnthnthn
     <div class="container">
@@ -128,6 +135,10 @@ return `
     </div>
     end chat view -->
     <section class="hero">
+    <div class="langs">
+${lang=='en'?'':'<a href="/about/en" hreflang="en">'} <img alt="English Version" src="/img/en.png" width="35" height="22"> ${n.ln=='en'?'':'</a>'}
+${n.ln=='ru'?'':'<a href="/about" hreflang="ru">'} <img alt="Русская версия" src="/img/ru.png"  width="35" height="22">${n.ln=='ru'?'':'</a>'}
+</div>
         <div class="container wow fadeInUp">
             <div class="logoЧатРулетка"></div>
             <h1 class="hero__title">Видео чат — случайные знакомства</h1>

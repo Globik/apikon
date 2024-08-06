@@ -32,7 +32,7 @@ var ignoreOffer = false;
 var isSettingRemoteAnswerPending = false;
 var unsubscribe = false;
 var CONNECTED = false;
-
+const L = function(){ return Lang.value; }
 const heartcountels = document.querySelectorAll("div.heartcount");
 var context = new (window.AudioContext || window.webkitAudioContext)();
 var notes = new Sound(context);
@@ -50,7 +50,7 @@ function getPubId(){
 var publishedId = getPubId()?gid('publishedid').value:null;
 
 function toggleCam(el){
-	if(Prem.value == "n"){
+	if(Prem.value == "n" && L == "ru"){
 		window.location.href = "#gopremium";
 		panelOpen();
 		return;
@@ -64,7 +64,8 @@ window.streami = undefined;
 	local.srcObject = null;
 
 	}else{
-		note({ content: "Нажми на старт-то!", type: "warn", time: 5 });
+		let s = L()=='ru'?"Нажми на старт-то!":'First press "start"';
+		note({ content: s, type: "warn", time: 5 });
 		panelOpen();
 		return;
 	}
@@ -295,7 +296,7 @@ function gotDevices(deviceInfos){
 }
 function getDevice(){
 if(!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices){
-console.warn("your browser navigator.mediaDevices not supported");
+alert("your browser navigator.mediaDevices not supported");
 }else{
 navigator.mediaDevices.enumerateDevices().then(gotDevices).catch(function(err){console.error(err)});
 }
@@ -345,9 +346,11 @@ function openClaim(el){
 function sendClaim(el){
 	let d = el.getAttribute("data-claim");
 	if(d == "ignor"){
-		note({ content: "ОК. Добавили в игнор.", type: "info", time: 5 });
+		let s = L()=="ru"?"ОК. Добавили в игнор.":"OK, added to ignore."
+		note({ content: s, type: "info", time: 5 });
 	}else if(d == "claim"){
-		note({ content: "Спвсибо, модератор рассмотрит вашу жалобу.", type: "info", time: 5 });
+		let s = L()=="ru"?"Спвсибо, модератор рассмотрит вашу жалобу.":"Thanks, the moderator will look at your abuse"
+		note({ content: s, type: "info", time: 5 });
 	}
 	openClaim(claimContainer);
 	let l = claimMenu.getAttribute("data-vip");
@@ -484,7 +487,8 @@ function setSignal(){
 function get_socket() {
 	 if(NICK == "anon" || NICK == undefined){
 		// sock.close();
-		 note({content: "Залогиньтесь!", type: "warn", time: 5 });
+		let s = L()=="ru"?"Залогиньтесь!":"You should log in!"
+		 note({content: s, type: "warn", time: 5 });
 		 location.href="#login";
 	const faka = document.querySelector('.overlay:target');
 	 if(faka){
@@ -516,7 +520,7 @@ return window.location.href='#purchaseHREF';
   sock.onopen = function () {
 	 console.log("websocket opened");
 	// heartbeat();
-	 wsend({ type: "helloServer", userId: gid("userId").value?gid("userId").value:'anon', nick: userName.value, logged:  Login()?"yes":"no" });
+	 wsend({ type: "helloServer", userId: gid("userId").value?gid("userId").value:'anon', nick: userName.value, logged:  Login()?"yes":"no", LANG: L });
   };
   sock.onerror = function (e) {
     note({ content: "Websocket error: " + e, type: "error", time: 5 });
@@ -535,7 +539,8 @@ return window.location.href='#purchaseHREF';
   sock.onclose = function () {
 	 // clearTimeout(pingTimeout);
     sock = null;
-    note({ content: "Соединение с сервером закрыто!", type: "info", time: 5 });
+    let s = L()=="ru"?"Соединение с сервером закрыто!":"Websocket closed!"
+    note({ content: s, type: "info", time: 5 });
     console.log('socket closed');
     closeAll(startbtn);
   };
@@ -693,9 +698,9 @@ function  handleMessage(msg, bool){
 
 		div.className="yourmsg he2";
 		if(bool){
-			div.innerHTML="<span><b>Собеседник: </b></span><br><span>" + msg + "</span>";
+			div.innerHTML="<span><b>" + (L()=='ru'?'Собеседник':'Partner') + ": </b></span><br><span>" + msg + "</span>";
 		}else{
-		div.innerHTML="<span><b>Собеседник: </b></span><br><span>" + esci(msg.trim()) + "</span>";
+		div.innerHTML="<span><b>" + (L()=='ru'?'Собеседник':'Partner') + ": </b></span><br><span>" + esci(msg.trim()) + "</span>";
 	}
 		chatbox.appendChild(div);
 		chatbox.scrollTop = chatbox.clientHeight + chatbox.scrollHeight;
@@ -707,9 +712,9 @@ textarea2.className="";
 
 		div2.className="yourmsg2 he";
 		if(bool){
-			div2.innerHTML="<span><b>Собеседник: </b></span><br><span>" + msg + "</span>";
+			div2.innerHTML="<span><b>" + (L()=='ru'?'Собеседник':'Partner') + ": </b></span><br><span>" + msg + "</span>";
 		}else{
-		div2.innerHTML="<span><b>Собеседник: </b></span><br><span>" + esci(msg.trim()) + "</span>";
+		div2.innerHTML="<span><b>" + (L()=='ru'?'Собеседник':'Partner') + ": </b></span><br><span>" + esci(msg.trim()) + "</span>";
 	}
 		chatbox2.appendChild(div2);
 		chatbox2.scrollTop = chatbox2.clientHeight + chatbox2.scrollHeight;
@@ -899,8 +904,8 @@ console.log("<b>Your browser, version:</b> " + brows + " " + vers);
 
 function start(el){
 	 if(NICK == "anon" || NICK == undefined){
-		
-		 note({content: "Залогиньтесь!", type: "warn", time: 5 });
+		let s = (L()=="ru"?"Залогиньтесь!":"Please log in")
+		 note({content: s, type: "warn", time: 5 });
 		 return;
 	  }
 	if(!sock) {
@@ -936,7 +941,7 @@ function start(el){
 	
 	local.srcObject = stream;	
 	window.streami = stream;
-el.textContent = "стоп";
+el.textContent = L()=="ru"?"стоп":"stop";
 	el.setAttribute("data-start", "yes");
 	el.disabled = false;
 	el.className = "stop";
@@ -1055,7 +1060,7 @@ function base64ToBlob(base64String, contentType = '') {
 }
 function closeAll(el){
 	el.setAttribute("data-start", "no");
-	el.textContent = "старт";
+	el.textContent = L()=="ru"?"старт":"start";
 	el.className = "start";
 	 onlineCount.textContent = 0;
      camsCount.textContent = "0";
@@ -1303,13 +1308,13 @@ if(l2){
 		 let div=document.createElement('div');
 		
 		div.className = "yourmsg";
-		div.innerHTML="<span class='you2'><b>Вы: </b></span><br><span>" + n.msg + "</span>";
+		div.innerHTML="<span class='you2'><b>" + (L()=="ru"?"Вы":"You") + ": </b></span><br><span>" + n.msg + "</span>";
 		chatbox.appendChild(div);
 		chatbox.scrollTop = chatbox.clientHeight + chatbox.scrollHeight;
 	}else{
 		let div2=document.createElement('div');
 		div2.className="yourmsg2";
-		div2.innerHTML="<span class='you'><b>Вы: </b></span><br><span>" + n.msg + "</span>";
+		div2.innerHTML="<span class='you'><b>" + (L()=="ru"?"Вы":"You") + ": </b></span><br><span>" + n.msg + "</span>";
 		chatbox2.appendChild(div2);
 		chatbox2.scrollTop = chatbox2.clientHeight + chatbox2.scrollHeight;
 	}
@@ -1323,7 +1328,7 @@ if(l2){
         znakPrint.classList.add("hidden");
       znakPrint2.classList.add("hidden");
 		div.className="yourmsg";
-		div.innerHTML="<span class='you2'><b>Вы: </b></span><br><span>" + esci(txtvalue.value.trim()) + "</span>";
+		div.innerHTML="<span class='you2'><b>" + (L()=="ru"?"Вы":"You") + ": </b></span><br><span>" + esci(txtvalue.value.trim()) + "</span>";
 		chatbox.appendChild(div);
 		chatbox.scrollTop = chatbox.clientHeight + chatbox.scrollHeight;
 		wsend({type:"message", data: txtvalue.value});
@@ -1338,7 +1343,7 @@ if(l2){
 		if(!txtvalue2.value) return;
 			let div2=document.createElement('div');
 		div2.className="yourmsg2";
-		div2.innerHTML="<span class='you'><b>Вы: </b></span><br><span>" + esci(txtvalue2.value.trim()) + "</span>";
+		div2.innerHTML="<span class='you'><b>" + (L()=="ru"?"Вы":"You") + ": </b></span><br><span>" + esci(txtvalue2.value.trim()) + "</span>";
 		chatbox2.appendChild(div2);
 		chatbox2.scrollTop = chatbox2.clientHeight + chatbox2.scrollHeight;
 		wsend({type:"message", data: txtvalue2.value});
@@ -1921,7 +1926,8 @@ function onHeartClick(ev){
 		return;
 	}
 	if(!CONNECTED){
-		note({ content: "Никого нет!", type: "info", tyme: 5 });
+		let s = (L()=="ru"?"Никого нет!":"There is no one! ")
+		note({ content: s, type: "info", tyme: 5 });
 		return;
 	}
 	
@@ -1960,7 +1966,7 @@ function processHeart(n, ev){
 			wsend({ type: "gift", gift: n.g, quant: n.quant, from_id: userId.value, from_name: userName.value, to_id: partnerId, 
 				istestheart: (isTestHeart.value=="true"?true:false) });
 				//wsend({ type: "messagepublished", data: txtvalue.value, publishedId: publishedId, from: userName.value });
-			let str = `Послали в подарок ${n.g=='heart'?'сердечко &#x1f496':''}`
+			let str = (L()=="ru"?`Послали в подарок ${n.g=='heart'?'сердечко &#x1f496':''}`:`You've sent as a gift ${n.g=='heart'?'heart &#x1f496':''}`)
 			console.warn(str);
 			let l = ev.target.getAttribute("data-type");
 			//alert(l);
@@ -1980,7 +1986,8 @@ function processHeart(n, ev){
 		
 function handleGift(msg){
 	console.log(msg);
-	handleMessage(`Подарили в подарок сердечко &#x1f496`, true);
+	let s = (L()=="ru"?`Подарили в подарок сердечко &#x1f496`:`You've gifted a heart &#x1f496`)
+	handleMessage(s, true);
 	let n = Number(msg.quant);
 	let a = Number(heartcountels[0].textContent);
 	heartcountels[0].textContent = n + a;
