@@ -981,7 +981,7 @@ p{
 }
 @media screen and (max-width: 452px) and (orientation: portrait){
 .hero .hero__title , .info-description__title{
-	margin-top:10rem;
+	margin-top:15rem;
 }
 .hero__mobile-btn .only-mobile{
 	transform:translateY(-100px);
