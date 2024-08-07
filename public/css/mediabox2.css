@@ -1320,6 +1320,9 @@ width:50px;
 div#playContainer.eng:hover::after{
 	content:"Translation";
 }
+div#playContainer.zh:hover::after{
+	content:"溪流";
+}
 div#playContainer svg{
 position:absolute;
 top:25%;

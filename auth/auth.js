@@ -41,15 +41,15 @@ async function(username, password, done){
 	//console.log("username , paswword: ", username, password);
 	
 	 if (!username || !password) {
-        return done(null, false, { error: true, message: 'Введите имя или пароль!' });
+        return done(null, false, { error: true, message: 'Введите имя или пароль!', status: 401 });
     }
-
+/*
     if (!(username.length >= 2 && password.length >= 6)) {
         return done(null, false, { error: true, message: 'Пароль должен содержать минимум 6 символов, а Имя минимум 2!' });
     }
     if(username.length >=20){
 		return done(null, false, { error: true, message: 'Имя должно быть меньше 20 букв.' });
-	}
+	}*/
 
  try{
 	 
@@ -69,7 +69,7 @@ async function(username, password, done){
 	 let wi=await db.query('select*from users where name=(?)',[username]);
 	// console.log('wi :', wi);
 	 if(wi.length==0){
-		 return done(null, false, { error:true, message:'Пользователь не найден!', status:401 })
+		 return done(null, false, { error:true, message:'Пользователь не найден!', status:406 })
 	 }
  let w=wi[0];
 
@@ -78,13 +78,13 @@ async function(username, password, done){
 			return done(null, w.id, { message: "ok", status:200, name: w.name, id: w.id });
 		}else{
 			//console.log("NOT MATCH!");
-			return done(null, false, {error: true, message:'Имя или пароль неверный!!', status:401 })
+			return done(null, false, {error: true, message:'Имя или пароль неверный!!', status:407 })
 		}
 	 
 	
 
 }catch(err){
-	return done(null, false, { error: true, message: err.message, status: 401 })
+	return done(null, false, { error: true, message: err.message, status: 405 })
 }
 
 
@@ -99,15 +99,15 @@ passport.use('local-signup', new LocalStrategy({usernameField: 'name', passReqTo
 	//console.log("username , paswword: ", username, password);
 	if(!req.body.name || !password){return done(null,false,{error: true, message: "Missing credentials", status: 401 })}	
 
- if (!username || !password) {
-        return done(null, false, { error: true, message: 'Введите имя или пароль!' });
-    }
+ //if (!username || !password) {
+ //       return done(null, false, { error: true, message: 'Введите имя или пароль!', status: 402 });
+  //  }
 
     if (!(username.length >= 2 && password.length >= 6)) {
-        return done(null, false, { error: true, message: 'Пароль должен содержать минимум 6 символов, а Имя минимум 2!' });
+        return done(null, false, { error: true, message: 'Пароль должен содержать минимум 6 символов, а Имя минимум 2!', status: 402 });
     }
     if(username.length >=20){
-		return done(null, false, { error: true, message: 'Имя должно быть меньше 20 букв.' });
+		return done(null, false, { error: true, message: 'Имя должно быть меньше 20 букв.', status: 403 });
 	}
 try{
 
@@ -122,14 +122,14 @@ if(useri.length==0) {
 //	console.log('qu: ', qu);
 	return done(null, qu.insertId.toString(), { username: username, status: 200, message: "Success!" });
 }else{
-return done(null, false, {error:true, message: "Ник " + username + " уже есть!", status: 401 })
+return done(null, false, {error:true, message: "Ник " + username + " уже есть!", status: 404 })
 
 }
 }catch(err){
 //	console.log('custom error handling in local signup auth.js: ', err.message);
 
 		
-	return done(null, false, { error: true, message: err.message, status: 401 })
+	return done(null, false, { error: true, message: err.message, status: 405 })
 	
 }			
 }))

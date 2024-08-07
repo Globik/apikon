@@ -72,7 +72,8 @@ return `
 <body>
     <div class="langs">
 ${lang=='en'?'':'<a href="/about/en" hreflang="en">'} <img alt="English Version" src="/img/en.png" width="35" height="22"> ${n.ln=='en'?'':'</a>'}
-${n.ln=='ru'?'':'<a href="/about" hreflang="ru">'} <img alt="Русская версия" src="/img/ru.png"  width="35" height="22">${n.ln=='ru'?'':'</a>'}
+${lang=='ru'?'':'<a href="/about" hreflang="ru">'} <img alt="Русская версия" src="/img/ru.png"  width="35" height="22">${n.ln=='ru'?'':'</a>'}
+${lang=='zh'?'':'<a href="/about/zh" hreflang="zh">'}<img alt="中文网站" src="/img/zh.png"  width="35" height="22">${n.ln=='zh'?'':'</a>'}
 </div>
     <section class="hero">
     

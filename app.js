@@ -205,6 +205,9 @@ app.get("/about", async(req, res)=>{
 app.get('/about/en', async(req, res)=>{
 	res.rendel('main', { imgData: imgData, lang: 'en' });
 })
+app.get('/about/zh', async(req, res)=>{
+	res.rendel('main', { imgData: imgData, lang: 'zh' });
+})
 app.get("/", async(req, res)=>{
 	oni((req.user?req.user.name:'anonym'), " on about");
 	res.rendel('about', {});
