@@ -722,7 +722,7 @@ lang varchar(3) not null
 	console.log('hier error6666 ', e);
 	await axios.post(`https://api.telegram.org/bot${tg_api}/sendMessage`, {
 		chat_id: grid,
-		text: 'Облом! ' + (e.response?e.response.data:e.toString())
+		text: 'Облом! ' + (e.response?JSON.stringify(e.response.data):e.toString())
 	});
 }
 	
