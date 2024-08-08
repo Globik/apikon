@@ -76,17 +76,29 @@ var r=await fetch(uri, {
 			//'Имя или пароль неверный!!', status:407
 			let s;
 			if(data.status == 401){
-				s=L()=='ru'?'Нет пароля или ника':L()=='en'?data.message:L()=='zh'?'没有密码或昵称':'';
+				s=L()=='ru'?'Нет пароля или ника':L()=='en'?data.message:
+				L()=='zh'?'没有密码或昵称':
+				L()=='id'?'Bukan masalah atau masalah':'';
 			}else if(data.status == 402){
-				s=L()=='ru'?data.message:L()=='en'?'Password is minimum 6 symbols and nick 2 as a minimmum!':L()=='zh'?'密码必须至少包含 6 个字符，名称必须至少包含 2 个字符':'';
+				s=L()=='ru'?data.message:L()=='en'?'Password is minimum 6 symbols and nick 2 as a minimmum!':
+				L()=='zh'?'密码必须至少包含 6 个字符，名称必须至少包含 2 个字符':
+				L()=='id'?'Password minimal 6 simbol dan nick minimal 2!':'';
 			}else if(data.status == 403){
-				s=L()=='ru'?data.message:L()=='en'?'Nick must content less than 20 letters':L()=='zh'?'名称必须少于 20 个字母':'';
+				s=L()=='ru'?data.message:L()=='en'?'Nick must content less than 20 letters':
+				L()=='zh'?'名称必须少于 20 个字母':
+				L()=='id'?'Nick harus berisi kurang dari 20 huruf':'';
 			}else if(data.status == 404){
-				s=L()=='ru'?data.message:L()=='en'?'Nick already in use!':L()=='zh'?'名字已经在那里了!':'';
+				s=L()=='ru'?data.message:L()=='en'?'Nick already in use!':
+				L()=='zh'?'名字已经在那里了!':
+				L()=='id'?'Nick sudah digunakan':'';
 			}else if(data.status == 406){
-				s=L()=='ru'?data.message:L()=='en'?'User not found!':L()=='zh'?'未找到用户':'';
+				s=L()=='ru'?data.message:L()=='en'?'User not found!':
+				L()=='zh'?'未找到用户':
+				L()=='id'?'Pengguna tidak ditemukan':"'";
 			}else if(data.status == 407){
-				s=L()=='ru'?data.message:L()=='en'?'Nick or password wrong':L()=='zh'?'用户名或密码不正确':'';
+				s=L()=='ru'?data.message:L()=='en'?'Nick or password wrong':
+				L()=='zh'?'用户名或密码不正确':
+				L()=='id'?'Nick atau kata sandi salah':'';
 			}else{
 				s = data.message;
 			}

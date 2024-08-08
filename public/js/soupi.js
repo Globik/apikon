@@ -66,12 +66,16 @@ function sendRequest(obj) {
     return new Promise((resolve, reject) => {
         obj.request = "mediasoup";
         if(!sock) {
-			let s = L()=="ru"?"Повторите попытку позднее":L()=='en'?"Try later":L()=='zh'?'稍后再试':'';
+			let s = L()=="ru"?"Повторите попытку позднее":L()=='en'?"Try later":
+			L()=='zh'?'稍后再试':
+			L()=='id'?'coba lagi nanti':'';
 			reject({ info: s });
 			return;
 		}
 		if(sock.readyState === 0) {
-			let s = L()=="ru"?"Повторите попытку позднее":L()=='en'?"Try later":L()=='zh'?'稍后再试':'';
+			let s = L()=="ru"?"Повторите попытку позднее":L()=='en'?"Try later":
+			L()=='zh'?'稍后再试':
+			L()=='id'?'coba lagi nanti':'';
 			reject({ info: s });
 			return;
 		}
@@ -211,7 +215,10 @@ function pauseVideo(element) {
 function startMedia(el) {
     if (local.srcObject) {
         console.warn('WARN: local media ALREADY started');
-        let s = L()=="ru"?"Нажмите сперва на стоп, а потом уже запускайте трансляцию!":L()=='en'?"Press first 'stop' then get a stream":L()=='zh'?'先按“停止”然后获取流':'';
+        let s = L()=="ru"?"Нажмите сперва на стоп, а потом уже запускайте трансляцию!":
+        L()=='en'?"Press first 'stop' then get a stream":
+        L()=='zh'?'先按“停止”然后获取流':
+        L()=='id'?'Tekan dulu \'berhenti\' lalu dapatkan streaming':'';
         note({ content: s, type: "warn", time: 5 });
         return;
     }
@@ -343,7 +350,7 @@ console.log("after sender")
             nextbtn.disabled = true;
                 SENDER = true;
                 el.setAttribute("data-state", "published");
-                let s = L()=="ru"?"Вы в эфире!":L()=='en'?"On air!":L()=='zh'?'正在播出！':'';
+                let s = L()=="ru"?"Вы в эфире!":L()=='en'?"On air!":L()=='zh'?'正在播出！':L()=='id'?'mengudara!':'';
                 note({content: s, type: "info", time: 5});
                 publishedId = MYSOCKETID;
                
@@ -376,7 +383,9 @@ console.log("after sender")
                 break;
 
             case 'failed':
-             s = L()=="ru"?"Не удалось сконнектиться с сервером!":L()=='en'?"No luck connect to server":L()=='zh'?'没有运气连接到服务器':'';
+             s = L()=="ru"?"Не удалось сконнектиться с сервером!":L()=='en'?"No luck connect to server":
+             L()=='zh'?'没有运气连接到服务器':
+             L()=='id'?'Tidak berhasil terhubung ke server':'';
                 note({content: s, type: "error", time: 5});
                 if (producerTransport) producerTransport.close();
                 unpublish();
@@ -460,14 +469,16 @@ async function subscribe(el) {
         console.warn('WARN: local media ALREADY started');
         let s = L()=="ru"?"Нажмите сперва на стоп, а потом уже подписывайтесь на трансляцию!":
         L()=='en'?"First press 'stop' then subscribe to translation":
-        L()=='zh'?"首先按“停止”，然后订阅翻译":"";
+        L()=='zh'?"首先按“停止”，然后订阅翻译":
+        L()=='id'?"Pertama tekan 'stop' lalu berlangganan terjemahan":'';
         note({ content: s, type: "warn", time: 5 });
         return;
     }
    if (SENDER) {
 	   let s = L()=="ru"?"Вы не можете на себя подписаться!":
 	   L()=='en'?"You cannot subscribe to yourself!":
-	   L()=='zh'?"您无法订阅自己！":"";
+	   L()=='zh'?"您无法订阅自己！":
+	   L()=='id'?"Anda tidak dapat berlangganan diri Anda sendiri!":'';
         note({content: s, type: "warn", time: 5});
         return;
     }
@@ -529,7 +540,8 @@ async function subscribe(el) {
             nextbtn.disabled = true;
             let s = L()=="ru"?"Вы подключились к трансляции!":
             L()=='en'?"You subscribed to translation!":
-            L()=='zh'?"您订阅了翻译！":"";
+            L()=='zh'?"您订阅了翻译！":
+            L()=='id'?"Anda berlangganan terjemahan!":'';
                 note({content: s, type: "info", time: 5});
                 gid("playContainer").setAttribute("data-state", "subscribed");
                 gid("txtvalue2").setAttribute("data-publish", "publish");
@@ -716,7 +728,8 @@ function unpublish() {
    PSENDER = false;
    let s = L()=="ru"?"Вы закончили трансляцию.":
    L()=='en'?"You finished translation!":
-   L()=='zh'?'你翻译完了':'';
+   L()=='zh'?'你翻译完了':
+   L()=='id'?'Anda menyelesaikan terjemahan!':'';
     note({content: s, type: "info", time: 5});
      let a = document.querySelector('div#playContainer #kresti');
                if(a) a.classList.toggle('show');
@@ -755,7 +768,8 @@ gid("playContainer").setAttribute("data-state", "busy");
         startbtn.disabled = false;
         let s = L()=="ru"?"Вы отписались от трансляции":
         L()=='en'?"You unsubscribed from translation":
-        L()=='zh'?'您取消订阅翻译':'';
+        L()=='zh'?'您取消订阅翻译':
+        L()=='id'?'Anda berhenti berlangganan terjemahan':'';
    note({ content: s, type: "info", time: 5 });
    gid("txtvalue2").setAttribute("data-publish", "none");
    gid("txtvalue").setAttribute("data-publish", "none");
@@ -842,7 +856,8 @@ function beginTranslation(el){
 	if(el.getAttribute("data-state") == "niemand"){
 		let s = (L()=="ru"?'Запустить трансляцию? Вас увидят множество зрителей!':
 		L()=='en'?'Enable the stream? Many viewers will watch you!':
-		L()=='zh'?'启用流吗？很多观众都会看你的！':'')
+		L()=='zh'?'启用流吗？很多观众都会看你的！':
+		L()=='id'?'Aktifkan streaming? Banyak pemirsa akan menonton Anda!':'')
 	//	alert(L());
 		if(window.confirm(s)){
 			startMedia(el);

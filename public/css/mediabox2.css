@@ -1323,6 +1323,9 @@ div#playContainer.eng:hover::after{
 div#playContainer.zh:hover::after{
 	content:"溪流";
 }
+div#playContainer.id:hover::after{
+	content:"sungai kecil";
+}
 div#playContainer svg{
 position:absolute;
 top:25%;
