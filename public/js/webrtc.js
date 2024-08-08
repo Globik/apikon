@@ -64,7 +64,7 @@ window.streami = undefined;
 	local.srcObject = null;
 
 	}else{
-		let s = L()=='ru'?"Нажми на старт-то!":'First press "start"';
+		let s = L()=='ru'?"Нажми на старт-то!":L()=='en'?'First press "start"':L()=='zh'?'首先按“开始”':'';
 		note({ content: s, type: "warn", time: 5 });
 		panelOpen();
 		return;
@@ -346,10 +346,10 @@ function openClaim(el){
 function sendClaim(el){
 	let d = el.getAttribute("data-claim");
 	if(d == "ignor"){
-		let s = L()=="ru"?"ОК. Добавили в игнор.":"OK, added to ignore."
+		let s = L()=="ru"?"ОК. Добавили в игнор.":L()=='en'?"OK, added to ignore.":L()=='zh'?'好的，添加忽略。':'';
 		note({ content: s, type: "info", time: 5 });
 	}else if(d == "claim"){
-		let s = L()=="ru"?"Спвсибо, модератор рассмотрит вашу жалобу.":"Thanks, the moderator will look at your abuse"
+		let s = L()=="ru"?"Спвсибо, модератор рассмотрит вашу жалобу.":L()=='en'?"Thanks, the moderator will look at your abuse":L()=='zh'?'谢谢，版主会看看你的滥用行为':'';
 		note({ content: s, type: "info", time: 5 });
 	}
 	openClaim(claimContainer);
@@ -487,7 +487,7 @@ function setSignal(){
 function get_socket() {
 	 if(NICK == "anon" || NICK == undefined){
 		// sock.close();
-		let s = L()=="ru"?"Залогиньтесь!":"You should log in!"
+		let s = L()=="ru"?"Залогиньтесь!":L()=='en'?"You should log in!":L()=='zh'?'您应该登录！':'';
 		 note({content: s, type: "warn", time: 5 });
 		 location.href="#login";
 	const faka = document.querySelector('.overlay:target');
@@ -539,7 +539,7 @@ return window.location.href='#purchaseHREF';
   sock.onclose = function () {
 	 // clearTimeout(pingTimeout);
     sock = null;
-    let s = L()=="ru"?"Соединение с сервером закрыто!":"Websocket closed!"
+    let s = L()=="ru"?"Соединение с сервером закрыто!":L()=='en'?"Websocket closed!":L()=='zh'?'Websocket 已关闭':'';
     note({ content: s, type: "info", time: 5 });
     console.log('socket closed');
     closeAll(startbtn);
@@ -698,9 +698,9 @@ function  handleMessage(msg, bool){
 
 		div.className="yourmsg he2";
 		if(bool){
-			div.innerHTML="<span><b>" + (L()=='ru'?'Собеседник':'Partner') + ": </b></span><br><span>" + msg + "</span>";
+			div.innerHTML="<span><b>" + (L()=='ru'?'Собеседник':L()=='en'?'Partner':L()=='zh'?'伙伴':'') + ": </b></span><br><span>" + msg + "</span>";
 		}else{
-		div.innerHTML="<span><b>" + (L()=='ru'?'Собеседник':'Partner') + ": </b></span><br><span>" + esci(msg.trim()) + "</span>";
+		div.innerHTML="<span><b>" + (L()=='ru'?'Собеседник':L()=='en'?'Partner':L()=='zh'?'伙伴':'') + ": </b></span><br><span>" + esci(msg.trim()) + "</span>";
 	}
 		chatbox.appendChild(div);
 		chatbox.scrollTop = chatbox.clientHeight + chatbox.scrollHeight;
@@ -712,9 +712,9 @@ textarea2.className="";
 
 		div2.className="yourmsg2 he";
 		if(bool){
-			div2.innerHTML="<span><b>" + (L()=='ru'?'Собеседник':'Partner') + ": </b></span><br><span>" + msg + "</span>";
+			div2.innerHTML="<span><b>" + (L()=='ru'?'Собеседник':L()=='en'?'Partner':L()=='zh'?'伙伴':'') + ": </b></span><br><span>" + msg + "</span>";
 		}else{
-		div2.innerHTML="<span><b>" + (L()=='ru'?'Собеседник':'Partner') + ": </b></span><br><span>" + esci(msg.trim()) + "</span>";
+		div2.innerHTML="<span><b>" + (L()=='ru'?'Собеседник':L()=='en'?'Partner':L()=='zh'?'伙伴':'') + ": </b></span><br><span>" + esci(msg.trim()) + "</span>";
 	}
 		chatbox2.appendChild(div2);
 		chatbox2.scrollTop = chatbox2.clientHeight + chatbox2.scrollHeight;
@@ -904,7 +904,7 @@ console.log("<b>Your browser, version:</b> " + brows + " " + vers);
 
 function start(el){
 	 if(NICK == "anon" || NICK == undefined){
-		let s = (L()=="ru"?"Залогиньтесь!":"Please log in")
+		let s = (L()=="ru"?"Залогиньтесь!":L()=='en'?"Please log in":L()=='zh'?'请登录':'')
 		 note({content: s, type: "warn", time: 5 });
 		 return;
 	  }
@@ -941,7 +941,7 @@ function start(el){
 	
 	local.srcObject = stream;	
 	window.streami = stream;
-el.textContent = L()=="ru"?"стоп":"stop";
+el.textContent = L()=="ru"?"стоп":L()=='en'?"stop":L()=='zh'?'停止':'';
 	el.setAttribute("data-start", "yes");
 	el.disabled = false;
 	el.className = "stop";
@@ -1060,7 +1060,7 @@ function base64ToBlob(base64String, contentType = '') {
 }
 function closeAll(el){
 	el.setAttribute("data-start", "no");
-	el.textContent = L()=="ru"?"старт":"start";
+	el.textContent = L()=="ru"?"старт":L()=='en'?"start":L()=='zh'?'开始':'';
 	el.className = "start";
 	 onlineCount.textContent = 0;
      camsCount.textContent = "0";
@@ -1308,13 +1308,13 @@ if(l2){
 		 let div=document.createElement('div');
 		
 		div.className = "yourmsg";
-		div.innerHTML="<span class='you2'><b>" + (L()=="ru"?"Вы":"You") + ": </b></span><br><span>" + n.msg + "</span>";
+		div.innerHTML="<span class='you2'><b>" + (L()=="ru"?"Вы":L()=='en'?"You":L()=='zh'?'你':'') + ": </b></span><br><span>" + n.msg + "</span>";
 		chatbox.appendChild(div);
 		chatbox.scrollTop = chatbox.clientHeight + chatbox.scrollHeight;
 	}else{
 		let div2=document.createElement('div');
 		div2.className="yourmsg2";
-		div2.innerHTML="<span class='you'><b>" + (L()=="ru"?"Вы":"You") + ": </b></span><br><span>" + n.msg + "</span>";
+		div2.innerHTML="<span class='you'><b>" + (L()=="ru"?"Вы":L()=='en'?"You":L()=='zh'?'你':'') + ": </b></span><br><span>" + n.msg + "</span>";
 		chatbox2.appendChild(div2);
 		chatbox2.scrollTop = chatbox2.clientHeight + chatbox2.scrollHeight;
 	}
@@ -1328,7 +1328,7 @@ if(l2){
         znakPrint.classList.add("hidden");
       znakPrint2.classList.add("hidden");
 		div.className="yourmsg";
-		div.innerHTML="<span class='you2'><b>" + (L()=="ru"?"Вы":"You") + ": </b></span><br><span>" + esci(txtvalue.value.trim()) + "</span>";
+		div.innerHTML="<span class='you2'><b>" + (L()=="ru"?"Вы":L()=='en'?"You":L()=='zh'?'你':'') + ": </b></span><br><span>" + esci(txtvalue.value.trim()) + "</span>";
 		chatbox.appendChild(div);
 		chatbox.scrollTop = chatbox.clientHeight + chatbox.scrollHeight;
 		wsend({type:"message", data: txtvalue.value});
@@ -1343,7 +1343,7 @@ if(l2){
 		if(!txtvalue2.value) return;
 			let div2=document.createElement('div');
 		div2.className="yourmsg2";
-		div2.innerHTML="<span class='you'><b>" + (L()=="ru"?"Вы":"You") + ": </b></span><br><span>" + esci(txtvalue2.value.trim()) + "</span>";
+		div2.innerHTML="<span class='you'><b>" + (L()=="ru"?"Вы":L()=='en'?"You":L()=='zh'?'你':'') + ": </b></span><br><span>" + esci(txtvalue2.value.trim()) + "</span>";
 		chatbox2.appendChild(div2);
 		chatbox2.scrollTop = chatbox2.clientHeight + chatbox2.scrollHeight;
 		wsend({type:"message", data: txtvalue2.value});
@@ -1966,7 +1966,9 @@ function processHeart(n, ev){
 			wsend({ type: "gift", gift: n.g, quant: n.quant, from_id: userId.value, from_name: userName.value, to_id: partnerId, 
 				istestheart: (isTestHeart.value=="true"?true:false) });
 				//wsend({ type: "messagepublished", data: txtvalue.value, publishedId: publishedId, from: userName.value });
-			let str = (L()=="ru"?`Послали в подарок ${n.g=='heart'?'сердечко &#x1f496':''}`:`You've sent as a gift ${n.g=='heart'?'heart &#x1f496':''}`)
+			let str = L()=="ru"?`Послали в подарок ${n.g=='heart'?'сердечко &#x1f496':''}`
+			:L()=='en'?`You've sent as a gift ${n.g=='heart'?'heart &#x1f496':''}`
+			:L()=='zh'?`您已作为礼物发送 ${n.g=='heart'?'心 &#x1f496':''}`:''
 			console.warn(str);
 			let l = ev.target.getAttribute("data-type");
 			//alert(l);
@@ -1986,7 +1988,7 @@ function processHeart(n, ev){
 		
 function handleGift(msg){
 	console.log(msg);
-	let s = (L()=="ru"?`Подарили в подарок сердечко &#x1f496`:`You've gifted a heart &#x1f496`)
+	let s = (L()=="ru"?`Подарили в подарок сердечко &#x1f496`:L()=='en'?`You've gifted a heart &#x1f496`:L()=='zh'?'你赠予了一颗心':'')
 	handleMessage(s, true);
 	let n = Number(msg.quant);
 	let a = Number(heartcountels[0].textContent);

@@ -427,7 +427,7 @@ lang=='zh'?'信息':''}" oninput="txtInput(this);" onchange="someChange();"></te
     <section id="premContainer">
 	
 	<form id="premForm" method="post" action="https://yoomoney.ru/quickpay/confirm" name="ordertodo">
-<p class="intro">Чтобы пользоваться дополнительным функционалом приобретайте премиум аккаунт  &#x1F451; за 10 рублей в месяц. <br>Вы будете преренаправлены в yoomoney</p>
+<p class="intro">Чтобы пользоваться дополнительным функционалом приобретайте премиум аккаунт  &#x1F451; за 100 рублей в месяц. <br>Вы будете преренаправлены в yoomoney</p>
 	<div id="premrapper"> 
 	 <div><input type="hidden" id="receiver2" placeholder="Получатель yoomoney" name="receiver" value="410016439442251" required/> </div>
 	<input type="hidden" name="label" value="id=${n.user?n.user.id:'0'}&p=100"/>
@@ -435,7 +435,7 @@ lang=='zh'?'信息':''}" oninput="txtInput(this);" onchange="someChange();"></te
     <input type="hidden" name="successURL" value="https://rouletka.ru/about" />
     <input type="hidden" name="formcomment" value="Покупка премиум аккаунта на месяц" />
     <input type="hidden" name="targets" value="Купить премиум аккаунт на месяц" />
-    <div><input class="number"  type="hidden" id="sum2" name="sum" value="10.00" required data-type="number"/></div>
+    <div><input class="number"  type="hidden" id="sum2" name="sum" value="100.00" required data-type="number"/></div>
    <input id="ym2" class="input" type="hidden" checked name="paymentType" value="PC" /></div>
    <div><input id="bc2"  class="input" type="hidden" name="paymentType" value="AC" /></div>
    <div><input type="submit" id="premBtn" value="Купить"/></div>

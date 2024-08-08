@@ -66,12 +66,12 @@ function sendRequest(obj) {
     return new Promise((resolve, reject) => {
         obj.request = "mediasoup";
         if(!sock) {
-			let s = L()=="ru"?"Повторите попытку позднее":"Try later"
+			let s = L()=="ru"?"Повторите попытку позднее":L()=='en'?"Try later":L()=='zh'?'稍后再试':'';
 			reject({ info: s });
 			return;
 		}
 		if(sock.readyState === 0) {
-			let s = L()=="ru"?"Повторите попытку позднее":"Try later"
+			let s = L()=="ru"?"Повторите попытку позднее":L()=='en'?"Try later":L()=='zh'?'稍后再试':'';
 			reject({ info: s });
 			return;
 		}
@@ -211,7 +211,7 @@ function pauseVideo(element) {
 function startMedia(el) {
     if (local.srcObject) {
         console.warn('WARN: local media ALREADY started');
-        let s = L()=="ru"?"Нажмите сперва на стоп, а потом уже запускайте трансляцию!":"Press first 'stop' then go translation"
+        let s = L()=="ru"?"Нажмите сперва на стоп, а потом уже запускайте трансляцию!":L()=='en'?"Press first 'stop' then get a stream":L()=='zh'?'先按“停止”然后获取流':'';
         note({ content: s, type: "warn", time: 5 });
         return;
     }
@@ -343,7 +343,7 @@ console.log("after sender")
             nextbtn.disabled = true;
                 SENDER = true;
                 el.setAttribute("data-state", "published");
-                let s = L()=="ru"?"Вы в эфире!":"On air!"
+                let s = L()=="ru"?"Вы в эфире!":L()=='en'?"On air!":L()=='zh'?'正在播出！':'';
                 note({content: s, type: "info", time: 5});
                 publishedId = MYSOCKETID;
                
@@ -376,7 +376,7 @@ console.log("after sender")
                 break;
 
             case 'failed':
-             s = L()=="ru"?"Не удалось сконнектиться с сервером!":"No luck connect to server"
+             s = L()=="ru"?"Не удалось сконнектиться с сервером!":L()=='en'?"No luck connect to server":L()=='zh'?'没有运气连接到服务器':'';
                 note({content: s, type: "error", time: 5});
                 if (producerTransport) producerTransport.close();
                 unpublish();
@@ -458,12 +458,16 @@ disableElement("stopTranslation");
 async function subscribe(el) {
 	 if (local.srcObject) {
         console.warn('WARN: local media ALREADY started');
-        let s = L()=="ru"?"Нажмите сперва на стоп, а потом уже подписывайтесь на трансляцию!":"First press 'stop' then subscribe to translation"
+        let s = L()=="ru"?"Нажмите сперва на стоп, а потом уже подписывайтесь на трансляцию!":
+        L()=='en'?"First press 'stop' then subscribe to translation":
+        L()=='zh'?"首先按“停止”，然后订阅翻译":"";
         note({ content: s, type: "warn", time: 5 });
         return;
     }
    if (SENDER) {
-	   let s = L()=="ru"?"Вы не можете на себя подписаться!":"You cannot subscribe to yourself!"
+	   let s = L()=="ru"?"Вы не можете на себя подписаться!":
+	   L()=='en'?"You cannot subscribe to yourself!":
+	   L()=='zh'?"您无法订阅自己！":"";
         note({content: s, type: "warn", time: 5});
         return;
     }
@@ -523,7 +527,9 @@ async function subscribe(el) {
             CONNECTED = true;
             startbtn.disabled = true;
             nextbtn.disabled = true;
-            let s = L()=="ru"?"Вы подключились к трансляции!":"You subscribed to translation!"
+            let s = L()=="ru"?"Вы подключились к трансляции!":
+            L()=='en'?"You subscribed to translation!":
+            L()=='zh'?"您订阅了翻译！":"";
                 note({content: s, type: "info", time: 5});
                 gid("playContainer").setAttribute("data-state", "subscribed");
                 gid("txtvalue2").setAttribute("data-publish", "publish");
@@ -708,7 +714,9 @@ function unpublish() {
    // disableElement("stopTranslation");
    playContainer.setAttribute("data-state", "niemand");
    PSENDER = false;
-   let s = L()=="ru"?"Вы закончили трансляцию.":"You finished translation!"
+   let s = L()=="ru"?"Вы закончили трансляцию.":
+   L()=='en'?"You finished translation!":
+   L()=='zh'?'你翻译完了':'';
     note({content: s, type: "info", time: 5});
      let a = document.querySelector('div#playContainer #kresti');
                if(a) a.classList.toggle('show');
@@ -745,7 +753,9 @@ gid("playContainer").setAttribute("data-state", "busy");
         loci = null;
         PSENDER = false;
         startbtn.disabled = false;
-        let s = L()=="ru"?"Вы отписались от трансляции":"You unsubscribed from translation"
+        let s = L()=="ru"?"Вы отписались от трансляции":
+        L()=='en'?"You unsubscribed from translation":
+        L()=='zh'?'您取消订阅翻译':'';
    note({ content: s, type: "info", time: 5 });
    gid("txtvalue2").setAttribute("data-publish", "none");
    gid("txtvalue").setAttribute("data-publish", "none");
@@ -830,7 +840,9 @@ function disableElement(id) {
 function beginTranslation(el){
 	//alert(1);
 	if(el.getAttribute("data-state") == "niemand"){
-		let s = (L()=="ru"?'Запустить трансляцию? Вас увидят множество зрителей!':'Enable the stream? Many viewers will watch you!')
+		let s = (L()=="ru"?'Запустить трансляцию? Вас увидят множество зрителей!':
+		L()=='en'?'Enable the stream? Many viewers will watch you!':
+		L()=='zh'?'启用流吗？很多观众都会看你的！':'')
 	//	alert(L());
 		if(window.confirm(s)){
 			startMedia(el);
