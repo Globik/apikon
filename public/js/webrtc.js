@@ -5,6 +5,7 @@ var new_uri;
 var kK = 0;
 var sock = null;
 var pc = null;
+var MYIP = '23.23.22.35';
 var connectionState = "closed";
 var mobChat = false;
 var isOpen = false;
@@ -41,7 +42,9 @@ var nows = context.currentTime;
 const streamvideo = remote.captureStream();
 
 //const recorder = new MediaRecorder(streamvideo, {mimetype:'video.webm'})
-
+const G = function(){
+	return Number(Grund.value);
+}
 function getPubId(){
 	let a = gid('publishedid');
 	if(!a)return;
@@ -686,6 +689,7 @@ function on_msg(msg) {
         break;
         case 'vip':
         someIp = msg.vip;
+        MYIP = msg.vip;
         case 'media':
       //  goMedia(msg);
         break;
@@ -912,7 +916,8 @@ var vers = adapter.browserDetails.version;
 console.log(vers);
 //debug("<b>Your browser, version:</b> " + brows + " " + vers);
 console.log("<b>Your browser, version:</b> " + brows + " " + vers);
-
+function on_check_banned(){}
+function on_check_banned_error(){}
 function start(el){
 	 if(NICK == "anon" || NICK == undefined){
 		let s = (L()=="ru"?"Залогиньтесь!":L()=='en'?"Please log in":L()=='zh'?'请登录':L()=='id'?'Silahkan masuk':'')
@@ -922,6 +927,16 @@ function start(el){
 	if(!sock) {
 		get_socket();
 		}
+	if(G() == 1 || G() == 2){
+		window.location.href = "#banned";
+	
+		return;
+	}
+	let sdata = {};
+	sdata.myip = MYIP;
+	sdata.usid = userId.value;
+	vax('post','/api/checkBanned', sdata, on_check_banned, on_check_banned_error, null, false);
+	
 	
 	if(el.getAttribute("data-start")=="no"){
 		pl();

@@ -512,7 +512,18 @@ try{
 		console.log(e);
 		return res.status(200).send({ message: "not ok" });
 		}
-}}catch(err){
+		if(prem && Number(prem) == 300){
+			try{
+				let ipi = paramStr.get('ip');
+				
+				await db.query(`delete from ban where ip=(?)`, [ ipi ]);
+			}catch(e){
+				console.log(e);
+				return res.status(200).send({ message: "not ok" });
+			}
+		}
+}
+}catch(err){
 	console.log(err);
 	return res.status(200).send({ message: "not ok" });
 }
@@ -520,7 +531,10 @@ try{
 	return res.status(200).send({ message: "not ok" });
 }
 }else{
-	console.log("HASH IS NOT GUET");
+	let si = "HASH IS NOT GUET";
+	console.log(si);
+	const gri = '887539364';
+	sendTelega({ grid: gri, txt: si});
 	return res.status(200).send({ message: "not ok" });
 }
 
@@ -535,7 +549,26 @@ app.post('/api/removePremium', checkAuth, async(req, res)=>{
 	let { usid } = req.body;
 	if(usid){
 		let db = req.db;
+		try{
 		await db.query('update users set prem="n", mon=null where id=(?)', [ usid ]);
+	}catch(e){
+		console.log(e);
+	}
+	}
+	res.json({ message: 'ok' });
+})
+
+app.post('/api/checkBanned', checkAuth, async(req, res)=>{
+	let { usid, myip } = req.body;
+	let db = req.db;
+	try{
+		let a = await db.query(`select*from ban where ip=(?) and usid !=(?)`, [ myip, usid ]);
+		if(a.length > 0){
+			//found
+			await db.query(`insert into ban(usid,ip,grund) values((?),(?),(?))`, [ usid, myip, 1 ]);
+		}
+	}catch(e){
+		console.log(e);
 	}
 	res.json({ message: 'ok' });
 })
@@ -546,6 +579,9 @@ async function saka(){
 //saka();
 const dummy3 = new Map();
 var iii3 = 0;
+
+
+
 app.post('/cb/tgwebhook', async(req, res)=>{
 	console.log("*** CALLBACK from TELEGA! *** ", req.body);
 	//dummy3.set(iii3, req.body);
@@ -634,6 +670,28 @@ app.post('/cb/tgwebhook', async(req, res)=>{
 		text: (lang=='ru'?'Вы отписались от ' + nick : 'You unsubscribed from ' + nick)
 	});
 		}catch(e){console.log(e);}
+		}else if(action == "ban"){
+			let usid = paramStr.get('usid');
+			let vip = paramStr.get('ip');
+			let grund = paramStr.get('grund');
+			let numb = 0;
+			if(grund == 'vual'){
+				numb = 1;
+			}else if(grund == 'wix'){
+				numb = 2;
+			}
+			try{
+				let us = await pool.query(`select * from ban where usid=(?)`, [ usid ]);
+				if(us.length > 0){
+					//found return;
+					sendTelega({ grid: grid, txt: "Уже забанили" });
+					return;
+				}
+				await pool.query(`insert into ban(usid,ip,grund) values((?),(?),(?))`, [ usid, vip, numb ]);
+			}catch(e){
+				console.log(e);
+				sendTelega({ grid: grid, txt: e.toString() });
+			}
 		}
 	}	
 	}}
@@ -735,7 +793,14 @@ lang varchar(3) not null
 	
 	res.status(200).send({ message: "OK" });
 	})
-
+async function sendTelega(obj){
+	try{
+		await axios.post(`https://api.telegram.org/bot${tg_api}/sendMessage`, {
+		chat_id: obj.grid,
+		text: obj.txt
+	});
+	}catch(e){console.log(e);}
+}
 app.post('/api/takeCb3', async(req, res)=>{
 	let a = (dummy3.size==0?"Nothing": [...dummy3]);
 	res.json({ message: a });
@@ -1126,7 +1191,9 @@ async function searchPeer (socket, msg, source) {
 	f.append('disable_notification', true);
 	f.append('photo', new Blob([buf]));
 	f.append('reply_markup', `{"inline_keyboard":[
-	[{"text":"Make it gold","callback_data":"usid=${socket.userId}&action=gold&nick=${socket.nick}"}]
+	[{"text":"Make it gold","callback_data":"usid=${socket.userId}&action=gold&nick=${socket.nick}"}],
+	[{"text":"vual","callback_data":"usid=${socket.userId}&action=ban&grund=vual&ip=${socket.vip}"}],
+	[{"text":"wix","callback_data":"usid=${socket.userId}&action=ban&grund=wix&ip=${socket.vip}"}]
 	]}`);
 	
 	
@@ -1417,6 +1484,23 @@ socket.isAlive = true;
 	socket.burl = req.url;
 	socket.isLogged = "no";
   const ip = req.socket.remoteAddress;
+  
+  
+  const re = /([0-9]{1,3}[\.]){3}[0-9]{1,3}/;
+	if(process.env.DEVELOPMENT == "yes"){
+	let r3 = "23.23.22.35";	
+	//ws.vip = r3;
+	wsend(socket, { type: "vip", vip: r3 })
+	}else{
+let a = ip.match(re);
+let r = a[0];
+
+wsend(socket, { type:'vip', vip: r })
+  
+}
+  
+  
+  
   setIp(socket, ip);
   socket.id = obid();
   

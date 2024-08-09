@@ -1371,10 +1371,32 @@ section#recordSection{
 }
 
 
+output#bannedoutput p{
+	line-height:1.2;
+	margin-top:5px;
+	margin-bottom:5px;
+	font-size:1rem;
+}
+output#bannedoutput form div.bandiv{
+display:flex;
+	align-items: center;
+  justify-content: center;
+}
+output#bannedoutput form input[type=submit]{
+	width:initial;
+	margin-top:8px;
+	margin-bottom:8px;
+	font-size:1rem;
+	background:lightgreen;
+color:rgb(20,20,23);
+font-weight:bold;
+}
 
-
-
-
+@media screen and (max-width: 452px) and (orientation: portrait){
+	output#bannedoutput{
+		width:98%;
+	}
+}
 
 
 
