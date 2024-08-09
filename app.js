@@ -688,6 +688,7 @@ app.post('/cb/tgwebhook', async(req, res)=>{
 					return;
 				}
 				await pool.query(`insert into ban(usid,ip,grund) values((?),(?),(?))`, [ usid, vip, numb ]);
+				sendTelega({ grid: grid, txt: "OK, banned " + usid});
 			}catch(e){
 				console.log(e);
 				sendTelega({ grid: grid, txt: e.toString() });
