@@ -429,6 +429,7 @@ console.log("after sender")
 
 function updateButtons() {}
 function premi(){
+	if(!Login())return;
 	if(Lang.value !=="ru") return;
 	 if(Prem.value == "y") return;
 let a = localStorage.getItem("prem");
