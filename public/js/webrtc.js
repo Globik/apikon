@@ -1444,7 +1444,7 @@ window.addEventListener("online", function(e) {
 notes.play(261.63, nows);
    function next(el, bool, ignores, isIgnore){
 	   //next(nextbtn, false, amma, false);
-	   pl();
+	   //pl();
 	   el.disabled = true;
 	   CONNECTED = false;
       closeVideoCall();
