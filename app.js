@@ -685,7 +685,7 @@ app.post('/cb/tgwebhook', async(req, res)=>{
 				if(us.length > 0){
 					//found return;
 					sendTelega({ grid: grid, txt: "Уже забанили" });
-					return;
+					return res.status(200).send({ message: "OK" });
 				}
 				await pool.query(`insert into ban(usid,ip,grund) values((?),(?),(?))`, [ usid, vip, numb ]);
 				sendTelega({ grid: grid, txt: "OK, banned " + usid});
@@ -794,6 +794,8 @@ lang varchar(3) not null
 	
 	res.status(200).send({ message: "OK" });
 	})
+	
+	
 async function sendTelega(obj){
 	try{
 		await axios.post(`https://api.telegram.org/bot${tg_api}/sendMessage`, {
