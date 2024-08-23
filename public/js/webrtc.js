@@ -1215,7 +1215,7 @@ return imgdata22;
 	if(IPS.size > 0) amap = IPS;
 	console.error("amap", amap, IPS);
 		wsend({ type:'search-peer', nick: (NICK?NICK:'Anonym'), src: imgdata , ignores: [...IPS] });
-	}, 3000);
+	}, 0);
 	someInterval = setInterval(doScreenshot, 1000);
 		somespinner.className="show";
 		mobileloader.className="active";

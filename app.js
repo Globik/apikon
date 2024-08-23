@@ -215,7 +215,9 @@ app.get("/", async(req, res)=>{
 	oni((req.user?req.user.name:'anonym'), " on about");
 	res.rendel('about', {});
 })
-
+app.get('/lolo', async(req,res)=>{
+	res.rendel('lolo',{arr:[0,1,2,3,4,5]});
+})
 app.post('/api/auth', (req, res, next)=>{
 	passport.authenticate("local", (err, user, info)=>{
 		//console.log("err, user, info: ", err, user, info);
