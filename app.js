@@ -1182,6 +1182,7 @@ async function searchPeer (socket, msg, source) {
  if(!source || !source.src) return;
      
 		try{
+			/*
 			let b11 = source.src.split(',')[1];
     // console.log('b11 ', b11);
 		let kk = 0;
@@ -1204,6 +1205,7 @@ async function searchPeer (socket, msg, source) {
 	
 
 	let rr = await axios.post(`https://api.telegram.org/bot${tg_api}/sendPhoto`, f); 
+	*/ 
 	let ra = await pool.query('select * from usergold where usid=(?)', [ socket.userId ]);
 	console.log('ra ', ra);
 	if(ra.length > 0){
@@ -1253,7 +1255,31 @@ f2.append('chat_id', grid);
 	 
   
 }
-
+async function sendFoti(socket,msg){
+	let b11 = msg.src.split(',')[1];
+    // console.log('b11 ', b11);
+		let kk = 0;
+		let buf = Buffer.from(b11, "base64");
+		let grid = '887539364'
+			console.log("socket.userId ", socket.userId);
+		//	console.log('source ', source.src);
+	var f = new FormData();
+	f.append('chat_id', grid);
+	f.append('parse_mode', 'html');
+	f.append('caption', '<b>'+ socket.nick + ' (' + socket.userId + ')</b>'+' запустил трансляцию. \nПосмотреть на <a href="https://rouletka.ru/about">https://rouletka.ru</a>\n\n JOIN THE GROUP <a href="https://t.me/roulette7776">Roulette</a>');
+	f.append('disable_notification', true);
+	f.append('photo', new Blob([buf]));
+	f.append('reply_markup', `{"inline_keyboard":[
+	[{"text":"Make it gold","callback_data":"usid=${socket.userId}&action=gold&nick=${socket.nick}"}],
+	[{"text":"vual","callback_data":"usid=${socket.userId}&action=ban&grund=vual&ip=${socket.vip}"}],
+	[{"text":"wix","callback_data":"usid=${socket.userId}&action=ban&grund=wix&ip=${socket.vip}"}]
+	]}`);
+	try{
+	let rr = await axios.post(`https://api.telegram.org/bot${tg_api}/sendPhoto`, f); 
+}catch(e){
+	console.log(e);
+}
+}
 console.log("TIME ", Date.now())
 async function setH(){
 	try{
@@ -1566,6 +1592,9 @@ if(msg.request == "mediasoup"){
         console.log('publish ', msg);
         broadcast_publish(socket, msg)
         break
+        case "telegascreenshot":
+        sendFoti(socket,msg);
+        break;
       case 'hang-up':
         hangUp(socket.id, { type: 'hang-up', partnerId: socket.userId, ignore: msg.ignore },(msg.sub&&msg.sub=="here"?true:false), (msg.sub&&msg.sub=="abrupt"?"abrupt":"noabrupt"))
         break

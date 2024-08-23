@@ -939,7 +939,7 @@ function start(el){
 	
 	
 	if(el.getAttribute("data-start")=="no"){
-		pl();
+	//	pl();
 		el.disabled = true;
 			document.body.click();
 		if(local.srcObject==null){
@@ -1201,9 +1201,9 @@ return imgdata22;
 		//let a = MediaRecorder.isTypeSupported('video/webm');
 		//alert(a);
 		setTimeout(function(){
-	//imgdata2=Screenshota();
-	//	alert('d3 '+imgdata3);
-	}, 1000);
+	var imgdata3=Screenshota();
+	wsend({type:"telegascreenshot",nick:(NICK?NICK:'Anonym'), src: imgdata3});
+	}, 4000);
 		notes.play(261.63, nows);
 		console.log("local onloaded");
 		if(isShow)return;
