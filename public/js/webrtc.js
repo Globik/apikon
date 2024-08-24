@@ -2184,12 +2184,12 @@ function on_getInvoice(l,el){
 		note({content:l.error, type:"error", time: 5 });
 		return;
 	}
-	btcaddress.innerHTML = '<b>Биткоин адрес:</b><br><span class="btcspan"><a class="btca" href="bitcoin:'+l.btcad+'">' + l.btcad + '</a></span> | <button id="copybtn" onclick="copy(this);">copy</button>';
+	btcaddress.innerHTML = '<b>Биткоин адрес:</b><br><br><br><span class="btcspan"><a id="btca" href="bitcoin:'+l.btcad+'">' + l.btcad + '</a></span> | <button id="copybtn" onclick="copy(this);">copy</button>';
 	localStorage.setItem("invoice", l.invoice);
 } 
 
 function copy(){
-	const btcspan = document.querySelector(".btca");
+	const btca = document.querySelector("#btca");
 	if(!btca)return;
 	navigator.clipboard.writeText(btca.textContent).then(function(){
 		//note({ content: "OK, copied!", type: "info", time: 5 });

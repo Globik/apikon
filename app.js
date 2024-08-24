@@ -912,9 +912,11 @@ app.post("/api/getInvoice", checkAuth, async(req,res)=>{
 		return res.json({error:"No userid"});
 	}
 	let db = req.db;
+	//WHERE creation_date < NOW() - INTERVAL '15' MINUTE
 	try{
-		let su = await db.query(`select*from invoice where inv=(?)`, [inv]);
+		let su = await db.query(`select*from invoice where inv=(?) and crAt > now() - interval '15' minute`, [inv]);
 		if(su.length > 0){
+			console.log("bbbbbb ",su);
 			return res.json({ error: "Already pressed the button", status: 1 });
 		}
 	}catch(err){

@@ -83,6 +83,7 @@ html,body{
 	@media screen and (max-width: 452px) and (orientation: portrait){
 		#premiumoutput{
 width:100%;
+overflow:auto;
 			bckground:#327332;
 		}
 		#premForm p{
@@ -1457,10 +1458,15 @@ transform:translateY(5px);
 	line-height:2;
 	font-size:1.2rem;
 	font-weight:bold;
-	margin-top:20px;
+	margin-top:40px;
 	padding:10px;
 }
 
+@media screen and (max-width: 452px) and (orientation: portrait){
+	.btcbtn{
+		width:100%;
+	}
+}
 
 
 
