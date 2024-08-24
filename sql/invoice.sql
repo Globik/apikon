@@ -24,5 +24,6 @@ conf int not null default 0);
   forwarding_address: 'bc1qjd6sdgd23h9vknhfd2l3gt3elsw3w8v9ngpj5t',
   currency: 'BTC'
 }
-
+WHERE creation_date < NOW() - INTERVAL '15' MINUTE;
+select crAt from invoice WHERE crat < NOW() + INTERVAL '1' MINUTE;
 */

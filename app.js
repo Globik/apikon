@@ -914,7 +914,7 @@ app.post("/api/getInvoice", checkAuth, async(req,res)=>{
 	let db = req.db;
 	//WHERE creation_date < NOW() - INTERVAL '15' MINUTE
 	try{
-		let su = await db.query(`select*from invoice where inv=(?) and crAt > now() - interval '15' minute`, [inv]);
+		let su = await db.query(`select*from invoice where inv=(?) and crAt < now() - interval '1' minute`, [inv]);
 		if(su.length > 0){
 			console.log("bbbbbb ",su);
 			return res.json({ error: "Already pressed the button", status: 1 });
@@ -929,7 +929,7 @@ app.post("/api/getInvoice", checkAuth, async(req,res)=>{
 	try{
 		let rr = await axios.post(btcurl+"create/payment/address", d); 
 		console.log('rr ', rr.data);
-		sendTelega({ grid: '887539364', txt: JSON.stringify(req.body) });
+		sendTelega({ grid: '887539364', txt: JSON.stringify(rr.data) });
 		console.log(rr.data.response?rr.data.responce:'');
 		await db.query(`insert into invoice(usid,inv,pc) values((?),(?),(?))`, [ userid,rr.data.invoice,rr.data.payment_code]);
 		return res.json({ message:"ok", btcad: rr.data.address, inv:rr.data.invoice });
