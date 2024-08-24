@@ -694,6 +694,7 @@ app.post('/cb/tgwebhook', async(req, res)=>{
 			}catch(e){
 				console.log(e);
 				sendTelega({ grid: grid, txt: e.toString() });
+				// sendTelega({ grid: '887539364', txt: e.toString() });
 			}
 		}
 	}	
@@ -887,6 +888,73 @@ app.post('/api/setstun', checkAuth, checkRole(['admin']), async(req, res)=>{
 		console.log("Error ", err);
 		res.status(400).send({ message: err.name });
 	}
+})
+const btcurl = "https://api.bitaps.com/btc/v1/";
+const mybtcaddress = "bc1qjd6sdgd23h9vknhfd2l3gt3elsw3w8v9ngpj5t";
+/* rr  {
+  invoice: 'invPd7zbVPTGJMrXTKPfiYoygJFUUUVGzut69yKrkEvDYtBfBTtYU',
+  payment_code: 'PMTvBAidjUHZPn1RxY3y8vM3CPSANXFfaaLcb75gXGTdsTs9TT16W',
+  address: '3KuCztELFSgMLCkkT3MYt7bYrPFPXdJq12',
+  domain: 'rouletka.ru',
+  domain_hash: '9a3d1ff1f6285339f79d6788f4afff1fe3e614ff',
+  confirmations: 3,
+  callback_link: 'https://rouletka.ru/btccb',
+  forwarding_address: 'bc1qjd6sdgd23h9vknhfd2l3gt3elsw3w8v9ngpj5t',
+  currency: 'BTC'
+}
+
+ * 
+ * 
+ */ 
+app.post("/api/getInvoice", checkAuth, async(req,res)=>{
+	let { userid, inv=0 }  = req.body;
+	if(!userid){
+		return res.json({error:"No userid"});
+	}
+	let db = req.db;
+	try{
+		let su = await db.query(`select*from invoice where inv=(?)`, [inv]);
+		if(su.length > 0){
+			return res.json({ error: "Already pressed the button", status: 1 });
+		}
+	}catch(err){
+		return res.json({"error": err.toString()});
+	}
+	let d = {};
+	d.forwarding_address = mybtcaddress;
+	d.callback_link = "https://rouletka.ru/btccb";
+	d.confirmations = 3;
+	try{
+		let rr = await axios.post(btcurl+"create/payment/address", d); 
+		console.log('rr ', rr.data);
+		sendTelega({ grid: '887539364', txt: JSON.stringify(req.body) });
+		console.log(rr.data.response?rr.data.responce:'');
+		await db.query(`insert into invoice(usid,inv,pc) values((?),(?),(?))`, [ userid,rr.data.invoice,rr.data.payment_code]);
+		return res.json({ message:"ok", btcad: rr.data.address, inv:rr.data.invoice });
+	}catch(err){
+		console.log(err);
+		return res.json({error: err.toString()});
+	}
+	
+	res.json({message: "ok"});
+	
+})
+app.post('/btccb', async (req, res)=>{
+	let { invoice, code, amount,event } = req.body;
+	let db = req.db;
+	if(event == "confirmed"){
+		if(amount){}
+	try{
+		let a = await db.query(`select usid from invoice where inv=(?)`, [invoice]);
+		if(a.length > 0){
+			let b = await db.query(`update users set prem="y",mon=(?) where id=(?)`, [ Date.now(), a.usid ]);
+		}
+	}catch(err){
+		sendTelega({ grid: '887539364', txt: err.toString() });
+	}
+	}
+	sendTelega({ grid: '887539364', txt: amount + ' ' + event });
+	res.status(200).send({ invoice:  invoice });
 })
 
 

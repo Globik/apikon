@@ -427,6 +427,8 @@ console.log("after sender")
     updateButtons();
 }
 
+location.href="#gopremium";
+
 function updateButtons() {}
 function premi(){
 	if(!Login())return;

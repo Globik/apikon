@@ -1398,13 +1398,68 @@ font-weight:bold;
 	}
 }
 
+.btcp{
+	margin-top:20px;
+	font-size:1.4rem;
+}
+.btcpresent{
+	color:yellow;
+}
+.btcbtn{
+	margin-top:20px;
+	width:20%;
+	height:60px;
+	border-radius:5px;
+	display:flex;
+	background:pink;/*rgba(0,0,0,0);*/
+	align-items: center;
+  justify-content: center;
+  font-weight:bold;
+  font-size:1,4rem;
+}
+
+.btcbtn.puls{
+	 animation-name: puls;
+    animation-duration: 1s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+}
+
+@keyframes puls {
+    from {
+        background: green;
+    }
+    to {
+        background: lightgreen;
+    }
+}
 
 
-
-
-
-
-
+.btcsvg{
+	height:60px;
+	width:60px;
+	bakground:red;
+	padding:10px;
+	fill:rgb(23,12,7);
+}
+.btckup{
+color:rgb(23,12,7);
+line-height:1.2;
+bckground:brown;
+padding:10px;
+height:60px;
+font-size:1.4rem;
+font-weight:bold;
+transform:translateY(5px);
+}
+.btcspan, .btca,#copybtn{
+	border:2px solid yellow;
+	line-height:2;
+	font-size:1.2rem;
+	font-weight:bold;
+	margin-top:20px;
+	padding:10px;
+}
 
 
 

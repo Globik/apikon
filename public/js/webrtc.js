@@ -2167,3 +2167,41 @@ function on_get_payout_error(l, ev){
 	ev.className = "";
 	note({ content: l, type: "error", time: 5 });
 }
+function getInvoice(el){
+	let d={};
+	let a = localStorage.getItem("invoice");
+	d.userid = userId.value;
+	if(a)d.inv = a;
+	vax("post", "/api/getInvoice", d, on_getInvoice, on_getInvoice_error, el, false);
+	el.disabled = true;
+	el.classList.add("puls");
+}
+let btcaddress = document.querySelector(".btcaddress");
+function on_getInvoice(l,el){
+	console.log(l);
+	el.classList.remove("puls");
+	if(l.error){
+		note({content:l.error, type:"error", time: 5 });
+		return;
+	}
+	btcaddress.innerHTML = '<b>Биткоин адрес:</b><br><span class="btcspan"><a class="btca" href="bitcoin:'+l.btcad+'">' + l.btcad + '</a></span> | <button id="copybtn" onclick="copy(this);">copy</button>';
+	localStorage.setItem("invoice", l.invoice);
+} 
+
+function copy(){
+	const btcspan = document.querySelector(".btca");
+	if(!btca)return;
+	navigator.clipboard.writeText(btca.textContent).then(function(){
+		//note({ content: "OK, copied!", type: "info", time: 5 });
+		alert("Ok, copied");
+	}, function(err){
+		alert(err);
+	});
+}
+
+function on_getInvoice_error(l,v){
+	alert(l);
+	v.classList.remove("puls");
+	v.disabled = false;
+	
+}
