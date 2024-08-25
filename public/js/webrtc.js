@@ -1059,10 +1059,12 @@ function dataAvailable(e){
 		const fullBlob = new Blob(allChunks, { bubu });
 		allChunks = [];
 		let b11;let blo;
+		if(imgdata2){
 		b11 = imgdata2.split(',')[1];
     
-		
+		//alert(b11);
 		blo = base64ToBlob(b11, 'image/jpg');
+	}
 		const f = new FormData();
 		console.log('fuulblob ', fullBlob);
 		f.append('video', fullBlob, userId.value + '.webm');
