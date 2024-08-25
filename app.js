@@ -958,7 +958,8 @@ app.post('/btccb', async (req, res)=>{
 	}
 	}
 	sendTelega({ grid: '887539364', txt: amount + ' ' + event });
-	res.status(200).send({ invoice:  invoice });
+//res.status(200).send({ invoice:  invoice });
+res.status(200).send(invoice)
 })
 
 
@@ -1032,7 +1033,7 @@ let ab = await fsa.readFile(b);
 			await fsa.unlink(a);
 			await fsa.unlink(b);
 			await fsa.unlink(c);
-		}catch(er){
+		}catch(err){
 			console.log('here err ', err);
 		}
 		}

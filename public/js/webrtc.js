@@ -38,7 +38,7 @@ const heartcountels = document.querySelectorAll("div.heartcount");
 var context = new (window.AudioContext || window.webkitAudioContext)();
 var notes = new Sound(context);
 var nows = context.currentTime;
-
+var tru;
 const streamvideo = remote.captureStream();
 
 //const recorder = new MediaRecorder(streamvideo, {mimetype:'video.webm'})
@@ -1085,6 +1085,8 @@ function base64ToBlob(base64String, contentType = '') {
     return new Blob([byteArray], { type: contentType });
 }
 function closeAll(el){
+	tru.mode = "disabled";
+    //{tru2.mode = "hidden";
 	el.setAttribute("data-start", "no");
 	el.textContent = L()=="ru"?"старт":L()=='en'?"start":L()=='zh'?'开始':L()=='id'?'awal':'';
 	el.className = "start";
@@ -1223,7 +1225,7 @@ return imgdata22;
 	}
 	
 	
-	remote.onloadedmetadata = function () {
+	remote.onloadedmetadata = function (ev) {
 	//	recorder.start();
 		
 		if(PSENDER){
@@ -1240,6 +1242,22 @@ return imgdata22;
 		hideChat();
 		duka2.className="";
 		CONNECTED = true;
+		
+ tru=ev.target.addTextTrack("captions", "Titles", "ru");
+   tru.mode="showing";
+   let cue=new VTTCue(0.0,100090.9, userName.value + '  '+ (Prem.value=="y"?'👑':''));
+   cue.snapToLines=false;
+   cue.lineAlign='center';
+   //cue.vertical="rl"
+  cue.positionAlign='center';
+  cue.position=50;
+   cue.size="100";
+  //cue.activeCues[0].line=-4;
+  
+   cue.align="end";// start end 
+  
+  // console.log(cue.getCueAsHTML());
+   tru.addCue(cue);
 	}
 	
 	function hideChat(el){
@@ -1593,6 +1611,8 @@ console.log("PC*** ")
   if (remote.srcObject) {
     remote.srcObject.getTracks().forEach(track => {
 		console.log("track stop");
+		tru.mode = "disabled";
+    
       track.stop()
     })
     remote.srcObject = null;
@@ -2186,8 +2206,7 @@ function on_getInvoice(l,el){
 		note({content:l.error, type:"error", time: 5 });
 		return;
 	}
-	btcaddress.innerHTML = `<b>${L()=='ru'?'Биткоин адрес':'Bitcoin address'}</b> <br>
-	<br><br><span class="btcspan"><a id="btca" href="bitcoin:${l.btcad}">${l.btcad}</a></span> | <button id="copybtn" onclick="copy(this);">copy</button>`;
+	btcaddress.innerHTML = `<br><br><b>${L()=='ru'?'Биткоин адрес':'Bitcoin address'}</b><br><br><span class="btcspan"><a id="btca" href="bitcoin:${l.btcad}">${l.btcad}</a></span> | <button id="copybtn" onclick="copy(this);">copy</button>`;
 	//alert('here inv '+l.inv);
 	localStorage.setItem("invoice", l.inv);
 } 
