@@ -428,8 +428,9 @@ console.log("after sender")
 }
 
 //location.href="#gopremium";
-location.href="#goinfo";
+//location.href="#goinfo";
 function updateButtons() {}
+
 function premi(){
 	if(!Login())return;
 	//if(Lang.value !=="ru") return;
