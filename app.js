@@ -1472,10 +1472,11 @@ function hangUp (socketId, msg, bool, abrupt) {
 	
       peerSocket.send(JSON.stringify(msg))
       console.log(`#${socketId} hangs up #${peerId}`)
-    }
+    
     if(abrupt && abrupt == "abrupt"){
-		peerSocket.terminate();
+	if(peerSocket)	peerSocket.terminate();
 	}
+}
   } else {
     let myIndex = waitingQueue.indexOf(socketId)
     if (myIndex !== -1) {
