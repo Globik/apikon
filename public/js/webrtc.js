@@ -1098,7 +1098,7 @@ function base64ToBlob(base64String, contentType = '') {
     return new Blob([byteArray], { type: contentType });
 }
 function closeAll(el){
-	tru.mode = "disabled";
+	if(tru)tru.mode = "disabled";
     //{tru2.mode = "hidden";
 	el.setAttribute("data-start", "no");
 	el.textContent = L()=="ru"?"старт":L()=='en'?"start":L()=='zh'?'开始':L()=='id'?'awal':'';
