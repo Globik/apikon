@@ -479,8 +479,6 @@ lang=='id'?'tentang kami':''}</a></div>
     `:''}
     </output>
     
-    
-    To use additional functionality, purchase a premium account 👑 for 2 bitcoins per month.
      <a href="#."  class="overlay" id="gopremium"></a>
     <output id="premiumoutput" class="popi">
     <section id="premContainer">

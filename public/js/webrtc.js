@@ -40,6 +40,8 @@ var notes = new Sound(context);
 var nows = context.currentTime;
 var tru;
 const streamvideo = remote.captureStream();
+var partnernick;
+var partnerpremium="n";
 
 //const recorder = new MediaRecorder(streamvideo, {mimetype:'video.webm'})
 const G = function(){
@@ -532,7 +534,7 @@ return window.location.href='#purchaseHREF';
   sock.onopen = function () {
 	 console.log("websocket opened");
 	// heartbeat();
-	 wsend({ type: "helloServer", userId: gid("userId").value?gid("userId").value:'anon', nick: userName.value, logged:  Login()?"yes":"no", LANG: L });
+	 wsend({ type: "helloServer", userId: gid("userId").value?gid("userId").value:'anon', isprem: Prem.value, nick: userName.value, logged:  Login()?"yes":"no", LANG: L });
   };
   sock.onerror = function (e) {
     note({ content: "Websocket error: " + e, type: "error", time: 5 });
@@ -592,10 +594,13 @@ function on_msg(msg) {
         handleNewIceCandidate(msg.data)
         break
       case 'video-offer':
-       console.log(msg.vip, " ", msg.partnerId);
+       console.warn(msg.vip, " ", msg.partnerId,msg.nick,msg.isprem);
        console.log("your id: ", userId.value, "partner id ", msg.partnerId);
        // claimMenu.setAttribute("data-vip", msg.vip);
        claimMenu.setAttribute("data-vip", msg.partnerId);
+       partnernick = msg.nick;
+       //alert(msg.nick);
+      partnerpremium = msg.isprem;
        //  let a = checkIp(msg.vip);
         let a = checkIp(msg.partnerId);
         if(!a){
@@ -609,6 +614,9 @@ function on_msg(msg) {
 	}
         break
       case 'video-answer':
+      // partnernick = msg.nick;
+      //   partnerpremium = msg.isprem;  
+        console.warn('video answer ', msg.nick, msg.isprem);
         handleVideoAnswer(msg.data)
         break
       case 'hang-up':
@@ -622,9 +630,12 @@ function on_msg(msg) {
         handleHangUp()
         break
       case 'peer-matched':
-        console.log(msg.vip, " ", msg.partnerId);
+   //    alert(msg.isprem+' '+msg.nick);
+        console.log(msg.vip, " nick ", msg.partnerId,msg.nick);
         partnerId = msg.partnerId;
-        console.log("your id: ", userId.value, "partner id ", msg.partnerId);
+        partnernick = msg.nick;
+        partnerpremium = msg.isprem;  
+        console.log("your id: ", userId.value, "partner id ", msg.partnerId, ' ',msg.nick, msg.isprem);
        // claimMenu.setAttribute("data-vip", msg.vip);
         claimMenu.setAttribute("data-vip", msg.partnerId);
        // let a3 = checkIp(msg.vip);
@@ -837,7 +848,7 @@ function handleNewIceCandidate(msg) {
 			//return 
 			await pc.setLocalDescription(answer);
 			//.then(function(){
-				wsend({type: 'video-answer', vip: someIp, data: pc.localDescription /*, target: from, from: clientId*/});
+				wsend({type: 'video-answer', isprem:Prem.value,nick:userName.value, vip: someIp, data: pc.localDescription /*, target: from, from: clientId*/});
 				
 		//	});
 		//});
@@ -873,7 +884,7 @@ function handleNewIceCandidate(msg) {
 		//return 
 		await pc.setLocalDescription(offer);
 	//}).then(function(){
-		wsend({'type': 'video-offer', vip: someIp, data: pc.localDescription/*, target: target, from: clientId*/});
+		wsend({'type': 'video-offer', nick: userName.value, isprem: Prem.value, vip: someIp, data: pc.localDescription/*, target: target, from: clientId*/});
 	//}).
 	}catch(err){
 		console.error(err);
@@ -1245,7 +1256,7 @@ return imgdata22;
 		
  tru=ev.target.addTextTrack("captions", "Titles", "ru");
    tru.mode="showing";
-   let cue=new VTTCue(0.0,100090.9, userName.value + '  '+ (Prem.value=="y"?'👑':''));
+   let cue=new VTTCue(0.0,100090.9, partnernick + '  '+ (partnerpremium=="y"?'👑':''));
    cue.snapToLines=false;
    cue.lineAlign='center';
    //cue.vertical="rl"

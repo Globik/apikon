@@ -1181,7 +1181,7 @@ console.log('suka ', ed2, " ", ign.size)
 //console.log("bb ", bb)
 
 async function searchPeer (socket, msg, source) {
-	
+	console.log('msg****',msg);
 
 		console.log("search peer 1",  waitingQueue.length, waitingQueue);
 		console.log("*** MSG>IGNORES ***",  msg, " ", source.ignores);
@@ -1219,7 +1219,12 @@ async function searchPeer (socket, msg, source) {
       msg.vip = peerSocket.vip;
       console.log('matchedIds2=>', [...matchedIds]);
       	msg.partnerId = peerSocket.userId;
-      socket.send(JSON.stringify(msg))
+      	msg.nick = peerSocket.nick;
+      	console.log("*** NICK *** ", peerSocket.nick, ' ', peerSocket.isprem);
+      	msg.isprem = peerSocket.isprem;
+      	let el = JSON.stringify(msg);
+      	console.log(" **** EL ***", el);
+      socket.send(el);
       console.log(`#${socket.id} matches #${peerId}`)
      if(!onLine.has(socket.id)) {
 	 onLine.set(socket.id, { id: socket.id, src: source.src, nick: socket.nick, status: 'busy' });
@@ -1484,7 +1489,9 @@ var ww='2024-05-10T12:01:28.271Z';
 var ee=new Date(ww)
 console.log(ee.toDateString())
 console.log( new Date().toISOString().split('.')[0]+"Z" );
+
 async function sendToPeer (socket, msg) {
+	//console.log(" ************************************************* MSG SENDTOPEER ", msg);
   if (!matchedIds.has(socket.id)) {
     return
   }
@@ -1515,7 +1522,11 @@ await pool.query(`insert into processTest(from_id,from_nick,wieviel) values((?),
 		 }
 		 
 	 }else{
-    peerSocket.send(JSON.stringify({ type: msg.type, vip: msg.vip, partnerId: socket.userId, data: msg.data }))
+		 //msg.nick = peerSocket.nick;
+      	//console.log("*** NICK *** ", peerSocket.nick, ' ', peerSocket.isprem);
+      	//msg.isprem = peerSocket.isprem;
+      	let el = JSON.stringify(msg);
+    peerSocket.send(JSON.stringify({ type: msg.type, vip: msg.vip, isprem: socket.isprem, nick: socket.nick,partnerId: socket.userId, data: msg.data }))
    }
   }
 }
@@ -1659,6 +1670,7 @@ if(msg.request == "mediasoup"){
         socket.nick = msg.nick;
         socket.isLogged = msg.logged;
         socket.lang = msg.LANG;
+        socket.isprem = msg.isprem;
         wsend(socket, { type: "helloServer", socketId: socket.id });
         break
         case "messagepublished":
