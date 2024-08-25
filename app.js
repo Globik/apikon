@@ -908,13 +908,15 @@ const mybtcaddress = "bc1qjd6sdgd23h9vknhfd2l3gt3elsw3w8v9ngpj5t";
  */ 
 app.post("/api/getInvoice", checkAuth, async(req,res)=>{
 	let { userid, inv=0 }  = req.body;
+	console.log('body ', req.body);
 	if(!userid){
 		return res.json({error:"No userid"});
 	}
 	let db = req.db;
-	//WHERE creation_date < NOW() - INTERVAL '15' MINUTE
+	//WHERE creation_date < NOW() - INTERVAL '15' MINUTE select * from invoice WHERE crat > current_timestamp -  INTERVAL '6' MINUTE; 
 	try{
-		let su = await db.query(`select*from invoice where inv=(?) and crAt < now() - interval '1' minute`, [inv]);
+		let su = await db.query(`select*from invoice where inv=(?) and crAt > current_timestamp -  INTERVAL '6' MINUTE`, [inv]);
+		console.log("****SU**** ",su);
 		if(su.length > 0){
 			console.log("bbbbbb ",su);
 			return res.json({ error: "Already pressed the button", status: 1 });
@@ -949,7 +951,7 @@ app.post('/btccb', async (req, res)=>{
 	try{
 		let a = await db.query(`select usid from invoice where inv=(?)`, [invoice]);
 		if(a.length > 0){
-			let b = await db.query(`update users set prem="y",mon=(?) where id=(?)`, [ Date.now(), a.usid ]);
+			let b = await db.query(`update users set prem="y",mon=(?) where id=(?)`, [ Date.now(), a[0].usid ]);
 		}
 	}catch(err){
 		sendTelega({ grid: '887539364', txt: err.toString() });

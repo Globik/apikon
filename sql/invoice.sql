@@ -25,5 +25,14 @@ conf int not null default 0);
   currency: 'BTC'
 }
 WHERE creation_date < NOW() - INTERVAL '15' MINUTE;
-select crAt from invoice WHERE crat < NOW() + INTERVAL '1' MINUTE;
+  insert into invoice(usid,inv,pc) values(5,'inv','fucker');
+  select * from invoice WHERE crat < current_timestamp + INTERVAL '1' MINUTE;
+  select*from invoice where crAt < interval '1' minute;
+  
+  select * from invoice WHERE crat < current_timestamp -  INTERVAL '60' MINUTE;     nothing
+  select * from invoice WHERE crat < current_timestamp -  INTERVAL '10' MINUTE;
+
+ select * from invoice WHERE crat > current_timestamp +  INTERVAL '6' MINUTE; 
+ select * from invoice WHERE crat > current_timestamp -  INTERVAL '6' MINUTE;  vot eto
+
 */

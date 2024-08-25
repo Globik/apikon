@@ -361,7 +361,7 @@ console.log("after sender")
             
                 wsend({isprem: (Prem.value=="y"?"y":"n"), clientId: userId.value, img_data: img_data, type: "pic", request: "mediasoup"});
                }, 1000)
-               if(Prem.value == "n" || Brole.value !="admin" && Lang.value == "ru"){
+               if(Prem.value == "n" || Brole.value !="admin"){
 				   setTimeout(function(){
 					   unpublish();
 					   location.href="#gopremium";
@@ -427,12 +427,12 @@ console.log("after sender")
     updateButtons();
 }
 
-location.href="#gopremium";
+//location.href="#gopremium";
 
 function updateButtons() {}
 function premi(){
 	if(!Login())return;
-	if(Lang.value !=="ru") return;
+	//if(Lang.value !=="ru") return;
 	 if(Prem.value == "y") return;
 let a = localStorage.getItem("prem");
 if(!a&&a!=="0"){

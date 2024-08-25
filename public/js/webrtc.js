@@ -53,7 +53,7 @@ function getPubId(){
 var publishedId = getPubId()?gid('publishedid').value:null;
 
 function toggleCam(el){
-	if(Prem.value == "n" && L == "ru"){
+	if(Prem.value == "n"){
 		window.location.href = "#gopremium";
 		panelOpen();
 		return;
@@ -2171,6 +2171,7 @@ function getInvoice(el){
 	let d={};
 	let a = localStorage.getItem("invoice");
 	d.userid = userId.value;
+	//alert('inv '+ a);
 	if(a)d.inv = a;
 	vax("post", "/api/getInvoice", d, on_getInvoice, on_getInvoice_error, el, false);
 	el.disabled = true;
@@ -2181,11 +2182,14 @@ function on_getInvoice(l,el){
 	console.log(l);
 	el.classList.remove("puls");
 	if(l.error){
+		alert(l.error);
 		note({content:l.error, type:"error", time: 5 });
 		return;
 	}
-	btcaddress.innerHTML = '<b>Биткоин адрес:</b><br><br><br><span class="btcspan"><a id="btca" href="bitcoin:'+l.btcad+'">' + l.btcad + '</a></span> | <button id="copybtn" onclick="copy(this);">copy</button>';
-	localStorage.setItem("invoice", l.invoice);
+	btcaddress.innerHTML = `<b>${L()=='ru'?'Биткоин адрес':'Bitcoin address'}</b> <br>
+	<br><br><span class="btcspan"><a id="btca" href="bitcoin:${l.btcad}">${l.btcad}</a></span> | <button id="copybtn" onclick="copy(this);">copy</button>`;
+	//alert('here inv '+l.inv);
+	localStorage.setItem("invoice", l.inv);
 } 
 
 function copy(){
