@@ -1023,7 +1023,7 @@ function makeRecord(stream){
 	recorder.start();
 		setTimeout(function(){
 		imgdata2 = Screenshota();
-	},2000)
+	},0)
 
 	
 	recorder.ondataavailable = dataAvailable; 
