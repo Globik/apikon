@@ -428,7 +428,7 @@ console.log("after sender")
 }
 
 //location.href="#gopremium";
-
+location.href="#goinfo";
 function updateButtons() {}
 function premi(){
 	if(!Login())return;
@@ -442,7 +442,8 @@ if(faka){
 	faka.onclick=function(e){
 		//e.preventDefault();
 	localStorage.setItem("prem", "0");
-	window.location.href="#";
+	window.location.href="#goinfo";
+
 	
 	}
 }}}

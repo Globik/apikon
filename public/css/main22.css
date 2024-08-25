@@ -276,8 +276,21 @@ input[type=submit].puls,button.puls,div.puls,form.puls {
     }
 
 }
-
-
+#infooutput{
+	overflow:auto;
+}
+#infooutput p{
+	line-height:1.2;
+	font-size:1.2rem;
+	margin-top:5px;
+	margin-bottom:5px;
+}
+@media screen and (max-width: 452px) and (orientation: portrait){
+	
+	#infooutput{
+		width:99%;
+	}
+}
 
 
 
