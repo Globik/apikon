@@ -998,7 +998,7 @@ el.textContent = L()=="ru"?"стоп":L()=='en'?"stop":L()=='zh'?'停止':L()=='
 
 }
 }
-if(Login())start(startbtn);
+//if(Login())start(startbtn);
  function mama(e){
 	e.preventDefault();
 	e.returnValue = 'suka';

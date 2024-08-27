@@ -1,3 +1,4 @@
+const {langpage} = require('./langpage.js');
 function about(n){
 	const { lang } = n;
 return `
@@ -178,7 +179,7 @@ ${lang=='id'?'':'<a href="/about/id" hreflang="zh">'}<img title="Индонез�
             </div>
 
     </section>
-
+${langpage(n)}
     <footer class="footer">
         <div class="container">
             <a href="https://play.google.com/store/apps/details?id=ru.rouletka.pwa" class="btn btn_play-market">
