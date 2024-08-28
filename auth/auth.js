@@ -110,6 +110,19 @@ passport.use('local-signup', new LocalStrategy({usernameField: 'name', passReqTo
 		return done(null, false, { error: true, message: 'Имя должно быть меньше 20 букв.', status: 403 });
 	}
 try{
+	
+	console.log(" *** IP *** ", req.ip);
+	var ipaddress = req.ip;
+	const re = /([0-9]{1,3}[\.]){3}[0-9]{1,3}/;
+	if(process.env.DEVELOPMENT != "yes"){
+		let ad = ipaddress.match(reg);
+let rip = ad[0];
+console.log("*** IP2 *** ", rip);
+let resultat = await db.query(`select * from ban where ip=(?)`, [ rip ]);
+if(resultat.length  > 0){
+	return done(null, false, { message: "Вы забанены", grund: resultat[0].grund, usid: resultat[0].usid, status: 409 });
+}
+	}
 
 var useri = await db.query('select*from users where name=(?)', [ username ]);
 

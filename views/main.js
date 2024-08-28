@@ -481,7 +481,7 @@ lang=='id'?'tentang kami':''}</a></div>
     `:''}
     </output>
     
-     <a href="#."  class="overlay" id="gopremium"></a>
+     <a href="#goinfo"  class="overlay" id="gopremium"></a>
     <output id="premiumoutput" class="popi">
     <section id="premContainer">
 	${lang=='ru'?`

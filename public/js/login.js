@@ -99,6 +99,8 @@ var r=await fetch(uri, {
 				s=L()=='ru'?data.message:L()=='en'?'Nick or password wrong':
 				L()=='zh'?'用户名或密码不正确':
 				L()=='id'?'Nick atau kata sandi salah':'';
+			}else if(data.status == 409){
+				s=L()=='ru'?data.message:"You're banned!";
 			}else{
 				s = data.message;
 			}
