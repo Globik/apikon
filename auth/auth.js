@@ -113,7 +113,7 @@ try{
 	
 	console.log(" *** IP *** ", req.ip);
 	var ipaddress = req.ip;
-	const re = /([0-9]{1,3}[\.]){3}[0-9]{1,3}/;
+	const reg = /([0-9]{1,3}[\.]){3}[0-9]{1,3}/;
 	if(process.env.DEVELOPMENT != "yes"){
 		let ad = ipaddress.match(reg);
 let rip = ad[0];
