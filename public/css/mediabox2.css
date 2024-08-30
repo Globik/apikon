@@ -328,10 +328,11 @@ background-image: linear-gradient(147deg, #000000 0%, #434343 74%);
 		background:rgb(40,60,24);
 	}
 	#local,#remote{
-		
+	display:block;
+		width:100%;
 		border-bottom-right-radius:10px 10px;
 	border-bottom-left-radius: 10px 10px;
-		objct-fit:cover;
+		object-fit:fill;
 		
 	}
 	#remote{
