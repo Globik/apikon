@@ -55,7 +55,7 @@ function getPubId(){
 var publishedId = getPubId()?gid('publishedid').value:null;
 
 function toggleCam(el){
-	if(Prem.value == "n"){
+	if(Prem.value == "n" || Brole.value !="admin"){
 		window.location.href = "#gopremium";
 		panelOpen();
 		return;
