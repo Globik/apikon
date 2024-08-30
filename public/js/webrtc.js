@@ -55,13 +55,13 @@ function getPubId(){
 var publishedId = getPubId()?gid('publishedid').value:null;
 
 function toggleCam(el){
-	if(Prem.value == "n" || Brole.value !="admin"){
+
+	if(window.streami){
+			if(Prem.value == "n" || Brole.value !="admin"){
 		window.location.href = "#gopremium";
 		panelOpen();
 		return;
 	}
-	if(window.streami){
-		
 		window.streami.getTracks().forEach(function(track){
 			track.stop();
 		});
@@ -76,6 +76,7 @@ window.streami = undefined;
 		panelOpen();
 		return;
 	}
+	
 	
 	var dura;
 	var si = el.getAttribute("data-current");
@@ -1625,7 +1626,7 @@ console.log("PC*** ")
   if (remote.srcObject) {
     remote.srcObject.getTracks().forEach(track => {
 		console.log("track stop");
-		tru.mode = "disabled";
+		if(tru)tru.mode = "disabled";
     
       track.stop()
     })
