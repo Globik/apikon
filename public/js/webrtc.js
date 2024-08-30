@@ -57,7 +57,7 @@ var publishedId = getPubId()?gid('publishedid').value:null;
 function toggleCam(el){
 
 	if(window.streami){
-			if(Prem.value == "n" || Brole.value !="admin"){
+			if(Prem.value == "n" && Brole.value !="admin"){
 		window.location.href = "#gopremium";
 		panelOpen();
 		return;
