@@ -483,7 +483,7 @@ section#mobileChat{
 }
 #remote, #local{
 		
-		object-fit:cover;
+		bject-fit:cover;
 	}
 	#remote.fill, #local.fill{
 		
@@ -870,9 +870,9 @@ div.heartcount{
 		display:block;
 	}
 	#remote{
-		height:100%;
+		hight:100%;
 	
-		width:100%;
+		idth:100%;
 		border-radius:1px;
 	}
 	

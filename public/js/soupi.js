@@ -443,12 +443,29 @@ if(faka){
 	faka.onclick=function(e){
 		//e.preventDefault();
 	localStorage.setItem("prem", "0");
-	window.location.href="#goinfo";
+	//window.location.href="#goinfo";
 
 	
 	}
 }}}
-premi();
+//premi();
+function premiInfo(){
+	if(!Login())return;
+	//if(Lang.value !=="ru") return;
+	 if(Prem.value == "y") return;
+let a = localStorage.getItem("prem");
+if(!a&&a!=="0"){
+ location.href="#goinfo";
+ let faka = document.querySelector('.overlay:target');
+if(faka){
+	faka.onclick=function(e){
+		//e.preventDefault();
+	localStorage.setItem("prem", "0");
+
+	
+	}
+}}}
+premiInfo();
 function logp(t) {
     let out = gid("out7");
     if (out) {
