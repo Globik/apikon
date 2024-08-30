@@ -365,7 +365,7 @@ console.log("after sender")
 				   setTimeout(function(){
 					   unpublish();
 					   location.href="#gopremium";
-				   },1000*3);
+				   },1000*15);
 			   }
                gid("txtvalue2").setAttribute("data-publish", "publish");
                gid("txtvalue").setAttribute("data-publish", "publish");

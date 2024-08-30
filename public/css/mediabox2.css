@@ -335,8 +335,8 @@ background-image: linear-gradient(147deg, #000000 0%, #434343 74%);
 		
 	}
 	#remote{
-		width:100%;
-		height:100%;
+		wdth:100%;
+		heght:100%;
 		
 background-color: #2d3436;
 background-image: linear-gradient(315deg, #2d3436 0%, #d3d3d3 74%);
@@ -487,11 +487,11 @@ section#mobileChat{
 	}
 	#remote.fill, #local.fill{
 		
-		object-fit:fill;
+		obect-fit:fill;
 	}
 	#remote.paravilno, #local.pravilno{
-		width:100%;
-		height:100%;
+		wdth:100%;
+		hight:100%;
 	}
 #somespinner{
 	color:white;
