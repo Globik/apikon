@@ -500,6 +500,7 @@ console.log('HASH IS GUET')
 let userid = paramStr.get('id');
 let quant = paramStr.get('c');
 let prem = paramStr.get('p');
+let enti = paramStr.get('enti');
 let quant_n = Number(quant);
 if(unaccepted == 'false'){
 try{
@@ -525,8 +526,16 @@ try{
 			}
 		}
 }
+if(enti){
+	await db.query(`update users set entr=1 where id=(?)`, [ userid ]);
+	var gri = '887539364';
+	sendTelega({ grid: gri, txt: "jemand buy partner vsnos"});
+}
+
 }catch(err){
 	console.log(err);
+	var gri = '887539364';
+	sendTelega({ grid: gri, txt: err});
 	return res.status(200).send({ message: "not ok" });
 }
 }else{

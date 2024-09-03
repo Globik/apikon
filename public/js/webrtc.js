@@ -513,7 +513,7 @@ function get_socket() {
 		  return;
 	  }}
 	//  alert(ifEnter());
-/*	if(ifEnter()){
+	if(ifEnter() && Brole.value !="admin"){
 		window.location.href='#purchaseHREF';
 		 const faka = document.querySelector('.overlay:target');
 	 if(faka){
@@ -529,7 +529,7 @@ return window.location.href='#purchaseHREF';
 
 }else{
 	window.ohashchange = null;
-}*/
+}
  if(!sock) sock = new  WebSocket(new_uri + "//" + loc3 + "/gesamt");
 
   sock.onopen = function () {
