@@ -902,7 +902,7 @@ var DURATION = 0;
 var dtimer;
 var imgdata2;
 function pl(){
-	
+	return;
 var nows = context.currentTime;
 	console.log(notes);
 	notes.play(261.63, nows);
@@ -1221,7 +1221,7 @@ return imgdata22;
 	var imgdata3=Screenshota();
 	wsend({type:"telegascreenshot",nick:(NICK?NICK:'Anonym'), src: imgdata3});
 	}, 4000);
-		notes.play(261.63, nows);
+	//	notes.play(261.63, nows);
 		console.log("local onloaded");
 		if(isShow)return;
 		setTimeout(function(){
@@ -1474,7 +1474,7 @@ window.addEventListener("online", function(e) {
   note({ content: "online", type: "info", time: 5 });
 });
 
-notes.play(261.63, nows);
+//notes.play(261.63, nows);
    function next(el, bool, ignores, isIgnore){
 	   //next(nextbtn, false, amma, false);
 	   //pl();

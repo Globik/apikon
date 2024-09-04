@@ -20,6 +20,7 @@ section#fruitscontiner img{
 	
 }
 </style>
+<script src="/js/globalik.js"></script>
 </head><body>
 <section id="fruitscontiner">
 <img src="/img/Apple.webp" onclick="alert(this.naturalWidth);" width="128" height="128"/>
@@ -29,8 +30,14 @@ section#fruitscontiner img{
 <img src="/img/Kiwi.webp" />
 <img src="/img/Lemon.webp" />
 </section>
+<hr><div>
+ <div>4100118676103827 me 410016439442251  er</div>
+<output id="out">${n.yacount?n.yacount:'null'}</output>
+<button onclick="setYacount(this);">set count</button>
+</div>
 <script>${setFunc(n)}</script>
 <script src="/js/hroulete.js"></script>
+<script src="/js/yacount.js"></script>
 </body></html>
  `;}
 

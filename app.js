@@ -34,7 +34,9 @@ const grid = '-1002095475544';
 //const { v4: uuidv4 } = require('uuid');
 //uuidv4(); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
 
-
+const me = '4100118676103827'; 
+const er = '410016439442251'; 
+var JETZT = er;
 const bodyParser =require('body-parser');
 
 //var cors = require('cors')
@@ -200,23 +202,32 @@ var imgData = {};
 app.get("/about", async(req, res)=>{
 	console.log("*** USER *** ", req.user);
 	//console.log('req.app.locals ', req.app.locals.testshopid, ' ', req.app.locals.testshopsecret);
-	res.rendel('main', { imgData: imgData, lang: 'ru' });
+	res.rendel('main', { imgData: imgData, lang: 'ru', yacount: JETZT });
 })
 app.get('/about/en', async(req, res)=>{
-	res.rendel('main', { imgData: imgData, lang: 'en' });
+	res.rendel('main', { imgData: imgData, lang: 'en', yacount: JETZT });
 })
 app.get('/about/zh', async(req, res)=>{
-	res.rendel('main', { imgData: imgData, lang: 'zh' });
+	res.rendel('main', { imgData: imgData, lang: 'zh', yacount: JETZT });
 })
 app.get('/about/id', async(req, res)=>{
-	res.rendel('main', { imgData: imgData, lang: 'id' });
+	res.rendel('main', { imgData: imgData, lang: 'id', yacount: JETZT });
 })
 app.get("/", async(req, res)=>{
 	oni((req.user?req.user.name:'anonym'), " on about");
 	res.rendel('about', {});
 })
 app.get('/lolo', async(req,res)=>{
-	res.rendel('lolo',{arr:[0,1,2,3,4,5]});
+	res.rendel('lolo',{arr:[0,1,2,3,4,5], yacount: JETZT });
+})
+app.post('/api/setyacount', async(req, res)=>{
+	let {countya} = req.body;
+	if(countya == me){
+		JETZT = er;
+	}else{
+		JETZT = me;
+	}
+	res.json({ message: JETZT });
 })
 app.post('/api/auth', (req, res, next)=>{
 	passport.authenticate("local", (err, user, info)=>{

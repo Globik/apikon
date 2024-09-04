@@ -430,7 +430,7 @@ lang=='id'?'tentang kami':''}</a></div>
 <p class="intro">Чтобы предотвратить попадание несовершеннолетних в рулетку, мы вынуждены брать с вновь прибывших членский взнос в размере 50 рублей. 
 Тем самым вы подтверждаете, что вы совершеннолетний. Вы будете преренаправлены в yoomoney</p>
 	<div id="heartswrapper">
-	 <div><input type="hidden" id="receiver" placeholder="Получатель yoomoney" name="receiver" value="410016439442251" required/> </div>
+	 <div><input type="hidden" id="receiver" placeholder="Получатель yoomoney" name="receiver" value="${n.yacount}" required/> </div>
 	<input type="hidden" name="label" value="id=${n.user?n.user.id:'0'}&enti=50"/>
     <input type="hidden" name="quickpay-form" value="button" />
     <input type="hidden" name="successURL" value="https://rouletka.ru/about" />
@@ -444,7 +444,7 @@ lang=='id'?'tentang kami':''}</a></div>
 	</div>
 	</form>
 	</section> 
-	<!--4100118676103827 410016439442251  
+	<!--4100118676103827 me 410016439442251  er
 	<form class="ymform"  method="POST" action="https://yoomoney.ru/quickpay/confirm">
     <div><label for="receiver"><b>Получатель:</b></label><br><input type="text" id="receiver" placeholder="олучатель yoomoney" name="receiver" value="4100118676103827" required/> </div>
     <input type="hidden" name="label" value="id=${n.user?n.user.id:'0'}&c=5"/>
