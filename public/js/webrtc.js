@@ -6,6 +6,7 @@ var kK = 0;
 var sock = null;
 var pc = null;
 var MYIP = '23.23.22.35';
+var HELP = 0;
 var connectionState = "closed";
 var mobChat = false;
 var isOpen = false;
@@ -1480,6 +1481,10 @@ window.addEventListener("online", function(e) {
    function next(el, bool, ignores, isIgnore){
 	   //next(nextbtn, false, amma, false);
 	   //pl();
+	   if(HELP == 10){
+		   window.location.href="#helproject";
+	   }
+	   HELP++;
 	   el.disabled = true;
 	   CONNECTED = false;
       closeVideoCall();

@@ -251,9 +251,9 @@ lang=='en'?'Our Telegram':
 lang=='zh'?'我们的电报':
 lang=='id'?'Telegram kami':''}</a></div>
 ${lang=='ru'?`<div class="settingspanel" ><a href="#ozeniteHREF" onclick="ozenite(this);"><span class="ozenka">Оцените приложение</span></a></div>`:''}
- <!--
+ 
  <div class="settingspanel"  id="donatis">Помочь проекту<br>
- <iframe src="https://yoomoney.ru/quickpay/fundraise/button?billNumber=AWVMCQLpAcY.240125&" width="330" height="50" frameborder="0" allowtransparency="true" scrolling="no"></iframe></div> -->
+ <iframe src="https://yoomoney.ru/quickpay/fundraise/button?billNumber=AWVMCQLpAcY.240125&" width="330" height="50" frameborder="0" allowtransparency="true" scrolling="no"></iframe></div> 
 ${n.user?`<div class="settingspanel" onclick="logout(this);">${lang=='ru'?'Выйти':lang=='en'?'Logout':lang=='zh'?'登出':
 	lang=='id'?'keluar':''}</div>`:
 `<div class="settingspanel"><a href="#login" onclick="panelOpen();">${lang=='ru'?'Войти':lang=='en'?'Log in':lang=='zh'?'登录':
@@ -482,7 +482,11 @@ lang=='id'?'tentang kami':''}</a></div>
     </form>
     `:''}
     </output>
-    
+     <a href="#."  class="overlay" id="helproject"></a>
+    <output id="helpoutput" class="popi">
+    <div>Пожалуйста, перечислите финансы на развитие проекта. Вы будете перенаправлены в yoomoney</div><br><br><br>
+    <div><iframe src="https://yoomoney.ru/quickpay/fundraise/button?billNumber=AWVMCQLpAcY.240125&" width="330" height="50" frameborder="0" allowtransparency="true" scrolling="no"></iframe></div> 
+</output>
      <a href="#."  class="overlay" id="gopremium"></a>
     <output id="premiumoutput" class="popi">
     <section id="premContainer">
