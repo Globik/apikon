@@ -6,7 +6,8 @@ const crypto = require('crypto');
 const scmp = require('scmp');
 const util = require("util");
 const  pbkdf2 = util.promisify(crypto.pbkdf2);
-
+const TelegramStrategy = require('passport-telegram-login');
+const tg_api = '7129138329:AAGl9GvZlsK3RsL9Vb3PQGoXOdeoc97lpJ4'; 
 
 module.exports = (db, passport)=>{
 
@@ -146,5 +147,12 @@ return done(null, false, {error:true, message: "Ник " + username + " уже �
 	
 }			
 }))
+
+passport.use(new TelegramStrategy({
+botToken:	tg_api
+}, (userData, done)=>{
+	console.log('userData ', userData);
+}
+))
 
 }

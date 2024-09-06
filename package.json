@@ -35,6 +35,7 @@
     "mediasoup-client": "^3.7.12",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
+    "passport-telegram-login": "^0.3.1",
     "scmp": "^2.1.0",
     "telegraf": "^4.16.3",
     "uuid": "^9.0.1",

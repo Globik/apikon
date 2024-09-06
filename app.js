@@ -257,6 +257,12 @@ app.post('/logout', (req, res)=>{
 	});
 	res.json({message: "ok", status:200 });
 })
+
+app.get('/auth/telegram-login/callback', passport.authenticate('telegram-login', { session: true, successRedirect: '/about'}))
+
+
+
+
 app.get('/cb1', async(req, res)=>{
 	let db = req.db;
 	if(req.query&&req.query.code){

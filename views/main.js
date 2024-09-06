@@ -77,6 +77,7 @@ lang=='id'?`Terbukanya dunia komunikasi dan kenalan baru baik jiwa raga, maupun 
 <!-- <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script> -->
  <script src="/js/adapter-latest.js"></script> 
 <script src="/js/sound.js"></script>
+<script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="RouletkaBot" data-size="large" data-auth-url="/auth/telegram-login/callback" data-request-access="write"></script>
  <!-- Google tag (gtag.js) -->
 <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-QG900MX52X"></script>
 <script>
