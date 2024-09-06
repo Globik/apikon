@@ -598,7 +598,7 @@ lang=='id'?'tentang kami':''}</a></div>
            
           </form>
           <div>
- <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="RouletkaBot" data-size="small" data-auth-url="/auth/telegram-login/callback" data-request-access="write"></script>
+ <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="RouletkaBot" data-size="medium" data-onauth="onTelega(user)"  data-request-access="write"></script>
  
           </div>
         </div>

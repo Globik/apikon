@@ -205,7 +205,8 @@ app.get("/about", async(req, res)=>{
 	res.rendel('main', { imgData: imgData, lang: 'ru', yacount: JETZT });
 })
 app.get('/about/en', async(req, res)=>{
-	res.rendel('main', { imgData: imgData, lang: 'en', yacount: JETZT });
+	
+res.rendel('main', { imgData: imgData, lang: 'en', yacount: JETZT });
 })
 app.get('/about/zh', async(req, res)=>{
 	res.rendel('main', { imgData: imgData, lang: 'zh', yacount: JETZT });
@@ -258,9 +259,33 @@ app.post('/logout', (req, res)=>{
 	res.json({message: "ok", status:200 });
 })
 
-app.get('/auth/telegram-login/callback', passport.authenticate('telegram-login', { session: true, successRedirect: '/about'}))
+app.get('/auth/telegram-login/callback', passport.authenticate('telegram-login', { session: true, successRedirect: '/about', failureRedirect:'/about'}))
 
+/*
+ * 
+ * userData  {
+  id: '887539364',
+  displayName: 'Alik',
+  name: { familyName: undefined, givenName: 'Alik' },
+  username: 'Globik2',
+  profileUrl: 'https://t.me/Globik2',
+  provider: 'telegram-login',
+  _json: {
+    id: '887539364',
+    first_name: 'Alik',
+    username: 'Globik2',
+    auth_date: '1725640577'
+  },
+  _raw: {
+    id: '887539364',
+    first_name: 'Alik',
+    username: 'Globik2',
+    auth_date: '1725640577',
+    hash: 'f8d4d60e1830c7f51b28a2d24bf8ccfad4f3d15caf74990037d00bf15a7e23ef'
+  }
+}
 
+ */ 
 
 
 app.get('/cb1', async(req, res)=>{

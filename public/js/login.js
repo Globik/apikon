@@ -173,3 +173,7 @@ return;
 	alert(err);
 }
 }
+
+function onTelega(user){
+	alert(JSON.stringify(user));
+}

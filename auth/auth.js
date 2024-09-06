@@ -152,6 +152,9 @@ passport.use(new TelegramStrategy({
 botToken:	tg_api
 }, (userData, done)=>{
 	console.log('userData ', userData);
+	if(userData){
+		
+	}
 }
 ))
 
