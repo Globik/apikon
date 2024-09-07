@@ -119,7 +119,7 @@ return;
 	
 localStorage.setItem("islogin" , "yes");
 window.location.href="#."
-          location.reload();
+        //  location.reload();
          // in_rem_hash();
           
    
@@ -207,7 +207,7 @@ return;
 	
 localStorage.setItem("islogin" , "yes");
 window.location.href="#."
-         location.reload();
+         //location.reload();
 }
 }catch(error){
 	console.log(error);
