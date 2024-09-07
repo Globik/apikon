@@ -268,8 +268,8 @@ alert('som5 '+JSON.stringify(som5))
 
 let usinfo = await VKID.Auth.userInfo(som5.access_token);
 console.log('usinfo ', usinfo)
-alert(JSON.stringify(usinfo))
-}catch(e){alert(e);}
+alert('usinfo '+JSON.stringify(usinfo))
+}catch(e){console.error(e);alert('err '+JSON.stringify(e));}
 }
 ati();
 }
