@@ -263,7 +263,7 @@ if(c && d){
 		try{
 			//alert('device3 ', d);
 let som5=await VKID.Auth.exchangeCode(c, d);
-await fetch('/newfucker', {method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify(som5)});
+//await fetch('/newfucker', {method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify(som5)});
 //console.log('som5 ', som5);
 
 //alert('som5 '+JSON.stringify(som5))
@@ -282,7 +282,7 @@ da2.name = usinfo.user.first_name;
 //da2.username = usinfo.first_name;
 da2.type = "vk";
 let abba=JSON.stringify(da2);
-alert('abba '+abba)
+//alert('abba '+abba)
 let res3 = await fetch('/api/register', {method: "POST",headers: {  "Content-Type": "application/json",},body: abba});
 if(res3.ok){
 		console.log('ok');
@@ -306,7 +306,7 @@ location.reload();
 }catch(e){
 	console.error(e);
 	alert('err '+JSON.stringify(e));
-	await fetch('/newfucker', {method: "POST",headers: {"Content-Type": "application/json",}, body: JSON.stringify(e) });
+	//await fetch('/newfucker', {method: "POST",headers: {"Content-Type": "application/json",}, body: JSON.stringify(e) });
 	setTimeout(() => {
           errormsg.textContent = "";
         }, 3500)
