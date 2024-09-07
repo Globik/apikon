@@ -18,6 +18,8 @@ function isOpenModal(){
 	 window.location.href="#regeln";
 }
 */
+// const VK_APP_ID = 52271555;
+
 function logi(el){
 	el.preventDefault();
 	//el.stopPropogation();
@@ -220,3 +222,33 @@ window.location.href="#."
 	}
 	//el.style.backGround="green";
 	}
+	/*
+const VKID = window.VKIDSDK;
+VKID.Config.init({
+	app: VK_APP_ID,
+	
+})
+OAuthList
+*/ 
+
+const oauthList = new VKID.OAuthList();
+const containervk = gid("VkIdSdkOAuthList");
+
+const oauthListNames = [
+VKID.OAuthName.VK,
+VKID.OAuthName.OK,
+];
+if(containervk){
+	oauthList.render({ container: containervk, oauthList: oauthListNames, scheme: VKID.Scheme.LIGHT, lang: VKID.Languages.RUS,
+		styles:{
+			height: 44, borderRadius: 8
+		}}).on(VKID.WidgetEvents.ERROR, vkerr);
+}
+function vkerr(err){
+	alert(err);
+	console.log(err);
+}
+// https://id.vk.com/authorize?lang_id=0&scheme=light&code_challenge=d4j5IftPMxXP9nniXCNf2Y93hi2mfANLSsSA_cvid-g&
+// code_challenge_method=s256&client_id=52271555&response_type=code&state=mamamia&provider=vkid&prompt=&stats_info
+// =eyJmbG93X3NvdXJjZSI6ImZyb21fbXVsdGlicmFuZGluZyIsInNlc3Npb25faWQiOiJ3ZnhuamkifQ%3D%3D&origin=http%3A%2F%2Flocalhost&v=2.3.0&sdk_type=vkid&app_id=52271555&redirect_uri=localhost
+//let som5=VKID.Auth.exchangeCode(code, device_id);

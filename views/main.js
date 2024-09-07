@@ -77,6 +77,19 @@ lang=='id'?`Terbukanya dunia komunikasi dan kenalan baru baik jiwa raga, maupun 
 <!-- <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script> -->
  <script src="/js/adapter-latest.js"></script> 
 <script src="/js/sound.js"></script>
+<script src="https://unpkg.com/@vkid/sdk@2.3.0/dist-sdk/umd/index.js"></script>
+<script>
+const VK_APP_ID = 52271555;
+const VKID = window.VKIDSDK;
+VKID.Config.init({
+	app: VK_APP_ID,
+	redirectUrl:'https://rouletka.ru/about',
+	state:'mamamia',
+	codeVerifier:'huygygyg',
+	//scope:'email,phone',
+	mode:VKID.ConfigAuthMode.InNewTab
+});
+</script>
 <!-- Google tag (gtag.js) -->
 <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-QG900MX52X"></script>
 <script>
@@ -601,6 +614,7 @@ lang=='id'?'tentang kami':''}</a></div>
  <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="RouletkaBot" data-size="medium" data-onauth="onTelega(user)"  data-request-access="write"></script>
  
           </div>
+          <div id="VkIdSdkOAuthList"></div>
         </div>
     </output>
     
