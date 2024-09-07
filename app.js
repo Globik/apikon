@@ -232,7 +232,7 @@ app.post('/api/setyacount', async(req, res)=>{
 })
 app.post('/api/auth', (req, res, next)=>{
 	passport.authenticate("local", (err, user, info)=>{
-		//console.log("err, user, info: ", err, user, info);
+		console.log("err, user, info: ", err, user, info);
 		if(err){
 			return next(err);
 		}
@@ -863,8 +863,8 @@ app.post('/api/takeCb3', async(req, res)=>{
 	let a = (dummy3.size==0?"Nothing": [...dummy3]);
 	res.json({ message: a });
 })
-app.get('/api/somevkcb', async(req,res)=>{
-	res.rendel('somevkcb', {});
+app.get('/admin', async(req,res)=>{
+	res.rendel('admin', {});
 })
 app.post('/newfucker', async(req,res)=>{
 	console.log("***ASOME BODY *** ", req.body);
