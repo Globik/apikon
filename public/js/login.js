@@ -248,7 +248,27 @@ function vkerr(err){
 	alert(err);
 	console.log(err);
 }
-// https://id.vk.com/authorize?lang_id=0&scheme=light&code_challenge=d4j5IftPMxXP9nniXCNf2Y93hi2mfANLSsSA_cvid-g&
-// code_challenge_method=s256&client_id=52271555&response_type=code&state=mamamia&provider=vkid&prompt=&stats_info
-// =eyJmbG93X3NvdXJjZSI6ImZyb21fbXVsdGlicmFuZGluZyIsInNlc3Npb25faWQiOiJ3ZnhuamkifQ%3D%3D&origin=http%3A%2F%2Flocalhost&v=2.3.0&sdk_type=vkid&app_id=52271555&redirect_uri=localhost
-//let som5=VKID.Auth.exchangeCode(code, device_id);
+const url2 = new URL(window.location.href);
+if(url2.search){
+	
+
+ console.log('url.search ', url2.search);
+ const paramStr = new URLSearchParams(url2.search);
+// out.textContent += 'code ' + paramStr.get('code') + ' device_id ' + paramStr.get('device_id');
+let c = paramStr.get('code');
+let d = paramStr.get('device_id');
+if(c && d){
+let som5=VKID.Auth.exchangeCode(c, d);
+console.log('som5 ', som5);
+try{
+alert('som5 '+JSON.stringify(som5))
+// access_token, refresh_token, token_type, _expires_in, user_id, id_token, scope
+}catch(e){
+	alert(e);
+}
+try{
+let usinfo = VKID.Auth.userInfo(som5.access_token);
+console.log('usinfo ', usinfo)
+alert(JSON.stringify(usinfo))}catch(e){alert(e)}
+}
+}
