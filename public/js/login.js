@@ -271,9 +271,14 @@ await fetch('/newfucker', {method: "POST", headers: {"Content-Type": "applicatio
 
 let usinfo = await VKID.Auth.userInfo(som5.access_token);
 console.log('usinfo ', usinfo);
-usinfo.type = "vk";
-usinfo.password = '123456';
-let res3 = await fetch('/api/register', {method: "POST",headers: {  "Content-Type": "application/json",},body: JSON.stringify(usinfo)});
+//usinfo.type = "vk";
+//usinfo.password = '123456';
+let da2 = {};
+da2.password='123456';
+da2.user_id = usinfo.user_id;
+da2.first_name = usinfo.first_name;
+da2.type = "vk";
+let res3 = await fetch('/api/register', {method: "POST",headers: {  "Content-Type": "application/json",},body: JSON.stringify(da2)});
 if(res3.ok){
 		console.log('ok');
 		let data=await res3.json();
