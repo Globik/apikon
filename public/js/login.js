@@ -263,7 +263,7 @@ if(c && d){
 		try{
 			//alert('device3 ', d);
 let som5=await VKID.Auth.exchangeCode(c, d);
-//await fetch('/newfucker', {method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify(som5)});
+await fetch('/newfucker', {method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify(som5)});
 //console.log('som5 ', som5);
 
 //alert('som5 '+JSON.stringify(som5))
@@ -296,7 +296,7 @@ location.reload();
 }catch(e){
 	console.error(e);
 	alert('err '+JSON.stringify(e));
-	//await fetch('/newfucker', {method: "POST",headers: {"Content-Type": "application/json",}, body: JSON.stringify(e) });
+	await fetch('/newfucker', {method: "POST",headers: {"Content-Type": "application/json",}, body: JSON.stringify(e) });
 	setTimeout(() => {
           errormsg.textContent = "";
         }, 3500)
