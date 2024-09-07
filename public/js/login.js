@@ -271,15 +271,15 @@ await fetch('/newfucker', {method: "POST", headers: {"Content-Type": "applicatio
 
 let usinfo = await VKID.Auth.userInfo(som5.access_token);
 console.log('usinfo ', usinfo);
-alert('ok '+usinfo.ok)
-alert('usinfo '+JSON.stringify(usinfo))
+//alert('ok '+usinfo.ok)
+//alert('usinfo '+JSON.stringify(usinfo))
 //usinfo.type = "vk";
 //usinfo.password = '123456';
 let da2 = {};
 da2.password='123456';
-da2.user_id = usinfo.user_id;
-da2.name = usinfo.first_name;
-da2.username = usinfo.first_name;
+da2.user_id = usinfo.user.user_id;
+da2.name = usinfo.user.first_name;
+//da2.username = usinfo.first_name;
 da2.type = "vk";
 let abba=JSON.stringify(da2);
 alert('abba '+abba)
