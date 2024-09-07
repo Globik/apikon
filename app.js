@@ -885,7 +885,7 @@ app.post('/api/register', (req, res, next)=>{
 				return next(err);
 			}
 			//console.log("USERNAME: ", info.username);
-		oni(info.username, " registered");
+		oni(info.name, " registered");
 		res.json({ user: user });
 		});
 	})(req, res, next);
