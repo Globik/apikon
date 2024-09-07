@@ -431,11 +431,11 @@ lang=='id'?'tentang kami':''}</a></div>
 	</div>
 	</form>
 	</section>
-    </output>
-    -->
+    </output> -->
+    
     <!-- {n.user?n.user.heart:'fuck'} -->
     <input type="hidden" id="isEnter" value="${n.user?n.user.heart==0?'true':'false':'true'}" />
-    <a href="#."  class="overlay" id="purchaseHREF"></a>
+    <a href="#."  class="overlay" id="purchaseHREFI"></a>
     <output id="purchaseoutput" class="popi">
     <section id="heartsContainer">
 	
@@ -447,8 +447,8 @@ lang=='id'?'tentang kami':''}</a></div>
 	<input type="hidden" name="label" value="id=${n.user?n.user.id:'0'}&enti=50"/>
     <input type="hidden" name="quickpay-form" value="button" />
     <input type="hidden" name="successURL" value="https://rouletka.ru/about" />
-    <input type="hidden" name="formcomment" value="Покупка сердечек 5 штук" />
-    <input type="hidden" name="targets" value="Купить 5 сердечек" />
+    <input type="hidden" name="formcomment" value="Покупка" />
+    <input type="hidden" name="targets" value="Confirm" />
     <div><input class="number"  type="hidden" id="sum" name="sum" value="50.00" required data-type="number"/></div>
    <input id="ym" class="input" type="hidden" checked name="paymentType" value="PC" /></div>
    <div><input id="bc"  class="input" type="hidden" name="paymentType" value="AC" /></div>
@@ -457,22 +457,32 @@ lang=='id'?'tentang kami':''}</a></div>
 	</div>
 	</form>
 	</section> 
-	<!--4100118676103827 me 410016439442251  er
-	<form class="ymform"  method="POST" action="https://yoomoney.ru/quickpay/confirm">
-    <div><label for="receiver"><b>Получатель:</b></label><br><input type="text" id="receiver" placeholder="олучатель yoomoney" name="receiver" value="4100118676103827" required/> </div>
-    <input type="hidden" name="label" value="id=${n.user?n.user.id:'0'}&c=5"/>
-    <input type="hidden" name="quickpay-form" value="button" />
-    <input type="hidden" name="formcomment" value="Покупка сердечек 5 штук" />
-    <input type="hidden" name="targets" value="Купить 5 сердечек" />
-    <input type="hidden" name="successURL" value="https://rouletka.ru/about" />
-    <h3>Платить будете:</h3>
-   <div><label for="sum"><b>Cумма в рублях:</b>&nbsp;&nbsp;&nbsp;</label><input class="number"  type="text" id="sum" name="sum" value="2.00" required data-type="number"/></div>
-   <div><label for="ym" ><b>ЮMoney:</b></label>&nbsp;&nbsp;&nbsp;<input id="ym" class="input" type="radio" checked name="paymentType" value="PC" /></div>
-   <div><label for="bc" ><b>Банковской картой:</b></label>&nbsp;&nbsp;&nbsp;<input id="bc"  class="input" type="radio" name="paymentType" value="AC" /></div>
-   <div><input type="submit" value="Купить"/></div>
-    </form>
+	</output>
+	<!--4100118676103827 me 410016439442251  er -->
+	<a href="#."  class="overlay" id="purchaseHREF"></a>
+    <output id="purchaseoutput" class="popi">
 	
-	-->
+	<section id="heartsContainer">
+	
+	<form id="purchaseForm" method="post" action="https://yoomoney.ru/quickpay/confirm" name="ordertodo">
+<p class="intro">Чтобы предотвратить попадание несовершеннолетних в рулетку, мы вынуждены брать с вновь прибывших членский взнос в размере 50 рублей. 
+Тем самым вы подтверждаете, что вы совершеннолетний. Вы будете преренаправлены в yoomoney</p>
+	<div id="heartswrapper">
+	 <div><input type="hidden" id="receiver333" placeholder="Получатель yoomoney" name="receiver" value="${n.yacount}" required/> </div>
+	<input type="hidden" name="label" value="id=${n.user?n.user.id:'0'}&c=5"/>
+    <input type="hidden" name="quickpay-form" value="button" />
+    <input type="hidden" name="successURL" value="https://rouletka.ru/about" />
+    <input type="hidden" name="formcomment" value="Покупка" />
+    <input type="hidden" name="targets" value="Покупка 10 сердечек" />
+    <div><input class="number"  type="hidden" id="sum" name="sum" value="50.00" required data-type="number"/></div>
+   <input id="ym" class="input" type="hidden" checked name="paymentType" value="PC" /></div>
+   <div><input id="bc"  class="input" type="hidden" name="paymentType" value="AC" /></div>
+   <div><input type="submit" id="fuckersubmit333" value="Купить"/></div>
+	
+	</div>
+	</form>
+	</section> 
+	
 	
     </output>
     

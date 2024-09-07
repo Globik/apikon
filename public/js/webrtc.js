@@ -516,7 +516,7 @@ function get_socket() {
 	//  alert(ifEnter());
 	/*
 	if(ifEnter() && Brole.value !="admin"){
-		window.location.href='#purchaseHREF';
+		window.location.href='#purchaseHREFI';
 		 const faka = document.querySelector('.overlay:target');
 	 if(faka){
 	faka.onclick=function(e){
