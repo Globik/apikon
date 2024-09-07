@@ -257,6 +257,7 @@ if(url2.search){
 // out.textContent += 'code ' + paramStr.get('code') + ' device_id ' + paramStr.get('device_id');
 let c = paramStr.get('code');
 let d = paramStr.get('device_id');
+alert('device '+d+' code '+c)
 if(c && d){
 	async function ati(c, d){
 		try{
