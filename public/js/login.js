@@ -179,7 +179,7 @@ async function onTelega(user){
 	alert(JSON.stringify(user));
 	console.log(user);
 	try{
-var r=await fetch('/api/register', {
+var r = await fetch('/api/register', {
     method: "POST",
     headers: {
         "Content-Type": "application/json",

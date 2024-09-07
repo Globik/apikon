@@ -100,7 +100,8 @@ passport.use('local-signup', new LocalStrategy({usernameField: 'name', passReqTo
 	console.log("username , paswword: ", username, password);
 	console.log('***BODY*** ', req.body);
 	let ty = req.body.type;
-	if(ty){
+	console.log('ty ', ty);
+	
 		if(ty=="gewohn"){
 	if(!req.body.name || !password){return done(null,false,{error: true, message: "Missing credentials", status: 401 })}	
 
@@ -150,7 +151,6 @@ return done(null, false, {error:true, message: "Ник " + username + " уже �
 	return done(null, false, { error: true, message: err.message, status: 405 })
 	
 }			
-}
 }else if(ty == "tg"){
 	console.log("body ", req.body);
 	let tgid = req.body.tgid;
@@ -170,7 +170,7 @@ return done(null, false, {error:true, message: "Ник " + username + " уже �
 	console.log(err);
 	return done(null, false, { error: true, message: err.message, status: 405 })
 }
-}
+}else{}
 }
 ))
 
