@@ -28,4 +28,8 @@ alter table users add column tgid bigint;
 alter table users add column vkid bigint;
 
 DROP INDEX IF EXISTS name ON users; 
+delete from users;
+ALTER TABLE users AUTO_INCREMENT = 1;
+CREATE UNIQUE INDEX VkId ON users(vkid);
+CREATE UNIQUE INDEX TgId ON users(tgid);
 */

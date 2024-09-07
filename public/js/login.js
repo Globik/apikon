@@ -30,8 +30,8 @@ const name = gid("name");
 const password = gid("password");
 const btnlogin = gid("btnlogin");
 const btnregister = gid("btnregister");
-btnlogin.addEventListener('click', register, false);
-btnregister.addEventListener('click', register, false);
+if(btnlogin)btnlogin.addEventListener('click', register, false);
+if(btnregister)btnregister.addEventListener('click', register, false);
 
 async function register(el){
 	el.preventDefault();
@@ -241,7 +241,7 @@ VKID.OAuthName.OK,
 if(containervk){
 	oauthList.render({ container: containervk, oauthList: oauthListNames, scheme: VKID.Scheme.LIGHT, lang: VKID.Languages.RUS,
 		styles:{
-			height: 44, borderRadius: 8
+			height: 64, borderRadius: 8
 		}}).on(VKID.WidgetEvents.ERROR, vkerr);
 }
 function vkerr(err){

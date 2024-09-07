@@ -594,10 +594,13 @@ lang=='id'?'tentang kami':''}</a></div>
             ${lang == 'ru'?'Правила чата':lang=='en'?'Chat rules':lang=='zh'?'聊天规则':lang=='id'?'aturan obrolan':''}
           </span>
         </div>
-        
+       <br> <b style="color:black;">${lang=='ru'?'Добро пожаловать в чат рулетку':lang=='en'?
+            'Welcome to chat roulette':
+            lang=='zh'?'欢迎聊天轮盘赌':
+            lang=='id'?'Selamat datang di obrolan rolet':''}!</b><br>
         <div class="modal-body">
           <div class="error-message" id="errormsg"></div>
-          <form name="formlogin" id="myform">
+         <!-- <form name="formlogin" id="myform">
             <label for="name" style="margin-top: 5px;"><b>${lang=='ru'?'Добро пожаловать в чат рулетку':lang=='en'?
             'Welcome to chat roulette':
             lang=='zh'?'欢迎聊天轮盘赌':
@@ -609,11 +612,11 @@ lang=='id'?'tentang kami':''}</a></div>
 			 <button  class="login-button" id="btnlogin">${lang=='ru'?'Войти':lang=='en'?'Login':lang=='zh'?'登录':lang=='id'?'Gabung':''}</button>
             <button class="register-button" id="btnregister">${lang=='ru'?'Зарегистрироваться':lang=='en'?'Sign up':lang=='zh'?'报名':lang=='id'?'mendaftar':''}</button>
            
-          </form>
+          </form> -->
           <div>
- <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="RouletkaBot" data-size="medium" data-onauth="onTelega(user)"  data-request-access="write"></script>
+ <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="RouletkaBot" data-size="large" data-onauth="onTelega(user)"  data-request-access="write"></script>
  
-          </div>
+          </div><br><br>
           <div id="VkIdSdkOAuthList"></div>
         </div>
     </output>
