@@ -208,7 +208,7 @@ window.location.href="#."
          // location.reload();
 }
 }catch(error){
-	
+	console.log(error);
       alert(error);
 
         setTimeout(() => {
