@@ -175,7 +175,7 @@ return;
 }
 }
 
-function onTelega(user){
+async function onTelega(user){
 	//alert(JSON.stringify(user));
 	console.log(user);
 	try{
