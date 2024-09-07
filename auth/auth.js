@@ -98,6 +98,9 @@ async function(username, password, done){
 
 passport.use('local-signup', new LocalStrategy({usernameField: 'name', passReqToCallback: true}, async(req,username, password, done)=>{
 	//console.log("username , paswword: ", username, password);
+	let ty = req.body.type;
+	if(ty){
+		if(ty=="gewohn"){
 	if(!req.body.name || !password){return done(null,false,{error: true, message: "Missing credentials", status: 401 })}	
 
  //if (!username || !password) {
@@ -146,7 +149,28 @@ return done(null, false, {error:true, message: "Ник " + username + " уже �
 	return done(null, false, { error: true, message: err.message, status: 405 })
 	
 }			
-}))
+}
+}else if(ty == "tg"){
+	console.log("body ", req.body);
+	let tgid = req.body.tgid;
+	let name = req.body.name;
+	if(!tgid){
+		return done(null, false, { error: true, message: "no tgid", status: 405 })
+	}
+	try{
+	let result = await db.query(`select*from users where tgid=(?)`, [ tgid ]);
+	if(result.length > 0){
+		return done(null, result[0].id, { message: "ok", status:200, name: result[0].name, id: result[0].id });
+	}else{
+		let result2 = await db.query(`insert into users(name, tgid, password) values(?,?,'1234')`, [ '@' + name, tgid ]);
+		return done(null, result2.insertId.toString(), { username: '@'+ name, status: 200, message: "Success!" });
+	}
+}catch(err){
+	return done(null, false, { error: true, message: err.message, status: 405 })
+}
+}
+}
+))
 
 passport.use(new TelegramStrategy({
 botToken:	tg_api

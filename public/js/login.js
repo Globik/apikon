@@ -49,6 +49,7 @@ async function register(el){
 let user = {};
 user.name = sname;
 user.password = password.value;
+user.type = "gewohn";
 
 let uri = (el.target.className=="register-button" ? "/api/register":"/api/auth");
 //alert(uri)
@@ -175,5 +176,47 @@ return;
 }
 
 function onTelega(user){
-	alert(JSON.stringify(user));
+	//alert(JSON.stringify(user));
+	console.log(user);
+	try{
+var r=await fetch('/api/register', {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+      },
+    body: JSON.stringify({ type: "tg", tgid: user.id, hash: user.hash, name: user.username, auth_date: user.auth_date, first_name: user.first_name })
+    });
+    
+  console.log('res ', r);
+    if(r.ok){
+		console.log('ok');
+		let data=await r.json();
+		console.log('data: ', data);
+		if(data.error){
+			 errormsg.textContent = data.message;
+			
+			  setTimeout(() => {
+    //    el.target.disabled = false;
+         errormsg.textContent = "";
+        }, 3500)
+return;
+			 
+		}
+	
+localStorage.setItem("islogin" , "yes");
+window.location.href="#."
+          location.reload();
 }
+}catch(error){
+	
+      
+
+        setTimeout(() => {
+          errormsg.textContent = "";
+        }, 3500)
+
+        console.error(error)
+	
+	}
+	//el.style.backGround="green";
+	}

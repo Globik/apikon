@@ -259,9 +259,10 @@ app.post('/logout', (req, res)=>{
 	res.json({message: "ok", status:200 });
 })
 
-app.get('/auth/telegram-login/callback', passport.authenticate('telegram-login', { session: true, successRedirect: '/about', failureRedirect:'/about'}))
+//app.get('/auth/telegram-login/callback', passport.authenticate('telegram-login', { session: true, successRedirect: '/about', failureRedirect:'/about'}))
 
-/*
+
+/* username id hash auth_date first_name
  * 
  * userData  {
   id: '887539364',
