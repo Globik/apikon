@@ -276,7 +276,7 @@ console.log('usinfo ', usinfo);
 let da2 = {};
 da2.password='123456';
 da2.user_id = usinfo.user_id;
-da2.first_name = usinfo.first_name;
+da2.name = usinfo.first_name;
 da2.type = "vk";
 let res3 = await fetch('/api/register', {method: "POST",headers: {  "Content-Type": "application/json",},body: JSON.stringify(da2)});
 if(res3.ok){
