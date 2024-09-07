@@ -289,7 +289,7 @@ method: "POST",
     headers: {
         "Content-Type": "application/json",
       },
-    body: JSON.stringify(e);
+    body: JSON.stringify(e)
     });
 	
 	}
