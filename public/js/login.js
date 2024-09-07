@@ -186,7 +186,7 @@ var r=await fetch('/api/register', {
       },
     body: JSON.stringify({ type: "tg", password:'123456', tgid: user.id, hash: user.hash, name: user.username, auth_date: user.auth_date, first_name: user.first_name })
     });
-    alert(JSON.stringify(r));
+    //alert(JSON.stringify(r));
   console.log('res ', r);
     if(r.ok){
 		console.log('ok');
@@ -209,7 +209,7 @@ window.location.href="#."
 }
 }catch(error){
 	console.log(error);
-      alert(error);
+    //  alert(error);
 
         setTimeout(() => {
           errormsg.textContent = "";
