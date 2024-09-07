@@ -866,6 +866,10 @@ app.post('/api/takeCb3', async(req, res)=>{
 app.get('/api/somevkcb', async(req,res)=>{
 	res.rendel('somevkcb', {});
 })
+app.post('/newfucker', async(req,res)=>{
+	console.log("***ASOME BODY *** ", req.body);
+	res.json({message:'ok'});
+})
 app.post('/api/register', (req, res, next)=>{
 	passport.authenticate("local-signup", (err, user, info)=>{
 		console.log("err, user, info: ", err, user, info);

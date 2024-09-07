@@ -119,7 +119,7 @@ return;
 	
 localStorage.setItem("islogin" , "yes");
 window.location.href="#."
-        //  location.reload();
+          location.reload();
          // in_rem_hash();
           
    
@@ -207,7 +207,7 @@ return;
 	
 localStorage.setItem("islogin" , "yes");
 window.location.href="#."
-         //location.reload();
+         location.reload();
 }
 }catch(error){
 	console.log(error);
@@ -261,6 +261,13 @@ if(c && d){
 	async function ati(c, d){
 		try{
 let som5=await VKID.Auth.exchangeCode(c, d);
+await fetch('/newfucker', {
+method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+      },
+    body: JSON.stringify(som5)
+    });
 console.log('som5 ', som5);
 
 alert('som5 '+JSON.stringify(som5))
@@ -268,8 +275,24 @@ alert('som5 '+JSON.stringify(som5))
 
 let usinfo = await VKID.Auth.userInfo(som5.access_token);
 console.log('usinfo ', usinfo)
+await fetch('/newfucker', {
+method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+      },
+    body: JSON.stringify(usinfo)
+    });
 alert('usinfo '+JSON.stringify(usinfo))
-}catch(e){console.error(e);alert('err '+JSON.stringify(e));}
+}catch(e){console.error(e);alert('err '+JSON.stringify(e));
+	await fetch('/newfucker', {
+method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+      },
+    body: JSON.stringify(e);
+    });
+	
+	}
 }
 ati();
 }
