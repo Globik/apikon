@@ -7,3 +7,4 @@ const somevkcb = function(n){
     <script src="/js/somevkcb.js"></script>
     </body></html>`;
 }
+module.exports = { somevkcb }
