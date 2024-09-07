@@ -97,7 +97,7 @@ async function(username, password, done){
 
 
 passport.use('local-signup', new LocalStrategy({usernameField: 'name', passReqToCallback: true}, async(req,username, password, done)=>{
-	//console.log("username , paswword: ", username, password);
+	console.log("username , paswword: ", username, password);
 	console.log('***BODY*** ', req.body);
 	let ty = req.body.type;
 	if(ty){

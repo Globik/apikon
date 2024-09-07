@@ -176,7 +176,7 @@ return;
 }
 
 async function onTelega(user){
-	//alert(JSON.stringify(user));
+	alert(JSON.stringify(user));
 	console.log(user);
 	try{
 var r=await fetch('/api/register', {
