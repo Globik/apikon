@@ -184,7 +184,7 @@ var r=await fetch('/api/register', {
     headers: {
         "Content-Type": "application/json",
       },
-    body: JSON.stringify({ type: "tg", tgid: user.id, hash: user.hash, name: user.username, auth_date: user.auth_date, first_name: user.first_name })
+    body: JSON.stringify({ type: "tg", password:'123456', tgid: user.id, hash: user.hash, name: user.username, auth_date: user.auth_date, first_name: user.first_name })
     });
     alert(JSON.stringify(r));
   console.log('res ', r);
@@ -205,11 +205,11 @@ return;
 	
 localStorage.setItem("islogin" , "yes");
 window.location.href="#."
-          location.reload();
+         // location.reload();
 }
 }catch(error){
 	
-      
+      alert(error);
 
         setTimeout(() => {
           errormsg.textContent = "";
