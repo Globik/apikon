@@ -83,7 +83,7 @@ const VK_APP_ID = 52271555;
 const VKID = window.VKIDSDK;
 VKID.Config.init({
 	app: VK_APP_ID,
-	redirectUrl:'https://rouletka.ru/about',
+	redirectUrl:'https://rouletka.ru/api/somevkcb',
 	state:'mamamia',
 	codeVerifier:'huygygyg',
 	//scope:'email,phone',
