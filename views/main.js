@@ -87,7 +87,7 @@ VKID.Config.init({
 	state:'mamamia',
 	codeVerifier:'huygygyg',
 	//scope:'email,phone',
-	mode:VKID.ConfigAuthMode.Redirect //InNewTab
+	mode:VKID.ConfigAuthMode.InNewTab
 });
 </script>
 <!-- Google tag (gtag.js) -->
