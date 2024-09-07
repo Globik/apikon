@@ -252,48 +252,55 @@ const url2 = new URL(window.location.href);
 if(url2.search){
 	
 
- console.log('url.search ', url2.search);
+// console.log('url.search ', url2.search);
  const paramStr = new URLSearchParams(url2.search);
 // out.textContent += 'code ' + paramStr.get('code') + ' device_id ' + paramStr.get('device_id');
 let c = paramStr.get('code');
 let d = paramStr.get('device_id');
-alert('device_id '+d+' code '+c)
+//alert('device_id '+d+' code '+c)
 if(c && d){
 	async function ati(){
 		try{
-			alert('device3 ', d);
+			//alert('device3 ', d);
 let som5=await VKID.Auth.exchangeCode(c, d);
-await fetch('/newfucker', {
-method: "POST",
-    headers: {
-        "Content-Type": "application/json",
-      },
-    body: JSON.stringify(som5)
-    });
-console.log('som5 ', som5);
+//await fetch('/newfucker', {method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify(som5)});
+//console.log('som5 ', som5);
 
-alert('som5 '+JSON.stringify(som5))
+//alert('som5 '+JSON.stringify(som5))
 // access_token, refresh_token, token_type, _expires_in, user_id, id_token, scope
 
 let usinfo = await VKID.Auth.userInfo(som5.access_token);
-console.log('usinfo ', usinfo)
-await fetch('/newfucker', {
-method: "POST",
-    headers: {
-        "Content-Type": "application/json",
-      },
-    body: JSON.stringify(usinfo)
-    });
-alert('usinfo '+JSON.stringify(usinfo))
-}catch(e){console.error(e);alert('err '+JSON.stringify(e));
-	await fetch('/newfucker', {
-method: "POST",
-    headers: {
-        "Content-Type": "application/json",
-      },
-    body: JSON.stringify(e)
-    });
+console.log('usinfo ', usinfo);
+usinfo.type = "vk";
+usinfo.password = '123456';
+let res3 = await fetch('/api/register', {method: "POST",headers: {  "Content-Type": "application/json",},body: JSON.stringify(usinfo)});
+if(res3.ok){
+		console.log('ok');
+		let data=await res3.json();
+		console.log('data: ', data);
+		if(data.error){
+			 errormsg.textContent = data.message;
+			
+			  setTimeout(() => {
+    //    el.target.disabled = false;
+         errormsg.textContent = "";
+        }, 3500)
+return;
+			 
+		}
 	
+localStorage.setItem("islogin" , "yes");
+window.location.href="#."
+location.reload();
+}
+}catch(e){
+	console.error(e);
+	alert('err '+JSON.stringify(e));
+	//await fetch('/newfucker', {method: "POST",headers: {"Content-Type": "application/json",}, body: JSON.stringify(e) });
+	setTimeout(() => {
+          errormsg.textContent = "";
+        }, 3500)
+
 	}
 }
 ati();

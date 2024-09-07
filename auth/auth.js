@@ -170,6 +170,24 @@ return done(null, false, {error:true, message: "Ник " + username + " уже �
 	console.log(err);
 	return done(null, false, { error: true, message: err.message, status: 405 })
 }
+}else if(ty == "vk"){
+		console.log("body ", req.body);
+		var { user_id, first_name } = req.body;
+		
+		try{
+	let result4 = await db.query(`select*from users where vkid=(?)`, [ user_id ]);
+	if(result4.length > 0){
+		return done(null, result4[0].id, { message: "ok", status:200, name: result4[0].name, id: result4[0].id });
+	}else{
+		let result5 = await db.query(`insert into users(name, vkid, password) values(?,?,'1234')`, [ first_name, vkid ]);
+		return done(null, result5.insertId.toString(), { username: first_name, status: 200, message: "Success!" });
+	}
+}catch(err){
+	console.log(err);
+	return done(null, false, { error: true, message: err.message, status: 405 })
+}
+		
+		
 }else{}
 }
 ))
