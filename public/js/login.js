@@ -259,8 +259,9 @@ let c = paramStr.get('code');
 let d = paramStr.get('device_id');
 alert('device_id '+d+' code '+c)
 if(c && d){
-	async function ati(c, d){
+	async function ati(){
 		try{
+			alert('device3 ', d);
 let som5=await VKID.Auth.exchangeCode(c, d);
 await fetch('/newfucker', {
 method: "POST",
