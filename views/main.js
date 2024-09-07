@@ -439,7 +439,7 @@ lang=='id'?'tentang kami':''}</a></div>
     <output id="purchaseoutput" class="popi">
     <section id="heartsContainer">
 	
-	<form id="purchaseForm" method="post" action="https://yoomoney.ru/quickpay/confirm" name="ordertodo">
+	<form id="purchaseForm2" method="post" action="https://yoomoney.ru/quickpay/confirm" name="ordertodo">
 <p class="intro">Чтобы предотвратить попадание несовершеннолетних в рулетку, мы вынуждены брать с вновь прибывших членский взнос в размере 50 рублей. 
 Тем самым вы подтверждаете, что вы совершеннолетний. Вы будете преренаправлены в yoomoney</p>
 	<div id="heartswrapper">
@@ -449,9 +449,9 @@ lang=='id'?'tentang kami':''}</a></div>
     <input type="hidden" name="successURL" value="https://rouletka.ru/about" />
     <input type="hidden" name="formcomment" value="Покупка" />
     <input type="hidden" name="targets" value="Confirm" />
-    <div><input class="number"  type="hidden" id="sum" name="sum" value="50.00" required data-type="number"/></div>
-   <input id="ym" class="input" type="hidden" checked name="paymentType" value="PC" /></div>
-   <div><input id="bc"  class="input" type="hidden" name="paymentType" value="AC" /></div>
+    <div><input class="number"  type="hidden"  name="sum" value="50.00" required data-type="number"/></div>
+   <input  class="input" type="hidden" checked name="paymentType" value="PC" /></div>
+   <div><input  class="input" type="hidden" name="paymentType" value="AC" /></div>
    <div><input type="submit" id="fuckersubmit" value="Да, мне 18, и я \n \nготов(а) заплатить 50 руб"/></div>
 	
 	</div>
@@ -473,9 +473,9 @@ lang=='id'?'tentang kami':''}</a></div>
     <input type="hidden" name="successURL" value="https://rouletka.ru/about" />
     <input type="hidden" name="formcomment" value="Покупка" />
     <input type="hidden" name="targets" value="Покупка 50 сердечек" />
-    <div><input class="number"  type="hidden" id="sum" name="sum" value="50.00" required data-type="number"/></div>
-   <input id="ym" class="input" type="hidden" checked name="paymentType" value="PC" /></div>
-   <div><input id="bc"  class="input" type="hidden" name="paymentType" value="AC" /></div>
+    <div><input class="number"  type="hidden" name="sum" value="50.00" required data-type="number"/></div>
+   <input class="input" type="hidden" checked name="paymentType" value="PC" /></div>
+   <div><input  class="input" type="hidden" name="paymentType" value="AC" /></div>
    <div><input type="submit" id="fuckersubmit333" value="Купить"/></div>
 	
 	</div>
@@ -523,8 +523,8 @@ lang=='id'?'tentang kami':''}</a></div>
     <input type="hidden" name="formcomment" value="Покупка премиум аккаунта на месяц" />
     <input type="hidden" name="targets" value="Купить премиум аккаунт на месяц" />
     <div><input class="number"  type="hidden" id="sum2" name="sum" value="50.00" required data-type="number"/></div>
-   <input id="ym2" class="input" type="hidden" checked name="paymentType" value="PC" /></div>
-   <div><input id="bc2"  class="input" type="hidden" name="paymentType" value="AC" /></div>
+   <input  class="input" type="hidden" checked name="paymentType" value="PC" /></div>
+   <div><input  class="input" type="hidden" name="paymentType" value="AC" /></div>
    <div><input type="submit" id="premBtn" value="Купить"/></div>
 	
 	</div>
@@ -609,19 +609,16 @@ lang=='id'?'tentang kami':''}</a></div>
             lang=='id'?'Selamat datang di obrolan rolet':''}!</b><br>
         <div class="modal-body">
           <div class="error-message" id="errormsg"></div>
-         <!-- <form name="formlogin" id="myform">
-            <label for="name" style="margin-top: 5px;"><b>${lang=='ru'?'Добро пожаловать в чат рулетку':lang=='en'?
-            'Welcome to chat roulette':
-            lang=='zh'?'欢迎聊天轮盘赌':
-            lang=='id'?'Selamat datang di obrolan rolet':''}!</b><br>${lang=='ru'?'Имя':lang=='en'?'Nick' :lang=='zh'?'姓名':lang=='id'?'nama':''} </label>
+         ${process.env.DEVELOPMENT=='yes'?`<form name="formlogin" id="myform">
+            <label for="name" style="margin-top: 5px;">${lang=='ru'?'Имя':lang=='en'?'Nick' :lang=='zh'?'姓名':lang=='id'?'nama':''} </label>
             <input  name="username" type="text" placeholder="${lang=='ru'?'Введите Логин':lang=='en'?'Login':lang=='zh'?'姓名':lang=='id'?'nama':''}" id="name" required minlength="2" maxlength="20">
 
             <label for="name">${lang=='ru'?'Пароль':lang=='en'?'Password':lang=='zh'?'密码':lang=='id'?'kata sandi':''}</label>
             <input  name="userpassword" type="password" autocomplete="on" placeholder="${lang=='ru'?'Введите пароль':lang=='en'?'password':lang=='zh'?'密码':lang=='id'?'kata sandi':''}" id="password" required minlength="2" maxlength="20">
 			 <button  class="login-button" id="btnlogin">${lang=='ru'?'Войти':lang=='en'?'Login':lang=='zh'?'登录':lang=='id'?'Gabung':''}</button>
-            <button class="register-button" id="btnregister">${lang=='ru'?'Зарегистрироваться':lang=='en'?'Sign up':lang=='zh'?'报名':lang=='id'?'mendaftar':''}</button>
+          <!--  <button class="register-button" id="btnregister">${lang=='ru'?'Зарегистрироваться':lang=='en'?'Sign up':lang=='zh'?'报名':lang=='id'?'mendaftar':''}</button> -->
            
-          </form> -->
+          </form> `:''}
           <div>
  <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="RouletkaBot" data-size="large" data-onauth="onTelega(user)"  data-request-access="write"></script>
  
