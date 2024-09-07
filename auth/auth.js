@@ -74,7 +74,8 @@ async function(username, password, done){
 	 }
  let w=wi[0];
 
-	if(scmp(c, Buffer.from(w.password))){
+	//if(scmp(c, Buffer.from(w.password))){
+	if(w.password == password){
 			//console.log('MATCH!');
 			return done(null, w.id, { message: "ok", status:200, name: w.name, id: w.id });
 		}else{
