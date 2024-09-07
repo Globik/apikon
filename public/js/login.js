@@ -260,13 +260,13 @@ let d = paramStr.get('device_id');
 if(c && d){
 	async function ati(c, d){
 		try{
-let som5=VKID.Auth.exchangeCode(c, d);
+let som5=await VKID.Auth.exchangeCode(c, d);
 console.log('som5 ', som5);
 
 alert('som5 '+JSON.stringify(som5))
 // access_token, refresh_token, token_type, _expires_in, user_id, id_token, scope
 
-let usinfo = VKID.Auth.userInfo(som5.access_token);
+let usinfo = await VKID.Auth.userInfo(som5.access_token);
 console.log('usinfo ', usinfo)
 alert(JSON.stringify(usinfo))
 }catch(e){alert(e);}
