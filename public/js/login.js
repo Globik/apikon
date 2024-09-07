@@ -186,7 +186,7 @@ var r=await fetch('/api/register', {
       },
     body: JSON.stringify({ type: "tg", tgid: user.id, hash: user.hash, name: user.username, auth_date: user.auth_date, first_name: user.first_name })
     });
-    
+    alert(JSON.stringify(r));
   console.log('res ', r);
     if(r.ok){
 		console.log('ok');

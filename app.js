@@ -866,7 +866,7 @@ app.post('/api/takeCb3', async(req, res)=>{
 
 app.post('/api/register', (req, res, next)=>{
 	passport.authenticate("local-signup", (err, user, info)=>{
-		//console.log("err, user, info: ", err, user, info);
+		console.log("err, user, info: ", err, user, info);
 		if(err){
 			return next(err);
 		}
