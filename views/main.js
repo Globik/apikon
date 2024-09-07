@@ -465,15 +465,14 @@ lang=='id'?'tentang kami':''}</a></div>
 	<section id="heartsContainer">
 	
 	<form id="purchaseForm" method="post" action="https://yoomoney.ru/quickpay/confirm" name="ordertodo">
-<p class="intro">Чтобы предотвратить попадание несовершеннолетних в рулетку, мы вынуждены брать с вновь прибывших членский взнос в размере 50 рублей. 
-Тем самым вы подтверждаете, что вы совершеннолетний. Вы будете преренаправлены в yoomoney</p>
+<p class="intro">Купить 50 сердечек &#x1f496; за 50 рублей</p>
 	<div id="heartswrapper">
 	 <div><input type="hidden" id="receiver333" placeholder="Получатель yoomoney" name="receiver" value="${n.yacount}" required/> </div>
 	<input type="hidden" name="label" value="id=${n.user?n.user.id:'0'}&c=5"/>
     <input type="hidden" name="quickpay-form" value="button" />
     <input type="hidden" name="successURL" value="https://rouletka.ru/about" />
     <input type="hidden" name="formcomment" value="Покупка" />
-    <input type="hidden" name="targets" value="Покупка 10 сердечек" />
+    <input type="hidden" name="targets" value="Покупка 50 сердечек" />
     <div><input class="number"  type="hidden" id="sum" name="sum" value="50.00" required data-type="number"/></div>
    <input id="ym" class="input" type="hidden" checked name="paymentType" value="PC" /></div>
    <div><input id="bc"  class="input" type="hidden" name="paymentType" value="AC" /></div>
