@@ -179,7 +179,7 @@ return done(null, false, {error:true, message: "Ник " + username + " уже �
 	if(result4.length > 0){
 		return done(null, result4[0].id, { message: "ok", status:200, name: result4[0].name, id: result4[0].id });
 	}else{
-		let result5 = await db.query(`insert into users(name, vkid, password) values(?,?,'1234')`, [ name, vkid ]);
+		let result5 = await db.query(`insert into users(name, vkid, password) values(?,?,'1234')`, [ name, user_id ]);
 		return done(null, result5.insertId.toString(), { username: name, status: 200, message: "Success!" });
 	}
 }catch(err){
