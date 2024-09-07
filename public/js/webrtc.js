@@ -2009,7 +2009,7 @@ function onHeartClick(ev){
 		let n = Number(heartcount.textContent);
 		if(n <= 0){
 			//note({ content: "Недостаточно средств!", type: "info", time: 5 });
-			window.location.href = '#purchaseHREF'
+			window.location.href = '#purchaseHREFA'
 			return
 		}else{
 		 quant = n - 1;
@@ -2052,7 +2052,7 @@ function processHeart(n, ev){
 		window.location.href="#login";
 		return;
 	}
-			window.location.href = "#purchaseHREF";
+			window.location.href = "#purchaseHREFA";
 		}
 		
 function handleGift(msg){

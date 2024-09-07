@@ -1158,7 +1158,7 @@ top:30px;
 }
 }
 
-#purchaseoutput{
+#purchaseoutput,purchaseoutput2{
 	width:50%;
 }
 #purchaseoutput form#purchaseForm{
@@ -1212,7 +1212,7 @@ dsplay:inline-block;
 
 
 @media screen and (max-width: 452px) and (orientation: portrait){
-#purchaseoutput{
+#purchaseoutput,#purchaseoutput2{
 	width:98%;
 	height:90vh;
 }
