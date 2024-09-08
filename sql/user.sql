@@ -13,7 +13,7 @@ PRIMARY KEY (id),
 UNIQUE (name)
 );
 /*
-update users set brole='admin' where name='suka1';
+
 alter table users drop column theart;
 alter table users add column theart int not null default 0;
 alter table users add column heart int not null default 0;
@@ -32,4 +32,8 @@ delete from users;
 ALTER TABLE users AUTO_INCREMENT = 1;
 CREATE UNIQUE INDEX VkId ON users(vkid);
 CREATE UNIQUE INDEX TgId ON users(tgid);
+update users set brole='admin' where name='@Globik2';
+update users set theart=100 where name='@Globik2';
+update users set brole='admin' where name='@Vista2013';
+update users set theart=100 where name='@Vista2013';
 */

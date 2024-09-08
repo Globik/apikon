@@ -78,6 +78,7 @@ lang=='id'?`Terbukanya dunia komunikasi dan kenalan baru baik jiwa raga, maupun 
  <script src="/js/adapter-latest.js"></script> 
 <script src="/js/sound.js"></script>
 <script src="https://unpkg.com/@vkid/sdk@2.3.0/dist-sdk/umd/index.js"></script>
+<script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
 <script>
 const VK_APP_ID = 52271555;
 const VKID = window.VKIDSDK;
@@ -89,6 +90,9 @@ VKID.Config.init({
 	//scope:'email,phone',
 	mode:VKID.ConfigAuthMode.InNewTab
 });
+</script>
+<script>
+vkBridge.send('VKWebAppInit');
 </script>
 <!-- Google tag (gtag.js) -->
 <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-QG900MX52X"></script>
@@ -641,7 +645,7 @@ lang=='id'?'tentang kami':''}</a></div>
     
     <script src="/js/webrtc.js"></script>
     <script src="/js/soupi.js"></script>
-    
+    <script src="/js/vkapp.js"></script>
     
     
     
