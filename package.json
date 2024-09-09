@@ -4,7 +4,8 @@
   "description": "random videochat roulette",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tunnel": "vk-tunnel --insecure=1 --http-protocol=http --ws-protocol=ws --host=localhost --port=3000"
   },
   "repository": {
     "type": "git",

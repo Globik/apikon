@@ -92,7 +92,16 @@ VKID.Config.init({
 });
 </script>
 <script>
-vkBridge.send('VKWebAppInit');
+var FLAGVK=false;
+vkBridge.send('VKWebAppInit').then(data=>{
+if(data.result){
+//alert('innnitialised');
+FLAGVK=true;
+}else{
+console.log('not initialised');
+}
+
+}).catch(err=>{console.log(err);})
 </script>
 <!-- Google tag (gtag.js) -->
 <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-QG900MX52X"></script>
@@ -147,6 +156,7 @@ vkBridge.send('VKWebAppInit');
     ${!n.user?`<script>
     const NICK = "anon";
     window.onload=function(){
+		if(FLAGVK)return;
 		//get_socket(); 
    const cat = localStorage.getItem("myCat");
    if(!cat && cat !=="Tom"){

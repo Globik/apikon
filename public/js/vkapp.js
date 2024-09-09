@@ -1,3 +1,5 @@
+// https://dev.vk.com/ru/admin/app-settings/52272918/platform
+
 vkBridge.subscribe((e)=>{console.log('vk ', e);})
 
 vkBridge.supportsAsync('VKWebAppResizeWindow').then(res=>{

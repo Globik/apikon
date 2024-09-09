@@ -5,6 +5,7 @@ const fsi = require('fs/promises')
 const url = require('url');
 
 const express = require('express');
+//var cors = require('cors');
 const { oni, oni1 } = require('./libs/web_push.js');
 var WebSocket = require('ws');
 
@@ -199,11 +200,59 @@ app.use((req, res, next)=>{
 app.use('/admin', admin);
 app.use('/pay', pay);
 var imgData = {};
+const getUservkUrl = `https://api.vk.com/method/users.get`;
+const skey='48b5165748b5165748b516572a4ba88941448b548b516572e682a9cdaa4cd958d2d985d';
+const vparam = 5.199;
 app.get("/about", async(req, res)=>{
+	console.log("REQ.QUERY: ", req.query,  ' ',req.query.length);
+	let db = req.db;
+	if(req.query.vk_app_id){
+		try{
+			//access_token
+		let r = await axios.get(getUservkUrl,{params:{access_token: skey, user_ids:[req.query.vk_user_id],fields: [req.query.nickname], v: vparam}});
+		console.log("DATA ", r.data);
+		if(r.data.response && r.data.response.length > 0){
+			//id, first_name
+			
+		
+	let result4 = await db.query(`select*from users where vkid=(?)`, [ r.data.response[0].id ]);
+	if(result4.length > 0){
+	return res.rendel('main', { imgData: imgData, lang: 'ru', yacount: JETZT , user: result4[0] });
+	}else{
+		let result5 = await db.query(`insert into users(name, vkid, password) values(?,?,'1234')`, [ r.data.response[0].first_name, r.data.response[0].id ]);
+		console.log("INSERT ", result5);
+		let result6 = await db.query(`select*from users where vkid=(?)`, [ result5.insertId.toString() ]);
+		result6[0].id = result5.insertId.toString();
+		let dabu = result6[0];
+		return res.rendel('main', { imgData: imgData, lang: 'ru', yacount: JETZT , user: dabu });
+		// result5.insertId.toString(), { user
+		
+	}
+			
+			
+		}
+	
+	
+	}catch(e){console.log(e);}
+}
 	console.log("*** USER *** ", req.user);
 	//console.log('req.app.locals ', req.app.locals.testshopid, ' ', req.app.locals.testshopsecret);
 	res.rendel('main', { imgData: imgData, lang: 'ru', yacount: JETZT });
 })
+
+/*
+ *  vk_access_token_settings: '',
+  vk_app_id: '52272918',
+  vk_are_notifications_enabled: '0',
+  vk_is_app_user: '1',
+  vk_is_favorite: '0',
+  vk_language: 'ru',
+  vk_platform: 'desktop_web',
+  vk_ref: 'other',
+  vk_ts: '1725885920',
+  vk_user_id: '98506638',
+  sign: 'UcX1erGti1D-Cj8KCicDxmYh7KRuyn49KhWBo_Oo22M'
+*/
 app.get('/about/en', async(req, res)=>{
 	
 res.rendel('main', { imgData: imgData, lang: 'en', yacount: JETZT });
