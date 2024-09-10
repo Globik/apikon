@@ -4,6 +4,9 @@ html,body{
 			height:100%;
 			background:black;
 		}
+		#local video::-webkit-media-controls,#remote video::-webkit-media-controls,#kartina video::-webkit-media-controls{
+		display:none !important;
+		}
 	p.intro{
 		line-height:1.8;
 		padding:10px;
@@ -330,6 +333,7 @@ background-image: linear-gradient(147deg, #000000 0%, #434343 74%);
 	#local,#remote{
 	display:block;
 		width:100%;
+		
 		border-bottom-right-radius:10px 10px;
 	border-bottom-left-radius: 10px 10px;
 		object-fit:contain;

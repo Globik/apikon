@@ -298,7 +298,7 @@ ${n.user?`<div class="settingspanel" onclick="logout(this);">${lang=='ru'?'Вы�
 <g><path d="M500,10C229.4,10,10,229.4,10,500s219.4,490,490,490c270.6,0,490-219.4,490-490S770.6,10,500,10z M500,881.1c-210.5,0-381.1-170.6-381.1-381.1S289.5,118.9,500,118.9c210.5,0,381.1,170.6,381.1,381.1S710.5,881.1,500,881.1z"/><path d="M390.2,282.2l326.7,218.6L390.2,719.5V282.2z"/></g>
 </svg>
 <div id="kresti"><b id="kres">&#x274E;</b></div>
-    <video id="kartina" ${n.imgData && n.imgData.img_data?` poster=${n.imgData.img_data}`:''}></video></div>
+    <video id="kartina" ${n.imgData && n.imgData.img_data?` poster=${n.imgData.img_data}`:`poster="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"`} playsinline ></video></div>
     
   <!--  <section id="recordSection"><div>&#x1F4F8;</div></section> -->
     
@@ -311,7 +311,7 @@ ${n.user?`<div class="settingspanel" onclick="logout(this);">${lang=='ru'?'Вы�
     lang=='id'?'melecehkan':''}!</div></div>
     <section id="mobileloader"><div class="loader"></div></section>
     
-    <video id="remote"  class="" autoplay></video>
+    <video id="remote"  class="" autoplay playsinline poster="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"></video>
      <div id="duka2">Жизнь как рулетка. Никогда не узнаешь, кого встретишь следуюшим...</div>
      <!-- MOBILE! -->
  <section id="mobileChat" class="hide">
@@ -355,7 +355,7 @@ lang=='id'?'pesan':''}" oninput="txtInput(this);" onchange="someChange();"></tex
 </section> 
 <!-- END MOBILE! -->
     </div>
-<div id="localcontainer"><video id="local"  class=""  autoplay muted></video></div>
+<div id="localcontainer"><video id="local"  class=""  autoplay muted playsinline  poster="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"></video></div>
 
 <div id="controlsContainer"><button id="startbtn" class="start" data-start="no" onclick="start(this);">${lang=='ru'?'старт':lang=='en'?'start':lang=='zh'?'开始':lang=='id'?'awal':''}</button>
 <button id="nextbtn" class="next" onclick="next(this,true);" disabled>${lang=='ru'?'далее':lang=='en'?'next':lang=='zh'?'下一个':lang=='id'?'Berikutnya':''}</button>
