@@ -97,6 +97,14 @@ vkBridge.send('VKWebAppInit').then(data=>{
 if(data.result){
 //alert('innnitialised');
 FLAGVK = true;
+if(FLAGVK){
+			gid("settings").style.display = "none";
+gid("foot").style.display = "none";
+gid("foot2").style.display = "none";
+}
+
+
+
 }else{
 console.log('not initialised');
 }
