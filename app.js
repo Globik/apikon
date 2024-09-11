@@ -275,11 +275,12 @@ app.get("/about", async(req, res)=>{
 //const s22 = `vk_access_token_settings=${obj6.vk_access_token_settings}&vk_app_id=${obj6.vk_app_id}&vk_are_notifications_enabled=${obj6.vk_are_notifications_enabled}&vk_is_app_user=${obj6.vk_is_app_user}&vk_is_favorite=${obj6.vk_is_favorite}&vk_language=${obj6.vk_language}&vk_platform=${obj6.vk_platform}&vk_ref=${obj6.vk_ref}&vk_ts=${obj6.vk_ts}&vk_user_id=${obj6.vk_user_id}`;
 
 function checkSign(ob){
+	console.log("OBJECT ", ob);
 const sign = ob.sign;
 delete ob.sign;
 var ordered = '';
 for(let k in ob){
-	ordered+=`${k}=${obj6[k]}&`;
+	ordered+=`${k}=${obj[k]}&`;
 }
 ordered=ordered.substring(0, ordered.length-1);
 
