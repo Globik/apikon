@@ -385,6 +385,11 @@ lang=='en'?'About us':
 lang=='zh'?'关于我们':
 lang=='id'?'tentang kami':''}</a></div>
 </div>
+<script>
+if(FLAGVK){
+	gid("foot").style.display="none";
+}
+</script>
 <!-- COMPUTER VERSION -->
 <div id="sectionChat">
 	<div id="znakChat">
@@ -429,7 +434,6 @@ lang=='zh'?'关于我们':
 lang=='id'?'tentang kami':''}</a></div>
 <script>
 if(FLAGVK){
-gid("foot").style.display = "none";
 gid("foot2").style.display = "none";
 }
 </script>
@@ -672,7 +676,7 @@ gid("foot2").style.display = "none";
     
     
     
- <!--   <footer><a href="/about"> О проекте</a></footer> -->
+ 
     
        </body>
 </html>`;
