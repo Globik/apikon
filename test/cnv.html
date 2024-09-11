@@ -5,11 +5,12 @@
 <canvas id="cnv"></canvas>
 <script>
 	let c = cnv.getContext('2d');
-	cnv.width = 500;
-	cnv.height = 500;
+	cnv.width = 600;
+	cnv.height = 1200;
 	var img = new Image();
 	//img.src = "../public/img/gold/some.jpg";
-	img.src = "../public/img/tvpic.jpg"
+	//img.src = "../public/img/tvpic.jpg"
+	img.src="../public/img1/s2.png"
 	img.onload = function(){
 		let cropx = 0;
 		let cropy = 0;
@@ -19,13 +20,13 @@
 			cropx =(img.width - scaledwidth) / 2;
 			c.drawImage(img, cropx, cropy, scaledwidth, img.height, 0, 0, cnv.width, cnv.height);
 			//alert(img.width + ' ' + img.height)// 320x240
-			alert(aspectratio)// landshaft
+			//alert(aspectratio)// landshaft
 		}else{
 			// portrait
 			const scaledheight = img.height * aspectratio;
 			cropy = (img.height - scaledheight) / 2;
 			c.drawImage(img, cropx, cropy, img.width, scaledheight, 0, 0, cnv.width, cnv.height)
-			alert(2)
+			//alert(2)
 		}
 	}
 </script>

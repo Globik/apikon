@@ -1,4 +1,4 @@
-// https://dev.vk.com/ru/admin/app-settings/52272918/platform
+// https://dev.vk.com/ru/admin/app-settings/52272918/platform 1000 x 730 | 576 278 bolshoi snippet 1120 × 630 px 3 screenshot Размер: 600 × 1200 px
 
 vkBridge.subscribe((e)=>{console.log('vk ', e);})
 

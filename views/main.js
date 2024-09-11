@@ -92,11 +92,11 @@ VKID.Config.init({
 });
 </script>
 <script>
-var FLAGVK=false;
+var FLAGVK = false;
 vkBridge.send('VKWebAppInit').then(data=>{
 if(data.result){
 //alert('innnitialised');
-FLAGVK=true;
+FLAGVK = true;
 }else{
 console.log('not initialised');
 }
@@ -250,9 +250,15 @@ function isOpenModal(){
     <span id="vV" style="color:orange;font-weight:bold;">${n.imgData && n.imgData.img_data?n.imgData.value:0}</span>
    ${n.user && n.user.prem=="y"? '&nbsp;&nbsp;&nbsp;<span style="color:#d5a8a8;">Premium &nbsp;&nbsp;&#x1F451;</span>':''} 
     </div>
+    
     <div id="settings" class="ita" onclick="panelOpen(this);">
  <img class="setimg" src="/img/set2.svg">
 </div>
+<script>
+if(FLAGVK){
+	gid("settings").style.display = "none";
+}
+</script>
 <div id="settingspanel">
 ${n.user && n.user.brole=='admin'?'<div class="settingspanel" onclick="toAdminPanel(this);">В админку</div>':''}
 <div class="settingspanel" data-current="" id="camToggle" onclick="toggleCam(this);">${lang=='ru'?'Переключить камеру':
@@ -268,7 +274,7 @@ lang=='en'?'Connects':
 lang=='zh'?'连接':
 lang=='id'?'koneksi':''}:</b> <span id="connects">0</span></div>
 <!-- <div class="settingspanel"  onclick="pushSubscribe(this);">Пуш уведомления</div> -->
-${lang=='ru'?`<div class="settingspanel"  onclick="purchaseTokens(this);">Купить сердечки &#x1f496;</div>
+${lang=='ru' ?`<div class="settingspanel"  onclick="purchaseTokens(this);">Купить сердечки &#x1f496;</div>
 <div class="settingspanel">
 <div class="some doh">${n.user?n.user.name:null} Ваш доход&nbsp;&nbsp;<span id="dohod">${n.user? Number.parseFloat(n.user.theart*0.10).toFixed(2):'0.00'}</span>&nbsp;&nbsp;рублей</div>
 <div class="du" onclick="getPayout(this);">Получить</div>
@@ -421,6 +427,12 @@ lang=='id'?'pesan':''}" oninput="txtInput(this);" onchange="someChange();"></tex
 lang=='en'?'About us':
 lang=='zh'?'关于我们':
 lang=='id'?'tentang kami':''}</a></div>
+<script>
+if(VKFLAG){
+gid("foot").style.display = "none";
+gid("foot2").style.display = "none";
+}
+</script>
     </section>
     </article>
    <!-- <button onclick="pl(this);">play</button> -->
