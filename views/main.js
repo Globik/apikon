@@ -248,7 +248,7 @@ gid("giftbox").style.display = "none";
 }
 		
     }
-    funvtion confirmRules(){
+    function confirmRules(){
 
 	localStorage.setItem("myCat", "Tom");
 	window.location.href="#.";
