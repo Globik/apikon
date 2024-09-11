@@ -114,6 +114,7 @@ gid("foot2").style.display = "none";
 gid("giftbox").style.display = "none";
 gid("giftbox2").style.display = "none";
  const cat = localStorage.getItem("myCat");
+ localStorage.removeItem('myCat');
  console.warn("***** CAT ***** ", cat);
  if(!cat && cat !=="Tom"){
  console.log("**** NO CAT ***");
