@@ -361,10 +361,10 @@ console.log("after sender")
             
                 wsend({isprem: (Prem.value=="y"?"y":"n"), clientId: userId.value, img_data: img_data, type: "pic", request: "mediasoup"});
                }, 1000)
-               if(Prem.value == "n" && Brole.value !="admin"){
+               if(Prem.value == "n" && Brole.value !="admin" ){
 				   setTimeout(function(){
 					   unpublish();
-					   location.href="#gopremium";
+					  if(!FLAGVK) location.href="#gopremium";
 				   },1000*15);
 			   }
                gid("txtvalue2").setAttribute("data-publish", "publish");
