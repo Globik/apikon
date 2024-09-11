@@ -111,7 +111,7 @@ let f888=gid("giftbox2");
 if(f888)f888.style.display = "none";
  const cat = localStorage.getItem("myCat");
  //let r7=localStorage.removeItem('myCat');
- console.warn("***** CAT ***** ", r7,' ', cat);
+ console.warn("***** CAT ***** ", cat);
  if(!cat && cat !=="Tom"){
  console.log("**** NO CAT ***");
     location.href="#regeln";
