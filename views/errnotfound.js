@@ -33,6 +33,12 @@ font-size: 40px;
 		}
 	}
 	</style>
+	<script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
+	<script>
+	var FLAGVK = false;
+	
+vkBridge.send('VKWebAppInit').then(data=>{}).catch(function(er){})
+</script>
 	</head><body><div id="errcontainer"><h1>404</h1><span>СТРАНИЦА НЕ НАЙДЕНА!</span></div></body></html>`;
 }
 module.exports = { errnotfound }
