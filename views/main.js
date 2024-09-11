@@ -116,7 +116,7 @@ gid("giftbox2").style.display = "none";
  const cat = localStorage.getItem("myCat");
  console.warn("***** CAT ***** ", cat);
  if(!cat && cat !=="Tom"){
- console.log("**** NO CAT ***);
+ console.log("**** NO CAT ***");
     location.href="#regeln";
     const faka = document.querySelector('.overlay:target');
 if(faka){
