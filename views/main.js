@@ -213,6 +213,11 @@ function isOpenModal(){
     const NICK = "${n.user?n.user.name:'anonym'}";
     window.onload = function(){
 		get_socket();
+		if(FLAGVK){
+			gid("settings").style.display = "none";
+gid("foot").style.display = "none";
+gid("foot2").style.display = "none";
+}
 		
     }
     </script>
