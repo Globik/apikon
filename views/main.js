@@ -108,7 +108,7 @@ if(data.result){
 FLAGVK = true;
 if(FLAGVK){
 
-			gid("settings").style.display = "none";
+gid("settings").style.display = "none";
 gid("foot").style.display = "none";
 gid("foot2").style.display = "none";
 gid("giftbox").style.display = "none";
@@ -127,11 +127,11 @@ if(faka){
 
 
 }
-}else{
+}}else{
 console.log('not initialised');
 }
 
-}}).catch(err=>{console.log(err);})
+}).catch(err=>{console.log(err);})
 
 </script>
 <!-- Google tag (gtag.js) -->
