@@ -202,11 +202,13 @@ app.use('/pay', pay);
 var imgData = {};
 const getUservkUrl = `https://api.vk.com/method/users.get`;
 const skey='48b5165748b5165748b516572a4ba88941448b548b516572e682a9cdaa4cd958d2d985d';
+const vkey = 'fM8VjwulM3xw9cJhFDIq';
 const vparam = 5.199;
 app.get("/about", async(req, res)=>{
-	console.log("REQ.QUERY: ", req.query,  ' ',req.query.length);
+	console.log("REQ.QUERY: ", req.query);
 	let db = req.db;
 	if(req.query.vk_app_id){
+		if(checkSign(req.query)){
 		try{
 			//access_token
 		let r = await axios.get(getUservkUrl,{params:{access_token: skey, user_ids:[req.query.vk_user_id],fields: [req.query.nickname], v: vparam}});
@@ -230,28 +232,90 @@ app.get("/about", async(req, res)=>{
 	}
 			
 			
+		}else{
+			//some error
+			cosnsole.log('error in vk axios ', r.data);
+			return res.rendel('errnotfound',{});
 		}
 	
-	
 	}catch(e){console.log(e);}
+}else{
+	//return 404 not found
+	console.log("VK NOT OK!");
+	return res.rendel('errnotfound',{});
+}
 }
 	console.log("*** USER *** ", req.user);
 	//console.log('req.app.locals ', req.app.locals.testshopid, ' ', req.app.locals.testshopsecret);
+	//res.rendel('errnotfound',{});
 	res.rendel('main', { imgData: imgData, lang: 'ru', yacount: JETZT });
 })
 
-/*
- *  vk_access_token_settings: '',
+
+ // verteidigen key fM8VjwulM3xw9cJhFDIq
+ 
+ const obj6={
+  vk_access_token_settings: 'status',
   vk_app_id: '52272918',
   vk_are_notifications_enabled: '0',
   vk_is_app_user: '1',
   vk_is_favorite: '0',
   vk_language: 'ru',
-  vk_platform: 'desktop_web',
+  vk_platform: 'mobile_web',
   vk_ref: 'other',
-  vk_ts: '1725885920',
+  vk_ts: '1726054014',
   vk_user_id: '98506638',
-  sign: 'UcX1erGti1D-Cj8KCicDxmYh7KRuyn49KhWBo_Oo22M'
+  sign: 'mUkbhW5QTZnZVfd-vywgTULqUKQ4GUrE_852WDps8Xo'
+}  
+//const sign = obj6.sign;
+//delete obj6.sign;
+ 
+//const s22 = `${obj6.vk_access_token_settings}&${obj6.vk_app_id}&${obj6.vk_are_notifications_enabled}&${obj6.vk_is_app_user}&${obj6.vk_is_favorite}&${obj6.vk_language}&${obj6.vk_platform}&${obj6.vk_ref}&${obj6.vk_ts}&${obj6.vk_user_id}`;
+
+//const s22 = `vk_access_token_settings=${obj6.vk_access_token_settings}&vk_app_id=${obj6.vk_app_id}&vk_are_notifications_enabled=${obj6.vk_are_notifications_enabled}&vk_is_app_user=${obj6.vk_is_app_user}&vk_is_favorite=${obj6.vk_is_favorite}&vk_language=${obj6.vk_language}&vk_platform=${obj6.vk_platform}&vk_ref=${obj6.vk_ref}&vk_ts=${obj6.vk_ts}&vk_user_id=${obj6.vk_user_id}`;
+
+function checkSign(ob){
+const sign = ob.sign;
+delete ob.sign;
+var ordered = '';
+for(let k in ob){
+	ordered+=`${k}=${obj6[k]}&`;
+}
+ordered=ordered.substring(0, ordered.length-1);
+
+let sha12_ha = sign;
+let sh2 = crypto.createHmac('sha256', vkey);
+let li2 = sh2.update(ordered).digest().toString('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/=$/, '');
+console.log('li2: ',li2)
+console.log('sha2:', sha12_ha)
+if(li2==sha12_ha){
+	console.log("vk OK");
+	return true
+}else{
+	console.log('vk not ok');
+	return false;
+}
+}
+/*
+var ordered = '';
+for(let k in obj6){
+	if(k.includes('vk_'))ordered+=`${k}=${obj6[k]}&`;
+}
+ordered=ordered.substring(0, ordered.length-1);
+
+console.log('si2 ', s22)
+console.log("ordered ", ordered)
+let sha12_ha = sign;
+let sh2 = crypto.createHmac('sha256', vkey);
+let li2 = sh2.update(ordered).digest().toString('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/=$/, '');
+console.log('li2: ',li2)
+console.log('sha2:', sha12_ha)
+if(li2==sha12_ha){
+	console.log("vk OK");
+}else{
+	console.log('vk not ok');
+}
+
 */
 app.get('/about/en', async(req, res)=>{
 	

@@ -363,9 +363,9 @@ console.log("after sender")
                }, 1000)
                if(Prem.value == "n" && Brole.value !="admin" ){
 				   setTimeout(function(){
-					   unpublish();
+					  if(!FLAGVK) unpublish();
 					  if(!FLAGVK) location.href="#gopremium";
-				   },1000*15);
+				   },1000*15*10);
 			   }
                gid("txtvalue2").setAttribute("data-publish", "publish");
                gid("txtvalue").setAttribute("data-publish", "publish");

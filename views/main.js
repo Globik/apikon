@@ -103,10 +103,26 @@ gid("foot").style.display = "none";
 gid("foot2").style.display = "none";
 gid("giftbox").style.display = "none";
 gid("giftbox2").style.display = "none";
+ const cat = localStorage.getItem("myCat");
+ if(!cat && cat !=="Tom"){
+    location.href="#regeln";
+    const faka = document.querySelector('.overlay:target');
+if(faka){
+	faka.onclick=function(e){e.preventDefault();}
+}
+}
+//else{
+confirmRulesvk();
+//}
+
+function confirmRulesvk(){
+	localStorage.setItem("myCat", "Tom");
+	window.location.href="#,";
+	 const faka = document.querySelector('.overlay:target');
+	
 }
 
-
-
+}
 }else{
 console.log('not initialised');
 }
