@@ -92,15 +92,7 @@ VKID.Config.init({
 });
 </script>
 <script>
-function confirmRules(){
-	localStorage.setItem("myCat", "Tom");
-	window.location.href="#,";
-	 const faka = document.querySelector('.overlay:target');
-	 if(faka){
-	faka.onclick=function(e){e.preventDefault();}
-}
-	
-}
+
 var FLAGVK = false;
 vkBridge.send('VKWebAppInit').then(data=>{
 if(data.result){
@@ -114,7 +106,7 @@ gid("foot2").style.display = "none";
 gid("giftbox").style.display = "none";
 gid("giftbox2").style.display = "none";
  const cat = localStorage.getItem("myCat");
- let r7=localStorage.removeItem('myCat');
+ //let r7=localStorage.removeItem('myCat');
  console.warn("***** CAT ***** ", r7,' ', cat);
  if(!cat && cat !=="Tom"){
  console.log("**** NO CAT ***");
@@ -132,8 +124,9 @@ console.log('not initialised');
 }
 
 }).catch(err=>{console.log(err);})
-
 </script>
+
+
 <!-- Google tag (gtag.js) -->
 <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-QG900MX52X"></script>
 <script>
@@ -221,6 +214,7 @@ in_rem_hash();
     
 function confirmRules(){
 	localStorage.setItem("myCat", "Tom");
+	
 	window.location.href="#login";
 	 const faka = document.querySelector('.overlay:target');
 	 if(faka){
@@ -228,6 +222,7 @@ function confirmRules(){
 		e.preventDefault();
 	}
 }
+
 }
 function isOpenModal(){
 	 window.location.href="#regeln";
@@ -249,9 +244,15 @@ function isOpenModal(){
 gid("foot").style.display = "none";
 gid("foot2").style.display = "none";
 gid("giftbox").style.display = "none";
+
 }
 		
     }
+    funvtion confirmRules(){
+
+	localStorage.setItem("myCat", "Tom");
+	window.location.href="#.";
+}
     </script>
     `}
     <script>
