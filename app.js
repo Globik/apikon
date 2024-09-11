@@ -280,7 +280,7 @@ const sign = ob.sign;
 delete ob.sign;
 var ordered = '';
 for(let k in ob){
-	ordered+=`${k}=${obj[k]}&`;
+	ordered+=`${k}=${ob[k]}&`;
 }
 ordered=ordered.substring(0, ordered.length-1);
 
