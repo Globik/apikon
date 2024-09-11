@@ -114,8 +114,8 @@ gid("foot2").style.display = "none";
 gid("giftbox").style.display = "none";
 gid("giftbox2").style.display = "none";
  const cat = localStorage.getItem("myCat");
- localStorage.removeItem('myCat');
- console.warn("***** CAT ***** ", cat);
+ let r7=localStorage.removeItem('myCat');
+ console.warn("***** CAT ***** ", r7,' ', cat);
  if(!cat && cat !=="Tom"){
  console.log("**** NO CAT ***");
     location.href="#regeln";
