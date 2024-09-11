@@ -98,6 +98,12 @@ if(data.result){
 //alert('innnitialised');
 FLAGVK = true;
 if(FLAGVK){
+function confirmRules(){
+	localStorage.setItem("myCat", "Tom");
+	window.location.href="#,";
+	 const faka = document.querySelector('.overlay:target');
+	
+}
 			gid("settings").style.display = "none";
 gid("foot").style.display = "none";
 gid("foot2").style.display = "none";
@@ -115,12 +121,7 @@ if(faka){
 //confirmRulesvk();
 //}
 
-function confirmRules(){
-	localStorage.setItem("myCat", "Tom");
-	window.location.href="#,";
-	 const faka = document.querySelector('.overlay:target');
-	
-}
+
 
 }
 }else{
@@ -128,6 +129,7 @@ console.log('not initialised');
 }
 
 }).catch(err=>{console.log(err);})
+
 </script>
 <!-- Google tag (gtag.js) -->
 <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-QG900MX52X"></script>
