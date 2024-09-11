@@ -2004,6 +2004,7 @@ function onHeartClick(ev){
 		return;
 	}
 	let quant;let g;
+	if(heartcountels){
 	for(var i = 0; i < heartcountels.length; i++){
 		let heartcount = heartcountels[i];
 		let n = Number(heartcount.textContent);
@@ -2020,6 +2021,7 @@ function onHeartClick(ev){
 		 payoutamountid.value = cc;
 		}
 	}
+}
 	processHeart({ g: g, quant: 1 }, ev);
 }
 
@@ -2056,6 +2058,7 @@ function processHeart(n, ev){
 		}
 		
 function handleGift(msg){
+	if(!heartcountels) return;
 	console.log(msg);
 	let s = (L()=="ru"?`Подарили в подарок сердечко &#x1f496`:L()=='en'?`You've gifted a heart &#x1f496`:
 	L()=='zh'?'你赠予了一颗心 &#x1f496':
@@ -2073,6 +2076,7 @@ function handleGift(msg){
 	
 }
 function handleGift2(msg){
+	if(!heartcountels) return;
 	console.log(msg);
 	let n = Number(msg.quant);
 	let a = Number(heartcountels[0].textContent);

@@ -101,6 +101,8 @@ if(FLAGVK){
 			gid("settings").style.display = "none";
 gid("foot").style.display = "none";
 gid("foot2").style.display = "none";
+gid("giftbox").style.display = "none";
+gid("giftbox2").style.display = "none";
 }
 
 
@@ -225,6 +227,7 @@ function isOpenModal(){
 			gid("settings").style.display = "none";
 gid("foot").style.display = "none";
 gid("foot2").style.display = "none";
+gid("giftbox").style.display = "none";
 }
 		
     }
