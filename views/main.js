@@ -428,7 +428,7 @@ lang=='en'?'About us':
 lang=='zh'?'关于我们':
 lang=='id'?'tentang kami':''}</a></div>
 <script>
-if(VKFLAG){
+if(FLAGVK){
 gid("foot").style.display = "none";
 gid("foot2").style.display = "none";
 }
