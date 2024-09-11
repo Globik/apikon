@@ -101,10 +101,14 @@ FLAGVK = true;
 if(FLAGVK){
 
 gid("settings").style.display = "none";
-gid("foot").style.display = "none";
-gid("foot2").style.display = "none";
-gid("giftbox").style.display = "none";
-gid("giftbox2").style.display = "none";
+let f555=gid("foot");
+if(f555)f555.style.display = "none";
+let f666=gid("foot2");
+if(f666)f666.style.display = "none";
+let f777=gid("giftbox");
+if(f777)f777.style.display = "none";
+let f888=gid("giftbox2");
+if(f888)f888.style.display = "none";
  const cat = localStorage.getItem("myCat");
  //let r7=localStorage.removeItem('myCat');
  console.warn("***** CAT ***** ", r7,' ', cat);
