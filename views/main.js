@@ -95,7 +95,10 @@ VKID.Config.init({
 function confirmRules(){
 	localStorage.setItem("myCat", "Tom");
 	window.location.href="#,";
-	// const faka = document.querySelector('.overlay:target');
+	 const faka = document.querySelector('.overlay:target');
+	 if(faka){
+	faka.onclick=function(e){e.preventDefault();}
+}
 	
 }
 var FLAGVK = false;
@@ -111,7 +114,9 @@ gid("foot2").style.display = "none";
 gid("giftbox").style.display = "none";
 gid("giftbox2").style.display = "none";
  const cat = localStorage.getItem("myCat");
- //if(!cat && cat !=="Tom"){
+ console.warn("***** CAT ***** ", cat);
+ if(!cat && cat !=="Tom"){
+ console.log("**** NO CAT ***);
     location.href="#regeln";
     const faka = document.querySelector('.overlay:target');
 if(faka){
