@@ -130,7 +130,7 @@ if(faka){
 console.log('not initialised');
 }
 
-}).catch(err=>{console.log(err);})
+}}).catch(err=>{console.log(err);})
 
 </script>
 <!-- Google tag (gtag.js) -->
