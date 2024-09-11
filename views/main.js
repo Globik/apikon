@@ -104,13 +104,13 @@ gid("foot2").style.display = "none";
 gid("giftbox").style.display = "none";
 gid("giftbox2").style.display = "none";
  const cat = localStorage.getItem("myCat");
- if(!cat && cat !=="Tom"){
+ //if(!cat && cat !=="Tom"){
     location.href="#regeln";
     const faka = document.querySelector('.overlay:target');
 if(faka){
 	faka.onclick=function(e){e.preventDefault();}
 }
-}
+//}
 //else{
 //confirmRulesvk();
 //}
