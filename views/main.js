@@ -112,10 +112,10 @@ if(faka){
 }
 }
 //else{
-confirmRulesvk();
+//confirmRulesvk();
 //}
 
-function confirmRulesvk(){
+function confirmRules(){
 	localStorage.setItem("myCat", "Tom");
 	window.location.href="#,";
 	 const faka = document.querySelector('.overlay:target');

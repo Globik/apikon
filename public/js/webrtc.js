@@ -1153,7 +1153,7 @@ someInterval = null;
  if(sock) sock.close();
  partnerId = null;
  
- if(window.recorder.state == 'recording')window.recorder.stop();
+ if(window.recorder && window.recorder.state == 'recording')window.recorder.stop();
  //const fullBlob = new Blob(allChunks,{ type:'video/mp4'});
  //const link = document.createElement('a');
  //link.style.display = 'none';
