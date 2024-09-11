@@ -92,18 +92,19 @@ VKID.Config.init({
 });
 </script>
 <script>
+function confirmRules(){
+	localStorage.setItem("myCat", "Tom");
+	window.location.href="#,";
+	// const faka = document.querySelector('.overlay:target');
+	
+}
 var FLAGVK = false;
 vkBridge.send('VKWebAppInit').then(data=>{
 if(data.result){
 //alert('innnitialised');
 FLAGVK = true;
 if(FLAGVK){
-function confirmRules(){
-	localStorage.setItem("myCat", "Tom");
-	window.location.href="#,";
-	 const faka = document.querySelector('.overlay:target');
-	
-}
+
 			gid("settings").style.display = "none";
 gid("foot").style.display = "none";
 gid("foot2").style.display = "none";
@@ -116,10 +117,6 @@ gid("giftbox2").style.display = "none";
 if(faka){
 	faka.onclick=function(e){e.preventDefault();}
 }
-//}
-//else{
-//confirmRulesvk();
-//}
 
 
 
