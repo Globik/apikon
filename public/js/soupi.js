@@ -365,7 +365,7 @@ console.log("after sender")
 				   setTimeout(function(){
 					  if(!FLAGVK) unpublish();
 					  if(!FLAGVK) location.href="#gopremium";
-				   },1000*15*10);
+				   },1000*10);
 			   }
                gid("txtvalue2").setAttribute("data-publish", "publish");
                gid("txtvalue").setAttribute("data-publish", "publish");

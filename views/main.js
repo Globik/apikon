@@ -109,6 +109,7 @@ let f777=gid("giftbox");
 if(f777)f777.style.display = "none";
 let f888=gid("giftbox2");
 if(f888)f888.style.display = "none";
+if(gid('playContainer'))gid('playContainer').style.display = "none";
  const cat = localStorage.getItem("myCat");
  //let r7=localStorage.removeItem('myCat');
  console.warn("***** CAT ***** ", cat);
@@ -176,11 +177,7 @@ console.log('not initialised');
     <input type="hidden" id="Grund" value="${n.user?n.user.grund:0}" />
     <input type="hidden" id="isEnter" value="${n.user?n.user.entr==0?true:false:false}" />
     <!-- {n.user? JSON.stringify(n.user):'no user'} -->
-    <script>
-   // note({ content: '<b>Помочь проекту: </b><br><br>
- //  <iame src="https://yoomoney.ru/quickpay/fundraise/button?billNumber=AWVMCQLpAcY.240125&" width="330" height="50" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
-   //', type: "info", time: 60 });
-    </script>
+    
     ${!n.user?`<script>
     const NICK = "anon";
     window.onload=function(){
@@ -248,6 +245,7 @@ function isOpenModal(){
 gid("foot").style.display = "none";
 gid("foot2").style.display = "none";
 gid("giftbox").style.display = "none";
+gid('playContainer').style.display = 'none';
 
 }
 		
@@ -346,7 +344,7 @@ ${n.user?`<div class="settingspanel" onclick="logout(this);">${lang=='ru'?'Вы�
 <g><path d="M500,10C229.4,10,10,229.4,10,500s219.4,490,490,490c270.6,0,490-219.4,490-490S770.6,10,500,10z M500,881.1c-210.5,0-381.1-170.6-381.1-381.1S289.5,118.9,500,118.9c210.5,0,381.1,170.6,381.1,381.1S710.5,881.1,500,881.1z"/><path d="M390.2,282.2l326.7,218.6L390.2,719.5V282.2z"/></g>
 </svg>
 <div id="kresti"><b id="kres">&#x274E;</b></div>
-    <video id="kartina" ${n.imgData && n.imgData.img_data?` poster=${n.imgData.img_data}`:`poster="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"`} playsinline ></video></div>
+<video id="kartina" ${n.imgData && n.imgData.img_data?` poster=${n.imgData.img_data}`:`poster="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"`} playsinline ></video></div>
     
   <!--  <section id="recordSection"><div>&#x1F4F8;</div></section> -->
     
@@ -398,7 +396,7 @@ lang=='id'?'pesan':''}" oninput="txtInput(this);" onchange="someChange();"></tex
 
 </div>
 </div>
-<div class="send" data-send="two" onclick="sendi(this);"><img src="/img/send1.svg"/></div>
+<!-- <div class="send" data-send="two" onclick="sendi(this);"><img src="/img/send1.svg"/></div> -->
 </div></section>
 </section> 
 <!-- END MOBILE! -->
@@ -468,7 +466,7 @@ lang=='id'?'pesan':''}" oninput="txtInput(this);" onchange="someChange();"></tex
 
 </div>
 </div>
-<div class="send" data-send="one" onclick="sendi(this);" value="papa" ><img src="/img/send1.svg"/></div>
+<!-- <div class="send" data-send="one" onclick="sendi(this);" value="papa" ><img src="/img/send1.svg"/></div> -->
 </div></section>
 </div><div id="foot2"><a href="/"> ${lang=='ru'?'О проекте':
 lang=='en'?'About us':
