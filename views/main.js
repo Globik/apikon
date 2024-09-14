@@ -110,6 +110,8 @@ if(f777)f777.style.display = "none";
 let f888=gid("giftbox2");
 if(f888)f888.style.display = "none";
 if(gid('playContainer'))gid('playContainer').style.display = "none";
+gid("chatruleslink").style.display="block";
+gid("chatruleslink2").style.display="block";
 function tomi(){
  const cat = localStorage.getItem("myCat");
  //let r7=localStorage.removeItem('myCat');
@@ -185,7 +187,7 @@ console.log('not initialised');
     ${!n.user?`<script>
     const NICK = "anon";
     window.onload=function(){
-		if(FLAGVK)return;
+	if(FLAGVK)return;
 		//get_socket(); 
 	
    var cat = localStorage.getItem("myCat");
@@ -203,8 +205,8 @@ if(faka){
 }else{
 	let islogin = localStorage.getItem("islogin");
 	//if(!islogin && islogin !=="yes")
-   location.href="#login";
- //window.location.href="#confirmAGE";
+  location.href="#login";
+// window.location.href="#confirmAGE";
 	
 const faka = document.querySelector('.overlay:target');
 if(faka){
@@ -247,7 +249,7 @@ function isOpenModal(){
     window.onload = function(){
 		get_socket();
 		if(FLAGVK){
-			gid("settings").style.display = "none";
+gid("settings").style.display = "none";
 gid("foot").style.display = "none";
 gid("foot2").style.display = "none";
 gid("giftbox").style.display = "none";
@@ -445,9 +447,11 @@ lang=='en'?'About us':
 lang=='zh'?'关于我们':
 lang=='id'?'tentang kami':''}</a></div>
 </div>
+<div id="chatruleslink" style="display:none;"><a href="#regeln">Правила чата</a></div>
 <script>
 if(FLAGVK){
 	gid("foot").style.display="none";
+	gid("chatruleslink").style.display="block";
 }
 </script>
 <!-- COMPUTER VERSION -->
@@ -492,21 +496,25 @@ lang=='id'?'pesan':''}" oninput="txtInput(this);" onchange="someChange();"></tex
 lang=='en'?'About us':
 lang=='zh'?'关于我们':
 lang=='id'?'tentang kami':''}</a></div>
+<div id="chatruleslink2" style="display:none;"><a href="#regeln">Правила чата</a></div>
 <script>
 if(FLAGVK){
 gid("foot2").style.display = "none";
+gid("chatruleslink2").style.display="block";
 }
 </script>
     </section>
     </article>
-   <!-- <button onclick="pl(this);">play</button> -->
+ 
  <a href="#."  class="overlay" id="confirmAGE"></a>
     <output id="confirmageoutput" class="popi">
     <form name="verifyageform"><h2>Предупреждение</h2>
     <span>Чат рулетка может содежать контент, неприемлемый для несовершеннолетних.</span><span> Поэтому, чтобы продолжить, введите дату вашего рождения</span>
     <input type="date" name="bday" required min="1940-01-01" autocomplete />
-    <span>В случае, если вам нет 18-ти лет, вы будете перенаправлены на <b>vk.com</b></span>
-    <input type="submit" name="contin" id="continbtn" data-target="continue" value="Продолжить"/></form><input name="leav"  id="leavbtn" data-target="leav" value="Выйти" />
+    <input type="submit" name="contin" value="Продолжить"/>
+    </form>
+    <span id="outputing" style="visibility:hidden;color:red;">Вам нет 18-ти лет. Покиньте чат.</span>
+    
     </output>
     
    <!--
