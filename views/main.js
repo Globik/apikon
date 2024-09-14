@@ -92,14 +92,15 @@ VKID.Config.init({
 });
 </script>
 <script>
-
+var VK_USER = false;
 var FLAGVK = false;
 vkBridge.send('VKWebAppInit').then(data=>{
 if(data.result){
 //alert('innnitialised');
 FLAGVK = true;
-if(FLAGVK){
 
+if(FLAGVK){
+VK_USER = true;
 gid("settings").style.display = "none";
 let f555=gid("foot");
 if(f555)f555.style.display = "none";
@@ -246,7 +247,7 @@ function isOpenModal(){
     </script>`:`<script>
     in_rem_hash();
     const NICK = "${n.user?n.user.name:'anonym'}";
-    var VK_USER = false;
+   // var VK_USER = false;
     window.onload = function(){
 		get_socket();
 		if(FLAGVK){
