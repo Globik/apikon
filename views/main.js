@@ -432,7 +432,7 @@ lang=='en'?'About us':
 lang=='zh'?'关于我们':
 lang=='id'?'tentang kami':''}</a></div>
 </div>
-<div id="chatruleslink" style="display:none;"><a href="#regeln">Правила чата</a></div>
+<div id="chatruleslink"><a href="#regeln">Правила чата</a></div>
 <script>
 if(FLAGVK){
 	gid("foot").style.display="none";
@@ -481,7 +481,7 @@ lang=='id'?'pesan':''}" oninput="txtInput(this);" onchange="someChange();"></tex
 lang=='en'?'About us':
 lang=='zh'?'关于我们':
 lang=='id'?'tentang kami':''}</a></div>
-<div id="chatruleslink2" style="display:none;"><a href="#regeln">Правила чата</a></div>
+<div id="chatruleslink2"><a href="#regeln">Правила чата</a></div>
 <script>
 if(FLAGVK){
 gid("foot2").style.display = "none";

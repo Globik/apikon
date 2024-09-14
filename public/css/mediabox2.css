@@ -694,7 +694,7 @@ section#mobileChat{
 		display:none;
 	}
 	
-	#foot{
+	#foot,#chatruleslink{
 	display:none;
 		
 	}
@@ -791,7 +791,7 @@ div.heartcount{
 }
 
 @media screen and (max-width: 452px) and (orientation: portrait){
-#foot,#chatruleslink2{
+#foot,#chatruleslink{
 	display:inline-block;
 		position:absolute;
 		ackground:green;
@@ -800,7 +800,7 @@ div.heartcount{
 		bottom:4px;
 		
 }
-#foot2{
+#foot2,#chatruleslink2{
 	display:none;
 }
 	#somespinner,#somehello{
