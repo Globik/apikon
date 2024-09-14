@@ -111,26 +111,8 @@ if(f777)f777.style.display = "none";
 let f888=gid("giftbox2");
 if(f888)f888.style.display = "none";
 if(gid('playContainer'))gid('playContainer').style.display = "none";
-gid("chatruleslink").style.display="block";
-gid("chatruleslink2").style.display="block";
-function tomi(){
- const cat = localStorage.getItem("myCat");
- //let r7=localStorage.removeItem('myCat');
- console.warn("***** CAT ***** ", cat);
-/*
- window.location.href="";
- if(!cat && cat !=="Tom"){
- console.log("**** NO CAT ***");
-    location.href="#regeln";
-    const faka = document.querySelector('.overlay:target');
-if(faka){
-	faka.onclick=function(e){e.preventDefault();}
-}
 
-}
-*/
 
-}
 }}else{
 console.log('not initialised');
 }
@@ -454,7 +436,7 @@ lang=='id'?'tentang kami':''}</a></div>
 <script>
 if(FLAGVK){
 	gid("foot").style.display="none";
-	gid("chatruleslink").style.display="block";
+	
 }
 </script>
 <!-- COMPUTER VERSION -->
@@ -503,7 +485,7 @@ lang=='id'?'tentang kami':''}</a></div>
 <script>
 if(FLAGVK){
 gid("foot2").style.display = "none";
-gid("chatruleslink2").style.display="block";
+
 }
 </script>
     </section>
