@@ -96,11 +96,17 @@ overflow:auto;
 	
 	#mediabox{
 		width:100%;
-		height:99vh;
+		height:99.9vh;
 		bakground:yellow;
 		display:block;
 		position:relative;
 		overflow:hidden;
+	}
+
+	@media screen and (max-width: 1001px) and (orientation: landscape){
+	#loginoutput{
+		width:50%;
+	}
 	}
 	#navpanel{
 		width:100%;
@@ -321,6 +327,7 @@ background-image: linear-gradient(147deg, #000000 0%, #434343 74%);
 		order-bottom-right-radius: 10px 10px;
 	
 	}
+	
 	.yourmsg{
 		line-height:2.5;
 		border-radius:10px;
@@ -768,15 +775,16 @@ padding:5px;
 .heart {
 
   display: inline-block;
-  width: 50px;
+  wdth: 50px;
   ackground:yellow;
-  font-size: 2.2rem;
+  font-size: 1.6rem;
   
   /*
   aspect-ratio: 1;
   border-image: radial-gradient(red 69%, #0000 70%) 84.5%/50%;
   clip-path: polygon(-41% 0, 50% 91%, 141% 0);
   */ 
+  transform:translateY(0.5rem);
   cursor:pointer;
 }
 
@@ -785,14 +793,35 @@ div.heartcount{
 	font-size:12px;
 	font-weight:bold;
 	height:20px;
-	ackground:yellow;
+	bckground:yellow;
 	width:100%;
 	position:absolute;
 	left:0%;
 	top:74%;
 	text-align:center;
+	transform:translateY(0.5rem);
+}
+@media screen and (max-width: 1001px) and (orientation: landscape){
+		#txtvalue{
+			height:90%;
+			transform:translateY(-0.4rem);
+		}
+		
+		.heart {
+  transform:translateY(0rem);
+ 
 }
 
+div.heartcount{
+	
+	transform:translateY(0rem);
+}
+	[data-send=one]{
+		transform:translateY(-0.5rem);
+		
+	}	
+		
+	}
 @media screen and (max-width: 452px) and (orientation: portrait){
 #foot,#chatruleslink{
 	display:inline-block;
