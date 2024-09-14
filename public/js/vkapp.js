@@ -41,6 +41,7 @@ function leavingPage(ev){
 	window.location.href = "https://vk.com";
 }
 function showRules(){
+	window.onhashchange = null;
 	var cat = localStorage.getItem("myCat");
  if(!cat && cat !=="Tom"){
  console.log("**** NO CAT ***");

@@ -265,6 +265,7 @@ window.onhashchange = function(ev){
 }
 		
     }
+    
     function confirmRules(){
 
 	localStorage.setItem("myCat", "Tom");
