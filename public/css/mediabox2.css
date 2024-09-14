@@ -1494,8 +1494,31 @@ transform:translateY(5px);
 }
 
 
-
-
+#confirmageoutput{
+	font-size:1rem;
+	line-height:1.5;
+	width:50%;
+}
+#confirmageoutput form{
+	margin-top:10px;
+	margin-bottom:10px;
+}
+#confirmageoutput form b{
+	color:blue;
+}
+[name="contin"],[name=bday],#leavbtn{
+	margin-top:15px;
+	margin-bottom:15px;
+	font-size:1.2rem;
+}
+#leavbtn{
+	margin-top:25px;
+}
+@media screen and (max-width: 452px) and (orientation: portrait){
+#confirmageoutput{
+		width:100%;
+	}
+}
 
 
 

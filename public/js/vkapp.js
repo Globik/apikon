@@ -8,4 +8,58 @@ vkBridge.supportsAsync('VKWebAppResizeWindow').then(res=>{
 		//vkBridge.send('VKWebAppResizeWindow',{'width': 800, 'height': 1000 });
 	}
 })
+
+
+
+}
+ const myAgeForm = document.forms.verifyageform;
+ if(myAgeForm){
+ myAgeForm.addEventListener('submit', confirm_age, false);
+ var agi = localStorage.getItem("myAge");
+if(agi) myAgeForm.bday.value = agi;
+}
+const leavbtn = gid('leavbtn');
+const continbtn = gid('continbtn');
+leavbtn.addEventListener('click', leavingPage, false);
+//continbtn.addEventListener('click', confirm_age, false);
+function confirm_age(ev){
+	ev.preventDefault();
+	try{
+	//alert(ev.target.bday.value);
+	if(isover18(new Date(ev.target.bday.value))){
+		localStorage.setItem("myAge", ev.target.bday.value);
+		showRules();
+	}else{
+		window.location.href = "https://vk.com";
+	}
+}catch(e){
+	//alert(e);
+	console.log(e);
+}
+}
+function leavingPage(ev){
+	window.location.href = "https://vk.com";
+}
+function showRules(){
+	var cat = localStorage.getItem("myCat");
+ if(!cat && cat !=="Tom"){
+ console.log("**** NO CAT ***");
+    location.href="#regeln";
+    const faka = document.querySelector('.overlay:target');
+if(faka){
+	faka.onclick=function(e){e.preventDefault();}
+}
+window.onhashchange = function(ev){
+	console.log('hashchanged');
+	window.location.href='#regeln';
+}
+
+}else{
+	window.location.href="#."
+}
+}
+function isover18(dateofbirth){
+	const date18yrsago = new Date();
+	date18yrsago.setFullYear(date18yrsago.getFullYear() - 18);
+	return dateofbirth <= date18yrsago;
 }

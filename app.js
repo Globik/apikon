@@ -219,14 +219,14 @@ app.get("/about", async(req, res)=>{
 		
 	let result4 = await db.query(`select*from users where vkid=(?)`, [ r.data.response[0].id ]);
 	if(result4.length > 0){
-	return res.rendel('main', { imgData: imgData, lang: 'ru', yacount: JETZT , user: result4[0] });
+	return res.rendel('main', { imgData: imgData, lang: 'ru', yacount: JETZT , user: result4[0], VK: true });
 	}else{
 		let result5 = await db.query(`insert into users(name, vkid, password) values(?,?,'1234')`, [ r.data.response[0].first_name, r.data.response[0].id ]);
 		console.log("INSERT ", result5);
 		let result6 = await db.query(`select*from users where vkid=(?)`, [ result5.insertId.toString() ]);
 		result6[0].id = result5.insertId.toString();
 		let dabu = result6[0];
-		return res.rendel('main', { imgData: imgData, lang: 'ru', yacount: JETZT , user: dabu });
+		return res.rendel('main', { imgData: imgData, lang: 'ru', yacount: JETZT , user: dabu, VK: true });
 		// result5.insertId.toString(), { user
 		
 	}

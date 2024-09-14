@@ -110,9 +110,12 @@ if(f777)f777.style.display = "none";
 let f888=gid("giftbox2");
 if(f888)f888.style.display = "none";
 if(gid('playContainer'))gid('playContainer').style.display = "none";
+function tomi(){
  const cat = localStorage.getItem("myCat");
  //let r7=localStorage.removeItem('myCat');
  console.warn("***** CAT ***** ", cat);
+/*
+ window.location.href="";
  if(!cat && cat !=="Tom"){
  console.log("**** NO CAT ***");
     location.href="#regeln";
@@ -121,7 +124,8 @@ if(faka){
 	faka.onclick=function(e){e.preventDefault();}
 }
 
-
+}
+*/
 
 }
 }}else{
@@ -183,7 +187,8 @@ console.log('not initialised');
     window.onload=function(){
 		if(FLAGVK)return;
 		//get_socket(); 
-   const cat = localStorage.getItem("myCat");
+	
+   var cat = localStorage.getItem("myCat");
    if(!cat && cat !=="Tom"){
     location.href="#regeln";
     const faka = document.querySelector('.overlay:target');
@@ -198,7 +203,8 @@ if(faka){
 }else{
 	let islogin = localStorage.getItem("islogin");
 	//if(!islogin && islogin !=="yes")
-    location.href="#login";
+   location.href="#login";
+ //window.location.href="#confirmAGE";
 	
 const faka = document.querySelector('.overlay:target');
 if(faka){
@@ -246,6 +252,15 @@ gid("foot").style.display = "none";
 gid("foot2").style.display = "none";
 gid("giftbox").style.display = "none";
 gid('playContainer').style.display = 'none';
+window.location.href="#confirmAGE";
+const faka = document.querySelector('.overlay:target');
+if(faka){
+	faka.onclick=function(e){e.preventDefault();}
+}
+window.onhashchange = function(ev){
+	console.log('hashchanged');
+	window.location.href='#confirmAGE';
+}
 
 }
 		
@@ -253,7 +268,11 @@ gid('playContainer').style.display = 'none';
     function confirmRules(){
 
 	localStorage.setItem("myCat", "Tom");
+	window.onhashchange = null;
 	window.location.href="#.";
+}
+
+
 }
     </script>
     `}
@@ -466,7 +485,7 @@ lang=='id'?'pesan':''}" oninput="txtInput(this);" onchange="someChange();"></tex
 
 </div>
 </div>
-<!-- <div class="send" data-send="one" onclick="sendi(this);" value="papa" ><img src="/img/send1.svg"/></div> -->
+ <div class="send" data-send="one" onclick="sendi(this);" value="papa" ><img src="/img/send1.svg"/></div> 
 </div></section>
 </div><div id="foot2"><a href="/"> ${lang=='ru'?'О проекте':
 lang=='en'?'About us':
@@ -480,7 +499,15 @@ gid("foot2").style.display = "none";
     </section>
     </article>
    <!-- <button onclick="pl(this);">play</button> -->
- 
+ <a href="#."  class="overlay" id="confirmAGE"></a>
+    <output id="confirmageoutput" class="popi">
+    <form name="verifyageform"><h2>Предупреждение</h2>
+    <span>Чат рулетка может содежать контент, неприемлемый для несовершеннолетних.</span><span> Поэтому, чтобы продолжить, введите дату вашего рождения</span>
+    <input type="date" name="bday" required min="1940-01-01" autocomplete />
+    <span>В случае, если вам нет 18-ти лет, вы будете перенаправлены на <b>vk.com</b></span>
+    <input type="submit" name="contin" id="continbtn" data-target="continue" value="Продолжить"/></form><input name="leav"  id="leavbtn" data-target="leav" value="Выйти" />
+    </output>
+    
    <!--
     <a href="#."  class="overlay" id="purchaseHREF"></a>
     <output id="purchaseoutput" class="popi">

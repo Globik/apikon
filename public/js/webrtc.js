@@ -530,7 +530,7 @@ window.onhashchange = function(ev){
 return window.location.href='#purchaseHREF';
 
 }else{
-	window.ohashchange = null;
+	window.onhashchange = null;
 }
 */ 
  if(!sock) sock = new  WebSocket(new_uri + "//" + loc3 + "/gesamt");
