@@ -246,9 +246,11 @@ function isOpenModal(){
     </script>`:`<script>
     in_rem_hash();
     const NICK = "${n.user?n.user.name:'anonym'}";
+    var VK_USER = false;
     window.onload = function(){
 		get_socket();
 		if(FLAGVK){
+			VK_USER = true;
 gid("settings").style.display = "none";
 gid("foot").style.display = "none";
 gid("foot2").style.display = "none";

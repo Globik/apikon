@@ -12,6 +12,7 @@ var mobChat = false;
 var isOpen = false;
 var PSENDER = false;
 var F = false;
+//var VK_USER = false;
 var isShow = false;
 var someInterval;
 var OPENCLAIM = false;
@@ -933,7 +934,9 @@ console.log(vers);
 console.log("<b>Your browser, version:</b> " + brows + " " + vers);
 function on_check_banned(){}
 function on_check_banned_error(){}
+
 function start(el){
+	
 	 if(NICK == "anon" || NICK == undefined){
 		let s = (L()=="ru"?"Залогиньтесь!":L()=='en'?"Please log in":L()=='zh'?'请登录':L()=='id'?'Silahkan masuk':'')
 		 note({content: s, type: "warn", time: 5 });
@@ -947,6 +950,7 @@ function start(el){
 	
 		return;
 	}
+	if(VK_USER) return;
 	let sdata = {};
 	sdata.myip = MYIP;
 	sdata.usid = userId.value;

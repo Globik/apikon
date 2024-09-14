@@ -39,6 +39,7 @@ function confirm_age(ev){
 	//alert(e);
 	console.log(e);
 }
+VK_USER = false;
 }
 /*
 function leavingPage(ev){
