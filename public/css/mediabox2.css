@@ -242,10 +242,10 @@ section#giftsContainer.hidden,section#giftsContainer2.hidden{
 	#textarea{
 		position:relative;
 		border-radius:10px;
-		
+		padding:0;
 		width:100%;
 		height: 100%;
-		order:1px solid green;
+		brder:1px solid green;
 		display:flex;
 		flex-wrap: wrap;
     flex-direction: row;
@@ -263,6 +263,7 @@ section#giftsContainer.hidden,section#giftsContainer2.hidden{
 		brder:1px solid yellow;
 		border-radius:100%;
 		margin-right:10px;
+		transform:translateY(-2px);	
 		order-top-right-radius:10px 10px;
 		brder-bottom-right-radius: 10px 10px;
 		object-fit:cover;
@@ -270,15 +271,17 @@ section#giftsContainer.hidden,section#giftsContainer2.hidden{
 	}
 	#txtvalue{
 		olor:red;
-		ackground:red;
+		bakground:red;
 		width:calc(100% - 190px);
 		border-radius:30px;
-		
+		height:90%;
+		transform:translateY(-2px);	
 		}
 		#giftbox2{
 			width:70px;
 			height:70px;
-			
+			transform:translateY(-2px);	
+			transform:translateX(-2px);	
 			border:1ps solid yellow;
 		}
 		#giftbox2 span{

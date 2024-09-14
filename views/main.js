@@ -432,7 +432,7 @@ lang=='en'?'About us':
 lang=='zh'?'关于我们':
 lang=='id'?'tentang kami':''}</a></div>
 </div>
-<div id="chatruleslink"><a href="#regeln">Правила чата</a></div>
+${n.VK?`<div id="chatruleslink"><a href="#regeln">Правила чата</a></div>`:''}
 <script>
 if(FLAGVK){
 	gid("foot").style.display="none";
@@ -476,12 +476,13 @@ lang=='id'?'pesan':''}" oninput="txtInput(this);" onchange="someChange();"></tex
 </div>
 </div>
  <div class="send" data-send="one" onclick="sendi(this);" value="papa" ><img src="/img/send1.svg"/></div> 
-</div></section>
+</div>
+</section>
 </div><div id="foot2"><a href="/"> ${lang=='ru'?'О проекте':
 lang=='en'?'About us':
 lang=='zh'?'关于我们':
 lang=='id'?'tentang kami':''}</a></div>
-<div id="chatruleslink2"><a href="#regeln">Правила чата</a></div>
+${n.VK?`<div id="chatruleslink2"><a href="#regeln">Правила чата</a></div>`:''}
 <script>
 if(FLAGVK){
 gid("foot2").style.display = "none";
