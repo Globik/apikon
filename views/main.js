@@ -236,7 +236,7 @@ function isOpenModal(){
 			VK_USER = true;
 gid("settings").style.display = "none";
 gid("foot").style.display = "none";
-gid("foot2").style.display = "none";
+gid("foot2").style.display = "none"
 gid('playContainer').style.display = 'none';
 window.location.href="#confirmAGE";
 const faka = document.querySelector('.overlay:target');
@@ -394,14 +394,13 @@ ${n.user?`<div class="settingspanel" onclick="logout(this);">${lang=='ru'?'Вы�
 lang=='en'?'Message':
 lang=='zh'?'信息':
 lang=='id'?'pesan':''}" oninput="txtInput(this);" onchange="someChange();"></textarea>
-${n.VK?``:`<div id="giftbox">
+${n.VK?'':`<div id="giftbox">
 <!-- <span>&#x1f381</span> -->
 <div class="flexgiftsitem">
 <div class="heart" data-type="mobile">&#x1f496</div>
 <div class="heartcount">${n.user?istestheart?n.user.theart:n.user.heart:0}</div>
-
-</div>`}
 </div>
+</div>`}
 <!-- <div class="send" data-send="two" onclick="sendi(this);"><img src="/img/send1.svg"/></div> -->
 </div></section>
 </section> 
