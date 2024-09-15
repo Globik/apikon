@@ -647,6 +647,7 @@ section#mobileChat{
   width: 48px;
   height: 48px;
   border-radius: 50%;
+  left:15px;
   display: inline-block;
   position: relative;
   border: 3px solid;
@@ -818,6 +819,8 @@ div.heartcount{
 }
 	[data-send=one]{
 		transform:translateY(-0.5rem);
+		
+		
 		
 	}	
 		

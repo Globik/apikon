@@ -306,7 +306,7 @@ function gotDevices(deviceInfos){
 }
 function getDevice(){
 if(!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices){
-alert("your browser navigator.mediaDevices not supported");
+note({ content: "Your browser navigator.mediaDevices not supported", type: "warn", time: 5 });
 }else{
 navigator.mediaDevices.enumerateDevices().then(gotDevices).catch(function(err){console.error(err)});
 }
@@ -542,7 +542,7 @@ return window.location.href='#purchaseHREF';
 	 wsend({ type: "helloServer", userId: gid("userId").value?gid("userId").value:'anon', isprem: Prem.value, nick: userName.value, logged:  Login()?"yes":"no", LANG: L });
   };
   sock.onerror = function (e) {
-    note({ content: "Websocket error: " + e, type: "error", time: 5 });
+   // note({ content: "Websocket error: " + e, type: "error", time: 5 });
   };
   
   sock.onmessage = function (evt) {
@@ -2021,7 +2021,7 @@ function onHeartClick(ev){
 		 g = "heart";
 		heartcount.textContent = quant;	
 		let cc = Number.parseFloat(quant*0.10).toFixed(2);
-		dohod.textContent =  cc;
+		if(dohod)dohod.textContent =  cc;
 		 payoutamountid.value = cc;
 		}
 	}
@@ -2075,7 +2075,7 @@ function handleGift(msg){
 	let a1 = Number(heartcountels[1].textContent);
 	let b = heartcountels[1].textContent = n1 + a1;
 	let cd = Number.parseFloat(b*0.10).toFixed(2);
-	dohod.textContent =  cd;
+	if(dohod)dohod.textContent =  cd;
 	payoutamountid.value = cd;
 	
 }
@@ -2089,7 +2089,7 @@ function handleGift2(msg){
 	let a1 = Number(heartcountels[1].textContent);
 	let b = heartcountels[1].textContent = n1 + a1;
 	let cd = Number.parseFloat(b*0.10).toFixed(2);
-	dohod.textContent =  cd;
+	if(dohod)dohod.textContent =  cd;
 	payoutamountid.value = cd;
 }
 
@@ -2150,6 +2150,7 @@ function on_payurl_error(l, el){
 	note({ content: l.message, type: "error", time: 5 });
 }
  function getPayout(el){
+	 if(!dohod)return;
 	panelOpen();
 	if(!Login()){
 		window.location.href = "#login";
@@ -2180,7 +2181,7 @@ function onpayoutsubmit(ev){
 	d.account = ev.target.payoutaccount.value;
 	d.amount = ev.target.payoutamount.value;
 	if(Number(d.amount) == 0 || Number(d.amount == 0.00)){
-		//note({ content: "Нечего и минимум 1000 рублей на вывод накопить", type: "warn", time: 10 });
+		note({ content: "Нечего и минимум 1000 рублей на вывод накопить", type: "warn", time: 10 });
 		alert("Нечего и минимум 1000 рублей на вывод накопить");
 		return;
 	}
@@ -2205,7 +2206,7 @@ function on_payout(l, el){
 	el.className = "";
 	el.disabled = false;
 	if(l.error){
-		alert(l.message);
+		//alert(l.message);
 		note({ content: l.message, type: "error", time: 5 });
 		return;
 	}
@@ -2232,7 +2233,8 @@ function on_getInvoice(l,el){
 	console.log(l);
 	el.classList.remove("puls");
 	if(l.error){
-		alert(l.error);
+		//alert(l.error);
+		console.error(l.error);
 		note({content:l.error, type:"error", time: 5 });
 		return;
 	}
@@ -2248,12 +2250,15 @@ function copy(){
 		//note({ content: "OK, copied!", type: "info", time: 5 });
 		alert("Ok, copied");
 	}, function(err){
-		alert(err);
+		//alert(err);
+		
+		console.log(err);
 	});
 }
 
 function on_getInvoice_error(l,v){
-	alert(l);
+	//alert(l);
+	console.log(l);
 	v.classList.remove("puls");
 	v.disabled = false;
 	

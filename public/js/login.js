@@ -173,7 +173,8 @@ return;
 	//localStorage.removeItem("myCat");
 	location.reload();
 }}catch(err){
-	alert(err);
+	console.error(err);
+	//alert(err);
 }
 }
 
@@ -245,7 +246,7 @@ if(containervk){
 		}}).on(VKID.WidgetEvents.ERROR, vkerr);
 }
 function vkerr(err){
-	alert(err);
+	//alert(err);
 	console.log(err);
 }
 const url2 = new URL(window.location.href);
@@ -305,7 +306,7 @@ location.reload();
 }
 }catch(e){
 	console.error(e);
-	alert('err '+JSON.stringify(e));
+	//alert('err '+JSON.stringify(e));
 	//await fetch('/newfucker', {method: "POST",headers: {"Content-Type": "application/json",}, body: JSON.stringify(e) });
 	setTimeout(() => {
           errormsg.textContent = "";

@@ -293,8 +293,8 @@ window.onhashchange = function(ev){
   
      </script>
      <article id="mediabox">
-    <nav id="navpanel"><div class="nav"><b>Online: <span id="onlineCount">0</span></b>&nbsp;&nbsp;&nbsp;<b style="font-size:18px;">&#x1F441;</b>&nbsp;&nbsp;&nbsp;
-    <span id="vV" style="color:orange;font-weight:bold;">${n.imgData && n.imgData.img_data?n.imgData.value:0}</span>
+    <nav id="navpanel"><div class="nav"><b>Online: <span id="onlineCount">0</span></b>${n.VK?'':`&nbsp;&nbsp;&nbsp;<b style="font-size:18px;">&#x1F441;</b>&nbsp;&nbsp;&nbsp;
+    <span id="vV" style="color:orange;font-weight:bold;">${n.imgData && n.imgData.img_data?n.imgData.value:0}</span>`}
    ${n.user && n.user.prem=="y"? '&nbsp;&nbsp;&nbsp;<span style="color:#d5a8a8;">Premium &nbsp;&nbsp;&#x1F451;</span>':''} 
     </div>
     
@@ -395,13 +395,13 @@ ${n.user?`<div class="settingspanel" onclick="logout(this);">${lang=='ru'?'Вы�
 lang=='en'?'Message':
 lang=='zh'?'信息':
 lang=='id'?'pesan':''}" oninput="txtInput(this);" onchange="someChange();"></textarea>
-<div id="giftbox">
+${n.VK?``:`<div id="giftbox">
 <!-- <span>&#x1f381</span> -->
 <div class="flexgiftsitem">
 <div class="heart" data-type="mobile">&#x1f496</div>
 <div class="heartcount">${n.user?istestheart?n.user.theart:n.user.heart:0}</div>
 
-</div>
+</div>`}
 </div>
 <!-- <div class="send" data-send="two" onclick="sendi(this);"><img src="/img/send1.svg"/></div> -->
 </div></section>
@@ -436,7 +436,7 @@ ${n.VK?`<div id="chatruleslink"><a href="#regeln">Правила чата</a></d
 <script>
 if(FLAGVK){
 	gid("foot").style.display="none";
-	
+	if(gid("giftbox"))gid("giftbox").style.display="none";
 }
 </script>
 <!-- COMPUTER VERSION -->
@@ -467,14 +467,14 @@ if(FLAGVK){
 lang=='en'?'Message':
 lang=='zh'?'信息':
 lang=='id'?'pesan':''}" oninput="txtInput(this);" onchange="someChange();"></textarea>
-<div id="giftbox2" data-state="closed">
+${n.VK?'':`<div id="giftbox2" data-state="closed">
 <!-- <span>&#x1f381</span> -->
 <div class="flexgiftsitem">
 <div class="heart" data-type="computer">&#x1f496</div>
 <div class="heartcount">${n.user?istestheart?n.user.theart:n.user.heart:0}</div>
 
 </div>
-</div>
+</div>`}
  <div class="send" data-send="one" onclick="sendi(this);" value="papa" ><img src="/img/send1.svg"/></div> 
 </div>
 </section>
@@ -486,7 +486,7 @@ ${n.VK?`<div id="chatruleslink2"><a href="#regeln">Правила чата</a></
 <script>
 if(FLAGVK){
 gid("foot2").style.display = "none";
-
+if(gid("giftbox2"))gid('giftbox2').style.display='none';
 }
 </script>
     </section>
