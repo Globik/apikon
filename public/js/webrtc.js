@@ -1934,8 +1934,8 @@ const giftbox = document.getElementById("giftbox");
 const heartels = document.querySelectorAll("div.heart");
 //const heartcountels = document.querySelectorAll("div.heartcount");
 
-giftbox2.addEventListener('click', openGiftBox, false);
-giftbox.addEventListener('click', openGiftBox2, false);
+if(giftbox2)giftbox2.addEventListener('click', openGiftBox, false);
+if(giftbox)giftbox.addEventListener('click', openGiftBox2, false);
 if(giftsContainer)giftsContainer.addEventListener('click', ongiftscontainer, false);
 if(giftsContainer2)giftsContainer2.addEventListener('click', ongiftscontainer2, false);
 
