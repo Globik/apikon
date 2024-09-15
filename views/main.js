@@ -237,7 +237,6 @@ function isOpenModal(){
 gid("settings").style.display = "none";
 gid("foot").style.display = "none";
 gid("foot2").style.display = "none";
-gid("giftbox").style.display = "none";
 gid('playContainer').style.display = 'none';
 window.location.href="#confirmAGE";
 const faka = document.querySelector('.overlay:target');
