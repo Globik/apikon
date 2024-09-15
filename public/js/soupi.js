@@ -22,9 +22,9 @@ function goMedia(data){
        if (vV) vV.textContent = data.value;
     } else if (data.type == "producer_unpublished") {
        if (vV) vV.textContent = 0;
-       gid('kartina').setAttribute('poster',  "");
+     if(gid('kartina'))  gid('kartina').setAttribute('poster',  "");
        publishedId = null;
-       gid("playContainer").setAttribute("data-state", "niemand");
+      if(gid('playContainer')) gid("playContainer").setAttribute("data-state", "niemand");
         pauseVideo(remote);
          let a = document.querySelector('div#playContainer #kresti');
          if(a)a.className = "";//a.classList.toggle('show');
@@ -50,14 +50,14 @@ function goMedia(data){
       //  disableElement("startMediaBtn");
       //  disableElement("stopMediaBtn");
       gid("playContainer").setAttribute("data-state", "busy");
-        gid('kartina').setAttribute('poster',  data.img_data);
+      if(!FLAGVK)  gid('kartina').setAttribute('poster',  data.img_data);
         publishedId = data.publishedId;
         let a = document.querySelector('div#playContainer svg');
         if(a) a.style.fill = 'rgba(234,223,244,0.6)';
         //alert(data.img_data);
     } else if (data.type == "perror") {
 
-        note({content: data.info, type: "error", time: 5});
+      if(!FLAGVK)  note({content: data.info, type: "error", time: 5});
     } else {
         console.warn("Unknown type: ", data.type);
     }
