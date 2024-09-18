@@ -1374,7 +1374,7 @@ async function searchPeer (socket, msg, source) {
 		 console.log("**** PEER SOCKET ***");
 		 
 		 if(amap.has(peerSocket.userId)){
-			 console.log("*** HAS!!! ***");
+			 console.log("*** HAS ignore!!! ***");
 			 amap.clear();
 			 break;
 		 }
@@ -1428,7 +1428,7 @@ async function searchPeer (socket, msg, source) {
 //  console.log(`#${socket.id} ${socket.nick} adds self into waiting queue`)
 // console.log("waiting ", waitingQueue);
  //console.log("*** MSG>IGNORES ***",  msg, " ", source.ignores);
- oni("Сейчас ", socket.nick + " online: " + wsServer.clients.size);
+ //oni("Сейчас ", socket.nick + " online: " + wsServer.clients.size);
  if(!source || !source.src) return;
      
 		try{

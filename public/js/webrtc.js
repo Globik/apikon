@@ -1486,7 +1486,7 @@ window.addEventListener("online", function(e) {
 	   //next(nextbtn, false, amma, false);
 	   //pl();
 	   if(HELP == 10){
-		   window.location.href="#helproject";
+		//   window.location.href="#helproject";
 	   }
 	   HELP++;
 	   el.disabled = true;
@@ -1549,25 +1549,26 @@ function iceConnectionStateChangeHandler (event) {
     break;
     case 'failed':
     console.log('ice failed');
-     note({content: "Failed! Press stop, then start", type: "warn", time: 5 });
+    // note({content: "Failed! Press stop, then start", type: "warn", time: 5 });
      break;
     case 'disconnected':
     CONNECTED = false;
     console.log('ice disconnected');
-    note({content: "Disconnected! Press next. Online: " + navigator.onLine, type: "warn", time: 5 });
+    note({content: "Временная потеря сигнала ", type: "warn", time: 10 });
   if(navigator.onLine){
-	  wsend({type: "hang-up", ignore: [[0,{}]], sub: "abrupt" });
-	  next(nextbtn, false, false, false);
+	 // wsend({type: "hang-up", ignore: [[0,{}]], sub: "abrupt" });
+	 // next(nextbtn, false, false, false);
    }else{
 	   
-	 if(sock)  sock.close();
-	 closeAll(startbtn);
+	// if(sock)  sock.close();
+	// closeAll(startbtn);
    }
       break;
   }
 }
 
 function iceGatheringStateChangeHandler (event) {
+	// todo ???? hangs up on complete
   console.log('*** ICE gathering state changed to: ' + event.target.iceGatheringState)
 //  if(event.target.iceGatheringState=="complete")next(nextbtn);
 }
