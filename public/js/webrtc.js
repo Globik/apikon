@@ -648,7 +648,7 @@ function on_msg(msg) {
         console.warn("a3", a3);
         if(!a3){
 			console.warn("was isch");
-		handlePeerMatched()
+		handlePeerMatched();
 	}else{
 		console.error("some ignor");
 		//wsend({ type: "hang-up" });
@@ -991,7 +991,7 @@ el.textContent = L()=="ru"?"стоп":L()=='en'?"stop":L()=='zh'?'停止':L()=='
 	el.disabled = false;
 	el.className = "stop";
 	
-		makeRecord(stream);
+	//	makeRecord(stream);
 	
 
 

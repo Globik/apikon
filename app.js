@@ -1424,38 +1424,17 @@ async function searchPeer (socket, msg, source) {
 	 broadcast({ type: "dynamic", sub: "add", id: socket.id, nick: socket.nick, status: 'free', camcount: onLine.size });
 	 broadcast_admin({ type: "dynamic", sub: "add", id: socket.id, src: source.src, nick: socket.nick, status: 'free', camcount: onLine.size });
 	if(isEven(matchedIds.size))broadcasti({ type: "connected2", size: matchedIds.size/2 });
- }
+ }}
 //  console.log(`#${socket.id} ${socket.nick} adds self into waiting queue`)
 // console.log("waiting ", waitingQueue);
  //console.log("*** MSG>IGNORES ***",  msg, " ", source.ignores);
  //oni("Сейчас ", socket.nick + " online: " + wsServer.clients.size);
+ 
+ /*
  if(!source || !source.src) return;
      
 		try{
-			/*
-			let b11 = source.src.split(',')[1];
-    // console.log('b11 ', b11);
-		let kk = 0;
-		let buf = Buffer.from(b11, "base64");
-		let grid = '887539364'
-			console.log("socket.userId ", socket.userId);
-		//	console.log('source ', source.src);
-	var f = new FormData();
-	f.append('chat_id', grid);
-	f.append('parse_mode', 'html');
-	f.append('caption', '<b>'+ socket.nick + ' (' + socket.userId + ')</b>'+' запустил трансляцию. \nПосмотреть на <a href="https://rouletka.ru/about">https://rouletka.ru</a>\n\n JOIN THE GROUP <a href="https://t.me/roulette7776">Roulette</a>');
-	f.append('disable_notification', true);
-	f.append('photo', new Blob([buf]));
-	f.append('reply_markup', `{"inline_keyboard":[
-	[{"text":"Make it gold","callback_data":"usid=${socket.userId}&action=gold&nick=${socket.nick}"}],
-	[{"text":"vual","callback_data":"usid=${socket.userId}&action=ban&grund=vual&ip=${socket.vip}"}],
-	[{"text":"wix","callback_data":"usid=${socket.userId}&action=ban&grund=wix&ip=${socket.vip}"}]
-	]}`);
-	
-	
-
-	let rr = await axios.post(`https://api.telegram.org/bot${tg_api}/sendPhoto`, f); 
-	*/ 
+			
 	let ra = await pool.query('select * from usergold where usid=(?)', [ socket.userId ]);
 	console.log('ra ', ra);
 	if(ra.length > 0){
@@ -1473,20 +1452,20 @@ async function searchPeer (socket, msg, source) {
 	}); 
 
 
-await Promise.all(notifyUsers);
-	}
+await Promise.all(notifyUsers);*/
+	
 	//console.log('rr data ', rr.data);
 	//console.log('photo ', JSON.stringify(rr.data.result.photo));
 	//photo  [{"file_id":"AgACAgIAAxkDAAIDxGaZaPP98n4DhSIdhxsY8vnJkFlaAAKb5DEbP7LQSHWCfC1l2CawAQADAgADcwADNQQ","file_unique_id":"AQADm-QxGz-y0Eh4","file_size":554,"width":90,"height":67},
 	//{"file_id":"AgACAgIAAxkDAAIDxGaZaPP98n4DhSIdhxsY8vnJkFlaAAKb5DEbP7LQSHWCfC1l2CawAQADAgADbQADNQQ","file_unique_id":"AQADm-QxGz-y0Ehy","file_size":6510,"width":320,"height":240}]
-var f2 = new FormData();
+/*var f2 = new FormData();
 f2.append('chat_id', grid);
 	f2.append('title','Подписка на ' + socket.nick);
 	f2.append('description', '<a href="HH.ru">test</a> Подписаться на уведомления о том, когда '+socket.nick+' будет онлайн в чат-рулетке. Уведомление придет к вам в телегу');
 	f2.append('payload', 'payload');
 	f2.append('currency', 'XTR');
 	f2.append('prices', '[{"label":"my product","amount":1}]');
-	f2.append('parse_mode', 'html');
+	f2.append('parse_mode', 'html');*/
 	//f2.append('photo_url', "AQADm-QxGz-y0Eh4");
 	//await axios.post(`https://api.telegram.org/bot${tg_api}/sendInvoice`, f2); 
 	/*
@@ -1498,13 +1477,13 @@ f2.append('chat_id', grid);
 			inline_keyboard:[[{one_time_keyboard:false,text:'loser',callback_data:'sticker'}]]
 			}
 	});*/
-		}catch(e){
-			console.log(e);
-		}
+		//}catch(e){
+			//console.log(e);
+		//}
 	 
 	 
   
-}
+
 async function sendFoti(socket,msg){
 	let b11 = msg.src.split(',')[1];
     // console.log('b11 ', b11);
