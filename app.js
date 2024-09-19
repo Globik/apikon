@@ -1134,6 +1134,7 @@ app.post('/btccb', async (req, res)=>{
 res.status(200).send(invoice)
 })
 app.post('/api/setviewdvk', async(req, res)=>{
+	console.log('body ', req.body);
 	let { vkid } = req.body;
 	if(!vkid){
 		return res.json({message: "No vkid"});
