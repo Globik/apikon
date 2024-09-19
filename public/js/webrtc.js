@@ -1492,6 +1492,9 @@ window.addEventListener("online", function(e) {
 			.then(data=>{
 				if(data.result){
 					console.log('reklama');
+					setTimeout(function(){
+						vkBridge.send('VKWebAppHideBannerAd').then(d=>{}).catch(er=>{console.error(er)});
+					},1000*10);
 				}
 			}).catch(err=>{
 				console.error(err);
