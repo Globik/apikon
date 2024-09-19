@@ -937,11 +937,11 @@ function on_check_banned_error(){}
 
 function start(el){
 	
-	/* if(NICK == "anon" || NICK == undefined){
+	 if(NICK == "anon" || NICK == undefined){
 		let s = (L()=="ru"?"Залогиньтесь!":L()=='en'?"Please log in":L()=='zh'?'请登录':L()=='id'?'Silahkan masuk':'')
 		 note({content: s, type: "warn", time: 5 });
 		 return;
-	  }*/
+	  }
 	if(!sock) {
 		get_socket();
 		}
@@ -1487,6 +1487,16 @@ window.addEventListener("online", function(e) {
 	   //pl();
 	   if(HELP == 10){
 		//   window.location.href="#helproject";
+		if(vkBridge){
+			vkBridge.send('VKWebAppShowBannerAd',{banner_location:'bottom'})
+			.then(data=>{
+				if(data.result){
+					console.log('reklama');
+				}
+			}).catch(err=>{
+				console.error(err);
+			});
+		}
 	   }
 	   HELP++;
 	   el.disabled = true;
