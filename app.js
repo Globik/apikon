@@ -332,7 +332,7 @@ app.get('/about/id', async(req, res)=>{
 	res.rendel('main', { imgData: imgData, lang: 'id', yacount: JETZT });
 })
 app.get("/", async(req, res)=>{
-	oni((req.user?req.user.name:'anonym'), " on about");
+	//oni((req.user?req.user.name:'anonym'), " on about");
 	res.rendel('about', {});
 })
 app.get('/lolo', async(req,res)=>{
@@ -1002,14 +1002,14 @@ app.post('/api/register', (req, res, next)=>{
 				return next(err);
 			}
 			//console.log("USERNAME: ", info.username);
-		oni(info.name, " registered");
+	//	oni(info.name, " registered");
 		res.json({ user: user });
 		});
 	})(req, res, next);
 })
 app.post('/api/setDonation', async(req, res)=>{
 	console.log("signal: ", req.body);
-	oni(req.body.nick, " it looks like gone donation");
+	//oni(req.body.nick, " it looks like gone donation");
 	res.json({ message: "ok"});
 })
 app.get("/dashboard", secured, isAdmin(['admin']), async(req, res)=>{
@@ -1369,10 +1369,10 @@ console.log('suka ', ed2, " ", ign.size)
 //console.log("bb ", bb)
 
 async function searchPeer (socket, msg, source) {
-	console.log('msg****',msg);
+	//console.log('msg****',msg);
 
-		console.log("search peer 1",  waitingQueue.length, waitingQueue);
-		console.log("*** MSG>IGNORES ***",  msg, " ", source.ignores);
+	//	console.log("search peer 1",  waitingQueue.length, waitingQueue);
+	//	console.log("*** MSG>IGNORES ***",  msg, " ", source.ignores);
   while (waitingQueue.length) {
 	  
     let index = Math.floor(Math.random() * waitingQueue.length)
@@ -1387,10 +1387,10 @@ async function searchPeer (socket, msg, source) {
     
     let peerSocket = getPeerSocket(peerId)
      if(peerSocket){
-		 console.log("**** PEER SOCKET ***");
+		// console.log("**** PEER SOCKET ***");
 		 
 		 if(amap.has(peerSocket.userId)){
-			 console.log("*** HAS ignore!!! ***");
+			// console.log("*** HAS ignore!!! ***");
 			 amap.clear();
 			 break;
 		 }
@@ -1400,20 +1400,20 @@ async function searchPeer (socket, msg, source) {
 //console.log("search peer 2")
     if (peerSocket) {
 		//console.log("search peer 3")
-		console.log('matchedIds1=>', [...matchedIds]);
+		//console.log('matchedIds1=>', [...matchedIds]);
       matchedIds.set(socket.id, peerId)
       matchedIds.set(peerId, socket.id)
      // console.log("IP: ", socket.vip);
       msg.vip = peerSocket.vip;
-      console.log('matchedIds2=>', [...matchedIds]);
+     // console.log('matchedIds2=>', [...matchedIds]);
       	msg.partnerId = peerSocket.userId;
       	msg.nick = peerSocket.nick;
       	console.log("*** NICK *** ", peerSocket.nick, ' ', peerSocket.isprem);
       	msg.isprem = peerSocket.isprem;
       	let el = JSON.stringify(msg);
-      	console.log(" **** EL ***", el);
+      //	console.log(" **** EL ***", el);
       socket.send(el);
-      console.log(`#${socket.id} matches #${peerId}`)
+     // console.log(`#${socket.id} matches #${peerId}`)
      if(!onLine.has(socket.id)) {
 	 onLine.set(socket.id, { id: socket.id, src: source.src, nick: socket.nick, status: 'busy' });
 	 broadcast({ type: "dynamic", sub: "add", id: socket.id, partnerid: peerId, nick: socket.nick, status: 'busy', camcount: onLine.size});
@@ -1435,7 +1435,7 @@ async function searchPeer (socket, msg, source) {
   waitingQueue.push(socket.id);
   
  if(!onLine.has(socket.id)) {
-	 console.log("*** ONLINE *** ", onLine.has(socket.id));
+	// console.log("*** ONLINE *** ", onLine.has(socket.id));
 	 onLine.set(socket.id, { id: socket.id, src: source.src, nick: socket.nick, status: 'free' });
 	 broadcast({ type: "dynamic", sub: "add", id: socket.id, nick: socket.nick, status: 'free', camcount: onLine.size });
 	 broadcast_admin({ type: "dynamic", sub: "add", id: socket.id, src: source.src, nick: socket.nick, status: 'free', camcount: onLine.size });
