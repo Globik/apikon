@@ -197,7 +197,7 @@ if(faka){
 	}
 }
 }else{
-	let islogin = localStorage.getItem("islogin");
+	${!n.VK?`let islogin = localStorage.getItem("islogin");
 	//if(!islogin && islogin !=="yes")
   location.href="#login";
 // window.location.href="#confirmAGE";
@@ -208,7 +208,7 @@ if(faka){
 		e.preventDefault();
 	
 	}
-}
+}`:''}
 }
 in_rem_hash();
 
