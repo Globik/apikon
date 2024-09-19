@@ -165,8 +165,8 @@ console.log('not initialised');
     <input type="hidden" id="Lang" value="${n.lang}" />
     <input type="hidden" id="Grund" value="${n.user?n.user.grund:0}" />
     <input type="hidden" id="isEnter" value="${n.user?n.user.entr==0?true:false:false}" />
-    <input type="hidden" id="VKID" value="${n.user?n.user.vkid:null}" />
-    <!-- ${n.user? JSON.stringify(n.user):'no user'} -->
+    <input type="hidden" id="VKID" value="${n.buser?n.buser.vkid:null}" />
+    <!-- ${n.buser? JSON.stringify(n.buser):'no buser'} -->
     
     ${!n.user?`<script>
     const NICK = "anon";
