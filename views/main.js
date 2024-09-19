@@ -170,16 +170,18 @@ console.log('not initialised');
     <!-- {n.user? JSON.stringify(n.user):'no user'} -->
     
     ${!n.user?`<script>
-    const NICK = "anon";
+    var NICK = "anon";
     window.onload=function(){
 	${n.VK?`
 		
 		${n.buser&&n.buser.entr==0?` window.location.href="#confirmAGE";`:''}
 		 const fakad = document.querySelector('.overlay:target');
+		 NICK=${n.buser.name}
 if(fakad){
 	fakad.onclick=function(e){
 		e.preventDefault();
 	}
+	get_socket();
 	return;
 }`:''}
 		//get_socket(); 
