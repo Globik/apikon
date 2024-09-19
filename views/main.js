@@ -239,7 +239,7 @@ gid("settings").style.display = "none";
 gid("foot").style.display = "none";
 gid("foot2").style.display = "none"
 gid('playContainer').style.display = 'none';
-${n.user?n.user.entr==0?'window.location.href="#confirmAGE";':'':''}
+${n.buser?n.buser.entr==0?'window.location.href="#confirmAGE";':'':''}
 const faka = document.querySelector('.overlay:target');
 if(faka){
 	faka.onclick=function(e){e.preventDefault();}
