@@ -31,7 +31,7 @@ function confirm_age(ev){
 	//alert(ev.target.bday.value);
 	if(isover18(new Date(ev.target.bday.value))){
 	//	localStorage.setItem("myAge", ev.target.bday.value);
-	vax('post','/api/setviewdvk', { vid: VKID.value }, onsetviewd, onsetviewd_error, null, false);;
+	vax('post','/api/setviewdvk', { vkid: VKID.value }, onsetviewd, onsetviewd_error, null, false);;
 		showRules();
 	}else{
 		gid('outputing').style.visibility = 'visible';
