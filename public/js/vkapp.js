@@ -30,9 +30,9 @@ function confirm_age(ev){
 	try{
 	//alert(ev.target.bday.value);
 	if(isover18(new Date(ev.target.bday.value))){
-		alert('VKID '+VKID.value);
+		alert('VKID '+gid('VKID').value);
 	//	localStorage.setItem("myAge", ev.target.bday.value);
-	vax('post','/api/setviewdvk', { vkid: VKID.value }, onsetviewd, onsetviewd_error, null, false);;
+	vax('post','/api/setviewdvk', { vkid: gid('VKID').value }, onsetviewd, onsetviewd_error, null, false);;
 		showRules();
 	}else{
 		gid('outputing').style.visibility = 'visible';
