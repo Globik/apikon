@@ -172,7 +172,16 @@ console.log('not initialised');
     ${!n.user?`<script>
     const NICK = "anon";
     window.onload=function(){
-	if(FLAGVK)return;
+	if(FLAGVK){
+		
+		 window.location.href="#confirmAGE";
+		 const fakad = document.querySelector('.overlay:target');
+if(fakad){
+	fakad.onclick=function(e){
+		e.preventDefault();
+	}
+	return;
+}
 		//get_socket(); 
 	
    var cat = localStorage.getItem("myCat");
