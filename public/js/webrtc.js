@@ -1485,10 +1485,10 @@ window.addEventListener("online", function(e) {
    function next(el, bool, ignores, isIgnore){
 	   //next(nextbtn, false, amma, false);
 	   //pl();
-	   if(HELP == 10){
+	   if(HELP == 5){
 		//   window.location.href="#helproject";
 		if(vkBridge){
-			vkBridge.send('VKWebAppShowBannerAd',{banner_location:'bottom'})
+			vkBridge.send('VKWebAppShowBannerAd',{banner_location:'top'})
 			.then(data=>{
 				if(data.result){
 					console.log('reklama');
