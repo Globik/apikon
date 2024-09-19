@@ -176,7 +176,7 @@ console.log('not initialised');
 		
 		${n.buser&&n.buser.entr==0?` window.location.href="#confirmAGE";`:''}
 		 const fakad = document.querySelector('.overlay:target');
-		 NICK=${n.buser.name}
+		 NICK="${n.buser.name}";
 if(fakad){
 	fakad.onclick=function(e){
 		e.preventDefault();
