@@ -1488,7 +1488,7 @@ window.addEventListener("online", function(e) {
 	   if(HELP == 3){
 		//   window.location.href="#helproject";
 		if(vkBridge){
-			vkBridge.send('VKWebAppShowBannerAd',{banner_location:'top'})
+			vkBridge.send('VKWebAppShowBannerAd',{banner_location:'bottom'})
 			.then(data=>{
 				if(data.result){
 					console.log('reklama');
