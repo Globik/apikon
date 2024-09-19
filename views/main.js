@@ -182,7 +182,7 @@ if(fakad){
 	}
 	return;
 }
-`:}
+`:''}
 		`:}//get_socket(); 
 	
    var cat = localStorage.getItem("myCat");
