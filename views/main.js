@@ -181,7 +181,7 @@ if(fakad){
 	fakad.onclick=function(e){
 		e.preventDefault();
 	}
-	get_socket();
+	
 	return;
 }`:''}
 		//get_socket(); 
@@ -238,7 +238,7 @@ function isOpenModal(){
 	}
 }
 }
-
+get_socket();
     </script>`:`<script>
     in_rem_hash();
     const NICK = "${n.user?n.user.name:'anonym'}";

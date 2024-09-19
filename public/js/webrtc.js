@@ -500,7 +500,7 @@ function setSignal(){
 }
 //window.onpagehide=function(){alert('open')}
 function get_socket() {
-	 if(NICK == "anon" || NICK == undefined){
+	/* if(NICK == "anon" || NICK == undefined){
 		// sock.close();
 		let s = L()=="ru"?"Залогиньтесь!":L()=='en'?"You should log in!":
 		L()=='zh'?'您应该登录！':
@@ -513,7 +513,7 @@ function get_socket() {
 		e.preventDefault();
 	}
 		  return;
-	  }}
+	  }}*/
 	//  alert(ifEnter());
 	/*
 	if(ifEnter() && Brole.value !="admin"){
