@@ -1485,7 +1485,7 @@ window.addEventListener("online", function(e) {
    function next(el, bool, ignores, isIgnore){
 	   //next(nextbtn, false, amma, false);
 	   //pl();
-	   if(HELP == 5){
+	   if(HELP == 3){
 		//   window.location.href="#helproject";
 		if(vkBridge){
 			vkBridge.send('VKWebAppShowBannerAd',{banner_location:'top'})
