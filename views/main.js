@@ -238,7 +238,7 @@ function isOpenModal(){
 	}
 }
 }
-get_socket();
+//get_socket();
     </script>`:`<script>
     in_rem_hash();
     const NICK = "${n.user?n.user.name:'anonym'}";
