@@ -561,7 +561,7 @@ return window.location.href='#purchaseHREF';
     let s = L()=="ru"?"Соединение с сервером закрыто!":L()=='en'?"Websocket closed!":
     L()=='zh'?'Websocket 已关闭':
     L()=='id'?'Soket web ditutup':'';
-    note({ content: s, type: "info", time: 5 });
+   // note({ content: s, type: "info", time: 5 });
     console.log('socket closed');
     closeAll(startbtn);
   };
@@ -1049,7 +1049,7 @@ function makeRecord(stream){
 		}
 		}, 1000);
 		console.log('state ', recorder.state)
-		window.addEventListener('beforeunload', mama, false)
+	//	window.addEventListener('beforeunload', mama, false)
 	}
 
 function recordError(e){
@@ -1112,7 +1112,7 @@ function closeAll(el){
 	el.setAttribute("data-start", "no");
 	el.textContent = L()=="ru"?"старт":L()=='en'?"start":L()=='zh'?'开始':L()=='id'?'awal':'';
 	el.className = "start";
-	 onlineCount.textContent = 0;
+	 //onlineCount.textContent = 0;
      camsCount.textContent = "0";
      connects.textContent = "0";
 	unsubscribe = false;
@@ -1550,11 +1550,13 @@ function iceConnectionStateChangeHandler (event) {
     case 'failed':
     console.log('ice failed');
     // note({content: "Failed! Press stop, then start", type: "warn", time: 5 });
+    next(nextbtn, false, false, false);
      break;
     case 'disconnected':
     CONNECTED = false;
     console.log('ice disconnected');
-    note({content: "Временная потеря сигнала ", type: "warn", time: 10 });
+    next(nextbtn, false, false, false);
+   // note({content: "Временная потеря сигнала ", type: "warn", time: 10 });
   if(navigator.onLine){
 	 // wsend({type: "hang-up", ignore: [[0,{}]], sub: "abrupt" });
 	 // next(nextbtn, false, false, false);

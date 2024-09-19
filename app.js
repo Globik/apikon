@@ -1133,7 +1133,19 @@ app.post('/btccb', async (req, res)=>{
 //res.status(200).send({ invoice:  invoice });
 res.status(200).send(invoice)
 })
-
+app.post('/api/setviewdvk', async(req, res)=>{
+	let { vkid } = req.body;
+	if(!vkid){
+		return res.json({message: "No vkid"});
+	}
+	let db = req.db;
+	try{
+		await db.query(`update users set entr=1 where vkid=(?)`, [ vkid ]);
+	}catch(e){
+		console.log(e);
+	}
+	res.json({ message:"OK"});
+})
 
 app.get("/api/getSettings", checkAuth, checkRole(['admin']), async(req, res)=>{
 		res.json({ content: res.compile('settings', {})});

@@ -30,7 +30,8 @@ function confirm_age(ev){
 	try{
 	//alert(ev.target.bday.value);
 	if(isover18(new Date(ev.target.bday.value))){
-		localStorage.setItem("myAge", ev.target.bday.value);
+	//	localStorage.setItem("myAge", ev.target.bday.value);
+	vax('post','/api/setviewdvk', { vid: VKID.value }, onsetviewd, onsetvied_error, null, false);;
 		showRules();
 	}else{
 		gid('outputing').style.visibility = 'visible';
@@ -46,7 +47,8 @@ function leavingPage(ev){
 	window.location.href = "https://vk.com";
 }
 */
- 
+ function onsetviewd(){}
+ function onsetviewd_error(){};
 function showRules(){
 	window.onhashchange = null;
 	var cat = localStorage.getItem("myCat");
