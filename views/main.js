@@ -183,7 +183,10 @@ if(fakad){
 	}
 	
 	return;
-}`:''}
+} 
+VK_USER=false;
+get_socket();
+`:''}
 		//get_socket(); 
 	
    var cat = localStorage.getItem("myCat");
