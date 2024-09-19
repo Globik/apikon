@@ -172,9 +172,9 @@ console.log('not initialised');
     ${!n.user?`<script>
     const NICK = "anon";
     window.onload=function(){
-	if(FLAGVK){
+	${n.VK?`{
 		
-		 window.location.href="#confirmAGE";
+		${n.buser&&n.buser.entr==0?` window.location.href="#confirmAGE";
 		 const fakad = document.querySelector('.overlay:target');
 if(fakad){
 	fakad.onclick=function(e){
@@ -182,7 +182,8 @@ if(fakad){
 	}
 	return;
 }
-		//get_socket(); 
+`:}
+		`:}//get_socket(); 
 	
    var cat = localStorage.getItem("myCat");
    if(!cat && cat !=="Tom"){
