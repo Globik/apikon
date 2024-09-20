@@ -301,7 +301,7 @@ return;
 		}
 	
 localStorage.setItem("islogin" , "yes");
-window.location.href="#."
+//window.location.href="#."
 window.reload();
 }
 }catch(e){
