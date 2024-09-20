@@ -302,7 +302,7 @@ return;
 	
 localStorage.setItem("islogin" , "yes");
 //window.location.href="#."
-window.reload();
+location.reload();
 }
 }catch(e){
 	console.error(e);
