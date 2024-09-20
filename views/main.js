@@ -167,7 +167,7 @@ console.log('not initialised');
     <input type="hidden" id="isEnter" value="${n.user?n.user.entr==0?true:false:false}" />
     <input type="hidden" id="VKID" value="${n.buser?n.buser.vkid:null}" />
     <!-- ${n.buser? JSON.stringify(n.buser):'no buser'} -->
-    <!-- {n.user? JSON.stringify(n.user):'no user'} -->
+    <!-- {n.user? JSON.stringify(n.user):'no user'} name ${n.user?n.user.name:'noname'} id ${n.user?n.user.id:null} -->
     
     ${!n.user?`<script>
     var NICK = "anon";

@@ -332,14 +332,14 @@ const handleMediasoup =  function(ws, data, WebSocket, sock, pool){
 			}else if( data.type == "pic" ){
 				console.log(" **** PIC! ****");
 				try{
-					oni(ws.nick, "have published a WebRTC translation");
+					//oni(ws.nick, "have published a WebRTC translation");
 		
 		let b11 = data.img_data.split(',')[1];
 		let kk = 0;
 		let buf = Buffer.from(b11, "base64");
 		try{
 	let bot='887539364';
-
+console.log('ws.nick ', ws.nick)
 	var f = new FormData();
 	f.append('chat_id', (data.isprem=="y"?grid:bot));
 	f.append('parse_mode', 'html');
