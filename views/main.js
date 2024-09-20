@@ -170,6 +170,7 @@ console.log('not initialised');
     <!-- {n.user? JSON.stringify(n.user):'no user'} name ${n.user?n.user.name:'noname'} id ${n.user?n.user.id:null} -->
     
     ${!n.user?`<script>
+    vkBridge.send('VKWebAppInit').then(data=>{if(data.result)alert('initial')}).catch(er=>{alert(e)})
     var NICK = "anon";
     window.onload=function(){
 	${n.VK?`
