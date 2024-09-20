@@ -222,14 +222,15 @@ app.get("/about", async(req, res)=>{
 		console.log('result4 ', result4[0]);
 		result4[0].vkid=result4[0].vkid.toString();
 		console.log('result4 ', result4[0]);
-	return res.rendel('main', { imgData: imgData, lang: 'ru', yacount: JETZT , user: result4[0], VK: true });
+		
+	return res.rendel('main', { imgData: imgData, lang: 'ru', yacount: JETZT , buser: result4[0], VK: true });
 	}else{
 		let result5 = await db.query(`insert into users(name, vkid, password) values(?,?,'1234')`, [ r.data.response[0].first_name, r.data.response[0].id ]);
 		console.log("INSERT ", result5);
 		let result6 = await db.query(`select*from users where vkid=(?)`, [ result5.insertId.toString() ]);
 		result6[0].id = result5.insertId.toString();
 		let dabu = result6[0];
-		return res.rendel('main', { imgData: imgData, lang: 'ru', yacount: JETZT , user: dabu, VK: true });
+		return res.rendel('main', { imgData: imgData, lang: 'ru', yacount: JETZT , buser: dabu, VK: true });
 		// result5.insertId.toString(), { user
 		
 	}
@@ -248,6 +249,7 @@ app.get("/about", async(req, res)=>{
 	return res.rendel('errnotfound',{});
 }
 }
+//Object.assign(req,{user:{name:'alik', id:333}})
 	console.log("*** USER *** ", req.user);
 	//console.log('req.app.locals ', req.app.locals.testshopid, ' ', req.app.locals.testshopsecret);
 	//res.rendel('errnotfound',{});

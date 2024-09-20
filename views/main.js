@@ -155,8 +155,8 @@ console.log('not initialised');
       <strong>We're sorry but chatroulette doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
     <input type="hidden" id="isLogin" value="${n.user?true:false}"/>
-    <input type="hidden" id="userId" value="${n.user?n.user.id:0}">
-    <input type="hidden" id="userName" value="${n.user?n.user.name:'anon'}">
+    <input type="hidden" id="userId" value="${n.user?n.user.id:n.buser?n.buser.id:0}">
+    <input type="hidden" id="userName" value="${n.user?n.user.name:n.buser?n.buser.name:'anon'}">
     <input type="hidden" id="isTestHeart" value="${istestheart}">
     <input type="hidden" id="publishedid" value="${n.imgData && n.imgData.img_data?n.imgData.publishedId:null}" >
     <input type="hidden" id="Mon" value="${n.user?n.user.mon:null}" />
@@ -164,7 +164,7 @@ console.log('not initialised');
     <input type="hidden" id="Brole" value="${n.user?n.user.brole:'non'}"/>
     <input type="hidden" id="Lang" value="${n.lang}" />
     <input type="hidden" id="Grund" value="${n.user?n.user.grund:0}" />
-    <input type="hidden" id="isEnter" value="${n.user?n.user.entr==0?true:false:false}" />
+    <input type="hidden" id="isEnter" value="${n.user?n.user.entr==0?true:false:n.buser?n.buser.entr==0?true:false:false}" />
     <input type="hidden" id="VKID" value="${n.buser?n.buser.vkid:null}" />
     <!-- ${n.buser? JSON.stringify(n.buser):'no buser'} -->
     <!-- {n.user? JSON.stringify(n.user):'no user'} name ${n.user?n.user.name:'noname'} id ${n.user?n.user.id:null} -->
