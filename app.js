@@ -204,6 +204,9 @@ const getUservkUrl = `https://api.vk.com/method/users.get`;
 const skey='48b5165748b5165748b516572a4ba88941448b548b516572e682a9cdaa4cd958d2d985d';
 const vkey = 'fM8VjwulM3xw9cJhFDIq';
 const vparam = 5.199;
+app.get('/errnotfound', async(req,res)=>{
+	res.rendel('errnotfound',{});
+})
 app.get("/about", async(req, res)=>{
 	console.log("REQ.QUERY: ", req.query);
 	let db = req.db;

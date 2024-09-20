@@ -80,6 +80,7 @@ lang=='id'?`Terbukanya dunia komunikasi dan kenalan baru baik jiwa raga, maupun 
 <script src="https://unpkg.com/@vkid/sdk@2.3.0/dist-sdk/umd/index.js"></script>
 <script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
 <script>
+vkBridge.send('VKWebAppInit').then(data=>{}).catch(function(er){})
 const VK_APP_ID = 52271555;
 const VKID = window.VKIDSDK;
 VKID.Config.init({
@@ -96,7 +97,7 @@ var VK_USER = false;
 var FLAGVK = false;
 
 </script>
-
+ 
 
 <!-- Google tag (gtag.js) -->
 <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-QG900MX52X"></script>
@@ -147,7 +148,7 @@ var FLAGVK = false;
     <!-- {n.user? JSON.stringify(n.user):'no user'} name ${n.user?n.user.name:'noname'} id ${n.user?n.user.id:null} -->
     
     ${!n.user?`<script>
-    vkBridge.send('VKWebAppInit').then(data=>{if(data.result)alert('initial')}).catch(er=>{alert(e)})
+    
     var NICK = "anon";
     window.onload=function(){
 	${n.VK?`
@@ -258,17 +259,7 @@ window.onhashchange = function(ev){
     </script>
     
     `}
-    <script>
-    vkBridge.send('VKWebAppInit').then(data=>{
-if(data.result){
-alert('innnitialised');
-}else{
-console.log('not initialised');
-}
-
-}).catch(err=>{console.log(err);})
-    
-    </script>
+   
     <script>
   //  var ICESERVERS =n.stun?n.stun:null
   
