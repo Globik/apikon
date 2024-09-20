@@ -94,30 +94,7 @@ VKID.Config.init({
 <script>
 var VK_USER = false;
 var FLAGVK = false;
-vkBridge.send('VKWebAppInit').then(data=>{
-if(data.result){
-//alert('innnitialised');
-FLAGVK = true;
 
-if(FLAGVK){
-VK_USER = true;
-gid("settings").style.display = "none";
-let f555=gid("foot");
-if(f555)f555.style.display = "none";
-let f666=gid("foot2");
-if(f666)f666.style.display = "none";
-let f777=gid("giftbox");
-if(f777)f777.style.display = "none";
-let f888=gid("giftbox2");
-if(f888)f888.style.display = "none";
-if(gid('playContainer'))gid('playContainer').style.display = "none";
-
-
-}}else{
-console.log('not initialised');
-}
-
-}).catch(err=>{console.log(err);})
 </script>
 
 
@@ -279,7 +256,19 @@ window.onhashchange = function(ev){
 
 
     </script>
+    
     `}
+    <script>
+    vkBridge.send('VKWebAppInit').then(data=>{
+if(data.result){
+alert('innnitialised');
+}else{
+console.log('not initialised');
+}
+
+}).catch(err=>{console.log(err);})
+    
+    </script>
     <script>
   //  var ICESERVERS =n.stun?n.stun:null
   
