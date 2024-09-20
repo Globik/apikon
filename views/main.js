@@ -3,6 +3,7 @@
 function main(n){
 	let istestheart = (n.istestheart==1?true:false);
 	const { lang } = n;
+	console.log("N ",n);
 return `
  <!DOCTYPE html>
 <html lang="ru">
@@ -79,8 +80,9 @@ lang=='id'?`Terbukanya dunia komunikasi dan kenalan baru baik jiwa raga, maupun 
 <script src="/js/sound.js"></script>
 <script src="https://unpkg.com/@vkid/sdk@2.3.0/dist-sdk/umd/index.js"></script>
 <script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
+
 <script>
-vkBridge.send('VKWebAppInit').then(data=>{}).catch(function(er){})
+
 const VK_APP_ID = 52271555;
 const VKID = window.VKIDSDK;
 VKID.Config.init({
@@ -95,7 +97,11 @@ VKID.Config.init({
 <script>
 var VK_USER = false;
 var FLAGVK = false;
-
+vkBridge.send('VKWebAppInit').then(data=>{
+	if(data.result){
+		FLAGVK=true;
+	}
+}).catch(function(er){})
 </script>
  
 
@@ -132,7 +138,7 @@ var FLAGVK = false;
     <noscript>
       <strong>We're sorry but chatroulette doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
-    <input type="hidden" id="isLogin" value="${n.user?true:false}"/>
+   <input type="hidden" id="isLogin" value="${n.user?true:false}"/>
     <input type="hidden" id="userId" value="${n.user?n.user.id:0}">
     <input type="hidden" id="userName" value="${n.user?n.user.name:'anon'}">
     <input type="hidden" id="isTestHeart" value="${istestheart}">
@@ -143,29 +149,17 @@ var FLAGVK = false;
     <input type="hidden" id="Lang" value="${n.lang}" />
     <input type="hidden" id="Grund" value="${n.user?n.user.grund:0}" />
     <input type="hidden" id="isEnter" value="${n.user?n.user.entr==0?true:false:false}" />
-    <input type="hidden" id="VKID" value="${n.buser?n.buser.vkid:null}" />
+    <input type="hidden" id="VKID" value="${n.buser?n.buser.vkid:null}" /> 
     <!-- ${n.buser? JSON.stringify(n.buser):'no buser'} -->
+   <!-- name ${n.buser?n.buser.name:'nonig'} id ${n.buser?n.buser.id:0} -->
+    
     <!-- {n.user? JSON.stringify(n.user):'no user'} name ${n.user?n.user.name:'noname'} id ${n.user?n.user.id:null} -->
     
     ${!n.user?`<script>
     
     var NICK = "anon";
     window.onload=function(){
-	${n.VK?`
-		
-		${n.user&&n.user.entr==0?` window.location.href="#confirmAGE";`:''}
-		 const fakad = document.querySelector('.overlay:target');
-		 NICK="${n.user.name}";
-if(fakad){
-	fakad.onclick=function(e){
-		e.preventDefault();
-	}
 	
-	return;
-} 
-VK_USER=false;
-get_socket();
-`:''}
 		//get_socket(); 
 	
    var cat = localStorage.getItem("myCat");
@@ -225,10 +219,11 @@ function isOpenModal(){
     in_rem_hash();
     const NICK = "${n.user?n.user.name:'anonym'}";
    // var VK_USER = false;
+  // alert("NICK "+NICK);
     window.onload = function(){
 		get_socket();
 		if(FLAGVK){
-			VK_USER = true;
+			VK_USER = false;
 gid("settings").style.display = "none";
 gid("foot").style.display = "none";
 gid("foot2").style.display = "none"
@@ -240,7 +235,7 @@ if(faka){
 }
 window.onhashchange = function(ev){
 	console.log('hashchanged');
-	window.location.href='#confirmAGE';
+	//window.location.href='#confirmAGE';
 }
 
 }
@@ -262,7 +257,7 @@ window.onhashchange = function(ev){
    
     <script>
   //  var ICESERVERS =n.stun?n.stun:null
-  
+ // vkBridge.send('VKWebAppInit').then(data=>{}).catch(function(er){})
   
   
   var ICESERVERS = {
@@ -319,7 +314,7 @@ lang=='id'?'koneksi':''}:</b> <span id="connects">0</span></div>
 <!-- <div class="settingspanel"  onclick="pushSubscribe(this);">Пуш уведомления</div> -->
 ${lang=='ru' ?`<div class="settingspanel"  onclick="purchaseTokens(this);">Купить сердечки &#x1f496;</div>
 <div class="settingspanel">
-<div class="some doh">${n.user?n.user.name:null} Ваш доход&nbsp;&nbsp;<span id="dohod">${n.user? Number.parseFloat(n.user.theart*0.10).toFixed(2):'0.00'}</span>&nbsp;&nbsp;рублей</div>
+<div class="some doh">${n.user?n.user.name:null} ${n.buser?n.buser.name:'nonig'} Ваш доход&nbsp;&nbsp;<span id="dohod">${n.user? Number.parseFloat(n.user.theart*0.10).toFixed(2):'0.00'}</span>&nbsp;&nbsp;рублей</div>
 <div class="du" onclick="getPayout(this);">Получить</div>
 </div>`:''}
 <div class="settingspanel"><a href="https://t.me/rouletka3">${lang=='ru'?'Наш Телеграм':

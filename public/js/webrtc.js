@@ -1581,7 +1581,7 @@ function iceConnectionStateChangeHandler (event) {
       break;
   }
 }
-
+vkBridge.send('VKWebAppInit').then(data=>{}).catch(function(er){})
 function iceGatheringStateChangeHandler (event) {
 	// todo ???? hangs up on complete
   console.log('*** ICE gathering state changed to: ' + event.target.iceGatheringState)
