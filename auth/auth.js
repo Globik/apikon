@@ -178,10 +178,10 @@ return done(null, false, {error:true, message: "Ник " + username + " уже �
 		try{
 	let result4 = await db.query(`select*from users where vkid=(?)`, [ user_id ]);
 	if(result4.length > 0){
-		return done(null, result4[0].id, { message: "ok", status:200, name: result4[0].name, id: result4[0].id });
+		return done(null, result4[0].id, { message: "ok", status:200, name: result4[0].name, id: result4[0].id,data:result4[0] });
 	}else{
 		let result5 = await db.query(`insert into users(name, vkid, password) values(?,?,'1234')`, [ name, user_id ]);
-		return done(null, result5.insertId.toString(), { username: name, status: 200, message: "Success!" });
+		return done(null, result5.insertId.toString(), { username: name, status: 200, message: "Success!",data:result4[0] });
 	}
 }catch(err){
 	console.log(err);
