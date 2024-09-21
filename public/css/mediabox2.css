@@ -1261,7 +1261,10 @@ dsplay:inline-block;
 	padding-top:10px;
 	padding-bottom:10px;
 }
-	
+	#settingspanel{
+	height:70vh;
+	overflow:auto;
+	}
 }
 
 @media screen and (max-width: 452px) and (orientation: portrait){}
