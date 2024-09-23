@@ -3,23 +3,24 @@
 	<style>canvas{border:1px solid green;}</style>
 	</head><body>
 <canvas id="cnv"></canvas>
+<output id="out"></output>
 <script>
 	let c = cnv.getContext('2d');
-	cnv.width = 600/2;
-	cnv.height = 1200/2;
+	cnv.width = 832;
+	cnv.height = 555;
 	var img = new Image();
 	//img.src = "../public/img/gold/some.jpg";
 	//img.src = "../public/img/tvpic.jpg"
-	img.src="../public/img1/IMG1.jpg"
+	img.src="3.png"
 	img.onload = function(){
 		let cropx = 0;
 		let cropy = 0;
 		const aspectratio = img.width / img.height;
-		c.drawImage(img,0,0,cnv.width,cnv.height)
-		/*if(aspectratio > 1){
+		//c.drawImage(img,0,0,cnv.width,cnv.height)
+		if(aspectratio > 1){
 			const scaledwidth = img.width / aspectratio;
 			cropx =(img.width - scaledwidth) / 2;
-		/	c.drawImage(img, cropx, cropy, scaledwidth, img.height, 0, 0, cnv.width, cnv.height);
+			c.drawImage(img, cropx, cropy, scaledwidth, img.height, 0, 0, cnv.width, cnv.height);
 			//alert(img.width + ' ' + img.height)// 320x240
 			//alert(aspectratio)// landshaft
 		}else{
@@ -28,7 +29,9 @@
 			cropy = (img.height - scaledheight) / 2;
 			c.drawImage(img, cropx, cropy, img.width, scaledheight, 0, 0, cnv.width+100, cnv.height+0)
 			//alert(2)
-		}*/
+		}
+		let a = cnv.toDataURL()
+		out.textContent=a;
 	}
 </script>
 </body></html>
