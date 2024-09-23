@@ -35,19 +35,19 @@ var ignoreOffer = false;
 var isSettingRemoteAnswerPending = false;
 var unsubscribe = false;
 var CONNECTED = false;
-const L = function(){ return Lang.value; }
+function L(){ return Lang.value; }
 const heartcountels = document.querySelectorAll("div.heartcount");
 var context = new (window.AudioContext || window.webkitAudioContext)();
 var notes = new Sound(context);
 var nows = context.currentTime;
 var tru;
-const streamvideo = remote.captureStream();
+//const streamvideo = remote.captureStream();
 var partnernick;
 var partnerpremium="n";
 
 //const recorder = new MediaRecorder(streamvideo, {mimetype:'video.webm'})
-const G = function(){
-	return Number(Grund.value);
+function G(){
+	return Number(gid('Grund').value);
 }
 function getPubId(){
 	let a = gid('publishedid');
@@ -908,7 +908,7 @@ var imgdata2;
 function pl(){
 	return;
 var nows = context.currentTime;
-	console.log(notes);
+	//console.log(notes);
 	notes.play(261.63, nows);
 	//notes.stop();
 }
@@ -945,9 +945,9 @@ function start(el){
 	if(!sock) {
 		get_socket();
 		}
-	if(G() == 1 || G() == 2){
+		var gg = G();
+	if(gg == 1 || gg == 2){
 		window.location.href = "#banned";
-	
 		return;
 	}
 	if(VK_USER) return;
@@ -1701,7 +1701,7 @@ function iceCandidateError(e) {
     try{
     pc = new RTCPeerConnection(iceServers);
 }catch(er){
-	alert(er);
+	//alert(er);
 	return;
 }
 addLocalStream ();

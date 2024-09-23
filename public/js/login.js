@@ -137,7 +137,7 @@ window.location.href="#."
         console.error(error)
 	
 	}
-	el.style.backGround="green";
+//	el.style.backGround="green";
 	}
 	function logi(ev){
 		ev.preventDefault();
@@ -208,7 +208,7 @@ return;
 	
 localStorage.setItem("islogin" , "yes");
 window.location.href="#."
-         location.reload();
+         window.location.reload(true);
 }
 }catch(error){
 	console.log(error);
@@ -303,8 +303,8 @@ return;
 localStorage.setItem("islogin" , "yes");
 window.location.href="#."
 setTimeout(function(){
-	location.reload();
-},5000)
+	window.location.reload(true);
+},1000)
 //location.reload();
 }
 }catch(e){
