@@ -2,8 +2,15 @@
 
 function main(n){
 	let istestheart = (n.istestheart==1?true:false);
-	const { lang } = n;
+	const { lang , buser, user } = n;
 	console.log("N ",n);
+	console.log("^^^ USER ****", user);
+	console.log("*** BUSER ****", buser);
+	console.log("fucker *** ", n.FUCKER);
+	const bur = n.buser;
+	//const user = n.user;
+	const namealik='suka';
+	console.log('buser2 ', bur);
 return `
  <!DOCTYPE html>
 <html lang="ru">
@@ -150,13 +157,15 @@ vkBridge.send('VKWebAppInit').then(data=>{
     <input type="hidden" id="Grund" value="${n.user?n.user.grund:0}" />
     <input type="hidden" id="isEnter" value="${n.user?n.user.entr==0?true:false:false}" />
     <input type="hidden" id="VKID" value="${n.buser?n.buser.vkid:null}" /> 
-    <!-- ${n.buser? JSON.stringify(n.buser):'no buser'} -->
-   <!-- name ${n.buser?n.buser.name:'nonig'} id ${n.buser?n.buser.id:0} -->
+    <!-- ${buser? buser:'no buser'} -->
+   <!-- name ${buser?buser:'nonig'} id ${buser?buser.id:0} 
+   namealik: ${namealik} fuck ${n.FUCKER}
+   -->
     
-    <!-- {n.user? JSON.stringify(n.user):'no user'} name ${n.user?n.user.name:'noname'} id ${n.user?n.user.id:null} -->
+    <!-- {user? JSON.stringify(user):'no user'} name ${user?user.name:'noname'} id ${user?user.id:null} -->
     
     ${!n.user?`<script>
-    
+   // alert("UNDEFINED");
     var NICK = "anon";
     window.onload=function(){
 	
@@ -216,6 +225,7 @@ function isOpenModal(){
 }
 //get_socket();
     </script>`:`<script>
+   // alert('alik defined');
     in_rem_hash();
     const NICK = "${n.user?n.user.name:'anonym'}";
    // var VK_USER = false;
@@ -284,7 +294,7 @@ window.onhashchange = function(ev){
   
      </script>
      <article id="mediabox">
-    <nav id="navpanel"><div class="nav"><b>Online: <span id="onlineCount">0</span></b>${n.VK?'':`&nbsp;&nbsp;&nbsp;<b style="font-size:18px;">&#x1F441;</b>&nbsp;&nbsp;&nbsp;
+    <nav id="navpanel"><div class="nav"><b>Online: <span id="onlineCount">0</span></b>&nbsp;&nbsp;&nbsp; ${buser?buser.name:'anonym'}${n.VK?'':`&nbsp;&nbsp;&nbsp;<b style="font-size:18px;">&#x1F441;</b>&nbsp;&nbsp;&nbsp;
     <span id="vV" style="color:orange;font-weight:bold;">${n.imgData && n.imgData.img_data?n.imgData.value:0}</span>`}
    ${n.user && n.user.prem=="y"? '&nbsp;&nbsp;&nbsp;<span style="color:#d5a8a8;">Premium &nbsp;&nbsp;&#x1F451;</span>':''} 
     </div>

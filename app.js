@@ -226,14 +226,15 @@ app.get("/about", async(req, res)=>{
 		result4[0].vkid=result4[0].vkid.toString();
 		console.log('result4 ', result4[0].id);
 		let babu=result4[0]
-	return res.rendel('main', { imgData: imgData, lang: 'ru', yacount: JETZT ,user: babu,buser:babu, VK: true });
+	 return res.rendel('main', { imgData: imgData, lang: 'ru', yacount: JETZT ,user: babu,buser:babu, FUCKER:'FUCKER', VK: true });
 	}else{
 		let result5 = await db.query(`insert into users(name, vkid, password) values(?,?,'1234')`, [ r.data.response[0].first_name, r.data.response[0].id ]);
 		console.log("INSERT ", result5);
-		let result6 = await db.query(`select*from users where vkid=(?)`, [ result5.insertId.toString() ]);
+		let result6 = await db.query(`select*from users where id=(?)`, [ result5.insertId.toString() ]);
+		console.log('result6 ', result6[0]);
 		result6[0].id = result5.insertId.toString();
 		let dabu = result6[0];
-		return res.rendel('main', { imgData: imgData, lang: 'ru', yacount: JETZT , user: dabu, VK: true });
+		return res.rendel('main', { imgData: imgData, lang: 'ru', yacount: JETZT , user: dabu, buser: dabu, FUCKER2:'FUCKER2', VK: true });
 		// result5.insertId.toString(), { user
 		
 	}
