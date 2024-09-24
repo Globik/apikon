@@ -34,6 +34,8 @@ function confirm_age(ev){
 	//	localStorage.setItem("myAge", ev.target.bday.value);
 	vax('post','/api/setviewdvk', { vkid: gid('VKID').value }, onsetviewd, onsetviewd_error, null, false);;
 		//showRules();
+		 window.onhashchange = null;
+		 window.location.href="#."
 		showSlides();
 	}else{
 		gid('outputing').style.visibility = 'visible';
@@ -73,8 +75,7 @@ function leavingPage(ev){
 		 }
 		 ]
 	 }).then(data=>{
-		 window.onhashchange = null;
-		 window.location.href="#."
+		
 		 if(data.result){
 			 console.log('slides showed');
 		 }
