@@ -38,7 +38,7 @@ var CONNECTED = false;
 function L(){ return Lang.value; }
 const heartcountels = document.querySelectorAll("div.heartcount");
 var context = new (window.AudioContext || window.webkitAudioContext)();
-var notes = new Sound(context);
+//var notes = new Sound(context);
 var nows = context.currentTime;
 var tru;
 //const streamvideo = remote.captureStream();
@@ -817,8 +817,8 @@ function handleNewIceCandidate(msg) {
 		pc.addIceCandidate(msg).then(function(){
 			
 		}).catch(function handleError(er){
-			console.log("ignoreOffer ? ", ignoreOffer);
-			console.error(er);
+			//console.log("ignoreOffer ? ", ignoreOffer);
+			//console.error(er);
 		});
 	}
 	}
@@ -954,7 +954,7 @@ function start(el){
 	let sdata = {};
 	sdata.myip = MYIP;
 	sdata.usid = userId.value;
-	vax('post','/api/checkBanned', sdata, on_check_banned, on_check_banned_error, null, false);
+	//vax('post','/api/checkBanned', sdata, on_check_banned, on_check_banned_error, null, false);
 	
 	
 	if(el.getAttribute("data-start")=="no"){
@@ -1172,7 +1172,7 @@ someInterval = null;
 
 function handleError(err){
 	//alert(err);
-		//note({"content": err.name, type: "error", time: 15});
+		note({"content": "Вебкамера не найдена. Подключите вебкамеру", type: "error", time: 15});
 		console.error(err);
 	}
 	function doScreenshot(){

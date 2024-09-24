@@ -84,7 +84,7 @@ lang=='id'?`Terbukanya dunia komunikasi dan kenalan baru baik jiwa raga, maupun 
 <script src="/js/mediasoup-client.min.js"></script>
 <!-- <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script> -->
  <script src="/js/adapter-latest.js"></script> 
-<script src="/js/sound.js"></script>
+<!-- <script src="/js/sound.js"></script> -->
 <script src="https://unpkg.com/@vkid/sdk@2.3.0/dist-sdk/umd/index.js"></script>
 <script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
 
@@ -712,7 +712,7 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
            
           </form> `:''}
           <div>
- <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="RouletkaBot" data-size="large" data-onauth="onTelega(user)"  data-request-access="write"></script>
+ ${n.VK?'':`<script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="RouletkaBot" data-size="large" data-onauth="onTelega(user)"  data-request-access="write"></script>`}
  
           </div><br><br>
           <div id="VkIdSdkOAuthList"></div>
