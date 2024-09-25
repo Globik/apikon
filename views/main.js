@@ -502,15 +502,7 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
 </script>
     </section>
     </article>
- <div id="yandex_rtb_R-A-12098170-2"></div>
-     <script>
-     window.yaContextCb.push(()=>{
-		 Ya.Context.AdvManager.render({
-			 "blockId":"R-A-12098170-2",
-			 "renderTo":"yandex_rtb_R-A-12098170-2"
-		 })
-	 })
-	 </script>
+
  <a href="#."  class="overlay" id="confirmAGE"></a>
     <output id="confirmageoutput" class="popi">
     <form name="verifyageform"><h2>Предупреждение</h2>
