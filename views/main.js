@@ -296,7 +296,7 @@ window.onhashchange = function(ev){
   
      </script>
      
-     <div id="yandex_rtb_R-A-12098170-1"></div>
+   <!--  <div id="yandex_rtb_R-A-12098170-1"></div>
      <script>
      // https://yandex.ru/support2/partner/ru/web/units/sizes
      window.yaContextCb.push(()=>{
@@ -305,7 +305,7 @@ window.onhashchange = function(ev){
 			 "renderTo":"yandex_rtb_R-A-12098170-1"
 		 })
 	 })
-	 </script>
+	 </script> -->
      <article id="mediabox">
     <nav id="navpanel"><div class="nav"><b>Online: <span id="onlineCount">0</span></b>&nbsp;&nbsp;&nbsp; ${n.user?n.user.name:'anonym'}${n.VK?'':`&nbsp;&nbsp;&nbsp;<b style="font-size:18px;">&#x1F441;</b>&nbsp;&nbsp;&nbsp;
     <span id="vV" style="color:orange;font-weight:bold;">${n.imgData && n.imgData.img_data?n.imgData.value:0}</span>`}
@@ -504,7 +504,16 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
 </script>
     </section>
     </article>
-
+ <div id="yandex_rtb_R-A-12098170-1"></div>
+     <script>
+     // https://yandex.ru/support2/partner/ru/web/units/sizes
+     window.yaContextCb.push(()=>{
+		 Ya.Context.AdvManager.render({
+			 "blockId":"R-A-12098170-1",
+			 "renderTo":"yandex_rtb_R-A-12098170-1"
+		 })
+	 })
+	 </script>
  <a href="#."  class="overlay" id="confirmAGE"></a>
     <output id="confirmageoutput" class="popi">
     <form name="verifyageform"><h2>Предупреждение</h2>
