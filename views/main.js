@@ -140,6 +140,8 @@ vkBridge.send('VKWebAppInit').then(data=>{
 <!-- /Yandex.Metrika counter -->
 <!--
     <script src="/pwabuilder-sw-register.js"></script> -->
+    <script>window.yaContextCb=window.yaContextCb||[]</script>
+    <script src="https://yandex.ru/ads/system/context.js" async></script>
   </head>
   <body>
     <noscript>
@@ -293,6 +295,15 @@ window.onhashchange = function(ev){
 
   
      </script>
+     <div id="yandex_rtb_R-A-12098170-2"></div>
+     <script>
+     window.yaContextCb.push(()=>{
+		 Ya.Context.AdvManager.render({
+			 "blockId":"R-A-12098170-2",
+			 "renderTo:"yandex_rtb_R-A-12098170-2"
+		 })
+	 })
+	 </script>
      <article id="mediabox">
     <nav id="navpanel"><div class="nav"><b>Online: <span id="onlineCount">0</span></b>&nbsp;&nbsp;&nbsp; ${n.user?n.user.name:'anonym'}${n.VK?'':`&nbsp;&nbsp;&nbsp;<b style="font-size:18px;">&#x1F441;</b>&nbsp;&nbsp;&nbsp;
     <span id="vV" style="color:orange;font-weight:bold;">${n.imgData && n.imgData.img_data?n.imgData.value:0}</span>`}
