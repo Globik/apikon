@@ -296,12 +296,13 @@ window.onhashchange = function(ev){
   
      </script>
      
-     <div id="yandex_rtb_R-A-12098170-2"></div>
+     <div id="yandex_rtb_R-A-12098170-1"></div>
      <script>
+     // https://yandex.ru/support2/partner/ru/web/units/sizes
      window.yaContextCb.push(()=>{
 		 Ya.Context.AdvManager.render({
-			 "blockId":"R-A-12098170-2",
-			 "renderTo":"yandex_rtb_R-A-12098170-2"
+			 "blockId":"R-A-12098170-1",
+			 "renderTo":"yandex_rtb_R-A-12098170-1"
 		 })
 	 })
 	 </script>
