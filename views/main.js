@@ -300,7 +300,7 @@ window.onhashchange = function(ev){
      window.yaContextCb.push(()=>{
 		 Ya.Context.AdvManager.render({
 			 "blockId":"R-A-12098170-2",
-			 "renderTo:"yandex_rtb_R-A-12098170-2"
+			 "renderTo":"yandex_rtb_R-A-12098170-2"
 		 })
 	 })
 	 </script>
