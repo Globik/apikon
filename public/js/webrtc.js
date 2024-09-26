@@ -561,7 +561,7 @@ return window.location.href='#purchaseHREF';
     let s = L()=="ru"?"Соединение с сервером закрыто!":L()=='en'?"Websocket closed!":
     L()=='zh'?'Websocket 已关闭':
     L()=='id'?'Soket web ditutup':'';
-   // note({ content: s, type: "info", time: 5 });
+    note({ content: s, type: "info", time: 5 });
     console.log('socket closed');
     closeAll(startbtn);
   };
@@ -1112,7 +1112,7 @@ function closeAll(el){
 	el.setAttribute("data-start", "no");
 	el.textContent = L()=="ru"?"старт":L()=='en'?"start":L()=='zh'?'开始':L()=='id'?'awal':'';
 	el.className = "start";
-	 //onlineCount.textContent = 0;
+	 onlineCount.textContent = 0;
      camsCount.textContent = "0";
      connects.textContent = "0";
 	unsubscribe = false;
