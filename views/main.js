@@ -508,12 +508,20 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
      <script>
      // https://yandex.ru/support2/partner/ru/web/units/sizes
      window.yaContextCb.push(()=>{
+     if(Ya.Context.AdvManager.getPlatform()==='desktop'){
 		 Ya.Context.AdvManager.render({
 			 "blockId":"R-A-12098170-3",
 			// "renderTo":"yandex_rtb_R-A-12098170-1
 			"type":"floorAd",
-			"platform":"desktop"
+			"platform":"desktop",
 		 })
+	 }else{
+		 Ya.Context.AdvManager.render({
+		 "blockId":"R-A-12098170-5",
+		 "type":"floorAd",
+			"platform":"touch",
+		})
+	 }
 	 })
 	 </script>
  <a href="#."  class="overlay" id="confirmAGE"></a>
