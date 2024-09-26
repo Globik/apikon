@@ -255,7 +255,7 @@ function stopMedia(el) {
     }
   //  el.setAttribute('disabled', 1);
 }
-
+//if(Login())location.href="#setPrem";
 async function publish(el) {
 	console.warn('publish');
     if (SENDER) return;

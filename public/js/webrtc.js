@@ -1485,9 +1485,9 @@ window.addEventListener("online", function(e) {
    function next(el, bool, ignores, isIgnore){
 	   //next(nextbtn, false, amma, false);
 	   //pl();
-	   if(HELP == 3){
+	   if(HELP == 5){
 		//   window.location.href="#helproject";
-		if(vkBridge){
+		/*if(vkBridge){
 			vkBridge.send('VKWebAppShowBannerAd',{banner_location:'bottom'})
 			.then(data=>{
 				if(data.result){
@@ -1499,7 +1499,14 @@ window.addEventListener("online", function(e) {
 			}).catch(err=>{
 				console.error(err);
 			});
-		}
+		}*/
+		//alert(5);
+		try{
+		getReklama();
+		HELP=0;
+	}catch(e){
+		console.log(e);
+	}
 	   }
 	   HELP++;
 	   el.disabled = true;

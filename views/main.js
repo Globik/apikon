@@ -3,14 +3,14 @@
 function main(n){
 	let istestheart = (n.istestheart==1?true:false);
 	const { lang , buser, user } = n;
-	console.log("N ",n);
-	console.log("^^^ USER ****", user);
-	console.log("*** BUSER ****", buser);
-	console.log("fucker *** ", n.FUCKER);
+	//console.log("N ",n);
+	//console.log("^^^ USER ****", user);
+	//console.log("*** BUSER ****", buser);
+	//console.log("fucker *** ", n.FUCKER);
 	const bur = n.buser;
 	//const user = n.user;
 	const namealik='suka';
-	console.log('buser2 ', bur);
+	//console.log('buser2 ', bur);
 return `
  <!DOCTYPE html>
 <html lang="ru">
@@ -169,12 +169,15 @@ vkBridge.send('VKWebAppInit').then(data=>{
     ${!n.user?`<script>
    // alert("UNDEFINED");
     var NICK = "anon";
+    //location.href="#login2"
     window.onload=function(){
-	
+	let islogin = localStorage.getItem("islogin");
+	console.warn('islogin ', islogin);
 		//get_socket(); 
 	
    var cat = localStorage.getItem("myCat");
    if(!cat && cat !=="Tom"){
+	   console.warn("NO REGELN");
     location.href="#regeln";
     const faka = document.querySelector('.overlay:target');
 if(faka){
@@ -186,10 +189,12 @@ if(faka){
 	}
 }
 }else{
-	${!n.VK?`let islogin = localStorage.getItem("islogin");
+	${!n.VK?`
+		//let islogin = localStorage.getItem("islogin");
 	//if(!islogin && islogin !=="yes")
-  location.href="#login";
-// window.location.href="#confirmAGE";
+	console.warn("must login")
+  window.location.href="#login";
+//window.location.href="#gopremium";
 	
 const faka = document.querySelector('.overlay:target');
 if(faka){
@@ -505,8 +510,9 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
     </section>
     </article>
  <!-- <div id="yandex_rtb_R-A-12098170-1"></div> -->
-     <script>
+   ${process.env.DEVELOPMENT==="yes"?'':`<script>
      // https://yandex.ru/support2/partner/ru/web/units/sizes
+     function getReklama(){
      window.yaContextCb.push(()=>{
      if(Ya.Context.AdvManager.getPlatform()==='desktop'){
 		 Ya.Context.AdvManager.render({
@@ -514,16 +520,26 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
 			// "renderTo":"yandex_rtb_R-A-12098170-1
 			"type":"floorAd",
 			"platform":"desktop",
+			"onClose":function(){
+			console.log("Reklama closed")
+				if(isLogin.value=="true")window.location.href="#setPrem";
+			},
 		 })
 	 }else{
 		 Ya.Context.AdvManager.render({
 		 "blockId":"R-A-12098170-5",
 		 "type":"floorAd",
 			"platform":"touch",
+			"onClose":function(){
+			console.log("Reklama closed")
+			if(isLogin.value=="true")window.location.href="#setPrem";
+			}
 		})
 	 }
 	 })
-	 </script>
+ }
+ getReklama();
+	 </script> `}
  <a href="#."  class="overlay" id="confirmAGE"></a>
     <output id="confirmageoutput" class="popi">
     <form name="verifyageform"><h2>Предупреждение</h2>
@@ -633,7 +649,9 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
     <div>Пожалуйста, перечислите финансы на развитие проекта. Вы будете перенаправлены в yoomoney</div><br><br><br>
     <div><iframe src="https://yoomoney.ru/quickpay/fundraise/button?billNumber=AWVMCQLpAcY.240125&" width="330" height="50" frameborder="0" allowtransparency="true" scrolling="no"></iframe></div> 
 </output>
-     <a href="#."  class="overlay" id="gopremium"></a>
+
+	
+<a href="#."  class="overlay" id="gopremium"></a>
     <output id="premiumoutput" class="popi">
     <section id="premContainer">
 	${lang=='ru'?`
@@ -753,6 +771,26 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
     
     
     
+ <a href="#."  class="overlay" id="setPrem"></a>
+    <output id="premiumoutput2" class="popi">
+    <section id="premContainer2">
+
+	<form id="premForm2" method="post" action="https://yoomoney.ru/quickpay/confirm" name="ordertodo">
+<p class="intro">Вы можете отключить рекламу, купив премиум аккаунт  &#x1F451; всего за 50 рублей в месяц. <br>Вы будете преренаправлены в yoomoney</p>
+	<div id="premrapper2"> 
+	 <div><input type="hidden" placeholder="Получатель yoomoney" name="receiver" value="410016439442251" required/> </div>
+	<input type="hidden" name="label" value="id=${n.user?n.user.id:'0'}&p=100"/>
+    <input type="hidden" name="quickpay-form" value="button" />
+    <input type="hidden" name="successURL" value="https://rouletka.ru/about" />
+    <input type="hidden" name="formcomment" value="Покупка премиум аккаунта на месяц" />
+    <input type="hidden" name="targets" value="Купить премиум аккаунт на месяц" />
+    <div><input class="number"  type="hidden"  name="sum" value="50.00" required data-type="number"/></div>
+   <input  class="input" type="hidden" checked name="paymentType" value="PC" /></div>
+   <div><input  class="input" type="hidden" name="paymentType" value="AC" /></div>
+   <div><input type="submit" id="premBtn2" value="Купить"/></div>
+	
+	</div>
+	</form></output> 
     
     
     

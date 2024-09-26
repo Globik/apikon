@@ -71,12 +71,13 @@ html,body{
 		}
 	}
 	
-	#premiumoutput{
+	#premiumoutput,#premiumoutput2{
 		background:black;
 		color:whie;
+		height:auto;
 		
 	}
-	#premBtn{
+	#premBtn,#premBtn2{
 		color:black;
 		background:lightgreen;
 		font-size:1.3rem;
@@ -84,9 +85,9 @@ html,body{
 	}
 	
 	@media screen and (max-width: 452px) and (orientation: portrait){
-		#premiumoutput{
+		#premiumoutput,#premiumoutput2{
 width:100%;
-overflow:auto;
+oveflow:auto;
 			bckground:#327332;
 		}
 		#premForm p{
