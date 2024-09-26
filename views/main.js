@@ -504,13 +504,15 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
 </script>
     </section>
     </article>
- <div id="yandex_rtb_R-A-12098170-1"></div>
+ <!-- <div id="yandex_rtb_R-A-12098170-1"></div> -->
      <script>
      // https://yandex.ru/support2/partner/ru/web/units/sizes
      window.yaContextCb.push(()=>{
 		 Ya.Context.AdvManager.render({
-			 "blockId":"R-A-12098170-1",
-			 "renderTo":"yandex_rtb_R-A-12098170-1"
+			 "blockId":"R-A-12098170-3",
+			// "renderTo":"yandex_rtb_R-A-12098170-1
+			"type":"floorAd",
+			"platform":"desktop"
 		 })
 	 })
 	 </script>
