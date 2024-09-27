@@ -1343,8 +1343,8 @@ servi = https
 const wsServer = new WebSocket.Server({server: servi});
 
 
-let waitingQueue = []
-let matchedIds = new Map()
+let waitingQueue = [];
+let matchedIds = new Map();
 var connected = 0;//new Map();
 function log (text) {
   const time = new Date()
@@ -1393,7 +1393,7 @@ async function searchPeer (socket, msg, source) {
     
     let peerSocket = getPeerSocket(peerId)
      if(peerSocket){
-		// console.log("**** PEER SOCKET ***");
+		 console.log("**** PEER SOCKET ***");
 		 
 		 if(amap.has(peerSocket.userId)){
 			// console.log("*** HAS ignore!!! ***");
@@ -1417,14 +1417,14 @@ async function searchPeer (socket, msg, source) {
       	console.log("*** NICK *** ", peerSocket.nick, ' ', peerSocket.isprem);
       	msg.isprem = peerSocket.isprem;
       	let el = JSON.stringify(msg);
-      //	console.log(" **** EL ***", el);
+      	console.log(" **** EL ***", el);
       socket.send(el);
      // console.log(`#${socket.id} matches #${peerId}`)
      if(!onLine.has(socket.id)) {
 	 onLine.set(socket.id, { id: socket.id, src: source.src, nick: socket.nick, status: 'busy' });
 	 broadcast({ type: "dynamic", sub: "add", id: socket.id, partnerid: peerId, nick: socket.nick, status: 'busy', camcount: onLine.size});
 	 broadcast_admin({ type: "dynamic", sub: "add", id: socket.id, partnerid: peerId, src: source.src, nick: socket.nick, status: 'busy', camcount: onLine.size});
-	 if(isEven(matchedIds.size))broadcasti({ type: "connected2", size:matchedIds.size/2 });
+	 //if(isEven(matchedIds.size))broadcasti({ type: "connected2", size:matchedIds.size/2 });
 	 
 	 
 	 
@@ -1445,7 +1445,7 @@ async function searchPeer (socket, msg, source) {
 	 onLine.set(socket.id, { id: socket.id, src: source.src, nick: socket.nick, status: 'free' });
 	 broadcast({ type: "dynamic", sub: "add", id: socket.id, nick: socket.nick, status: 'free', camcount: onLine.size });
 	 broadcast_admin({ type: "dynamic", sub: "add", id: socket.id, src: source.src, nick: socket.nick, status: 'free', camcount: onLine.size });
-	if(isEven(matchedIds.size))broadcasti({ type: "connected2", size: matchedIds.size/2 });
+	//if(isEven(matchedIds.size))broadcasti({ type: "connected2", size: matchedIds.size/2 });
  }}
 //  console.log(`#${socket.id} ${socket.nick} adds self into waiting queue`)
 // console.log("waiting ", waitingQueue);
