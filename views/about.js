@@ -232,7 +232,7 @@ ${langpage(n)}
     ${process.env.DEVELOPMENT==="yes"?'':`<script>
      // https://yandex.ru/support2/partner/ru/web/units/sizes
      function getReklama(){
-		 if(Brole.value==="admin") return;
+		
      window.yaContextCb.push(()=>{
      if(Ya.Context.AdvManager.getPlatform()==='desktop'){
 		 Ya.Context.AdvManager.render({
