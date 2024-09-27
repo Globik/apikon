@@ -66,7 +66,8 @@ return `
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.4.0/animate.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
     <script src='https://code.jquery.com/jquery-2.1.1.min.js'></script>
-    
+    <script>window.yaContextCb=window.yaContextCb||[]</script>
+    <script src="https://yandex.ru/ads/system/context.js" async></script>
     <script src="/pwabuilder-sw-register.js"></script>
 </head>
 
@@ -228,6 +229,37 @@ ${langpage(n)}
 <div id="socialbox"><!-- <b>Наш Телеграм:&nbsp;&nbsp;&nbsp;</b><a href="https://t.me/rouletka3"><img id="telegimg" src="/img/telega.png" /></a> --></div>
         </section> 
     </footer>
+    ${process.env.DEVELOPMENT==="yes"?'':`<script>
+     // https://yandex.ru/support2/partner/ru/web/units/sizes
+     function getReklama(){
+		 if(Brole.value==="admin") return;
+     window.yaContextCb.push(()=>{
+     if(Ya.Context.AdvManager.getPlatform()==='desktop'){
+		 Ya.Context.AdvManager.render({
+			 "blockId":"R-A-12098170-3",
+			// "renderTo":"yandex_rtb_R-A-12098170-1
+			"type":"floorAd",
+			"platform":"desktop",
+			"onClose":function(){
+			console.log("Reklama closed")
+				if(isLogin.value=="true")window.location.href="#setPrem";
+			},
+		 })
+	 }else{
+		 Ya.Context.AdvManager.render({
+		 "blockId":"R-A-12098170-5",
+		 "type":"floorAd",
+			"platform":"touch",
+			"onClose":function(){
+			console.log("Reklama closed")
+			if(isLogin.value=="true")window.location.href="#setPrem";
+			}
+		})
+	 }
+	 })
+ }
+ getReklama();
+	 </script> `}
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
 <script>
