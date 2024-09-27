@@ -1502,7 +1502,7 @@ window.addEventListener("online", function(e) {
 		}*/
 		//alert(5);
 		try{
-		getReklama();
+		if(Prem.value=="n")getReklama();
 		HELP=0;
 	}catch(e){
 		console.log(e);
