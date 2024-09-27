@@ -242,7 +242,7 @@ ${langpage(n)}
 			"platform":"desktop",
 			"onClose":function(){
 			console.log("Reklama closed")
-				if(isLogin.value=="true")window.location.href="#setPrem";
+				//if(isLogin.value=="true")window.location.href="#setPrem";
 			},
 		 })
 	 }else{
@@ -252,7 +252,7 @@ ${langpage(n)}
 			"platform":"touch",
 			"onClose":function(){
 			console.log("Reklama closed")
-			if(isLogin.value=="true")window.location.href="#setPrem";
+		//	if(isLogin.value=="true")window.location.href="#setPrem";
 			}
 		})
 	 }

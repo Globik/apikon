@@ -523,7 +523,7 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
 			"platform":"desktop",
 			"onClose":function(){
 			console.log("Reklama closed")
-				//if(isLogin.value=="true")window.location.href="#setPrem";
+				if(isLogin.value=="true")window.location.href="#setPrem";
 			},
 		 })
 	 }else{
@@ -533,7 +533,7 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
 			"platform":"touch",
 			"onClose":function(){
 			console.log("Reklama closed")
-			//if(isLogin.value=="true")window.location.href="#setPrem";
+			if(isLogin.value=="true")window.location.href="#setPrem";
 			}
 		})
 	 }
