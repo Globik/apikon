@@ -254,7 +254,60 @@ router.post("/saveNotif", checkAuth, checkRole(['admin']), async (req, res)=>{
 	res.json({ message: "OK saved!" , y_notif: req.y_notif });
 })
 
+router.get('/getBanned', checkAuth, isAdmin(['admin']), async(req, res) => {
+	let db = req.db;
+	try{
+	let a = await db.query('select * from ban');
+	console.log("a ", a);
+   res.json({ content: res.compile('vBanned', { banlist: a })});
+   }catch(err){
+	   console.log("Get ban err ", err);
+		res.status(400).send({ message: err.name });
+	}
+})
 
+router.post('/OneBanned', checkAuth, isAdmin(['admin']), async(req, res) => {
+	let { usid, nick } = req.body;
+	console.log('body ', req.body);
+	if(!usid || !nick){
+		return res.json({ error: true, message: "No usid or nick" });
+	}
+	let db = req.db;
+	try{
+	await db.query('insert into ban(usid,nick) values((?),(?))', [ usid, nick ]);
+   res.json({ message: `OK - ${nick} banned!`});
+   }catch(err){
+	   console.log("insert ban err ", err);
+		res.status(400).send({ message: err.name });
+	}
+})
+
+router.post('/deleteOneBanned', checkAuth, isAdmin(['admin']), async(req, res) => {
+	let { usid } = req.body;
+	if(!usid){
+		return res.json({ error: true, message: "No usid" });
+	}
+		let db = req.db;
+	try{
+	await db.query('delete from ban where usid=(?)', [ usid ]);
+   res.json({ message: "OK - deleted!"});
+   }catch(err){
+	   console.log("delete ban err ", err);
+		res.status(400).send({ message: err.name });
+	}
+})
+
+router.post('/bannedOutAll', checkAuth, isAdmin(['admin']), async(req, res) => {
+	
+	let db = req.db;
+	try{
+	await db.query('delete from ban', [ ]);
+   res.json({ message: "OK - all deleted!"});
+   }catch(err){
+	   console.log("delete ban err ", err);
+		res.json({ error: true, message: err.name });
+	}
+})
 module.exports = router
 
 function checkAuth(req, res, next){

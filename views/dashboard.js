@@ -19,6 +19,7 @@ return `
     <nav id="adminNav"><button onclick="getUsers(this);">Пользователи</button><button onclick="getStun(this)";>Stun / turn</button><button onclick="whosOnline(this);">Кто онлайн</button>
     <button id="settings" onclick="getSettings(this);">Настройки</button><!-- <button onclick="getTest(this);">Купить</button> -->
     <button onclick="getTestGifts(this);">Сердечки тест</button><button onclick="getPayments(this);">Платежи</button>
+    <button onclick="getAllBanned(this);">Бан</button>
     </nav>
   <!--  <div>
     <button onclick="post_start();">post start</button>&nbsp;&nbsp;<button onclick="post_next();">post next</button>
@@ -29,7 +30,7 @@ return `
  
 
     <div><b>Пересылок:</b> <span>${n.giftcount}</span></div>
-    <div></div>
+    
     <div><b>Веб-камер:</b> <span id="camsCount">0</span></div><div><b>Коннектов:</b> <span id="connects">0</span></div></div>
     <hr> <a href="/admin/yoomoneytest">yoomoney</a>
     <hr>

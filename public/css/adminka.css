@@ -1,8 +1,19 @@
 html,body{
 	height:90vh;
 }
+h3{
+	text-align:center;
+}
+div,section{
+	margin-top:10px;
+	margin-bottom:10px;
+	order:1px solid orange;
+	padding:10px;
+	color:#0f294f;
+	font-size:1.3rem;
+}
 #adminNav{
-	background:blue;
+	background:#a4c797;
 	display:flex;
 	flex-wrap: wrap;
     flex-direction: row;
@@ -13,10 +24,17 @@ html,body{
 		align-items: center;
 		
 }
-#adminNav button{
+#adminNav button, button{
 	padding:4px;
 	margin-top:4px;
 	margin-bottom:4px;
+	background:#efa34f;
+	border:none;
+	font-weight:bold;
+	font-size:1rem;
+	line-height: 1.5;
+	padding:5px;
+	color:#0f294f;
 }
 
 #adminContainer{
@@ -192,3 +210,54 @@ input[type=text], input[type=submit]{
 		width:100%;
 	}
 }
+.bansec{
+display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  }
+  
+  .bansec.puls{
+	animation-name: puls;
+    animation-duration: 1s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+}
+
+@keyframes puls {
+    from {
+        background: green;
+    }
+    to {
+        background: lightgreen;
+    }
+}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  

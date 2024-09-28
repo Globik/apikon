@@ -4,6 +4,7 @@ function main(n){
 	let istestheart = (n.istestheart==1?true:false);
 	const { lang , buser, user } = n;
 	//console.log("N ",n);
+	console.log("ENVIRONMENT ",n.settings.env);
 	//console.log("^^^ USER ****", user);
 	//console.log("*** BUSER ****", buser);
 	//console.log("fucker *** ", n.FUCKER);
@@ -85,10 +86,8 @@ lang=='id'?`Terbukanya dunia komunikasi dan kenalan baru baik jiwa raga, maupun 
 <!-- <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script> -->
  <script src="/js/adapter-latest.js"></script> 
 <!-- <script src="/js/sound.js"></script> -->
-<script src="https://unpkg.com/@vkid/sdk@2.3.0/dist-sdk/umd/index.js"></script>
-<script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
-
-<script>
+ ${process.env.DEVELOPMENT=="yes"?'':`<script src="https://unpkg.com/@vkid/sdk@2.3.0/dist-sdk/umd/index.js"></script>
+ <script>
 
 const VK_APP_ID = 52271555;
 const VKID = window.VKIDSDK;
@@ -100,17 +99,17 @@ VKID.Config.init({
 	//scope:'email,phone',
 	mode:VKID.ConfigAuthMode.InNewTab
 });
-</script>
+</script>`}
+
+ ${n.settings.env=="production"?`<script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script> `:''}
+
+
 <script>
 var VK_USER = false;
 var FLAGVK = false;
-vkBridge.send('VKWebAppInit').then(data=>{
-	if(data.result){
-		FLAGVK=true;
-	}
-}).catch(function(er){})
+${n.settings.env=="production"?`vkBridge.send('VKWebAppInit').then(data=>{if(data.result){FLAGVK=true;}}).catch(function(er){}) `:''}
 </script>
- 
+
 
 <!-- Google tag (gtag.js) -->
 <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-QG900MX52X"></script>
@@ -121,7 +120,7 @@ vkBridge.send('VKWebAppInit').then(data=>{
 
   gtag('config', 'G-QG900MX52X');
 </script> -->
-<!-- Yandex.Metrika counter -->
+${process.env.DEVELOPMENT == "yes" ? '':`<!-- Yandex.Metrika counter -->
 <script type="text/javascript" >
    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
    m[i].l=1*new Date();
@@ -135,7 +134,7 @@ vkBridge.send('VKWebAppInit').then(data=>{
         accurateTrackBounce:true,
         webvisor:true
    });
-</script>
+</script>`}
 <noscript><div><img src="https://mc.yandex.ru/watch/95229410" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
 <!--
@@ -380,7 +379,9 @@ ${n.user?`<div class="settingspanel" onclick="logout(this);">${lang=='ru'?'Вы�
     lang=='id'?'untuk mengabaikan':''}!</div>
     <div data-claim="claim" onclick="sendClaim(this);">${lang=='ru'?'Пожаловаться':lang=='en'?'Abuse':
     lang=='zh'?'虐待':
-    lang=='id'?'melecehkan':''}!</div></div>
+    lang=='id'?'melecehkan':''}!</div>
+    ${n.user&&n.user.brole=="admin"?`<div onclick="banit(this);">Забанить</div>`:''}
+    </div>
     <section id="mobileloader"><div class="loader"></div></section>
     
     <video id="remote"  class="" autoplay playsinline poster="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"></video>
@@ -629,8 +630,8 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
      <a href="#."  class="overlay" id="banned"></a>
     <output id="bannedoutput" class="popi">
     ${lang=='ru'?`
-    <p>Вы забанены за ${n.user?n.user.grund=="1"?'темный экран, за закрытый экран, за демонстрацию мебели':n.user.grund=="2"?'онанизм':'':''}</p>
-    <p>Чтобы разбанить себя, заплатите 30 рублей.</p>
+    <p>Вы забанены за нарушение правил чата!<!-- ${n.user?n.user.grund=="1"?'темный экран, за закрытый экран, за демонстрацию мебели':n.user.grund=="2"?'онанизм':'':''} --></p>
+    <p>Чтобы разбанить себя, оплатите 30 рублей.</p>
     <form id="bannedForm" method="post" action="https://yoomoney.ru/quickpay/confirm" name="ordertodo">
     <div><input type="hidden"  placeholder="Получатель yoomoney" name="receiver" value="4100118676103827" required/> </div>
 	<input type="hidden" name="label" value="id=${n.user?n.user.id:'0'}&p=300?ip=${n.user?n.user.ip?n.user.ip:undefined:undefined}"/>

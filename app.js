@@ -77,7 +77,7 @@ const app = express();
 const suka = "./public";
 
 app.use(express.static(suka));
-
+if(process.env.DEVELOPMENT !=="yes")app.set('env','production')
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
@@ -851,6 +851,7 @@ app.post('/cb/tgwebhook', async(req, res)=>{
 			let usid = paramStr.get('usid');
 			let vip = paramStr.get('ip');
 			let grund = paramStr.get('grund');
+			let nick2 = paramStr.get('nick');
 			let numb = 0;
 			if(grund == 'vual'){
 				numb = 1;
@@ -864,7 +865,7 @@ app.post('/cb/tgwebhook', async(req, res)=>{
 					sendTelega({ grid: grid, txt: "Уже забанили" });
 					return res.status(200).send({ message: "OK" });
 				}
-				await pool.query(`insert into ban(usid,ip,grund) values((?),(?),(?))`, [ usid, vip, numb ]);
+				await pool.query(`insert into ban(usid,nick,grund) values((?),(?),(?))`, [ usid, nick2, numb ]);
 				sendTelega({ grid: grid, txt: "OK, banned " + usid});
 			}catch(e){
 				console.log(e);
@@ -1424,7 +1425,7 @@ async function searchPeer (socket, msg, source) {
 	 onLine.set(socket.id, { id: socket.id, src: source.src, nick: socket.nick, status: 'busy' });
 	 broadcast({ type: "dynamic", sub: "add", id: socket.id, partnerid: peerId, nick: socket.nick, status: 'busy', camcount: onLine.size});
 	 broadcast_admin({ type: "dynamic", sub: "add", id: socket.id, partnerid: peerId, src: source.src, nick: socket.nick, status: 'busy', camcount: onLine.size});
-	 //if(isEven(matchedIds.size))broadcasti({ type: "connected2", size:matchedIds.size/2 });
+	// if(isEven(matchedIds.size))broadcasti({ type: "connected2", size:matchedIds.size/2 });
 	 
 	 
 	 
@@ -1445,7 +1446,7 @@ async function searchPeer (socket, msg, source) {
 	 onLine.set(socket.id, { id: socket.id, src: source.src, nick: socket.nick, status: 'free' });
 	 broadcast({ type: "dynamic", sub: "add", id: socket.id, nick: socket.nick, status: 'free', camcount: onLine.size });
 	 broadcast_admin({ type: "dynamic", sub: "add", id: socket.id, src: source.src, nick: socket.nick, status: 'free', camcount: onLine.size });
-	//if(isEven(matchedIds.size))broadcasti({ type: "connected2", size: matchedIds.size/2 });
+//	if(isEven(matchedIds.size))broadcasti({ type: "connected2", size: matchedIds.size/2 });
  }}
 //  console.log(`#${socket.id} ${socket.nick} adds self into waiting queue`)
 // console.log("waiting ", waitingQueue);
@@ -1522,8 +1523,8 @@ async function sendFoti(socket,msg){
 	f.append('photo', new Blob([buf]));
 	f.append('reply_markup', `{"inline_keyboard":[
 	[{"text":"Make it gold","callback_data":"usid=${socket.userId}&action=gold&nick=${socket.nick}"}],
-	[{"text":"vual","callback_data":"usid=${socket.userId}&action=ban&grund=vual&ip=${socket.vip}"}],
-	[{"text":"wix","callback_data":"usid=${socket.userId}&action=ban&grund=wix&ip=${socket.vip}"}]
+	[{"text":"vual","callback_data":"usid=${socket.userId}&action=ban&grund=vual&ip=${socket.vip}&nick=${socket.nick}"}],
+	[{"text":"wix","callback_data":"usid=${socket.userId}&action=ban&grund=wix&ip=${socket.vip}&nick=${socket.nick}"}]
 	]}`);
 	try{
 	let rr = await axios.post(`https://api.telegram.org/bot${tg_api}/sendPhoto`, f); 

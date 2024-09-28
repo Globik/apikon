@@ -9,12 +9,12 @@ usid MEDIUMINT NOT NULL,
 CONSTRAINT `fk_user_id`
     FOREIGN KEY (usid) REFERENCES users (id),
    -- ON DELETE CASCADE
-ip VARCHAR (20) NOT NULL,
-grund int not null default 0
+nick varchar(20) NOT NULL,
+grund int not null default 1
 );
 
 /*
-insert into ban(usid,ip) values(5,'23.23.22.35');
+insert into ban(usid,nick) values(5,'suka1');
 select*from ban where ip='23.23.22.35' and usid !=5;
 select brole,name,ip,grund from users left join ban on users.id=ban.usid where users.id=5;
 

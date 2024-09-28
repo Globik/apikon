@@ -231,7 +231,7 @@ VKID.Config.init({
 })
 OAuthList
 */ 
-
+try{
 const oauthList = new VKID.OAuthList();
 const containervk = gid("VkIdSdkOAuthList");
 
@@ -321,3 +321,4 @@ ati();
 }
 
 }
+}catch(e){console.warn(e)}

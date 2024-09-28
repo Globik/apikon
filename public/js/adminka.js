@@ -270,25 +270,90 @@ d.innerHTML=`<caption>${obj.nick}</caption><div class="dynamicImgHalter"><div cl
 	}
 	
 }
-
+function getSomeContent(l, el){
+	someSpinner.className = "hide";
+	contentBox.innerHTML = l.content;
+}
 function getTestGifts(el){
 	clearWindows();
-	vax('get','/admin/getGiftTests', {}, on_get_test_gift, on_error, el, false);
+	vax('get','/admin/getGiftTests', {}, getSomeContent, on_error, el, false);
 }
 
-function on_get_test_gift(l, el){
-	someSpinner.className = "hide";
-	contentBox.innerHTML = l.content;
-}
+
 function getPayments(el){
 	clearWindows();
-	vax('get','/admin/getPayments', {}, on_get_payments, on_error, el, false);
+	vax('get','/admin/getPayments', {}, getSomeContent, on_error, el, false);
 }
 
-function on_get_payments(l, el){
-	someSpinner.className = "hide";
-	contentBox.innerHTML = l.content;
+
+
+function getAllBanned(el){
+	clearWindows();
+	vax('get','/admin/getBanned', {}, getSomeContent, on_error, el, false);
 }
+ 
+
+function banOutThat(el){
+	let a = el.getAttribute("data-usid");
+	if(!a)return;
+	//alert(a);
+	let b = document.querySelector(`[data-banid="${a}"]`);
+	//if(b)b.remove();
+	vax('post','/admin/deleteOneBanned', { usid: a }, on_ban_out_that, on_banout_that_error, b, false);
+	b.classList.add("puls");
+}
+function on_ban_out_that(l, el){
+	if(l.error){
+		el.classList.remove("puls");
+		note({ content: l.message, type: "error", time: 5});
+		return;
+	}
+	note({ content: l.message, type: "info", time: 5 });
+	el.remove();
+}
+function on_banout_that_error(l, el){
+	el.classList.remove("puls");
+	console.error(l);
+	alert(l);
+}
+
+function banOutAll(el){
+	vax('post','/admin/bannedOutAll', {}, on_ban_out_all, on_banout_all_error, el, false);
+	el.classList.add("puls");
+}
+
+function on_ban_out_all(l, el){
+	el.classList.remove("puls");
+	if(l.error){
+		note({ content: l.message, type: "error", time: 5});
+		return;
+	}
+	while(hauptbansec.firstChild){
+		hauptbansec.firstChild.remove();
+	}
+	note({ content: l.message, type: "info", time: 5 });
+}
+ function on_banout_all_error(l, el){
+	 el.classList.remove("puls");
+	console.error(l);
+	alert(l);
+ }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

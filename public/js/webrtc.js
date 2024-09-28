@@ -379,6 +379,39 @@ function insertIgnore(ip){
 	console.log("pressing next");
 	next(nextbtn, true, IPS, true);
 }
+
+function banit(el){
+	let l = claimMenu.getAttribute("data-vip");
+	//alert(l);
+	if(l){
+		if(!partnernick){
+			console.warn("No partner nick");
+			return;
+		}
+		let d = {}
+		d.usid = l;
+		d.nick = partnernick;
+		vax('post','/admin/OneBanned', d, on_ban_it, on_ban_it_error, el, false);
+		el.className = "puls";
+	}else{
+		console.warn("NO partner user id");
+	}
+}
+function on_ban_it(l, el){
+	el.classList.remove("puls");
+	if(l.error){
+		note({ content: l.message, type: "error", time: 5});
+		return;
+	}
+	
+	note({ content: l.message, type: "info", time: 5 });
+	openClaim(claimContainer);
+}
+function on_ban_it_error(l, el){
+	el.className="";
+	note({ content: l, type: "error", time: 5 });
+}
+
 function closeClaim(el){
 	/*
 	if(OPENCLAIM){
@@ -640,7 +673,7 @@ function on_msg(msg) {
         partnerId = msg.partnerId;
         partnernick = msg.nick;
         partnerpremium = msg.isprem;  
-        console.log("your id: ", userId.value, "partner id ", msg.partnerId, ' ',msg.nick, msg.isprem);
+        console.log("your id: ", userId.value, "partner id ", msg.partnerId, 'partner nick ',msg.nick, msg.isprem);
        // claimMenu.setAttribute("data-vip", msg.vip);
         claimMenu.setAttribute("data-vip", msg.partnerId);
        // let a3 = checkIp(msg.vip);
@@ -1540,6 +1573,8 @@ window.addEventListener("online", function(e) {
  ignoreOffer = false;
  isSettingRemoteAnswerPending = false;
  partnerId = null;
+ partnernick = undefined;
+ claimMenu.setAttribute("data-vip","");
  //giftsContainer.style.display="block";
     }
     
@@ -1588,7 +1623,7 @@ function iceConnectionStateChangeHandler (event) {
       break;
   }
 }
-vkBridge.send('VKWebAppInit').then(data=>{}).catch(function(er){})
+//vkBridge.send('VKWebAppInit').then(data=>{}).catch(function(er){})
 function iceGatheringStateChangeHandler (event) {
 	// todo ???? hangs up on complete
   console.log('*** ICE gathering state changed to: ' + event.target.iceGatheringState)
