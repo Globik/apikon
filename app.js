@@ -10,6 +10,7 @@ const { oni, oni1 } = require('./libs/web_push.js');
 var WebSocket = require('ws');
 
 const crypto = require('crypto');
+//console.log('crypto.', crypto.randomUUID())
 const passport = require("passport");
 const session = require('express-session');
 const mariadb = require('mariadb');
@@ -257,7 +258,7 @@ app.get("/about", async(req, res)=>{
 	console.log("*** USER *** ", req.user);
 	//console.log('req.app.locals ', req.app.locals.testshopid, ' ', req.app.locals.testshopsecret);
 	//res.rendel('errnotfound',{});
-	res.rendel('main', { imgData: imgData, lang: 'ru', yacount: JETZT });
+	res.rendel('main', { imgData: imgData, lang: 'ru', yacount: JETZT, uuid: crypto.randomUUID() });
 })
 
 
@@ -329,13 +330,13 @@ if(li2==sha12_ha){
 */
 app.get('/about/en', async(req, res)=>{
 	
-res.rendel('main', { imgData: imgData, lang: 'en', yacount: JETZT });
+res.rendel('main', { imgData: imgData, lang: 'en', yacount: JETZT, uuid: crypto.randomUUID() });
 })
 app.get('/about/zh', async(req, res)=>{
-	res.rendel('main', { imgData: imgData, lang: 'zh', yacount: JETZT });
+	res.rendel('main', { imgData: imgData, lang: 'zh', yacount: JETZT, uuid: crypto.randomUUID() });
 })
 app.get('/about/id', async(req, res)=>{
-	res.rendel('main', { imgData: imgData, lang: 'id', yacount: JETZT });
+	res.rendel('main', { imgData: imgData, lang: 'id', yacount: JETZT, uuid: crypto.randomUUID() });
 })
 app.get("/", async(req, res)=>{
 	//oni((req.user?req.user.name:'anonym'), " on about");

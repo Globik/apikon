@@ -95,8 +95,8 @@ VKID.Config.init({
 	app: VK_APP_ID,
 	redirectUrl:'https://rouletka.ru/about',
 	state:'mamamia',
-	codeVerifier:'huygygyg',
-	//scope:'email,phone',
+	codeVerifier:${n.uuid},
+	scope:'email',
 	mode:VKID.ConfigAuthMode.InNewTab
 });
 </script>`}

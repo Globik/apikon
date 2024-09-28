@@ -302,9 +302,9 @@ return;
 	
 localStorage.setItem("islogin" , "yes");
 window.location.href="#."
-setTimeout(function(){
+//setTimeout(function(){
 	window.location.reload(true);
-},1000)
+//},1000)
 //location.reload();
 }
 }catch(e){
