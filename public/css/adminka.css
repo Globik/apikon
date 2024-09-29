@@ -5,12 +5,12 @@ h3{
 	text-align:center;
 }
 div,section{
-	margin-top:10px;
-	margin-bottom:10px;
+	margin-top:4px;
+	margin-bottom:4px;
 	order:1px solid orange;
-	padding:10px;
+	padding:4px;
 	color:#0f294f;
-	font-size:1.3rem;
+	font-size:1rem;
 }
 #adminNav{
 	background:#a4c797;
