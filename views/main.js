@@ -233,7 +233,7 @@ function isOpenModal(){
     </script>`:`<script>
    // alert('alik defined');
     in_rem_hash();
-    const NICK = "${n.user?n.user.name:'anonym'}";
+    const NICK = "${n.user?n.user.name:'anon'}";
    // var VK_USER = false;
   // alert("NICK "+NICK);
     window.onload = function(){

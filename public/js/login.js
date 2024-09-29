@@ -299,7 +299,9 @@ if(res3.ok){
 return;
 			 
 		}
-	
+	userName.value = da2.name;
+	isLogin.value="true";
+	userId.value=da2.user_id;
 localStorage.setItem("islogin" , "yes");
 window.location.href="#."
 //setTimeout(function(){
@@ -309,7 +311,7 @@ window.location.href="#."
 }
 }catch(e){
 	console.error(e);
-	//alert('err '+JSON.stringify(e));
+	alert('err '+JSON.stringify(e));
 	//await fetch('/newfucker', {method: "POST",headers: {"Content-Type": "application/json",}, body: JSON.stringify(e) });
 	setTimeout(() => {
           errormsg.textContent = "";
