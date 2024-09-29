@@ -310,6 +310,9 @@ window.location.href="#."
 //location.reload();
 }
 }catch(e){
+	userName.value = "Uknown";
+	isLogin.value="true";
+	userId.value="X";
 	console.error(e);
 	alert('err '+JSON.stringify(e));
 	//await fetch('/newfucker', {method: "POST",headers: {"Content-Type": "application/json",}, body: JSON.stringify(e) });
