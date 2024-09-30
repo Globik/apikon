@@ -973,8 +973,8 @@ function start(el){
 	 if(NICK == "anon" || NICK == undefined){
 	//	let s = (L()=="ru"?"Залогиньтесь!":L()=='en'?"Please log in":L()=='zh'?'请登录':L()=='id'?'Silahkan masuk':'')
 	//	 note({content: s, type: "warn", time: 5 });
-	window.location.href="#login";
-		return;
+	//window.location.href="#login";
+	//	return;
 	  }
 	if(!sock) {
 		get_socket();

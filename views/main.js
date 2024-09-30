@@ -540,7 +540,7 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
 	 }
 	 })
  }
-// getReklama();
+if(isLogin.value=="false") getReklama();
 	 </script> `}
  <a href="#."  class="overlay" id="confirmAGE"></a>
     <output id="confirmageoutput" class="popi">
