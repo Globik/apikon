@@ -198,7 +198,7 @@ function confirm_agenot(ev){
 	ev.preventDefault();
 	
 	try{
-	alert(ev.target.bday.value);
+	//alert(ev.target.bday.value);
 	if(isover18(new Date(ev.target.bday.value))){
 		//alert('VKID '+gid('VKID').value);
 		localStorage.setItem("myAge2", ev.target.bday.value);
