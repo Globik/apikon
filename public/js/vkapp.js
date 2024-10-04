@@ -21,10 +21,7 @@ vkBridge.supportsAsync('VKWebAppResizeWindow').then(res=>{
  var agi = localStorage.getItem("myAge");
 if(agi) myAgeForm.bday.value = agi;
 }
-//const leavbtn = gid('leavbtn');
-//const continbtn = gid('continbtn');
-//leavbtn.addEventListener('click', leavingPage, false);
-//continbtn.addEventListener('click', confirm_age, false);
+
 function confirm_age(ev){
 	ev.preventDefault();
 	

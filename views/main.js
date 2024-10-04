@@ -173,7 +173,52 @@ ${process.env.DEVELOPMENT == "yes" ? '':`<!-- Yandex.Metrika counter -->
 	let islogin = localStorage.getItem("islogin");
 	console.warn('islogin ', islogin);
 		//get_socket(); 
+	let isage = localStorage.getItem("myAge");
+	if(!isage && isage !=="y"){
+		window.location.href="#confirmAGE";
+	 const faka = document.querySelector('.overlay:target');
+if(faka){
+	faka.onclick=function(e){
+		e.preventDefault();
+	}
+}
 	
+	
+	
+	const myAgeForm2 = document.forms.verifyageform;
+ if(myAgeForm2){
+ myAgeForm2.addEventListener('submit', confirm_agenot, false);
+ var agi = localStorage.getItem("myAge2");
+if(agi) myAgeForm.bday.value = agi;
+}}else{
+	showSomething();
+}
+
+function confirm_agenot(ev){
+	ev.preventDefault();
+	
+	try{
+	alert(ev.target.bday.value);
+	if(isover18(new Date(ev.target.bday.value))){
+		//alert('VKID '+gid('VKID').value);
+		localStorage.setItem("myAge2", ev.target.bday.value);
+		localStorage.setItem("myAge", "y");
+		 window.onhashchange = null;
+		 //window.location.href="#."
+		try{
+		showSomething();
+	}catch(e){
+		
+	}
+	}else{
+		gid('outputing').style.visibility = 'visible';
+	}
+}catch(e){
+	//alert(e);
+	console.log(e);
+}
+}
+	function showSomething(){
    var cat = localStorage.getItem("myCat");
    if(!cat && cat !=="Tom"){
 	   console.warn("NO REGELN");
@@ -202,6 +247,7 @@ if(faka){
 	
 	}
 }`:''}
+}
 }
 in_rem_hash();
 

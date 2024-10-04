@@ -1526,7 +1526,8 @@ window.addEventListener("online", function(e) {
 	   //pl();
 	   if(HELP == 5){
 		//   window.location.href="#helproject";
-		/*if(vkBridge){
+		try{
+		if(vkBridge){
 			vkBridge.send('VKWebAppShowBannerAd',{banner_location:'bottom'})
 			.then(data=>{
 				if(data.result){
@@ -1538,7 +1539,8 @@ window.addEventListener("online", function(e) {
 			}).catch(err=>{
 				console.error(err);
 			});
-		}*/
+		}
+	}catch(e){}
 		//alert(5);
 		try{
 		if(Prem.value=="n")getReklama();
