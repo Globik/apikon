@@ -1031,7 +1031,12 @@ el.textContent = L()=="ru"?"стоп":L()=='en'?"stop":L()=='zh'?'停止':L()=='
 
 
 
-		}).catch(handleError);
+		}).catch(err=>{
+			if(err.name == "NotFoundError" || err.name == "DevicesNotFoundError"){
+				note({ content: "Вебкамера или микрофон не найдены", type: "warn", time: 5 });
+				el.disabled = false;
+			}
+		});
 }
 }else{
 	
@@ -1206,7 +1211,7 @@ someInterval = null;
 
 function handleError(err){
 	//alert(err);
-		note({"content": "Вебкамера не найдена. Подключите вебкамеру", type: "error", time: 15});
+		note({"content": err, type: "error", time: 15});
 		console.error(err);
 	}
 	function doScreenshot(){

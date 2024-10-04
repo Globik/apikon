@@ -215,7 +215,7 @@ app.get("/about", async(req, res)=>{
 		if(checkSign(req.query)){
 		try{
 			//access_token
-		let r = await axios.get(getUservkUrl,{params:{access_token: skey, user_ids:[req.query.vk_user_id],fields: [req.query.nickname], v: vparam}});
+		let r = await axios.get(getUservkUrl, { params:{access_token: skey, user_ids:[req.query.vk_user_id],fields: [req.query.nickname], lang:'ru', v: vparam}});
 		console.log("DATA ", r.data);
 		if(r.data.response && r.data.response.length > 0){
 			//id, first_name

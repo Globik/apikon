@@ -56,6 +56,14 @@ VK_USER = false;
  function onsetviewd_error(){};
  //showSlides();
  function showSlides(){
+	 vkBridge.send("VKWebAppGetUserInfo", {
+		 user_id:gid("VKID").value;
+	 }).then(data=>{
+		 if(data.id){
+			 console.log('user info ', data);
+			 gid("VKUSERNAME").textContent=data.first_name;
+		 }
+	 }).catch(err=>{console.error(err);});
 	 vkBridge.send('VKWebAppShowSlidesSheet', {
 		 slides:[
 		 {
