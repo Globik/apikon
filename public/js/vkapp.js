@@ -57,7 +57,7 @@ VK_USER = false;
  //showSlides();
  function showSlides(){
 	 vkBridge.send("VKWebAppGetUserInfo", {
-		 user_id:gid("VKID").value;
+		 user_id:gid("VKID").value
 	 }).then(data=>{
 		 if(data.id){
 			 console.log('user info ', data);
