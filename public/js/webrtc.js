@@ -598,7 +598,7 @@ return window.location.href='#purchaseHREF';
     let s = L()=="ru"?"Соединение с сервером закрыто!":L()=='en'?"Websocket closed!":
     L()=='zh'?'Websocket 已关闭':
     L()=='id'?'Soket web ditutup':'';
-   // note({ content: s, type: "info", time: 5 });
+    note({ content: s, type: "info", time: 5 });
     console.log('socket closed');
     closeAll(startbtn);
   };
@@ -1194,7 +1194,7 @@ someInterval = null;
 	el.disabled = false;
 	nextbtn.disabled = true;
 	local.style.backGround="rgba(0,0,0,0);"
-	//if(sock) sock.close();
+	if(sock) sock.close();
 	isShow = false;
 	chatbox.innerHTML="";
 	chatbox2.innerHTML="";
