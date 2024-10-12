@@ -60,9 +60,9 @@ function toggleCam(el){
 
 	if(window.streami){
 			if(Prem.value == "n" && Brole.value !="admin"){
-		window.location.href = "#gopremium";
-		panelOpen();
-		return;
+		//window.location.href = "#gopremium";
+		//panelOpen();
+		//return;
 	}
 		window.streami.getTracks().forEach(function(track){
 			track.stop();
@@ -354,6 +354,10 @@ function openClaim(el){
 }
 
 function sendClaim(el){
+	if(!CONNECTED){
+		note({ content: "Дождитесь собеседника", type: "info", time: 5});
+		return;
+	}
 	let d = el.getAttribute("data-claim");
 	if(d == "ignor"){
 		let s = L()=="ru"?"ОК. Добавили в игнор.":L()=='en'?"OK, added to ignore.":
@@ -594,7 +598,7 @@ return window.location.href='#purchaseHREF';
     let s = L()=="ru"?"Соединение с сервером закрыто!":L()=='en'?"Websocket closed!":
     L()=='zh'?'Websocket 已关闭':
     L()=='id'?'Soket web ditutup':'';
-    note({ content: s, type: "info", time: 5 });
+   // note({ content: s, type: "info", time: 5 });
     console.log('socket closed');
     closeAll(startbtn);
   };
@@ -753,6 +757,8 @@ function checkIp(ip){
 	return a;
 }
 function  handleMessage(msg, bool){
+	//alert(1);
+	
 	//printmsg2.className="";
 	//printmsg.className="";
 	znakPrint.classList.add("hidden");
@@ -786,6 +792,7 @@ textarea2.className="";
 }
 
 function insertPublished(obj, bool){
+
 	znakPrint.classList.add("hidden");
 	znakPrint2.classList.add("hidden");
 	let div=document.createElement('div');
@@ -976,6 +983,16 @@ function start(el){
 	//window.location.href="#login";
 	//	return;
 	  }
+	  let isage = localStorage.getItem("myAge");
+	
+	  if(isVK.value == "true"){
+		  if(!isage && isage !=="y"){
+		 // if(FLAGisAged == false){
+			  window.location.href = "#confirmAGE";
+			  return;
+		 // }
+	  }
+  }
 	if(!sock) {
 		get_socket();
 		}
@@ -1032,10 +1049,17 @@ el.textContent = L()=="ru"?"стоп":L()=='en'?"stop":L()=='zh'?'停止':L()=='
 
 
 		}).catch(err=>{
+			//alert(err);
+			console.log(err);//permission denied NotAllowedError
 			if(err.name == "NotFoundError" || err.name == "DevicesNotFoundError"){
 				note({ content: "Вебкамера или микрофон не найдены", type: "warn", time: 5 });
-				el.disabled = false;
+			
+			}else if(err.name == "NotAllowedError" || err.name == "PermissionDeniedError"){
+				note({ content: "Пожалуйста, разрешите браузеру использовать камеру и микрофон.", type: "warn", time: 5 });
+			}else{
+				note({content: err.name,type:"warn", time: 5 });
 			}
+			el.disabled = false;
 		});
 }
 }else{
@@ -1193,7 +1217,7 @@ someInterval = null;
  makingOffer = false;
  ignoreOffer = false;
  isSettingRemoteAnswerPending = false;
- if(sock) sock.close();
+ //if(sock) sock.close();
  partnerId = null;
  
  if(window.recorder && window.recorder.state == 'recording')window.recorder.stop();
@@ -1263,6 +1287,7 @@ return imgdata22;
 	local.onloadedmetadata = function () {
 		//let a = MediaRecorder.isTypeSupported('video/webm');
 		//alert(a);
+		
 		setTimeout(function(){
 	var imgdata3=Screenshota();
 	wsend({type:"telegascreenshot",nick:(NICK?NICK:'Anonym'), src: imgdata3});
@@ -1298,7 +1323,8 @@ return imgdata22;
 		somespinner.className="";
 		somehello.className="see";
 		mobileloader.className="";
-		
+		txtvalue.disabled = false;
+		txtvalue2.disabled = false;
 		//mobileChat.className = "";
 		hideChat();
 		duka2.className="";
@@ -1343,9 +1369,16 @@ return imgdata22;
 		wsend({type:"unwrite"});
 	}
 	
-	txtvalue.addEventListener('keydown', sendEnter, false);
-	txtvalue2.addEventListener('keydown', sendEnter, false);
+	//txtvalue.addEventListener('keydown', sendEnter, false);
+	//txtvalue2.addEventListener('keydown', sendEnter, false);
 	function sendEnter(ev){
+		if(!CONNECTED){
+			//alert(4);
+		note({content: "Дождитесь собеседника", type: "info", time: 5 });
+		txtvalue.value='';
+		txtvalue2.value='';
+		return;
+	}
 		if(ev.key == "Enter"){
 			//alert(event.target.getAttribute("data-send"));
 			//if(!txtvalue.value || !txtvalue2.value)return;
@@ -1356,7 +1389,12 @@ return imgdata22;
 	}
 	
 	function sendi(event){
-		
+		if(!CONNECTED){
+		note({content: "Дождитесь собеседника", type: "info", time: 5 });
+		txtvalue.value='';
+		txtvalue2.value='';
+		return;
+	}
 		 let l = event.getAttribute("data-send");
 		 let l2 = txtvalue2.getAttribute("data-publish");
 		 let l3 = txtvalue.getAttribute("data-publish");
@@ -1426,6 +1464,7 @@ if(l2){
 	 }
 	 
 	 function sendiOne(){	
+		 //alert(3);
 			if(!txtvalue.value) return;
 				let div=document.createElement('div');
 				// printmsg2.className='';
@@ -1440,6 +1479,7 @@ if(l2){
 		txtvalue.value="";
 	}
 	function sendiTwo(){
+		//alert(1);
 		//for mobile
 		// printmsg2.className='';
         //printmsg.className="";
@@ -1456,6 +1496,7 @@ if(l2){
 	}
 	
 	function sendiTwoTwo(){
+		//alert(2);
 		         znakPrint.classList.add("hidden");
       znakPrint2.classList.add("hidden");
       if(!txtvalue2.value) return;
@@ -1566,6 +1607,8 @@ window.addEventListener("online", function(e) {
 	mobChat = false;
 	txtvalue.value="";
 	txtvalue2.value="";
+	txtvalue.disabled = true;
+		txtvalue2.disabled = true;
 	somespinner.className="show";
 	mobileloader.className="active";
 	duka2.className="show";

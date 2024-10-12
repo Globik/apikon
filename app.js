@@ -1509,6 +1509,7 @@ f2.append('chat_id', grid);
   
 
 async function sendFoti(socket,msg){
+	if(!msg.src)return;
 	let b11 = msg.src.split(',')[1];
     // console.log('b11 ', b11);
 		let kk = 0;

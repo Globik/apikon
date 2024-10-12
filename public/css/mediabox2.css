@@ -248,7 +248,7 @@ section#giftsContainer.hidden,section#giftsContainer2.hidden{
 }
 	#textarea{
 		position:relative;
-		border-radius:10px;
+		border-radius:1px;
 		padding:0;
 		width:100%;
 		height: 100%;
@@ -264,7 +264,7 @@ section#giftsContainer.hidden,section#giftsContainer2.hidden{
 		position:relative;
 		top:0;
 		right:1px;
-		background:rgba(0,0,0,0.0);
+		background:rgba(0,0,0,0);
 		height:65px;
 		width:65px;
 		brder:1px solid yellow;
@@ -277,10 +277,11 @@ section#giftsContainer.hidden,section#giftsContainer2.hidden{
 		
 	}
 	#txtvalue{
-		olor:red;
+		color:red;
 		bakground:red;
 		width:calc(100% - 190px);
-		border-radius:30px;
+		/*width:90%;*/
+		border-radius:1px;
 		height:90%;
 		transform:translateY(-2px);	
 		}
@@ -322,6 +323,7 @@ background-image: linear-gradient(147deg, #000000 0%, #434343 74%);
 	background:rgba(0,0,0,0.1);
 		width:65px;
 		height:65px;
+		cursor:pointer;
 		border-radius:100%;
 		adding-top:5px;
 		boder-top-right-radius:10px 10px;
@@ -371,12 +373,14 @@ background-image: linear-gradient(315deg, #2d3436 0%, #d3d3d3 74%);
 	
 	#localcontainer{
 	
-	 background-image: url("/img/webcam.png");
+	 background-image: url("/img/webcam2.svg");
 	 background-repeat: no-repeat;
 	 background-position: center;
+	 background-size:contain;
 	 position:relative;
 	 z-ndex:1111;
 	 bckground:red;
+	 margin-top:0px;
  }
 	.ita{
 dsplay:block;
@@ -860,6 +864,11 @@ div.heartcount{
 		height:100px;
 		order:1px solid red;
 		border:none;
+		margin-top:10px;4
+		border-radius:5px;
+	}
+	#local{
+		border-radius:5px;
 	}
 	#settingspanel,.settingspanel{
 		width:100%;
@@ -996,7 +1005,7 @@ div.heartcount{
 			width:100%;
 		height: 100%;/*calc(100% - 85%);*/
 
-		
+		color:red;
 		order:1px solid green;
 		display:flex;
 		flex-wrap: wrap;
@@ -1015,11 +1024,13 @@ div.heartcount{
 		width: calc(100% - 70px - 70px - 36px);
 		height:85%;
 		bttom:0;
-		border-radius:30px;
+		border-radius:1px;
 		boder:1px solid silver;
-		background:rgba(0,0,0,0.2);
+		background:rgba(0,0,0,0.9);
 		padding-left:15px;
 		margin-left:10px;
+		color:green;
+		font-weight:bold;
 	}
 	
 	#chat4{
@@ -1538,7 +1549,7 @@ transform:translateY(5px);
 #confirmageoutput{
 	font-size:1rem;
 	line-height:1.5;
-	width:50%;
+	width:30%;
 }
 #confirmageoutput form{
 	margin-top:10px;
@@ -1550,7 +1561,12 @@ transform:translateY(5px);
 [name="contin"],[name=bday]{
 	margin-top:15px;
 	margin-bottom:15px;
+	padding:5px;
 	font-size:1.2rem;
+	line-height:1.5;
+	color:black;
+	height:initial;
+	background:innitial;
 }
 #leavbtn{
 	margin-top:25px;

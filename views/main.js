@@ -107,7 +107,13 @@ VKID.Config.init({
 <script>
 var VK_USER = false;
 var FLAGVK = false;
-${n.settings.env=="production"?`vkBridge.send('VKWebAppInit').then(data=>{if(data.result){FLAGVK=true;}}).catch(function(er){}) `:''}
+var FLAGisAged = false;
+${n.settings.env=="production"?`vkBridge.send('VKWebAppInit').then(data=>{
+	if(data.result){
+		
+		FLAGVK=true;
+		showSlides();
+		}}).catch(function(er){}) `:''}
 </script>
 
 
@@ -158,17 +164,15 @@ ${process.env.DEVELOPMENT == "yes" ? '':`<!-- Yandex.Metrika counter -->
     <input type="hidden" id="Grund" value="${n.user?n.user.grund:0}" />
     <input type="hidden" id="isEnter" value="${n.user?n.user.entr==0?true:false:false}" />
     <input type="hidden" id="VKID" value="${n.buser?n.buser.vkid:null}" /> 
-    <!-- ${buser? buser:'no buser'} -->
-   <!-- name ${buser?buser:'nonig'} id ${buser?buser.id:0} 
-   namealik: ${namealik} fuck ${n.FUCKER}
-   -->
+   <input type="hidden" id="isVK" value="${n.VK?true:false}" /> 
     
-    <!-- {user? JSON.stringify(user):'no user'} name ${user?user.name:'noname'} id ${user?user.id:null} -->
+   
     
     ${!n.user?`<script>
    // alert("UNDEFINED");
     var NICK = "anon";
     //location.href="#login2"
+   
     window.onload=function(){
 	let islogin = localStorage.getItem("islogin");
 	console.warn('islogin ', islogin);
@@ -282,6 +286,7 @@ function isOpenModal(){
     const NICK = "${n.user?n.user.name:'anon'}";
    // var VK_USER = false;
   // alert("NICK "+NICK);
+  
     window.onload = function(){
 		get_socket();
 		if(FLAGVK){
@@ -290,16 +295,21 @@ gid("settings").style.display = "none";
 gid("foot").style.display = "none";
 gid("foot2").style.display = "none"
 gid('playContainer').style.display = 'none';
-${n.user?n.user.entr==0?'window.location.href="#confirmAGE";':'':''}
+// {n.user?n.user.entr==0?'window.location.href="#confirmAGE";':'':''}
+/*
+let isage = localStorage.getItem("myAge");
+	if(!isage && isage !=="y"){
+window.location.href="#confirmAGE"
+}
 const faka = document.querySelector('.overlay:target');
 if(faka){
 	faka.onclick=function(e){e.preventDefault();}
 }
 window.onhashchange = function(ev){
 	console.log('hashchanged');
-	//window.location.href='#confirmAGE';
+	window.location.href='#confirmAGE';
 }
-
+*/
 }
 		
     }
@@ -366,7 +376,7 @@ window.onhashchange = function(ev){
  <img class="setimg" src="/img/set2.svg">
 </div>
 <script>
-if(FLAGVK){
+if(isVK.value == "true"){
 	gid("settings").style.display = "none";
 }
 </script>
@@ -385,11 +395,11 @@ lang=='en'?'Connects':
 lang=='zh'?'连接':
 lang=='id'?'koneksi':''}:</b> <span id="connects">0</span></div>
 <!-- <div class="settingspanel"  onclick="pushSubscribe(this);">Пуш уведомления</div> -->
-${lang=='ru' ?`<div class="settingspanel"  onclick="purchaseTokens(this);">Купить сердечки &#x1f496;</div>
+${lang=='ru' ?`<!-- <div class="settingspanel"  onclick="purchaseTokens(this);">Купить сердечки &#x1f496;</div>
 <div class="settingspanel">
 <div class="some doh">${n.user?n.user.name:'anon'}  Ваш доход&nbsp;&nbsp;<span id="dohod">${n.user? Number.parseFloat(n.user.theart*0.10).toFixed(2):'0.00'}</span>&nbsp;&nbsp;рублей</div>
 <div class="du" onclick="getPayout(this);">Получить</div>
-</div>`:''}
+</div>-->`:''}
 <div class="settingspanel"><a href="https://t.me/rouletka3">${lang=='ru'?'Наш Телеграм':
 lang=='en'?'Our Telegram':
 lang=='zh'?'我们的电报':
@@ -457,18 +467,18 @@ ${n.user?`<div class="settingspanel" onclick="logout(this);">${lang=='ru'?'Вы�
 </section> -->
 	</div>
 <section id="sectionTextArea" class="hide">
-<div id="textarea2" class="hide"><textarea id="txtvalue2" data-publish="none" data-send="two" placeholder="${lang=='ru'?'Сообщение':
+<div id="textarea2" class="hide"><textarea id="txtvalue2" style="${n.VK?'width:80%;':''}" data-publish="none" data-send="two" placeholder="${lang=='ru'?'Сообщение':
 lang=='en'?'Message':
 lang=='zh'?'信息':
-lang=='id'?'pesan':''}" oninput="txtInput(this);" onchange="someChange();"></textarea>
+lang=='id'?'pesan':''}"  disabled></textarea>
+<!-- oninput="txtInput(this);" onchange="someChange();" -->
 ${n.VK?'':`<div id="giftbox">
-<!-- <span>&#x1f381</span> -->
 <div class="flexgiftsitem">
 <div class="heart" data-type="mobile">&#x1f496</div>
 <div class="heartcount">${n.user?istestheart?n.user.theart:n.user.heart:0}</div>
 </div>
 </div>`}
-<!-- <div class="send" data-send="two" onclick="sendi(this);"><img src="/img/send1.svg"/></div> -->
+ <div class="send" data-send="two" onclick="sendi(this);"><img style="cursor:pointer;" src="/img/send1.svg"/></div>
 </div></section>
 </section> 
 <!-- END MOBILE! -->
@@ -499,7 +509,7 @@ lang=='id'?'tentang kami':''}</a></div>
 </div>
 ${n.VK?`<div id="chatruleslink"><a href="#regeln">Правила чата</a></div>`:''}
 <script>
-if(FLAGVK){
+if(isVK.value=="true"){
 	gid("foot").style.display="none";
 	if(gid("giftbox"))gid("giftbox").style.display="none";
 }
@@ -528,19 +538,19 @@ if(FLAGVK){
 
 <section id="MainSectionTextArea">
 
-<div id="textarea"><textarea id="txtvalue" data-publish="none" data-send="one" placeholder="${lang=='ru'?'Сообщение':
+<div id="textarea"><textarea id="txtvalue" style="${n.VK?'width:90%;':''}" data-publish="none" data-send="one" placeholder="${lang=='ru'?'Сообщение':
 lang=='en'?'Message':
 lang=='zh'?'信息':
-lang=='id'?'pesan':''}" oninput="txtInput(this);" onchange="someChange();"></textarea>
+lang=='id'?'pesan':''}" oninput="txtInput(this);" onchange="someChange();" disabled></textarea>
 ${n.VK?'':`<div id="giftbox2" data-state="closed">
-<!-- <span>&#x1f381</span> -->
+
 <div class="flexgiftsitem">
 <div class="heart" data-type="computer">&#x1f496</div>
 <div class="heartcount">${n.user?istestheart?n.user.theart:n.user.heart:0}</div>
 
 </div>
 </div>`}
- <div class="send" data-send="one" onclick="sendi(this);" value="papa" ><img src="/img/send1.svg"/></div> 
+ <div class="send" data-send="one" onclick="sendi(this);" value="papa" ><img style="cursor:pointer;" src="/img/send1.svg"/></div> 
 </div>
 </section>
 </div><div id="foot2"><a href="/"> ${lang=='ru'?'О проекте':
@@ -571,7 +581,7 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
 			"platform":"desktop",
 			"onClose":function(){
 			console.log("Reklama closed")
-				if(isLogin.value=="true")window.location.href="#setPrem";
+			//	if(isLogin.value=="true")window.location.href="#setPrem";
 			},
 		 })
 	 }else{
@@ -592,8 +602,8 @@ if(isLogin.value=="false") getReklama();
  <a href="#."  class="overlay" id="confirmAGE"></a>
     <output id="confirmageoutput" class="popi">
     <form name="verifyageform"><h2>Предупреждение</h2>
-    <span>Чат рулетка может содежать контент, неприемлемый для несовершеннолетних.</span><span> Поэтому, чтобы продолжить, введите дату вашего рождения</span>
-    <input type="date" name="bday" required min="1940-01-01" autocomplete />
+    <span>Чат рулетка может содежать контент, неприемлемый для несовершеннолетних.</span><span> Поэтому, чтобы продолжить, введите дату Bашего рождения</span>
+    <input type="date" name="bday" required min="1940-01-01" max="2014-01-01" autocomplete />
     <input type="submit" name="contin" value="Продолжить"/>
     </form>
     <span id="outputing" style="visibility:hidden;color:red;">Вам нет 18-ти лет. Покиньте чат.</span>
@@ -622,7 +632,7 @@ if(isLogin.value=="false") getReklama();
 	</section>
     </output> -->
     
-    <!-- {n.user?n.user.heart:'fuck'} -->
+   
     <input type="hidden" id="isEnter" value="${n.user?n.user.heart==0?'true':'false':'true'}" />
     <a href="#."  class="overlay" id="purchaseHREFI"></a>
     <output id="purchaseoutput" class="popi">
@@ -641,7 +651,7 @@ if(isLogin.value=="false") getReklama();
     <div><input class="number"  type="hidden"  name="sum" value="50.00" required data-type="number"/></div>
    <input  class="input" type="hidden" checked name="paymentType" value="PC" /></div>
    <div><input  class="input" type="hidden" name="paymentType" value="AC" /></div>
-   <div><input type="submit" id="fuckersubmit" value="Да, мне 18, и я \n \nготов(а) заплатить 50 руб"/></div>
+   <div><input type="submit" id="duckersubmit" value="Да, мне 18, и я \n \nготов(а) заплатить 50 руб"/></div>
 	
 	</div>
 	</form>
@@ -665,7 +675,7 @@ if(isLogin.value=="false") getReklama();
     <div><input class="number"  type="hidden" name="sum" value="50.00" required data-type="number"/></div>
    <input class="input" type="hidden" checked name="paymentType" value="PC" /></div>
    <div><input  class="input" type="hidden" name="paymentType" value="AC" /></div>
-   <div><input type="submit" id="fuckersubmit333" value="Купить"/></div>
+   <div><input type="submit" id="duckersubmit333" value="Купить"/></div>
 	
 	</div>
 	</form>

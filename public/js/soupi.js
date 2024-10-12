@@ -256,6 +256,7 @@ function stopMedia(el) {
   //  el.setAttribute('disabled', 1);
 }
 //if(Login())location.href="#setPrem";
+ //window.location.href='#confirmAGE';
 async function publish(el) {
 	console.warn('publish');
     if (SENDER) return;
@@ -363,8 +364,8 @@ console.log("after sender")
                }, 1000)
                if(Prem.value == "n" && Brole.value !="admin" ){
 				   setTimeout(function(){
-					  if(!FLAGVK) unpublish();
-					  if(!FLAGVK) location.href="#gopremium";
+					  //if(!FLAGVK) unpublish();
+					 // if(!FLAGVK) location.href="#gopremium";
 				   },1000*10);
 			   }
                gid("txtvalue2").setAttribute("data-publish", "publish");

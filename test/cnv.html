@@ -5,33 +5,52 @@
 <canvas id="cnv"></canvas>
 <output id="out"></output>
 <script>
-	let c = cnv.getContext('2d');
-	cnv.width = 832;
-	cnv.height = 555;
-	var img = new Image();
-	//img.src = "../public/img/gold/some.jpg";
-	//img.src = "../public/img/tvpic.jpg"
-	img.src="3.png"
-	img.onload = function(){
-		let cropx = 0;
-		let cropy = 0;
-		const aspectratio = img.width / img.height;
-		//c.drawImage(img,0,0,cnv.width,cnv.height)
-		if(aspectratio > 1){
-			const scaledwidth = img.width / aspectratio;
-			cropx =(img.width - scaledwidth) / 2;
-			c.drawImage(img, cropx, cropy, scaledwidth, img.height, 0, 0, cnv.width, cnv.height);
-			//alert(img.width + ' ' + img.height)// 320x240
-			//alert(aspectratio)// landshaft
-		}else{
-			// portrait
-			const scaledheight = img.height * aspectratio;
-			cropy = (img.height - scaledheight) / 2;
-			c.drawImage(img, cropx, cropy, img.width, scaledheight, 0, 0, cnv.width+100, cnv.height+0)
-			//alert(2)
-		}
+	    var c=cnv.getContext('2d')
+	    //832x555
+	    cnv.width=832
+	    cnv.height=555;
+	var f1=new Image();
+	f1.src="../public/img1/faces/Ellipse.png";
+	var f2=new Image();
+	f2.src="../public/img1/faces/Ellipse-1.png";
+	var f3=new Image();
+	f3.src="../public/img1/faces/Ellipse-2.png";
+	var f4=new Image();
+	f4.src="../public/img1/faces/Ellipse-3.png";
+	var f5=new Image();
+	f5.src="../public/img1/faces/Ellipse-4.png";
+	var f6=new Image();
+	f6.src="../public/img1/faces/Ellipse-5.png";
+	var f7=new Image();
+	f7.src="../public/img1/faces/Ellipse-6.png";
+//	c.fillStyle="green";
+	
+	 
+	 let gradient = c.createLinearGradient(0, 0, 0, 555);
+gradient.addColorStop(0, "green");
+gradient.addColorStop(0.7, "white");
+gradient.addColorStop(1, "orange");
+c.fillStyle = gradient;
+ c.fillRect(0,0,cnv.width, cnv.height)
+ c.save()
+ c.font = "100px serif";
+ c.fillStyle="green";
+c.fillText("Видео Чат Рулетка", 10, 500,832);
+c.restore()
+	 f1.onload=function(){
+		// alert(f1.naturalWidth)
+		 c.drawImage(f1,5,5,100, 100)
+		f2.onload=function(){ 
+		 c.drawImage(f2, 110,100,100,100)
+		 c.drawImage(f3,210,210,100,100)
+		 c.drawImage(f4, 350,210,100,100)
+		 c.drawImage(f5, 450, 100, 100,100)
+		 c.drawImage(f6, 600,110,100,100)
+		 c.drawImage(f7, cnv.width-105,5,100,100)
+	 }
+	 }
 		let a = cnv.toDataURL()
 		out.textContent=a;
-	}
+	
 </script>
 </body></html>
