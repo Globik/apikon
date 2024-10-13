@@ -33,14 +33,16 @@ async function confirm_age(ev){
 	//vax('post','/api/setviewdvk', { vkid: gid('VKID').value }, onsetviewd, onsetviewd_error, null, false);;
 		//showRules();
 		FLAGisAged = true;
-		 window.onhashchange = null;
-		// window.location.href="#.";
+		 
 		// localStorage.setItem("myAge", "y");
 		try{
 		//showSlides()	
 		await vkBridge.send('VKWebAppStorageSet',  { key:'age', value:'y' });
+		window.onhashchange = null;
+	 window.location.href="#.";
 	}catch(e){
 		console.error(e);
+		return;
 	}
 	}else{
 		gid('outputing').style.visibility = 'visible';
