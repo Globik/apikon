@@ -9,6 +9,7 @@
 	    //832x555
 	    cnv.width=832
 	    cnv.height=555;
+	    /*
 	var f1=new Image();
 	f1.src="../public/img1/faces/Ellipse.png";
 	var f2=new Image();
@@ -37,6 +38,8 @@ c.fillStyle = gradient;
  c.fillStyle="green";
 c.fillText("Видео Чат Рулетка", 10, 500,832);
 c.restore()
+*/
+/*
 	 f1.onload=function(){
 		// alert(f1.naturalWidth)
 		 c.drawImage(f1,5,5,100, 100)
@@ -48,6 +51,32 @@ c.restore()
 		 c.drawImage(f6, 600,110,100,100)
 		 c.drawImage(f7, cnv.width-105,5,100,100)
 	 }
+	 }
+	 */
+	 var img = new Image();
+	 img.src = "../public/img1/4.png";
+	 var f2=new Image();
+	f2.src="../public/img1/faces/Ellipse-1.png";
+	  let gradient = c.createLinearGradient(0, 0, 0, 555);
+gradient.addColorStop(0, "orange");
+gradient.addColorStop(0.9, "white");
+gradient.addColorStop(1, "#ffba00");
+c.fillStyle = gradient;
+ c.fillRect(0,0,cnv.width, cnv.height)
+ c.save()
+ c.font = "45px Fantasy";
+ c.fillStyle="white";
+ var fs = 600;
+ var y = 10;
+ 
+c.fillText("НОВЫЕ", fs, 100);
+c.fillText("ДРУЗЬЯ,", fs, 150+10);
+c.fillText("ОБЩЕНИЕ", fs, 200+y+10);
+c.fillText("И ФЛИРТ", fs, 250+y+20);
+	 img.onload = function(){
+		 c.drawImage(img, 0,0,500,450,0,0,600,555);
+		  c.drawImage(f2, 640,390,100,100);
+		 
 	 }
 		let a = cnv.toDataURL()
 		out.textContent=a;

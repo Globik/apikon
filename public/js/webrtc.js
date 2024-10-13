@@ -986,12 +986,9 @@ function start(el){
 	  let isage = localStorage.getItem("myAge");
 	
 	  if(isVK.value == "true"){
-		  if(!isage && isage !=="y"){
-		 // if(FLAGisAged == false){
+		  
 			  window.location.href = "#confirmAGE";
 			  return;
-		 // }
-	  }
   }
 	if(!sock) {
 		get_socket();
