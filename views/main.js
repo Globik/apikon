@@ -113,8 +113,8 @@ ${n.settings.env=="production"?`vkBridge.send('VKWebAppInit').then(data=>{
 		FLAGVK=true;
 		vkBridge.send('VKWebAppStorageGet', { keys: ['slide'] }).then(function(result){
 			console.log('storage get ', result);
-			if(result.keys){
-				console.log(result);
+			if(result.keys && result.keys[0].value=="y"){
+				console.log('result ', result);
 			}else{
 				showSlides();
 			}
