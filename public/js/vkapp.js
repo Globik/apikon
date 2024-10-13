@@ -22,7 +22,7 @@ vkBridge.supportsAsync('VKWebAppResizeWindow').then(res=>{
 if(agi) myAgeForm.bday.value = agi;
 }
 
-function confirm_age(ev){
+async function confirm_age(ev){
 	ev.preventDefault();
 	
 	try{
@@ -34,15 +34,17 @@ function confirm_age(ev){
 		//showRules();
 		FLAGisAged = true;
 		 window.onhashchange = null;
-		 window.location.href="#.";
-		 localStorage.setItem("myAge", "y");
+		// window.location.href="#.";
+		// localStorage.setItem("myAge", "y");
 		try{
 		//showSlides()	
+		await vkBridge.send('VKWebAppStorageSet',  { key:'age', value:'y' });
 	}catch(e){
-		
+		console.error(e);
 	}
 	}else{
 		gid('outputing').style.visibility = 'visible';
+		return;
 	}
 }catch(e){
 	//alert(e);

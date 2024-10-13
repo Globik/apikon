@@ -975,7 +975,7 @@ console.log("<b>Your browser, version:</b> " + brows + " " + vers);
 function on_check_banned(){}
 function on_check_banned_error(){}
 
-function start(el){
+async function start(el){
 	
 	 if(NICK == "anon" || NICK == undefined){
 	//	let s = (L()=="ru"?"Залогиньтесь!":L()=='en'?"Please log in":L()=='zh'?'请登录':L()=='id'?'Silahkan masuk':'')
@@ -986,10 +986,25 @@ function start(el){
 	  let isage = localStorage.getItem("myAge");
 	
 	  if(isVK.value == "true"){
-		  
-			  window.location.href = "#confirmAGE";
-			  return;
-  }
+		  try{
+		var data = await vkBridge.send('VKWebAppStorageGet', { keys: ['age'] });
+		console.log('result ', data);
+			  if(data.keys && data.keys[0].value=="y"){
+				
+			}else{
+				window.location.href = "#confirmAGE";
+				window.onhashchange = function(){
+					window.location.href = "#confirmAGE";
+				}
+				return;
+			}
+		}catch(err){
+			return;
+		}
+		  }
+			 // window.location.href = "#confirmAGE";
+			 // return;
+  
 	if(!sock) {
 		get_socket();
 		}
