@@ -475,7 +475,7 @@ ${n.user?`<div class="settingspanel" onclick="logout(this);">${lang=='ru'?'Вы�
 </section> -->
 	</div>
 <section id="sectionTextArea" class="hide">
-<div id="textarea2" class="hide"><textarea id="txtvalue2" style="${n.VK?'width:80%;':''}" data-publish="none" data-send="two" placeholder="${lang=='ru'?'Сообщение':
+<div id="textarea2" class="hide"><textarea id="txtvalue2" style="${n.VK?'width:70%;':''}" data-publish="none" data-send="two" placeholder="${lang=='ru'?'Сообщение':
 lang=='en'?'Message':
 lang=='zh'?'信息':
 lang=='id'?'pesan':''}"  disabled></textarea>
