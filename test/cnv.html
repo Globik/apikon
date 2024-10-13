@@ -4,26 +4,29 @@
 	</head><body>
 <canvas id="cnv"></canvas>
 <output id="out"></output>
+<img src="" id="im"/>
+<button onclick="gi();">get</button>
 <script>
+	var cnv=document.getElementById('cnv')
 	    var c=cnv.getContext('2d')
 	    //832x555
 	    cnv.width=832
 	    cnv.height=555;
-	    /*
+	    
 	var f1=new Image();
-	f1.src="../public/img1/faces/Ellipse.png";
+	f1.src="img1/faces/Ellipse.png";
 	var f2=new Image();
-	f2.src="../public/img1/faces/Ellipse-1.png";
+	f2.src="img1/faces/Ellipse-1.png";
 	var f3=new Image();
-	f3.src="../public/img1/faces/Ellipse-2.png";
+	f3.src="img1/faces/Ellipse-2.png";
 	var f4=new Image();
-	f4.src="../public/img1/faces/Ellipse-3.png";
+	f4.src="img1/faces/Ellipse-3.png";
 	var f5=new Image();
-	f5.src="../public/img1/faces/Ellipse-4.png";
+	f5.src="img1/faces/Ellipse-4.png";
 	var f6=new Image();
-	f6.src="../public/img1/faces/Ellipse-5.png";
+	f6.src="img1/faces/Ellipse-5.png";
 	var f7=new Image();
-	f7.src="../public/img1/faces/Ellipse-6.png";
+	f7.src="img1/faces/Ellipse-6.png";
 //	c.fillStyle="green";
 	
 	 
@@ -38,25 +41,30 @@ c.fillStyle = gradient;
  c.fillStyle="green";
 c.fillText("Видео Чат Рулетка", 10, 500,832);
 c.restore()
-*/
-/*
+
 	 f1.onload=function(){
 		// alert(f1.naturalWidth)
 		 c.drawImage(f1,5,5,100, 100)
 		f2.onload=function(){ 
 		 c.drawImage(f2, 110,100,100,100)
+		 f3.onload=function(){ 
 		 c.drawImage(f3,210,210,100,100)
+		 f4.onload=function(){ 
 		 c.drawImage(f4, 350,210,100,100)
+		 f5.onload=function(){ 
 		 c.drawImage(f5, 450, 100, 100,100)
+		 f6.onload=function(){ 
 		 c.drawImage(f6, 600,110,100,100)
-		 c.drawImage(f7, cnv.width-105,5,100,100)
+		 f7.onload=function(){ 
+		 c.drawImage(f7,700,5,100,100)
 	 }
-	 }
-	 */
+	 }}}}}}
+	 
+	 /*
 	 var img = new Image();
-	 img.src = "../public/img1/4.png";
+	 img.src = "4.png";
 	 var f2=new Image();
-	f2.src="../public/img1/faces/Ellipse-1.png";
+	f2.src="Ellipse-1.png";
 	  let gradient = c.createLinearGradient(0, 0, 0, 555);
 gradient.addColorStop(0, "orange");
 gradient.addColorStop(0.9, "white");
@@ -76,10 +84,15 @@ c.fillText("И ФЛИРТ", fs, 250+y+20);
 	 img.onload = function(){
 		 c.drawImage(img, 0,0,500,450,0,0,600,555);
 		  c.drawImage(f2, 640,390,100,100);
-		 
+		// gi()
 	 }
-		let a = cnv.toDataURL()
+	 */
+	// gi()
+	 function gi(){
+		let a = document.getElementById('cnv').toDataURL()
 		out.textContent=a;
+		im.src=a;
+	}
 	
 </script>
 </body></html>

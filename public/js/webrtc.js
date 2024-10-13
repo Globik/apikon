@@ -365,7 +365,7 @@ function sendClaim(el){
 		L()=='id'?'Oke, ditambahkan untuk mengabaikan':'';
 		note({ content: s, type: "info", time: 5 });
 	}else if(d == "claim"){
-		let s = L()=="ru"?"Спвсибо, модератор рассмотрит вашу жалобу.":
+		let s = L()=="ru"?"Спaсибо, модератор рассмотрит вашу жалобу.":
 		L()=='en'?"Thanks, the moderator will look at your abuse":
 		L()=='zh'?'谢谢，版主会看看你的滥用行为':
 		L()=='id'?'Terima kasih, moderator akan melihat penyalahgunaan Anda':'';
