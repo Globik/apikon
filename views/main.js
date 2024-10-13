@@ -111,7 +111,7 @@ var FLAGisAged = false;
 ${n.settings.env=="production"?`vkBridge.send('VKWebAppInit').then(data=>{
 	if(data.result){
 		FLAGVK=true;
-		vkBridge.send('VKWebAppStorageGet', { keys: 'slide' }).then(function(result){
+		vkBridge.send('VKWebAppStorageGet', { keys: ['slide'] }).then(function(result){
 			console.log('storage get ', result);
 			if(result.keys){
 				console.log(result);
