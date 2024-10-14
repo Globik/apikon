@@ -486,7 +486,7 @@ ${n.VK?'':`<div id="giftbox">
 <div class="heartcount">${n.user?istestheart?n.user.theart:n.user.heart:0}</div>
 </div>
 </div>`}
- <div class="send" data-send="two" onclick="sendi(this);"><img style="cursor:pointer;" src="/img/send1.svg"/></div>
+ <div class="send"  data-publish="none" data-send="two" onclick="sendi(this);"><img style="cursor:pointer;" src="/img/send1.svg"/></div>
 </div></section>
 </section> 
 <!-- END MOBILE! -->
@@ -558,7 +558,7 @@ ${n.VK?'':`<div id="giftbox2" data-state="closed">
 
 </div>
 </div>`}
- <div class="send" data-send="one" onclick="sendi(this);" value="papa" ><img style="cursor:pointer;" src="/img/send1.svg"/></div> 
+ <div class="send" data-publish="none" data-send="one" onclick="sendi(this);" value="papa" ><img style="cursor:pointer;" src="/img/send1.svg"/></div> 
 </div>
 </section>
 </div><div id="foot2"><a href="/"> ${lang=='ru'?'О проекте':

@@ -354,7 +354,11 @@ console.log("after sender")
                 let s = L()=="ru"?"Вы в эфире!":L()=='en'?"On air!":L()=='zh'?'正在播出！':L()=='id'?'mengudara!':'';
                 note({content: s, type: "info", time: 5});
                 publishedId = MYSOCKETID;
-               
+               txtvalue.disabled = false;
+               txtvalue2.disabled = false;
+               let abbi = document.querySelectorAll('.send');
+               abbi[0].setAttribute('data-publish', 'publish');
+               abbi[1].setAttribute('data-publish', 'publish');
                let a = document.querySelector('div#playContainer #kresti');
                if(a) a.classList.toggle('show');
                 setTimeout(()=>{;
@@ -569,6 +573,9 @@ async function subscribe(el) {
                 gid("playContainer").setAttribute("data-state", "subscribed");
                 gid("txtvalue2").setAttribute("data-publish", "publish");
                 gid("txtvalue").setAttribute("data-publish", "publish");
+                txtvalue.disabled = false;
+               txtvalue2.disabled = false;
+                
                 wsend({type: "onconsume", publishedId: publishedId, request: "mediasoup"})
                  let a = document.querySelector('div#playContainer #kresti');
                if(a) a.classList.toggle('show');
@@ -576,12 +583,16 @@ async function subscribe(el) {
             case 'disconnected':
                 note({content: 'Disconnected!', type: 'info', time: 5});
                 CONNECTED = false;
+                PSENDER = false;
                 if (vV) vV.textContent = 0;
        gid('kartina').setAttribute('poster',  "");
        publishedId = null;
        gid("playContainer").setAttribute("data-state", "niemand");
        gid("txtvalue2").setAttribute("data-publish", "none");
        gid("txtvalue").setAttribute("data-publish", "none");
+        txtvalue.disabled = true;
+         txtvalue2.disabled = true;
+         startbtn.disabled = false;
       // mobileChat.className="";
       //hideChat();
       mobileChat.className="hide";
@@ -602,7 +613,10 @@ async function subscribe(el) {
                 //  producerTransport.close();
                 gid("txtvalue2").setAttribute("data-publish", "none");
                 gid("txtvalue").setAttribute("data-publish", "none");
+                 txtvalue.disabled = true;
+               txtvalue2.disabled = true;
                 CONNECTED = false;
+                PSENDER = false;
                 consumerTransport.close();
                 break;
 
@@ -754,6 +768,14 @@ function unpublish() {
    L()=='zh'?'你翻译完了':
    L()=='id'?'Anda menyelesaikan terjemahan!':'';
     note({content: s, type: "info", time: 5});
+    
+    txtvalue.disabled = true;
+   txtvalue2.disabled = true;
+   txtvalue.setAttribute('data-publish', 'none');
+   txtvalue2.setAttribute('data-publish', 'none');
+    let abbi = document.querySelectorAll('.send');
+               abbi[0].setAttribute('data-publish', 'none');
+               abbi[1].setAttribute('data-publish', 'none');
      let a = document.querySelector('div#playContainer #kresti');
                if(a) a.classList.toggle('show');
     startbtn.disabled = false;
@@ -796,6 +818,11 @@ gid("playContainer").setAttribute("data-state", "busy");
    note({ content: s, type: "info", time: 5 });
    gid("txtvalue2").setAttribute("data-publish", "none");
    gid("txtvalue").setAttribute("data-publish", "none");
+   txtvalue.disabled = true;
+   txtvalue2.disabled = true;
+    let abbi = document.querySelectorAll('.send');
+               abbi[0].setAttribute('data-publish', 'none');
+               abbi[1].setAttribute('data-publish', 'none');
     let a = document.querySelector('div#playContainer #kresti');
    if(a)a.className = "";
                if(a) {

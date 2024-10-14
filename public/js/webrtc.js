@@ -1387,14 +1387,19 @@ return imgdata22;
 	txtvalue.addEventListener('keydown', sendEnter, false);
 	txtvalue2.addEventListener('keydown', sendEnter, false);
 	function sendEnter(ev){
-		if(!CONNECTED){
+		
+		if(ev.key == "Enter"){
+			if(!CONNECTED){
 			//alert(4);
+			//alert(ev.target.getAttribute('data-publish'));
+			let a = ev.target.getAttribute('data-publish');
+			if(a && a == "publish"){}else{
 		note({content: "Дождитесь собеседника", type: "info", time: 5 });
 		txtvalue.value='';
 		txtvalue2.value='';
 		return;
 	}
-		if(ev.key == "Enter"){
+	}
 			//alert(event.target.getAttribute("data-send"));
 			//if(!txtvalue.value || !txtvalue2.value)return;
 			let str = txtvalue2.value.trim();
@@ -1404,11 +1409,15 @@ return imgdata22;
 	}
 	
 	function sendi(event){
+		//alert(event.getAttribute('data-publish'));
 		if(!CONNECTED){
+			let a = event.getAttribute('data-publish');
+			if(a && a == "publish"){}else{
 		note({content: "Дождитесь собеседника", type: "info", time: 5 });
 		txtvalue.value='';
 		txtvalue2.value='';
 		return;
+	}
 	}
 		 let l = event.getAttribute("data-send");
 		 let l2 = txtvalue2.getAttribute("data-publish");
