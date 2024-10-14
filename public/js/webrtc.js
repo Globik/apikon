@@ -768,8 +768,10 @@ function  handleMessage(msg, bool){
 
 		div.className="yourmsg he2";
 		if(bool){
+			//mobile
 			div.innerHTML="<span><b>" + (L()=='ru'?'Собеседник':L()=='en'?'Partner':L()=='zh'?'伙伴':L()=='id'?'mitra':'') + ": </b></span><br><span>" + msg + "</span>";
 		}else{
+			//alert(3); //mobile normal
 		div.innerHTML="<span><b>" + (L()=='ru'?'Собеседник':L()=='en'?'Partner':L()=='zh'?'伙伴':L()=='id'?'mitra':'') + ": </b></span><br><span>" + esci(msg.trim()) + "</span>";
 	}
 		chatbox.appendChild(div);
@@ -782,8 +784,12 @@ textarea2.className="";
 
 		div2.className="yourmsg2 he";
 		if(bool){
+			//alert(2);
+			// comp heart?
 			div2.innerHTML="<span><b>" + (L()=='ru'?'Собеседник':L()=='en'?'Partner':L()=='zh'?'伙伴':L()=='id'?'mitra':'') + ": </b></span><br><span>" + msg + "</span>";
 		}else{
+			//alert(3);
+			//comp normal
 		div2.innerHTML="<span><b>" + (L()=='ru'?'Собеседник':L()=='en'?'Partner':L()=='zh'?'伙伴':L()=='id'?'mitra':'') + ": </b></span><br><span>" + esci(msg.trim()) + "</span>";
 	}
 		chatbox2.appendChild(div2);
@@ -996,14 +1002,12 @@ async function start(el){
 				window.onhashchange = function(){
 					window.location.href = "#confirmAGE";
 				}
-				return;
+			return;
 			}
 		}catch(err){
-			return;
+			//return;
 		}
 		  }
-			 // window.location.href = "#confirmAGE";
-			 // return;
   
 	if(!sock) {
 		get_socket();
@@ -1427,6 +1431,7 @@ return imgdata22;
 		 if(l == "one"){
 			 //for computer
 			//if(!txtvalue.value)return;
+			//alert(4);
 			console.warn('bu ', txtvalue.value.trim());
 			let stri = txtvalue.value.trim();
 		//console.warn("str ", str, str.length);
@@ -1437,6 +1442,7 @@ return imgdata22;
 			
 	}else if(l == "two"){
 		// for mobile
+		//alert(5);
 		//console.warn('bu2 ', txtvalue.value.trim());
 		let str = txtvalue2.value.trim();
 		console.warn("str ", str, str.length);
@@ -1476,7 +1482,7 @@ if(l2){
 	 }
 	 
 	 function sendiOne(){	
-		 //alert(3);
+		 //alert(3); //computer
 			if(!txtvalue.value) return;
 				let div=document.createElement('div');
 				// printmsg2.className='';
@@ -1500,10 +1506,11 @@ if(l2){
 		if(!txtvalue2.value) return;
 			let div2=document.createElement('div');
 		div2.className="yourmsg2";
+		console.log("textval 2 ", esci(txtvalue2.value.trim()));
 		div2.innerHTML="<span class='you'><b>" + (L()=="ru"?"Вы":L()=='en'?"You":L()=='zh'?'你':L()=='id'?'Anda':'') + ": </b></span><br><span>" + esci(txtvalue2.value.trim()) + "</span>";
 		chatbox2.appendChild(div2);
 		chatbox2.scrollTop = chatbox2.clientHeight + chatbox2.scrollHeight;
-		wsend({type:"message", data: txtvalue2.value});
+		wsend({type:"message", data: txtvalue2.value });
 		txtvalue2.value="";
 	}
 	

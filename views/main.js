@@ -449,7 +449,7 @@ ${n.user?`<div class="settingspanel" onclick="logout(this);">${lang=='ru'?'Вы�
     <section id="mobileloader"><div class="loader"></div></section>
     
     <video id="remote"  class="" autoplay playsinline poster="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"></video>
-     <div id="duka2">Жизнь как рулетка. Никогда не узнаешь, кого встретишь следуюшим...</div>
+     <div id="duka2">Жизнь как рулетка. Никогда не узнаешь, кого встретишь следующим...</div>
      <!-- MOBILE! -->
  <section id="mobileChat" class="hide">
 		<div id="hidechat" onclick="hideChat(this);"><img class="chaticon" src="/img/chat.svg"/></div>
@@ -478,7 +478,7 @@ ${n.user?`<div class="settingspanel" onclick="logout(this);">${lang=='ru'?'Вы�
 <div id="textarea2" class="hide"><textarea id="txtvalue2" style="${n.VK?'width:70%;':''}" data-publish="none" data-send="two" placeholder="${lang=='ru'?'Сообщение':
 lang=='en'?'Message':
 lang=='zh'?'信息':
-lang=='id'?'pesan':''}"  disabled></textarea>
+lang=='id'?'pesan':''}"  disabled oninput="txtInput(this);" onchange="someChange();"></textarea>
 <!-- oninput="txtInput(this);" onchange="someChange();" -->
 ${n.VK?'':`<div id="giftbox">
 <div class="flexgiftsitem">
@@ -497,7 +497,7 @@ ${n.VK?'':`<div id="giftbox">
 <button id="nextbtn" class="next" onclick="next(this,true);" disabled>${lang=='ru'?'далее':lang=='en'?'next':lang=='zh'?'下一个':lang=='id'?'Berikutnya':''}</button>
  <div id="somespinner" class="text"><!-- https://cssloaders.github.io/ -->
  <div class="loader"></div>
-      <span class="duka">${lang=='ru'?'Жизнь как рулетка. Никогда не узнаешь, кого встретишь следуюшим':
+      <span class="duka">${lang=='ru'?'Жизнь как рулетка. Никогда не узнаешь, кого встретишь следующим':
       lang=='en'?'Life is like roulette. You never know who you\'ll meet next':
       lang=='zh'?'生活就像轮盘赌。你永远不知道接下来会遇到谁':
       lang=='id'?'Hidup itu seperti rolet. Anda tidak pernah tahu siapa yang akan Anda temui selanjutnya':''}...</span>

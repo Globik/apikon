@@ -276,6 +276,9 @@ section#giftsContainer.hidden,section#giftsContainer2.hidden{
 		object-fit:cover;
 		
 	}
+	#txtvalue[disabled],#txtvalue2[disabled]{
+		background:lightgray;
+	}
 	#txtvalue{
 		color:red;
 		bakground:red;
@@ -1026,7 +1029,7 @@ div.heartcount{
 		bttom:0;
 		border-radius:1px;
 		boder:1px solid silver;
-		background:rgba(0,0,0,0.9);
+		background:rgba(0,0,0,0.4);
 		padding-left:15px;
 		margin-left:10px;
 		color:green;

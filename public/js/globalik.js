@@ -192,6 +192,7 @@ if(refnode.nextSibling.tagName==tagname.toUpperCase())refnode.parentNode.removeC
 
 }(document);
 var html_sA={
+	'\n':' ',
 	'&':'&amp',
 	'<':'&lt;',
 	'>':'&gt;',
@@ -199,7 +200,7 @@ var html_sA={
 	"'":'&#x27;',
 	'/':'&#x2F;'
 	}
-	var er_sA=/[&<>"'\/]/g;
+	var er_sA=/[\n&<>"'\/]/g;
 	var esci=function(str){
 		return (''+str).replace(er_sA,function(m){return html_sA[m];});
 		}
