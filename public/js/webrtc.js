@@ -1377,7 +1377,6 @@ return imgdata22;
 	}
 	
 	function txtInput(el){
-
 		wsend({type:"write"});
 	
 	}
@@ -1385,8 +1384,8 @@ return imgdata22;
 		wsend({type:"unwrite"});
 	}
 	
-	//txtvalue.addEventListener('keydown', sendEnter, false);
-	//txtvalue2.addEventListener('keydown', sendEnter, false);
+	txtvalue.addEventListener('keydown', sendEnter, false);
+	txtvalue2.addEventListener('keydown', sendEnter, false);
 	function sendEnter(ev){
 		if(!CONNECTED){
 			//alert(4);
