@@ -3,7 +3,7 @@
 function main(n){
 	let istestheart = (n.istestheart==1?true:false);
 	const { lang , buser, user } = n;
-	console.log("N ",n);
+	//console.log("N ",n);
 	console.log("ENVIRONMENT ",n.settings.env, "n.VK ", n.VK, ' n.buser.vkid: ', n.buser);
 	//console.log("^^^ USER ****", user);
 	//console.log("*** BUSER ****", buser);
@@ -13,7 +13,7 @@ function main(n){
 	const namealik='suka';
 	//console.log('buser2 ', bur);
 return `
- <!DOCTYPE html>
+ <!DOCTYPE html><!-- ${n.VK} -->
 <html lang="ru">
   <head>
     <meta charset="utf-8">
@@ -122,6 +122,7 @@ ${n.settings.env=="production"?`vkBridge.send('VKWebAppInit').then(data=>{
 			console.log(er);
 		});
 		}}).catch(function(er){}) `:''}
+		// vk ${n.VK}
 </script>
 
 
@@ -156,7 +157,7 @@ ${process.env.DEVELOPMENT == "yes" ? '':`<!-- Yandex.Metrika counter -->
     <script>window.yaContextCb=window.yaContextCb||[]</script>
     <script src="https://yandex.ru/ads/system/context.js" async></script>
   </head>
-  <body>
+  <body><!-- ${n.VK} -->
     <noscript>
       <strong>We're sorry but chatroulette doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
@@ -546,9 +547,9 @@ if(isVK.value=="true"){
 
 <section id="MainSectionTextArea">
 
-<div id="textarea"><textarea id="txtvalue" style="${n.VK?'width:calc(100% - 65px - 3px);':''}" data-publish="none" data-send="one" placeholder="${lang=='ru'?'Сообщение':
+<div id="textarea"><textarea id="txtvalue" style="${n.VK?'width:calc(100% - 65px - 12px);':''}" data-publish="none" data-send="one" placeholder="${lang=='ru'?`Сообщение`:
 lang=='en'?'Message':
-lang=='zh'?'信息':
+lang=='zh'?'信息': 
 lang=='id'?'pesan':''}" oninput="txtInput(this);" onchange="someChange();" disabled></textarea>
 ${n.VK?'':`<div id="giftbox2" data-state="closed">
 
