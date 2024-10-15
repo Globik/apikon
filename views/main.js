@@ -476,7 +476,7 @@ ${n.user?`<div class="settingspanel" onclick="logout(this);">${lang=='ru'?'Вы�
 </section> -->
 	</div>
 <section id="sectionTextArea" class="hide">
-<div id="textarea2" class="hide"><textarea id="txtvalue2" style="${n.VK?'width:70%;':''}" data-publish="none" data-send="two" placeholder="${lang=='ru'?'Сообщение':
+<div id="textarea2" class="hide"><textarea id="txtvalue2" style="${n.VK?'width:calc(100% - 65px - 13px);':''}" data-publish="none" data-send="two" placeholder="${lang=='ru'?'Сообщение':
 lang=='en'?'Message':
 lang=='zh'?'信息':
 lang=='id'?'pesan':''}"  disabled oninput="txtInput(this);" onchange="someChange();"></textarea>
@@ -611,7 +611,7 @@ if(isLogin.value=="false") getReklama();
  <a href="#."  class="overlay" id="confirmAGE"></a>
     <output id="confirmageoutput" class="popi">
     <form name="verifyageform"><h2>Предупреждение</h2>
-    <span>Чат рулетка может содежать контент, неприемлемый для несовершеннолетних.</span><span> Поэтому, чтобы продолжить, введите дату Bашего рождения</span>
+    <span>Чат рулетка может содеpжать контент, неприемлемый для несовершеннолетних.</span><span> Поэтому, чтобы продолжить, введите дату Bашего рождения</span>
     <input type="date" name="bday" required min="1940-01-01" max="2014-01-01" autocomplete />
     <input type="submit" name="contin" value="Продолжить"/>
     </form>
