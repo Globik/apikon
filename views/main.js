@@ -546,7 +546,7 @@ if(isVK.value=="true"){
 
 <section id="MainSectionTextArea">
 
-<div id="textarea"><textarea id="txtvalue" style="${n.VK?'width:90%;':''}" data-publish="none" data-send="one" placeholder="${lang=='ru'?'Сообщение':
+<div id="textarea"><textarea id="txtvalue" style="${n.VK?'width:calc(100% - 65px - 3px);':''}" data-publish="none" data-send="one" placeholder="${lang=='ru'?'Сообщение':
 lang=='en'?'Message':
 lang=='zh'?'信息':
 lang=='id'?'pesan':''}" oninput="txtInput(this);" onchange="someChange();" disabled></textarea>
