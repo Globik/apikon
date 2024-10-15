@@ -172,7 +172,7 @@ ${process.env.DEVELOPMENT == "yes" ? '':`<!-- Yandex.Metrika counter -->
     <input type="hidden" id="Grund" value="${n.user?n.user.grund:0}" />
     <input type="hidden" id="isEnter" value="${n.user?n.user.entr==0?true:false:false}" />
     <input type="hidden" id="VKID" value="${n.buser?n.buser.vkid:null}" /> 
-   <input type="hidden" id="isVK" value="${n.VK?true:false}" /> 
+   <input type="hidden" data-vk="${n.VK}" id="isVK" value="${n.VK?true:false}" /> 
     
    
     
