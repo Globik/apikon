@@ -258,7 +258,7 @@ app.get("/about", async(req, res)=>{
 	console.log("*** USER *** ", req.user);
 	//console.log('req.app.locals ', req.app.locals.testshopid, ' ', req.app.locals.testshopsecret);
 	//res.rendel('errnotfound',{});
-	res.rendel('main', { imgData: imgData, lang: 'ru', yacount: JETZT, uuid: crypto.randomUUID() });
+	res.rendel('main', { imgData: imgData, lang: 'ru', yacount: JETZT, uuid: crypto.randomUUID(), VK:false });
 })
 
 

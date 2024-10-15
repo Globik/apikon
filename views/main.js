@@ -3,7 +3,7 @@
 function main(n){
 	let istestheart = (n.istestheart==1?true:false);
 	const { lang , buser, user } = n;
-	//console.log("N ",n);
+	console.log("N ",n);
 	console.log("ENVIRONMENT ",n.settings.env, "n.VK ", n.VK, ' n.buser.vkid: ', n.buser);
 	//console.log("^^^ USER ****", user);
 	//console.log("*** BUSER ****", buser);
