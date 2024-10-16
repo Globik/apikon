@@ -611,7 +611,7 @@ if(isLogin.value=="false") getReklama();
  <a href="#."  class="overlay" id="confirmAGE"></a>
     <output id="confirmageoutput" class="popi">
     <form name="verifyageform"><h2>Предупреждение</h2>
-    <span>Чат рулетка может содеpжать контент, неприемлемый для несовершеннолетних.</span><span> Поэтому, чтобы продолжить, введите дату Bашего рождения</span>
+    <span>Чат рулетка может содержать контент, неприемлемый для несовершеннолетних.</span><span> Поэтому, чтобы продолжить, введите дату Bашего рождения</span>
     <input type="date" name="bday" required min="1940-01-01" max="2014-01-01" autocomplete />
     <input type="submit" name="contin" value="Продолжить"/>
     </form>
