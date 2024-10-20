@@ -102,7 +102,7 @@ VKID.Config.init({
 </script>`}
 
  ${n.settings.env=="production"?`<script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script> `:''}
-
+<script src="https://vk.com/js/api/share.js?93"></script>
 
 <script>
 var VK_USER = false;
@@ -511,10 +511,12 @@ ${n.VK?'':`<div id="giftbox">
         lang=='zh'?'只是互相打个招呼':
         lang=='id'?'Katakan saja halo satu sama lain':''} :D
       </div>
-<div id="foot"><a href="/"> ${lang=='ru'?'О проекте':
+<div id="foot"><!--<a href="/"> ${lang=='ru'?'О проекте':
 lang=='en'?'About us':
 lang=='zh'?'关于我们':
-lang=='id'?'tentang kami':''}</a></div>
+lang=='id'?'tentang kami':''}</a> -->
+<script>document.write(VK.Share.button());</script>
+</div>
 </div>
 ${n.VK?`<div id="chatruleslink"><a href="#regeln">Правила чата</a></div>`:''}
 <script>
