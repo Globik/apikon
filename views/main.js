@@ -515,8 +515,9 @@ ${n.VK?'':`<div id="giftbox">
 lang=='en'?'About us':
 lang=='zh'?'关于我们':
 lang=='id'?'tentang kami':''}</a> -->
-
-<script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-share-url="https://t.me/share/url?url=${encodeURI('https://rouletka.ru/about')}&text=${encodeURI('Чат Рулетка')}"></script>
+<a href="https://t.me/share/url?url=${encodeURI('https://rouletka.ru/about')}&text=${encodeURI('Чат Рулетка')}"><div style="display:inline-block;">
+<img style="display:inline;transform:translateY(6px);" src="/img/telega.png" width="18px" height="18px"/></div>
+<b style="margin:3px;background:blue;line-height:3;color:white;border:1px solid green;font-size:0.6rem;">Share</b></a>
 <script>document.write(VK.Share.button());</script>
 </div>
 </div>
