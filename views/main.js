@@ -515,10 +515,10 @@ ${n.VK?'':`<div id="giftbox">
 lang=='en'?'About us':
 lang=='zh'?'关于我们':
 lang=='id'?'tentang kami':''}</a> -->
-<a href="https://t.me/share/url?url=${encodeURI('https://rouletka.ru/about')}&text=${encodeURI('Чат Рулетка')}"><div style="display:inline-block;">
-<img style="display:inline;transform:translateY(6px);" src="/img/telega.png" width="18px" height="18px"/></div>
-<b style="margin:3px;background:blue;line-height:3;color:white;border:1px solid green;font-size:0.6rem;">Share</b></a>
-<script>document.write(VK.Share.button());</script>
+<div><a href="https://t.me/share/url?url=${encodeURI('https://rouletka.ru/about')}&text=${encodeURI('Чат Рулетка')}">
+<img style="display:inline;transform:translateY(2px);padding-left:5px;" src="/img/telega.png" width="22px" height="20px"/></a>
+<b style="display:inline-block;margin:3px;line-height:1.3;padding-bottom:1px;transform:translateY(-2px);color:blue;font-size:0.9rem;">Share</b></div>
+<div style="margin-left:4px;"><script>document.write(VK.Share.button(false,{type:"round",text:"Share"}));</script></div>
 </div>
 </div>
 ${n.VK?`<div id="chatruleslink"><a href="#regeln">Правила чата</a></div>`:''}

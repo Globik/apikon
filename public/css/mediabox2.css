@@ -835,7 +835,7 @@ div.heartcount{
 	}
 @media screen and (max-width: 452px) and (orientation: portrait){
 #foot,#chatruleslink{
-	display:inline-block;
+	display:flex;
 		position:absolute;
 		ackground:green;
 		color:rgb(16,66,88);
