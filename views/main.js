@@ -516,7 +516,7 @@ lang=='en'?'About us':
 lang=='zh'?'关于我们':
 lang=='id'?'tentang kami':''}</a> -->
 
-<script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-share-url="https://rouletka.ru/about"></script>
+<script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-share-url="https://t.me/share/url?url=${encodeURI('https://rouletka.ru/about')}&text=${encodeURI('Чат Рулетка')}"></script>
 <script>document.write(VK.Share.button());</script>
 </div>
 </div>
