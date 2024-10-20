@@ -515,6 +515,7 @@ ${n.VK?'':`<div id="giftbox">
 lang=='en'?'About us':
 lang=='zh'?'关于我们':
 lang=='id'?'tentang kami':''}</a> -->
+<script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-share-url="https://core.telegram.org/widgets/share" data-text="notext"></script>
 <script>document.write(VK.Share.button());</script>
 </div>
 </div>
