@@ -10,9 +10,14 @@
 	var cnv=document.getElementById('cnv')
 	    var c=cnv.getContext('2d')
 	    //832x555
-	    cnv.width=832
-	    cnv.height=555;
-	    
+	    cnv.width=800
+	    cnv.height=1068;
+	    var img=new Image();
+	    img.src="4.png";
+	    img.onload=function(){
+			c.drawImage(img,0,0,800,1068,0,0,800*1.8,1068*2)
+		}
+	    /*
 	var f1=new Image();
 	f1.src="img1/faces/Ellipse.png";
 	var f2=new Image();
@@ -58,7 +63,7 @@ c.restore()
 		 f7.onload=function(){ 
 		 c.drawImage(f7,700,5,100,100)
 	 }
-	 }}}}}}
+	 }}}}}}*/
 	 
 	 /*
 	 var img = new Image();
