@@ -576,7 +576,7 @@ return window.location.href='#purchaseHREF';
   sock.onopen = function () {
 	 console.log("websocket opened");
 	// heartbeat();
-	 wsend({ type: "helloServer", userId: gid("userId").value?gid("userId").value:'anon', isprem: Prem.value, nick: userName.value, logged:  Login()?"yes":"no", LANG: L });
+	 wsend({ type: "helloServer", VK: isVK.value, userId: gid("userId").value?gid("userId").value:'anon', isprem: Prem.value, nick: userName.value, logged:  Login()?"yes":"no", LANG: L });
   };
   sock.onerror = function (e) {
    // note({ content: "Websocket error: " + e, type: "error", time: 5 });

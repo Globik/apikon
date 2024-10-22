@@ -1520,7 +1520,7 @@ async function sendFoti(socket,msg){
 	var f = new FormData();
 	f.append('chat_id', grid);
 	f.append('parse_mode', 'html');
-	f.append('caption', '<b>'+ socket.nick + ' (' + socket.userId + ')</b>'+' запустил трансляцию. \nПосмотреть на <a href="https://rouletka.ru/about">https://rouletka.ru</a>\n\n JOIN THE GROUP <a href="https://t.me/roulette7776">Roulette</a>');
+	f.append('caption', '<b>'+ socket.nick + ' (' + socket.userId + ')</b>'+ ' VK ' + socket.VK + ' запустил трансляцию. \nПосмотреть на <a href="https://rouletka.ru/about">https://rouletka.ru</a>\n\n JOIN THE GROUP <a href="https://t.me/roulette7776">Roulette</a>');
 	f.append('disable_notification', true);
 	f.append('photo', new Blob([buf]));
 	f.append('reply_markup', `{"inline_keyboard":[
@@ -1775,6 +1775,7 @@ socket.isAlive = true;
   socket.on("pong", heartbeat);
 	socket.burl = req.url;
 	socket.isLogged = "no";
+	socket.VK = false;
   const ip = req.socket.remoteAddress;
   
   
@@ -1848,6 +1849,7 @@ if(msg.request == "mediasoup"){
         socket.isLogged = msg.logged;
         socket.lang = msg.LANG;
         socket.isprem = msg.isprem;
+        socket.VK = msg.VK;
         wsend(socket, { type: "helloServer", socketId: socket.id });
         break
         case "messagepublished":
