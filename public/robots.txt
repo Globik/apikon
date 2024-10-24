@@ -1,2 +1,3 @@
 User-agent: *
-Allow: https://rouletka.ru
+Disallow: 
+Host: rouletka.ru
