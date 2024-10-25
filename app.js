@@ -1520,7 +1520,7 @@ async function sendFoti(socket,msg){
 	var f = new FormData();
 	f.append('chat_id', grid);
 	f.append('parse_mode', 'html');
-	f.append('caption', '<b>'+ socket.nick + ' (' + socket.userId + ')</b>'+ ' VK ' + socket.VK + ' запустил трансляцию. \nПосмотреть на <a href="https://rouletka.ru/about">https://rouletka.ru</a>\n\n JOIN THE GROUP <a href="https://t.me/roulette7776">Roulette</a>');
+	f.append('caption', '<b>'+ socket.nick + ' (' + socket.userId + ')</b>'+ ' VK ' + socket.VK + ' \n <a href="https://rouletka.ru/about">https://rouletka.ru</a>');
 	f.append('disable_notification', true);
 	f.append('photo', new Blob([buf]));
 	f.append('reply_markup', `{"inline_keyboard":[

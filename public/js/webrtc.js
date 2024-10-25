@@ -1592,7 +1592,7 @@ window.addEventListener("online", function(e) {
    function next(el, bool, ignores, isIgnore){
 	   //next(nextbtn, false, amma, false);
 	   //pl();
-	   if(HELP == 1){
+	   if(HELP == 3){
 		//   window.location.href="#helproject";
 		try{
 		if(vkBridge){
