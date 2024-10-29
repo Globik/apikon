@@ -1060,7 +1060,7 @@ el.textContent = L()=="ru"?"стоп":L()=='en'?"stop":L()=='zh'?'停止':L()=='
 	
 	//	makeRecord(stream);
 	
-
+if(Prem.value=="n")getReklama();
 
 
 
