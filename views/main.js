@@ -1,5 +1,5 @@
 
-
+const getSeoText = require('./getSeoText.js')
 function main(n){
 	let istestheart = (n.istestheart==1?true:false);
 	const { lang , buser, user } = n;
@@ -301,7 +301,7 @@ function isOpenModal(){
 		get_socket();
 		if(FLAGVK){
 			VK_USER = false;
-gid("settings").style.display = "none";
+//gid("settings").style.display = "none";
 gid("foot").style.display = "none";
 gid("foot2").style.display = "none"
 gid('playContainer').style.display = 'none';
@@ -387,7 +387,7 @@ window.onhashchange = function(ev){
 </div>
 <script>
 if(isVK.value == "true"){
-	gid("settings").style.display = "none";
+//	gid("settings").style.display = "none";
 }
 </script>
 <div id="settingspanel">
@@ -410,18 +410,18 @@ ${lang=='ru' ?`<!-- <div class="settingspanel"  onclick="purchaseTokens(this);">
 <div class="some doh">${n.user?n.user.name:'anon'}  Ваш доход&nbsp;&nbsp;<span id="dohod">${n.user? Number.parseFloat(n.user.theart*0.10).toFixed(2):'0.00'}</span>&nbsp;&nbsp;рублей</div>
 <div class="du" onclick="getPayout(this);">Получить</div>
 </div>-->`:''}
+${!n.VK ? `
 <div class="settingspanel"><a href="https://t.me/rouletka3">${lang=='ru'?'Наш Телеграм':
 lang=='en'?'Our Telegram':
 lang=='zh'?'我们的电报':
-lang=='id'?'Telegram kami':''}</a></div>
-${lang=='ru'?`<div class="settingspanel" ><a href="#ozeniteHREF" onclick="ozenite(this);"><span class="ozenka">Оцените приложение</span></a></div>`:''}
+lang=='id'?'Telegram kami':''}</a></div>`:''}
+${lang=='ru' && !n.VK ? `<div class="settingspanel" ><a href="#ozeniteHREF" onclick="ozenite(this);"><span class="ozenka">Оцените приложение</span></a></div>`:''}
  
- <div class="settingspanel"  id="donatis">Помочь проекту<br>
- <iframe src="https://yoomoney.ru/quickpay/fundraise/button?billNumber=AWVMCQLpAcY.240125&" width="330" height="50" frameborder="0" allowtransparency="true" scrolling="no"></iframe></div> 
-${n.user?`<div class="settingspanel" onclick="logout(this);">${lang=='ru'?'Выйти':lang=='en'?'Logout':lang=='zh'?'登出':
-	lang=='id'?'keluar':''}</div>`:
-`<div class="settingspanel"><a href="#login" onclick="panelOpen();">${lang=='ru'?'Войти':lang=='en'?'Log in':lang=='zh'?'登录':
-	lang=='id'?'Gabung':''}</a></div>`}
+ ${!n.VK?`<div class="settingspanel"  id="donatis">Помочь проекту<br>
+ <iframe src="https://yoomoney.ru/quickpay/fundraise/button?billNumber=AWVMCQLpAcY.240125&" width="330" height="50" frameborder="0" allowtransparency="true" scrolling="no"></iframe></div> `:''}
+${n.user && !n.VK?`<div class="settingspanel" onclick="logout(this);">${lang=='ru'?'Выйти':lang=='en'?'Logout':lang=='zh'?'登出':lang=='id'?'keluar':''}</div>`:
+`${!n.VK ? `<div class="settingspanel"><a href="#login" onclick="panelOpen();">${lang=='ru'?'Войти':lang=='en'?'Log in':lang=='zh'?'登录':
+	lang=='id'?'Gabung':''}</a></div>`:''}`}
 <!-- <div class="settingspanel"><button onclick="mach();">mach</button></div> -->
 </div>
 </nav>
@@ -584,7 +584,7 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
     </section>
     </article>
  <!-- <div id="yandex_rtb_R-A-12098170-1"></div> -->
-   ${process.env.DEVELOPMENT==="yes"?'':`<script>
+   ${process.env.DEVELOPMENT==="yes"?'<script>function getReklama(){}</script>':`<script>
      // https://yandex.ru/support2/partner/ru/web/units/sizes
      var kkk = 0;
      function getReklama(){
@@ -625,6 +625,7 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
  }
 if(isLogin.value=="false") getReklama();
 	 </script> `}
+	 ${getSeoText.getSeoText(lang)}
  <a href="#."  class="overlay" id="confirmAGE"></a>
     <output id="confirmageoutput" class="popi">
     <form name="verifyageform"><h2>Предупреждение</h2>
