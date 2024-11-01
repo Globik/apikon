@@ -1368,11 +1368,14 @@ video#kartina{
 	object-fit:cover;
 	border-radius:50%;
 	border:1px solid transparent;
+	overflow:hidden;
+	
 }
 video#kartina poster{
 	object-fit:cover;
 	width:60px;
 	height:60px;
+	overflow:hidden;
 }
 
 div#playContainer{
