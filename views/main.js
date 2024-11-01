@@ -304,7 +304,7 @@ function isOpenModal(){
 //gid("settings").style.display = "none";
 gid("foot").style.display = "none";
 gid("foot2").style.display = "none"
-gid('playContainer').style.display = 'none';
+//gid('playContainer').style.display = 'none';
 // {n.user?n.user.entr==0?'window.location.href="#confirmAGE";':'':''}
 /*
 let isage = localStorage.getItem("myAge");
@@ -377,8 +377,10 @@ window.onhashchange = function(ev){
 	 })
 	 </script> -->
      <article id="mediabox">
-    <nav id="navpanel"><div class="nav"><b>Online: <span id="onlineCount">0</span></b>&nbsp;&nbsp;&nbsp; <b id="VKUSERNAME">${n.user?n.user.name:'anonym'}</b>${n.VK?'':`&nbsp;&nbsp;&nbsp;<b style="font-size:18px;">&#x1F441;</b>&nbsp;&nbsp;&nbsp;
-    <span id="vV" style="color:orange;font-weight:bold;">${n.imgData && n.imgData.img_data?n.imgData.value:0}</span>`}
+    <nav id="navpanel"><div class="nav"><b>Online: <span id="onlineCount">0</span></b>&nbsp;&nbsp;&nbsp; <b id="VKUSERNAME">${n.user?n.user.name:'anonym'}</b>
+    
+   &nbsp;&nbsp;&nbsp;<b style="font-size:18px;">&#x1F441;</b>&nbsp;&nbsp;&nbsp;
+    <span id="vV" style="color:orange;font-weight:bold;">${n.imgData && n.imgData.img_data?n.imgData.value:0}</span>
    ${n.user && n.user.prem=="y"? '&nbsp;&nbsp;&nbsp;<span style="color:#d5a8a8;">Premium &nbsp;&nbsp;&#x1F451;</span>':''} 
     </div>
     
@@ -430,7 +432,7 @@ ${n.user && !n.VK?`<div class="settingspanel" onclick="logout(this);">${lang=='r
     
     ${n.imgData && n.imgData.img_data?'<style>div#playContainer svg{fill:rgba(234,223,244,0.6);}</style>':''}
     <div id="playContainer" class="${lang=='en'?'eng':lang=='zh'?'溪流':lang=='id'?'id':''}" data-state="${n.imgData && n.imgData.img_data?'busy':'niemand'}" onclick="beginTranslation(this);"><!-- <img  src="/img/play2.svg"/>-->
-<svg version="1.1"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000" xml:space="preserve">
+<svg version="1.1" id="kartinasvg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000" xml:space="preserve">
 <metadata> Svg Vector Icons : http://www.onlinewebfonts.com/icon </metadata>
 <g><path d="M500,10C229.4,10,10,229.4,10,500s219.4,490,490,490c270.6,0,490-219.4,490-490S770.6,10,500,10z M500,881.1c-210.5,0-381.1-170.6-381.1-381.1S289.5,118.9,500,118.9c210.5,0,381.1,170.6,381.1,381.1S710.5,881.1,500,881.1z"/><path d="M390.2,282.2l326.7,218.6L390.2,719.5V282.2z"/></g>
 </svg>
@@ -583,6 +585,7 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
 </script>
     </section>
     </article>
+   
  <!-- <div id="yandex_rtb_R-A-12098170-1"></div> -->
    ${process.env.DEVELOPMENT==="yes"?'<script>function getReklama(){}</script>':`<script>
      // https://yandex.ru/support2/partner/ru/web/units/sizes
@@ -658,7 +661,7 @@ if(isLogin.value=="false") getReklama();
 	</form>
 	</section>
     </output> -->
-    
+     
    
     <input type="hidden" id="isEnter" value="${n.user?n.user.heart==0?'true':'false':'true'}" />
     <a href="#."  class="overlay" id="purchaseHREFI"></a>
@@ -880,7 +883,15 @@ if(isLogin.value=="false") getReklama();
     
     
     
+    <dialog id="mydialog">
+    <section id="inbox"></section>
+     <form method="dialog">
+     <menu>
+     <button value="cancel">Нет</button>
+      <button id="confirmBtn" value="confirm">Да</button></menu>
+  </form>
     
+    </dialog>
     
     
     

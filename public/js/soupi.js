@@ -361,6 +361,8 @@ console.log("after sender")
                abbi[1].setAttribute('data-publish', 'publish');
                let a = document.querySelector('div#playContainer #kresti');
                if(a) a.classList.toggle('show');
+               let sa = document.querySelector("#kartinasvg");
+               if(sa) sa.style.display="none";
                 setTimeout(()=>{;
                let img_data = Screenshot2();
             
@@ -579,6 +581,8 @@ async function subscribe(el) {
                 wsend({type: "onconsume", publishedId: publishedId, request: "mediasoup"})
                  let a = document.querySelector('div#playContainer #kresti');
                if(a) a.classList.toggle('show');
+               let sa = document.querySelector("#kartinasvg");
+               if(sa) sa.style.display="none";
                 break;
             case 'disconnected':
                 note({content: 'Disconnected!', type: 'info', time: 5});
@@ -778,6 +782,8 @@ function unpublish() {
                abbi[1].setAttribute('data-publish', 'none');
      let a = document.querySelector('div#playContainer #kresti');
                if(a) a.classList.toggle('show');
+               let sa = document.querySelector("#kartinasvg");
+               if(sa) sa.style.display="block";
     startbtn.disabled = false;
     nextbtn.disabled = true;
     chatbox.innerHTML="";
@@ -825,6 +831,8 @@ gid("playContainer").setAttribute("data-state", "busy");
                abbi[1].setAttribute('data-publish', 'none');
     let a = document.querySelector('div#playContainer #kresti');
    if(a)a.className = "";
+   let sa = document.querySelector("#kartinasvg");
+               if(sa) sa.style.display="block";
                if(a) {
 				// if(!a.classList.contains('show'))  a.classList.toggle('show');
 			   }
@@ -904,15 +912,28 @@ function disableElement(id) {
 function beginTranslation(el){
 	//alert(1);
 	if(el.getAttribute("data-state") == "niemand"){
-		let s = (L()=="ru"?'Запустить трансляцию? Вас увидят множество зрителей!':
+		let s = (L()=="ru"?'Запустить трансляцию? Вас увидят сотня потенциальных зрителей!':
 		L()=='en'?'Enable the stream? Many viewers will watch you!':
 		L()=='zh'?'启用流吗？很多观众都会看你的！':
 		L()=='id'?'Aktifkan streaming? Banyak pemirsa akan menonton Anda!':'')
 	//	alert(L());
-		if(window.confirm(s)){
+	if(is_dialogi()){
+	gid('inbox').innerHTML=s;
+     gid('mydialog').showModal();
+     mydialog.addEventListener("close", function(e){
+		 if(mydialog.returnValue === "cancel"){
+			 
+		 }else if(mydialog.returnValue === "confirm"){
+			 startMedia(el);
+		 }
+		 })
+	 }else{
+		 if(window.confirm(s)){
 			startMedia(el);
 			//el.setAttribute("data-state", "begin");
 		}
+	 }
+		
 	}else if(el.getAttribute("data-state") == "published"){
 		unpublish();
 	}else if(el.getAttribute("data-state") == "busy"){

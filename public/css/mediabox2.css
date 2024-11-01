@@ -1337,6 +1337,47 @@ span.ozenka{
 	padding:5px;
 	background:#162255;
 }
+#mydialog{
+	backgrund:white;
+	transform: translate(70%, 100%);
+}
+form menu button[value=cancel]{
+	color: white;
+	height: 49px;
+	background:red;
+	font-weight:bold;
+	padding:10px;
+	border:2px solid white;
+}
+menu{
+	background:orange;
+	display:flex;
+	align-items: center;
+  justify-content: space-around;
+}
+form menu button[value=confirm]{
+	background:lightgreen;
+	height: 49px;
+	color:white;
+	font-weight: bold;
+	padding: 10px;
+	margin-left:100px;
+	border:2px solid white;
+}
+#mydialog #inbox{
+	background:lightgreen;
+	color:black;
+}
+::backdrop {
+  background-image: linear-gradient(
+    45deg,
+    magenta,
+    rebeccapurple,
+    dodgerblue,
+    green
+  );
+  opacity: 0.75;
+}
 @media screen and (max-width: 452px) and (orientation: portrait){
 	output#ozenite{
 	width:98%;
@@ -1347,44 +1388,59 @@ span.ozenka{
 	div#playContainer{
 	background:rgba(0,0,0,0);
 	border-radius:1px;
-	width:40px;
-	height:40px;
+	width:160px;
+	height:60px;
 	position:absolute;
 	top:11.8%;
-	right:7%;
+	right:100px;
 	z-index:1;
 	display:flex;
+	boder:2px solid red;
+}
+#mydialog{
+font-size:1.2rem;
+width:100vw;
+	transform:translate(0px,60%);
+	margin:0 auto;
 }
 }
 video#kartina{
-	border:1px solid yellow;
-	width:60px;
-	height:60px;
+	boder:1px solid yellow;
+	width:100%;
+	height:100%;
 	psition:absolute;
 	op:2%;
 	eft:70%;
 	display:block;
 	z-idex:300;
 	object-fit:cover;
-	border-radius:50%;
+	brder-radius:50%;
 	border:1px solid transparent;
 	overflow:hidden;
 	
 }
+#kartisvg{
+width:50%;
+position:absolute;
+	background:red;
+	transform: translateX(-21px);
+	tranform: translateY(-21px);
+}
 video#kartina poster{
-	object-fit:cover;
-	width:60px;
-	height:60px;
+	objet-fit:cover;
+	wdth:60px;
+	hight:60px;
 	overflow:hidden;
 }
 
 div#playContainer{
 	background:rgba(0,0,0,0);
+	border:1px solid green;
 	border-radius:1px;
-	width:40px;
-	height:40px;
+	width:100px;
+	height:100px;
 	position:absolute;
-	top:11.8%;
+	top:12.8%;
 	right:7%;
 	z-index:1;
 	display:flex;
@@ -1411,9 +1467,9 @@ div#playContainer.id:hover::after{
 div#playContainer svg{
 position:absolute;
 top:25%;
-left:27%;
-	width:100%;
-	height:100%;
+left:25%;
+	width:50%;
+	height:50%;
 	fill: rgba(34,23,44,0.2);
 	z-index:1;
 }
@@ -1423,7 +1479,7 @@ align-items: center;
   justify-content: center;
 position:absolute;
 top:25%;
-left:27%;
+left:30%;
 width:40px;
 height:40px;
 border-radius:50%;

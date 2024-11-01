@@ -71,7 +71,7 @@ window.streami = undefined;
 	local.srcObject = null;
 
 	}else{
-		let s = L()=='ru'?"Нажми на старт-то!":L()=='en'?'First press "start"':
+		let s = L()=='ru'?"Нажмите сперва на старт":L()=='en'?'First press "start"':
 		L()=='zh'?'首先按“开始”':
 		L()=='id'?'Tekan pertama "mulai"':'';
 		note({ content: s, type: "warn", time: 5 });
