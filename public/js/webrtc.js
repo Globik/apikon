@@ -1085,6 +1085,20 @@ if(Prem.value=="n")getReklama();
 
 }
 }
+//window.innerWidth=40;
+//alert(window.innerWidth);
+function onfoci(){
+	let w=window.innerWidth;
+	const mediaq=window.matchMedia('@media screen and (max-width: 592px) and (orientation: portrait)');
+	if(mediaq.matches){
+		//alert('match');
+		window.innerWidth = w;
+	}else{
+		//alert('no match');
+		window.innerWidth = w;
+	}
+	//mediaq.addEventListener();
+}
 //if(Login())start(startbtn);
  function mama(e){
 	e.preventDefault();
