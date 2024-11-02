@@ -838,7 +838,7 @@ div.heartcount{
 		
 	}
 /*@media screen and (max-width: 452px) and (orientation: portrait){*/
-@media screen and (max-width: 592px) and (orientation: portrait){
+@media screen and (max-width: 452px) and (orientation: portrait){
 #foot,#chatruleslink{
 	display:flex;
 		position:absolute;
@@ -1384,7 +1384,7 @@ form menu button[value=confirm]{
   );
   opacity: 0.75;
 }
-@media screen and (max-width: 452) and (orientation: portrait){
+@media screen and (max-width: 452px) and (orientation: portrait){
 	output#ozenite{
 	width:98%;
 	}
@@ -1406,7 +1406,7 @@ form menu button[value=confirm]{
 #mydialog{
 font-size:1.2rem;
 width:100vw;
-	transform:translate(0px,60%);
+	transform:translate(0px,80%);
 	margin:0 auto;
 }
 }
