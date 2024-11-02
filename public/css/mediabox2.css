@@ -4,6 +4,10 @@ html,body{
 			height:100%;
 			background:black;
 		}
+		:root {
+    --mobilewidth: 452px;/*452px;*/
+}
+
 		#local video::-webkit-media-controls,#remote video::-webkit-media-controls,#kartina video::-webkit-media-controls{
 		display:none !important;
 		}
@@ -64,7 +68,7 @@ html,body{
 	#mpa{
 		text-decoration: underline;
 	}
-	@media screen and (max-width: 452px) and (orientation: portrait){
+	@media screen and (max-width: var(--mobilewidth)) and (orientation: portrait){
 		#payoutoutput{
 			width:98%;
 			background:#327332;
@@ -84,7 +88,7 @@ html,body{
 		font-weight:bold;
 	}
 	
-	@media screen and (max-width: 452px) and (orientation: portrait){
+	@media screen and (max-width: var(--mobilewidth)) and (orientation: portrait){
 		#premiumoutput,#premiumoutput2{
 width:100%;
 oveflow:auto;
@@ -141,7 +145,7 @@ oveflow:auto;
 		color:orange;
 		font-weight:bold;
 	}
-	@media screen and (max-width: 452px) and (orientation: portrait){
+	@media screen and (max-width: var(--mobilewidth)) and (orientation: portrait){
 		#pushDiv{
 			transform:none;
 		}
@@ -833,7 +837,8 @@ div.heartcount{
 	}	
 		
 	}
-@media screen and (max-width: 452px) and (orientation: portrait){
+/*@media screen and (max-width: 452px) and (orientation: portrait){*/
+@media screen and (max-width: 592px) and (orientation: portrait){
 #foot,#chatruleslink{
 	display:flex;
 		position:absolute;
@@ -1265,7 +1270,7 @@ dsplay:inline-block;
 }
 
 
-@media screen and (max-width: 452px) and (orientation: portrait){
+@media screen and (max-width: 452px ) and (orientation: portrait){
 #purchaseoutput,#purchaseoutput2{
 	width:98%;
 	/*height:90vh;*/
@@ -1282,10 +1287,11 @@ dsplay:inline-block;
 	}
 }
 
+
 @media screen and (max-width: 452px) and (orientation: portrait){}
 output#ozenite{
 	width:25%;
-	background:white;
+	background: white;
 	color:black;
 	padding:50px;
 }
@@ -1378,7 +1384,7 @@ form menu button[value=confirm]{
   );
   opacity: 0.75;
 }
-@media screen and (max-width: 452px) and (orientation: portrait){
+@media screen and (max-width: 452) and (orientation: portrait){
 	output#ozenite{
 	width:98%;
 	}
@@ -1532,7 +1538,7 @@ color:rgb(20,20,23);
 font-weight:bold;
 }
 
-@media screen and (max-width: 452px) and (orientation: portrait){
+@media screen and (max-width: var(--mobilewidth)) and (orientation: portrait){
 	output#bannedoutput{
 		width:98%;
 	}
@@ -1601,7 +1607,7 @@ transform:translateY(5px);
 	padding:10px;
 }
 
-@media screen and (max-width: 452px) and (orientation: portrait){
+@media screen and (max-width: var(--mobilewidth)) and (orientation: portrait){
 	.btcbtn{
 		width:100%;
 	}
@@ -1633,7 +1639,7 @@ transform:translateY(5px);
 #leavbtn{
 	margin-top:25px;
 }
-@media screen and (max-width: 452px) and (orientation: portrait){
+@media screen and (max-width: var(--mobilewidth)) and (orientation: portrait){
 #confirmageoutput{
 		width:100%;
 	}

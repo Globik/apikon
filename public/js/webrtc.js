@@ -1017,7 +1017,7 @@ async function start(el){
 		window.location.href = "#banned";
 		return;
 	}
-	if(VK_USER) return;
+	//if(VK_USER) return;
 	let sdata = {};
 	sdata.myip = MYIP;
 	sdata.usid = userId.value;
