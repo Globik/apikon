@@ -189,7 +189,7 @@ ${process.env.DEVELOPMENT == "yes" ? '':`<!-- Yandex.Metrika counter -->
 		//get_socket(); 
 	let isage = localStorage.getItem("myAge");
 	if(!isage && isage !=="y"){
-		window.location.href="#confirmAGE";
+	//	window.location.href="#confirmAGE";
 	 const faka = document.querySelector('.overlay:target');
 if(faka){
 	faka.onclick=function(e){
@@ -232,6 +232,7 @@ function confirm_agenot(ev){
 	console.log(e);
 }
 }
+showSomething();
 	function showSomething(){
    var cat = localStorage.getItem("myCat");
    if(!cat && cat !=="Tom"){

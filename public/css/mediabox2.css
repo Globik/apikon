@@ -1344,35 +1344,41 @@ span.ozenka{
 	background:#162255;
 }
 #mydialog{
-	backgrund:white;
+	background:white;
 	transform: translate(70%, 100%);
+	padding:5px;
 }
+
 form menu button[value=cancel]{
 	color: white;
 	height: 49px;
-	background:red;
+	background:#b72d2d;
+	width: 70px;
 	font-weight:bold;
 	padding:10px;
 	border:2px solid white;
 }
 menu{
-	background:orange;
+	background:#a2e1c8;
 	display:flex;
 	align-items: center;
   justify-content: space-around;
+  padding:20px;
 }
 form menu button[value=confirm]{
-	background:lightgreen;
+	background: #3c2b4f;
 	height: 49px;
 	color:white;
 	font-weight: bold;
 	padding: 10px;
 	margin-left:100px;
 	border:2px solid white;
+	width:70px;
 }
 #mydialog #inbox{
-	background:lightgreen;
+	background: #a2e1c8;
 	color:black;
+	padding:20px;
 }
 ::backdrop {
   background-image: linear-gradient(
@@ -1441,7 +1447,7 @@ video#kartina poster{
 
 div#playContainer{
 	background:rgba(0,0,0,0);
-	border:1px solid green;
+	brder:1px solid green;
 	border-radius:1px;
 	width:100px;
 	height:100px;
