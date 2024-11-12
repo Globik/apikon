@@ -353,6 +353,7 @@ console.log("after sender")
                 el.setAttribute("data-state", "published");
                 let s = L()=="ru"?"Вы в эфире!":L()=='en'?"On air!":L()=='zh'?'正在播出！':L()=='id'?'mengudara!':'';
                 note({content: s, type: "info", time: 5});
+                getReklama();
                 publishedId = MYSOCKETID;
                txtvalue.disabled = false;
                txtvalue2.disabled = false;
