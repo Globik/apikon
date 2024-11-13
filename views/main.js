@@ -180,7 +180,7 @@ ${process.env.DEVELOPMENT == "yes" ? '':`<!-- Yandex.Metrika counter -->
     
     ${!n.user?`<script>
    // alert("UNDEFINED");
-    var NICK = "anon";
+    var NICK = "anonim";
     //location.href="#login2"
    
     window.onload=function(){
@@ -240,12 +240,13 @@ showSomething();
     location.href="#regeln";
     const faka = document.querySelector('.overlay:target');
 if(faka){
-	faka.onclick=function(e){
+	faka.addEventListener('click', function(e){
 		e.preventDefault();
 	//alert(1);
 	//window.location.href="#lregeln";
 	//return;
-	}
+	}, false);
+	faka.addEventListener('hashchange', han, false);
 }
 }else{
 	${!n.VK?`
@@ -261,33 +262,46 @@ if(faka){
 		e.preventDefault();
 	
 	}
+	window.addEventListener('hashchange', hani, false);
 }`:''}
 }
 }
-in_rem_hash();
+//in_rem_hash();
 
 }
    
-    
+   function han(ev){
+	 //  alert('regeln');
+	   window.location.href="#regeln";
+   }; 
 function confirmRules(){
 	localStorage.setItem("myCat", "Tom");
 	
-	window.location.href="#login";
+	
 	 const faka = document.querySelector('.overlay:target');
+	 window.removeEventListener('hashchange', han);
+	 window.location.href="#login";
 	 if(faka){
-	faka.onclick=function(e){
+	faka.addEventListener('click', function(e){
+		//alert('click');
 		e.preventDefault();
-	}
+	},false);
+	//window.addEventListener('hashchange', hani, false);
 }
 
+}
+function hani(ev){
+	//alert('login');
+	window.location.href="#login";
 }
 function isOpenModal(){
 	 window.location.href="#regeln";
 	 const faka = document.querySelector('.overlay:target');
 	 if(faka){
-	faka.onclick=function(e){
+	faka.addEventListener('click', function(e){
 		e.preventDefault();
-	}
+	}, false);
+	window.addEventListener('hashchange', han, false);
 }
 }
 //get_socket();

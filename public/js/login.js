@@ -118,8 +118,11 @@ return;
 		}
 	
 localStorage.setItem("islogin" , "yes");
+const faka = document.querySelector('.overlay:target');
+//if(faka)
+window.removeEventListener('hashchange', hani, false);
 window.location.href="#."
-          location.reload();
+          window.location.reload();
          // in_rem_hash();
           
    
