@@ -164,7 +164,7 @@ ${process.env.DEVELOPMENT == "yes" ? '':`<!-- Yandex.Metrika counter -->
     </noscript>
    <input type="hidden" id="isLogin" value="${n.user?true:false}"/>
     <input type="hidden" id="userId" value="${n.user?n.user.id:0}">
-    <input type="hidden" id="userName" value="${n.user?n.user.name:'anon'}">
+    <input type="hidden" id="userName" value="${n.user?n.user.name:'anonim4'}">
     <input type="hidden" id="isTestHeart" value="${istestheart}">
     <input type="hidden" id="publishedid" value="${n.imgData && n.imgData.img_data?n.imgData.publishedId:null}" >
     <input type="hidden" id="Mon" value="${n.user?n.user.mon:null}" />
@@ -180,7 +180,7 @@ ${process.env.DEVELOPMENT == "yes" ? '':`<!-- Yandex.Metrika counter -->
     
     ${!n.user?`<script>
    // alert("UNDEFINED");
-    var NICK = "anon";
+    var NICK = "anonim1";
     //location.href="#login2"
    
     window.onload=function(){
@@ -308,7 +308,7 @@ function isOpenModal(){
     </script>`:`<script>
    // alert('alik defined');
     in_rem_hash();
-    const NICK = "${n.user?n.user.name:'anon'}";
+    const NICK = "${n.user?n.user.name:'anonim2'}";
    // var VK_USER = false;
   // alert("NICK "+NICK);
   

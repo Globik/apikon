@@ -930,7 +930,7 @@ function beginTranslation(el){
 		 })
 	 }else{
 		 if(window.confirm(s)){
-			  if(isLogin.value==="false"){
+			  if(gid('isLogin').value==="false"){
 		let s = (L()=="ru"?"Залогиньтесь!":L()=='en'?"Please log in":L()=='zh'?'请登录':L()=='id'?'Silahkan masuk':'')
 		 note({content: s, type: "warn", time: 5 });
 	window.location.href="#login";

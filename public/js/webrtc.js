@@ -537,13 +537,13 @@ function setSignal(){
 }
 //window.onpagehide=function(){alert('open')}
 function get_socket() {
-	 if(isLogin.value==="false"){
+	 if(gid('isLogin').value === "false"){
 		// sock.close();
 		let s = L()=="ru"?"Залогиньтесь!":L()=='en'?"You should log in!":
 		L()=='zh'?'您应该登录！':
 		L()=='id'?'Anda harus masuk':'';
 		 note({content: s, type: "warn", time: 5 });
-		 location.href="#login";
+		 window.location.href="#login";
 	const faka = document.querySelector('.overlay:target');
 	 if(faka){
 	faka.onclick=function(e){
@@ -576,7 +576,7 @@ return window.location.href='#purchaseHREF';
   sock.onopen = function () {
 	 console.log("websocket opened");
 	// heartbeat();
-	 wsend({ type: "helloServer", VK: isVK.value, userId: gid("userId").value?gid("userId").value:'anon', isprem: Prem.value, nick: userName.value, logged:  Login()?"yes":"no", LANG: L });
+	 wsend({ type: "helloServer", VK: isVK.value, userId: gid("userId").value?gid("userId").value:'anonim3', isprem: Prem.value, nick: userName.value, logged:  Login()?"yes":"no", LANG: L });
   };
   sock.onerror = function (e) {
    // note({ content: "Websocket error: " + e, type: "error", time: 5 });
