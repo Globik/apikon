@@ -537,7 +537,7 @@ function setSignal(){
 }
 //window.onpagehide=function(){alert('open')}
 function get_socket() {
-	/* if(NICK == "anon" || NICK == undefined){
+	 if(isLogin.value==="false"){
 		// sock.close();
 		let s = L()=="ru"?"Залогиньтесь!":L()=='en'?"You should log in!":
 		L()=='zh'?'您应该登录！':
@@ -550,7 +550,7 @@ function get_socket() {
 		e.preventDefault();
 	}
 		  return;
-	  }}*/
+	  }}
 	//  alert(ifEnter());
 	/*
 	if(ifEnter() && Brole.value !="admin"){
@@ -983,7 +983,7 @@ function on_check_banned_error(){}
 
 async function start(el){
 	
-	 if(NICK == "anon" || NICK == undefined){
+	 if(isLogin.value==="false"){
 		let s = (L()=="ru"?"Залогиньтесь!":L()=='en'?"Please log in":L()=='zh'?'请登录':L()=='id'?'Silahkan masuk':'')
 		 note({content: s, type: "warn", time: 5 });
 	window.location.href="#login";
