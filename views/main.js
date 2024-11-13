@@ -180,7 +180,7 @@ ${process.env.DEVELOPMENT == "yes" ? '':`<!-- Yandex.Metrika counter -->
     
     ${!n.user?`<script>
    // alert("UNDEFINED");
-    var NICK = "anonim";
+    var NICK = "anon";
     //location.href="#login2"
    
     window.onload=function(){
