@@ -641,6 +641,7 @@ function on_msg(msg) {
        // claimMenu.setAttribute("data-vip", msg.vip);
        claimMenu.setAttribute("data-vip", msg.partnerId);
        partnernick = msg.nick;
+       
        //alert(msg.nick);
       partnerpremium = msg.isprem;
        //  let a = checkIp(msg.vip);

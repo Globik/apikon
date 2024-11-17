@@ -175,6 +175,7 @@ ${process.env.DEVELOPMENT == "yes" ? '':`<!-- Yandex.Metrika counter -->
     <input type="hidden" id="isEnter" value="${n.user?n.user.entr==0?true:false:false}" />
     <input type="hidden" id="VKID" value="${n.buser?n.buser.vkid:null}" /> 
    <input type="hidden" data-vk="${n.VK}" id="isVK" value="${n.VK?true:false}" /> 
+   <input type="hidden" id="PARTNERNICK" value="${n.imgData&&n.imgData.img_data?n.imgData.nick:false}"/>
     
    
     
@@ -380,7 +381,9 @@ window.onhashchange = function(ev){
 
   
      </script>
-     
+     <script>
+     var partnernick = "${n.imgData&&n.imgData.img_data?n.imgData.nick:''}";
+     </script>
    <!--  <div id="yandex_rtb_R-A-12098170-1"></div>
      <script>
      // https://yandex.ru/support2/partner/ru/web/units/sizes
@@ -424,7 +427,7 @@ lang=='id'?'koneksi':''}:</b> <span id="connects">0</span></div>
 <!-- <div class="settingspanel"  onclick="pushSubscribe(this);">Пуш уведомления</div> -->
 ${lang=='ru'&&!n.VK ?` <div class="settingspanel"  onclick="purchaseTokens(this);">Купить сердечки &#x1f496;</div>
 <div class="settingspanel">
-<div class="some doh">${n.user?n.user.name:'anon'}  Ваш доход&nbsp;&nbsp;<span id="dohod">${n.user? Number.parseFloat(n.user.theart*0.10).toFixed(2):'0.00'}</span>&nbsp;&nbsp;рублей</div>
+<div class="some doh">${n.user?n.user.name:'anon6'}  Ваш доход&nbsp;&nbsp;<span id="dohod">${n.user? Number.parseFloat(n.user.theart*0.10).toFixed(2):'0.00'}</span>&nbsp;&nbsp;рублей</div>
 <div class="du" onclick="getPayout(this);">Получить</div>
 </div>`:''}
 ${!n.VK ? `
@@ -452,12 +455,12 @@ ${n.user && !n.VK?`<div class="settingspanel" onclick="logout(this);">${lang=='r
 <g><path d="M500,10C229.4,10,10,229.4,10,500s219.4,490,490,490c270.6,0,490-219.4,490-490S770.6,10,500,10z M500,881.1c-210.5,0-381.1-170.6-381.1-381.1S289.5,118.9,500,118.9c210.5,0,381.1,170.6,381.1,381.1S710.5,881.1,500,881.1z"/><path d="M390.2,282.2l326.7,218.6L390.2,719.5V282.2z"/></g>
 </svg>
 <div id="kresti"><b id="kres">&#x274E;</b></div>
-<video id="kartina" ${n.imgData && n.imgData.img_data?` poster=${n.imgData.img_data}`:`poster="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"`} playsinline ></video></div>
+<video id="kartina" ${n.imgData && n.imgData.img_data?` poster=${n.imgData.img_data}`:`data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"`} playsinline ></video></div>
     
   <!--  <section id="recordSection"><div>&#x1F4F8;</div></section> -->
     
     <section id="claimContainer" onclick="openClaim(this);"><div id="claimBox">!</div></section>
-    <div id="claimMenu" data-vip=""><div data-claim="ignor" onclick="sendClaim(this);">${lang=='ru'?'В игнор':lang=='en'?'To ignore':
+    <div id="claimMenu" data-vip="${n.imgData&&n.imgData.img_data?n.imgData.userId:''}"><div data-claim="ignor" onclick="sendClaim(this);">${lang=='ru'?'В игнор':lang=='en'?'To ignore':
     lang=='zh'?'忽略':
     lang=='id'?'untuk mengabaikan':''}!</div>
     <div data-claim="claim" onclick="sendClaim(this);">${lang=='ru'?'Пожаловаться':lang=='en'?'Abuse':
@@ -911,7 +914,7 @@ if(isLogin.value=="false") getReklama();
     
     
     
-   <script src="/js/login.js"></script>
+   <script src="/js/login2.js"></script>
     
     <script src="/js/webrtc.js"></script>
     <script src="/js/soupi.js"></script>

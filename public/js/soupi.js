@@ -54,6 +54,8 @@ function goMedia(data){
         publishedId = data.publishedId;
         let a = document.querySelector('div#playContainer svg');
         if(a) a.style.fill = 'rgba(234,223,244,0.6)';
+        //claimMenu.setAttribute("data-vip", data.userId);
+        //console.log("userId *** ", data.userId);
         //alert(data.img_data);
     } else if (data.type == "perror") {
 
@@ -921,21 +923,16 @@ function beginTranslation(el){
 	if(is_dialogi()){
 	gid('inbox').innerHTML=s;
      gid('mydialog').showModal();
-     mydialog.addEventListener("close", function(e){
+     gid('mydialog').addEventListener("close", function(e){
 		 if(mydialog.returnValue === "cancel"){
 			 
-		 }else if(mydialog.returnValue === "confirm"){
+		 }else if(gid('mydialog').returnValue === "confirm"){
 			 startMedia(el);
 		 }
 		 })
 	 }else{
 		 if(window.confirm(s)){
-			  if(gid('isLogin').value==="false"){
-		let s = (L()=="ru"?"Залогиньтесь!":L()=='en'?"Please log in":L()=='zh'?'请登录':L()=='id'?'Silahkan masuk':'')
-		 note({content: s, type: "warn", time: 5 });
-	window.location.href="#login";
-		return;
-	  }
+			 
 			startMedia(el);
 			//el.setAttribute("data-state", "begin");
 		}

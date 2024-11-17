@@ -274,7 +274,7 @@ router.post('/OneBanned', checkAuth, isAdmin(['admin']), async(req, res) => {
 	}
 	let db = req.db;
 	try{
-		let us = await pool.query(`select * from ban where usid=(?)`, [ usid ]);
+		let us = await db.query(`select * from ban where usid=(?)`, [ usid ]);
 				if(us.length > 0){
 					//found return;
 					return res.json({ error: true, message: "Уже забанили" });
