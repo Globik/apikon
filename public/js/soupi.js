@@ -927,12 +927,21 @@ function beginTranslation(el){
 		 if(mydialog.returnValue === "cancel"){
 			 
 		 }else if(gid('mydialog').returnValue === "confirm"){
+			 	var gg = G();
+	if(gg == 1 || gg == 2){
+		window.location.href = "#banned";
+		return;
+	}
 			 startMedia(el);
 		 }
 		 })
 	 }else{
 		 if(window.confirm(s)){
-			 
+			 	var gg = G();
+	if(gg == 1 || gg == 2){
+		window.location.href = "#banned";
+		return;
+	}
 			startMedia(el);
 			//el.setAttribute("data-state", "begin");
 		}
