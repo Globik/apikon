@@ -1097,6 +1097,10 @@ function onfoci(){
 		ev.preventDefault();
 		ev.stopPropagation();
 	}, false);
+	txtvalue.addEventListener('blur', function(ev){
+		ev.preventDefault();
+		ev.stopPropagation();
+	}, false);
 	/*
 	let w=window.innerWidth;
 	const mediaq=window.matchMedia('@media screen and (max-width: 592px) and (orientation: portrait)');
