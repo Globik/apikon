@@ -1089,6 +1089,15 @@ if(Prem.value=="n")getReklama();
 //window.innerWidth=40;
 //alert(window.innerWidth);
 function onfoci(){
+	txtvalue.addEventListener('focus', function(ev){
+		ev.preventDefault();
+		ev.stopPropagation();
+	}, false);
+	txtvalue.addEventListener('input', function(ev){
+		ev.preventDefault();
+		ev.stopPropagation();
+	}, false);
+	/*
 	let w=window.innerWidth;
 	const mediaq=window.matchMedia('@media screen and (max-width: 592px) and (orientation: portrait)');
 	if(mediaq.matches){
@@ -1099,6 +1108,7 @@ function onfoci(){
 		window.innerWidth = w;
 	}
 	//mediaq.addEventListener();
+	*/ 
 }
 //if(Login())start(startbtn);
  function mama(e){
