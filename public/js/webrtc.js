@@ -1391,7 +1391,18 @@ return imgdata22;
 	}
 	}
 	
+	var txtvalue2 = gid('txtvalue2');
+	var txtvalue = gid('txtvalue');//for comp
+	if(txtvalue2){
+	 txtvalue2.addEventListener('input', txtInput, false);
+	 txtvalue2.addEventListener('change', someChange, false);
+ }
+	if(txtvalue) {
+		txtvalue.addEventListener('input', txtInput, false);
+		txtvalue.addEventListener('change', someChange, false);
+	}
 	function txtInput(el){
+		//alert('text input');
 		wsend({type:"write"});
 	
 	}

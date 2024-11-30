@@ -500,7 +500,7 @@ ${n.user && !n.VK?`<div class="settingspanel" onclick="logout(this);">${lang=='r
 <div id="textarea2" class="hide"><textarea id="txtvalue2" style="${n.VK?'width:calc(100% - 65px - 30px);':''}" data-publish="none" data-send="two" placeholder="${lang=='ru'?'Сообщение':
 lang=='en'?'Message':
 lang=='zh'?'信息':
-lang=='id'?'pesan':''}"  disabled oninput="txtInput(this);" onchange="someChange();" onfocus="onfoci();" onblur=""></textarea>
+lang=='id'?'pesan':''}"  disabled  onfocus="onfoci();" onblur=""></textarea>
 <!-- oninput="txtInput(this);" onchange="someChange();" -->
 ${n.VK?'':`<div id="giftbox">
 <div class="flexgiftsitem">
@@ -578,7 +578,7 @@ if(isVK.value=="true"){
 <div id="textarea"><textarea id="txtvalue" style="${n.VK?'width:calc(100% - 65px - 12px);':''}" data-publish="none" data-send="one" placeholder="${lang=='ru'?`Сообщение`:
 lang=='en'?'Message':
 lang=='zh'?'信息': 
-lang=='id'?'pesan':''}" oninput="txtInput(this);" onchange="someChange();" disabled></textarea>
+lang=='id'?'pesan':''}" disabled></textarea>
 ${n.VK?'':`<div id="giftbox2" data-state="closed">
 
 <div class="flexgiftsitem">
