@@ -352,13 +352,14 @@ let apikey = 'AQVN0YlnPMjLYRxiynUSly0V06GDVLd0HNb0FJIw';
 let folderid = 'b1g5v0ihc6evi9fec0di';
 // b1g5v0ihc6evi9fec0di
 let text = "окно";
+let a;
 try{
-let a = await axios.get(url, {params:{folderid:folderid,apikey:apikey,text:text}})
+ a = await axios.get(url, {params:{folderid:folderid,apikey:apikey,text:text}})
 console.log('answer ', a.data)
 }catch(e){
 	console.log('error ', e);
 }
-	res.json({message: 'ok'});
+	res.send('<?xml version="1.0" encoding="UTF-8"?>' + a.data);
 })
 app.post('/api/setyacount', async(req, res)=>{
 	let {countya} = req.body;
