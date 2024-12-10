@@ -348,6 +348,10 @@ app.get('/lolo', async(req,res)=>{
 const {convertXML, createAST} = require("simple-xml-to-json")
 
 //const myJson = convertXML(myXMLString)
+const { XMLParser, XMLBuilder, XMLValidator} = require("fast-xml-parser");
+
+const parser = new XMLParser();
+
 app.get('/photos', async(req, res)=>{
 //	https://yandex.<domain>/images-xml? [folderid=<folder_ID>]& [apikey=<API_key>]& [text=<search_query_text>]
 let url = 'https://yandex.ru/images-xml';
@@ -358,12 +362,15 @@ let text = "окно";
 let a;
 try{
  a = await axios.get(url, {params:{folderid:folderid,apikey:apikey,text:text}})
-console.log('answer ', a.data)
+//console.log('answer ', a.data)
 }catch(e){
 	console.log('error ', e);
 }
 const myJson = convertXML(a.data)
-	res.send(myJson);
+	//res.send(myJson);
+	let jObj = parser.parse(a.data);
+	console.log(jObj);
+	res.send(jObj);
 })
 app.post('/api/setyacount', async(req, res)=>{
 	let {countya} = req.body;
