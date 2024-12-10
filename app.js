@@ -345,6 +345,9 @@ app.get("/", async(req, res)=>{
 app.get('/lolo', async(req,res)=>{
 	res.rendel('lolo',{arr:[0,1,2,3,4,5], yacount: JETZT });
 })
+const {convertXML, createAST} = require("simple-xml-to-json")
+
+//const myJson = convertXML(myXMLString)
 app.get('/photos', async(req, res)=>{
 //	https://yandex.<domain>/images-xml? [folderid=<folder_ID>]& [apikey=<API_key>]& [text=<search_query_text>]
 let url = 'https://yandex.ru/images-xml';
@@ -359,7 +362,8 @@ console.log('answer ', a.data)
 }catch(e){
 	console.log('error ', e);
 }
-	res.send('<?xml version="1.0" encoding="UTF-8"?>' + a.data);
+const myJson = convertXML(a.data)
+	res.send(myJson);
 })
 app.post('/api/setyacount', async(req, res)=>{
 	let {countya} = req.body;

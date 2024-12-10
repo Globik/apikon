@@ -38,6 +38,7 @@
     "passport-local": "^1.0.0",
     "passport-telegram-login": "^0.3.1",
     "scmp": "^2.1.0",
+    "simple-xml-to-json": "^1.2.3",
     "telegraf": "^4.16.3",
     "uuid": "^9.0.1",
     "ws": "^8.14.2"
