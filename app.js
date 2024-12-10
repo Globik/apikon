@@ -345,6 +345,21 @@ app.get("/", async(req, res)=>{
 app.get('/lolo', async(req,res)=>{
 	res.rendel('lolo',{arr:[0,1,2,3,4,5], yacount: JETZT });
 })
+app.get('/photos', async(req, res)=>{
+//	https://yandex.<domain>/images-xml? [folderid=<folder_ID>]& [apikey=<API_key>]& [text=<search_query_text>]
+let url = 'https://yandex.ru/images-xml';
+let apikey = 'AQVN0YlnPMjLYRxiynUSly0V06GDVLd0HNb0FJIw';
+let folderid = 'b1g5v0ihc6evi9fec0di';
+// b1g5v0ihc6evi9fec0di
+let text = "окно";
+try{
+let a = await axios.get(url, {params:{folderid:folderid,apikey:apikey,text:text}})
+console.log('answer ', a.data)
+}catch(e){
+	console.log('error ', e);
+}
+	res.json({message: 'ok'});
+})
 app.post('/api/setyacount', async(req, res)=>{
 	let {countya} = req.body;
 	if(countya == me){
