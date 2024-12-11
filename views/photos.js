@@ -25,7 +25,7 @@ module.exports = { photos }
 
 function getPhoteli(n){
 	//console.log(n.jObj.yandexsearch.response.results.grouping.group);
-	
+	let s='';
 	//response.results.grouping.group:[{url}]
 	n.jObj.yandexsearch.response.results.grouping.group.forEach(function(el, i){
 		s+=`<div class="imghalter"><img src="${el.doc.url}" /></div>`
