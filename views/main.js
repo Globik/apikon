@@ -650,7 +650,7 @@ if(isLogin.value=="false") getReklama();
 	 window.yaContextCb.push(()=>{
 	 Ya.Context.AdvManager.render({
 	 "blockId":"R-A-12098170-7",
-	 "type:"fullscreen",
+	 "type":"fullscreen",
 	 "platform":"touch"
  })
 })
@@ -658,7 +658,7 @@ if(isLogin.value=="false") getReklama();
 window.yaContextCb.push(()=>{
 	 Ya.Context.AdvManager.render({
 	 "blockId":"R-A-12098170-8",
-	 "type:"fullscreen",
+	 "type":"fullscreen",
 	 "platform":"desktop"
  })
 })
