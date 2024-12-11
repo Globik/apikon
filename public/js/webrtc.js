@@ -997,7 +997,10 @@ async function start(el){
 		var data = await vkBridge.send('VKWebAppStorageGet', { keys: ['age'] });
 		console.log('result ', data);
 			  if(data.keys && data.keys[0].value=="y"){
-				
+				if(gg == 1 || gg == 2){
+		window.location.href = "#banned";
+		return;
+	}
 			}else{
 				window.location.href = "#confirmAGE";
 				window.onhashchange = function(){
@@ -1061,7 +1064,7 @@ el.textContent = L()=="ru"?"стоп":L()=='en'?"stop":L()=='zh'?'停止':L()=='
 	
 	//	makeRecord(stream);
 	
-if(Prem.value=="n")getReklama();
+//if(Prem.value=="n")getReklama();
 
 
 
@@ -1632,7 +1635,7 @@ window.addEventListener("online", function(e) {
    function next(el, bool, ignores, isIgnore){
 	   //next(nextbtn, false, amma, false);
 	   //pl();
-	   if(HELP == 3){
+	   if(HELP == 2){
 		//   window.location.href="#helproject";
 		try{
 		if(vkBridge){
@@ -1652,7 +1655,7 @@ window.addEventListener("online", function(e) {
 		//alert(5);
 		try{
 		if(Prem.value=="n")getReklama();
-		HELP=0;
+		//HELP=0;
 	}catch(e){
 		console.log(e);
 	}

@@ -609,7 +609,7 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
      // https://yandex.ru/support2/partner/ru/web/units/sizes
      var kkk = 0;
      function getReklama(){
-		 ${n.VK?'return;':''}
+		 //{n.VK?'return;':''}
 		 if(Brole.value==="admin") return;
      window.yaContextCb.push(()=>{
      if(Ya.Context.AdvManager.getPlatform()==='desktop'){
@@ -645,7 +645,26 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
 	 })
  }
 if(isLogin.value=="false") getReklama();
-	 </script> `}
+	 </script> 
+	 <script>
+	 window.yaContextCb.push(()=>{
+	 Ya.Context.AdvManager.render({
+	 "blockId":"R-A-12098170-7",
+	 "type:"fullscreen",
+	 "platform":"touch"
+ })
+})
+
+window.yaContextCb.push(()=>{
+	 Ya.Context.AdvManager.render({
+	 "blockId":"R-A-12098170-8",
+	 "type:"fullscreen",
+	 "platform":"desktop"
+ })
+})
+	 </script>
+	 
+	 `}
 	 ${getSeoText.getSeoText(lang)}
  <a href="#."  class="overlay" id="confirmAGE"></a>
     <output id="confirmageoutput" class="popi">

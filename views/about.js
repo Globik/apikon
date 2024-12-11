@@ -182,6 +182,16 @@ ${lang=='id'?'':'<a href="/about/id" hreflang="zh">'}<img title="Индонез�
             </div>
 
     </section>
+    <div id="yandex_rtb_R-A-12098170-6"></div>
+    <script>
+    window.yaContextCb.push(()=>{
+    Ya.Context.AdvManager.render({
+    "blockId":"R-A-12098170-6",
+    "renderTo":"yandex_rtb_R-A-12098170-6",
+    "type":"feed"
+})
+})
+</script>
 ${langpage(n)}
     <footer class="footer">
         <div class="container">
