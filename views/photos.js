@@ -28,7 +28,7 @@ function getPhoteli(n){
 	let s='';
 	//response.results.grouping.group:[{url}]
 	n.jObj.yandexsearch.response.results.grouping.group.forEach(function(el, i){
-		s+=`<div class="imghalter"><img src="${el.doc.url}" /></div>`
+		s+=`<div class="imghalter"><img onerror="this.remove();" src="${el.doc.url}" /></div>`
 	});
 	return s;
 }
