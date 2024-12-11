@@ -14,11 +14,11 @@ const photos = function(n){
 module.exports = { photos }
 
 function getPhoteli(n){
-	console.log(n.jObj);
+	console.log(n.jObj.yandexsearch.response.results.grouping.group);
 	let s = ''+n.jObj+' ';
 	let ob;
 	try{
-		ob = JSON.parse(n.jObj);
+	//	ob = JSON.parse(n.jObj);
 	}catch(e){
 		console.log(e);
 	}
