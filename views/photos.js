@@ -23,8 +23,8 @@ function getPhoteli(n){
 		console.log(e);
 	}
 	//response.results.grouping.group:[{url}]
-	//n.jObj.response.results.grouping.group.forEach(function(el, i){
-		//s+=`<div><div>${i+1})</div><img src="${el.url}" /></div>`
-	//});
+	n.jObj.yandexsearch.response.results.grouping.group.forEach(function(el, i){
+		s+=`<div><div>${i+1})</div><img src="${el.doc.url}" /></div>`
+	});
 	return s;
 }
