@@ -19,11 +19,11 @@ function getPhoteli(n){
 	try{
 		ob = JSON.parse(n.jObj);
 	}catch(e){
-		
+		console.log(e);
 	}
 	//response.results.grouping.group:[{url}]
-	n.jObj.response.results.grouping.group.forEach(function(el, i){
+	//n.jObj.response.results.grouping.group.forEach(function(el, i){
 		s+=`<div><div>${i+1})</div><img src="${el.url}" /></div>`
-	});
+	//});
 	return s;
 }
