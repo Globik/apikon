@@ -24,6 +24,8 @@ list-style-type:none;
 }
 li{display:inline;}
     </style>
+     <script>window.yaContextCb=window.yaContextCb||[]</script>
+    <script src="https://yandex.ru/ads/system/context.js" async></script>
     </head><body><nav itemscope itemtype="https://schema.org/BreadcrumbList">
     <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
     <a itemprop="iem" href="/"><span itemprop="name">rouletka.ru</span></a>
@@ -36,6 +38,32 @@ li{display:inline;}
     <meta itemprop="position" content="3" /></li>
     </nav>
     <section>${getPhoteli(n)}</section>
+     <script>
+	 window.yaContextCb.push(()=>{
+	 Ya.Context.AdvManager.render({
+	 "blockId":"R-A-12098170-7",
+	 "type":"fullscreen",
+	 "platform":"touch"
+ })
+})
+
+window.yaContextCb.push(()=>{
+	 Ya.Context.AdvManager.render({
+	 "blockId":"R-A-12098170-8",
+	 "type":"fullscreen",
+	 "platform":"desktop"
+ })
+})
+	 </script>
+	 <div id="yandex_rtb_R-A-12098170-9"></div>
+	 <script>
+	 window.yaContextCb.push(()=>{
+	 Ya.Context.AdvManager.render({
+	 "blockId":"R-A-12098170-9",
+	 "renderTo":"yandex_rtb_R-A-12098170-9"
+ })
+})
+	 </script>
     </body></html>`;
 }
 module.exports = { okno }
