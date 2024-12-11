@@ -17,10 +17,12 @@ const okno = function(n){
 	.imghalter img{
 	width:100%;
 }
-ul,ul li{
+
+
+ul{
 list-style-type:none;
-display:inline;
 }
+li{display:inline;}
     </style>
     </head><body><nav itemscope itemtype="https://schema.org/BreadcrumbList">
     <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
