@@ -30,7 +30,7 @@ display:inline;
     <a itemprop="iem" href="/photos"><span itemprop="name">photos</span></a>
     <meta itemprop="position" content="2" /></li>
     <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-    <a itemprop="iem" href="/photos/${n.lword}"><span itemprop="name">${n.word}</span></a>
+    <a itemprop="iem" href="/photos/${n.lword}"><span itemprop="name">${n.title}</span></a>
     <meta itemprop="position" content="3" /></li>
     </nav>
     <section>${getPhoteli(n)}</section>
@@ -44,7 +44,7 @@ function getPhoteli(n){
 	let s='';
 	
 	n.jObj.yandexsearch.response.results.grouping.group.forEach(function(el, i){
-		s+=`<div itemscope itemtype="http://schema.org/ImageObject" class="imghalter"><img onerror="this.remove();" src="${el.doc.url}" itemprop="contentUrl"/><span itemprop="description">${n.items[i]}.</span></div>`
+		s+=`<div itemscope itemtype="http://schema.org/ImageObject" class="imghalter"><img onerror="this.remove();" src="${el.doc.url}" itemprop="contentUrl"/><span itemprop="description"><b>${n.items[i]}.</b></span></div>`
 	});
 	return s;
 }
