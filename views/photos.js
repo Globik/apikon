@@ -14,7 +14,7 @@ const photos = function(n){
 module.exports = { photos }
 
 function getPhoteli(n){
-	let s = '';
+	let s = ''+n.jObj+' ';
 	let ob;
 	try{
 		ob = JSON.parse(n.jObj);
@@ -22,7 +22,7 @@ function getPhoteli(n){
 		
 	}
 	//response.results.grouping.group:[{url}]
-	ob.response.results.grouping.group.forEach(function(el, i){
+	n.jObj.response.results.grouping.group.forEach(function(el, i){
 		s+=`<div><div>${i+1})</div><img src="${el.url}" /></div>`
 	});
 	return s;
