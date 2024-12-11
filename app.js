@@ -351,27 +351,29 @@ app.get('/lolo', async(req,res)=>{
 const { XMLParser, XMLBuilder, XMLValidator} = require("fast-xml-parser");
 
 const parser = new XMLParser();
+const seo = require('./libs/seo.json');
 
-app.get('/photos', async(req, res)=>{
+app.get('/photos', async(req,res)=>{
+	res.rendel('photos', { items: seo.names });
+})
+seo.names.forEach(async function(el, i){
+app.get(`/photos/:${el.lword}`, async(req, res)=>{
+	console.log('params ', req.params);
 //	https://yandex.<domain>/images-xml? [folderid=<folder_ID>]& [apikey=<API_key>]& [text=<search_query_text>]
 let url = 'https://yandex.ru/images-xml';
 let apikey = 'AQVN0YlnPMjLYRxiynUSly0V06GDVLd0HNb0FJIw';
 let folderid = 'b1g5v0ihc6evi9fec0di';
-// b1g5v0ihc6evi9fec0di
-let text = "окно";
+let text = el.word;
 let a;
 try{
- a = await axios.get(url, {params:{folderid:folderid,apikey:apikey,text:text}})
-//console.log('answer ', a.data)
+ a = await axios.get(url, { params:{folderid:folderid,apikey:apikey,text:text}})
 }catch(e){
 	console.log('error ', e);
 }
-//const myJson = convertXML(a.data)
-	//res.send(myJson);
+
 	let jObj = parser.parse(a.data);
-	//console.log(jObj);
-	//res.send(jObj);
-	res.rendel('photos', { jObj: jObj });
+	res.rendel('okno', { jObj: jObj, title: el.word, lword: el.lword, items: el.items });
+})
 })
 app.post('/api/setyacount', async(req, res)=>{
 	let {countya} = req.body;

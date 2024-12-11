@@ -182,6 +182,7 @@ ${lang=='id'?'':'<a href="/about/id" hreflang="zh">'}<img title="Индонез�
             </div>
 
     </section>
+    <div><a href="/photos">rouletka.ru</a></div>
     <div id="yandex_rtb_R-A-12098170-6"></div>
     <script>
     window.yaContextCb.push(()=>{

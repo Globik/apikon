@@ -1,13 +1,14 @@
-const photos = function(n){
+//const seo = require('../libs/seo.json')
+const okno = function(n){
 	return `<!DOCTYPE html>
 <html lang="ru">
   <head>
     <meta charset="utf-8">
-    <title>Photos</title>
+    <title>${n.title}</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0"> 
+    <meta itemprop="name" content="${n.items[0]}"/>
     <link rel="icon" href="/favicon.ico">
-    <meta itemprop="name" content="Картинки"/>
     <style>
     .imghalter{
 		width:50%;
@@ -16,10 +17,10 @@ const photos = function(n){
 	.imghalter img{
 	width:100%;
 }
-ul{
+ul,ul li{
 list-style-type:none;
+display:inline;
 }
-li{display:inline;}
     </style>
     </head><body><nav itemscope itemtype="https://schema.org/BreadcrumbList">
     <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
@@ -28,17 +29,22 @@ li{display:inline;}
     <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
     <a itemprop="iem" href="/photos"><span itemprop="name">photos</span></a>
     <meta itemprop="position" content="2" /></li>
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+    <a itemprop="iem" href="/photos/${n.lword}"><span itemprop="name">${n.word}</span></a>
+    <meta itemprop="position" content="3" /></li>
     </nav>
-    
-    <article itemscope itemtype="https://schema.org/WebPage"><header itemprop="name">Картинки</header>${getLinks(n)}</article>
+    <section>${getPhoteli(n)}</section>
     </body></html>`;
 }
+module.exports = { okno }
 
-module.exports = { photos }
-function getLinks(n){
-	let s = '';
-	n.items.forEach(function(el, i){
-		s+=`<p><a href="/photos/${el.lword}" itemprop="url">${el.word}</a></p>`;
+
+function getPhoteli(n){
+	//console.log(n.jObj.yandexsearch.response.results.grouping.group);
+	let s='';
+	
+	n.jObj.yandexsearch.response.results.grouping.group.forEach(function(el, i){
+		s+=`<div itemscope itemtype="http://schema.org/ImageObject" class="imghalter"><img onerror="this.remove();" src="${el.doc.url}" itemprop="contentUrl"/><span itemprop="description">${n.items[i]}.</span></div>`
 	});
 	return s;
 }
