@@ -14,6 +14,7 @@ const photos = function(n){
 module.exports = { photos }
 
 function getPhoteli(n){
+	console.log(n.jObj);
 	let s = ''+n.jObj+' ';
 	let ob;
 	try{
