@@ -345,7 +345,7 @@ app.get("/", async(req, res)=>{
 app.get('/lolo', async(req,res)=>{
 	res.rendel('lolo',{arr:[0,1,2,3,4,5], yacount: JETZT });
 })
-const {convertXML, createAST} = require("simple-xml-to-json")
+//const {convertXML, createAST} = require("simple-xml-to-json")
 
 //const myJson = convertXML(myXMLString)
 const { XMLParser, XMLBuilder, XMLValidator} = require("fast-xml-parser");
@@ -366,11 +366,12 @@ try{
 }catch(e){
 	console.log('error ', e);
 }
-const myJson = convertXML(a.data)
+//const myJson = convertXML(a.data)
 	//res.send(myJson);
 	let jObj = parser.parse(a.data);
-	console.log(jObj);
-	res.send(jObj);
+	//console.log(jObj);
+	//res.send(jObj);
+	res.rendel('photos', { jObj: jObj });
 })
 app.post('/api/setyacount', async(req, res)=>{
 	let {countya} = req.body;
