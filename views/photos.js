@@ -6,7 +6,17 @@ const photos = function(n){
     <title>Photos</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0"> 
-    <link rel="icon" href="/favicon.ico"></head><body>
+    <link rel="icon" href="/favicon.ico">
+    <style>
+    .imghalter{
+		width:50%;
+		margin: 0 auto;
+	}
+	.imghalter img{
+	width:100%;
+}
+    </style>
+    </head><body>
     <section>${getPhoteli(n)}</section>
     </body></html>`;
 }
@@ -14,17 +24,11 @@ const photos = function(n){
 module.exports = { photos }
 
 function getPhoteli(n){
-	console.log(n.jObj.yandexsearch.response.results.grouping.group);
-	let s = ''+n.jObj+' ';
-	let ob;
-	try{
-	//	ob = JSON.parse(n.jObj);
-	}catch(e){
-		console.log(e);
-	}
+	//console.log(n.jObj.yandexsearch.response.results.grouping.group);
+	
 	//response.results.grouping.group:[{url}]
 	n.jObj.yandexsearch.response.results.grouping.group.forEach(function(el, i){
-		s+=`<div><div>${i+1})</div><img src="${el.doc.url}" /></div>`
+		s+=`<div class="imghalter"><img src="${el.doc.url}" /></div>`
 	});
 	return s;
 }
