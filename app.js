@@ -380,6 +380,7 @@ try{
 
 	
 	//console.log('jObj ', jObj.yandexsearch.response.results.grouping.group);
+	console.log(jObj.yandexsearch.response.results.grouping);
 	res.rendel('okno', { jObj: jObj, title: req.params.okno, lword: req.params.okno, items: seo[req.params.okno]?seo[req.params.okno].items:["No word"] });
 })
 app.post('/api/setyacount', async(req, res)=>{
