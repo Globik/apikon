@@ -64,9 +64,12 @@ window.yaContextCb.push(()=>{
 
 module.exports = { photos }
 function getLinks(n){
+	//console.log("*** N *** ", n);
 	let s = '';
-	n.items.forEach(function(el, i){
-		s+=`<p><a href="/photos/${el.word}" itemprop="url">${el.word}</a></p>`;
-	});
+//	n.items.forEach(function(el, i){
+for(let i in n.items){
+		s+=`<p><a href="/photos/${i}" itemprop="url">${i}</a></p>`;
+	}
+	//});
 	return s;
 }

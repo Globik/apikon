@@ -354,14 +354,11 @@ const parser = new XMLParser();
 const seo = require('./libs/seo.json');
 
 app.get('/photos', async(req,res)=>{
-	res.rendel('photos', { items: seo.names });
+	res.rendel('photos', { items: seo });
 })
-function goapp(app){
-seo.names.forEach( (el, i)=>{
-	console.log("*** I *** ", i, el.word);
-	var that = this;
-app.get(`/photos/:${el.lword}`, async(req, res)=>{
-	console.log('params ', req.params, `${el.lword}`, el.word, ' ',that.i);
+
+app.get(`/photos/:okno`, async(req, res)=>{
+	console.log('params ', req.params);
 //	https://yandex.<domain>/images-xml? [folderid=<folder_ID>]& [apikey=<API_key>]& [text=<search_query_text>]
 let url = 'https://yandex.ru/images-xml';
 let apikey = 'AQVN0YlnPMjLYRxiynUSly0V06GDVLd0HNb0FJIw';
@@ -374,13 +371,10 @@ try{
 }catch(e){
 	console.log('error ', e);
 }
-
+//console.log("*** ITEMS *** ", seo[req.params.okno])
 	let jObj = parser.parse(a.data);
-	res.rendel('okno', { jObj: jObj, title: el.word, lword: el.lword, items: el.items });
+	res.rendel('okno', { jObj: jObj, title: req.params.okno, lword: req.params.okno, items: seo[req.params.okno]?seo[req.params.okno].items:["No word"] });
 })
-})
-}
-goapp(app);
 app.post('/api/setyacount', async(req, res)=>{
 	let {countya} = req.body;
 	if(countya == me){
