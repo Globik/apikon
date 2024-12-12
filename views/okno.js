@@ -10,11 +10,18 @@ const okno = function(n){
     <meta itemprop="name" content="${n.items[0]}"/>
     <link rel="icon" href="/favicon.ico">
     <style>
-    .imghalter{
-		width:50%;
-		margin: 0 auto;
+    section#cont{
+    display:flex;
+	flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+		align-items: center;
 	}
-	.imghalter img{
+    figure.imghalter{
+		width:200px;
+		height:200px;
+	}
+	figure.imghalter img{
 	width:100%;
 }
 
@@ -37,7 +44,7 @@ li{display:inline;}
     <a itemprop="iem" href="/photos/${n.word}"><span itemprop="name">${n.title}</span></a>
     <meta itemprop="position" content="3" /></li>
     </nav>
-    <section>${getPhoteli(n)}</section>
+    <section id="cont">${getPhoteli(n)}</section>
      <script>
 	 window.yaContextCb.push(()=>{
 	 Ya.Context.AdvManager.render({
@@ -74,7 +81,7 @@ function getPhoteli(n){
 	let s='';
 	
 	n.jObj.yandexsearch.response.results.grouping.group.forEach(function(el, i){
-		s+=`<div itemscope itemtype="http://schema.org/ImageObject" class="imghalter"><img onerror="this.remove();" src="${el.doc["image-properties"]["thumbnail-link"]}" itemprop="contentUrl"/><span itemprop="description"><b>${n.items[i]}.</b></span></div>`
+		s+=`<figure itemscope itemtype="http://schema.org/ImageObject" class="imghalter"><img onerror="this.remove();" src="${el.doc["image-properties"]["thumbnail-link"]}" itemprop="contentUrl"/><figcaption><span itemprop="description"><b>${n.items[i]}.</b></span></figcaption></figure>`
 	});
 	return s;
 }
