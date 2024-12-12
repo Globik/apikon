@@ -366,8 +366,8 @@ app.get(`/photos/:${el.lword}`, async(req, res)=>{
 let url = 'https://yandex.ru/images-xml';
 let apikey = 'AQVN0YlnPMjLYRxiynUSly0V06GDVLd0HNb0FJIw';
 let folderid = 'b1g5v0ihc6evi9fec0di';
-var text = req.params;//el.word;
-console.log("*** TEXT *** ", el.word);
+var text = req.params.okno;//el.word;
+console.log("*** TEXT *** ", req.params.okno);
 let a;
 try{
  a = await axios.get(url, { params:{folderid:folderid,apikey:apikey,text:text}})
