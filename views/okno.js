@@ -74,7 +74,7 @@ function getPhoteli(n){
 	let s='';
 	
 	n.jObj.yandexsearch.response.results.grouping.group.forEach(function(el, i){
-		s+=`<div itemscope itemtype="http://schema.org/ImageObject" class="imghalter"><img onerror="this.remove();" src="${el.doc.url}" itemprop="contentUrl"/><span itemprop="description"><b>${n.items[i]}.</b></span></div>`
+		s+=`<div itemscope itemtype="http://schema.org/ImageObject" class="imghalter"><img onerror="this.remove();" src="${el.doc[image-properties][thumbnail-link]}" itemprop="contentUrl"/><span itemprop="description"><b>${n.items[i]}.</b></span></div>`
 	});
 	return s;
 }
