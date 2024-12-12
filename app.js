@@ -368,7 +368,7 @@ console.log("*** TEXT *** ", req.params.okno);
 let a;let jObj;
 try{
  a = await axios.get(url, { params:{folderid:folderid,apikey:apikey,text:text}})
- console.log(a.data);
+// console.log(a.data);
  jObj = parser.parse(a.data);
  if(jObj.yandexsearch.response.error){
 	 return res.status(404).send(jObj.yandexsearch.response.error);
@@ -381,7 +381,7 @@ try{
 	
 	//console.log('jObj ', jObj.yandexsearch.response.results.grouping.group);
 	//console.log(jObj.yandexsearch.response.results.grouping);
-	console.log(JSON.stringify(jObj));
+	//console.log(JSON.stringify(jObj));
 	res.rendel('okno', { jObj: jObj, title: req.params.okno, lword: req.params.okno, items: seo[req.params.okno]?seo[req.params.okno].items:["No word"] });
 })
 app.post('/api/setyacount', async(req, res)=>{
