@@ -356,14 +356,18 @@ const seo = require('./libs/seo.json');
 app.get('/photos', async(req,res)=>{
 	res.rendel('photos', { items: seo.names });
 })
-seo.names.forEach(async function(el, i){
+function goapp(app){
+seo.names.forEach( (el, i)=>{
+	console.log("*** I *** ", i, el.word);
+	var that = this;
 app.get(`/photos/:${el.lword}`, async(req, res)=>{
-	console.log('params ', req.params);
+	console.log('params ', req.params, `${el.lword}`, el.word, ' ',that.i);
 //	https://yandex.<domain>/images-xml? [folderid=<folder_ID>]& [apikey=<API_key>]& [text=<search_query_text>]
 let url = 'https://yandex.ru/images-xml';
 let apikey = 'AQVN0YlnPMjLYRxiynUSly0V06GDVLd0HNb0FJIw';
 let folderid = 'b1g5v0ihc6evi9fec0di';
-let text = el.word;
+var text = req.params;//el.word;
+console.log("*** TEXT *** ", el.word);
 let a;
 try{
  a = await axios.get(url, { params:{folderid:folderid,apikey:apikey,text:text}})
@@ -375,6 +379,8 @@ try{
 	res.rendel('okno', { jObj: jObj, title: el.word, lword: el.lword, items: el.items });
 })
 })
+}
+goapp(app);
 app.post('/api/setyacount', async(req, res)=>{
 	let {countya} = req.body;
 	if(countya == me){

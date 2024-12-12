@@ -66,7 +66,7 @@ module.exports = { photos }
 function getLinks(n){
 	let s = '';
 	n.items.forEach(function(el, i){
-		s+=`<p><a href="/photos/${el.lword}" itemprop="url">${el.word}</a></p>`;
+		s+=`<p><a href="/photos/${el.word}" itemprop="url">${el.word}</a></p>`;
 	});
 	return s;
 }

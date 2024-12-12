@@ -34,7 +34,7 @@ li{display:inline;}
     <a itemprop="iem" href="/photos"><span itemprop="name">photos</span></a>
     <meta itemprop="position" content="2" /></li>
     <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-    <a itemprop="iem" href="/photos/${n.lword}"><span itemprop="name">${n.title}</span></a>
+    <a itemprop="iem" href="/photos/${n.word}"><span itemprop="name">${n.title}</span></a>
     <meta itemprop="position" content="3" /></li>
     </nav>
     <section>${getPhoteli(n)}</section>
