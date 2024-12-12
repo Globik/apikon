@@ -365,14 +365,21 @@ let apikey = 'AQVN0YlnPMjLYRxiynUSly0V06GDVLd0HNb0FJIw';
 let folderid = 'b1g5v0ihc6evi9fec0di';
 var text = req.params.okno;//el.word;
 console.log("*** TEXT *** ", req.params.okno);
-let a;
+let a;let jObj;
 try{
  a = await axios.get(url, { params:{folderid:folderid,apikey:apikey,text:text}})
+ 
+ jObj = parser.parse(a.data);
+ if(jObj.yandexsearch.response.error){
+	 return res.status(404).send(jObj.yandexsearch.response.error);
+ }
 }catch(e){
 	console.log('error ', e);
+	return res.status(404).send(e);
 }
-//console.log("*** ITEMS *** ", seo[req.params.okno])
-	let jObj = parser.parse(a.data);
+
+	
+	console.log('jObj ', jObj);
 	res.rendel('okno', { jObj: jObj, title: req.params.okno, lword: req.params.okno, items: seo[req.params.okno]?seo[req.params.okno].items:["No word"] });
 })
 app.post('/api/setyacount', async(req, res)=>{

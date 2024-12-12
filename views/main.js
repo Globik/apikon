@@ -595,6 +595,7 @@ lang=='en'?'About us':
 lang=='zh'?'关于我们':
 lang=='id'?'tentang kami':''}</a></div>
 ${n.VK?`<div id="chatruleslink2"><a href="#regeln">Правила чата</a></div>`:''}
+<a href="/photos" style="color:inherit;font-size:0.1em;">Fotos</a>
 <script>
 if(FLAGVK){
 gid("foot2").style.display = "none";
