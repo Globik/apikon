@@ -183,7 +183,7 @@ ${lang=='id'?'':'<a href="/about/id" hreflang="zh">'}<img title="Индонез�
 
     </section>
     <div><a href="/photos">rouletka.ru</a></div>
-    <div id="yandex_rtb_R-A-12098170-6"></div>
+   <!-- <div id="yandex_rtb_R-A-12098170-6"></div>
     <script>
     window.yaContextCb.push(()=>{
     Ya.Context.AdvManager.render({
@@ -193,6 +193,16 @@ ${lang=='id'?'':'<a href="/about/id" hreflang="zh">'}<img title="Индонез�
 })
 })
 </script>
+-->
+<div id="yandex_rtb_R-A-12098170-9"></div>
+	 <script>
+	 window.yaContextCb.push(()=>{
+	 Ya.Context.AdvManager.render({
+	 "blockId":"R-A-12098170-9",
+	 "renderTo":"yandex_rtb_R-A-12098170-9"
+ })
+})
+	 </script>
 ${langpage(n)}
     <footer class="footer">
         <div class="container">
