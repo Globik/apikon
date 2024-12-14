@@ -220,13 +220,16 @@ app.get("/about", async(req, res)=>{
 		if(r.data.response && r.data.response.length > 0){
 			//id, first_name
 			
-		
+//select id,name,entr,vkid,tgid,brole,heart,theart,prem,mon,grund from users left join ban on users.id=ban.usid where users.id=(?)','select id,name,entr,vkid,tgid,brole,heart,theart,prem,mon,grund from users left join ban on users.id=ban.usid where users.id=(?)'
 	let result4 = await db.query(`select*from users where vkid=(?)`, [ r.data.response[0].id ]);
+	
 	if(result4.length > 0){
 		console.log('result4 ', result4[0]);
 		result4[0].vkid=result4[0].vkid.toString();
 		console.log('result4 ', result4[0].id);
-		let babu=result4[0]
+		//let babu=result4[0]
+		let suki = await db.query('select id,name,entr,vkid,tgid,brole,heart,theart,prem,mon,grund from users left join ban on users.id=ban.usid where users.id=(?)',[result4[0].id]);
+		let babu=suki[0];
 	 return res.rendel('main', { imgData: imgData, lang: 'ru', yacount: JETZT , user: babu,buser:babu, FUCKER:'FUCKER', VK: true });
 	}else{
 		let result5 = await db.query(`insert into users(name, vkid, password) values(?,?,'1234')`, [ r.data.response[0].first_name, r.data.response[0].id ]);
