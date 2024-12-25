@@ -28,7 +28,7 @@ li{display:inline;}
     <a itemprop="iem" href="/"><span itemprop="name">rouletka.ru</span></a>
     <meta itemprop="position" content="1" /></li>
     <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-    <a itemprop="iem" href="/photos"><span itemprop="name">photos</span></a>
+    <span itemprop="item"><span itemprop="name">photos</span></span>
     <meta itemprop="position" content="2" /></li>
     </nav>
     
