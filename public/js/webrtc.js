@@ -535,6 +535,7 @@ function setSignal(){
 	//vax('post','/api/setDonation', { nick: NICK }, function(l, v){}, function(l, v){}, null, false);
 	//document.removeEventListener('visibilitychange', newev);
 }
+//window.location.href="#myGame";
 //window.onpagehide=function(){alert('open')}
 function get_socket() {
 	 if(gid('isLogin').value === "false"){
@@ -981,7 +982,7 @@ console.log(vers);
 console.log("<b>Your browser, version:</b> " + brows + " " + vers);
 function on_check_banned(){}
 function on_check_banned_error(){}
-
+var kuku = 0;
 async function start(el){
 	/*
 	 if(isLogin.value==="false"){
@@ -1063,11 +1064,20 @@ el.textContent = L()=="ru"?"стоп":L()=='en'?"stop":L()=='zh'?'停止':L()=='
 	el.className = "stop";
 	
 	//	makeRecord(stream);
-	
-//if(Prem.value=="n")getReklama();
 
+if(kuku == 3){	
+if(Prem.value=="n")getReklama();
+}
+if(kuku==0){
 
-
+if(Brole.value=="non"){
+window.location.href="#myGame";
+}
+}
+kuku++;
+if(kuku==5){
+	kuku=0;
+}
 		}).catch(err=>{
 			//alert(err);
 			console.log(err);//permission denied NotAllowedError

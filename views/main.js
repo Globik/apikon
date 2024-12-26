@@ -542,7 +542,7 @@ lang=='id'?'tentang kami':''}</a> -->
 <b style="display:inline-block;margin:3px;line-height:1.3;padding-bottom:1px;transform:translateY(-2px);color:blue;font-size:0.9rem;">Share</b></div>
 <div style="margin-left:4px;"><script>document.write(VK.Share.button(false,{type:"round",text:"Share"}));</script></div>
 -->
-<div class="ya-share2" data-curtain data-size="m" data-shape="round"  data-services="vkontakte,telegram,odnoklassniki" data-url="https://rouletka.ru/about"  data-image="https://rouletka.ru/og_image.png"></div>
+<div class="ya-share2" data-curtain data-size="m" data-shape="round"  data-services="vkontakte,telegram,odnoklassniki" data-url="https://rouletka.ru/about" data-image="https://rouletka.ru/og_image.png"></div>
 </div></div>
 ${n.VK?`<div id="chatruleslink"><a href="#regeln">Правила чата</a></div>`:''}
 <script>
@@ -667,6 +667,21 @@ window.yaContextCb.push(()=>{
 	 
 	 `}
 	 ${getSeoText.getSeoText(lang)}
+	 
+	 <a href="#."  class="overlay" id="myGame"></a>
+    <output id="mygameoutput" class="popi">
+    <section id="fotocont">
+    <header>Игра слот-машина</header>
+    <section class="flgame"><p>Крути бесплатно барабан и выигрывай биткоины! <a href="https://chatikon.ru"> Перейти на сайт <span class="chatikon">chatikon.ru</span></a></p></section>
+  
+    </section>
+    </output>
+	 
+	 
+	 
+	 
+	 
+	 
  <a href="#."  class="overlay" id="confirmAGE"></a>
     <output id="confirmageoutput" class="popi">
     <form name="verifyageform"><h2>Предупреждение</h2>

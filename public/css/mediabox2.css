@@ -7,7 +7,54 @@ html,body{
 		:root {
     --mobilewidth: 452px;/*452px;*/
 }
-
+#mygameoutput{
+	width:80%;
+	clor:red;
+	height:auto;
+}
+#fotocont{
+	ackground:green;
+}
+#fotocont header{
+	height:40px;
+	ackground:yellow;
+	color:#65e165;
+	text-align:center;
+	font-size:28px;
+	line-height:1.5;
+	font-weight:bold;
+}
+.flgame{
+	height: calc(40rem - 40px - 60px);
+	width:100%;
+	bckground:red;
+	 background-image: url("/img/game.png");
+				 background-repeat: no-repeat;
+				  background-size: cover;  
+				  background-position: center center; 
+				  display:flex;
+}
+.flgame p{
+	margin:auto;
+	font-weight:bold;
+	font-size:4.5rem;
+	padding:5rem;
+	line-height:1.5;
+	color:#f7eeee;
+	background:rgba(0,4,6,0.4);
+}
+.flgame p span{
+	color:blue;
+}
+@media screen and (max-width: 452px) and (orientation: portrait){
+#mygameoutput{
+	width:100%;
+	}
+	.flgame p{
+		font-size:2.5rem;
+		line-height:1.2;
+	}
+}
 		#local video::-webkit-media-controls,#remote video::-webkit-media-controls,#kartina video::-webkit-media-controls{
 		display:none !important;
 		}
