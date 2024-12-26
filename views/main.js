@@ -425,11 +425,11 @@ lang=='en'?'Connects':
 lang=='zh'?'连接':
 lang=='id'?'koneksi':''}:</b> <span id="connects">0</span></div>
 <!-- <div class="settingspanel"  onclick="pushSubscribe(this);">Пуш уведомления</div> -->
-${lang=='ru'&&!n.VK ?` <div class="settingspanel"  onclick="purchaseTokens(this);">Купить сердечки &#x1f496;</div>
+${lang=='ru'&&!n.VK ?`<!-- <div class="settingspanel"  onclick="purchaseTokens(this);">Купить сердечки &#x1f496;</div>
 <div class="settingspanel">
 <div class="some doh">${n.user?n.user.name:'anon6'}  Ваш доход&nbsp;&nbsp;<span id="dohod">${n.user? Number.parseFloat(n.user.theart*0.10).toFixed(2):'0.00'}</span>&nbsp;&nbsp;рублей</div>
 <div class="du" onclick="getPayout(this);">Получить</div>
-</div>`:''}
+</div>-->`:''}
 ${!n.VK ? `
 <div class="settingspanel"><a href="https://t.me/rouletka3">${lang=='ru'?'Наш Телеграм':
 lang=='en'?'Our Telegram':
@@ -502,12 +502,12 @@ lang=='en'?'Message':
 lang=='zh'?'信息':
 lang=='id'?'pesan':''}"  disabled  onfocus="onfoci();" onblur=""></textarea>
 <!-- oninput="txtInput(this);" onchange="someChange();" -->
-${n.VK?'':`<div id="giftbox">
+${n.VK?'':`<!--<div id="giftbox">
 <div class="flexgiftsitem">
 <div class="heart" data-type="mobile">&#x1f496</div>
 <div class="heartcount">${n.user?istestheart?n.user.theart:n.user.heart:0}</div>
 </div>
-</div>`}
+</div> -->`}
  <div class="send"  data-publish="none" data-send="two" onclick="sendi(this);"><img style="cursor:pointer;" src="/img/send1.svg"/></div>
 </div></section>
 </section> 
@@ -579,14 +579,14 @@ if(isVK.value=="true"){
 lang=='en'?'Message':
 lang=='zh'?'信息': 
 lang=='id'?'pesan':''}" disabled></textarea>
-${n.VK?'':`<div id="giftbox2" data-state="closed">
+${n.VK?'':`<!-- <div id="giftbox2" data-state="closed">
 
 <div class="flexgiftsitem">
 <div class="heart" data-type="computer">&#x1f496</div>
 <div class="heartcount">${n.user?istestheart?n.user.theart:n.user.heart:0}</div>
 
 </div>
-</div>`}
+</div> -->`}
  <div class="send" data-publish="none" data-send="one" onclick="sendi(this);" value="papa" ><img style="cursor:pointer;" src="/img/send1.svg"/></div> 
 </div>
 </section>
