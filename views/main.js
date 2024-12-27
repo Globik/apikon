@@ -672,7 +672,7 @@ window.yaContextCb.push(()=>{
     <output id="mygameoutput" class="popi">
     <section id="fotocont">
     <header>Игра слот-машина</header>
-    <section class="flgame"><p>Крути бесплатно барабан и выигрывай биткоины! <a href="https://chatikon.ru"> Перейти на сайт <span class="chatikon">chatikon.ru</span></a></p></section>
+    <section class="flgame"><p>Крути бесплатно барабан и собирай сердечки, чтобы обменять на биткоины! <a target="_blank" href="https://chatikon.ru"> Перейти на сайт <span class="chatikon">chatikon.ru</span></a></p></section>
   
     </section>
     </output>

@@ -982,6 +982,7 @@ console.log(vers);
 console.log("<b>Your browser, version:</b> " + brows + " " + vers);
 function on_check_banned(){}
 function on_check_banned_error(){}
+//window.location.href="#myGame";
 var kuku = 0;
 async function start(el){
 	/*
