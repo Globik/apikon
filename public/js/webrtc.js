@@ -1072,7 +1072,7 @@ if(Prem.value=="n")getReklama();
 if(kuku==0){
 
 if(Brole.value=="non"){
-window.location.href="#myGame";
+//window.location.href="#myGame";
 }
 }
 kuku++;

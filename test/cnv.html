@@ -10,12 +10,13 @@
 	var cnv=document.getElementById('cnv')
 	    var c=cnv.getContext('2d')
 	    //832x555
-	    cnv.width=800
-	    cnv.height=1068;
+	    cnv.width=500
+	    cnv.height=508;
 	    var img=new Image();
-	    img.src="4.png";
+	    img.src="../public/img/game2.jpg";
 	    img.onload=function(){
-			c.drawImage(img,0,0,800,1068,0,0,800*1.8,1068*2)
+			//c.drawImage(img,0,0,500,500,-300,0,750,500)
+			c.drawImage(img,0,0,500,500,0,0,600,600)
 		}
 	    /*
 	var f1=new Image();
