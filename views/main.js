@@ -648,6 +648,8 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
 if(isLogin.value=="false") getReklama();
 	 </script> 
 	 <script>
+	 function ababa(){
+	  if(Brole.value==="admin") return;
 	 window.yaContextCb.push(()=>{
 	 Ya.Context.AdvManager.render({
 	 "blockId":"R-A-12098170-7",
@@ -663,6 +665,8 @@ window.yaContextCb.push(()=>{
 	 "platform":"desktop"
  })
 })
+}
+ababa();
 	 </script>
 	 
 	 `}

@@ -1066,7 +1066,7 @@ el.textContent = L()=="ru"?"стоп":L()=='en'?"stop":L()=='zh'?'停止':L()=='
 	
 	//	makeRecord(stream);
 
-if(kuku == 3){	
+if(kuku == 1){	
 if(Prem.value=="n")getReklama();
 }
 if(kuku==0){
@@ -1666,7 +1666,7 @@ window.addEventListener("online", function(e) {
 		//alert(5);
 		try{
 		if(Prem.value=="n")getReklama();
-		//HELP=0;
+		HELP=0;
 	}catch(e){
 		console.log(e);
 	}
