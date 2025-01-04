@@ -650,11 +650,17 @@ if(isLogin.value=="false") getReklama();
 	 <script>
 	 function ababa(){
 	  if(Brole.value==="admin") return;
+	  if(Prem.value !="n") return;
 	 window.yaContextCb.push(()=>{
 	 Ya.Context.AdvManager.render({
 	 "blockId":"R-A-12098170-7",
 	 "type":"fullscreen",
-	 "platform":"touch"
+	 "platform":"touch",
+	 "onClose":function(){
+			console.log("Reklama closed")
+			
+			if(isLogin.value=="true")window.location.href="#setPrem";
+			}
  })
 })
 
@@ -662,7 +668,12 @@ window.yaContextCb.push(()=>{
 	 Ya.Context.AdvManager.render({
 	 "blockId":"R-A-12098170-8",
 	 "type":"fullscreen",
-	 "platform":"desktop"
+	 "platform":"desktop",
+	 "onClose":function(){
+			console.log("Reklama closed")
+			
+			if(isLogin.value=="true")window.location.href="#setPrem";
+			}
  })
 })
 }
