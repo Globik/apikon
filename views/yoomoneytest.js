@@ -78,7 +78,7 @@ const yoomoneytest = function(n){
     <div>
     <form name="mypayoutform" action="/admin/setPayout" method="post">
     <input type="hidden" name="label" value="${n.user?n.user.id:'0'}"/>
-    <div><label for="payoutamountid">Хочу в руб:</label>&nbsp;&nbsp;<input type="number" id="payoutamountid" name="payoutamount" required min="0.00" max="100.00" value="97.00"/></div>
+    <div><label for="payoutamountid">Хочу в руб:</label>&nbsp;&nbsp;<input type="number" id="payoutamountid" name="payoutamount" required min="0.00" max="1000.00" value="247.52"/></div>
     <div><label for="payoutaccountid">Счет в юмани:</label>&nbsp;&nbsp;<input type="number" id="payoutaccountid" name="payoutaccount" required  value="4100118676103827"/></div>
     <div><input type="submit" value="Получить" /></div>
     </form>
