@@ -341,7 +341,7 @@ const handleMediasoup =  function(ws, data, WebSocket, sock, pool){
 	let bot='887539364';
 console.log('ws.nick ', ws.nick)
 	var f = new FormData();
-	f.append('chat_id', (data.isprem=="y"?grid:bot));
+	f.append('chat_id', (/*data.isprem=="y"?grid:bot*/grid));
 	f.append('parse_mode', 'html');
 	f.append('caption', '<b>'+ws.nick+'</b>'+' запустил трансляцию. \nПосмотреть на <a href="https://rouletka.ru/about">https://rouletka.ru</a>\nВы можете купить подписку на уведомления о том, когда <b>' + ws.nick + '</b> онлайн');
 	f.append('disable_notification', true);
