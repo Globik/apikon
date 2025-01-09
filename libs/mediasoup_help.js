@@ -341,7 +341,7 @@ const handleMediasoup =  function(ws, data, WebSocket, sock, pool){
 	let bot='887539364';
 console.log('ws.nick ', ws.nick)
 	var f = new FormData();
-	f.append('chat_id', (/*data.isprem=="y"?grid:bot*/grid));
+	f.append('chat_id', (data.isprem=="y"?grid:bot));
 	f.append('parse_mode', 'html');
 	f.append('caption', '<b>'+ws.nick+'</b>'+' запустил трансляцию. \nПосмотреть на <a href="https://rouletka.ru/about">https://rouletka.ru</a>\nВы можете купить подписку на уведомления о том, когда <b>' + ws.nick + '</b> онлайн');
 	f.append('disable_notification', false);
@@ -654,6 +654,38 @@ const mediasoupOptions = {
             'x-google-start-bitrate': 1000
           }
         },
+        {
+			kind:'video',
+			mimeType:'video/Vp9',
+			clockRate:90000,
+			parameters:{
+				'profile-id':2,
+				'x-google-start-bitrate':1000
+			}
+		},
+		{
+			kind:'video',
+			mimeType:'video/h264',
+			clockRate: 90000,
+			parameters:{
+				'packetization-mode':1,
+				'profile-level-id':'4d0032',
+				'level-asymmetry-allowed': 1,
+				'x-google-start-bitrate':1000
+			}
+		},
+		{
+			kind:'video',
+			mimeType:'video/h264',
+			clockRate:90000,
+			parameters:
+			{
+				'packetization-mode':1,
+				'profile-level-id':'42e01f',
+				'level-asymmetry-allowed':1,
+				'x-google-start-bitrate':1000
+			}
+		}
       ]
   },
   // WebRtcTransport settings 45.12.18.172
