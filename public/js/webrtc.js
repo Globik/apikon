@@ -1066,7 +1066,7 @@ el.textContent = L()=="ru"?"стоп":L()=='en'?"stop":L()=='zh'?'停止':L()=='
 	
 	//	makeRecord(stream);
 
-if(kuku == 1){	
+if(kuku == 0){	
 if(Prem.value=="n")getReklama();
 }
 if(kuku==0){
@@ -1076,7 +1076,7 @@ if(Brole.value=="non"){
 }
 }
 kuku++;
-if(kuku==5){
+if(kuku==1){
 	kuku=0;
 }
 		}).catch(err=>{
