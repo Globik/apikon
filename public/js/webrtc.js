@@ -1076,7 +1076,7 @@ window.location.href="#myGame";
 }
 }
 kuku++;
-if(kuku==4){
+if(kuku==2){
 	kuku=0;
 }
 		}).catch(err=>{
@@ -1094,7 +1094,7 @@ if(kuku==4){
 		});
 }
 }else{
-	
+	kuku=0;
 	closeAll(el);
 	
 
@@ -1666,12 +1666,17 @@ window.addEventListener("online", function(e) {
 		//alert(5);
 		try{
 		if(Prem.value=="n")getReklama();
-		HELP=0;
+		//HELP=0;
 	}catch(e){
 		console.log(e);
 	}
+	   }else if(HELP == 3){
+		   window.location.href = "#myGame";
 	   }
 	   HELP++;
+	   if(HELP == 4){
+		   HELP = 0;
+	   }
 	   el.disabled = true;
 	   CONNECTED = false;
       closeVideoCall();
