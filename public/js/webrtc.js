@@ -1072,7 +1072,7 @@ if(Prem.value=="n")getReklama();
 if(kuku==1){
 
 if(Brole.value=="non"){
-window.location.href="#myGame";
+if(Prem.value=="n") window.location.href="#myGame";
 }
 }
 kuku++;
@@ -1671,7 +1671,7 @@ window.addEventListener("online", function(e) {
 		console.log(e);
 	}
 	   }else if(HELP == 3){
-		   window.location.href = "#myGame";
+		if(Prem.value=="n")   window.location.href = "#myGame";
 	   }
 	   HELP++;
 	   if(HELP == 4){
