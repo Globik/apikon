@@ -1069,14 +1069,14 @@ el.textContent = L()=="ru"?"стоп":L()=='en'?"stop":L()=='zh'?'停止':L()=='
 if(kuku == 0){	
 if(Prem.value=="n")getReklama();
 }
-if(kuku==0){
+if(kuku==1){
 
 if(Brole.value=="non"){
-//window.location.href="#myGame";
+window.location.href="#myGame";
 }
 }
 kuku++;
-if(kuku==1){
+if(kuku==4){
 	kuku=0;
 }
 		}).catch(err=>{

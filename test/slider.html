@@ -1,0 +1,56 @@
+<html>
+	<style>
+	canvas{
+		border:1px solid green;
+	}
+	</style>
+	<body>
+<img src="Apple.webp" onclick="draw(0);"><img src="Pear.webp" onclick="draw(1);">
+<img src="Lemon.webp" onclick="draw(2);"><img src="Strawberry.webp" onclick="draw(3);">
+<img src="Kiwi.webp" onclick="draw(4);">
+<br><br>
+<canvas id="cnv"></canvas><output id="preview"></output><input type="file" multiple onchange="ifunc(this,preview);">
+<script>
+	var arr = ["Apple.webp", "Pear.webp","Lemon.webp","Strawberry.webp","Kiwi.webp"]
+var cnv = document.getElementById("cnv");
+var c = cnv.getContext("2d")
+var suka = []
+function preloadImages(urls){
+	const promises = urls.map((url)=>{
+		return new Promise((res, rej)=>{
+			const image = new Image();
+			image.src = url;
+			image.onload =()=>res(image);
+			image.onerror = ()=> rej('faild')
+		})
+	})
+	return Promise.all(promises);
+}
+var n = 0;
+async function draw(n){
+	const images = await preloadImages(suka);
+	//for(var i = 0;i < arr.length;i++){
+	c.clearRect(0,0,300,300)
+		c.drawImage(images[n], 0, 0)
+	//}
+}
+//draw(1)
+//draw(2)
+
+
+function ifunc(that, preview){
+	let files = that.files;
+	preview.innerHTML = ''
+	for(let i=0;i<files.length;i++){
+		let imager = document.createElement("img")
+		imager.src = URL.createObjectURL(files[i])
+		imager.setAttribute('onclick',"draw("+i+");")
+		suka.push(imager.src)
+		preview.appendChild(imager);
+	}
+}
+
+
+
+</script>
+</body></html>

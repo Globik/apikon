@@ -1812,6 +1812,7 @@ function doWas(obj){
  ev.on("onconsume", function doWas3(obj){
 	 imgData.value = obj.value;
  });
+ 
 wsServer.on('connection', async function (socket, req) {
 socket.isAlive = true;
   socket.on("pong", heartbeat);

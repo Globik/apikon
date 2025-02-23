@@ -28,7 +28,7 @@ html,body{
 	height: calc(40rem - 40px - 60px);
 	width:100%;
 	bckground:red;
-	 background-image: url("/img/game2.jpg");
+	 background-image: url("/img/chatikon.png");
 				 background-repeat: no-repeat;
 				  background-size: cover;  
 				  background-position: center center; 
@@ -40,12 +40,12 @@ html,body{
 	font-size:4.5rem;
 	padding:5rem;
 	line-height:1.5;
-	color:#f7eeee;
-	background:rgba(0,4,6,0.4);
+	color:/*#f7eeee*/black;
+	background:rgba(250,254,256,0.8);
 }
 .flgame::after{
 	position:absolute;
-	font-size:2rem;
+	font-size:0.5rem;
 	color:lightgreen;
 	left:0;
 	top:0;

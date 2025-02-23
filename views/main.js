@@ -425,11 +425,11 @@ lang=='en'?'Connects':
 lang=='zh'?'连接':
 lang=='id'?'koneksi':''}:</b> <span id="connects">0</span></div>
 <!-- <div class="settingspanel"  onclick="pushSubscribe(this);">Пуш уведомления</div> -->
-${lang=='ru'&&!n.VK ?`<div class="settingspanel"  onclick="purchaseTokens(this);">Купить сердечки &#x1f496;</div>
+<!-- ${lang=='ru'&&!n.VK ?`<div class="settingspanel"  onclick="purchaseTokens(this);">Купить сердечки &#x1f496;</div>
 <div class="settingspanel">
 <div class="some doh">${n.user?n.user.name:'anon6'}  Ваш доход&nbsp;&nbsp;<span id="dohod">${n.user? Number.parseFloat(n.user.theart*0.10).toFixed(2):'0.00'}</span>&nbsp;&nbsp;рублей</div>
 <div class="du" onclick="getPayout(this);">Получить</div>
-</div>`:''}
+</div>`:''} -->
 ${!n.VK ? `
 <div class="settingspanel"><a href="https://t.me/rouletka3">${lang=='ru'?'Наш Телеграм':
 lang=='en'?'Our Telegram':
@@ -686,8 +686,8 @@ ababa();
 	 <a href="#."  class="overlay" id="myGame"></a>
     <output id="mygameoutput" class="popi">
     <section id="fotocont">
-    <header>Игра слот-машина</header>
-    <section class="flgame"><p>Крути бесплатно барабан и собирай сердечки, чтобы обменять на биткоины! <a target="_blank" href="https://chatikon.ru"> Перейти на сайт <span class="chatikon">chatikon.ru</span></a></p></section>
+    <header>Групповой Видеочат</header>
+    <section class="flgame"><p>Общайтесь группой до десяти человек! <a target="_blank" href="https://chatikon.ru"> Перейти на сайт <span class="chatikon">chatikon.ru</span></a></p></section>
   
     </section>
     </output>

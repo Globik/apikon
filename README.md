@@ -77,6 +77,14 @@ sudo ufw allow 3479/tcp
 
 ```
 
+```
+rtcMinPort: 10000,
+    rtcMaxPort: 20100,
+   sudo ufw allow 10000:20100/tcp
+   sudo ufw allow 10000:20100/udp
+
+```
+
 ## webrtc javascript addresses
 
 ```
