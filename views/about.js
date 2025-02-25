@@ -280,7 +280,42 @@ ${langpage(n)}
 	 })
  }
  getReklama();
-	 </script> `}
+	 </script>
+	 
+	  <script>
+	 function ababa(){
+	//  if(Brole.value==="admin") return;
+	//  if(Prem.value !="n") return;
+	 window.yaContextCb.push(()=>{
+	 Ya.Context.AdvManager.render({
+	 "blockId":"R-A-12098170-7",
+	 "type":"fullscreen",
+	 "platform":"touch",
+	 "onClose":function(){
+			console.log("Reklama closed")
+			
+		//	if(isLogin.value=="true")window.location.href="#setPrem";
+			}
+ })
+})
+
+window.yaContextCb.push(()=>{
+	 Ya.Context.AdvManager.render({
+	 "blockId":"R-A-12098170-8",
+	 "type":"fullscreen",
+	 "platform":"desktop",
+	 "onClose":function(){
+			console.log("Reklama closed")
+			
+		//	if(isLogin.value=="true")window.location.href="#setPrem";
+			}
+ })
+})
+}
+ababa();
+	 </script>
+	 
+	  `}
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
 <script>
