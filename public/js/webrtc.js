@@ -1079,6 +1079,21 @@ kuku++;
 if(kuku==2){
 	kuku=0;
 }
+try{
+		if(vkBridge){
+			vkBridge.send('VKWebAppShowBannerAd',{banner_location:'bottom'})
+			.then(data=>{
+				if(data.result){
+					console.log('reklama');
+					setTimeout(function(){
+						vkBridge.send('VKWebAppHideBannerAd').then(d=>{}).catch(er=>{console.error(er)});
+					},1000*10);
+				}
+			}).catch(err=>{
+				console.error(err);
+			});
+		}
+	}catch(e){}
 		}).catch(err=>{
 			//alert(err);
 			console.log(err);//permission denied NotAllowedError
@@ -1646,7 +1661,7 @@ window.addEventListener("online", function(e) {
    function next(el, bool, ignores, isIgnore){
 	   //next(nextbtn, false, amma, false);
 	   //pl();
-	   if(HELP == 2){
+	   if(HELP == 1){
 		//   window.location.href="#helproject";
 		try{
 		if(vkBridge){
@@ -1674,7 +1689,7 @@ window.addEventListener("online", function(e) {
 		if(Prem.value=="n")   window.location.href = "#myGame";
 	   }
 	   HELP++;
-	   if(HELP == 4){
+	   if(HELP == 2){
 		   HELP = 0;
 	   }
 	   el.disabled = true;

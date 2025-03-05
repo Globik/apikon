@@ -344,7 +344,7 @@ console.log('ws.nick ', ws.nick)
 	f.append('chat_id', (data.isprem=="y"?grid:bot));
 	f.append('parse_mode', 'html');
 	f.append('caption', '<b>'+ws.nick+'</b>'+' запустил трансляцию. \nПосмотреть на <a href="https://rouletka.ru/about">https://rouletka.ru</a>\nВы можете купить подписку на уведомления о том, когда <b>' + ws.nick + '</b> онлайн');
-	f.append('disable_notification', false);
+	f.append('disable_notification', true);
 	f.append('photo', new Blob([buf]));
     f.append('reply_markup', `{"inline_keyboard":[
 	[{"text":"Купить за звездочки","callback_data":"usid=${ws.userId}&action=goldi&nick=${ws.nick}" }]
