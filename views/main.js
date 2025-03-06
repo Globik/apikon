@@ -926,22 +926,24 @@ ababa();
         </div>
     </output>
     
-    
+    <!-- 410016439442251 er
+    me 4100118676103827
+    -->
     
  <a href="#."  class="overlay" id="setPrem"></a>
     <output id="premiumoutput2" class="popi">
     <section id="premContainer2">
 
 	<form id="premForm2" method="post" action="https://yoomoney.ru/quickpay/confirm" name="ordertodo">
-<p class="intro">Вы можете отключить рекламу, купив премиум аккаунт  &#x1F451; всего за 1000 рублей в месяц. <br>Вы будете преренаправлены в yoomoney</p>
+<p class="intro">Вы можете отключить рекламу, купив премиум аккаунт  &#x1F451; всего за 300 рублей в месяц. <br>Вы будете преренаправлены в yoomoney</p>
 	<div id="premrapper2"> 
-	 <div><input type="hidden" placeholder="Получатель yoomoney" name="receiver" value="410016439442251" required/> </div>
+	 <div><input type="hidden" placeholder="Получатель yoomoney" name="receiver" value="4100118676103827" required/> </div>
 	<input type="hidden" name="label" value="id=${n.user?n.user.id:'0'}&p=100"/>
     <input type="hidden" name="quickpay-form" value="button" />
     <input type="hidden" name="successURL" value="https://rouletka.ru/about" />
     <input type="hidden" name="formcomment" value="Покупка премиум аккаунта на месяц" />
     <input type="hidden" name="targets" value="Купить премиум аккаунт на месяц" />
-    <div><input class="number"  type="hidden"  name="sum" value="1000.00" required data-type="number"/></div>
+    <div><input class="number"  type="hidden"  name="sum" value="300.00" required data-type="number"/></div>
    <input  class="input" type="hidden" checked name="paymentType" value="PC" /></div>
    <div><input  class="input" type="hidden" name="paymentType" value="AC" /></div>
    <div><input type="submit" id="premBtn2" value="Купить"/></div>
