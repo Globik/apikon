@@ -351,6 +351,22 @@ app.get('/lolo', async(req,res)=>{
 //const {convertXML, createAST} = require("simple-xml-to-json")
 
 //const myJson = convertXML(myXMLString)
+
+app.post('/zartoone', checkAuth, async(req, res)=>{
+	console.log('body: ', req.body);
+	const { value, id } = req.body;
+	let db = req.db;
+	try{
+		await db.query(`update users set zar=zar+(?) where id=(?)`, [ Number(value), id ]);
+		res.json({ info: 'ok', value, id });
+	}catch(err){
+		console.log(err);
+		res.json({ error: err });
+	}
+	
+})
+
+
 const { XMLParser, XMLBuilder, XMLValidator} = require("fast-xml-parser");
 
 const parser = new XMLParser();

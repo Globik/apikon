@@ -1737,7 +1737,16 @@ window.addEventListener("online", function(e) {
     wsend({type: 'new-ice-candidate', data: event.candidate/*, target: targetId*/})
   }
 }
-
+function on_zar(l, ev){
+	console.log(l);
+	if(l.info && l.info=='ok'){
+		let r = Number(gid('dohod').textContent);
+		gid('dohod').textContent = r + Number(l.value);
+	}
+} 
+function on_zar_error(l, ev){
+	console.log(l);
+}
 
 function iceConnectionStateChangeHandler (event) {
   console.log('*** ICE connection state changed to ' + event.target.iceConnectionState)
@@ -1746,6 +1755,7 @@ function iceConnectionStateChangeHandler (event) {
     case 'connected':
    // if(esWar == 'remoteOffer')
     wsend({ type: "connected" });
+    vax('post','/zartoone', { value: 300, id: gid('userId').value }, on_zar, on_zar_error, null, false);
     break;
     case 'complete':
       connectionState = 'open'
@@ -2366,17 +2376,19 @@ function on_payurl_error(l, el){
 		window.location.href = "#login";
 		return;
 	}
-	if(Number(dohod.textContent) == 0 || Number(dohod.textContent == 0.00)){
-		note({ content: "Нечего и минимум 1000 рублей на вывод накопить", type: "warn", time: 10 });
+	if(Number(dohod.textContent) == 0/* || Number(dohod.textContent == 0.00)*/){
+		note({ content: "Нечего и минимум 10 000 000 рублей на вывод накопить", type: "warn", time: 10 });
 		//alert("Нечего и минимум 1000 рублей на вывод накопить");
 		return;
 	}
-	if(Number(dohod.textContent) <=1000 || Number(dohod.textContent <= 1000.00)){
-		note({ content: "Минимум 1000 рублей на вывод накопить", type: "warn", time: 10 });
+	if(Number(dohod.textContent) <=10000000/* || Number(dohod.textContent <= 10000000.00)*/){
+		note({ content: "Минимум 10 000 000 рублей на вывод нужно накопить", type: "warn", time: 10 });
 		//alert("Минимум 1000 рублей на вывод накопить");
 		return;
 	}
-	window.location.href = "#vivest"
+	//alert((gid('dohod').textContent))
+	//alert(Number(gid('dohod').textContent)<10000000);
+//	window.location.href = "#vivest"
  }
 function Login(){
 	if(isLogin.value == 'true'){

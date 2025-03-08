@@ -1,5 +1,6 @@
 
 const getSeoText = require('./getSeoText.js')
+const { zar } = require('./zar.js')
 function main(n){
 	let istestheart = (n.istestheart==1?true:false);
 	const { lang , buser, user } = n;
@@ -312,8 +313,19 @@ function isOpenModal(){
     const NICK = "${n.user?n.user.name:'anonim2'}";
    // var VK_USER = false;
   // alert("NICK "+NICK);
-  
+  function getZar(){
+	  if(gid("Brole").value=='non'){
+	  let d = localStorage.getItem('zar');
+	  if(d&&d=='yes'){
+		//  alert(d);
+		  return;
+	  }
+	  window.location.href="#myZar";
+  }
+}
+ // getZar();
     window.onload = function(){
+		getZar();
 		get_socket();
 		if(FLAGVK){
 			VK_USER = false;
@@ -425,11 +437,11 @@ lang=='en'?'Connects':
 lang=='zh'?'连接':
 lang=='id'?'koneksi':''}:</b> <span id="connects">0</span></div>
 <!-- <div class="settingspanel"  onclick="pushSubscribe(this);">Пуш уведомления</div> -->
-<!-- ${lang=='ru'&&!n.VK ?`<div class="settingspanel"  onclick="purchaseTokens(this);">Купить сердечки &#x1f496;</div>
-<div class="settingspanel">
-<div class="some doh">${n.user?n.user.name:'anon6'}  Ваш доход&nbsp;&nbsp;<span id="dohod">${n.user? Number.parseFloat(n.user.theart*0.10).toFixed(2):'0.00'}</span>&nbsp;&nbsp;рублей</div>
+<!-- ${lang=='ru'&&!n.VK ?`<div class="settingspanel"  onclick="purchaseTokens(this);">Купить сердечки &#x1f496;</div>`:''} -->
+${n.user&&n.user.brole=='non'?`<div class="settingspanel">
+<div class="some doh"style="width:100%;overflow-x:scroll;" >${n.user?n.user.name:'anon6'}  Ваш доход&nbsp;&nbsp;<span id="dohod">${n.user? n.user.zar:'0'}</span>&nbsp;руб.</div>
 <div class="du" onclick="getPayout(this);">Получить</div>
-</div>`:''} -->
+</div>`:''}
 ${!n.VK ? `
 <div class="settingspanel"><a href="https://t.me/rouletka3">${lang=='ru'?'Наш Телеграм':
 lang=='en'?'Our Telegram':
@@ -682,7 +694,7 @@ ababa();
 	 
 	 `}
 	 ${getSeoText.getSeoText(lang)}
-	 
+	 ${zar({})}
 	 <a href="#."  class="overlay" id="myGame"></a>
     <output id="mygameoutput" class="popi">
     <section id="fotocont">
