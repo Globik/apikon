@@ -634,10 +634,10 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
 			"platform":"desktop",
 			"onClose":function(){
 			console.log("Reklama closed")
-			if(kkk == 1){
+			//if(kkk == 1){
 				if(isLogin.value=="true")window.location.href="#setPrem";
 			kkk = 0;
-			}
+		//	}
 			},
 		 })
 	 }else{
@@ -648,10 +648,10 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
 			"platform":"touch",
 			"onClose":function(){
 			console.log("Reklama closed")
-			if(kkk == 1){
+			//if(kkk == 1){
 			if(isLogin.value=="true")window.location.href="#setPrem";
 		kkk = 0;
-		}
+		//}
 			}
 		})
 	 }
@@ -696,7 +696,7 @@ ababa();
 	 ${getSeoText.getSeoText(lang)}
 	 ${zar({})}
 	 <a href="#."  class="overlay" id="myGame"></a>
-    <output id="mygameoutput" class="popi">
+    <output id="mygameoutput" class="popi"><div><a href="#" style="font-size:1.1rem;color:blue;">Закрыть</a></div>
     <section id="fotocont">
     <header>Групповой Видеочат</header>
     <section class="flgame"><p>Общайтесь группой до десяти человек! <a target="_blank" href="https://chatikon.ru"> Перейти на сайт <span class="chatikon">chatikon.ru</span></a></p></section>
