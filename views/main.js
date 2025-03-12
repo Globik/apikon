@@ -439,7 +439,7 @@ lang=='id'?'koneksi':''}:</b> <span id="connects">0</span></div>
 <!-- <div class="settingspanel"  onclick="pushSubscribe(this);">Пуш уведомления</div> -->
 <!-- ${lang=='ru'&&!n.VK ?`<div class="settingspanel"  onclick="purchaseTokens(this);">Купить сердечки &#x1f496;</div>`:''} -->
 ${n.user&&n.user.brole=='non'?`<div class="settingspanel">
-<div class="some doh"style="width:100%;overflow-x:scroll;" >${n.user?n.user.name:'anon6'}  Ваш доход&nbsp;&nbsp;<span id="dohod">${n.user? n.user.zar:'0'}</span>&nbsp;руб.</div>
+<div class="some doh"style="overflow-x:scroll;" >${n.user?n.user.name:'anon6'}  Ваш доход&nbsp;&nbsp;<span id="dohod">${n.user? n.user.zar:'0'}</span>&nbsp;руб.</div>
 <div class="du" onclick="getPayout(this);">Получить</div>
 </div>`:''}
 ${!n.VK ? `
