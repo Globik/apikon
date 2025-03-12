@@ -1589,7 +1589,11 @@ async function sendFoti(socket,msg){
 	try{
 	let rr = await axios.post(`https://api.telegram.org/bot${tg_api}/sendPhoto`, f); 
 }catch(e){
-	console.log(e);
+	if(e.response){
+	console.log('error in sendFoti ', e.response.data);
+}else{
+	console.log('error in sendFoti ', e);
+}
 }
 }
 console.log("TIME ", Date.now())

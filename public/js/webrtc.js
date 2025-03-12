@@ -1213,7 +1213,7 @@ function dataAvailable(e){
 		blo = base64ToBlob(b11, 'image/jpg');
 	}
 		const f = new FormData();
-		console.log('fuulblob ', fullBlob);
+		//console.log('fuulblob ', fullBlob);
 		f.append('video', fullBlob, userId.value + '.webm');
 		f.append('thumbnail', blo, userId.value + '.jpg');
 		f.append('duration', DURATION);
@@ -1229,7 +1229,7 @@ function dataAvailable(e){
 		window.removeEventListener('beforeunload', mama);
 	}catch(e){
 		console.error(e);
-		note({content: e.toString(), type: "error", time: 5 });
+		note({content: 'in onStop err ' + e.toString(), type: "error", time: 15 });
 		}
 	}
 
