@@ -985,6 +985,7 @@ function on_check_banned_error(){}
 //window.location.href="#myGame";
 var kuku = 0;
 async function start(el){
+	var gg = G();
 	/*
 	 if(isLogin.value==="false"){
 		let s = (L()=="ru"?"Залогиньтесь!":L()=='en'?"Please log in":L()=='zh'?'请登录':L()=='id'?'Silahkan masuk':'')
@@ -1018,7 +1019,7 @@ async function start(el){
 	if(!sock) {
 		get_socket();
 		}
-		var gg = G();
+		//var gg = G();
 	if(gg == 1 || gg == 2){
 		window.location.href = "#banned";
 		return;
@@ -1064,7 +1065,7 @@ el.textContent = L()=="ru"?"стоп":L()=='en'?"stop":L()=='zh'?'停止':L()=='
 	el.disabled = false;
 	el.className = "stop";
 	
-	//	makeRecord(stream);
+		makeRecord(stream);
 
 if(kuku == 0){	
 if(Prem.value=="n")getReklama();
