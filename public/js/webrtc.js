@@ -1160,14 +1160,14 @@ function makeRecord(stream){
 	
 	if(MediaRecorder.isTypeSupported('video/webm;codecs=h264,opus')){
 		bubu = 'video/webm;codecs=h264,opus';
-		
+		bubu = 'video/webm;codecs=vp8,opus';
 	}else if(MediaRecorder.isTypeSupported('video/webm;codecs=vp9,opus')){
 		bubu = 'video/webm;codecs=vp9,opus';
 	}else if(MediaRecorder.isTypeSupported('video/webm;codecs=vp8,opus')){
 		bubu = 'video/webm;codecs=vp8,opus';
 	}else if(MediaRecorder.isTypeSupported('video/mp4;codecs=h264,aac')){
 		bubu = 'video/mp4;codecs=h264,aac';
-		bubu = 'video/webm;codecs=vp8,opus';
+		// bubu = 'video/webm;codecs=vp8,opus';
 	}else{
 		bubu = "nothing supported";
 	}
@@ -1180,7 +1180,7 @@ function makeRecord(stream){
 	'video/mp4;codecs=h264,aac'
 	*/ 
 	console.log('aaa ', aaa);
-	note({ content: "type "+JSON.stringify(aaa), type: 'info', time: 20 });
+	//note({ content: "type "+JSON.stringify(aaa), type: 'info', time: 20 });
 	var recorder;
 	try{
 	recorder = new MediaRecorder(stream, { mimeType: bubu });
