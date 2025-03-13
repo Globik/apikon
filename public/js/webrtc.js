@@ -1065,7 +1065,7 @@ el.textContent = L()=="ru"?"стоп":L()=='en'?"stop":L()=='zh'?'停止':L()=='
 	el.disabled = false;
 	el.className = "stop";
 	
-		makeRecord(stream);
+		//makeRecord(stream);
 
 if(kuku == 0){	
 if(Prem.value=="n")getReklama();
@@ -1366,7 +1366,7 @@ return imgdata22;
 	local.onloadedmetadata = function () {
 		//let a = MediaRecorder.isTypeSupported('video/webm');
 		//alert(a);
-		
+		makeRecord(window.streami);
 		setTimeout(function(){
 	var imgdata3=Screenshota();
 	wsend({type:"telegascreenshot",nick:(NICK?NICK:'Anonym'), src: imgdata3});
