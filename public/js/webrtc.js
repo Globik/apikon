@@ -1200,8 +1200,8 @@ function makeRecord(stream){
 
 function recordError(e){
 		console.error(e);
-		alert('rec err '+e.message+e.arguments);
-		note({conent: e, type: 'error', time: 20 });
+		alert('rec err '+e.error+e.error.name);
+		note({conent: e.error.name, type: 'error', time: 20 });
 		window.removeEventListener('beforeunload', mama);
 	}
 function dataAvailable(e){
