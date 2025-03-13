@@ -1203,6 +1203,7 @@ function dataAvailable(e){
  async function onStop(){
 	 if(DURATION == 0){
 		 note({ content: "Why Duration is null???", type: 'error', time:10 });
+		 makeRecord(window.streami);
 		 return;
 	 }
 		try{
