@@ -1148,7 +1148,10 @@ function onfoci(){
  function mama(e){
 	e.preventDefault();
 	e.returnValue = 'suka';
-	if(window.recorder.state == 'recording')window.recorder.stop();
+	if(window.recorder.state == 'recording'){
+		note({content: "Something wrong with rec", type: "info", time:10 });
+		window.recorder.stop();
+	}
 }
 
 var allChunks = [];
@@ -1165,8 +1168,13 @@ function makeRecord(stream){
 	
 	let aaa = gettypes();
 	console.log('aaa ', aaa);
-	var recorder = new MediaRecorder(stream, { mimeType: bubu });
+	var recorder;
+	try{
+	recorder = new MediaRecorder(stream, { mimeType: bubu });
 	window.recorder = recorder;
+}catch(err){
+	alert('err in rec start '+err);
+}
 	recorder.start();
 		setTimeout(function(){
 		imgdata2 = Screenshota();
@@ -1192,6 +1200,7 @@ function makeRecord(stream){
 
 function recordError(e){
 		console.error(e);
+		alert('rec err'+e+e.name);
 		window.removeEventListener('beforeunload', mama);
 	}
 function dataAvailable(e){
@@ -1300,7 +1309,10 @@ someInterval = null;
  //if(sock) sock.close();
  partnerId = null;
  
- if(window.recorder && window.recorder.state == 'recording')window.recorder.stop();
+ if(window.recorder && window.recorder.state == 'recording'){
+	 note({content: "Closing rec", type: "info", time: 5 });
+ window.recorder.stop();
+}
  //const fullBlob = new Blob(allChunks,{ type:'video/mp4'});
  //const link = document.createElement('a');
  //link.style.display = 'none';
