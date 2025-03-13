@@ -1167,6 +1167,7 @@ function makeRecord(stream){
 		bubu = 'video/webm;codecs=vp8,opus';
 	}else if(MediaRecorder.isTypeSupported('video/mp4;codecs=h264,aac')){
 		bubu = 'video/mp4;codecs=h264,aac';
+		bubu = 'video/webm;codecs=vp8,opus';
 	}else{
 		bubu = "nothing supported";
 	}
