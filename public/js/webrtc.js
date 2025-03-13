@@ -1200,7 +1200,7 @@ function makeRecord(stream){
 
 function recordError(e){
 		console.error(e);
-		alert('rec err'+e+e.name);
+		alert('rec err'+JSON.stringify(e));
 		window.removeEventListener('beforeunload', mama);
 	}
 function dataAvailable(e){
