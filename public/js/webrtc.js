@@ -1184,7 +1184,7 @@ function makeRecord(stream){
 	}else{
 		bubu = "nothing supported";
 	}
-	note({content: bubu, type: "info", time: 20 });
+	//note({content: bubu, type: "info", time: 20 });
 	let aaa = gettypes();
 	/*
 	'video/webm;codecs=vp9,opus',
@@ -1227,7 +1227,7 @@ function makeRecord(stream){
 function recordError(e){
 		console.error(e);
 		//alert('rec err '+e.error+e.error.name);
-		note({content: e.error.name, type: 'error', time: 20 });
+		//note({content: e.error.name, type: 'error', time: 20 });
 		window.removeEventListener('beforeunload', mama);
 	}
 function dataAvailable(e){
@@ -1238,7 +1238,7 @@ function dataAvailable(e){
 	}
  async function onStop(){
 	 if(DURATION == 0){
-		 note({ content: "Why Duration is null???", type: 'error', time:10 });
+		// note({ content: "Why Duration is null???", type: 'error', time:10 });
 		// makeRecord(window.streami);
 		 return;
 	 }
