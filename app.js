@@ -744,7 +744,8 @@ try{
 			try{
 				let ipi = paramStr.get('ip');
 				
-				await db.query(`delete from ban where ip=(?)`, [ ipi ]);
+				await db.query(`delete from ban where id=(?)`, [ userid ]);
+				await db.query(`update users set brole='non' where id=(?)`, [ userid ]);
 			}catch(e){
 				console.log(e);
 				return res.status(200).send({ message: "not ok" });

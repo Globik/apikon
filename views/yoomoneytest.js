@@ -89,6 +89,7 @@ const yoomoneytest = function(n){
     <div><ooutput id="out333"></output></div>
     
     <hr>
+    <button onclick="banAll(this);">Забанить всех</button> | <button onclick="banoutAll(this);">Разбанить всех</button> 
     <script src="/js/yoomoneytest.js"></script>
     </body></html>
     `

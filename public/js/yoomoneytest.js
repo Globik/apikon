@@ -193,3 +193,32 @@ function on_payout(l, el){
 	}
 	note({ content: l.message, type: "info", time: 5 });
 }
+function banAll(el){
+	vax('post', '/admin/banAll', {}, on_get_banall, on_banall_error, el, false);
+	el.className = 'puls';
+}
+function on_get_banall(l,ev){
+	ev.className ="";
+	if(l.error){
+		note({ content: l.error, type: 'error', time : 5 });
+		return;
+	}
+	note({ content: l.info, type:'info', time: 5});
+} 
+function on_banall_error(l, ev){
+	ev.className = "";
+	alert(l);
+}
+function banoutAll(el){
+	vax('post', '/admin/banoutAll', {}, on_get_banoutall, on_banall_error, el, false);
+	el.className = 'puls';
+}
+function on_get_banoutall(l,ev){
+	ev.className ="";
+	if(l.error){
+		note({ content: l.error, type: 'error', time : 5 });
+		return;
+	}
+	note({ content: l.info, type:'info', time: 5});
+} 
+

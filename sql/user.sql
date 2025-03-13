@@ -35,4 +35,8 @@ CREATE UNIQUE INDEX VkId ON users(vkid);
 CREATE UNIQUE INDEX TgId ON users(tgid);
 sudo mysql -u root -p
 use roulet
+insert into ban(usid,nick,grund) values((?),(?),(?))`, [ usid, nick2, numb ]
+insert into ban(usid,nick) select id, name from users;
+valus(select id from users
+select into ban
 */

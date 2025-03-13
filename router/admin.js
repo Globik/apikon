@@ -313,6 +313,28 @@ router.post('/bannedOutAll', checkAuth, isAdmin(['admin']), async(req, res) => {
 		res.json({ error: true, message: err.name });
 	}
 })
+router.post('/banAll', checkAuth, isAdmin(['admin']), async(req, res) => {
+	
+	let db = req.db;
+	try{
+	await db.query(`update users set brole='ban' where brole='non'`, [ ]);
+   res.json({ info: "OK - all banned!"});
+   }catch(err){
+	   console.log(" ban all err ", err);
+		res.json({ error: err.name });
+	}
+});
+router.post('/banoutAll', checkAuth, isAdmin(['admin']), async(req, res) => {
+	
+	let db = req.db;
+	try{
+	await db.query(`update users set brole='non' where brole='ban'`, [ ]);
+   res.json({ info: "OK - всех разбанили!"});
+   }catch(err){
+	   console.log(" ban щге all err ", err);
+		res.json({ error: err.name });
+	}
+});
 module.exports = router
 
 function checkAuth(req, res, next){

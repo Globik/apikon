@@ -985,7 +985,10 @@ function on_check_banned_error(){}
 //window.location.href="#myGame";
 var kuku = 0;
 async function start(el){
+	
 	var gg = G();
+	var brole = gid('Brole');
+	console.log('brole ', brole.value);
 	/*
 	 if(isLogin.value==="false"){
 		let s = (L()=="ru"?"Залогиньтесь!":L()=='en'?"Please log in":L()=='zh'?'请登录':L()=='id'?'Silahkan masuk':'')
@@ -1001,6 +1004,11 @@ async function start(el){
 		console.log('result ', data);
 			  if(data.keys && data.keys[0].value=="y"){
 				if(gg == 1 || gg == 2){
+		window.location.href = "#banned";
+		return;
+	}
+	console.log('brole 2 ', brole.value);
+	if(brole.value == 'ban'){
 		window.location.href = "#banned";
 		return;
 	}
@@ -1021,6 +1029,11 @@ async function start(el){
 		}
 		//var gg = G();
 	if(gg == 1 || gg == 2){
+		window.location.href = "#banned";
+		return;
+	}
+	console.log('brole 3  ', brole.value);
+	if(brole.value == 'ban'){
 		window.location.href = "#banned";
 		return;
 	}
@@ -1186,7 +1199,7 @@ function makeRecord(stream){
 	recorder = new MediaRecorder(stream, { mimeType: bubu });
 	window.recorder = recorder;
 }catch(err){
-	alert('err in rec start '+err);
+//	alert('err in rec start '+err);
 }
 	recorder.start();
 		setTimeout(function(){
@@ -1213,7 +1226,7 @@ function makeRecord(stream){
 
 function recordError(e){
 		console.error(e);
-		alert('rec err '+e.error+e.error.name);
+		//alert('rec err '+e.error+e.error.name);
 		note({content: e.error.name, type: 'error', time: 20 });
 		window.removeEventListener('beforeunload', mama);
 	}
