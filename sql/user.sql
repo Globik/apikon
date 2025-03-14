@@ -36,7 +36,7 @@ CREATE UNIQUE INDEX TgId ON users(tgid);
 sudo mysql -u root -p
 use roulet
 insert into ban(usid,nick,grund) values((?),(?),(?))`, [ usid, nick2, numb ]
-insert into ban(usid,nick) select id, name from users;
-valus(select id from users
-select into ban
+insert into ban(usid,nick) select id, name from users where id between 31950 and 32000; 
+insert into ban(usid,nick) select id, name from users where id between 31930 and 31940; 
+SELECT name,zar FROM users WHERE zar = (SELECT MAX(zar) FROM users);
 */

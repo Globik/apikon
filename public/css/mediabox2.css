@@ -12,19 +12,64 @@ html,body{
 	clor:red;
 	height:auto;
 }
+#zaroutput{
+	background:#fff1f1;
+	max-height:90vh;
+	color:#1a1717d9;
+}
+#fotodiv{
+	height:auto;
+	display: flex;
+	align-self:center;
+	justify-content: center;
+	margin-top:10px;
+}
+.krestikdiv{
+	display:inline-block;
+	position:absolute;
+	right:10px;
+	top:10px;
+}
+.krestik-two{
+	
+}
+.loader.hide{
+	display:none;
+}
+#buttondiv{
+margin-top:10px;
+	display: flex;
+	justify-content:flex-end;
+}
+#fotodiv img{
+	height:200px;
+	align-self:center;
+}
 section#zarcont{
 	line-height:1.6;
 	font-size:1.4rem;
 	font-weight:bold;
 	margin-top:10px;
+	padding-right:100px;
+	padding-left:100px;
+	padding-top:20px;
+}
+section#zarcont strong{
+	background:#e71212;
+	color:#fbaa16;
+	font-size:1.5rem;
+	line-height:1.8;
+	padding:6px;
 }
 #zarcont button{
 	color:orange;
+	background:rgba(255,255,255,0.1);
 	font-size:1.4rem;
 	padding:20px;
 	font-weight:bold;
 	border-radius:5px;
 	margin-top:15px;
+	border:4px solid orange;
 }
 #fotocont{
 	ackground:green;
@@ -68,10 +113,44 @@ section#zarcont{
 .flgame p span{
 	color:blue;
 }
+#payoutoutput{
+	background:white;
+	color:#312929;
+}
+#secleader #spinnerP{
+	margin-top:1rem;
+	margin-bottom:1rem;
+	font-size:1.2rem;
+	line-height:1.6;
+}
+#secleader p{
+	margin-top:1rem;
+	margin-bottom:1rem;
+	font-size:1.2rem;
+	line-height:1.6;
+}
 @media screen and (max-width: 452px) and (orientation: portrait){
 #mygameoutput,#zaroutput{
-	width:100%;
+	width:98%;
+	height:99vh;
 	}
+	section#zarcont{
+		padding:3px;
+	}
+	section#zarcont h1{
+	line-height:1.2;
+	font-size:1.2rem;
+	}
+	section#zarcont p{
+	line-height:1.2;
+	font-size:1rem;
+	}
+	section#zarcont strong{
+		font-size:1rem;
+	}
+	#payoutoutput{
+			width:98%;
+		}
 	.flgame p{
 		font-size:2.5rem;
 		line-height:1.2;
@@ -103,6 +182,12 @@ section#zarcont{
 		border:1px solid green;
 		line-height:1.5;
 		padding:5px;
+		display:flex;
+		justify-content:space-around;
+	}
+	#coinContainer{
+		backgound:red;
+		width:50px;
 	}
 	.some.doh{
 		color: brown;
@@ -138,10 +223,7 @@ section#zarcont{
 		text-decoration: underline;
 	}
 	@media screen and (max-width: var(--mobilewidth)) and (orientation: portrait){
-		#payoutoutput{
-			width:98%;
-			background:#327332;
-		}
+		
 	}
 	
 	#premiumoutput,#premiumoutput2{

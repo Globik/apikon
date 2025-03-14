@@ -81,6 +81,7 @@ lang=='id'?`Terbukanya dunia komunikasi dan kenalan baru baik jiwa raga, maupun 
 		<link href="/css/main22.css" rel="stylesheet">
 		<link href="/css/login.css" rel="stylesheet">
 		<link href="/css/mediabox2.css" rel="stylesheet">
+		<link href="/css/coin.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
 <script src="/js/globalik.js"></script>
 <script src="/js/mediasoup-client.min.js"></script>
@@ -314,14 +315,15 @@ function isOpenModal(){
    // var VK_USER = false;
   // alert("NICK "+NICK);
   function getZar(){
-	  if(gid("Brole").value=='non'){
-	  let d = localStorage.getItem('zar');
+	 // if(gid("Brole").value=='non'){
+	 localStorage.removeItem('zae');
+	  let d = localStorage.getItem('zartwo');
 	  if(d&&d=='yes'){
 		//  alert(d);
 		  return;
 	  }
 	  window.location.href="#myZar";
-  }
+  //}
 }
  // getZar();
     window.onload = function(){
@@ -438,9 +440,9 @@ lang=='zh'?'连接':
 lang=='id'?'koneksi':''}:</b> <span id="connects">0</span></div>
 <!-- <div class="settingspanel"  onclick="pushSubscribe(this);">Пуш уведомления</div> -->
 <!-- ${lang=='ru'&&!n.VK ?`<div class="settingspanel"  onclick="purchaseTokens(this);">Купить сердечки &#x1f496;</div>`:''} -->
-${n.user&&n.user.brole=='non'?`<div class="settingspanel">
-<div class="some doh"style="overflow-x:scroll;" >${n.user?n.user.name:'anon6'}  Ваш доход&nbsp;&nbsp;<span id="dohod">${n.user? n.user.zar:'0'}</span>&nbsp;руб.</div>
-<div class="du" onclick="getPayout(this);">Получить</div>
+${n.user?`<div class="settingspanel">
+<div class="some doh"style="overflow-x:auto;" >${n.user?n.user.name:'anon6'}  Ваш доход&nbsp;&nbsp;<span id="dohod">${n.user? n.user.zar:'0'}</span>&nbsp;руб.</div>
+<div class="du" onclick="getPayout(this);"><div>Получить</div> <div id="coinContainer">${getCoin()}</div></div>
 </div>`:''}
 ${!n.VK ? `
 <div class="settingspanel"><a href="https://t.me/rouletka3">${lang=='ru'?'Наш Телеграм':
@@ -530,7 +532,7 @@ ${n.VK?'':`<div id="giftbox">
 <div id="controlsContainer"><button id="startbtn" class="start" data-start="no" onclick="start(this);">${lang=='ru'?'старт':lang=='en'?'start':lang=='zh'?'开始':lang=='id'?'awal':''}</button>
 <button id="nextbtn" class="next" onclick="next(this,true);" disabled>${lang=='ru'?'далее':lang=='en'?'next':lang=='zh'?'下一个':lang=='id'?'Berikutnya':''}</button>
  <div id="somespinner" class="text"><!-- https://cssloaders.github.io/ -->
- <div class="loader"></div>
+ 
       <span class="duka">${lang=='ru'?'Жизнь как рулетка. Никогда не узнаешь, кого встретишь следующим':
       lang=='en'?'Life is like roulette. You never know who you\'ll meet next':
       lang=='zh'?'生活就像轮盘赌。你永远不知道接下来会遇到谁':
@@ -853,14 +855,21 @@ ababa();
 	</section> 
     </output>
     <a href="#."  class="overlay" id="vivest"></a>
-    <output id="payoutoutput" class="popi">
+    <output id="payoutoutput" class="popi"><div class="krestikdiv"><a href="#." class="krestik-two">&#x274C;</span></div>
+    <section id="secleader">
+    <p>В лидерах:</p>
+   <p><div id="leaderSpinner" class="loader hide"></div><span id="spinnerP"></span></p>
+   <p> У вас тоже есть шанс победить - продолжайте крутить рулетку и копите свои <b>300 рублей</b> за каждую беседу!</p>
+   <p><b><small>До конца акции осталось ${daysUntilActionEnd()} дней.</small></b></p>
+    </section>
+    <!--
     <form name="mypayoutform" action="/admin/setPayout" method="post">
     
     <input type="hidden" name="label" value="${n.user?n.user.id:'0'}"/>
     <div><input type="hidden" id="payoutamountid" name="payoutamount"  value="${n.user? Number(n.user.theart * 0,10).toFixed(2):0}"/></div>
     <div class="pfo"><label for="payoutaccountid">Счет в <a  id="mpa" href="https://yoomoney.ru">yoomoney</a>:</label>&nbsp;&nbsp;<input type="number" id="payoutaccountid" name="payoutaccount" required placeholder="410016439442251"  value=""/></div>
     <div class="pfo"><input id="payoutsub" type="submit" value="Получить" /></div>
-    </form>
+    </form> -->
     </output>
     
     
@@ -1239,4 +1248,40 @@ const rules_ru =` <ol>
           `;
 function get_rules(lang){
 	return lang=='ru'?rules_ru:lang=='en'?rules_en:lang=='zh'?rules_zh:lang=='id'?rules_id:'';
+}
+function daysUntilActionEnd(){
+	const today = new Date();
+	const nextyear = today.getFullYear() + 1;
+	const actiondate = new Date(nextyear,3,1);
+	const diffinmilliseconds = actiondate - today;
+	const diffindays = Math.ceil(diffinmilliseconds / (1000 * 60 * 60 * 24));
+	return diffindays;
+}
+function getCoin(){
+return `
+<div class="purse">
+  <div class="coin">
+    <div class="front"></div>
+    <div class="back"></div>
+    <div class="side">
+      <div class="spoke"></div>
+      <div class="spoke"></div>
+      <div class="spoke"></div>
+      <div class="spoke"></div>
+      <div class="spoke"></div>
+      <div class="spoke"></div>
+      <div class="spoke"></div>
+      <div class="spoke"></div>
+      <div class="spoke"></div>
+      <div class="spoke"></div>
+      <div class="spoke"></div>
+      <div class="spoke"></div>
+      <div class="spoke"></div>
+      <div class="spoke"></div>
+      <div class="spoke"></div>
+      <div class="spoke"></div>
+    </div>
+  </div>
+</div>
+`;
 }

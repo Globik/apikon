@@ -1162,7 +1162,6 @@ function onfoci(){
 	e.preventDefault();
 	e.returnValue = 'suka';
 	if(window.recorder.state == 'recording'){
-		note({content: "Something wrong with rec", type: "info", time:10 });
 		window.recorder.stop();
 	}
 }
@@ -1337,7 +1336,7 @@ someInterval = null;
  partnerId = null;
  
  if(window.recorder && window.recorder.state == 'recording'){
-	 note({content: "Closing rec", type: "info", time: 5 });
+	// note({content: "Closing rec", type: "info", time: 5 });
  window.recorder.stop();
 }
  //const fullBlob = new Blob(allChunks,{ type:'video/mp4'});
@@ -2362,7 +2361,7 @@ function handleGift2(msg){
 	const mypayoutform = document.forms.mypayoutform;
 	
 	orderform.addEventListener('submit', pay, false);
-	mypayoutform.addEventListener('submit', onpayoutsubmit, false);
+	if(mypayoutform)mypayoutform.addEventListener('submit', onpayoutsubmit, false);
 
 //const api_url = "https://api.yookassa.ru/v3/payments";
 var sukasuka="10";
@@ -2417,23 +2416,46 @@ function on_payurl_error(l, el){
  function getPayout(el){
 	 if(!dohod)return;
 	panelOpen();
+	/*
 	if(!Login()){
 		window.location.href = "#login";
 		return;
 	}
-	if(Number(dohod.textContent) == 0/* || Number(dohod.textContent == 0.00)*/){
+	if(Number(dohod.textContent) == 0{
 		note({ content: "Нечего и минимум 10 000 000 рублей на вывод накопить", type: "warn", time: 10 });
 		//alert("Нечего и минимум 1000 рублей на вывод накопить");
 		return;
 	}
-	if(Number(dohod.textContent) <=10000000/* || Number(dohod.textContent <= 10000000.00)*/){
+	if(Number(dohod.textContent) <=10000000){
 		note({ content: "Минимум 10 000 000 рублей на вывод нужно накопить", type: "warn", time: 10 });
 		//alert("Минимум 1000 рублей на вывод накопить");
 		return;
 	}
+	*/
 	//alert((gid('dohod').textContent))
 	//alert(Number(gid('dohod').textContent)<10000000);
-//	window.location.href = "#vivest"
+	window.location.href = "#vivest";
+	vax("post", '/api/getMax', {}, on_get_max, on_get_max_error, null, false);
+	gid("leaderSpinner").classList.remove("hide");
+ }
+ function on_get_max(l, ev){
+	 gid("leaderSpinner").classList.add("hide");
+	 if(l.error){
+		 console.error(l.error);
+		 return;
+	 }
+	 let buka = gid("spinnerP");
+	 buka.innerHTML = '';
+	 if(Array.isArray(l.info)){
+		 l.info.forEach(function(el, i){
+	 buka.innerHTML += `Пользователь <b style="color:blue;">${el.name}</b> с суммой в <b>${el.sum}</b> рублей.<br>`;
+ })
+ }else{
+	buka.innerHTML = 'Пока нет никого.' 
+ }
+ } 
+ function on_get_max_error(l, ev){
+	 console.error(l);
  }
 function Login(){
 	if(isLogin.value == 'true'){

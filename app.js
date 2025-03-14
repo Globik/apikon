@@ -403,6 +403,24 @@ try{
 	//console.log(JSON.stringify(jObj));
 	res.rendel('okno', { jObj: jObj, title: req.params.okno, lword: req.params.okno, items: seo[req.params.okno]?seo[req.params.okno].items:["No word"] });
 })
+
+app.post('/api/getMax', async(req, res)=>{
+	let db = req.db;
+	try{
+		//SELECT name,zar FROM users WHERE zar = (SELECT MAX(zar) FROM users);
+		let r = await db.query(`select name, zar from users where zar=(select max(zar) from users)`, []);
+		//console.log('result ', r);
+		let info = {};
+		let su = r.map(function(el){
+			return { name:el.name,sum:el.zar.toString() }
+		});
+		
+		res.json({ info:su });
+	}catch(e){
+		console.log('err ', e);
+		res.json({ error: e });
+	}
+})
 app.post('/api/setyacount', async(req, res)=>{
 	let {countya} = req.body;
 	if(countya == me){
