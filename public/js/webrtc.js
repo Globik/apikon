@@ -538,7 +538,8 @@ function setSignal(){
 //window.location.href="#myGame";
 //window.onpagehide=function(){alert('open')}
 function get_socket() {
-	 if(gid('isLogin').value === "false"){
+	
+	/* if(gid('isLogin').value === "false"){
 		// sock.close();
 		let s = L()=="ru"?"Залогиньтесь!":L()=='en'?"You should log in!":
 		L()=='zh'?'您应该登录！':
@@ -551,7 +552,7 @@ function get_socket() {
 		e.preventDefault();
 	}
 		  return;
-	  }}
+	  }}*/
 	//  alert(ifEnter());
 	/*
 	if(ifEnter() && Brole.value !="admin"){
@@ -610,7 +611,7 @@ return window.location.href='#purchaseHREF';
 
 
 var tr = undefined;
-//get_socket();
+get_socket();
 var pingTimeout;
 /*
 function heartbeat(){
@@ -1783,8 +1784,10 @@ window.addEventListener("online", function(e) {
 }
 function on_zar(l, ev){
 	console.log(l);
+	if(!gid('dohod')) return;
 	if(l.info && l.info=='ok'){
 		let r = Number(gid('dohod').textContent);
+		
 		gid('dohod').textContent = r + Number(l.value);
 	}
 } 

@@ -256,7 +256,7 @@ if(faka){
 		//let islogin = localStorage.getItem("islogin");
 	//if(!islogin && islogin !=="yes")
 	console.warn("must login")
-  window.location.href="#login";
+ // window.location.href="#login";
 //window.location.href="#gopremium";
 	
 const faka = document.querySelector('.overlay:target');
@@ -283,6 +283,7 @@ function confirmRules(){
 	
 	 const faka = document.querySelector('.overlay:target');
 	 window.removeEventListener('hashchange', han);
+	 return;
 	 window.location.href="#login";
 	 if(faka){
 	faka.addEventListener('click', function(e){

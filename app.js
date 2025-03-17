@@ -1261,7 +1261,7 @@ app.get('/api/getTest', checkAuth, checkRole(['admin']), async(req, res)=>{
 	res.json({ content: res.compile('ytest', {})});
 })
 const fsa = require('node:fs/promises');
-app.post('/api/filesupload', checkAuth, async(req, res)=>{
+app.post('/api/filesupload'/*, checkAuth*/, async(req, res)=>{
 	if(!req.files){
 		return res.status(400).send('no files were uploaded.');
 	}
