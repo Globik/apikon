@@ -278,13 +278,15 @@ if(faka){
 	   window.location.href="#regeln";
    }; 
 function confirmRules(){
+	//alert('confirmrules');
 	localStorage.setItem("myCat", "Tom");
 	
 	
 	 const faka = document.querySelector('.overlay:target');
 	 window.removeEventListener('hashchange', han);
+	 window.location.href='#.'
 	 return;
-	 window.location.href="#login";
+	 //window.location.href="#login";
 	 if(faka){
 	faka.addEventListener('click', function(e){
 		//alert('click');
