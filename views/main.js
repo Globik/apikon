@@ -15,7 +15,7 @@ function main(n){
 	//console.log('buser2 ', bur);
 return `
  <!DOCTYPE html><!-- ${n.VK} -->
-<html lang="ru">
+<html lang="${n.langi=='true'?'ru':'en'}">
   <head>
     <meta charset="utf-8">
     <title>${lang=="ru"?"Чат-рулетка - видеочат для случайных знакомств в интернете":
@@ -59,6 +59,10 @@ lang=='id'?'Obrolan rolet video chat kencan online kencan rolet kenalan acak pem
   <meta property="og:site_name" content="${lang=="ru"?"Чат-рулетка":
   lang=='en'?"Chat roulette":
   lang=='id'?'Roulette Obrolan':''}" />
+  <link rel="alternate" href="https://rouletka.ru/about/en" hreflang="en" />
+<link rel="alternate" href="https://rouletka.ru/about" hreflang="ru" />
+<link rel="alternate" href="https://rouletka.ru/about/zh" hreflang="zh" />
+<link rel="alternate" href="https://rouletka.ru/about/id" hreflang="id" />
   <meta property="og:description" content="${lang=="ru"?"Чат-рулетка для русскоязычных пользователей. Случайные знакомства в видеочате. Есть веб-камера? Найди пару в чат рулетке!":
   lang=='en'?`Open the world of communication and new acquaintances both for body and soul, and for commercial business.
    Choose the language of the interlocutor, country, city and plunge into the world of full contact with the interlocutor, selected at random according to your criteria.`:

@@ -3,7 +3,7 @@ function about(n){
 	const { lang } = n;
 return `
  <!DOCTYPE html>
-<html ng-app="projectRtc">
+<html ng-app="projectRtc" lang="${n.langi=='true'?'ru':'en'}">
 
 <head>
     <title>Чат рулетка-видеочат для общения, знакомства онлайн</title>
@@ -58,7 +58,10 @@ return `
 <meta itemprop="description" content="Чат-рулетка — самый популярный русскоязычный чат. Заработок на виртуальных подарках Ежедневно чат посещает более 500 тысяч пользователей из России и стран СНГ." />
 <meta name="description" content="Чат-рулетка — самый популярный русскоязычный чат. Ежедневно чат посещает более 500 тысяч пользователей из России и стран СНГ." />
 <script type="application/ld+json"> { "@context": "https://schema.org", "@type": "Organization", "url": "https://rouletka.ru", "logo": "https://rouletka.ru/og_image.png" } </script>
-  
+  <link rel="alternate" href="https://rouletka.ru/about/en" hreflang="en" />
+<link rel="alternate" href="https://rouletka.ru/about" hreflang="ru" />
+<link rel="alternate" href="https://rouletka.ru/about/zh" hreflang="zh" />
+<link rel="alternate" href="https://rouletka.ru/about/id" hreflang="id" />
     <base href="/" />
     <link rel="canonical" href="https://rouletka.ru/" />
     <link rel='stylesheet' href='/css/style.css' />
@@ -76,7 +79,7 @@ return `
 ${lang=='en'?'':'<a href="/about/en" hreflang="en">'} <img title="English Version" alt="English Version" src="/img/en.png" width="35" height="22"> ${n.ln=='en'?'':'</a>'}
 ${lang=='ru'?'':'<a href="/about" hreflang="ru">'} <img alt="Русская версия" src="/img/ru.png"  width="35" height="22">${n.ln=='ru'?'':'</a>'}
 ${lang=='zh'?'':'<a href="/about/zh" hreflang="zh">'}<img title="Китай" alt="中文网站" src="/img/zh.png"  width="35" height="22">${n.ln=='zh'?'':'</a>'}
-${lang=='id'?'':'<a href="/about/id" hreflang="zh">'}<img title="Индонезия" alt="versi indonesia" src="/img/indonesia.png"  width="35" height="22">${n.ln=='zh'?'':'</a>'}
+${lang=='id'?'':'<a href="/about/id" hreflang="id">'}<img title="Индонезия" alt="versi indonesia" src="/img/indonesia.png"  width="35" height="22">${n.ln=='zh'?'':'</a>'}
 </div>
     <section class="hero">
     
@@ -84,7 +87,7 @@ ${lang=='id'?'':'<a href="/about/id" hreflang="zh">'}<img title="Индонез�
             <div class="logoЧатРулетка"></div>
             <h1 class="hero__title">Видео чат — случайные знакомства</h1>
             <h2 id="sukaK" class="hero__subtitle">Знакомьтесь с новыми людьми прямо сейчас!</h2>
-            <button class="btn btn_orange" id="start_chat_btn">Начать общаться</button>
+            <button class="btn btn_orange" id="start_chat_btn">${n.langi=='true'?'Начать общаться':'Start chatting'}</button>
             <div class="hero__mobile-btn only-mobile">
                 <a href="https://play.google.com/store/apps/details?id=ru.rouletka.pwa" class="btn btn_play-market only-mobile">
                     <svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="google-play" class="svg-inline--fa fa-google-play fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
