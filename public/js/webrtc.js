@@ -1406,7 +1406,7 @@ return imgdata22;
 	local.onloadedmetadata = function () {
 		//let a = MediaRecorder.isTypeSupported('video/webm');
 		//alert(a);
-		makeRecord(window.streami);
+		//makeRecord(window.streami);
 		setTimeout(function(){
 	var imgdata3=Screenshota();
 	wsend({type:"telegascreenshot",nick:(NICK?NICK:'Anonym'), src: imgdata3});
