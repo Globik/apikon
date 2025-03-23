@@ -203,8 +203,18 @@ if(faka){
 		e.preventDefault();
 	}
 }
-	
-	
+	 function getZar(){
+	 // if(gid("Brole").value=='non'){
+	 localStorage.removeItem('zae');
+	  let d = localStorage.getItem('zartwo');
+	  if(d&&d=='yes'){
+		//  alert(d);
+		  return;
+	  }
+	  window.location.href="#myZar";
+  //}
+}
+	//getZar();
 	
 	const myAgeForm2 = document.forms.verifyageform;
  if(myAgeForm2){
@@ -214,6 +224,18 @@ if(agi) myAgeForm.bday.value = agi;
 }}else{
 	showSomething();
 }
+ function getZar(){
+	 // if(gid("Brole").value=='non'){
+	 localStorage.removeItem('zae');
+	  let d = localStorage.getItem('zartwo');
+	  if(d&&d=='yes'){
+		//  alert(d);
+		  return;
+	  }
+	  window.location.href="#myZar";
+  //}
+}
+	getZar();
 
 function confirm_agenot(ev){
 	ev.preventDefault();
@@ -302,7 +324,7 @@ function confirmRules(){
 }
 function hani(ev){
 	//alert('login');
-	window.location.href="#login";
+	//window.location.href="#login";
 }
 function isOpenModal(){
 	 window.location.href="#regeln";
@@ -334,7 +356,7 @@ function isOpenModal(){
 }
  // getZar();
     window.onload = function(){
-		getZar();
+	//	getZar();
 		get_socket();
 		if(FLAGVK){
 			VK_USER = false;
