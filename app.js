@@ -143,9 +143,9 @@ app.use(passport.session());
 app.use(async(req, res, next)=>{
 	req.app.locals.user = req.user;
 	
-	var langstr = (req.get('Accept-Language').includes('ru')? 'true' : 'false');
-	console.log('langstr ',req.get('Accept-Language') );
-  req.app.locals.langi = langstr;
+	//var langstr = (req.get('Accept-Language').includes('ru')? 'true' : 'false');
+	//console.log('langstr ',req.get('Accept-Language') );
+  req.app.locals.langi ="false";// langstr;
 	req.app.locals.stun = stun;
 	req.app.locals.testshopid = testshopid;
 	req.app.locals.testshopsecret = testshopsecret;
