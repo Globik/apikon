@@ -10,14 +10,14 @@
 	var cnv=document.getElementById('cnv')
 	    var c=cnv.getContext('2d')
 	    //832x555
-	    cnv.width=512
-	    cnv.height=512;
+	    cnv.width=1000;
+	       cnv.height=600;
 	    var img=new Image();
-	    img.src="favicon.png";
+	    img.src="passport.png";
 	    img.onload=function(){
 			//c.drawImage(img,0,0,500,500,-300,0,750,500)
 			//c.drawImage(img,0,0,500,500,0,0,600,600)
-			c.drawImage(img, 0,0,512,512)
+			c.drawImage(img, 0,0,cnv.width,cnv.height)
 		}
 	    /*
 	var f1=new Image();
