@@ -260,6 +260,8 @@ function stopMedia(el) {
 //if(Login())location.href="#setPrem";
  //window.location.href='#confirmAGE';
 async function publish(el) {
+	
+	return;
 	console.warn('publish');
     if (SENDER) return;
 console.log("after sender")
@@ -914,6 +916,8 @@ function disableElement(id) {
 
 function beginTranslation(el){
 	//alert(1);
+	alert("Сервис временно не работает");
+	return;
 	if(el.getAttribute("data-state") == "niemand"){
 		let s = (L()=="ru"?'Запустить трансляцию? Вас увидят сотня потенциальных зрителей!':
 		L()=='en'?'Enable the stream? Many viewers will watch you!':
