@@ -54,7 +54,9 @@ function goMedia(data){
         publishedId = data.publishedId;
         let a = document.querySelector('div#playContainer svg');
         if(a) a.style.fill = 'rgba(234,223,244,0.6)';
-        //claimMenu.setAttribute("data-vip", data.userId);
+        claimMenu.setAttribute("data-vip", data.userId);
+        partnernick = data.nick;
+        claimMenu.setAttribute('data-was', 'dataPublish');
         //console.log("userId *** ", data.userId);
         //alert(data.img_data);
     } else if (data.type == "perror") {

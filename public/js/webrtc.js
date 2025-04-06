@@ -26,6 +26,7 @@ var local = gid("local");
 const claimMenu = gid("claimMenu");
 const startbtn = gid("startbtn");
 const nextbtn = gid("nextbtn");
+var userName = gid("userName");
 local.srcObject = null;
 remote.srcObject = null;
 var esWar = null;
@@ -365,8 +366,11 @@ function sendClaim(el){
 		L()=='id'?'Oke, ditambahkan untuk mengabaikan':'';
 		note({ content: s, type: "info", time: 5 });
 	}else if(d == "claim"){
+		let l = claimMenu.getAttribute("data-vip");
+		//alert(l+' '+partnernick);
 		let d5 = claimMenu.getAttribute("data-was");
 		if(d5 && d5 === "dataPublish"){
+			if(!partnernick) return;
 			let d = {}
 		d.usid = l;
 		d.nick = partnernick;
@@ -645,7 +649,10 @@ function on_msg(msg) {
 		 break
 		 case 'ban_publish':
 		 unpublish();
-		 unsubscribe();
+		 disconnect2();
+		 if(msg.nick === userName.value){
+			 gid("Grund").value = 4;
+		 }
 		 break
       case 'online':
         onlineCount.textContent = msg.online
@@ -655,6 +662,7 @@ function on_msg(msg) {
 			a44.setAttribute("poster", "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7");
 			gid("playContainer").setAttribute("data-state", "niemand");
 			claimMenu.setAttribute("data-was", "");
+			claimMenu.setAttribute("data-vip", "0");
 		}
         break
       case 'new-ice-candidate':
