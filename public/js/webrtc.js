@@ -365,6 +365,15 @@ function sendClaim(el){
 		L()=='id'?'Oke, ditambahkan untuk mengabaikan':'';
 		note({ content: s, type: "info", time: 5 });
 	}else if(d == "claim"){
+		let d5 = claimMenu.getAttribute("data-was");
+		if(d5 && d5 === "dataPublish"){
+			let d = {}
+		d.usid = l;
+		d.nick = partnernick;
+		d.numb =  4;
+		vax('post','/admin/OneBanned', d, on_ban_it, on_ban_it_error, undefined, false);
+		}
+		wsend({ type: "ban_publish" , nick: partnernick });
 		let s = L()=="ru"?"Спaсибо, модератор рассмотрит вашу жалобу.":
 		L()=='en'?"Thanks, the moderator will look at your abuse":
 		L()=='zh'?'谢谢，版主会看看你的滥用行为':
@@ -392,27 +401,30 @@ function banit(el){
 			console.warn("No partner nick");
 			return;
 		}
+		let wa = claimMenu.getAttribute("data-was");
 		let d = {}
 		d.usid = l;
 		d.nick = partnernick;
+		d.numb = (wa&&wa === "dataPublish" ? 4 : 1);
 		vax('post','/admin/OneBanned', d, on_ban_it, on_ban_it_error, el, false);
+		wsend({ type: "ban_publish" , nick: partnernick });
 		el.className = "puls";
 	}else{
 		console.warn("NO partner user id");
 	}
 }
 function on_ban_it(l, el){
-	el.classList.remove("puls");
+	if(el)el.classList.remove("puls");
 	if(l.error){
-		note({ content: l.message, type: "error", time: 5});
+		if(el)note({ content: l.message, type: "error", time: 5});
 		return;
 	}
 	
-	note({ content: l.message, type: "info", time: 5 });
+	if(el)note({ content: l.message, type: "info", time: 5 });
 	openClaim(claimContainer);
 }
 function on_ban_it_error(l, el){
-	el.className="";
+	if(el)el.className="";
 	note({ content: l, type: "error", time: 5 });
 }
 
@@ -631,8 +643,19 @@ function on_msg(msg) {
 		
 		MYSOCKETID = msg.socketId;
 		 break
+		 case 'ban_publish':
+		 unpublish();
+		 unsubscribe();
+		 break
       case 'online':
         onlineCount.textContent = msg.online
+        if(!msg.imgData){
+		partnernick = null;
+			let a44 = gid("kartina");
+			a44.setAttribute("poster", "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7");
+			gid("playContainer").setAttribute("data-state", "niemand");
+			claimMenu.setAttribute("data-was", "");
+		}
         break
       case 'new-ice-candidate':
         handleNewIceCandidate(msg.data)

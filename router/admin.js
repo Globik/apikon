@@ -267,11 +267,12 @@ router.get('/getBanned', checkAuth, isAdmin(['admin']), async(req, res) => {
 })
 
 router.post('/OneBanned', checkAuth, isAdmin(['admin']), async(req, res) => {
-	let { usid, nick } = req.body;
+	let { usid, nick, numb } = req.body;
 	console.log('body ', req.body);
-	if(!usid || !nick){
-		return res.json({ error: true, message: "No usid or nick" });
+	if(!usid || !nick || !numb){
+		return res.json({ error: true, message: "No usid or nick or numb" });
 	}
+	
 	let db = req.db;
 	try{
 		let us = await db.query(`select * from ban where usid=(?)`, [ usid ]);
@@ -279,7 +280,7 @@ router.post('/OneBanned', checkAuth, isAdmin(['admin']), async(req, res) => {
 					//found return;
 					return res.json({ error: true, message: "Уже забанили" });
 				}
-	await db.query('insert into ban(usid,nick) values((?),(?))', [ usid, nick ]);
+	await db.query('insert into ban(usid,nick,grund) values((?),(?),(?))', [ usid, nick, numb ]);
    res.json({ message: `OK - ${nick} banned!`});
    }catch(err){
 	   console.log("insert ban err ", err);

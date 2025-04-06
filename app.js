@@ -1883,7 +1883,7 @@ wsend(socket, { type:'vip', vip: r })
   
  
   
-   broadcasti({ type: 'online', online: wsServer.clients.size })
+   broadcasti({ type: 'online', online: wsServer.clients.size, imgData: imgData.img_data })
    console.log('isEven(connected) ', connected,isEven(connected));
   if(isEven(matchedIds.size /*connected)*/)) broadcasti({ type: "connected2", size:matchedIds.size/2/* connected/2 */});
 
@@ -1971,6 +1971,9 @@ if(msg.request == "mediasoup"){
         break
         case 'krestik':
         deleteConnection(msg.id);
+        break
+        case 'ban_publish' :
+        broadcasti({ type: msg.type, nick: msg.nick });
         break
       default:
         break

@@ -503,7 +503,7 @@ ${n.user && !n.VK?`<div class="settingspanel" onclick="logout(this);">${lang=='r
   <!--  <section id="recordSection"><div>&#x1F4F8;</div></section> -->
     
     <section id="claimContainer" onclick="openClaim(this);"><div id="claimBox">!</div></section>
-    <div id="claimMenu" data-vip="${n.imgData&&n.imgData.img_data?n.imgData.userId:''}"><div data-claim="ignor" onclick="sendClaim(this);">${lang=='ru'?'В игнор':lang=='en'?'To ignore':
+    <div id="claimMenu" data-was="${n.imgData&&n.imgData.img_data?'dataPublish':''}" data-vip="${n.imgData&&n.imgData.img_data?n.imgData.userId:''}"><div data-claim="ignor" onclick="sendClaim(this);">${lang=='ru'?'В игнор':lang=='en'?'To ignore':
     lang=='zh'?'忽略':
     lang=='id'?'untuk mengabaikan':''}!</div>
     <div data-claim="claim" onclick="sendClaim(this);">${lang=='ru'?'Пожаловаться':lang=='en'?'Abuse':

@@ -225,6 +225,15 @@ function startMedia(el) {
         return;
     }
 PSENDER = true;
+ if(gid("isLogin").value === "false"){
+		window.location.href = "#login";
+		return;
+	}
+	 	var gg = G();
+	if( gg == 4){
+		window.location.href = "#banned";
+		return;
+	}
    if(!sock)get_socket();
 
     navigator.mediaDevices.getUserMedia({audio: true, video: true })
@@ -260,10 +269,10 @@ function stopMedia(el) {
 //if(Login())location.href="#setPrem";
  //window.location.href='#confirmAGE';
 async function publish(el) {
-	
-	return;
 	console.warn('publish');
     if (SENDER) return;
+    //alert(isLogin.value);
+    
 console.log("after sender")
     if (!loci) {
         console.warn('WARN: local media NOT READY');
@@ -286,6 +295,7 @@ console.log("after sender")
     const params = await sendRequest({type: 'createProducerTransport'});
     console.log('transport params:', params);
     producerTransport = device.createSendTransport(params.params);
+    producerTransport.iceServers = ICESERVERS.iceServers;
     console.log(' --- join & start publish --');
     producerTransport.on('connect', async ({dtlsParameters}, callback, errback) => {
         console.log('--trasnport connect', dtlsParameters);
@@ -299,6 +309,7 @@ console.log("after sender")
             callback();
         } catch (er) {
 			console.error(er);
+			partnernick = null;
             note({content: er.toString(), type: "error", time: 5});
             errback(er);
         }
@@ -313,6 +324,7 @@ console.log("after sender")
             callback({id});
         } catch (err) {
 			console.error(err);
+			partnernick = null;
             note({content: err.toString(), type: "error", time: 5});
             errback(err);
         }
@@ -526,7 +538,8 @@ async function subscribe(el) {
     } catch (err) {
 		console.log(err);
         note({content: err.info?err.info:err, type: "error", time: 5});
-        if(err == "Нет видеотрансляции!"){
+        if(err == "Нет видеотрансляции!"){ 
+			partnernick = null;
 			wsend({ type: 'clearproducer' });
 			gid('kartina').setAttribute('poster',  "");
        publishedId = null;
@@ -548,6 +561,7 @@ async function subscribe(el) {
         return;
     }
     consumerTransport = device.createRecvTransport(params.params);
+    consumerTransport.iceServers = ICESERVERS.iceServers;
 
     consumerTransport.on('connect', async ({dtlsParameters}, callback, errback) => {
         try {
@@ -796,6 +810,7 @@ function unpublish() {
 	mobileChat.className = "hide";
 	mobChat = false;
 	textarea2.classList.add('hide');
+	claimMenu.setAttribute("data-was", "");
 }
 
 function disconnect2() {
@@ -851,6 +866,7 @@ gid("playContainer").setAttribute("data-state", "busy");
 			     while(chatbox.firstChild){
 				   chatbox.firstChild.remove();
 			   }
+			   claimMenu.setAttribute("data-was", "");
 }
 
 
@@ -916,8 +932,8 @@ function disableElement(id) {
 
 function beginTranslation(el){
 	//alert(1);
-	alert("Сервис временно не работает");
-	return;
+	//alert("Сервис временно не работает");
+	//return;
 	if(el.getAttribute("data-state") == "niemand"){
 		let s = (L()=="ru"?'Запустить трансляцию? Вас увидят сотня потенциальных зрителей!':
 		L()=='en'?'Enable the stream? Many viewers will watch you!':
@@ -931,11 +947,7 @@ function beginTranslation(el){
 		 if(mydialog.returnValue === "cancel"){
 			 
 		 }else if(gid('mydialog').returnValue === "confirm"){
-			 	var gg = G();
-	if(gg == 1 || gg == 2){
-		window.location.href = "#banned";
-		return;
-	}
+	
 			 startMedia(el);
 		 }
 		 })
