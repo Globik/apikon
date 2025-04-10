@@ -653,7 +653,7 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
      // https://yandex.ru/support2/partner/ru/web/units/sizes
      var kkk = 0;
      function getReklama(){
-		 //{n.VK?'return;':''}
+		 
 		 if(Brole.value==="admin") return;
      window.yaContextCb.push(()=>{
      if(Ya.Context.AdvManager.getPlatform()==='desktop'){
@@ -666,7 +666,7 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
 			"onClose":function(){
 			console.log("Reklama closed")
 			//if(kkk == 1){
-				//if(isLogin.value=="true")window.location.href="#setPrem";
+				if(isLogin.value=="true")window.location.href="#setPrem";
 			kkk = 0;
 		//	}
 			},
@@ -680,7 +680,7 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
 			"onClose":function(){
 			console.log("Reklama closed")
 			//if(kkk == 1){
-			//if(isLogin.value=="true")window.location.href="#setPrem";
+			if(isLogin.value=="true")window.location.href="#setPrem";
 		kkk = 0;
 		//}
 			}
@@ -702,7 +702,7 @@ if(isLogin.value=="false") getReklama();
 	 "onClose":function(){
 			console.log("Reklama closed")
 			
-			//if(isLogin.value=="true")window.location.href="#setPrem";
+			if(isLogin.value=="true")window.location.href="#setPrem";
 			}
  })
 })
@@ -715,7 +715,7 @@ window.yaContextCb.push(()=>{
 	 "onClose":function(){
 			console.log("Reklama closed")
 			
-		//	if(isLogin.value=="true")window.location.href="#setPrem";
+			if(isLogin.value=="true")window.location.href="#setPrem";
 			}
  })
 })
