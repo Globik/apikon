@@ -209,12 +209,12 @@ function post_start(){
 	//alert(1);
 	//window.postMessage('message', "*");
 	//const channel = new BroadcastChannel('message');
-	channel.postMessage({"type":"start"});
+	channel.postMessage({ "type": "start"  });
 }
 
 function post_next(){
 	//const channel = new BroadcastChannel('message');
-	channel.postMessage({"type":"next"});
+	channel.postMessage({ "type": "next" });
 }
 function krestik(el){
 	if(!window.confirm("Удалить?")) return;
@@ -244,7 +244,9 @@ function handleDynamic(obj){
 		let el = document.querySelector(`[data-id="${obj.id}"]`);
 		if(el)el.remove();
 	}else if(obj.sub == "add"){
-		
+		console.log('on add');
+		//alert(obj.waiting);
+		//waiting.innerHTML = obj.waiting;
 		let d = document.createElement("div");
 		d.className="dynamicbox";
 	

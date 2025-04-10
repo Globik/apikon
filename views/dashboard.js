@@ -21,9 +21,11 @@ return `
     <button onclick="getTestGifts(this);">Сердечки тест</button><button onclick="getPayments(this);">Платежи</button>
     <button onclick="getAllBanned(this);">Бан</button>
     </nav>
-  <!--  <div>
+    <div>
     <button onclick="post_start();">post start</button>&nbsp;&nbsp;<button onclick="post_next();">post next</button>
-    </div> -->
+    </div> 
+    <output id="waiting"></output>
+    <hr>
     <div id="dynamicNav">
     
     <div><b>Юзеров:</b> <span>${n.usercount?n.usercount:0}</span></div>

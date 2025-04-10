@@ -510,7 +510,8 @@ const channel = new BroadcastChannel('message');
 		if(a == "start"){
 			start(startbtn);
 		}else if(a == "next"){
-			next(nextbtn, true);
+			let amap = [[0,{}]];
+			next(nextbtn, true, amap, false);
 		}else{}
 		}
 
@@ -1735,6 +1736,10 @@ window.addEventListener("online", function(e) {
 
 //notes.play(261.63, nows);
    function next(el, bool, ignores, isIgnore){
+	   console.log('next');
+	  // let booli = false;
+	  //  ignores = false;
+	 //  isIgnore = false;
 	   //next(nextbtn, false, amma, false);
 	   //pl();
 	   if(HELP == 1){
