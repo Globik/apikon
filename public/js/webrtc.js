@@ -1751,8 +1751,8 @@ window.addEventListener("online", function(e) {
 
 //notes.play(261.63, nows);
    function next(el, bool, ignores, isIgnore){
-	   if(SUECH) return;
-	   SUECH = true;
+	//   if(SUECH) return;
+	//   SUECH = true;
 	   console.log('next');
 	  // let booli = false;
 	  //  ignores = false;
