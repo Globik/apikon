@@ -912,7 +912,7 @@ function handleNewIceCandidate(msg) {
 	
 	if(isNegotiating){
 		console.warn("already made an isNegotiating ");
-		return;
+	//	return;
 	}
 	 console.log('handle video offer ', msg.type);
 	 try{
@@ -920,7 +920,7 @@ function handleNewIceCandidate(msg) {
 	 isNegotiating = true;
 	 if(pc&&pc.signalingState=="have-local-offer"){
 		 console.warn('Collition! Rolling back local offer...');
-		 await pc.setLocalDescription({ type: 'rollback' });
+		// await pc.setLocalDescription({ type: 'rollback' });
 	 }
 	//  if(pc.signalingState == "stable") return;
 	   
@@ -972,7 +972,7 @@ function handleNewIceCandidate(msg) {
  async function handlePeerMatched(){
 	if(isNegotiating){
 		console.log("shon isnegotiating");
-		return;
+	//	return;
 	}
 	 createPeerConnection();
 	 isNegotiating = true;
@@ -1792,7 +1792,7 @@ window.addEventListener("online", function(e) {
 	   }
 	   el.disabled = true;
 	   CONNECTED = false;
-     // closeVideoCall();
+     closeVideoCall();
     if(bool)  {
 		wsend({type: "hang-up", ignore: isIgnore });
 		unsubscribe = true;
