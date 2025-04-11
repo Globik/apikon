@@ -11,6 +11,7 @@ var connectionState = "closed";
 var mobChat = false;
 var isOpen = false;
 var PSENDER = false;
+
 var F = false;
 //var VK_USER = false;
 var isShow = false;
@@ -36,6 +37,8 @@ var ignoreOffer = false;
 var isSettingRemoteAnswerPending = false;
 var unsubscribe = false;
 var CONNECTED = false;
+var isNegotiating = false;
+var SUECH = true;
 function L(){ return Lang.value; }
 const heartcountels = document.querySelectorAll("div.heartcount");
 var context = new (window.AudioContext || window.webkitAudioContext)();
@@ -899,24 +902,29 @@ function handleNewIceCandidate(msg) {
 			
 		}).catch(function handleError(er){
 			//console.log("ignoreOffer ? ", ignoreOffer);
-			//console.error(er);
+			console.error(er);
 		});
 	}
 	}
 
 }
  async function handleVideoOffer(msg){
-	console.log('makingOffer: ', makingOffer);
-	if(makingOffer){
-		console.warn("already made an offer");
+	
+	if(isNegotiating){
+		console.warn("already made an isNegotiating ");
 		return;
 	}
 	 console.log('handle video offer ', msg.type);
+	 try{
 	 createPeerConnection();
-	 if(pc&&pc.signalingState=="have-local-offer")return;
+	 isNegotiating = true;
+	 if(pc&&pc.signalingState=="have-local-offer"){
+		 console.warn('Collition! Rolling back local offer...');
+		 await pc.setLocalDescription({ type: 'rollback' });
+	 }
 	//  if(pc.signalingState == "stable") return;
 	   
-	 try{
+	 
 		// const readyForOffer = !makingOffer && (pc.signalingState == "stable" || isSettingRemoteAnswerPendingtting);
 		// const offerCollision = msg.type == "offer" && !readyForOffer;
 		// ignoreOffer = !polite && offerCollision;
@@ -942,6 +950,8 @@ function handleNewIceCandidate(msg) {
 	
 	}catch(err){
 		console.error(err);
+	}finally{
+		isNegotiating = false;
 	}
  }
  // iceTransportPolicy:"relay"
@@ -960,8 +970,12 @@ function handleNewIceCandidate(msg) {
  
  const offerOpts = {offerToReceiveAudio: 1, offerToReceiveVideo: 1};
  async function handlePeerMatched(){
-	
+	if(isNegotiating){
+		console.log("shon isnegotiating");
+		return;
+	}
 	 createPeerConnection();
+	 isNegotiating = true;
 	//  if(makingOffer) return;
     try{
 		makingOffer = true;
@@ -977,6 +991,7 @@ function handleNewIceCandidate(msg) {
 		makingOffer=false;
 	}finally{
 	//	makingOffer = false;
+	isNegotiating = false;
 	}
 
  }
@@ -1736,6 +1751,8 @@ window.addEventListener("online", function(e) {
 
 //notes.play(261.63, nows);
    function next(el, bool, ignores, isIgnore){
+	   if(SUECH) return;
+	   SUECH = true;
 	   console.log('next');
 	  // let booli = false;
 	  //  ignores = false;
@@ -1775,7 +1792,7 @@ window.addEventListener("online", function(e) {
 	   }
 	   el.disabled = true;
 	   CONNECTED = false;
-      closeVideoCall();
+     // closeVideoCall();
     if(bool)  {
 		wsend({type: "hang-up", ignore: isIgnore });
 		unsubscribe = true;
@@ -1838,6 +1855,7 @@ function iceConnectionStateChangeHandler (event) {
     case 'connected':
    // if(esWar == 'remoteOffer')
     wsend({ type: "connected" });
+    SUECH = false;
     vax('post','/zartoone', { value: 300, id: gid('userId').value }, on_zar, on_zar_error, null, false);
     break;
     case 'complete':
