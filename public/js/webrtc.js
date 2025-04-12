@@ -453,7 +453,7 @@ if (window.location.protocol === "https:") {
 function newev(){
 	 if (document.hidden){
         console.log("Browser tab is hidden")
-        alert("hidden");
+      //  alert("hidden");
       //  setSignal();
       if(sock)sock.close();
     } else {
@@ -465,11 +465,11 @@ function newev(){
 
 document.addEventListener('visibilitychange', newev);
 window.addEventListener("pagehide", function(ev){
-	alert("pagehide");
+	//alert("pagehide");
 	if(sock)sock.close();
 });
 window.addEventListener("beforeunload", function(ev){
-	alert("beforeunload");
+	//alert("beforeunload");
 	if(sock)sock.close();
 });
 function wari(el){
@@ -625,6 +625,7 @@ return window.location.href='#purchaseHREF';
     }
   };
   sock.onclose = function () {
+	  wsend({type: "hang-up", ignore: false });
 	 // clearTimeout(pingTimeout);
     sock = null;
     let s = L()=="ru"?"Соединение с сервером закрыто!":L()=='en'?"Websocket closed!":
