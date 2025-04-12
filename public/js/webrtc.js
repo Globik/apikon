@@ -328,7 +328,7 @@ function panelOpen(el){
 			isOpen = true;	
 			
 			
-			document.addEventListener("visibilitychange", newev);
+			//document.addEventListener("visibilitychange", newev);
 	
 	/*
 	window.addEventListener('beforeunload', function(event) {
@@ -341,7 +341,7 @@ function panelOpen(el){
 			
 			
 			}else{
-				 document.removeEventListener('visibilitychange', newev);
+				 //document.removeEventListener('visibilitychange', newev);
 				settingspanel.className = "";
 				isOpen = false;
 			}
@@ -453,7 +453,9 @@ if (window.location.protocol === "https:") {
 function newev(){
 	 if (document.hidden){
         console.log("Browser tab is hidden")
-        setSignal();
+        alert("hidden");
+      //  setSignal();
+      if(sock)sock.close();
     } else {
         console.log("Browser tab is visible")
        //document.removeEventListener('visibilitychange', newev);
@@ -461,7 +463,15 @@ function newev(){
    // document.removeEventListener('visibilitychange', newev);
 }
 
-
+document.addEventListener('visibilitychange', newev);
+window.addEventListener("pagehide", function(ev){
+	alert("pagehide");
+	if(sock)sock.close();
+});
+window.addEventListener("beforeunload", function(ev){
+	alert("beforeunload");
+	if(sock)sock.close();
+});
 function wari(el){
 	//alert('load');
 	return;
@@ -484,7 +494,7 @@ channel.addEventListener('message', (event) => {
     }
 });
 */ 
-	document.addEventListener("visibilitychange", newev);
+	//document.addEventListener("visibilitychange", newev);
 	
 	
 	window.addEventListener('beforeunload', function(event) {
@@ -2130,7 +2140,7 @@ window.onunload = function(e){
 	}catch(e){}
 }
 function toAdminPanel(el){
-	document.removeEventListener('visibilitychange', newev);
+	//document.removeEventListener('visibilitychange', newev);
 	window.location.href="/dashboard";
 }
 function pushSubscribe(el){
