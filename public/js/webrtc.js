@@ -455,7 +455,9 @@ function newev(){
         console.log("Browser tab is hidden")
       //  alert("hidden");
       //  setSignal();
+      if(DEVELOPMENT === "yes"){}else{
       if(sock)sock.close();
+  }
     } else {
         console.log("Browser tab is visible")
        //document.removeEventListener('visibilitychange', newev);
@@ -1788,22 +1790,23 @@ window.addEventListener("online", function(e) {
 		}
 	}catch(e){}
 		//alert(5);
-		try{
-			if(HELP == 5){
-		if(Prem.value=="n")getReklama();
-		window.location.href = "#ozeniteHREF";
-	}
-		//HELP=0;
-	}catch(e){
-		console.log(e);
-	}
+		
+		
+		
+	
+	
 	   }else if(HELP == 3){
 	//	if(Prem.value=="n")   window.location.href = "#myGame";
-	   }
-	   HELP++;
-	   if(HELP == 6){
+	if(Prem.value=="n")getReklama();
+		//window.location.href = "#ozeniteHREF";
+	   }else if(HELP == 5){
+		   window.location.href = "#ozeniteHREF";
 		   HELP = 0;
-	   }
+	   }else{}
+	   HELP++;
+	  // if(HELP == 6){
+		//   HELP = 0;
+	   //}
 	   el.disabled = true;
 	   CONNECTED = false;
      closeVideoCall();

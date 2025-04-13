@@ -399,7 +399,7 @@ window.onhashchange = function(ev){
     <script>
   //  var ICESERVERS =n.stun?n.stun:null
  // vkBridge.send('VKWebAppInit').then(data=>{}).catch(function(er){})
-  
+  const DEVELOPMENT = "${process.env.DEVELOPMENT === "yes"?"yes":"no"}";
   
   var ICESERVERS = {
   //iceTransportPolicy:"relay",
