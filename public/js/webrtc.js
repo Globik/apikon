@@ -1789,7 +1789,10 @@ window.addEventListener("online", function(e) {
 	}catch(e){}
 		//alert(5);
 		try{
+			if(HELP == 5){
 		if(Prem.value=="n")getReklama();
+		window.location.href = "#ozeniteHREF";
+	}
 		//HELP=0;
 	}catch(e){
 		console.log(e);
@@ -1798,7 +1801,7 @@ window.addEventListener("online", function(e) {
 	//	if(Prem.value=="n")   window.location.href = "#myGame";
 	   }
 	   HELP++;
-	   if(HELP == 2){
+	   if(HELP == 6){
 		   HELP = 0;
 	   }
 	   el.disabled = true;
