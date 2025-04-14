@@ -1764,6 +1764,7 @@ window.addEventListener("online", function(e) {
 
 //notes.play(261.63, nows);
    function next(el, bool, ignores, isIgnore){
+	   if(Prem.value=="n")getReklama();
 	//   if(SUECH) return;
 	//   SUECH = true;
 	   console.log('next');
@@ -1797,7 +1798,7 @@ window.addEventListener("online", function(e) {
 	
 	   }else if(HELP == 3){
 	//	if(Prem.value=="n")   window.location.href = "#myGame";
-	if(Prem.value=="n")getReklama();
+	// if(Prem.value=="n")getReklama();
 		//window.location.href = "#ozeniteHREF";
 	   }else if(HELP == 5){
 		   window.location.href = "#ozeniteHREF";

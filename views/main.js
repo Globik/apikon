@@ -545,12 +545,12 @@ lang=='en'?'Message':
 lang=='zh'?'信息':
 lang=='id'?'pesan':''}"  disabled  onfocus="onfoci();" onblur=""></textarea>
 <!-- oninput="txtInput(this);" onchange="someChange();" -->
-${n.VK?'':`<div id="giftbox">
+${n.VK?'':`<!-- <div id="giftbox">
 <div class="flexgiftsitem">
 <div class="heart" data-type="mobile">&#x1f496</div>
 <div class="heartcount">${n.user?istestheart?n.user.theart:n.user.heart:0}</div>
 </div>
-</div> `}
+</div> --> `}
 <!-- <div class="send"  data-publish="none" data-send="two" onclick="sendi(this);"><img style="cursor:pointer;" src="/img/send1.svg"/></div> -->
 </div></section>
 </section> 
