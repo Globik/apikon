@@ -1703,14 +1703,14 @@ function hangUp (socketId, msg, bool, abrupt) {
 	
 	
 	
-/*	if(bool){
+	if(bool){
 	if(onLine.has(socketId)){
 		onLine.delete(socketId);
 		broadcasti({ type: "dynamic", sub: "remove", id: socketId, camcount: onLine.size });
 		//broadcast_admin({ type: "dynamic", sub: "remove", id: socketId, camcount: onLine.size });
 		 if(isEven(matchedIds.size)) broadcasti({ type: "connected2", size: matchedIds.size/2 });
 	}
-}*/
+}
   if (matchedIds.has(socketId)) {
     let peerId = matchedIds.get(socketId)
     let peerSocket = getPeerSocket(peerId)
@@ -1733,7 +1733,7 @@ function hangUp (socketId, msg, bool, abrupt) {
       console.log(`#${socketId} hangs up #${peerId}`)
     
     if(abrupt && abrupt == "abrupt"){
-	//if(peerSocket)	peerSocket.terminate();
+	if(peerSocket)	peerSocket.terminate();
 	}
 }
   } else {
