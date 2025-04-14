@@ -1801,7 +1801,7 @@ window.addEventListener("online", function(e) {
 	// if(Prem.value=="n")getReklama();
 		//window.location.href = "#ozeniteHREF";
 	   }else if(HELP == 5){
-		   window.location.href = "#ozeniteHREF";
+		 //  window.location.href = "#ozeniteHREF";
 		   HELP = 0;
 	   }else{}
 	   HELP++;
