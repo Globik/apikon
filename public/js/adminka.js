@@ -51,7 +51,7 @@ function on_msg(msg) {
 	if(msg.type == 'dynamic'){
         handleDynamic(msg);
 	}else if(msg.type == "connected2"){
-		connects.textContent = msg.size;
+		//connects.textContent = msg.size;
 	}else if(msg.type == "pick"){
 	//wsend({type:'pock'});
 	}
@@ -222,12 +222,40 @@ function krestik(el){
 	if(!k) return;
 	wsend({ type: "krestik", id: k });
 }
+function isEven(n) {
+   return n % 2 == 0;
+}
+//alert(5%2)
+function setConnects(n){
+	if(n == 0){
+		return 0;
+	}
+	else if(n == 1){
+		return 0;
+	}else if(n == 2){
+		//if(isEven(n)){
+			return 1;
+	//	}
+		//else{
+		//	return Number(connects.textContent);
+		//}
+	}
+	else{
+		if(isEven(n)) {
+			return n / 2;
+		}else{
+		return (n - 1) / 2;	
+		}
+	}
+}
 function handleDynamic(obj){
 //	console.log(obj);
 	if(obj.sub == "total"){
 		camsCount.textContent = obj.cams.length;
-		let b = Number(obj.connects);
-		
+
+		let b = setConnects(obj.cams.length);
+		//if(b){
+		connects.textContent = b;
 		//connects.textContent = obj.connects;
 	
 		
@@ -241,6 +269,9 @@ function handleDynamic(obj){
 })
 	}else if(obj.sub == "remove"){
 		camsCount.textContent = obj.camcount;
+		let b = setConnects(obj.camcount);
+		
+		connects.textContent = b;
 		let el = document.querySelector(`[data-id="${obj.id}"]`);
 		if(el)el.remove();
 	}else if(obj.sub == "add"){
@@ -256,7 +287,9 @@ d.innerHTML=`<caption>${obj.nick}</caption><div class="dynamicImgHalter"><div cl
 		dynamicContainer.appendChild(d);
 		camsCount.textContent = obj.camcount;
 		 
-		let b = Number(obj.connects);
+		let b = setConnects(obj.camcount);
+	
+		connects.textContent = b;
 		
 		//connects.textContent = b / 2;
 		

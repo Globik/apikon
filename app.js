@@ -1505,7 +1505,7 @@ async function searchPeer (socket, msg, source) {
 	 onLine.set(socket.id, { id: socket.id, src: source.src, nick: socket.nick, status: 'busy' });
 	 broadcast({ type: "dynamic", sub: "add", id: socket.id, partnerid: peerId, nick: socket.nick, status: 'busy', camcount: onLine.size});
 	 broadcast_admin({ type: "dynamic", sub: "add", id: socket.id, partnerid: peerId, src: source.src, nick: socket.nick, status: 'busy', camcount: onLine.size, waiting: waitingQueue });
-	// if(isEven(matchedIds.size))broadcasti({ type: "connected2", size:matchedIds.size/2 });
+	 if(isEven(matchedIds.size))broadcasti({ type: "connected2", size: matchedIds.size/2 });
 	 
 	 
 	 
@@ -1733,7 +1733,7 @@ function hangUp (socketId, msg, bool, abrupt) {
       console.log(`#${socketId} hangs up #${peerId}`)
     
     if(abrupt && abrupt == "abrupt"){
-	if(peerSocket)	peerSocket.terminate();
+	//if(peerSocket)	peerSocket.terminate();
 	}
 }
   } else {
