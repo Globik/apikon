@@ -51,7 +51,8 @@ function on_msg(msg) {
 	if(msg.type == 'dynamic'){
         handleDynamic(msg);
 	}else if(msg.type == "connected2"){
-		connects.textContent = msg.size;
+		let b = setConnects(msg.size);
+		connects.textContent = b;
 	}else if(msg.type == "pick"){
 	//wsend({type:'pock'});
 	}
