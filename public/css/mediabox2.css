@@ -12,20 +12,40 @@ html,body{
 	clor:red;
 	height:auto;
 }
+.krestikdiva{
+	display:block;
+	position:relative;
+	text-align:right;
+	font-size:2rem;
+}
+.overlay.line{
+	background:rgba(0,0,0,0);
+}
 #whosonlineoutput{
 	width:100%;
-	background:white;
+	background:rgba(0,0,0,0);
+	baground: linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.25) 100%);
 	height:100%;
 }
 .caption{
 	color:blue;
 }
 #whosonlinecontent{
-background:white;
+bakground:white;
+background: linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.25) 100%);
+                backdrop-filter: blur(10px);
+                -webkit-bakdrop-filter: blur(10px);
 	width:100%;
+	height:85%;
+	overflow-x:auto;
 	display:flex;
-	align-self:center;
-	justify-content: center;
+	/*align-self:center;
+	justify-content: center;*/
+	flex-wrap: wrap;
+    flex-direction: row;
+     justify-content: space-around;
+		align-items: start;
+		margin-top:10px;
 }
 .dynamicImgHalter{
 	width:150px;
