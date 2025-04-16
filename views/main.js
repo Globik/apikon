@@ -171,7 +171,7 @@ ${process.env.DEVELOPMENT == "yes" ? '':`<!-- Yandex.Metrika counter -->
     </noscript>
    <input type="hidden" id="isLogin" value="${n.user?true:false}"/>
     <input type="hidden" id="userId" value="${n.user?n.user.id:0}">
-    <input type="hidden" id="userName" value="${n.user?n.user.name:'anonim4'}">
+    <input type="hidden" id="userName" value="${n.user?n.user.name:'anon'}">
     <input type="hidden" id="isTestHeart" value="${istestheart}">
     <input type="hidden" id="publishedid" value="${n.imgData && n.imgData.img_data?n.imgData.publishedId:null}" >
     <input type="hidden" id="Mon" value="${n.user?n.user.mon:null}" />
@@ -188,7 +188,7 @@ ${process.env.DEVELOPMENT == "yes" ? '':`<!-- Yandex.Metrika counter -->
     
     ${!n.user?`<script>
    // alert("UNDEFINED");
-    var NICK = "anonim1";
+    var NICK = "anon";
     //location.href="#login2"
    
     window.onload=function(){
@@ -341,7 +341,7 @@ function isOpenModal(){
     </script>`:`<script>
    // alert('alik defined');
     in_rem_hash();
-    const NICK = "${n.user?n.user.name:'anonim2'}";
+    const NICK = "${n.user?n.user.name:'anon'}";
    // var VK_USER = false;
   // alert("NICK "+NICK);
   function getZar(){
@@ -439,7 +439,7 @@ window.onhashchange = function(ev){
 	 })
 	 </script> -->
      <article id="mediabox">
-    <nav id="navpanel"><div class="nav"><b>Онлайн: <span id="onlineCount">0</span></b>&nbsp;&nbsp;&nbsp; <b id="VKUSERNAME">${n.user?n.user.name:'anonym'}</b>
+    <nav id="navpanel"><div class="nav"><b>Онлайн: <span id="onlineCount">0</span></b>&nbsp;&nbsp;&nbsp; <b id="VKUSERNAME">${n.user?n.user.name:'anon'}</b>
     
    &nbsp;&nbsp;&nbsp;<b style="font-size:18px;">&#x1F441;</b>&nbsp;&nbsp;&nbsp;
     <span id="vV" style="color:orange;font-weight:bold;">${n.imgData && n.imgData.img_data?n.imgData.value:0}</span>
