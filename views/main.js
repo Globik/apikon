@@ -892,7 +892,7 @@ ababa();
     <p>В лидерах:</p>
    <p><div id="leaderSpinner" class="loader hide"></div><span id="spinnerP"></span></p>
    <p> У вас тоже есть шанс победить - продолжайте крутить рулетку и копите свои <b>300 рублей</b> за каждую беседу!</p>
-   <p><b><small>До конца акции осталось ${daysUntilActionEnd()} дней.</small></b></p>
+   <p><b><small>До конца <a href="#myZar" style="color:blue;text-decoration:underline;">акции</a> осталось ${daysUntilActionEnd()} дней.</small></b></p>
     </section>
     <!--
     <form name="mypayoutform" action="/admin/setPayout" method="post">
