@@ -1262,6 +1262,15 @@ let a = await db.query(`update sets set testshopid=(?),testshopsecret=(?)`, [ te
 app.get('/api/getTest', checkAuth, checkRole(['admin']), async(req, res)=>{
 	res.json({ content: res.compile('ytest', {})});
 })
+app.post('/removePrizrak', async(req, res)=>{
+	let { id } = req.body;
+	if(id){
+		if(onLine.has(id)){
+			onLine.delete(id);
+		}
+	}
+	res.json({ message: 'ok' });
+})
 const fsa = require('node:fs/promises');
 app.post('/api/filesupload'/*, checkAuth*/, async(req, res)=>{
 	if(!req.files){
@@ -1713,8 +1722,8 @@ function hangUp (socketId, msg, bool, abrupt) {
 	if(bool){
 	if(onLine.has(socketId)){
 		onLine.delete(socketId);
-		broadcasti({ type: "dynamic", sub: "remove", id: socketId, camcount: onLine.size });
-		//broadcast_admin({ type: "dynamic", sub: "remove", id: socketId, camcount: onLine.size });
+		//broadcasti({ type: "dynamic", sub: "remove", id: socketId, camcount: onLine.size });
+		broadcast_admin({ type: "dynamic", sub: "remove", id: socketId, camcount: onLine.size });
 		// if(isEven(matchedIds.size)) 
 		 broadcasti({ type: "connected2", size: matchedIds.size });
 	}

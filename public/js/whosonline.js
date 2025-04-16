@@ -16,7 +16,7 @@ function handleDynamic(obj){
 		let d = document.createElement("div");
 		d.className="dynamicbox";
 		d.setAttribute("data-id", el[1].id);
-		d.innerHTML=`<div class="caption">${el[1].nick}</div><div class="dynamicImgHalter"><img data-pid="${el[1].id}" src="${el[1].src}"/></div>`;
+		d.innerHTML=`<div class="caption">${el[1].nick}</div><div class="dynamicImgHalter"><img data-pid="${el[1].id}" onerror="loadError(this);" src="${el[1].src}"/></div>`;
 		whosonlinecontent.appendChild(d);
 	})
 	}else if(obj.sub == "remove"){
@@ -31,7 +31,7 @@ function handleDynamic(obj){
 		let d = document.createElement("div");
 		d.className="dynamicbox";
 		d.setAttribute("data-id", obj.id);
-		d.innerHTML=`<div class="caption">${obj.nick}</div><div class="dynamicImgHalter"><img src="${obj.src}"/></div>`;
+		d.innerHTML=`<div class="caption">${obj.nick}</div><div class="dynamicImgHalter"><img data-pid="${obj.id}" src="${obj.src}" onerror="loadError(this);"/></div>`;
 		whosonlinecontent.appendChild(d);
 		camsCount.textContent = obj.camcount;
 		 
@@ -51,4 +51,12 @@ function handleDynamic(obj){
 	}else{
 		
 	}
+}
+
+function loadError(el){
+	let a = el.getAttibute('data-pid');
+	if(!a)return;
+	let elu = document.querySelector(`[data-id="${a}"]`);
+	if(elu)elu.remove();
+	vax('post','/removePrizrak', { id: a }, function(){}, function(){}, null, false);
 }
