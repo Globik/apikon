@@ -349,10 +349,10 @@ function panelOpen(el){
 function openClaim(el){
 	
 	if(!OPENCLAIM){
-			claimMenu.className = "show";
+		if(claimMenu)	claimMenu.className = "show";
 			OPENCLAIM = true;	
 			}else{
-				claimMenu.className = "";
+				if(claimMenu)claimMenu.className = "";
 				OPENCLAIM = false;
 			}
 }
@@ -678,8 +678,8 @@ function on_msg(msg) {
 			let a44 = gid("kartina");
 			a44.setAttribute("poster", "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7");
 			gid("playContainer").setAttribute("data-state", "niemand");
-			claimMenu.setAttribute("data-was", "");
-			claimMenu.setAttribute("data-vip", "0");
+		if(claimMenu)	claimMenu.setAttribute("data-was", "");
+			if(claimMenu)claimMenu.setAttribute("data-vip", "0");
 		}
         break
       case 'new-ice-candidate':
@@ -689,7 +689,7 @@ function on_msg(msg) {
        console.warn(msg.vip, " ", msg.partnerId,msg.nick,msg.isprem);
        console.log("your id: ", userId.value, "partner id ", msg.partnerId);
        // claimMenu.setAttribute("data-vip", msg.vip);
-       claimMenu.setAttribute("data-vip", msg.partnerId);
+      if(claimMenu) claimMenu.setAttribute("data-vip", msg.partnerId);
        partnernick = msg.nick;
        
        //alert(msg.nick);
@@ -723,14 +723,14 @@ function on_msg(msg) {
         handleHangUp()
         break
       case 'peer-matched':
-   //    alert(msg.isprem+' '+msg.nick);
+      //alert(msg.isprem+' '+msg.nick);
         console.log(msg.vip, " nick ", msg.partnerId,msg.nick);
         partnerId = msg.partnerId;
         partnernick = msg.nick;
         partnerpremium = msg.isprem;  
         console.log("your id: ", userId.value, "partner id ", msg.partnerId, 'partner nick ',msg.nick, msg.isprem);
        // claimMenu.setAttribute("data-vip", msg.vip);
-        claimMenu.setAttribute("data-vip", msg.partnerId);
+      if(claimMenu)  claimMenu.setAttribute("data-vip", msg.partnerId);
        // let a3 = checkIp(msg.vip);
         let a3 = checkIp(msg.partnerId);
         console.warn("a3", a3);
@@ -983,6 +983,7 @@ function handleNewIceCandidate(msg) {
  
  const offerOpts = {offerToReceiveAudio: 1, offerToReceiveVideo: 1};
  async function handlePeerMatched(){
+	// alert(1);
 	if(isNegotiating){
 		console.log("shon isnegotiating");
 	//	return;
@@ -1482,7 +1483,7 @@ return imgdata22;
 	if(IPS.size > 0) amap = IPS;
 	console.error("amap", amap, IPS);
 		wsend({ type:'search-peer', nick: (NICK?NICK:'Anonym'), src: imgdata , ignores: [...IPS] });
-	}, 0);
+	}, 4000);
 	//someInterval = setInterval(doScreenshot, 1000);
 		somespinner.className="show";
 		mobileloader.className="active";
@@ -1843,7 +1844,7 @@ window.addEventListener("online", function(e) {
  isSettingRemoteAnswerPending = false;
  partnerId = null;
  partnernick = undefined;
- claimMenu.setAttribute("data-vip","");
+ if(claimMenu)claimMenu.setAttribute("data-vip","");
  //giftsContainer.style.display="block";
     }
     
@@ -1879,6 +1880,7 @@ function iceConnectionStateChangeHandler (event) {
     break;
     case 'complete':
       connectionState = 'open'
+      wsend({ type: "connected" });
       break;
     case 'closed':
     console.log('ice closed');
@@ -2086,57 +2088,7 @@ function setConnects(n){
 		}
 	}
 }
-function handleDynamic(obj){
-	//console.log(obj);
-	if(obj.sub == "total"){
-		camsCount.textContent = obj.cams.length;
-		let b = setConnects(obj.cams.length);
-		//if(b){
-		connects.textContent = b;
-	//}
-		/*
-		obj.cams.forEach(function(el, i){
-		let d = document.createElement("div");
-		d.className="dynamicbox";
-		d.setAttribute("data-id", el[1].id);
-		d.innerHTML=`<caption>${el[1].nick}</caption><div class="dynamicImgHalter"><img src="${el[1].src}"/></div>`;
-		dynamicContainer.appendChild(d);
-		*/ 
-	//})
-	}else if(obj.sub == "remove"){
-		camsCount.textContent = obj.camcount;
-		let b = setConnects(obj.camcount);
-		//if(b){
-		connects.textContent = b;
-	//}
-	//alert(b);
-		//let el = document.querySelector(`[data-id="${obj.id}"]`);
-		//if(el)el.remove();
-	}else if(obj.sub == "add"){
-		/*
-		let d = document.createElement("div");
-		d.className="dynamicbox";
-		d.setAttribute("data-id", obj.id);
-		d.innerHTML=`<caption>${obj.nick}</caption><div class="dynamicImgHalter"><img src="${obj.src}"/></div>`;
-		dynamicContainer.appendChild(d);*/
-		camsCount.textContent = obj.camcount;
-		 
-		let b = setConnects(obj.camcount);
-		//if(b){
-		connects.textContent = b;
-	//}
-		//if(b == 0)return;
-		//connects.textContent = b / 2;
-		
-	}else if(obj.sub == "connects"){
-		//alert('connects');
-		//let b = Number(obj.connects);
-		//if(b == 0)return;
-		//connects.textContent = b / 2;
-	}else{
-		
-	}
-}
+
 function clearDynamicContainer(){
 	return;
 	if(!dynamicContainer)return;

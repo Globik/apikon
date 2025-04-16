@@ -51,8 +51,9 @@ function on_msg(msg) {
 	if(msg.type == 'dynamic'){
         handleDynamic(msg);
 	}else if(msg.type == "connected2"){
-		let b = setConnects(msg.size);
-		connects.textContent = b;
+		//let b = setConnects(msg.size);
+		//connects.textContent = b;
+		conns.textContent = msg.size;
 	}else if(msg.type == "pick"){
 	//wsend({type:'pock'});
 	}
@@ -250,6 +251,7 @@ function setConnects(n){
 	}
 }
 function handleDynamic(obj){
+	
 //	console.log(obj);
 	if(obj.sub == "total"){
 		camsCount.textContent = obj.cams.length;

@@ -33,7 +33,7 @@ return `
 
     <div><b>Пересылок:</b> <span>${n.giftcount}</span></div>
     
-    <div><b>Веб-камер:</b> <span id="camsCount">0</span></div><div><b>Коннектов:</b> <span id="connects">0</span></div></div>
+    <div><b>Веб-камер:</b> <span id="camsCount">0</span></div><div><b>Коннектов:</b> <span id="connects">0</span> (<span id="conns">0</span>)</div></div>
     <hr> <a href="/admin/yoomoneytest">yoomoney</a>
     <hr>
     <section id="adminContainer">

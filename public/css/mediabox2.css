@@ -12,6 +12,32 @@ html,body{
 	clor:red;
 	height:auto;
 }
+#whosonlineoutput{
+	width:100%;
+	background:white;
+	height:100%;
+}
+.caption{
+	color:blue;
+}
+#whosonlinecontent{
+background:white;
+	width:100%;
+	display:flex;
+	align-self:center;
+	justify-content: center;
+}
+.dynamicImgHalter{
+	width:150px;
+	height:150px;
+	brder: 1px solid red;
+	object-fit:cover;
+}
+.dynamicImgHalter img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
 #zaroutput{
 	background:#fff1f1;
 	max-height:90vh;

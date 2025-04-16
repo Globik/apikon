@@ -54,9 +54,9 @@ function goMedia(data){
         publishedId = data.publishedId;
         let a = document.querySelector('div#playContainer svg');
         if(a) a.style.fill = 'rgba(234,223,244,0.6)';
-        claimMenu.setAttribute("data-vip", data.userId);
+       if(claimMenu) claimMenu.setAttribute("data-vip", data.userId);
         partnernick = data.nick;
-        claimMenu.setAttribute('data-was', 'dataPublish');
+     if(claimMenu)   claimMenu.setAttribute('data-was', 'dataPublish');
         //console.log("userId *** ", data.userId);
         //alert(data.img_data);
     } else if (data.type == "perror") {
@@ -812,7 +812,7 @@ function unpublish() {
 	mobileChat.className = "hide";
 	mobChat = false;
 	textarea2.classList.add('hide');
-	claimMenu.setAttribute("data-was", "");
+	if(claimMenu)claimMenu.setAttribute("data-was", "");
 }
 
 function disconnect2() {
@@ -868,7 +868,7 @@ gid("playContainer").setAttribute("data-state", "busy");
 			     while(chatbox.firstChild){
 				   chatbox.firstChild.remove();
 			   }
-			   claimMenu.setAttribute("data-was", "");
+			  if(claimMenu) claimMenu.setAttribute("data-was", "");
 }
 
 
