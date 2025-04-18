@@ -690,7 +690,7 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
 	 }
 	 })
  }
-if(isLogin.value=="false") getReklama();
+//if(isLogin.value=="false") getReklama();
 	 </script> 
 	 <script>
 	 function ababa(){

@@ -1361,13 +1361,19 @@ function closeAll(el){
 			track.stop();
 		});
 }
+let whosonlinecontent = gid('whosonlinecontent')
+while(whosonlinecontent.firstChild){
+		whosonlinecontent.firstChild.remove();
+	}
+	gid('webcams2').textContent = 0;
+	gid('conns2').textContent = 0;
 CONNECTED = false;
 clearInterval(someInterval);
 someInterval = null;
 	local.srcObject = null;
 	window.streami = undefined;
 	closeVideoCall();
-	wsend({type: "hang-up", ignore: false });
+	wsend({type: "hang-up", ignore: false, sub: 'here' });
 	el.disabled = false;
 	nextbtn.disabled = true;
 	local.style.backGround="rgba(0,0,0,0);"

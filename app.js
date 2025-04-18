@@ -1717,10 +1717,11 @@ function  machdisconnect(socket){
 
 function hangUp (socketId, msg, bool, abrupt) {
 	
-	
+	console.log('bool ', bool, socketId);
 	
 	if(bool){
 	if(onLine.has(socketId)){
+	console.log('online has ', socketId);
 		onLine.delete(socketId);
 		//broadcasti({ type: "dynamic", sub: "remove", id: socketId, camcount: onLine.size });
 		broadcast_admin({ type: "dynamic", sub: "remove", id: socketId, camcount: onLine.size });
@@ -1963,6 +1964,7 @@ if(msg.request == "mediasoup"){
         sendFoti(socket,msg);
         break;
       case 'hang-up':
+      console.log('hang-up', msg);
         hangUp(socket.id, { type: 'hang-up', partnerId: socket.userId, ignore: msg.ignore },(msg.sub&&msg.sub=="here"?true:false), (msg.sub&&msg.sub=="abrupt"?"abrupt":"noabrupt"))
         break
       case 'search-peer':
