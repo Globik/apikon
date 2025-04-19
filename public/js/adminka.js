@@ -8,6 +8,7 @@ if (window.location.protocol === "https:") {
 } else {
   new_uri = "ws:";
 }
+var ISVIDEO = false;
 
 function get_socket(){
  if(!sock) sock = new  WebSocket(new_uri + "//" + loc3 + "/administrator");
@@ -56,6 +57,8 @@ function on_msg(msg) {
 		conns.textContent = msg.size;
 	}else if(msg.type == "pick"){
 	//wsend({type:'pock'});
+	}else{
+		adminMedia(msg);
 	}
 }
 const someSpinner = gid("someSpinner");
@@ -261,15 +264,16 @@ function handleDynamic(obj){
 		connects.textContent = b;
 		//connects.textContent = obj.connects;
 	
-		
+		if(!ISVIDEO){
 		obj.cams.forEach(function(el, i){
 		let d = document.createElement("div");
 		d.className="dynamicbox";
 		d.setAttribute("data-id", el[1].id);
 		d.innerHTML=`<caption>${el[1].nick}</caption><div class="dynamicImgHalter"><div class="krestik" data-kid="${el[1].id}" onclick="krestik(this);">&#x274E;</div><img data-pid="${el[1].id}" src="${el[1].src}"/></div>`;
 		dynamicContainer.appendChild(d);
-		
+	
 })
+}
 	}else if(obj.sub == "remove"){
 		camsCount.textContent = obj.camcount;
 		let b = setConnects(obj.camcount);
@@ -281,6 +285,7 @@ function handleDynamic(obj){
 		console.log('on add');
 		//alert(obj.waiting);
 		//waiting.innerHTML = obj.waiting;
+		if(!ISVIDEO){
 		let d = document.createElement("div");
 		d.className="dynamicbox";
 	
@@ -288,6 +293,7 @@ function handleDynamic(obj){
 d.innerHTML=`<caption>${obj.nick}</caption><div class="dynamicImgHalter"><div class="krestik" data-kid="${obj.id}" onclick="krestik(this);">&#x274E;</div><img data-pid="${obj.id}" src="${obj.src}"/></div>`;
 	
 		dynamicContainer.appendChild(d);
+	}
 		camsCount.textContent = obj.camcount;
 		 
 		let b = setConnects(obj.camcount);
@@ -301,8 +307,10 @@ d.innerHTML=`<caption>${obj.nick}</caption><div class="dynamicImgHalter"><div cl
 		
 	//	connects.textContent = b / 2;
 	}else if(obj.sub == "srcdata"){
+		if(!ISVIDEO){
 		let el = document.querySelector(`[data-pid="${obj.id}"]`);
 		if(el) el.src = obj.src;
+	}
 	}else{
 		
 	}

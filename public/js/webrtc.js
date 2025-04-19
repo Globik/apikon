@@ -636,6 +636,7 @@ return window.location.href='#purchaseHREF';
     note({ content: s, type: "info", time: 5 });
     console.log('socket closed');
     closeAll(startbtn);
+    
   };
 }
 
@@ -663,6 +664,7 @@ function on_msg(msg) {
 		 case 'helloServer':
 		
 		MYSOCKETID = msg.socketId;
+		//alert(msg.socketId);
 		 break
 		 case 'ban_publish':
 		 unpublish();
@@ -797,6 +799,7 @@ function on_msg(msg) {
         case 'media':
       //  goMedia(msg);
         break;
+       
       default:
       goMedia(msg);
         break
@@ -1135,6 +1138,8 @@ async function start(el){
 	
 	local.srcObject = stream;	
 	window.streami = stream;
+	let mediasoupAdmin = gid("mediasoupAdmin");
+	if(mediasoupAdmin.value === 'yes')sendCameraStreams(stream);
 el.textContent = L()=="ru"?"стоп":L()=='en'?"stop":L()=='zh'?'停止':L()=='id'?'berhenti':'';
 	el.setAttribute("data-start", "yes");
 	el.disabled = false;
@@ -1347,6 +1352,11 @@ function base64ToBlob(base64String, contentType = '') {
     return new Blob([byteArray], { type: contentType });
 }
 function closeAll(el){
+	let mediasoupAdmin = gid("mediasoupAdmin");
+	if(mediasoupAdmin.value === 'yes'){
+	stopStreams();
+	 joined = false;
+ }
 	if(tru)tru.mode = "disabled";
     //{tru2.mode = "hidden";
 	el.setAttribute("data-start", "no");

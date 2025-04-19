@@ -14,6 +14,7 @@ return `
     <link href="/css/adminka.css" rel="stylesheet">
     <link href="/css/hearts.css" rel="stylesheet">
     <script src="/js/globalik.js"></script>
+    <script src="/js/mediasoup-client.min.js"></script>
     </head><body>
     <a href="/about">На главную</a>
     <nav id="adminNav"><button onclick="getUsers(this);">Пользователи</button><button onclick="getStun(this)";>Stun / turn</button><button onclick="whosOnline(this);">Кто онлайн</button>
@@ -39,9 +40,12 @@ return `
     <section id="adminContainer">
     <div id="someSpinner" class="hide"><div class="loader"></div></div>
     <section id="contentBox"></section>
+    <button data-start="yes" onclick="joinRoom(this);">Войти в чат</button>
+    <input type="checkbox" id="myVideo" onchange="setVideos(this);" ${n.mediasoupadmin=='yes'?'checked':''}/>
     <section id="dynamicSection"><div id="dynamicContainer"></div></section>
     </section>
     <script src="/js/adminka.js"></script>
+    <script src="/js/adminM.js"></script>
     </body></html>`;
 }
 module.exports = { dashboard }

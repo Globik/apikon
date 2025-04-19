@@ -22,7 +22,7 @@ const render = require('./libs/render.js');
 const admin = require('./router/admin.js');
 const pay = require('./router/pay.js');
 
-const { handleMediasoup, ev } = require("./libs/mediasoup_help.js")
+const { handleMediasoup, ev , handleAdminMedia } = require("./libs/mediasoup_help.js")
 
 const axios = require('axios').default;
 
@@ -42,7 +42,7 @@ var JETZT = er;
 const bodyParser =require('body-parser');
 
 var cors = require('cors')
-
+var mediasoupadmin = "no";
 
 const onLine = new Map();
 
@@ -232,7 +232,7 @@ app.get("/about", async(req, res)=>{
 		//let babu=result4[0]
 		let suki = await db.query('select id,name,entr,vkid,tgid,brole,heart,theart,prem,mon,grund from users left join ban on users.id=ban.usid where users.id=(?)',[result4[0].id]);
 		let babu=suki[0];
-	 return res.rendel('main', { imgData: imgData, lang: 'ru', yacount: JETZT , user: babu,buser:babu, FUCKER:'FUCKER', VK: true });
+	 return res.rendel('main', { mediasoupadmin: mediasoupadmin, imgData: imgData, lang: 'ru', yacount: JETZT , user: babu,buser:babu, FUCKER:'FUCKER', VK: true });
 	}else{
 		let result5 = await db.query(`insert into users(name, vkid, password) values(?,?,'1234')`, [ r.data.response[0].first_name, r.data.response[0].id ]);
 		console.log("INSERT ", result5);
@@ -240,7 +240,7 @@ app.get("/about", async(req, res)=>{
 		console.log('result6 ', result6[0]);
 		result6[0].id = result5.insertId.toString();
 		let dabu = result6[0];
-		return res.rendel('main', { imgData: imgData, lang: 'ru', yacount: JETZT , user: dabu, buser: dabu, FUCKER2:'FUCKER2', VK: true });
+		return res.rendel('main', { mediasoupadmin: mediasoupadmin, imgData: imgData, lang: 'ru', yacount: JETZT , user: dabu, buser: dabu, FUCKER2:'FUCKER2', VK: true });
 		// result5.insertId.toString(), { user
 		
 	}
@@ -263,7 +263,7 @@ app.get("/about", async(req, res)=>{
 	console.log("*** USER *** ", req.user);
 	//console.log('req.app.locals ', req.app.locals.testshopid, ' ', req.app.locals.testshopsecret);
 	//res.rendel('errnotfound',{});
-	res.rendel('main', { imgData: imgData, lang: 'ru', yacount: JETZT, uuid: crypto.randomUUID(), VK:false });
+	res.rendel('main', { mediasoupadmin: mediasoupadmin, imgData: imgData, lang: 'ru', yacount: JETZT, uuid: crypto.randomUUID(), VK:false });
 })
 
 
@@ -1109,7 +1109,18 @@ app.get("/dashboard", secured, isAdmin(['admin']), async(req, res)=>{
 	}catch(err){
 		console.log(err);
 	}
-	res.rendel('dashboard', { usercount: (a?a[0]['COUNT(*)'].toString():0), giftcount: (b?b[0]['COUNT(*)'].toString():0) });
+	res.rendel('dashboard', { mediasoupadmin: mediasoupadmin, usercount: (a?a[0]['COUNT(*)'].toString():0), giftcount: (b?b[0]['COUNT(*)'].toString():0) });
+})
+
+app.post('/enableVideo', async(req, res)=>{
+	let { checked } = req.body;
+	if(checked == 'yes'){
+		mediasoupadmin = 'yes';
+		res.json({info: "Вы включили чат"});
+	}else{
+		mediasoupadmin = 'no';
+		res.json({info: "Вы выключили чат"});
+	}
 })
 app.get("/api/getUsers", checkAuth, checkRole(['admin']), async(req, res)=>{
 	let db = req.db;
@@ -1932,6 +1943,9 @@ wsend(socket, { type:'vip', vip: r })
 if(msg.request == "mediasoup"){
 	/*handleMediasoup.*/handleMediasoup(socket, msg, WebSocket, wsServer, pool).mediasoup_t();
 	return;
+}else if(msg.request == 'mediasoup2'){
+	handleAdminMedia(socket, msg, WebSocket, wsServer, pool).mediadmin();
+	return;
 }
     switch (msg.type) {
       case 'new-ice-candidate':
@@ -1974,6 +1988,9 @@ if(msg.request == "mediasoup"){
         case 'srcdata':
         broadcast_admin({ type: "dynamic", sub: "srcdata", src: msg.src, id: socket.id });
         break
+        case 'list':
+        if(onLine.size !=0)wsend(socket, { type: "dynamic", sub: "total", cams: [...onLine] });
+        break
       case 'pock':
      // console.log('pock');
     //   clearTimeout(this.pingTimeout);
@@ -2010,6 +2027,7 @@ socket.on('error', function(e){
     
     hangUp(socket.id, { type: 'hang-up', partnerId: socket.userId, ignore: false }, true, "noabrupt")
     /* handleMediasoup.*/handleMediasoup(socket, msg, WebSocket, wsServer, pool).cleanUpPeer(socket.pubId);
+    handleAdminMedia(socket, msg, WebSocket, wsServer, pool).cleanMedia();
   })
 })
 function wsend(ws, obj) {

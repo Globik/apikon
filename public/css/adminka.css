@@ -12,6 +12,12 @@ div,section{
 	color:#0f294f;
 	font-size:1rem;
 }
+div.video-box{
+	width:200px;
+}
+video{
+	width:150px;
+}
 #adminNav{
 	background:#a4c797;
 	display:flex;
