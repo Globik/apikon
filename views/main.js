@@ -358,7 +358,7 @@ function isOpenModal(){
  // getZar();
     window.onload = function(){
 	//	getZar();
-		get_socket();
+	
 		if(FLAGVK){
 			VK_USER = false;
 //gid("settings").style.display = "none";

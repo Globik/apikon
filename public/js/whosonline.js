@@ -33,7 +33,7 @@ function handleDynamic(obj){
 	let el = document.querySelector(`[data-id="${obj.id}"]`);
 	if(el)el.remove();
 	}else if(obj.sub == "add"){
-		
+		//alert('add');
 		let d = document.createElement("div");
 		d.className="dynamicbox";
 		d.setAttribute("data-id", obj.id);
@@ -59,8 +59,8 @@ function handleDynamic(obj){
 	}
 }
 
-function loadError(el){
-	let a = el.getAttibute('data-pid');
+function loadError(eli){
+	let a = eli.getAttibute('data-pid');
 	if(!a)return;
 	let elu = document.querySelector(`[data-id="${a}"]`);
 	if(elu)elu.remove();

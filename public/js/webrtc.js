@@ -788,6 +788,7 @@ function on_msg(msg) {
        // connects.textContent = msg.size;
         break;
         case 'dynamic':
+       // alert('dynamic');
         handleDynamic(msg);
         break;
         case 'error':

@@ -1524,7 +1524,7 @@ async function searchPeer (socket, msg, source) {
      if(!onLine.has(socket.id)) {
 	 onLine.set(socket.id, { id: socket.id, src: source.src, nick: socket.nick, status: 'busy' });
 	// broadcast({ type: "dynamic", sub: "add", id: socket.id, partnerid: peerId, nick: socket.nick, status: 'busy', camcount: onLine.size});
-	 broadcast_admin({ type: "dynamic", sub: "add", id: socket.id, partnerid: peerId, src: source.src, nick: socket.nick, status: 'busy', camcount: onLine.size, waiting: waitingQueue });
+	 //broadcast_admin({ type: "dynamic", sub: "add", id: socket.id, partnerid: peerId, src: source.src, nick: socket.nick, status: 'busy', camcount: onLine.size, waiting: waitingQueue });
 	 //if(isEven(matchedIds.size))
 	 broadcasti({ type: "connected2", size: matchedIds.size });
 	 
@@ -2038,6 +2038,7 @@ function wsend(ws, obj) {
 }
 function broadcast(obj){
 	for (let el of wsServer.clients) {
+		console.log('broadcasto3 ');
 		if(el.burl=="/gesamt")wsend(el, obj);
 	}
 }
@@ -2092,12 +2093,15 @@ function getSocket(id){
 }
 function broadcasti(obj){
 	for (let el of wsServer.clients) {
+		console.log('broadcast', obj);
 		wsend(el, obj);
 	}
 }
 function broadcast_admin(obj){
+	//console.log('brooadcast amin');
 	for (let el of wsServer.clients) {
 		//if(el.burl == "/administrator"){
+		console.log('brooadcast amin' ,wsServer.clients.size);
 		wsend(el, obj);
 	//}
 	}
