@@ -169,7 +169,7 @@ async function adminMedia(a){
      
      console.log(obj);
         sock.send(JSON.stringify(obj));
-        sock.onmessage = async function (e) {
+        sock.addEventListener('message',  async function (e) {
 			
             let a;
            // console.log('a ', a);
@@ -185,31 +185,33 @@ async function adminMedia(a){
 			if (a.type == obj.type) {
 				console.log("d ", a.type," = ", obj.type);
                 resolve(a);
-            }else if(a.type == 'dynamic'){
-				if(a.sub == 'total'){
-				camsCount.textContent = a.cams.length;
+          //  }
+            //else if(a.type == 'dynamic'){
+				//if(a.sub == 'total'){
+//				camsCount.textContent = a.cams.length;
 
-		let b = setConnects(a.cams.length);
+		//let b = setConnects(a.cams.length);
 		//if(b){
-		connects.textContent = b;
+		//connects.textContent = b;
 		//connects.textContent = obj.connects;
 	
-		if(!ISVIDEO){
-		a.cams.forEach(function(el, i){
+		//if(!ISVIDEO){
+		/*a.cams.forEach(function(el, i){
 		let d = document.createElement("div");
 		d.className="dynamicbox";
 		d.setAttribute("data-id", el[1].id);
 		d.innerHTML=`<caption>${el[1].nick}</caption><div class="dynamicImgHalter"><div class="krestik" data-kid="${el[1].id}" onclick="krestik(this);">&#x274E;</div><img data-pid="${el[1].id}" src="${el[1].src}"/></div>`;
-		dynamicContainer.appendChild(d);
+		dynamicContainer.appendChild(d);*/
 	
-})}}else if(a.sub=='remove'){
-	camsCount.textContent = a.camcount;
+//}
+//}else if(a.sub=='remove'){
+	/*camsCount.textContent = a.camcount;
 		let b = setConnects(a.camcount);
 		
 		connects.textContent = b;
 		let el = document.querySelector(`[data-id="${a.id}"]`);
-		if(el)el.remove();
-}
+		if(el)el.remove();*/
+//}
 			}else if (a.type == "error") {
                 reject(a.info);
             }else if(a.type == "simulcast"){
@@ -224,7 +226,7 @@ async function adminMedia(a){
 				console.log(a.type);
 				
 				}
-			}
+			})
         
 
     });

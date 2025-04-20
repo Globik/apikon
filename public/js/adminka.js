@@ -21,7 +21,7 @@ function get_socket(){
 	  console.error(e);
     note({ content: "Websocket error: " + e, type: "error", time: 5 });
   };
-  sock.onmessage = function (evt) {
+  sock.addEventListener('message',  function (evt) {
 	  
     let a;
     try {
@@ -30,7 +30,7 @@ function get_socket(){
     } catch (e) {
       note({ content: e, type: "error", time: 5 });
     }
-  };
+  });
   sock.onclose = function () {
     sock = null;
     console.log('websocket closed');

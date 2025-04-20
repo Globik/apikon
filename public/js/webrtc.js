@@ -616,7 +616,7 @@ return window.location.href='#purchaseHREF';
    // note({ content: "Websocket error: " + e, type: "error", time: 5 });
   };
   
-  sock.onmessage = function (evt) {
+  sock.addEventListener('message', function (evt) {
 	  
     let a;
     try {
@@ -625,7 +625,7 @@ return window.location.href='#purchaseHREF';
     } catch (e) {
       note({ content: e, type: "error", time: 5 });
     }
-  };
+  });
   sock.onclose = function () {
 	  wsend({type: "hang-up", ignore: false });
 	 // clearTimeout(pingTimeout);
@@ -1139,7 +1139,7 @@ async function start(el){
 	local.srcObject = stream;	
 	window.streami = stream;
 	let mediasoupAdmin = gid("mediasoupAdmin");
-	//if(mediasoupAdmin.value === 'yes')sendCameraStreams(stream);
+	if(mediasoupAdmin.value === 'yes')sendCameraStreams(stream);
 el.textContent = L()=="ru"?"стоп":L()=='en'?"stop":L()=='zh'?'停止':L()=='id'?'berhenti':'';
 	el.setAttribute("data-start", "yes");
 	el.disabled = false;

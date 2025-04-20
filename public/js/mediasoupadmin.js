@@ -101,7 +101,7 @@ main()
    //  alert('myPeerId ' + obj.peerId);
      
         sock.send(JSON.stringify(obj));
-        sock.onmessage = async function (e) {
+        sock.addEventListener('message',  async function (e) {
 			
             let a;
            // console.log('a ', a);
@@ -131,7 +131,7 @@ main()
 				console.log(a.type);
 				
 				}
-			}
+			})
         
 
     });
