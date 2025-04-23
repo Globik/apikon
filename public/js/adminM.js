@@ -28,6 +28,7 @@ let device,
            lastPollSyncData = {},
            consumers = [];
            var histarget;
+           
 
 //
 // entry point -- called by document.body.onload
@@ -118,13 +119,14 @@ main()
 
  
 async function adminMedia(a){
+	//alert(a.type);
 	console.log('msg type ', a.type);
 	if(a.type == 'howmuch'){
 		$('#onlineCount').textContent = a.value;
 	//	$('#totalSpeakers').textContent = a.count;
 	//	$('#consumerCount').textContent = a.consumerscount;
 	}else if(a.type == 'welcome'){
-		myPeerId = a.yourid;
+		myPeerId = a.socketid;
 	}else if(a.type == "Newproducer"){
 		if(!joined){
 			console.log(' not else joined, returning...');
@@ -165,6 +167,7 @@ async function adminMedia(a){
 			//return resolve({ error: 'socket closed' });
 		}
         obj.request = "mediasoup2";
+       // alert('peerid '+ myPeerId);
         obj.peerId = myPeerId; 
      
      console.log(obj);
@@ -281,7 +284,7 @@ if(l == 'yes'){
       console.log('state ', state);
       if(state.length > 0){
 			for(let item of state){
-			await subscribeToTrack(item.peerid, item.media)
+			await subscribeToTrack(item.peerid, item.media, item.nick)
 			}
 		}
     
@@ -380,7 +383,7 @@ async function leaveRoom() {
    //$('#send-camera').disabled = false;
 }
 
-async function subscribeToTrack(peerId, mediaTag) {
+async function subscribeToTrack(peerId, mediaTag, nick) {
   console.log('subscribe to track', peerId, mediaTag);
 if(mediaTag == 'video'){
 	mediaTag = 'cam-video';
@@ -407,7 +410,7 @@ try{
   //alert('mediatag ' + mediaTag);
  //videoConsumer = 
 if(mediaTag == 'cam-video'){
- let  consumer =  await consumeAndResume(recvTransport, mediaTag, peerId);
+ let  consumer =  await consumeAndResume(recvTransport, mediaTag, peerId, nick);
  if(consumer){
  consumers.push(consumer);
 	consumer.on('trackended', function(){
@@ -419,7 +422,7 @@ if(mediaTag == 'cam-video'){
 	})
 }
 }else{
- let consumer = await consumeAndResume(recvTransport, mediaTag, peerId);
+ let consumer = await consumeAndResume(recvTransport, mediaTag, peerId, nick);
  if(consumer){
  consumers.push(consumer);
 consumer.on('trackended', function(){
@@ -476,10 +479,10 @@ alert(e);
 }
 
 
-async function consumeAndResume(recvTransport, kind, peerId) {
+async function consumeAndResume(recvTransport, kind, peerId, nick) {
     let consumer;
     try {
-        consumer = await bconsume(recvTransport, kind, peerId);
+        consumer = await bconsume(recvTransport, kind, peerId, nick);
         
     } catch (err) {
 	
@@ -514,7 +517,7 @@ async function consumeAndResume(recvTransport, kind, peerId) {
         return null;
     }
 }
-async function bconsume(transport, trackKind, peerId) {
+async function bconsume(transport, trackKind, peerId, nick) {
     console.log('--start of consume --kind=' + trackKind);
     const {rtpCapabilities} = device;
     var data;
@@ -551,7 +554,7 @@ mediaTag = trackKind;
               //  rtpParameters,
                // codecOptions,
                ...consumerParameters,
-    appData: { peerId, mediaTag }
+    appData: { peerId, mediaTag, nick }
             });
         } catch (err) {
 			console.error(err);
@@ -642,8 +645,8 @@ async function closeConsumer(consumer) {
   try {
     // tell the server we're closing this consumer. (the server-side
     // consumer may have been closed already, but that's okay.)
-  //  let {error} = await sendRequest({ type:'close-consumer',  consumerId: consumer.id });
-    //if(error)console.warn(error);
+    //let {error} = await sendRequest({ type:'close-consumer',  consumerId: consumer.id });
+   // if(error)console.warn(error);
     await consumer.close();
 
     consumers = consumers.filter((c) => c !== consumer);
@@ -1048,7 +1051,7 @@ function addVideoAudio(consumer) {
  
   let mynamediv = document.createElement('div');
   mynamediv.className = "for-name";
-  mynamediv.textContent ="myname";
+  mynamediv.textContent = consumer.appData.nick;
   anotherdiv.appendChild(mynamediv);
   anotherdiv.className = "video-box";
   

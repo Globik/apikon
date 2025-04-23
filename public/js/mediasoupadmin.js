@@ -317,7 +317,7 @@ function camEncodings() {
   //localCam = null;
   //localScreen = null;
  
- //   wsend({ type: 'minus-statistic', subtype: 'streamer', peerId: myPeerId , request: 'mediasoup' });
+ //   wsend({ type: 'minus-statistic', subtype: 'streamer', peerId: myPeerId , closeTransportrequest: 'mediasoup' });
   //  el.setAttribute('disabled', 1);
 
   // update relevant ui elements
@@ -413,6 +413,7 @@ async function createTransport(direction) {
 	  
     transport = await device.createSendTransport(transportOptions);
     transport.appData.type = 'send';
+    transport.appData.nick = 'alik'
         transport.iceServers = ICESERVERS.iceServers;
   } else {
     throw new Error(`bad transport 'direction': ${direction}`);

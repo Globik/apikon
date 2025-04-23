@@ -456,7 +456,12 @@ function newev(){
       //  alert("hidden");
       //  setSignal();
       if(DEVELOPMENT === "yes"){}else{
-      if(sock)sock.close();
+      if(sock){
+		  
+		  stopStreams();
+		  joined = false;
+		  sock.close();
+		  }
   }
     } else {
         console.log("Browser tab is visible")
@@ -468,11 +473,20 @@ function newev(){
 document.addEventListener('visibilitychange', newev);
 window.addEventListener("pagehide", function(ev){
 	//alert("pagehide");
-	if(sock)sock.close();
+	if(sock){
+		 
+		  stopStreams();
+		  joined = false;
+	sock.close();
+}
 });
 window.addEventListener("beforeunload", function(ev){
 	//alert("beforeunload");
-	if(sock)sock.close();
+	if(sock){
+		 stopStreams();
+		  joined = false;
+		sock.close();
+	}
 });
 function wari(el){
 	//alert('load');
@@ -628,6 +642,7 @@ return window.location.href='#purchaseHREF';
   });
   sock.onclose = function () {
 	  wsend({type: "hang-up", ignore: false });
+	  closeAll(startbtn);
 	 // clearTimeout(pingTimeout);
     sock = null;
     let s = L()=="ru"?"Соединение с сервером закрыто!":L()=='en'?"Websocket closed!":
@@ -635,7 +650,7 @@ return window.location.href='#purchaseHREF';
     L()=='id'?'Soket web ditutup':'';
     note({ content: s, type: "info", time: 5 });
     console.log('socket closed');
-    closeAll(startbtn);
+    //closeAll(startbtn);
     
   };
 }
@@ -1354,10 +1369,10 @@ function base64ToBlob(base64String, contentType = '') {
 }
 function closeAll(el){
 	let mediasoupAdmin = gid("mediasoupAdmin");
-	if(mediasoupAdmin.value === 'yes'){
+	//if(mediasoupAdmin.value === 'yes'){
 	stopStreams();
-	 joined = false;
- }
+	joined = false;
+ //}
 	if(tru)tru.mode = "disabled";
     //{tru2.mode = "hidden";
 	el.setAttribute("data-start", "no");
@@ -1427,7 +1442,7 @@ someInterval = null;
 // document.body.appendChild(link);
 // link.click();
 // link.remove();
- 
+ if(sock)sock.close();
 }
 
 function handleError(err){

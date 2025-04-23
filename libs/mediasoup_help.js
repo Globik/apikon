@@ -684,14 +684,16 @@ removeAudioConsumer(id);
 		//broadcast_all({ type: 'total_speakers', count: TOTAL_SPEAKERS });
 
   try {
-	  try{
+	  //try{
 		  if(msg.vid == 'publish'){
 				if(!worker)await	startWorker();
+			}else{
+				if(!worker)await	startWorker();
 			}
-			}catch(e){console.log(e);return;}
+			//}catch(e){console.log(e);return;}
 	  
     let { peerId } = msg;
-    console.log('join-as-new-peer peerId ', peerId);
+    console.log('here2 join-as-new-peer peerId ', peerId);
         now = Date.now();
     //log('join-as-new-peer', peerId);
 socket.peerId = peerId;
@@ -705,7 +707,7 @@ let suka = [];
 
 for (let [key, value] of Object.entries(roomState.producers)){
 	console.log('key value.media ',key, ' ', value.appData);
-	suka.push({ peerid: value.appData.peerId, media: value.appData.mediaTag });
+	suka.push({ peerid: value.appData.peerId, media: value.appData.mediaTag, nick: value.appData.nick });
 }
     wsend(ws, { type: msg.type, routerRtpCapabilities: router.rtpCapabilities, state: suka });
   } catch (e) {
@@ -859,7 +861,7 @@ wsend(ws, { type: msg.type, state: suka })
       kind,
       rtpParameters,
       paused,
-      appData: { ...appData, peerId, transportId }
+      appData: { ...appData, peerId, transportId , nick: ws.nick }
     });
 
     // if our associated transport closes, close ourself, too
@@ -1458,12 +1460,35 @@ async function startWorker() {
   dtlsPrivateKeyFile  : dkey
 }*/
   );
-  router = await worker.createRouter({ mediaCodecs });
- // worker.fuck();
- router.on('workerclose', function(){ console.log('worker closed so router closed') })
+ 
  //router.observer.on('close', function(){console.log('router closed')})
 	  worker.observer.on('close', function(){console.log('worker closed')})
   console.log('-- mediasoup worker start. --')
+  worker.observer.on('newrouter', function(r){
+	  console.error('******************************************************ron new outer ');
+	  r.observer.on('close', function(){console.log('router closed')});
+	  r.observer.on('newtransport', function(t){
+		  console.log('******************************************************* new transport ***********************', t.appData);
+		  t.observer.on('newproducer', function(p, a){
+			  console.log('***************************  new producer! ******************** ', p.id, p.producerId, p.appData, a);
+				p.observer.on('close', function(){
+					console.log('**** producer closed ***** ', p.id);
+				});
+		  });
+		  t.observer.on('newconsumer', function(c){
+			  console.log('*** new consumer *****');
+			  c.observer.on('close', function(){
+				  console.log('*** consumer closed **** ', c.id);
+			  });
+		  });
+		  t.observer.on('close', function(){
+			  console.log('*** transport closed **** ', t.id, ' appData ', t.appData);
+		  });
+	  });
+  });
+   router = await worker.createRouter({ mediaCodecs });
+ // worker.fuck();
+ router.on('workerclose', function(){ console.log('worker closed so router closed') })
 }catch(e){console.log(e);}
 
 //worker.close();

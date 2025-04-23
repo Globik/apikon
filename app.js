@@ -1910,7 +1910,7 @@ wsend(socket, { type:'vip', vip: r })
   
   setIp(socket, ip);
   socket.id = obid();
-  
+  wsend(socket, { type: 'welcome', socketid: socket.id });
  
   
    broadcasti({ type: 'online', online: wsServer.clients.size, imgData: imgData.img_data })
@@ -1969,6 +1969,9 @@ if(msg.request == "mediasoup"){
         socket.isprem = msg.isprem;
         socket.VK = msg.VK;
         wsend(socket, { type: "helloServer", socketId: socket.id });
+        break
+        case 'introduce':
+        socket.nick = msg.nick;
         break
         case "messagepublished":
         console.log('publish ', msg);
