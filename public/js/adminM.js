@@ -137,13 +137,13 @@ async function adminMedia(a){
 		if(a.mediaTag == 'cam-video'){
 	
 		setTimeout(async ()=>{	
-			subscribeToTrack(a.peerId, a.mediaTag, a.nick) 
-			},1000)
+			await subscribeToTrack(a.peerId, a.mediaTag, a.nick) 
+			},4000)
 		}
 	else if(a.mediaTag == 'cam-audio'){
 		setTimeout(async ()=>{
-			subscribeToTrack(a.peerId, a.mediaTag, a.nick)
-			}, 2000) 
+				await subscribeToTrack(a.peerId, a.mediaTag, a.nick)
+			}, 5000) 
 	 }
  }
 	}else if(a.type == 'bye'){
@@ -294,7 +294,9 @@ if(l == 'yes'){
       console.log('state ', state);
       if(state.length > 0){
 			for(let item of state){
+		//		setTimeout(async function(){
 			await subscribeToTrack(item.peerid, item.media, item.nick)
+		//}, 3);
 			}
 		}
     
@@ -532,7 +534,7 @@ async function consumeAndResume(recvTransport, kind, peerId, nick) {
 }
 async function bconsume(transport, trackKind, peerId, nick) {
     console.log('--start of consume --kind=' + trackKind);
-    const {rtpCapabilities} = device;
+    const { rtpCapabilities } = device;
     var data;
     
     let consumerParameters;
@@ -549,7 +551,7 @@ async function bconsume(transport, trackKind, peerId, nick) {
     }
     
 //console.error(data)
-console.log('consumerParameters ', JSON.stringify(consumerParameters))
+//console.log('consumerParameters ', JSON.stringify(consumerParameters))
 
    const producerId = consumerParameters.producerId;
   //  const id = data.params.id;
