@@ -99,9 +99,13 @@ main()
         obj.request = "mediasoup2";
         obj.peerId = MYSOCKETID; 
    //  alert('myPeerId ' + obj.peerId);
-     
+     try{
         sock.send(JSON.stringify(obj));
-      //  sock.addEventListener('message',  async function (e) {
+	}catch(er){
+		resolve({error: er});
+		return;
+	}
+       // sock.addEventListener('message',  async function (e) {
 			sock.onmessage = async function(e){
             let a;
            // console.log('a ', a);
@@ -117,8 +121,10 @@ main()
 			if (a.type == obj.type) {
 				console.log("d ", a.type," = ", obj.type);
                 resolve(a);
+                sock.onmessage  = null;
             }else if (a.type == "error") {
                 reject(a.info);
+                sock.onmessage  = null;
             }/*else if(a.type == "simulcast"){
 			console.log(e.data);
 				resolve(a);
@@ -132,6 +138,7 @@ main()
 				
 				}
 			}
+			//)
         
 
     });
@@ -144,7 +151,7 @@ main()
 async function joinRoom() {
 //	alert('join room');
   if (joined) {
-    return;
+  //  return;
   }
 //$('#join-button').disabled = true;
   console.log('join room');
@@ -194,8 +201,9 @@ async function sendCameraStreams(localCam) {
   // create a transport for outgoing media, if we don't already have one
   if (!sendTransport) {
 	 // alert('send transport');
+	// alert('no transport');
     sendTransport = await createTransport('send');
-  }
+  }else{alert('with transport '+JSON.stringify(sendTransport));}
 
   // start sending video. the transport logic will initiate a
   // signaling conversation with the server to set up an outbound rtp
@@ -282,9 +290,10 @@ function camEncodings() {
  //   return;
  // }
   if (!sendTransport) {
+	 // alert('no transport');
     return;
   }
-
+//alert('transport')
   console.log('stop sending media streams');
   //$('#stop-streams').style.display = 'none';
 
@@ -292,7 +301,9 @@ function camEncodings() {
                             transportId: sendTransport.id });
   if (error) {
     console.error(error);
+   // alert(error);
   }
+  //alert('suka');
   // closing the sendTransport closes all associated producers. when
   // the camVideoProducer and camAudioProducer are closed,
   // mediasoup-client stops the local cam tracks, so we don't need to
@@ -302,7 +313,7 @@ function camEncodings() {
 // if(screenVideoProducer) screenVideoProducer.close();
 //  if(screenAudioProducer)screenAudioProducer.close();
   try {
-	//  alert(sendTransport.closed);
+	 // alert('sendTransport.closed');
     //await 
     sendTransport.close()
   } catch (e) {
@@ -326,6 +337,7 @@ function camEncodings() {
  // $('#local-screen-pause-ctrl').style.display = 'none';
 //  $('#local-screen-audio-pause-ctrl').style.display = 'none';
   leaveRoom();
+  return 'ok';
  // showCameraInfo();
 }
 
@@ -353,7 +365,7 @@ async function leaveRoom() {
   } catch (e) {
     console.error(e);
   }
-  wsend({ type: 'bye', peerId: myPeerId , request: 'mediasoup2' });
+  wsend({ type: 'bye', request: 'mediasoup2' });
   recvTransport = null;
   sendTransport = null;
   camVideoProducer = null;

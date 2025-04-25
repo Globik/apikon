@@ -131,7 +131,9 @@ async function adminMedia(a){
 		if(!joined){
 			console.log(' not else joined, returning...');
 			return;
-		}
+			}
+
+		//if(!ISVIDEO) return;
 		if(a.mediaTag == 'cam-video'){
 	
 		setTimeout(async ()=>{	
@@ -172,8 +174,8 @@ async function adminMedia(a){
      
      console.log(obj);
         sock.send(JSON.stringify(obj));
-        sock.addEventListener('message',  async function (e) {
-			
+       // sock.addEventListener('message',  async function (e) {
+			sock.onmessage = function(e){
             let a;
            // console.log('a ', a);
             try {
@@ -229,7 +231,7 @@ async function adminMedia(a){
 				console.log(a.type);
 				
 				}
-			})
+			}
         
 
     });
@@ -257,7 +259,7 @@ async function joinRoom(el) {
 		return;
 	}
   if (joined) {
-   // return;
+  // return;
   }
    while(dynamicContainer.firstChild){
 		dynamicContainer.firstChild.remove();
@@ -294,6 +296,7 @@ if(l == 'yes'){
    el.textContent = "Выйти";
    el.disabled = false;
   } catch (e) {
+	  ISVIDEO = false;
     console.error(e);
     note({ content: e, type: "error", time: 5 });
     $('#join-button').disabled = false;
@@ -301,7 +304,7 @@ if(l == 'yes'){
     return;
   }
 }else{
-	
+	 ISVIDEO = false;
 	el.textContent = "Войти в чат";
 	el.setAttribute('data-start', "yes");
 	leaveRoom();

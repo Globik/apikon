@@ -450,43 +450,27 @@ if (window.location.protocol === "https:") {
 }
 
 
-function newev(){
+async function newev(){
 	 if (document.hidden){
         console.log("Browser tab is hidden")
-      //  alert("hidden");
-      //  setSignal();
-      if(DEVELOPMENT === "yes"){}else{
-      if(sock){
-		  
-		  stopStreams();
-		  joined = false;
-		  sock.close();
-		  }
+    
+		//  	let mediasoupAdmin = gid("mediasoupAdmin");
+		  	  if(DEVELOPMENT === 'yes'){
+				//  alert('yes');
+			  }else{
+				  removeMedia();
+	 }
   }
-    } else {
-        console.log("Browser tab is visible")
-       //document.removeEventListener('visibilitychange', newev);
-    }
-   // document.removeEventListener('visibilitychange', newev);
-}
+ }
 
 document.addEventListener('visibilitychange', newev);
-window.addEventListener("pagehide", function(ev){
-	//alert("pagehide");
-	if(sock){
-		 
-		  stopStreams();
-		  joined = false;
-	sock.close();
-}
+window.addEventListener("pagehide", async function(ev){
+	
+		 	removeMedia();
+
 });
-window.addEventListener("beforeunload", function(ev){
-	//alert("beforeunload");
-	if(sock){
-		 stopStreams();
-		  joined = false;
-		sock.close();
-	}
+window.addEventListener("beforeunload", async function(ev){
+	removeMedia();
 });
 function wari(el){
 	//alert('load');
@@ -1367,12 +1351,23 @@ function base64ToBlob(base64String, contentType = '') {
     const byteArray = new Uint8Array(byteArrays);
     return new Blob([byteArray], { type: contentType });
 }
-function closeAll(el){
+async function removeMedia(){
 	let mediasoupAdmin = gid("mediasoupAdmin");
-	//if(mediasoupAdmin.value === 'yes'){
-	stopStreams();
-	joined = false;
- //}
+	if(mediasoupAdmin.value === 'yes'){
+	let bu = await stopStreams();
+	if(bu === 'ok'){
+		//alert(bu);
+		if(sock)sock.close();
+		joined = false;
+	}
+	
+ }else{
+	 wsend({type: "hang-up", ignore: false, sub: 'here' });
+	 if(sock)sock.close();
+ }
+}
+async function closeAll(el){
+	removeMedia();
 	if(tru)tru.mode = "disabled";
     //{tru2.mode = "hidden";
 	el.setAttribute("data-start", "no");
@@ -1399,11 +1394,11 @@ someInterval = null;
 	local.srcObject = null;
 	window.streami = undefined;
 	closeVideoCall();
-	wsend({type: "hang-up", ignore: false, sub: 'here' });
+	//wsend({type: "hang-up", ignore: false, sub: 'here' });
 	el.disabled = false;
 	nextbtn.disabled = true;
 	local.style.backGround="rgba(0,0,0,0);"
-	if(sock) sock.close();
+	//if(sock) sock.close();
 	isShow = false;
 	chatbox.innerHTML="";
 	chatbox2.innerHTML="";
@@ -1426,6 +1421,7 @@ someInterval = null;
  makingOffer = false;
  ignoreOffer = false;
  isSettingRemoteAnswerPending = false;
+ 
  //if(sock) sock.close();
  partnerId = null;
  
@@ -1442,7 +1438,7 @@ someInterval = null;
 // document.body.appendChild(link);
 // link.click();
 // link.remove();
- if(sock)sock.close();
+ //if(sock)sock.close();
 }
 
 function handleError(err){
@@ -1515,7 +1511,7 @@ return imgdata22;
 	if(IPS.size > 0) amap = IPS;
 	console.error("amap", amap, IPS);
 		wsend({ type:'search-peer', nick: (NICK?NICK:'Anonym'), src: imgdata , ignores: [...IPS] });
-	}, 4000);
+	}, 2000);
 	someInterval = setInterval(doScreenshot, 1000 * 11);
 		somespinner.className="show";
 		mobileloader.className="active";

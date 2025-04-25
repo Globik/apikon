@@ -59,8 +59,9 @@ function handleDynamic(obj){
 	}
 }
 
-function loadError(eli){
-	let a = eli.getAttibute('data-pid');
+function loadError(ma){
+	//return;
+	let a = ma.getAttribute('data-pid');
 	if(!a)return;
 	let elu = document.querySelector(`[data-id="${a}"]`);
 	if(elu)elu.remove();

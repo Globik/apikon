@@ -649,7 +649,8 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
 </script>
     </section>
     </article>
-   
+  
+
  <!-- <div id="yandex_rtb_R-A-12098170-1"></div> -->
    ${process.env.DEVELOPMENT==="yes"?'<script>function getReklama(){}</script>':`<script>
      // https://yandex.ru/support2/partner/ru/web/units/sizes
