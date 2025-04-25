@@ -220,7 +220,8 @@ async function adminMedia(a){
 		if(el)el.remove();*/
 //}
 			}else if (a.type == "error") {
-                reject(a.info);
+				alert(a.error);
+                reject(a);
                 sock.onmessage = null;
             }else if(a.type == "simulcast"){
 			console.log(e.data);

@@ -204,7 +204,9 @@ async function sendCameraStreams(localCam) {
 	 // alert('send transport');
 	// alert('no transport');
     sendTransport = await createTransport('send');
-  }else{alert('with transport '+JSON.stringify(sendTransport));}
+  }else{
+	 // alert('with transport '+JSON.stringify(sendTransport));
+	  }
 
   // start sending video. the transport logic will initiate a
   // signaling conversation with the server to set up an outbound rtp

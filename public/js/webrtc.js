@@ -1139,7 +1139,13 @@ async function start(el){
 	local.srcObject = stream;	
 	window.streami = stream;
 	let mediasoupAdmin = gid("mediasoupAdmin");
-	if(mediasoupAdmin.value === 'yes')sendCameraStreams(stream);
+	if(mediasoupAdmin.value === 'yes'){
+		try{
+	await	sendCameraStreams(stream);
+	}catch(err){
+		console.log(err);
+	}
+		}
 el.textContent = L()=="ru"?"стоп":L()=='en'?"stop":L()=='zh'?'停止':L()=='id'?'berhenti':'';
 	el.setAttribute("data-start", "yes");
 	el.disabled = false;
