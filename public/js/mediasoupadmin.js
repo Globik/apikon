@@ -46,7 +46,8 @@ let joined,
 						request: 'mediasoup2',
 						 mediaTag: p.appData.mediaTag, 
 						 peerId: MYSOCKETID ,
-						 id: p.id
+						 id: p.id,
+						 nick: gid('userName').value
 						 });
 		
 		

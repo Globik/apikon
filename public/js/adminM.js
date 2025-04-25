@@ -272,7 +272,7 @@ let l = el.getAttribute("data-start");
 //alert(l)
 if(l == 'yes'){
 	 if (joined) {
-	  alert('shon joined returning');
+	 // alert('shon joined returning');
    return;
   }
    while(dynamicContainer.firstChild){
@@ -336,11 +336,11 @@ function stopLocalStream(stream) {
 }
 async function leaveRoom() {
   if (!joined) {
-	  alert('!joined');
+	//  alert('!joined');
    // return;
   }
 
-  alert('leave room');
+ // alert('leave room');
   //$('#leave-room').style.display = 'none';
 
 

@@ -916,7 +916,7 @@ wsend(ws, { type: msg.type, state: suka })
 	  wsend(ws, { type: msg.type, error: e });
   }
 }else if(msg.type == 'Newproducer'){
-	 broadcast_admin({ type: "Newproducer", id: msg.id , peerId: msg.peerId, mediaTag: msg.mediaTag });
+	 broadcast_admin({ type: "Newproducer", id: msg.id , peerId: msg.peerId, mediaTag: msg.mediaTag , nick: msg.nick });
 }else if(msg.type == 'bye'){
 	broadcast_admin({ type: msg.type, peerId: msg.peerId });
 }else if(msg.type == 'recv-track'){ // can change to consumer.type == 'simulcast' or 'simple' video/audio to reply
