@@ -1105,7 +1105,7 @@ async function start(el){
 	//if(VK_USER) return;
 	let sdata = {};
 	sdata.myip = MYIP;
-	sdata.usid = userId.value;
+	sdata.usid = gid('userId').value;
 	//vax('post','/api/checkBanned', sdata, on_check_banned, on_check_banned_error, null, false);
 	
 	
@@ -1184,7 +1184,8 @@ try{
 			}else if(err.name == "NotAllowedError" || err.name == "PermissionDeniedError"){
 				note({ content: "Пожалуйста, разрешите браузеру использовать камеру и микрофон.", type: "warn", time: 5 });
 			}else{
-				note({content: err.name,type:"warn", time: 5 });
+				console.error(err);
+				note({content: err.name + err,type:"warn", time: 5 });
 			}
 			el.disabled = false;
 		});
