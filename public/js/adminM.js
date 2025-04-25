@@ -129,22 +129,23 @@ async function adminMedia(a){
 		myPeerId = a.socketid;
 	}else if(a.type == "Newproducer"){
 		if(!joined){
-			console.log(' not else joined, returning...');
+			//alert(' not else joined, returning...');
 			return;
 			}
 
-		//if(!ISVIDEO) return;
+		if(ISVIDEO) {
 		if(a.mediaTag == 'cam-video'){
 	
 		setTimeout(async ()=>{	
-			subscribeToTrack(a.peerId, a.mediaTag) 
+			subscribeToTrack(a.peerId, a.mediaTag, a.nick) 
 			},1000)
 		}
 	else if(a.mediaTag == 'cam-audio'){
 		setTimeout(async ()=>{
-			subscribeToTrack(a.peerId, a.mediaTag)
+			subscribeToTrack(a.peerId, a.mediaTag, a.nick)
 			}, 2000) 
 	 }
+ }
 	}else if(a.type == 'bye'){
 		unsubscribeFromTrack(a.peerId, 'cam-video')
 		setTimeout(function(){
@@ -190,6 +191,7 @@ async function adminMedia(a){
 			if (a.type == obj.type) {
 				console.log("d ", a.type," = ", obj.type);
                 resolve(a);
+                sock.onmessage = null;
           //  }
             //else if(a.type == 'dynamic'){
 				//if(a.sub == 'total'){
@@ -219,17 +221,21 @@ async function adminMedia(a){
 //}
 			}else if (a.type == "error") {
                 reject(a.info);
+                sock.onmessage = null;
             }else if(a.type == "simulcast"){
 			console.log(e.data);
 				resolve(a);
+				 sock.onmessage = null;
 			}else if(a.type =='simple'){
 				resolve(a);
+				 sock.onmessage = null;
 			}else if(a.type=='bye'){
 			//	resolve(a);
 			}
 			else{
 				console.log(a.type);
-				
+				resolve(a);
+				 sock.onmessage = null;
 				}
 			}
         
@@ -258,19 +264,21 @@ async function joinRoom(el) {
 		note({ content: "Сперва включите чат", type: "info", time: 5 });
 		return;
 	}
-  if (joined) {
-  // return;
-  }
-   while(dynamicContainer.firstChild){
-		dynamicContainer.firstChild.remove();
-	}
-	ISVIDEO = true;
+ 
 //$('#join-button').disabled = true;
   console.log('join room');
   //$('#join-control').style.display = 'none';
 let l = el.getAttribute("data-start");
 //alert(l)
 if(l == 'yes'){
+	 if (joined) {
+	  alert('shon joined returning');
+   return;
+  }
+   while(dynamicContainer.firstChild){
+		dynamicContainer.firstChild.remove();
+	}
+	ISVIDEO = true;
   try {
     // signal that we're a new peer and initialize our
     // mediasoup-client device, if this is our first time connecting
@@ -305,6 +313,7 @@ if(l == 'yes'){
   }
 }else{
 	 ISVIDEO = false;
+	 joined = false;
 	el.textContent = "Войти в чат";
 	el.setAttribute('data-start', "yes");
 	leaveRoom();
@@ -327,10 +336,11 @@ function stopLocalStream(stream) {
 }
 async function leaveRoom() {
   if (!joined) {
-    return;
+	  alert('!joined');
+   // return;
   }
 
-  console.log('leave room');
+  alert('leave room');
   //$('#leave-room').style.display = 'none';
 
 
