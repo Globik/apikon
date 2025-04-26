@@ -260,6 +260,20 @@ function on_check(l){
 function on_check_error(l){
 	console.log(l);
 }
+
+async function exec(functions){
+	const results = [];
+	for(const {fn, params} of functions){
+		const result = await fn(...params);
+		results.push(result);
+	}
+	return results;
+}
+
+
+
+
+
 async function joinRoom(el) {
 	if(!myVideo.checked){
 		note({ content: "Сперва включите чат", type: "info", time: 5 });
@@ -292,14 +306,26 @@ if(l == 'yes'){
     if (!device.loaded) {
       await device.load({ routerRtpCapabilities });
   }
+  let abba = [];
       console.log('state ', state);
       if(state.length > 0){
 			for(let item of state){
 		//		setTimeout(async function(){
-			await subscribeToTrack(item.peerid, item.media, item.nick)
+		abba.push({fn:  async ()=>{ let s = await subscribeToTrack(item.peerid, item.media, item.nick);return s;}, params:[item.peerid, item.media, item.nick] });
+			//await subscribeToTrack(item.peerid, item.media, item.nick)
 		//}, 3);
 			}
+			(async ()=>{
+				try{
+					const results = await exec(abba);
+					console.log('results ', results);
+				}catch(er){
+					console.error(er);
+				}
+			})()
 		}
+		
+		
     
     joined = true;
    // $('#leave-room').style.display = 'initial';
