@@ -19,6 +19,7 @@ const path = require('path');
 const { spawn } = require('child_process')
 
 const render = require('./libs/render.js');
+
 const admin = require('./router/admin.js');
 const pay = require('./router/pay.js');
 
@@ -1989,6 +1990,7 @@ if(msg.request == "mediasoup"){
         searchPeer(socket, { type: 'peer-matched' }, { src: msg.src, ignores: msg.ignores })
         break
         case 'srcdata':
+        ev.emit('suka', { id: socket.id })
         broadcast_admin({ type: "dynamic", sub: "srcdata", src: msg.src, id: socket.id });
         break
         case 'list':

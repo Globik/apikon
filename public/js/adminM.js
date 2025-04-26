@@ -349,7 +349,13 @@ if(l == 'yes'){
 }
 
 }
-
+setInterval(async function(){
+	try{
+	await sendRequest({ type:'sync' });
+}catch(er){
+	console.error(er);
+}
+}, 1000*11)
  
 function pauseVideo(element) {
     element.pause();
@@ -552,12 +558,12 @@ async function consumeAndResume(recvTransport, kind, peerId, nick) {
             }
         } else {
             console.log('-- do not resume kind=' + kind);
-            alert('-- do not resume kind=' + kind);
+          //  alert('-- do not resume kind=' + kind);
            return consumer;
         }
     } else {
         console.log('-- no consumer yet. kind=' + kind);
-        alert('-- no consumer yet. kind=' + kind);
+       // alert('-- no consumer yet. kind=' + kind);
         return null;
     }
 }

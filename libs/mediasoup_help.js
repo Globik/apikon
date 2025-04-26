@@ -10,6 +10,8 @@ var BID = undefined;
 const axios = require('axios').default;
 const EventEmitter = require('node:events');
 const eventEmitter = new EventEmitter();
+
+
 let onLine = new Map();
 
 const os = require('os')
@@ -44,6 +46,26 @@ const roomState = {
   producers: [],
   consumers: []
 }
+
+eventEmitter.on('suka', function(d){
+	console.log('mydata ', d);
+//	 roomState.peers[d.id].lastSeenTs = Date.now();
+	     if(roomState.peers[d.id]){
+   roomState.peers[d.id].lastSeenTs = Date.now();
+   /*
+       let now = Date.now();
+    console.log('my data join-as-new-peer', d.id);
+
+    roomState.peers[d.id] = {
+      joinTs: now,
+      lastSeenTs: now,
+      media: {}, consumerLayers: {}, stats: {}
+    };
+ */
+}
+})
+
+
 
  function on_producer_transport_close(){
 		console.log("***************************************")
@@ -668,8 +690,21 @@ removeAudioConsumer(id);
       throw new Error('type sync not connected');
     }
 
-    // update our most-recently-seem timestamp -- we're not stale!
+    // update our most-recently-sem timestamp -- we're not stale!
+    if(roomState.peers[peerId]){
    roomState.peers[peerId].lastSeenTs = Date.now();
+   
+       let now = Date.now();
+    console.log('join-as-new-peer', peerId);
+
+    roomState.peers[peerId] = {
+      joinTs: now,
+      lastSeenTs: now,
+      media: {}, consumerLayers: {}, stats: {}
+    };
+ 
+}
+   
 //console.error("************** active sper******************* ", roomState.activeSpeaker)
     wsend(ws, { 
 	  type:msg.type,
@@ -1192,6 +1227,7 @@ function closePeer(peerId) {
     }
   }
   delete roomState.peers[peerId];
+  broadcast_admin({type:'bye', peerId:peerId });
 }
 
 async function closeTransport(transport) {
@@ -1243,6 +1279,16 @@ async function closeConsumer(consumer) {
     delete roomState.peers[consumer.appData.peerId].consumerLayers[consumer.id];
   }
 }
+
+setInterval(() => {
+    let now = Date.now();
+    Object.entries(roomState.peers).forEach(([id, p]) => {
+      if ((now - p.lastSeenTs) > 15000) {
+        warn(`removing stale peer ${id}`);
+        closePeer(id);
+      }
+    });
+  }, 1000*13);
 /*config  {
   worker: {
     rtcMinPort: 10000,
