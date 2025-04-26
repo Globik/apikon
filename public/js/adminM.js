@@ -526,10 +526,12 @@ async function consumeAndResume(recvTransport, kind, peerId, nick) {
             }
         } else {
             console.log('-- do not resume kind=' + kind);
+            alert('-- do not resume kind=' + kind);
            return consumer;
         }
     } else {
         console.log('-- no consumer yet. kind=' + kind);
+        alert('-- no consumer yet. kind=' + kind);
         return null;
     }
 }
@@ -584,7 +586,7 @@ mediaTag = trackKind;
        
         return consumer;
     } else {
-        note({content: 'Remote producer NOT READY', type: "info", time: 5});
+        note({content: 'Remote producer NOT READY ' + mediaTag, type: "info", time: 5});
 
         return null;
     }
