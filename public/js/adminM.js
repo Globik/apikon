@@ -572,13 +572,14 @@ async function bconsume(transport, trackKind, peerId, nick) {
     const { rtpCapabilities } = device;
     var data;
     
-    let consumerParameters;
+    let consumerParameters;let error;
     try {
 		// mediaTag,
    // mediaPeerId: peerId,
    // rtpCapabilities: device.rtpCapabilities
       //  data
-      consumerParameters   = await sendRequest({type: 'recv-track' /*'consume'*/, rtpCapabilities, mediaTag: trackKind, mediaPeerId: peerId })
+      consumerParameters  = await sendRequest({type: 'recv-track' /*'consume'*/, rtpCapabilities, mediaTag: trackKind, mediaPeerId: peerId })
+  // if(error)alert(error);
     } catch (err) {
 		console.error(err);
         note({contrent: 'Consume ERROR: ' + err, type: "error", time: 5});

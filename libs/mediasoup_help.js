@@ -998,7 +998,7 @@ console.log('roomState.producers: ', JSON.stringify(roomState.producers))
       wsend(ws, { type: "error", error: msg });
       return;
     }
-
+console.log("************** producer.kind ", producer.kind)
     let consumer = await transport.consume({
       producerId: producer.id,
       rtpCapabilities,
@@ -1085,9 +1085,11 @@ console.log('roomState.producers: ', JSON.stringify(roomState.producers))
 
     log('resume-consumer', consumer.appData, ' kind ', kind);
 
- if(kind == 'cam-video')  await consumer.resume();
+ if(kind == 'cam-video') { 
+ await consumer.resume();
 
     wsend(ws, { type: msg.type, resumed: true });
+}
   } catch (e) {
     console.error('error in /signaling/resume-consumer', e);
     wsend(ws, { type: msg.type, error: e });
