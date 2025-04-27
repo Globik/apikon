@@ -518,7 +518,7 @@ resolve('ok')
 }catch(e){
 	resolve(e);
 	console.error(e);
-alert(e);
+//alert(e);
 }
  // ui
   //await addVideoAudio(consumer);
@@ -542,12 +542,12 @@ async function consumeAndResume(recvTransport, kind, peerId, nick) {
         console.log('-- track exist, consumer ready. kind=' + kind);
         console.log('----- consumer: ', consumer);
       //alert(kind);
-        if (kind === 'cam-video' || 'cam-audio') {
+        if (kind === 'cam-video' /*|| 'cam-audio'*/) {
 			
             console.log('-- resume kind=' + kind + ' --consumer.id = ' + consumer.id);
             try {
-                await sendRequest({type: 'resume-consumer' , kind: kind, consumerId: consumer.id })
-
+                let { error } = await sendRequest({type: 'resume-consumer' , kind: kind, consumerId: consumer.id })
+if(error) alert(error)
                 console.log('resume OK');
                
                 return consumer;
@@ -559,7 +559,7 @@ async function consumeAndResume(recvTransport, kind, peerId, nick) {
         } else {
             console.log('-- do not resume kind=' + kind);
           //  alert('-- do not resume kind=' + kind);
-           return consumer;
+          // return consumer;
         }
     } else {
         console.log('-- no consumer yet. kind=' + kind);

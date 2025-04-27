@@ -1002,7 +1002,7 @@ console.log('roomState.producers: ', JSON.stringify(roomState.producers))
     let consumer = await transport.consume({
       producerId: producer.id,
       rtpCapabilities,
-      paused: true, // see note above about always starting paused
+      paused: producer.kind === 'video', // see note above about always starting paused
       appData: { peerId, mediaPeerId, mediaTag }
     });
 
@@ -1085,8 +1085,7 @@ console.log('roomState.producers: ', JSON.stringify(roomState.producers))
 
     log('resume-consumer', consumer.appData, ' kind ', kind);
 
- // if(kind == 'cam-audio') 
-  await consumer.resume();
+ if(kind == 'cam-video')  await consumer.resume();
 
     wsend(ws, { type: msg.type, resumed: true });
   } catch (e) {
