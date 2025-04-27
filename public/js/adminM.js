@@ -270,7 +270,20 @@ async function exec(functions){
 	return results;
 }
 
-
+async function execwithdelay(functions, delay){
+	for (const funci of functions){
+		//if(typeof func === 'function'){
+		funci.fn();	
+		//}
+		//console.log(funci.fn);
+		await new Promise(resolve=>{
+			//if(typeof func === 'function'){
+		//funci.fn();	
+	//}
+			setTimeout(resolve, delay);
+		});
+	}
+}
 
 
 
@@ -315,6 +328,7 @@ if(l == 'yes'){
 			//await subscribeToTrack(item.peerid, item.media, item.nick)
 		//}, 3);
 			}
+			/*
 			(async ()=>{
 				try{
 					const results = await exec(abba);
@@ -322,7 +336,8 @@ if(l == 'yes'){
 				}catch(er){
 					console.error(er);
 				}
-			})()
+			})()*/
+			execwithdelay(abba, 3000);
 		}
 		
 		
