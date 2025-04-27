@@ -300,7 +300,7 @@ if(l == 'yes'){
     let { routerRtpCapabilities, state } = await sendRequest({type:'join-as-new-peer'});
     console.log('rtpcapabilities ', routerRtpCapabilities);
     if(!routerRtpCapabilities){
-		note({ content: "Нет никого", type: "info", time: 5 });
+		note({ content: "Повторите попытку", type: "info", time: 5 });
 		return;
 	}
     if (!device.loaded) {
