@@ -196,6 +196,7 @@ let consumeri = findConsumerForTrack(a.peerId, 'audio');
 			fucker(a.routerRtpCapabilities, a.state)
 		}else if(a.type == 'error'){
 			alert(a.error);
+			console.error(a.error);
 		}else{console.log("unknown type ", a.type);}
 
 	
@@ -634,7 +635,7 @@ console.log('consumerParameters ', consumerParameters)
     appData: { peerId, mediaTag, nick }
             });
             console.log(consumerParameters.kind);
-      if(consumerParameters.kind == 'video')     wsend({type: 'resume-consumer', request: 'mediasoup2', peerId: myPeerId, kind: consumerParameters.kind, consumerId: consumer.id});
+      if(consumerParameters.kind == 'video')     await sendRequest({type: 'resume-consumer', request: 'mediasoup2', peerId: myPeerId, kind: consumerParameters.kind, consumerId: consumer.id});
         } catch (err) {
 			console.error(err);
             note({content: err.toString(), type: "error", time: 5});
