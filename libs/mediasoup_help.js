@@ -951,13 +951,14 @@ wsend(ws, { type: msg.type, state: suka })
 	  wsend(ws, { type: msg.type, error: e });
   }
 }else if(msg.type == 'Newproducer'){
+	socket.partnernick = msg.nick;
 	 broadcast_admin({ type: "Newproducer", id: msg.id , peerId: msg.peerId, mediaTag: msg.mediaTag , nick: msg.nick });
 }else if(msg.type == 'bye'){
 	broadcast_admin({ type: msg.type, peerId: msg.peerId });
 }else if(msg.type == 'recv-track'){ // can change to consumer.type == 'simulcast' or 'simple' video/audio to reply
 	
   try {
-    let { peerId, mediaPeerId, mediaTag, rtpCapabilities } = msg;
+    let { peerId, mediaPeerId, mediaTag, rtpCapabilities, usernick } = msg;
 console.log('msg ', msg)
     let producer = roomState.producers.find(
       (p) => {
@@ -1041,6 +1042,8 @@ console.log("************** producer.kind ", producer.kind)
     wsend(ws, {
       producerId: producer.id,
       id: consumer.id,
+      usernick: usernick ,
+      peerid: mediaPeerId,
       kind: consumer.kind,
       rtpParameters: consumer.rtpParameters,
       type: consumer.type, // simulcast for video and simple for audio
@@ -1085,11 +1088,11 @@ console.log("************** producer.kind ", producer.kind)
 
     log('resume-consumer', consumer.appData, ' kind ', kind);
 
- if(kind == 'cam-video') { 
+// if(kind == 'cam-video') { 
  await consumer.resume();
 
     wsend(ws, { type: msg.type, resumed: true });
-}
+//}
   } catch (e) {
     console.error('error in /signaling/resume-consumer', e);
     wsend(ws, { type: msg.type, error: e });

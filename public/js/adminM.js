@@ -134,6 +134,7 @@ async function adminMedia(a){
 			}
 
 		if(ISVIDEO) {
+			/*
 		if(a.mediaTag == 'cam-video'){
 	
 		setTimeout(async ()=>{	
@@ -144,13 +145,39 @@ async function adminMedia(a){
 		setTimeout(async ()=>{
 				await subscribeToTrack(a.peerId, a.mediaTag, a.nick)
 			}, 5000) 
-	 }
+	 }*/
+	 subscribi(a.peerId, a.mediaTag, a.nick);
  }
 	}else if(a.type == 'bye'){
-		unsubscribeFromTrack(a.peerId, 'cam-video')
-		setTimeout(function(){
-			unsubscribeFromTrack(a.peerId, 'cam-audio')
+		//alert('booo '+a.type);
+		await unsubscribeFromTrack(a.peerId, 'video')
+		setTimeout(async function(){
+			await unsubscribeFromTrack(a.peerId, 'audio')
 		},100);
+		/*
+		let consumer = findConsumerForTrack(a.peerId, 'video');
+  if (!consumer) {
+	 console.log('no consumer',a.peerId, consumers);
+    return;
+  }
+  console.log('unsubscribe from track', a.peerId);
+  try {
+    await closeConsumer(consumer);
+  } catch (e) {
+    console.error(e);
+  }
+  
+let consumeri = findConsumerForTrack(a.peerId, 'audio');
+  if (!consumeri) {
+	console.log('no consumeri', a.peerId, consumers);
+    return;
+  }
+  console.log('unsubscribe from track', a.peerId);
+  try {
+    await closeConsumer(consumeri);
+  } catch (e) {
+    console.error(e);
+  }*/
 	}else if(a.type == 'total_speakers'){
 	//	$('#totalSpeakers').textContent = a.count;
 	}else if(a.type == 'total_consumers'){
@@ -159,7 +186,17 @@ async function adminMedia(a){
 		note({ content: "Нет в эфире!", type: 'info', time: 5 });
 	}else if(a.type == 'msg'){
 		handlePrivat(a);
-	}else{console.log("unknown type ", a.type);}
+	}else if(a.type == 'simulcast'){
+		console.log('simulcast', a);
+		setConsumerParameters(a)
+	}else if(a.type == 'simple'){
+		console.log('simple ', a);
+		setConsumerParameters(a)
+		}else if(a.type == 'join-as-new-peer'){
+			fucker(a.routerRtpCapabilities, a.state)
+		}else if(a.type == 'error'){
+			alert(a.error);
+		}else{console.log("unknown type ", a.type);}
 
 	
 }
@@ -307,11 +344,24 @@ if(l == 'yes'){
 		dynamicContainer.firstChild.remove();
 	}
 	ISVIDEO = true;
-  try {
+ // try {
     // signal that we're a new peer and initialize our
     // mediasoup-client device, if this is our first time connecting
-    let { routerRtpCapabilities, state } = await sendRequest({type:'join-as-new-peer'});
-    console.log('rtpcapabilities ', routerRtpCapabilities);
+   // let { routerRtpCapabilities, state } = await sendRequest({type:'join-as-new-peer'});
+   wsend({ type:'join-as-new-peer', request: 'mediasoup2', peerId: myPeerId });
+  //  console.log('rtpcapabilities ', routerRtpCapabilities);
+  el.setAttribute("data-start", "no");
+   el.textContent = "Выйти";
+   el.disabled = false;
+}else{
+	 ISVIDEO = false;
+	 joined = false;
+	el.textContent = "Войти в чат";
+	el.setAttribute('data-start', "yes");
+	leaveRoom();
+}
+}
+    async function fucker(routerRtpCapabilities, state){
     if(!routerRtpCapabilities){
 		note({ content: "Повторите попытку", type: "info", time: 5 });
 		return;
@@ -323,8 +373,9 @@ if(l == 'yes'){
       console.log('state ', state);
       if(state.length > 0){
 			for(let item of state){
+				//subscribi(item.peerid, item.media, item.nick);
 		//		setTimeout(async function(){
-		abba.push({fn:  async ()=>{ let s = await subscribeToTrack(item.peerid, item.media, item.nick);return s;}, params:[item.peerid, item.media, item.nick] });
+		abba.push({fn:  ()=>{ let s = subscribi(item.peerid, item.media, item.nick);return s;}, params:[item.peerid, item.media, item.nick] });
 			//await subscribeToTrack(item.peerid, item.media, item.nick)
 		//}, 3);
 			}
@@ -337,12 +388,14 @@ if(l == 'yes'){
 					console.error(er);
 				}
 			})()*/
-			execwithdelay(abba, 3000);
-		}
+			execwithdelay(abba, 1000);
 		
+	}	
 		
     
     joined = true;
+}
+/*
    // $('#leave-room').style.display = 'initial';
    el.setAttribute("data-start", "no");
    el.textContent = "Выйти";
@@ -363,7 +416,7 @@ if(l == 'yes'){
 	leaveRoom();
 }
 
-}
+}*/
 setInterval(async function(){
 	try{
 	await sendRequest({ type:'sync' });
@@ -446,15 +499,201 @@ async function leaveRoom() {
    //$('#send-camera').disabled = false;
 }
 
+async function subscribi(peerId, mediaTag, nick){
+	 console.log('subscribe to track', peerId, mediaTag);
+if(mediaTag == 'video'){
+	mediaTag = 'cam-video';
+}else if(mediaTag == 'audio'){
+	mediaTag = 'cam-audio';
+}else{}
+ if (!recvTransport) {
+    recvTransport = await createTransport('recv');
+  }
+
+  // if we do already have a consumer, we shouldn't have called this
+  // method
+ let consumer = findConsumerForTrack(peerId, mediaTag);
+  if (consumer) {
+    console.error('already have consumer for track', peerId, mediaTag)
+    return;
+ };
+  if(mediaTag == 'cam-video'){
+ let  consumer =   consumeAnd(recvTransport, mediaTag, peerId, nick);
+ if(consumer){
+// consumers.push(consumer);
+	consumer.on('trackended', function(){
+		alert('videoconsumer on track ended pused '+ videoConsumer.paused);
+	//	unsubscribeFromTrack(peerId, mediaTag)
+	});
+	consumer.on('transportclose', function(){
+		console.log('transport closed so videoconsumer must close');
+	})
+}
+}else{
+ let consumer =  consumeAnd(recvTransport, mediaTag, peerId, nick);
+ if(consumer){
+ //consumers.push(consumer);
+consumer.on('trackended', function(){
+	alert('audio consumer on track ended pause '+audioConsumer.paused); 
+	// unsubscribeFromTrack(peerId, mediaTag)
+ }
+ );
+ consumer.on('transportclose', function(){
+		console.log('transport closed so audioconsumer must close');
+	})
+}
+}
+}
+function consumeAnd(recvTransport, mediaTag, peerId, nick){
+	// let consumer;
+  //  try {
+      //  consumer =  
+        bconsumi(recvTransport, mediaTag, peerId, nick);
+        
+  /*  } catch (err) {
+	
+		console.error("err: ", err);
+        note({content: err.toString(), type: "error", time: 10 });
+    }*/
+  //  if (consumer) {
+		
+       // console.log('-- track exist, consumer ready. kind=' + kind);
+      //  console.log('----- consumer: ', consumer);
+      //alert(kind);
+        if (mediaTag === 'cam-video' /*|| 'cam-audio'*/) {
+			
+           // console.log('-- resume kind=' + kind + ' --consumer.id = ' + consumer.id);
+            //try {
+               // let { error } = await sendRequest({type: 'resume-consumer' , kind: kind, consumerId: consumer.id })
+            //   wsend({type: 'resume-consumer', request: 'mediasoup2', peerId: myPeerId, kind: kind, consumerId: consumer.id});
+                console.log('resume OK');
+               
+               // return consumer;
+           /* } catch (err) {
+				console.error(err);
+                note({content: err.toString(), type: "error", time: 10 });
+                return consumer;
+            }*/
+        } else {
+            console.log('-- do not resume kind=' + mediaTag);
+          //  alert('-- do not resume kind=' + kind);
+          // return consumer;
+        }
+ //   } else {
+      //  console.log('-- no consumer yet. kind=' + kind);
+       // alert('-- no consumer yet. kind=' + kind);
+    //    return null;
+   // }
+}
+function bconsumi(recvTransport, kind, peerId, nick){
+	  console.log('--start of consume --kind=' + kind);
+    const { rtpCapabilities } = device;
+   // var data;
+    
+   // let consumerParameters;let error;
+    try {
+		// mediaTag,
+   // mediaPeerId: peerId,
+   // rtpCapabilities: device.rtpCapabilities
+      //  data
+    //  consumerParameters  = await sendRequest({type: 'recv-track' /*'consume'*/, rtpCapabilities, mediaTag: trackKind, mediaPeerId: peerId })
+  // if(error)alert(error);
+ wsend({ type: 'recv-track' /*'consume'*/, rtpCapabilities, mediaTag: kind, mediaPeerId: peerId, request:'mediasoup2', peerId: myPeerId, usernick: nick }) 
+    } catch (err) {
+		console.error(err);
+        note({contrent: 'Consume ERROR: ' + err, type: "error", time: 5});
+        return null
+    }
+}
+    
+//console.error(data)
+//console.log('consumerParameters ', JSON.stringify(consumerParameters))
+async function setConsumerParameters(consumerParameters){
+	if (!recvTransport) {
+    recvTransport = await createTransport('recv');
+  }
+   const producerId = consumerParameters.producerId;
+  //  const id = data.params.id;
+  //  const kind = data.params.kind;
+  //  const rtpParameters = data.params.rtpParameters;
+let mediaTag = consumerParameters.kind; 
+let peerId = consumerParameters.peerid;
+let nick = consumerParameters.usernick;
+//alert(nick)
+console.log('consumerParameters ', consumerParameters)
+       let codecOptions = {};
+        let consumer;
+        try {
+            consumer = await recvTransport.consume({
+                //id,
+              //  producerId,
+              //  kind,
+              //  rtpParameters,
+               // codecOptions,
+               ...consumerParameters,
+    appData: { peerId, mediaTag, nick }
+            });
+            console.log(consumerParameters.kind);
+      if(consumerParameters.kind == 'video')     wsend({type: 'resume-consumer', request: 'mediasoup2', peerId: myPeerId, kind: consumerParameters.kind, consumerId: consumer.id});
+        } catch (err) {
+			console.error(err);
+            note({content: err.toString(), type: "error", time: 5});
+            return null;
+        }
+     
+        //  addRemoteTrack(MYSOCKETID, consumer.track);
+   // setTimeout(async function(){
+		   addVideoAudio(consumer);
+	  //},2000)
+		//updatePeersDisplay();
+       consumers.push(consumer);
+        return consumer;
+   // } else {
+    //    note({content: 'Remote producer NOT READY ' + mediaTag, type: "info", time: 5});
+
+     //   return null;
+    //}
+}
+
+async function unsubscribeFromTrack(peerId, mediaTag) {
+	alert('fucker');
+  let consumer = findConsumerForTrack(peerId, mediaTag);
+  if (!consumer) {
+	  alert('not a consumer');
+    return;
+  }
+alert('unsubscribe')
+  console.log('unsubscribe from track', peerId, mediaTag);
+  try {
+    await closeConsumer(consumer);
+  } catch (e) {
+    console.error(e);
+    alert(e);
+  }
+  // force update of ui
+ // updatePeersDisplay();
+}
+async function resumeConsumer(consumer) {
+  if (consumer) {
+    console.log('resume consumer', consumer.appData.peerId, consumer.appData.mediaTag);
+    try {
+    
+       await sendRequest({ type: 'resume-consumer',  consumerId: consumer.id });
+      await consumer.resume();
+    } catch (e) {
+      console.error(e);
+    }
+  }
+}
 async function subscribeToTrack(peerId, mediaTag, nick) {
   console.log('subscribe to track', peerId, mediaTag);
 if(mediaTag == 'video'){
 	mediaTag = 'cam-video';
 }else if(mediaTag == 'audio'){
 	mediaTag = 'cam-audio';
-}else{
-	
-}
+}else{}
+
+
 return new Promise(async function(resolve,reject){
 try{
   // create a receive transport if we don't already have one
@@ -705,6 +944,7 @@ async function resumeProducer(producer) {
 
 async function closeConsumer(consumer) {
   if (!consumer) {
+	 // alert('no consumer');
     return;
   }
   console.log('closing consumer', consumer.appData.peerId, consumer.appData.mediaTag, consumer.id);
@@ -1112,6 +1352,7 @@ function addVideoAudio(consumer) {
 		dynamicContainer.firstChild.remove();
 	}
 */
+//if(consumer.kind == 'video'){
   let anotherdiv = document.createElement('div');
   anotherdiv.setAttribute('data-peerid', consumer.appData.peerId);
  
@@ -1138,6 +1379,7 @@ function addVideoAudio(consumer) {
  
  let newstream = new MediaStream(/*[ consumer.track.clone() ]*/);
  newstream.addTrack(consumer.track);
+ //alert(consumer.track +' '+consumer.kind);
   el.srcObject = newstream;
  if(consumer.kind == 'video'){
 	 anotherdiv.appendChild(el);
@@ -1152,6 +1394,7 @@ function addVideoAudio(consumer) {
 	   dynamicContainer.appendChild(anotherdiv);
    }
   el.consumer = consumer;
+
 }
 
 function removeVideoAudio(consumer) {
@@ -1165,7 +1408,7 @@ function removeVideoAudio(consumer) {
  // alert(consumer.appData.peerId);
  // let el = document.querySelector(`[data-id="${obj.id}"]`);
   let el = document.querySelector(`[data-peerid="${consumer.appData.peerId}"]`); 
- 
+ //alert('el '+el);
   if(el)el.remove();
 }
 
