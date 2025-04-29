@@ -653,7 +653,7 @@ console.log('consumerParameters ', consumerParameters)
      //   return null;
     //}
 }
-function fucker(){
+function fucking(){
 	wsend({ type: 'clear' });
 }
 async function unsubscribeFromTrack(peerId, mediaTag) {
