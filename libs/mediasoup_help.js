@@ -1407,7 +1407,7 @@ function closePeeri(peerId) {
     }
   }
   delete roomState.peers[peerId];
-  broadcast_admin({type:'bye', peerId:peerId });
+//  broadcast_admin({ type:'bye', peerId: peerId });
 }
 
 async function closeTransporti(transport) {
