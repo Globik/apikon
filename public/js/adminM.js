@@ -508,7 +508,7 @@ if(mediaTag == 'video'){
 	mediaTag = 'cam-audio';
 }else{}
  if (!recvTransport) {
-    recvTransport = await createTransport('recv');
+   // recvTransport = await createTransport('recv');
   }
 
   // if we do already have a consumer, we shouldn't have called this

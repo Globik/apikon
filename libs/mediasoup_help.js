@@ -1287,9 +1287,11 @@ async function closeConsumer(consumer) {
 setInterval(() => {
     let now = Date.now();
     Object.entries(roomState.peers).forEach(([id, p]) => {
+		console.error('must close peer');
       if ((now - p.lastSeenTs) > 15000) {
         warn(`removing stale peer ${id}`);
         closePeer(id);
+        console.log('roomState ', roomState);
       }
     });
   }, 1000*13);

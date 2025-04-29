@@ -1360,18 +1360,23 @@ function base64ToBlob(base64String, contentType = '') {
 }
 async function removeMedia(){
 	let mediasoupAdmin = gid("mediasoupAdmin");
-	if(mediasoupAdmin.value === 'yes'){
-	let bu = await stopStreams();
+	//if(mediasoupAdmin.value === 'yes'){
+	let bu ;
+	try{
+	bu= await stopStreams();
+}catch(er){
+	alert('stopStreams '+er);
+}
 	if(bu === 'ok'){
 		//alert(bu);
 		if(sock)sock.close();
 		joined = false;
 	}
 	
- }else{
+ //}else{
 	 wsend({type: "hang-up", ignore: false, sub: 'here' });
 	 if(sock)sock.close();
- }
+// }
 }
 async function closeAll(el){
 	removeMedia();

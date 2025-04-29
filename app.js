@@ -1990,7 +1990,7 @@ if(msg.request == "mediasoup"){
         searchPeer(socket, { type: 'peer-matched' }, { src: msg.src, ignores: msg.ignores })
         break
         case 'srcdata':
-        ev.emit('suka', { id: socket.id })
+       ev.emit('suka', { id: socket.id })
         broadcast_admin({ type: "dynamic", sub: "srcdata", src: msg.src, id: socket.id });
         break
         case 'list':
