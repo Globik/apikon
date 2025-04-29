@@ -1286,17 +1286,7 @@ async function closeConsumer(consumer) {
   }
 }
 
-setInterval(() => {
-    let now = Date.now();
-    Object.entries(roomState.peers).forEach(([id, p]) => {
-		//console.error('must close peer');
-      if ((now - p.lastSeenTs) > 15000) {
-        warn(`removing stale peer ${id}`);
-        closePeer(id);
-        //console.log('roomState ', roomState);
-      }
-    });
-  }, 1000*13);
+
   function fucker(){
 	   let now = Date.now();
     Object.entries(roomState.peers).forEach(([id, p]) => {
@@ -1408,6 +1398,23 @@ function getId(ws) {
   return ws.id;
 }
 
+
+
+
+function davaj(){
+setInterval(() => {
+    let now = Date.now();
+    Object.entries(roomState.peers).forEach(([id, p]) => {
+		console.error('must close peer');
+      if ((now - p.lastSeenTs) > 15000) {
+        warn(`removing stale peer ${id}`);
+        closePeer(id);
+        //console.log('roomState ', roomState);
+      }
+    });
+  }, 1000*13);
+}
+davaj();
 const mediasoup = require("mediasoup");
 const mediasoupOptions = {
   // Worker settings
