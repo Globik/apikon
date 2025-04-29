@@ -654,7 +654,8 @@ console.log('consumerParameters ', consumerParameters)
     //}
 }
 function fucking(){
-	wsend({ type: 'clear' });
+	alert('ok');
+	wsend({ type: 'clear',  request:'mediasoup2' });
 }
 async function unsubscribeFromTrack(peerId, mediaTag) {
 	alert('fucker');
