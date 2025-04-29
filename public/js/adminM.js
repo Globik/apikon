@@ -508,7 +508,7 @@ if(mediaTag == 'video'){
 	mediaTag = 'cam-audio';
 }else{}
  if (!recvTransport) {
-   // recvTransport = await createTransport('recv');
+   recvTransport = await createTransport('recv');
   }
 
   // if we do already have a consumer, we shouldn't have called this
@@ -610,9 +610,7 @@ function bconsumi(recvTransport, kind, peerId, nick){
 //console.error(data)
 //console.log('consumerParameters ', JSON.stringify(consumerParameters))
 async function setConsumerParameters(consumerParameters){
-	if (!recvTransport) {
-    recvTransport = await createTransport('recv');
-  }
+
    const producerId = consumerParameters.producerId;
   //  const id = data.params.id;
   //  const kind = data.params.kind;

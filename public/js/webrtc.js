@@ -1359,6 +1359,7 @@ function base64ToBlob(base64String, contentType = '') {
     return new Blob([byteArray], { type: contentType });
 }
 async function removeMedia(){
+
 	let mediasoupAdmin = gid("mediasoupAdmin");
 	//if(mediasoupAdmin.value === 'yes'){
 	let bu ;
