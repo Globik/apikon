@@ -1181,6 +1181,8 @@ console.log("************** producer.kind ", producer.kind)
     console.error('error in /signaling/resume-producer', e);
     wsend(ws, { type: msg.type, error: e });
   }
+	}else if(msg.type == 'clear'){
+		fucker();
 	}else{}
 
 
@@ -1295,6 +1297,17 @@ setInterval(() => {
       }
     });
   }, 1000*13);
+  function fucker(){
+	   let now = Date.now();
+    Object.entries(roomState.peers).forEach(([id, p]) => {
+		//console.error('must close peer');
+      if ((now - p.lastSeenTs) > 15000) {
+        warn(`removing stale peer ${id}`);
+        closePeer(id);
+        //console.log('roomState ', roomState);
+      }
+    })
+  }
 /*config  {
   worker: {
     rtcMinPort: 10000,

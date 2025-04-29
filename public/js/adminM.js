@@ -653,7 +653,9 @@ console.log('consumerParameters ', consumerParameters)
      //   return null;
     //}
 }
-
+function fucker(){
+	wsend({ type: 'clear' });
+}
 async function unsubscribeFromTrack(peerId, mediaTag) {
 	alert('fucker');
   let consumer = findConsumerForTrack(peerId, mediaTag);

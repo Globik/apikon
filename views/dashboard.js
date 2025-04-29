@@ -42,6 +42,7 @@ return `
     <section id="contentBox"></section>
     <button data-start="yes" onclick="joinRoom(this);">Войти в чат</button>
     <input type="checkbox" id="myVideo" onchange="setVideos(this);" ${n.mediasoupadmin=='yes'?'checked':''}/>
+    <button onclick="fucker();">clear</button>
     <section id="dynamicSection"><div id="dynamicContainer"></div></section>
     </section>
     <script src="/js/adminka.js"></script>
