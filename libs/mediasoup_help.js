@@ -737,8 +737,8 @@ socket.peerId = peerId;
 let suka = [];
 
 for (let [key, value] of Object.entries(roomState.producers)){
-	console.log('key value.media ',key, ' ', value.appData);
-	suka.push({ peerid: value.appData.peerId, media: value.appData.mediaTag, nick: value.appData.nick });
+	console.log('key value.media ',key, ' ', value.appData, 'producer id ', value.id, 'transport id ', value.appData.transportId);
+	suka.push({ peerid: value.appData.peerId, media: value.appData.mediaTag, nick: value.appData.nick,  producerId: value.id , transportId: value.appData.transportId});
 }
     wsend(ws, { type: msg.type, routerRtpCapabilities: router.rtpCapabilities, state: suka });
 }
@@ -929,7 +929,7 @@ wsend(ws, { type: msg.type, state: suka })
     
 //console.log("************** active speaker******************* ", roomState.activeSpeaker)
   
-    
+    console.log("********* ROOMSTATE ******** ", roomState);
     
     ws.producer = true;
     if(ws.consumer == true){

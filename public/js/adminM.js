@@ -146,7 +146,8 @@ async function adminMedia(a){
 				await subscribeToTrack(a.peerId, a.mediaTag, a.nick)
 			}, 5000) 
 	 }*/
-	 subscribi(a.peerId, a.mediaTag, a.nick);
+	 alert(JSON.stringify(a));
+	 subscribi(a.peerId, a.mediaTag, a.nick, a.transportId, a.producerId);
  }
 	}else if(a.type == 'bye'){
 		//alert('booo '+a.type);
@@ -378,7 +379,8 @@ if(l == 'yes'){
 			for(let item of state){
 				//subscribi(item.peerid, item.media, item.nick);
 		//		setTimeout(async function(){
-		abba.push({fn:  ()=>{ let s = subscribi(item.peerid, item.media, item.nick);return s;}, params:[item.peerid, item.media, item.nick] });
+		abba.push({fn:  ()=>{ let s = subscribi(item.peerid, item.media, item.nick, item.transportId, item.producerId);return s;}, params:[item.peerid, item.media, item.nick, item.transportId, item.producerId] });
+		//alert(item.transportId);
 			//await subscribeToTrack(item.peerid, item.media, item.nick)
 		//}, 3);
 			}
@@ -502,7 +504,7 @@ async function leaveRoom() {
    //$('#send-camera').disabled = false;
 }
 
-async function subscribi(peerId, mediaTag, nick){
+async function subscribi(peerId, mediaTag, nick, transportId, producerId){
 	 console.log('subscribe to track', peerId, mediaTag);
 if(mediaTag == 'video'){
 	mediaTag = 'cam-video';
@@ -521,7 +523,7 @@ if(mediaTag == 'video'){
     return;
  };
   if(mediaTag == 'cam-video'){
- let  consumer =   consumeAnd(recvTransport, mediaTag, peerId, nick);
+ let  consumer =   consumeAnd(recvTransport, mediaTag, peerId, nick,transportId, producerId);
  if(consumer){
 // consumers.push(consumer);
 	consumer.on('trackended', function(){
@@ -533,7 +535,7 @@ if(mediaTag == 'video'){
 	})
 }
 }else{
- let consumer =  consumeAnd(recvTransport, mediaTag, peerId, nick);
+ let consumer =  consumeAnd(recvTransport, mediaTag, peerId, nick,transportId, producerId);
  if(consumer){
  //consumers.push(consumer);
 consumer.on('trackended', function(){
@@ -547,11 +549,11 @@ consumer.on('trackended', function(){
 }
 }
 }
-function consumeAnd(recvTransport, mediaTag, peerId, nick){
+function consumeAnd(recvTransport, mediaTag, peerId, nick,transportId, producerId){
 	// let consumer;
   //  try {
       //  consumer =  
-        bconsumi(recvTransport, mediaTag, peerId, nick);
+        bconsumi(recvTransport, mediaTag, peerId, nick,transportId, producerId);
         
   /*  } catch (err) {
 	
@@ -588,8 +590,9 @@ function consumeAnd(recvTransport, mediaTag, peerId, nick){
     //    return null;
    // }
 }
-function bconsumi(recvTransport, kind, peerId, nick){
+function bconsumi(recvTransport, kind, peerId, nick,transportId, producerId){
 	  console.log('--start of consume --kind=' + kind);
+	  //alert('here 4 '+transportId+' '+producerId);
     const { rtpCapabilities } = device;
    // var data;
     
@@ -601,7 +604,7 @@ function bconsumi(recvTransport, kind, peerId, nick){
       //  data
     //  consumerParameters  = await sendRequest({type: 'recv-track' /*'consume'*/, rtpCapabilities, mediaTag: trackKind, mediaPeerId: peerId })
   // if(error)alert(error);
- wsend({ type: 'recv-track' /*'consume'*/, rtpCapabilities, mediaTag: kind, mediaPeerId: peerId, request:'mediasoup2', peerId: myPeerId, usernick: nick }) 
+ wsend({ type: 'recv-track' /*'consume'*/, rtpCapabilities, mediaTag: kind, mediaPeerId: peerId, request:'mediasoup2', peerId: myPeerId, usernick: nick , transportId, producerId}) 
     } catch (err) {
 		console.error(err);
         note({contrent: 'Consume ERROR: ' + err, type: "error", time: 5});
@@ -619,7 +622,10 @@ async function setConsumerParameters(consumerParameters){
   //  const rtpParameters = data.params.rtpParameters;
 let mediaTag = consumerParameters.kind; 
 let peerId = consumerParameters.peerid;
-let nick = consumerParameters.usernick;
+let nick =        consumerParameters.usernick;
+let transportId = consumerParameters.transportId;
+//alert('here 3 '+ transportId)
+//let producerId = consumerParameters.producerId;
 //alert(nick)
 console.log('consumerParameters ', consumerParameters)
        let codecOptions = {};
@@ -632,7 +638,7 @@ console.log('consumerParameters ', consumerParameters)
               //  rtpParameters,
                // codecOptions,
                ...consumerParameters,
-    appData: { peerId, mediaTag, nick }
+    appData: { peerId, mediaTag, nick , transportId, producerId }
             });
             console.log(consumerParameters.kind);
       if(consumerParameters.kind == 'video')     await sendRequest({type: 'resume-consumer', request: 'mediasoup2', peerId: myPeerId, kind: consumerParameters.kind, consumerId: consumer.id});
@@ -1351,6 +1357,7 @@ function addVideoAudio(consumer) {
 	  alert('no track');
     return;
   }
+  alert('here transportid '+consumer.appData.transportId);
   /*
   while(dynamicContainer.firstChild){
 		dynamicContainer.firstChild.remove();
@@ -1359,7 +1366,9 @@ function addVideoAudio(consumer) {
 //if(consumer.kind == 'video'){
   let anotherdiv = document.createElement('div');
   anotherdiv.setAttribute('data-peerid', consumer.appData.peerId);
- 
+  anotherdiv.setAttribute('data-transportid', consumer.appData.transportId);
+  anotherdiv.setAttribute('data-producerid', consumer.appData.producerId);
+ anotherdiv.setAttribute('onclick', "getFucker(this);");
   let mynamediv = document.createElement('div');
   mynamediv.className = "for-name";
   mynamediv.textContent = consumer.appData.nick;
@@ -1400,7 +1409,11 @@ function addVideoAudio(consumer) {
   el.consumer = consumer;
 
 }
-
+function getFucker(el){
+	let a = el.getAttribute('data-transportid');
+	let b = el.getAttribute('data-producerid');
+	alert('transportid '+a+' producerid '+ b);
+}
 function removeVideoAudio(consumer) {
  /* document.querySelectorAll(consumer.kind).forEach((v) => {
     if (v.consumer === consumer) {
