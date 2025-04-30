@@ -503,7 +503,7 @@ ${n.user && !n.VK?`<div class="settingspanel" onclick="logout(this);">${lang=='r
 <video id="kartina" ${n.imgData && n.imgData.img_data?` poster=${n.imgData.img_data}`:`data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"`} playsinline ></video></div>
     
   <!--  <section id="recordSection"><div>&#x1F4F8;</div></section> -->
-    <!--
+   
     <section id="claimContainer" onclick="openClaim(this);"><div id="claimBox">!</div></section>
     <div id="claimMenu" data-was="${n.imgData&&n.imgData.img_data?'dataPublish':''}" data-vip="${n.imgData&&n.imgData.img_data?n.imgData.userId:''}"><div data-claim="ignor" onclick="sendClaim(this);">${lang=='ru'?'В игнор':lang=='en'?'To ignore':
     lang=='zh'?'忽略':
@@ -512,7 +512,7 @@ ${n.user && !n.VK?`<div class="settingspanel" onclick="logout(this);">${lang=='r
     lang=='zh'?'虐待':
     lang=='id'?'melecehkan':''}!</div>
     ${n.user&&n.user.brole=="admin"?`<div onclick="banit(this);">Забанить</div>`:''}
-    </div> -->
+    </div> 
     <section id="mobileloader"><div class="loader"></div></section>
     
     <video id="remote"  class="" autoplay playsinline poster="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"></video>

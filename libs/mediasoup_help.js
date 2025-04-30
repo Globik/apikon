@@ -716,16 +716,9 @@ removeAudioConsumer(id);
     wsend(ws, { type: msg.type, error: e.message });
   }
 	}else if(msg.type == 'join-as-new-peer'){
-		//broadcast_all({ type: 'total_speakers', count: TOTAL_SPEAKERS });
-
-  try {
-	  //try{
-		  if(msg.vid == 'publish'){
+		//broadcast_all({ type: 'total_speakers', count: TOTAL_SPEAKERS 
+		  
 				if(!worker)await	startWorker();
-			}else{
-				if(!worker)await	startWorker();
-			}
-			//}catch(e){console.log(e);return;}
 	  
     let { peerId } = msg;
     console.log('here2 join-as-new-peer peerId ', peerId);
@@ -737,6 +730,9 @@ socket.peerId = peerId;
       lastSeenTs: now,
       media: {}, consumerLayers: {}, stats: {}
     };
+    if(msg.vid == 'publish'){
+		wsend(ws, { type: msg.type, routerRtpCapabilities: router.rtpCapabilities });
+	}else{
 //console.error(msg.type, ' roomState.producers ', roomState.producers)
 let suka = [];
 
@@ -745,10 +741,7 @@ for (let [key, value] of Object.entries(roomState.producers)){
 	suka.push({ peerid: value.appData.peerId, media: value.appData.mediaTag, nick: value.appData.nick });
 }
     wsend(ws, { type: msg.type, routerRtpCapabilities: router.rtpCapabilities, state: suka });
-  } catch (e) {
-    console.error('error in /signaling/join-as-new-peer', e);
-    wsend(ws, { type: msg.type, error: e });
-  }
+}
 }else if(msg.type == 'get_speakers'){
 	console.log(msg);
 	const { peerId } =  msg;
