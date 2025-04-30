@@ -194,6 +194,8 @@ let consumeri = findConsumerForTrack(a.peerId, 'audio');
 		setConsumerParameters(a)
 		}else if(a.type == 'join-as-new-peer'){
 			fucker(a.routerRtpCapabilities, a.state)
+		}else if(a.type=='place'){
+			console.log('room state ', a.roomState);
 		}else if(a.type == 'error'){
 			alert(a.error);
 			console.error(a.error);

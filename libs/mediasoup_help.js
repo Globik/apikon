@@ -1290,13 +1290,15 @@ async function closeConsumer(consumer) {
   function fucker(){
 	   let now = Date.now();
     Object.entries(roomState.peers).forEach(([id, p]) => {
-		//console.error('must close peer');
+		console.error('fucker must close peer');
       if ((now - p.lastSeenTs) > 15000) {
         warn(`removing stale peer ${id}`);
         closePeer(id);
-        //console.log('roomState ', roomState);
+       // console.log('fucker roomState ', roomState);
       }
     })
+    console.log('fucker2 roomState ', roomState);
+    wsend(ws, { type: "place", roomState, roomState});
   }
 /*config  {
   worker: {
