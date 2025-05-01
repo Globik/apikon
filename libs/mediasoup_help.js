@@ -952,7 +952,7 @@ wsend(ws, { type: msg.type, state: suka })
 	
   try {
     let { peerId, mediaPeerId, mediaTag, rtpCapabilities, usernick } = msg;
-console.log('msg ', msg)
+console.log('msg recvack  ', msg)
     let producer = roomState.producers.find(
       (p) => {
 		  
@@ -1036,6 +1036,7 @@ console.log("************** producer.kind ", producer.kind)
       producerId: producer.id,
       id: consumer.id,
       usernick: usernick ,
+      transportId: transport.id,
       peerid: mediaPeerId,
       kind: consumer.kind,
       rtpParameters: consumer.rtpParameters,

@@ -146,7 +146,7 @@ async function adminMedia(a){
 				await subscribeToTrack(a.peerId, a.mediaTag, a.nick)
 			}, 5000) 
 	 }*/
-	 alert(JSON.stringify(a));
+	 //alert(JSON.stringify(a));
 	 subscribi(a.peerId, a.mediaTag, a.nick, a.transportId, a.producerId);
  }
 	}else if(a.type == 'bye'){
@@ -197,6 +197,9 @@ let consumeri = findConsumerForTrack(a.peerId, 'audio');
 			fucker(a.routerRtpCapabilities, a.state)
 		}else if(a.type=='place'){
 			console.log('room state ', a.roomState);
+		}else if(a.type=='close-producer'){
+			console.log(a);
+			alert(a.closed);
 		}else if(a.type == 'error'){
 			alert(a.error);
 			console.error(a.error);
@@ -1357,7 +1360,7 @@ function addVideoAudio(consumer) {
 	  alert('no track');
     return;
   }
-  alert('here transportid '+consumer.appData.transportId);
+  //alert('here transportid '+consumer.appData.transportId);
   /*
   while(dynamicContainer.firstChild){
 		dynamicContainer.firstChild.remove();
@@ -1367,7 +1370,11 @@ function addVideoAudio(consumer) {
   let anotherdiv = document.createElement('div');
   anotherdiv.setAttribute('data-peerid', consumer.appData.peerId);
   anotherdiv.setAttribute('data-transportid', consumer.appData.transportId);
-  anotherdiv.setAttribute('data-producerid', consumer.appData.producerId);
+  if(consumer.kind=='video'){
+  anotherdiv.setAttribute('data-produceridvideo', consumer.appData.producerId);
+}else{
+	anotherdiv.setAttribute('data-produceridaudio', consumer.appData.producerId);
+}
  anotherdiv.setAttribute('onclick', "getFucker(this);");
   let mynamediv = document.createElement('div');
   mynamediv.className = "for-name";
@@ -1411,8 +1418,10 @@ function addVideoAudio(consumer) {
 }
 function getFucker(el){
 	let a = el.getAttribute('data-transportid');
-	let b = el.getAttribute('data-producerid');
-	alert('transportid '+a+' producerid '+ b);
+	let b = el.getAttribute('data-produceridvideo');
+	let c = el.getAttribute('data-produceridaudio');
+	alert('transportid '+a+' producerid video '+ b+' producerid audio '+ c);
+	wsend({type: 'close-producer', request:'mediasoup2', producerId: b , peerId:myPeerId});
 }
 function removeVideoAudio(consumer) {
  /* document.querySelectorAll(consumer.kind).forEach((v) => {
