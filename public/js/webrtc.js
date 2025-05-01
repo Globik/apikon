@@ -1362,7 +1362,7 @@ async function removeMedia(){
 
 	let mediasoupAdmin = gid("mediasoupAdmin");
 	//if(mediasoupAdmin.value === 'yes'){
-	let bu ;
+	/*let bu ;
 	try{
 	bu= await stopStreams();
 }catch(er){
@@ -1373,7 +1373,7 @@ async function removeMedia(){
 		if(sock)sock.close();
 		joined = false;
 	}
-	
+	*/
  //}else{
 	 wsend({type: "hang-up", ignore: false, sub: 'here' });
 	 if(sock)sock.close();
