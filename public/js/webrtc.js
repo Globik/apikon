@@ -1141,7 +1141,7 @@ async function start(el){
 	let mediasoupAdmin = gid("mediasoupAdmin");
 	if(mediasoupAdmin.value === 'yes'){
 		try{
-	await	sendCameraStreams(stream);
+	//await	sendCameraStreams(stream);
 	}catch(err){
 		console.log(err);
 	}
@@ -1525,7 +1525,7 @@ return imgdata22;
 	console.error("amap", amap, IPS);
 		wsend({ type:'search-peer', nick: (NICK?NICK:'Anonym'), src: imgdata , ignores: [...IPS] });
 	}, 2000);
-	someInterval = setInterval(doScreenshot, 1000 * 11);
+	//someInterval = setInterval(doScreenshot, 1000 * 11);
 		somespinner.className="show";
 		mobileloader.className="active";
 		duka2.className="show";
