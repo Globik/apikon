@@ -1141,7 +1141,7 @@ async function start(el){
 	let mediasoupAdmin = gid("mediasoupAdmin");
 	if(mediasoupAdmin.value === 'yes'){
 		try{
-	//await	sendCameraStreams(stream);
+	await	sendCameraStreams(stream);
 	}catch(err){
 		console.log(err);
 	}
@@ -1361,8 +1361,8 @@ function base64ToBlob(base64String, contentType = '') {
 async function removeMedia(){
 
 	let mediasoupAdmin = gid("mediasoupAdmin");
-	//if(mediasoupAdmin.value === 'yes'){
-	/*let bu ;
+	if(mediasoupAdmin.value === 'yes'){
+	let bu ;
 	try{
 	bu= await stopStreams();
 }catch(er){
@@ -1373,11 +1373,11 @@ async function removeMedia(){
 		if(sock)sock.close();
 		joined = false;
 	}
-	*/
- //}else{
+}
+// }else{
 	 wsend({type: "hang-up", ignore: false, sub: 'here' });
 	 if(sock)sock.close();
-// }
+
 }
 async function closeAll(el){
 	removeMedia();
@@ -1525,7 +1525,7 @@ return imgdata22;
 	console.error("amap", amap, IPS);
 		wsend({ type:'search-peer', nick: (NICK?NICK:'Anonym'), src: imgdata , ignores: [...IPS] });
 	}, 2000);
-	//someInterval = setInterval(doScreenshot, 1000 * 11);
+	someInterval = setInterval(doScreenshot, 1000 * 11);
 		somespinner.className="show";
 		mobileloader.className="active";
 		duka2.className="show";
