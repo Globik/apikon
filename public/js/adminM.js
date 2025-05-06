@@ -322,12 +322,12 @@ async function exec(functions){
 async function execwithdelay(functions, delay){
 	for (const funci of functions){
 		//if(typeof func === 'function'){
-		funci.fn();	
+		//funci.fn();	
 		//}
 		//console.log(funci.fn);
 		await new Promise(resolve=>{
 			//if(typeof func === 'function'){
-		//funci.fn();	
+		funci.fn();	
 	//}
 			setTimeout(resolve, delay);
 		});
