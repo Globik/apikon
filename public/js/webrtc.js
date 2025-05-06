@@ -1364,7 +1364,7 @@ async function removeMedia(){
 	if(mediasoupAdmin.value === 'yes'){
 	let bu ;
 	try{
-	bu= await stopStreams();
+	bu= await leaveRoom();
 }catch(er){
 	alert('stopStreams '+er);
 }

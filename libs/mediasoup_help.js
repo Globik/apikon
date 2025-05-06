@@ -119,7 +119,7 @@ eventEmitter.on('suka', function(d){
       
 const handleMediasoup =  function(ws, data, WebSocket, sock, pool){
 	function wsend(ws, obj){
-	console.log('hallo wsend')
+	//console.log('hallo wsend')
 	let a;
 	try{
 		a = JSON.stringify(obj);
@@ -652,7 +652,7 @@ removeAudioConsumer(id);
 	}
 }
 	function wsend(ws, obj){
-	console.log('hallo wsend ', obj)
+	if(!obj.type=='sync')console.log('hallo wsend ', obj)
 	let a;
 	try{
 		a = JSON.stringify(obj);
@@ -662,7 +662,7 @@ removeAudioConsumer(id);
 		}catch(e){console.log(e)}
 	}
 	function broadcast(obj){
-		console.log("*** BROADCASTING !!!");
+		//console.log("*** BROADCASTING !!!");
 		wss.clients.forEach(function(client){
 			if( client !== ws ) wsend( client, obj );
 			})
@@ -674,14 +674,14 @@ removeAudioConsumer(id);
 		}
 		function broadcast_all(obj){
 		wss.clients.forEach(function(client){
-			console.log("*** BROADCASTING !!!");
+			//console.log("*** BROADCASTING !!!");
 			wsend(client, obj);
 			})
 		}
 		async function mediadmin(){
 			if(msg.type == 'sync'){
 		 let { peerId } = msg;
-		 console.log('type sync peerId ', peerId);
+		// console.log('type sync peerId ', peerId);
   try {
     // make sure this peer is connected. if we've disconnected the
     // peer because of a network outage we want the peer to know that
@@ -695,7 +695,7 @@ removeAudioConsumer(id);
    roomState.peers[peerId].lastSeenTs = Date.now();
    
        let now = Date.now();
-    console.log('join-as-new-peer', peerId);
+   // console.log('join-as-new-peer', peerId);
 
     roomState.peers[peerId] = {
       joinTs: now,
@@ -891,7 +891,8 @@ wsend(ws, { type: msg.type, state: suka })
       paused,
       appData: { ...appData, peerId, transportId , nick: ws.nick }
     });
-
+console.log("******** PRODUCER ID ******* ", producer.id);
+transport.appData.producerId = producer.id;
     // if our associated transport closes, close ourself, too
     producer.on('transportclose', () => {
       log('producer\'s transport closed', producer.id);
@@ -946,7 +947,7 @@ wsend(ws, { type: msg.type, state: suka })
 }else if(msg.type == 'Newproducer'){
 	socket.partnernick = msg.nick;
 	 broadcast_admin({ type: "Newproducer", id: msg.id , peerId: msg.peerId, mediaTag: msg.mediaTag , nick: msg.nick });
-}else if(msg.type == 'bye'){
+}else if(msg.type == 'byeD'){
 	broadcast_admin({ type: msg.type, peerId: msg.peerId });
 }else if(msg.type == 'recv-track'){ // can change to consumer.type == 'simulcast' or 'simple' video/audio to reply
 	
@@ -999,7 +1000,8 @@ console.log("************** producer.kind ", producer.kind)
       paused: producer.kind === 'video', // see note above about always starting paused
       appData: { peerId, mediaPeerId, mediaTag }
     });
-
+    console.log('******* CONSUMER ID ******** ', consumer.id);
+transport.appData.consumerId = consumer.id;
     // need both 'transportclose' and 'producerclose' event handlers,
     // to make sure we close and clean up consumers in all
     // circumstances
@@ -1009,7 +1011,7 @@ console.log("************** producer.kind ", producer.kind)
     });
     consumer.on('producerclose', () => {
       log(`consumer's producer closed`, consumer.id);
-      closeConsumer(consumer);
+     closeConsumer(consumer);
     });
 
     // stick this consumer in our list of consumers to keep track of,
@@ -1071,6 +1073,7 @@ console.log("************** producer.kind ", producer.kind)
   }
 }else if(msg.type == 'resume-consumer'){
 	 try {
+		
     let { peerId, consumerId, kind } = msg,
         consumer = roomState.consumers.find((c) => c.id === consumerId);
 
@@ -1085,7 +1088,7 @@ console.log("************** producer.kind ", producer.kind)
 // if(kind == 'cam-video') { 
  await consumer.resume();
 
-    wsend(ws, { type: msg.type, resumed: true });
+    wsend(ws, { type: msg.type, resumed: true, peerId: peerId, mediaTag: kind });
 //}
   } catch (e) {
     console.error('error in /signaling/resume-consumer', e);
@@ -1396,9 +1399,10 @@ function getId(ws) {
 
 function closePeeri(peerId) {
 	//2
-  log('closing peer', peerId);
+  log('closing peeri', peerId);
   for (let [id, transport] of Object.entries(roomState.transports)) {
     if (transport.appData.peerId === peerId) {
+		console.log("*** APP DATA *** ", transport.appData);
       closeTransporti(transport);
     }
   }
@@ -1409,8 +1413,9 @@ function closePeeri(peerId) {
 async function closeTransporti(transport) {
 	//1
   try {
-    log('closing transport', transport.id, transport.appData);
-
+    log('closing transporti', transport.id, transport.appData);
+let producerId = transport.appData.producerId;
+let consumerId = transport.appData.consumerId;
     // our producer and consumer event handlers will take care of
     // calling closeProducer() and closeConsumer() on all the producers
     // and consumers associated with this transport
@@ -1419,8 +1424,55 @@ async function closeTransporti(transport) {
     // so all we need to do, after we call transport.close(), is update
     // our roomState data structure
     delete roomState.transports[transport.id];
+    if(producerId){
+		console.log('there is producer to cloce ', producerId);
+		let producer = roomState.producers.find((p) => p.id === producerId);
+		if(producer){
+			await closeProduceri(producer);
+		}
+	}
+	if(consumerId){
+		console.log('there is consumer to cloce ', consumerId);
+		let consumer = roomState.consumers.find((c) => c.id === consumerId);
+		if(consumer){
+			await closeConsumeri(consumer);
+		}
+	}
+   // let consumer = roomState.consumers.find((c) => c.id === consumerId);
   } catch (e) {
     err(e);
+  }
+}
+
+async function closeProduceri(producer) {
+  log('closing produceri', producer.id, producer.appData);
+  try {
+    await producer.close();
+
+    // remove this producer from our roomState.producers list
+    roomState.producers = roomState.producers
+      .filter((p) => p.id !== producer.id);
+
+    // remove this track's info from our roomState...mediaTag bookkeeping
+    if (roomState.peers[producer.appData.peerId]) {
+      delete (roomState.peers[producer.appData.peerId]
+              .media[producer.appData.mediaTag]);
+    }
+  } catch (e) {
+    err(e);
+  }
+}
+
+async function closeConsumeri(consumer) {
+  log('closing consumeri', consumer.id, consumer.appData);
+  await consumer.close();
+
+  // remove this consumer from our roomState.consumers list
+  roomState.consumers = roomState.consumers.filter((c) => c.id !== consumer.id);
+
+  // remove layer info from from our roomState...consumerLayers bookkeeping
+  if (roomState.peers[consumer.appData.peerId]) {
+    delete roomState.peers[consumer.appData.peerId].consumerLayers[consumer.id];
   }
 }
 

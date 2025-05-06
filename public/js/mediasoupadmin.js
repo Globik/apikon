@@ -3,7 +3,7 @@ const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 //var isOpen = false;
 
-
+//var myPeerId;
 
 
 var kK = 0;
@@ -215,17 +215,20 @@ async function sendCameraStreams(localCam) {
   // state, if the checkbox in our UI is unchecked. so as soon as we
   // have a client-side camVideoProducer object, we need to set it to
   // paused as appropriate, too.
+  //if(!sendTransport.closed){
   camVideoProducer = await sendTransport.produce({
     track: localCam.getVideoTracks()[0],
     encodings: camEncodings(),
     appData: { mediaTag: 'cam-video' }
   });
+ 
   camVideoProducer.on('transportclose', function(){
 	  console.log('camvideoproducer on transport close');
   });
   camVideoProducer.on('trackended', function(){
 	  console.log('videoproducer track ended paused ', camVideoProducer.paused);
   });
+//}
   /*
   	if(camVideoProducer){
 					//alert('my peerId: '+ myPeerId+' mediTag '+camVideoProducer.appData.mediaTag+' producerId: '+camVideoProducer.id);
@@ -250,16 +253,19 @@ async function sendCameraStreams(localCam) {
   }
 */
   // same thing for audio, but we can use our already-created
+   //if(!sendTransport.closed){
   camAudioProducer = await sendTransport.produce({
     track: localCam.getAudioTracks()[0],
     appData: { mediaTag: 'cam-audio' }
   });
+
   camAudioProducer.on('transportclose', function(){
 	  console.log('camaudioproducer on transport close');
   });
   camAudioProducer.on('trackended', function(){
 	  console.log('audioproducer track ended paused ', camAudioProducer.paused);
   });
+//}
   /*
   if (getMicPausedState()) {
     try {
@@ -368,8 +374,8 @@ async function leaveRoom() {
   } catch (e) {
     console.error(e);
   }
-  wsend({ type: 'bye', request: 'mediasoup2' });
-  recvTransport = null;
+  wsend({ type: 'byeD', peerId: MYSOCKETID, request: 'mediasoup2' });
+ // recvTransport = null;
   sendTransport = null;
   camVideoProducer = null;
   camAudioProducer = null;

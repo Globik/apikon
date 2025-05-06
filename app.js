@@ -2023,7 +2023,7 @@ if(msg.request == "mediasoup"){
     }
   })
 socket.on('error', function(e){
-	//console.log("ERROR ***: ", e);
+	console.log("ERROR ***: ", e);
 })
   socket.on('close', (code, reason) => {
 	  clearTimeout(this.pingTimeout);
@@ -2043,7 +2043,7 @@ function wsend(ws, obj) {
 }
 function broadcast(obj){
 	for (let el of wsServer.clients) {
-		console.log('broadcasto3 ');
+		//console.log('broadcasto3 ');
 		if(el.burl=="/gesamt")wsend(el, obj);
 	}
 }
@@ -2051,12 +2051,12 @@ function broadcast(obj){
 async function broadcast_publish(ws, obj){
 		for (let el of wsServer.clients) {
 			if(el.pubId && el.pubId == obj.publishedId){
-				console.log("GENAU!", el.pubId);
+				//console.log("GENAU!", el.pubId);
 			wsend(el, obj);
 		}
 		}
 		 if(obj.sub =="gift"){
-		 console.log('msg gift*** : ', obj);
+		// console.log('msg gift*** : ', obj);
 		 let peerSocket = getSocket(obj.publishedId);
 		 if(peerSocket){
 		// console.log("userId, nick, userId , nick ", socket.userId, ' ', socket.nick, ' ', peerSocket.userId, ' ', peerSocket.nick);
@@ -2098,7 +2098,7 @@ function getSocket(id){
 }
 function broadcasti(obj){
 	for (let el of wsServer.clients) {
-		console.log('broadcast', obj);
+		//console.log('broadcast', obj);
 		wsend(el, obj);
 	}
 }
@@ -2106,7 +2106,7 @@ function broadcast_admin(obj){
 	//console.log('brooadcast amin');
 	for (let el of wsServer.clients) {
 		//if(el.burl == "/administrator"){
-		console.log('brooadcast amin' ,wsServer.clients.size);
+	//	console.log('brooadcast amin' ,wsServer.clients.size);
 		wsend(el, obj);
 	//}
 	}
