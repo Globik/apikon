@@ -401,7 +401,7 @@ if(l == 'yes'){
 					console.error(er);
 				}
 			})()*/
-			execwithdelay(abba, 100);
+			execwithdelay(abba, 2000);
 		
 	}	
 		
