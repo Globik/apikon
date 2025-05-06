@@ -385,7 +385,8 @@ if(l == 'yes'){
       console.log('state ', state);
       if(state.length > 0){
 			for(let item of state){
-				//subscribi(item.peerid, item.media, item.nick);
+				subscribi(item.peerid, item.media, item.nick, item.transportId, item.producerId);
+			
 		//		setTimeout(async function(){
 		abba.push({fn:  ()=>{ let s = subscribi(item.peerid, item.media, item.nick, item.transportId, item.producerId);return s;}, params:[item.peerid, item.media, item.nick, item.transportId, item.producerId] });
 		//alert(item.transportId);
@@ -401,7 +402,7 @@ if(l == 'yes'){
 					console.error(er);
 				}
 			})()*/
-			execwithdelay(abba, 2000);
+			//execwithdelay(abba, 1010);
 		
 	}	
 		
