@@ -238,7 +238,7 @@ let consumeri = findConsumerForTrack(a.peerId, 'audio');
 			//console.log('B ', a);
 		
 			if (a.type == obj.type) {
-				console.log("d ", a.type," = ", obj.type);
+				//console.log("d ", a.type," = ", obj.type);
                 resolve(a);
                 sock.onmessage = null;
           //  }
@@ -401,7 +401,7 @@ if(l == 'yes'){
 					console.error(er);
 				}
 			})()*/
-			execwithdelay(abba, 1000);
+			execwithdelay(abba, 10);
 		
 	}	
 		
