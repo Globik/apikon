@@ -183,7 +183,7 @@ ${process.env.DEVELOPMENT == "yes" ? '':`<!-- Yandex.Metrika counter -->
     <input type="hidden" id="VKID" value="${n.buser?n.buser.vkid:null}" /> 
    <input type="hidden" data-vk="${n.VK}" id="isVK" value="${n.VK?true:false}" /> 
    <input type="hidden" id="PARTNERNICK" value="${n.imgData&&n.imgData.img_data?n.imgData.nick:false}"/>
-    <input type="hidden" id="mediasoupAdmin" value="${n.mediasoupadmin=='yes'?'yes':'no'}"/>
+    <input type="hidden" id="mediasoupAdmin" value="${n.mediasoupadmin=='yes'?'yes':'yes'}"/>
    
     
     ${!n.user?`<script>
