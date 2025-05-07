@@ -1049,7 +1049,7 @@ window.addEventListener("load", () => {
             return
         }
         const image = images.shift()
-        image.id = `yandex_rtb_R-A-12098170-10-${Math.random().toString(16).slice(2)}`
+        image.id = 'yandex_rtb_R-A-12098170-10-${Math.random().toString(16).slice(2)}'
         if (image.tagName === "IMG" && !image.complete) {
             image.addEventListener("load", () => {
                 render(image.id)
