@@ -1141,7 +1141,7 @@ async function start(el){
 	let mediasoupAdmin = gid("mediasoupAdmin");
 	if(mediasoupAdmin.value === 'yes'){
 		try{
-	await	sendCameraStreams(stream);
+	//await	sendCameraStreams(stream);
 	}catch(err){
 		console.log(err);
 	}
