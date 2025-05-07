@@ -1380,10 +1380,12 @@ async function removeMedia(){
 	 //wsend({type: "hang-up", ignore: false, sub: 'here' });
 	 if(sock)sock.close();
 	 */ 
+	 wsend({type: "hang-up", ignore: false, sub: 'here' });
+	 if(sock)sock.close();
 
 }
 async function closeAll(el){
-	//removeMedia();
+	removeMedia();
 	if(tru)tru.mode = "disabled";
     //{tru2.mode = "hidden";
 	el.setAttribute("data-start", "no");
@@ -1438,7 +1440,7 @@ someInterval = null;
  ignoreOffer = false;
  isSettingRemoteAnswerPending = false;
  
- //if(sock) sock.close();
+ if(sock) sock.close();
  partnerId = null;
  
  if(window.recorder && window.recorder.state == 'recording'){
@@ -1512,11 +1514,11 @@ return imgdata22;
 		//let a = MediaRecorder.isTypeSupported('video/webm');
 		//alert(a);
 		//makeRecord(window.streami);
-		/*
+		
 		setTimeout(function(){
 	var imgdata3=Screenshota();
 	wsend({type:"telegascreenshot",nick:(NICK?NICK:'Anonym'), src: imgdata3});
-	}, 4000);*/
+	}, 4000);
 	//	notes.play(261.63, nows);
 		console.log("local onloaded");
 		if(isShow)return;
@@ -1529,7 +1531,7 @@ return imgdata22;
 	//console.error("amap", amap, IPS);
 		wsend({ type:'search-peer', nick: (NICK?NICK:'Anonym'), src: imgdata , ignores: [...IPS] });
 	//}, 2000);
-	//someInterval = setInterval(doScreenshot, 1000 * 11);
+	someInterval = setInterval(doScreenshot, 1000 * 8);
 		somespinner.className="show";
 		mobileloader.className="active";
 		duka2.className="show";
