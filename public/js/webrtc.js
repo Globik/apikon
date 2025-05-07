@@ -1168,7 +1168,7 @@ if(kuku==2){
 	kuku=0;
 }
 try{
-		if(vkBridge){
+	/*	if(vkBridge){
 			vkBridge.send('VKWebAppShowBannerAd',{banner_location:'bottom'})
 			.then(data=>{
 				if(data.result){
@@ -1180,7 +1180,8 @@ try{
 			}).catch(err=>{
 				console.error(err);
 			});
-		}
+		}*/
+		
 	}catch(e){}
 		}).catch(err=>{
 			//alert(err);
@@ -1382,7 +1383,7 @@ async function removeMedia(){
 
 }
 async function closeAll(el){
-	removeMedia();
+	//removeMedia();
 	if(tru)tru.mode = "disabled";
     //{tru2.mode = "hidden";
 	el.setAttribute("data-start", "no");
@@ -1409,7 +1410,7 @@ someInterval = null;
 	local.srcObject = null;
 	window.streami = undefined;
 	closeVideoCall();
-	//wsend({type: "hang-up", ignore: false, sub: 'here' });
+	wsend({type: "hang-up", ignore: false, sub: 'here' });
 	el.disabled = false;
 	nextbtn.disabled = true;
 	local.style.backGround="rgba(0,0,0,0);"
@@ -1511,22 +1512,23 @@ return imgdata22;
 		//let a = MediaRecorder.isTypeSupported('video/webm');
 		//alert(a);
 		//makeRecord(window.streami);
+		/*
 		setTimeout(function(){
 	var imgdata3=Screenshota();
 	wsend({type:"telegascreenshot",nick:(NICK?NICK:'Anonym'), src: imgdata3});
-	}, 4000);
+	}, 4000);*/
 	//	notes.play(261.63, nows);
 		console.log("local onloaded");
 		if(isShow)return;
-		setTimeout(function(){
+	//	setTimeout(function(){
 		let imgdata = Screenshot();
 //	alert('d4 '+imgdata);
 
 		let amap=[['0',{}]];
-	if(IPS.size > 0) amap = IPS;
-	console.error("amap", amap, IPS);
+	//if(IPS.size > 0) amap = IPS;
+	//console.error("amap", amap, IPS);
 		wsend({ type:'search-peer', nick: (NICK?NICK:'Anonym'), src: imgdata , ignores: [...IPS] });
-	}, 2000);
+	//}, 2000);
 	//someInterval = setInterval(doScreenshot, 1000 * 11);
 		somespinner.className="show";
 		mobileloader.className="active";
@@ -1933,12 +1935,12 @@ function iceConnectionStateChangeHandler (event) {
     case 'failed':
     console.log('ice failed');
     // note({content: "Failed! Press stop, then start", type: "warn", time: 5 });
-    next(nextbtn, true, false, false);
+    //next(nextbtn, true, false, false);
      break;
     case 'disconnected':
     CONNECTED = false;
     console.log('ice disconnected');
-    next(nextbtn, true, false, false);
+   // next(nextbtn, true, false, false);
    // note({content: "Временная потеря сигнала ", type: "warn", time: 10 });
   if(navigator.onLine){
 	 // wsend({type: "hang-up", ignore: [[0,{}]], sub: "abrupt" });
