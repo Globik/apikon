@@ -721,7 +721,7 @@ function on_msg(msg) {
 		  }
 	  }
 	  console.warn("hangup! " + msg.ignore);
-        handleHangUp()
+     //   handleHangUp()
         break
       case 'peer-matched':
       //alert(msg.isprem+' '+msg.nick);
