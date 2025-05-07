@@ -902,7 +902,7 @@ function handleHangUp(){
      znakPrint2.classList.add("hidden");
     // let ss = unsubscribe?false:false;
     let amma=[[0,{}]]
-    if(IPS.size > 0)amma = IPS;
+   // if(IPS.size > 0)amma = IPS;
   //  console.warn("giftsContainer.className ", giftsContainer.className);
     //giftsContainer.className="";
     console.log("before next");
