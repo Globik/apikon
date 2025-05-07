@@ -1366,7 +1366,7 @@ async function removeMedia(){
 	try{
 	bu= await leaveRoom();
 }catch(er){
-	alert('stopStreams '+er);
+	//alert('stopStreams '+er);
 }
 	if(bu === 'ok'){
 		//alert(bu);
@@ -1524,8 +1524,8 @@ return imgdata22;
 	if(IPS.size > 0) amap = IPS;
 	console.error("amap", amap, IPS);
 		wsend({ type:'search-peer', nick: (NICK?NICK:'Anonym'), src: imgdata , ignores: [...IPS] });
-	}, 2000);
-	someInterval = setInterval(doScreenshot, 1000 * 11);
+	}, 1000);
+	someInterval = setInterval(doScreenshot, 1000 * 6);
 		somespinner.className="show";
 		mobileloader.className="active";
 		duka2.className="show";
