@@ -735,17 +735,18 @@ function on_msg(msg) {
        // let a3 = checkIp(msg.vip);
         let a3 = checkIp(msg.partnerId);
         console.warn("a3", a3);
-        if(!a3){
+       // if(!a3){
 			console.warn("was isch");
 		handlePeerMatched();
-	}else{
+	//}
+	/*else{
 		console.error("some ignor");
 		//wsend({ type: "hang-up" });
 		let amap=[[0,{}]];
 	if(IPS.size > 0) amap = IPS;
 	next(nextbtn, true, IPS, true);
 		
-	}
+	}*/
         break
       case 'message':
         handleMessage(msg.data)
