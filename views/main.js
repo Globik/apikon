@@ -515,7 +515,7 @@ ${n.user && !n.VK?`<div class="settingspanel" onclick="logout(this);">${lang=='r
     </div> 
     <section id="mobileloader"><div class="loader"></div></section>
     
-    <video id="remote"  class="" autoplay playsinline poster="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"></video>
+    <video id="remote"  class="Vid" autoplay playsinline poster="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"></video>
      <div id="duka2">Жизнь как рулетка. Никогда не узнаешь, кого встретишь следующим...</div>
      <!-- MOBILE! -->
  <section id="mobileChat" class="hide">
@@ -656,7 +656,7 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
      // https://yandex.ru/support2/partner/ru/web/units/sizes
      var kkk = 0;
      function getReklama(){
-		 
+		 return;
 		 if(Brole.value==="admin") return;
      window.yaContextCb.push(()=>{
      if(Ya.Context.AdvManager.getPlatform()==='desktop'){
@@ -1028,7 +1028,43 @@ ababa();
     <script src="/js/mediasoupadmin.js"></script>
     <script src="/js/vkapp.js"></script>
     
-    
+    <script>
+window.addEventListener("load", () => {
+    const render = (imageId) => {
+        return new Promise((resolve, reject) => {
+            window.yaContextCb.push(() => {
+                Ya.Context.AdvManager.render({
+                    "renderTo": imageId,
+                    "blockId": "R-A-12098170-10",
+                    "type": "inImage",
+                    "onRender": resolve,
+                    "onError": reject,
+                    "altCallback": reject
+                })
+            })
+        })
+    }
+    const renderInImage = (adImagesCounter, images) => {
+        if (adImagesCounter <= 0 || !images.length) {
+            return
+        }
+        const image = images.shift()
+        image.id = `yandex_rtb_R-A-12098170-10-${Math.random().toString(16).slice(2)}`
+        if (image.tagName === "IMG" && !image.complete) {
+            image.addEventListener("load", () => {
+                render(image.id)
+                    .then(() => renderInImage(adImagesCounter - 1, images))
+                    .catch(() => renderInImage(adImagesCounter, images))
+            }, { once: true })
+        } else {
+            render(image.id)
+                .then(() => renderInImage(adImagesCounter - 1, images))
+                .catch(() => renderInImage(adImagesCounter, images))
+        }
+    }
+    renderInImage(2, Array.from(document.querySelectorAll(".Vid")))
+}, { once: true })
+</script>
     
     
  
