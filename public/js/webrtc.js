@@ -1817,7 +1817,8 @@ window.addEventListener("online", function(e) {
 	   //pl();
 	   if(HELP == 1){
 		//   window.location.href="#helproject";
-		try{
+		
+		/*try{
 		if(vkBridge){
 			vkBridge.send('VKWebAppShowBannerAd',{banner_location:'bottom'})
 			.then(data=>{
@@ -1833,7 +1834,7 @@ window.addEventListener("online", function(e) {
 		}
 	}catch(e){}
 		//alert(5);
-		
+		*/
 		
 		
 	
