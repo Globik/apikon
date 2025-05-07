@@ -1360,7 +1360,7 @@ function base64ToBlob(base64String, contentType = '') {
     return new Blob([byteArray], { type: contentType });
 }
 async function removeMedia(){
-
+/*
 	let mediasoupAdmin = gid("mediasoupAdmin");
 	if(mediasoupAdmin.value === 'yes'){
 	let bu ;
@@ -1376,8 +1376,9 @@ async function removeMedia(){
 	}
 }
 // }else{
-	 wsend({type: "hang-up", ignore: false, sub: 'here' });
+	 //wsend({type: "hang-up", ignore: false, sub: 'here' });
 	 if(sock)sock.close();
+	 */ 
 
 }
 async function closeAll(el){
