@@ -207,7 +207,7 @@ section#zarcont strong{
 		line-height:1.2;
 	}
 }
-		#local video::-webkit-media-controls,#remote video::-webkit-media-controls,#kartina video::-webkit-media-controls{
+		#local video::-webkit-media-controls, video.Vid::-webkit-media-controls,#kartina video::-webkit-media-controls{
 		display:none !important;
 		}
 	p.intro{
@@ -552,7 +552,7 @@ background-image: linear-gradient(147deg, #000000 0%, #434343 74%);
 	.yourmsg.he2{
 		background:rgb(40,60,24);
 	}
-	#local,#remote{
+	#local,.Vid{
 	display:block;
 		width:100%;
 		
@@ -561,7 +561,7 @@ background-image: linear-gradient(147deg, #000000 0%, #434343 74%);
 		object-fit:contain;
 		
 	}
-	#remote{
+	.Vid{
 		width:100%;
 		height:100%;
 		
@@ -710,10 +710,7 @@ section#mobileChat{
 	display:none;
 	
 }
-#remote, #local{
-		
-		bject-fit:cover;
-	}
+
 	#remote.fill, #local.fill{
 		
 		obect-fit:fill;
@@ -1129,13 +1126,13 @@ div.heartcount{
 	#mobileloader.active{
 		display:block;
 	}
-	#remote{
+	.Vid{
 		height:100%;
 	
 		width:100%;
 		border-radius:1px;
 	}
-	#local,#remote{
+	#local,.Vid{
 		object-fit:cover;
 	}
 	
