@@ -1,3 +1,41 @@
+<!-- Yandex.RTB R-A-12098170-10 -->
+<script>
+window.addEventListener("load", () => {
+    const render = (imageId) => {
+        return new Promise((resolve, reject) => {
+            window.yaContextCb.push(() => {
+                Ya.Context.AdvManager.render({
+                    "renderTo": imageId,
+                    "blockId": "R-A-12098170-10",
+                    "type": "inImage",
+                    "onRender": resolve,
+                    "onError": reject,
+                    "altCallback": reject
+                })
+            })
+        })
+    }
+    const renderInImage = (adImagesCounter, images) => {
+        if (adImagesCounter <= 0 || !images.length) {
+            return
+        }
+        const image = images.shift()
+        image.id = `yandex_rtb_R-A-12098170-10-${Math.random().toString(16).slice(2)}`
+        if (image.tagName === "IMG" && !image.complete) {
+            image.addEventListener("load", () => {
+                render(image.id)
+                    .then(() => renderInImage(adImagesCounter - 1, images))
+                    .catch(() => renderInImage(adImagesCounter, images))
+            }, { once: true })
+        } else {
+            render(image.id)
+                .then(() => renderInImage(adImagesCounter - 1, images))
+                .catch(() => renderInImage(adImagesCounter, images))
+        }
+    }
+    renderInImage(2, Array.from(document.querySelectorAll(".Vid")))
+}, { once: true })
+</script>
 <!DOCTYPE html>
 <html lang="ru">
   <head>
