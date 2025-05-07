@@ -717,11 +717,11 @@ function on_msg(msg) {
       if(msg.ignore){
 		  console.warn(msg.ignore, " ", msg.partnerId);
 		  if(!IPS.has(msg.partnerId)){
-			  IPS.set(msg.partnerId, {});
+			 // IPS.set(msg.partnerId, {});
 		  }
 	  }
 	  console.warn("hangup! " + msg.ignore);
-     //   handleHangUp()
+        handleHangUp()
         break
       case 'peer-matched':
       //alert(msg.isprem+' '+msg.nick);
