@@ -1942,10 +1942,11 @@ wsend(socket, { type:'vip', vip: r })
      msg = JSON.parse(message)
 }catch(e){return;}
 if(msg.request == "mediasoup"){
-	/*handleMediasoup.*/handleMediasoup(socket, msg, WebSocket, wsServer, pool).mediasoup_t();
+	/*handleMediasoup.*/
+	//handleMediasoup(socket, msg, WebSocket, wsServer, pool).mediasoup_t();
 	return;
 }else if(msg.request == 'mediasoup2'){
-	handleAdminMedia(socket, msg, WebSocket, wsServer, pool).mediadmin();
+	//handleAdminMedia(socket, msg, WebSocket, wsServer, pool).mediadmin();
 	return;
 }
     switch (msg.type) {
@@ -2031,8 +2032,9 @@ socket.on('error', function(e){
     broadcasti({ type: 'online', online: wsServer.clients.size })
     
     hangUp(socket.id, { type: 'hang-up', partnerId: socket.userId, ignore: false }, true, "noabrupt")
-    /* handleMediasoup.*/handleMediasoup(socket, msg, WebSocket, wsServer, pool).cleanUpPeer(socket.pubId);
-    handleAdminMedia(socket, msg, WebSocket, wsServer, pool).cleanMedia();
+    /* handleMediasoup.*/
+    //handleMediasoup(socket, msg, WebSocket, wsServer, pool).cleanUpPeer(socket.pubId);
+   // handleAdminMedia(socket, msg, WebSocket, wsServer, pool).cleanMedia();
   })
 })
 function wsend(ws, obj) {
