@@ -1510,6 +1510,8 @@ return imgdata22;
 //},'image/jpeg',0.95)
 //})
 }
+//mobileloader.className="active";
+
 	local.onloadedmetadata = function () {
 		//let a = MediaRecorder.isTypeSupported('video/webm');
 		//alert(a);
@@ -1534,6 +1536,7 @@ return imgdata22;
 	someInterval = setInterval(doScreenshot, 1000 * 11);
 		somespinner.className="show";
 		mobileloader.className="active";
+		
 		duka2.className="show";
 	}
 	
