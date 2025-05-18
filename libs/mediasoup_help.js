@@ -611,7 +611,7 @@ removeAudioConsumer(id);
     removeAllConsumers();
    // if(router){router.close(); router=null;}
     
-    //if(worker){worker.close();worker=null;}
+    if(worker){worker.close();worker=null;}
     
     
      /*try{

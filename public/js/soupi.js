@@ -377,7 +377,7 @@ console.log("after sender")
                txtvalue2.disabled = false;
                let abbi = document.querySelectorAll('.send');
                abbi[0].setAttribute('data-publish', 'publish');
-               abbi[1].setAttribute('data-publish', 'publish');
+            //   abbi[1].setAttribute('data-publish', 'publish');
                let a = document.querySelector('div#playContainer #kresti');
                if(a) a.classList.toggle('show');
                let sa = document.querySelector("#kartinasvg");
@@ -799,8 +799,8 @@ function unpublish() {
    txtvalue.setAttribute('data-publish', 'none');
    txtvalue2.setAttribute('data-publish', 'none');
     let abbi = document.querySelectorAll('.send');
-               abbi[0].setAttribute('data-publish', 'none');
-               abbi[1].setAttribute('data-publish', 'none');
+              // abbi[0].setAttribute('data-publish', 'none');
+               //abbi[1].setAttribute('data-publish', 'none');
      let a = document.querySelector('div#playContainer #kresti');
                if(a) a.classList.toggle('show');
                let sa = document.querySelector("#kartinasvg");
