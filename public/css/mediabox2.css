@@ -1127,7 +1127,7 @@ div.heartcount{
 	}
 	#mobileloader.active{
 		display:block;
-		z-index:9998;
+		z-index:800;
 	}
 	.Vid{
 		height:100%;

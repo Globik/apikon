@@ -1943,7 +1943,7 @@ wsend(socket, { type:'vip', vip: r })
 }catch(e){return;}
 if(msg.request == "mediasoup"){
 	/*handleMediasoup.*/
-	//handleMediasoup(socket, msg, WebSocket, wsServer, pool).mediasoup_t();
+	handleMediasoup(socket, msg, WebSocket, wsServer, pool).mediasoup_t();
 	return;
 }else if(msg.request == 'mediasoup2'){
 	//handleAdminMedia(socket, msg, WebSocket, wsServer, pool).mediadmin();
