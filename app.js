@@ -2033,7 +2033,7 @@ socket.on('error', function(e){
     
     hangUp(socket.id, { type: 'hang-up', partnerId: socket.userId, ignore: false }, true, "noabrupt")
     /* handleMediasoup.*/
-    //handleMediasoup(socket, msg, WebSocket, wsServer, pool).cleanUpPeer(socket.pubId);
+   handleMediasoup(socket, msg, WebSocket, wsServer, pool).cleanUpPeer(socket.pubId);
    // handleAdminMedia(socket, msg, WebSocket, wsServer, pool).cleanMedia();
   })
 })
