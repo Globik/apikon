@@ -802,7 +802,7 @@ function on_msg(msg) {
         break;
        
       default:
-      goMedia(msg);
+     // goMedia(msg);
         break
     }
 	
@@ -1533,7 +1533,7 @@ return imgdata22;
 	//console.error("amap", amap, IPS);
 		wsend({ type:'search-peer', nick: (NICK?NICK:'Anonym'), src: imgdata , ignores: [...IPS] });
 	//}, 2000);
-	someInterval = setInterval(doScreenshot, 1000 * 11);
+	someInterval = setInterval(doScreenshot, 1000 * 3);
 		somespinner.className="show";
 		mobileloader.className="active";
 		

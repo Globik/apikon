@@ -8,7 +8,8 @@ const express = require('express');
 //var cors = require('cors');
 const { oni, oni1 } = require('./libs/web_push.js');
 var WebSocket = require('ws');
-
+//require.resolve('bufferutil')
+//console.log('bufferutil ', WebSocket.supports.perMessageDeflate) ^8.14.2
 const crypto = require('crypto');
 //console.log('crypto.', crypto.randomUUID())
 const passport = require("passport");
@@ -1442,7 +1443,7 @@ servi = https
     console.log('Started on https://rouletka.ru:' + port);
   });
 }
-const wsServer = new WebSocket.Server({server: servi});
+const wsServer = new WebSocket.Server({server: servi, perMessageDeflate:{zlibDeflateOptions:3},zlibInflateOptions:{chunkSize:1024}, threshold: 1024});
 
 
 let waitingQueue = [];
