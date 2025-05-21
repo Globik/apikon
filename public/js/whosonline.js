@@ -13,8 +13,8 @@ function handleDynamic(obj){
 		webcams2.textContent = obj.cams.length;
 		let b = setConnects(obj.cams.length);
 		//if(b){
-		connects.textContent = b;
-		conns2.textContent = b;
+		//connects.textContent = b;
+		//conns2.textContent = b;
 	//}
 		obj.cams.forEach(function(el, i){
 		let d = document.createElement("div");
@@ -28,8 +28,8 @@ function handleDynamic(obj){
 				webcams2.textContent = obj.camcount;
 		let b = setConnects(obj.camcount);
 		
-		connects.textContent = b;
-		conns2.textContent = b;
+		//connects.textContent = b;
+		//conns2.textContent = b;
 	let el = document.querySelector(`[data-id="${obj.id}"]`);
 	if(el)el.remove();
 	}else if(obj.sub == "add"){
@@ -43,8 +43,8 @@ function handleDynamic(obj){
 		 webcams2.textContent = obj.camcount;
 		let b = setConnects(obj.camcount);
 		
-		connects.textContent = b;
-	conns2.textContent = b;
+		//connects.textContent = b;
+	//conns2.textContent = b;
 		
 	}else if(obj.sub == "connects"){
 		//alert('connects');

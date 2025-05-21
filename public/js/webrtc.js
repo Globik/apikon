@@ -785,7 +785,10 @@ function on_msg(msg) {
         znakPrint2.classList.add("hidden");
         break;
         case 'connected2':
-       // connects.textContent = msg.size;
+        let conns2 = gid("conns2");
+        connects.textContent = msg.size;
+        conns2.textContent = msg.size;
+        //alert(msg.size);
         break;
         case 'dynamic':
        // alert('dynamic');
@@ -1931,7 +1934,7 @@ function iceConnectionStateChangeHandler (event) {
     break;
     case 'complete':
       connectionState = 'open'
-      wsend({ type: "connected" });
+     // wsend({ type: "connected" });
       break;
     case 'closed':
     console.log('ice closed');
