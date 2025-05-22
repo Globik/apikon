@@ -1443,7 +1443,7 @@ servi = https
     console.log('Started on https://rouletka.ru:' + port);
   });
 }
-const wsServer = new WebSocket.Server({server: servi, perMessageDeflate:{zlibDeflateOptions:3},zlibInflateOptions:{chunkSize:512}, threshold: 512 });
+const wsServer = new WebSocket.Server({server: servi/*, perMessageDeflate:{zlibDeflateOptions:3},zlibInflateOptions:{chunkSize:512}, threshold: 512 */});
 
 
 let waitingQueue = [];
