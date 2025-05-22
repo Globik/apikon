@@ -48,7 +48,7 @@ const roomState = {
 }
 
 eventEmitter.on('suka', function(d){
-	console.log('mydata ', d);
+	//console.log('mydata ', d);
 //	 roomState.peers[d.id].lastSeenTs = Date.now();
 	     if(roomState.peers[d.id]){
    roomState.peers[d.id].lastSeenTs = Date.now();

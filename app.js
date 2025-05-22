@@ -24,7 +24,7 @@ const render = require('./libs/render.js');
 const admin = require('./router/admin.js');
 const pay = require('./router/pay.js');
 
-const { handleMediasoup, ev , handleAdminMedia } = require("./libs/mediasoup_help.js")
+//const { handleMediasoup, ev , handleAdminMedia } = require("./libs/mediasoup_help.js")
 
 const axios = require('axios').default;
 
@@ -1862,11 +1862,11 @@ function doWas(obj){
 	imgData.value = obj.value;
 	imgData.publishedId = obj.publishedId;
 }
- ev.on('producer_published', doWas);
- ev.on("producer_unpublished", function doWas2(){
-	 console.log("producer unpublished event");
-	 clearProducer();
- });
+ //ev.on('producer_published', doWas);
+ //ev.on("producer_unpublished", function doWas2(){
+	// console.log("producer unpublished event");
+	 //clearProducer();
+ //});
  function clearProducer(){
 	 //console.log("*** clear producer ", imgData);
 	 delete imgData.img_data;
@@ -1878,9 +1878,10 @@ function doWas(obj){
 	 imgData = {}
 	  console.log("*** clear producer ", imgData);
  }
- ev.on("onconsume", function doWas3(obj){
-	 imgData.value = obj.value;
- });
+ 
+// ev.on("onconsume", function doWas3(obj){
+	// imgData.value = obj.value;
+ //});
  
 wsServer.on('connection', async function (socket, req) {
 socket.isAlive = true;
@@ -1987,7 +1988,7 @@ if(msg.request == "mediasoup"){
         searchPeer(socket, { type: 'peer-matched' }, { src: msg.src, ignores: msg.ignores })
         break
         case 'srcdata':
-       ev.emit('suka', { id: socket.id })
+    //   ev.emit('suka', { id: socket.id })
         broadcast_admin({ type: "dynamic", sub: "srcdata", src: msg.src, id: socket.id });
         break
         case 'list':
@@ -2029,7 +2030,7 @@ socket.on('error', function(e){
     
     hangUp(socket.id, { type: 'hang-up', partnerId: socket.userId, ignore: false }, true, "noabrupt")
     /* handleMediasoup.*/
-   handleMediasoup(socket, msg, WebSocket, wsServer, pool).cleanUpPeer(socket.pubId);
+ //  handleMediasoup(socket, msg, WebSocket, wsServer, pool).cleanUpPeer(socket.pubId);
    // handleAdminMedia(socket, msg, WebSocket, wsServer, pool).cleanMedia();
   })
 })
