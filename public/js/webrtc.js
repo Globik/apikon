@@ -1851,7 +1851,7 @@ window.addEventListener("online", function(e) {
 		
 	
 	
-	   }else if(HELP == 3){
+	   }else if(HELP == 8){
 	//	if(Prem.value=="n")   window.location.href = "#myGame";
 	 if(Prem.value=="n")getReklama();
 	 HELP = 0;
