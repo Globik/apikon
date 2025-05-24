@@ -1,28 +1,19 @@
-const {langpage} = require('./langpage.js');
+const { langpage } = require('./langpage.js');
+const  { ru } = require('../lang/ru.js');
+const { en } = require('../lang/en.js');
+const { zh } = require('../lang/zh.js');
+
 function about(n){
-	const { lang } = n;
+	const { lang, ln } = n;
 return `
  <!DOCTYPE html>
-<html ng-app="projectRtc" lang="${n.langi=='true'?'ru':'en'}">
+<html ng-app="projectRtc" lang="${n.ln}">
 
 <head>
-    <title>Чат рулетка-видеочат для общения, знакомства онлайн</title>
+    <title>${ln=='ru'?ru.title:ln=='zh'?zh.title:en.title}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<!--
-    <meta name="description" content="Чат рулетка ! Онлайн видеочат без регистрации для знакомства и общения" />
-    <meta name="keywords" content="для онлайн знакомства, как чатрулетка,общение, видео знакомства, бесплатно, без регистрации, чат, видеочат,чат рулетка-видеочат №1, знакомства" />
-    <meta name="yandex-verification" content="fda46e049783b204" />
-    <meta name='wmail-verification' content='98c0f2f2d54a70e546cef505fbab8330' />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="apple-touch-icon" sizes="120x120" href="/img1/icons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/img1/icons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/img1/icons/favicon-16x16.png">
- <link rel="manifest" href="/img/icons/site.webmanifest">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ffffff">
--->
+
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- <meta name="viewport" content="width=device-width,initial-scale=1.0"> -->
     <meta name="viewport" content="width=device-width,user-scalable=no" />
     <link rel="icon" href="favicon.ico">
     <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
@@ -44,19 +35,17 @@ return `
 		<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
 		<meta name="theme-color" content="#ffffff">
 		
-<meta name="description" content="Чат-рулетка — самый популярный русскоязычный чат. Заработок на виртуальных подарках. Ежедневно чат посещает более 500 тысяч пользователей из России и стран СНГ." />
-  <meta name="keywords" content="rouletka.ru, roulet.chat, chat.roulet, roulette, chat, Chatroulette, видеочат, чатрулетка, чатрулет, chatroulette русский, чатрулетт, анонимность, видео, чат, рулетка, чат рулет, чат рулетка, чат рулетт, chat roulette, chatroulette.com, знакомства, videochatru, videochat.ru, videochat.com" />
  
-  <meta property="og:title" content="Чат-рулетка - анонимный видеочат (Русский аналог ChatRoulette)" />
+  <meta property="og:title" content="${ln=='ru'?ru.title:ln=='zh'?zh.title:en.title}" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="//rouletka.ru/" />
   <meta property="og:image" content="//rouletka.ru/og_image.png" />
-  <meta property="og:site_name" content="Чат-рулетка" />
-  <meta property="og:description" content="Чат-рулетка для русскоязычных пользователей. Заработок на виртуальных подарках. Случайные знакомства в видеочате. Есть веб-камера? Найди пару в чат рулетке!" />
+  <meta property="og:site_name" content="${ln=='ru'?ru.name:ln=='zh'?zh.name:en.name}" />
+  <meta property="og:description" content="${ln=='ru'?ru.descr:ln=='zh'?zh.descr:en.descr}" />
   
-  <meta itemprop="name" content="Чат-рулетка - анонимный видеочат (Русский аналог ChatRoulette)" />
-<meta itemprop="description" content="Чат-рулетка — самый популярный русскоязычный чат. Заработок на виртуальных подарках Ежедневно чат посещает более 500 тысяч пользователей из России и стран СНГ." />
-<meta name="description" content="Чат-рулетка — самый популярный русскоязычный чат. Ежедневно чат посещает более 500 тысяч пользователей из России и стран СНГ." />
+  <meta itemprop="name" content="${ln=='ru'?ru.title:ln=='zh'?zh.title:en.title}" />
+<meta itemprop="description" content="${ln=='ru'?ru.descr:ln=='zh'?zh.descr:en.descr}" />
+<meta name="description" content="${ln=='ru'?ru.descr:ln=='zh'?zh.descr:en.descr}" />
 <script type="application/ld+json"> { "@context": "https://schema.org", "@type": "Organization", "url": "https://rouletka.ru", "logo": "https://rouletka.ru/og_image.png" } </script>
   <link rel="alternate" href="https://rouletka.ru/about/en" hreflang="en" />
 <link rel="alternate" href="https://rouletka.ru/about" hreflang="ru" />
@@ -85,16 +74,16 @@ ${lang=='id'?'':'<a href="/about/id" hreflang="id">'}<img title="Индонез�
     
         <div class="container wow fadeInUp">
             <div class="logoЧатРулетка"></div>
-            <h1 class="hero__title">Видео чат — случайные знакомства</h1>
-            <h2 id="sukaK" class="hero__subtitle">Знакомьтесь с новыми людьми прямо сейчас!</h2>
-            <button class="btn btn_orange" id="start_chat_btn">${n.langi=='true'?'Начать общаться':'Start chatting'}</button>
+            <h1 class="hero__title">${ln=='ru'?ru.herotitle:ln=='zh'?zh.herotitle:en.herotitle}</h1>
+            <h2 id="sukaK" class="hero__subtitle">${ln=='ru'?ru.herosubtitle:ln=='zh'?zh.herosubtitle:en.herosubtitle}</h2>
+            <button class="btn btn_orange" id="start_chat_btn">${ln=='ru'?ru.knopka:ln=='zh'?zh.knopka:`Start chatting`}</button>
             <div class="hero__mobile-btn only-mobile">
                 <a href="https://play.google.com/store/apps/details?id=ru.rouletka.pwa" class="btn btn_play-market only-mobile">
                     <svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="google-play" class="svg-inline--fa fa-google-play fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                     <path fill="currentColor"
                         d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c18-14.3 18-46.5-1.2-60.8zM104.6 499l280.8-161.2-60.1-60.1L104.6 499z">
                     </path>
-                </svg> Приложение в Google Play
+                </svg> ${ln=='ru'?ru.play:ln=='zh'?zh.play:en.play}
                 </a><!--
                 <a class="btn btn_appGallery only-mobile" href="https://appgallery.huawei.com/app/C109425847?sharePrepath=ag&locale=ru_RU&source=appshare&subsource=C109425847&shareTo=com.android.bluetooth&shareFrom=appmarket&shareIds=b582f0a3a57545f99084d72b532620c1_com.android.bluetooth&callType=SHARE">
                     <div class="btn__icon">
@@ -139,13 +128,9 @@ ${lang=='id'?'':'<a href="/about/id" hreflang="id">'}<img title="Индонез�
         <div class="container">
             <div class="info-description  wow fadeInUp">
                 <h3 class="info-description__title">
-                    Видео чат - случайные знакомства
+                   ${ln=='ru'?ru.herotitle:ln=='zh'?zh.herotitle:en.herotitle}
                 </h3>
-                <p class="info-description__text">
-                    Такая чат рулетка не похожа на все другие, ведь вы можете начинать беседы в любое удобное для себя время. Вне зависимости от того, когда проходит разговор днем или ночью, вам всегда будет найден случайный собеседник. Необычная чатрулетка, путем нестандартного
-                    выбора, найдет вам человека для беседы, подарит общение, знакомства и море положительных эмоций.
-             <!--   Можно купиь <b>виртульных подарков</b> и дарить их собеседнику. <b>Зарабатывайте на виртуальных подарках</b> 
-             в виде сердечек &#x1f496. Виртуальные подарки можно обменять на <b>деньги</b>. -->
+                <p class="info-description__text">${ln=='ru'?ru.infodescr:ln=='zh'?zh.infodescr:en.infodescr}
                 </p>
             </div>
 
@@ -155,27 +140,28 @@ ${lang=='id'?'':'<a href="/about/id" hreflang="id">'}<img title="Индонез�
                     <img src="/img1/2.png" alt="новые друзья" class="info-block__img info-block__img_2 wow fadeInDown">
                 </div>
                 <div class="info-block__col wow fadeInRight">
-                    <h4 class="info-block__title">Русская чат рулетка</h4>
-                    <p class="info-block__text">Вас ждут увлекательные разговоры, длительные беседы, вы найдете здесь много разных людей, общение знакомства и, быть может, одно из них перейдет во что-то большее.
-                    </p>
-                    <p class="info-block__text">Помните, что каждая девушка – это достойная претендентка на ваше сердце. Здесь каждый находит то, что ищет.</p>
-                    <p class="info-block__text">Теперь нет необходимости писать черные буквы на белом экране, не имеет смысла тратить много времени, на изнурительный подбор фраз, поскольку видео чат открывает совсем другие грани.</p>
+                    <h4 class="info-block__title">${ln=='ru'?ru.infotitle:ln=='zh'?zh.infotitle:en.infotitle}</h4>
                     <p class="info-block__text">
-                        Чат Рулетка — это популярный русскоязычный видеочат, ежедневно посещаемый большим количеством пользователей из России и государств СНГ. Наш сервис открыт для всех людей, которые ищут новые интригующие знакомства. Возможности такого общения намного шире,
-                        нежели при обычной интернет-переписке, ведь оно позволяет собеседникам видеть друг друга при помощи веб-камеры. Если вы ощущаете жажду общения, видеочат поможет вам реализовать эти желания.
+                   ${ln=='ru'?ru.txt1:ln=='zh'?zh.txt1:en.txt1}
+                    
+                    </p>
+                    <p class="info-block__text">${ln=='ru'?ru.txt2:ln=='zh'?zh.txt2:en.txt2}
+                    
+                    </p>
+                    <p class="info-block__text">${ln=='ru'?ru.txt3:ln=='zh'?zh.txt3:en.txt3}
+        
+                    </p>
+                    <p class="info-block__text">${ln=='ru'?ru.txt4:ln=='zh'?zh.txt4:en.txt4}
                     </p>
                 </div>
             </div>
 
             <div class="info-block">
                 <div class="info-block__col wow fadeInLeft">
-                    <h4 class="info-block__title">Чат Рулетка с девушками — это реально!</h4>
-                    <p class="info-block__text">
-                        Чат рулетка работает по принципу случайных знакомств. Использовать данный интернет-сервис чрезвычайно легко.Если вы поймете, что с вашим собеседником скучно, то вы сможете продолжить поиск, нажав кнопку «дальше»
+                    <h4 class="info-block__title">${ln=='ru'?ru.infotitle1:ln=='zh'?zh.infotitle1:en.infotitle1}</h4>
+                    <p class="info-block__text">${ln=='ru'?ru.txt5:ln=='zh'?zh.txt5:en.txt5}
                     </p>
-                    <p class="info-block__text">Девушки в чате рулетке — это не какие-то там платные агенты, задача которых завлекать и развлекать мужчин, которые зашли на этот чат. 
-                    Это обычные девушки, которые, как и вы, оказались на этом чате в поиске своей половинки или приятного
-                        собеседника.<!-- Вы можете приобрести <b>виртуальных сердечек</b> &#x1f496 и подарить сердечко девушке. --> 
+                    <p class="info-block__text">${ln=='ru'?ru.txt6:ln=='zh'?zh.txt6:en.txt6} 
                     </p>
                 </div>
                 <div class="info-block__col info-block__col_rel-flex">
@@ -214,20 +200,18 @@ ${langpage(n)}
                     <path fill="currentColor"
                         d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c18-14.3 18-46.5-1.2-60.8zM104.6 499l280.8-161.2-60.1-60.1L104.6 499z">
                     </path>
-                </svg> Приложение в Google Play
+                </svg> ${ln=='ru'?ru.play:ln=='zh'?zh.play:en.play}
             </a>
 
             <div class="footer-desc">
-                <h4 class="footer-desc__title">Знакомьтесь с новыми людьми прямо сейчас!</h4>
-                <p class="footer-desc__text">
-                    Вы никогда не угадаете заранее, с кем наш алгоритм видеочат рулетки соединит вас в следующий раз. Может быть, это девушка по соседству, а может, это кто-то, кто живет за тысячи километров от вас. Вы никогда не узнаете, пока не попробуете.
+                <h4 class="footer-desc__title">${ln=='ru'?ru.footertitle:ln=='zh'?zh.footertitle:en.footertitle}</h4>
+                <p class="footer-desc__text">${ln=='ru'?ru.txt7:ln=='zh'?zh.txt7:en.txt7}
                 </p>
-                <p class="footer-desc__text">
-                    Готовьтесь к сюрпризам и веселым беседам с незнакомцами каждый раз, когда вы нажимаете кнопку “Далее”. Откройте для себя новые увлекательные приключения! Если вы всегда мечтали пообщаться с новыми людьми, но не знали как, видеочат Rouletka вам в этом
-                    поможет.
+                <p class="footer-desc__text">${ln=='ru'?ru.txt8:ln=='zh'?zh.txt8:en.txt8}
+                    
                 </p>
-                <p class="footer-desc__text">
-                    Мир увлекательных знакомств находится всего в одном шаге от вас. Не упустите возможность совершить множество новых открытий.
+                <p class="footer-desc__text">${ln=='ru'?ru.txt9:ln=='zh'?zh.txt9:en.txt9}
+                   
                 </p>
                 <p class="footer-desc__copy">
                     &copy;2023 Rouletka

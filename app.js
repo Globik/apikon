@@ -144,10 +144,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(async(req, res, next)=>{
 	req.app.locals.user = req.user;
-	
-	var langstr = (req.get('Accept-Language')&&req.get('Accept-Language').includes('ru')? 'true' : 'false');
+	var isln = req.get('Accept-Language');
+	var langstr = (isln&&isln.includes('ru')? 'ru':isln.includes('zh')?'zh': 'en');
 	//console.log('langstr ',req.get('Accept-Language') );
-  req.app.locals.langi =  langstr;
+  req.app.locals.ln =  langstr;
 	req.app.locals.stun = stun;
 	req.app.locals.testshopid = testshopid;
 	req.app.locals.testshopsecret = testshopsecret;
