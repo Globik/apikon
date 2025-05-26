@@ -521,10 +521,10 @@ const channel = new BroadcastChannel('message');
 		console.log(ev.data); 
 		let a = ev.data.type;
 		if(a == "start"){
-			start(startbtn);
+			//start(startbtn);
 		}else if(a == "next"){
 			let amap = [[0,{}]];
-			next(nextbtn, true, amap, false);
+			//next(nextbtn, true, amap, false);
 		}else{}
 		}
 
