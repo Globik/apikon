@@ -1158,7 +1158,7 @@ el.textContent = L()=="ru"?"стоп":L()=='en'?"stop":L()=='zh'?'停止':L()=='
 		//makeRecord(stream);
 
 if(kuku == 0){	
-if(Prem.value=="n")getReklama();
+//if(Prem.value=="n")getReklama();
 }
 if(kuku==1){
 
@@ -1851,9 +1851,9 @@ window.addEventListener("online", function(e) {
 		
 	
 	
-	   }else if(HELP == 8){
+	   }else if(HELP == 6){
 	//	if(Prem.value=="n")   window.location.href = "#myGame";
-	// if(Prem.value=="n")getReklama();
+	 if(Prem.value=="n")getReklama();
 	 HELP = 0;
 		//window.location.href = "#ozeniteHREF";
 	   }else if(HELP == 5){
@@ -1861,9 +1861,9 @@ window.addEventListener("online", function(e) {
 		   //HELP = 0;
 	   }else{}
 	   HELP++;
-	  // if(HELP == 6){
-		//   HELP = 0;
-	   //}
+	   if(HELP == 6){
+		 //  HELP = 0;
+	   }
 	   el.disabled = true;
 	   CONNECTED = false;
      closeVideoCall();
