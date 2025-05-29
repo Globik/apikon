@@ -11,7 +11,7 @@ const zar = function(n){
 <p class="pzar">Чем больше общаетесь, тем ближе к победе! Акция проводится при поддержке спонсора — сети мини-маркетов <strong>PennyMarket</strong>.</p>
 
 <p class="pzar">Не упустите возможность стать миллионером! Участвуйте, общайтесь и выигрывайте!</p>
-<p class="pzar">Только для зарегистрированных пользователей.</p>
+<p class="pzar">Только для <b style="font-size:1.4rem;">зарегистрированных</b> пользователей.</p>
    <div id="fotodiv"><img src="/img/penny.webp"/></div>
     <div id="buttondiv">
     <button onclick="hideZar(this);">Не показывать больше</button>
@@ -20,7 +20,7 @@ const zar = function(n){
     <script>
     function hideZar(el){
 		window.location.href="#.";
-		localStorage.setItem('zartwo','yes');
+		localStorage.setItem('zarthree','yes');
 	}
     </script>
     </output>

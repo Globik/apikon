@@ -206,16 +206,17 @@ if(faka){
 }
 	 function getZar(){
 	 // if(gid("Brole").value=='non'){
-	 localStorage.removeItem('zae');
-	  let d = localStorage.getItem('zartwo');
+	// alert('suka');
+	 localStorage.removeItem('zartwo');
+	  let d = localStorage.getItem('zarthree');
 	  if(d&&d=='yes'){
 		//  alert(d);
-		  return;
+		 // return;
 	  }
-	 // window.location.href="#myZar";
+	  window.location.href="#myZar";
   //}
 }
-	//getZar();
+	
 	
 	const myAgeForm2 = document.forms.verifyageform;
  if(myAgeForm2){
@@ -225,17 +226,7 @@ if(agi) myAgeForm.bday.value = agi;
 }}else{
 	showSomething();
 }
- function getZar(){
-	 // if(gid("Brole").value=='non'){
-	 localStorage.removeItem('zae');
-	  let d = localStorage.getItem('zartwo');
-	  if(d&&d=='yes'){
-		//  alert(d);
-		  return;
-	  }
-	 // window.location.href="#myZar";
-  //}
-}
+
 	getZar();
 
 function confirm_agenot(ev){
@@ -344,20 +335,9 @@ function isOpenModal(){
     const NICK = "${n.user?n.user.name:'anon'}";
    // var VK_USER = false;
   // alert("NICK "+NICK);
-  function getZar(){
-	 // if(gid("Brole").value=='non'){
-	 localStorage.removeItem('zae');
-	  let d = localStorage.getItem('zartwo');
-	  if(d&&d=='yes'){
-		//  alert(d);
-		  return;
-	  }
-	  window.location.href="#myZar";
-  //}
-}
- // getZar();
+  
     window.onload = function(){
-	//	getZar();
+	
 	
 		if(FLAGVK){
 			VK_USER = false;
