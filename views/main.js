@@ -204,18 +204,7 @@ if(faka){
 		e.preventDefault();
 	}
 }
-	 function getZar(){
-	 // if(gid("Brole").value=='non'){
-	// alert('suka');
-	 localStorage.removeItem('zartwo');
-	  let d = localStorage.getItem('zarthree');
-	  if(d&&d=='yes'){
-		//  alert(d);
-		  return;
-	  }
-	  window.location.href="#myZar";
-  //}
-}
+	 
 	
 	
 	const myAgeForm2 = document.forms.verifyageform;
@@ -227,7 +216,7 @@ if(agi) myAgeForm.bday.value = agi;
 	showSomething();
 }
 
-	getZar();
+	//getZar();
 
 function confirm_agenot(ev){
 	ev.preventDefault();
@@ -290,7 +279,19 @@ if(faka){
 //in_rem_hash();
 
 }
-   
+function getZar(){
+	 // if(gid("Brole").value=='non'){
+	// alert('suka');
+	 localStorage.removeItem('zartwo');
+	  let d = localStorage.getItem('zarthree');
+	  if(d&&d=='yes'){
+		//  alert(d);
+		  return;
+	  }
+	  window.location.href="#myZar";
+  //}
+}
+   getZar();
    function han(ev){
 	 //  alert('regeln');
 	   window.location.href="#regeln";
