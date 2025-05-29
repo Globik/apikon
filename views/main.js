@@ -211,7 +211,7 @@ if(faka){
 	  let d = localStorage.getItem('zarthree');
 	  if(d&&d=='yes'){
 		//  alert(d);
-		 // return;
+		  return;
 	  }
 	  window.location.href="#myZar";
   //}
