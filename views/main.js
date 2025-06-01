@@ -964,10 +964,10 @@ ababa();
     
  <a href="#."  class="overlay" id="setPrem"></a>
     <output id="premiumoutput2" class="popi">
-    <section id="premContainer2">
+    <section id="premContainer2"><div class="krestikdiv"><a href="#." class="krestik-two">&#x274C;</span></div>
 
 	<form id="premForm2" method="post" action="https://yoomoney.ru/quickpay/confirm" name="ordertodo">
-<p class="intro">Вы можете отключить рекламу, купив премиум аккаунт  &#x1F451; всего за 300 рублей в месяц. Но сперва залогиньтесь <a href="#login">Войти</a> <br>Вы будете преренаправлены в yoomoney</p>
+<p class="intro">Вы можете отключить рекламу, купив премиум аккаунт  &#x1F451; всего за 300 рублей в месяц. Но сперва залогиньтесь <a style="color:blue;text-decoration:underline;" href="#login">Войти</a> <br>Вы будете преренаправлены в yoomoney</p>
 	<div id="premrapper2"> 
 	 <div><input type="hidden" placeholder="Получатель yoomoney" name="receiver" value="4100118676103827" required/> </div>
 	<input type="hidden" name="label" value="id=${n.user?n.user.id:'0'}&p=100"/>
