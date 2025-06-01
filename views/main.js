@@ -291,6 +291,7 @@ function getZar(){
 	  window.location.href="#myZar";
   //}
 }
+//window.location.href="#setPrem";
    getZar();
    function han(ev){
 	 //  alert('regeln');
@@ -449,7 +450,7 @@ lang=='id'?'kamera web':''}:</b> <span id="camsCount">0</span> | <b>${lang=='ru'
 lang=='en'?'Connects':
 lang=='zh'?'连接':
 lang=='id'?'koneksi':''}:</b> <span id="connects">0</span></div>
-<!-- <div class="settingspanel"  onclick="pushSubscribe(this);">Пуш уведомления</div> -->
+ <div class="settingspanel"><a href="#setPrem" onclick="panelOpen();">Премиум аккаунт</a></div>
 <!-- ${lang=='ru'&&!n.VK ?`<div class="settingspanel"  onclick="purchaseTokens(this);">Купить сердечки &#x1f496;</div>`:''} -->
 <div class="settingspanel" onclick="showWhosOnline();">Who's online</div>
 ${n.user?`<div class="settingspanel">
@@ -641,10 +642,11 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
 			"platform":"desktop",
 			"onClose":function(){
 			console.log("Reklama closed")
-			//if(kkk == 1){
-			//	if(isLogin.value=="true")window.location.href="#setPrem";
+			if(kkk == 1){
+				//if(isLogin.value=="true")
+				window.location.href="#setPrem";
 			kkk = 0;
-		//	}
+		}
 			},
 		 })
 	 }else{
@@ -655,10 +657,11 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
 			"platform":"touch",
 			"onClose":function(){
 			console.log("Reklama closed")
-			//if(kkk == 1){
-			//if(isLogin.value=="true")window.location.href="#setPrem";
+			if(kkk == 1){
+			//if(isLogin.value=="true")
+			window.location.href="#setPrem";
 		kkk = 0;
-		//}
+		}
 			}
 		})
 	 }
@@ -678,7 +681,8 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
 	 "onClose":function(){
 			console.log("Reklama closed")
 			
-			//if(isLogin.value=="true")window.location.href="#setPrem";
+			//if(isLogin.value=="true")
+			window.location.href="#setPrem";
 			}
  })
 })
@@ -691,7 +695,8 @@ window.yaContextCb.push(()=>{
 	 "onClose":function(){
 			console.log("Reklama closed")
 			
-			//if(isLogin.value=="true")window.location.href="#setPrem";
+			//if(isLogin.value=="true")
+			window.location.href="#setPrem";
 			}
  })
 })
@@ -962,7 +967,7 @@ ababa();
     <section id="premContainer2">
 
 	<form id="premForm2" method="post" action="https://yoomoney.ru/quickpay/confirm" name="ordertodo">
-<p class="intro">Вы можете отключить рекламу, купив премиум аккаунт  &#x1F451; всего за 300 рублей в месяц. <br>Вы будете преренаправлены в yoomoney</p>
+<p class="intro">Вы можете отключить рекламу, купив премиум аккаунт  &#x1F451; всего за 300 рублей в месяц. Но сперва залогиньтесь <a href="#login">Войти</a> <br>Вы будете преренаправлены в yoomoney</p>
 	<div id="premrapper2"> 
 	 <div><input type="hidden" placeholder="Получатель yoomoney" name="receiver" value="4100118676103827" required/> </div>
 	<input type="hidden" name="label" value="id=${n.user?n.user.id:'0'}&p=100"/>
