@@ -644,7 +644,7 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
 			console.log("Reklama closed")
 			if(kkk == 1){
 				//if(isLogin.value=="true")
-				window.location.href="#setPrem";
+			//	window.location.href="#setPrem";
 			kkk = 0;
 		}
 			},
@@ -659,7 +659,7 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
 			console.log("Reklama closed")
 			if(kkk == 1){
 			//if(isLogin.value=="true")
-			window.location.href="#setPrem";
+		//	window.location.href="#setPrem";
 		kkk = 0;
 		}
 			}
@@ -682,7 +682,7 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
 			console.log("Reklama closed")
 			
 			//if(isLogin.value=="true")
-			window.location.href="#setPrem";
+			//window.location.href="#setPrem";
 			}
  })
 })
@@ -696,7 +696,7 @@ window.yaContextCb.push(()=>{
 			console.log("Reklama closed")
 			
 			//if(isLogin.value=="true")
-			window.location.href="#setPrem";
+			//window.location.href="#setPrem";
 			}
  })
 })
