@@ -50,7 +50,9 @@ function goMedia(data){
       //  disableElement("startMediaBtn");
       //  disableElement("stopMediaBtn");
       gid("playContainer").setAttribute("data-state", "busy");
-      if(!FLAGVK)  gid('kartina').setAttribute('poster',  data.img_data);
+      //if(!FLAGVK)  
+     // alert('published '+data.img_data);
+      gid('kartina').setAttribute('poster',  data.img_data);
         publishedId = data.publishedId;
         let a = document.querySelector('div#playContainer svg');
         if(a) a.style.fill = 'rgba(234,223,244,0.6)';
@@ -107,6 +109,7 @@ function sendRequest(obj) {
 }
 function Screenshot2() {
 	if(!remote.srcObject) return;
+	//alert('screen');
     let cnv = document.createElement('canvas');
     let w = 180;
     let h = 180;
@@ -227,10 +230,11 @@ function startMedia(el) {
         return;
     }
 PSENDER = true;
+/*
  if(gid("isLogin").value === "false"){
 		window.location.href = "#login";
 		return;
-	}
+	}*/
 	 	var gg = G();
 	if( gg == 4){
 		window.location.href = "#banned";
@@ -848,9 +852,9 @@ gid("playContainer").setAttribute("data-state", "busy");
    gid("txtvalue").setAttribute("data-publish", "none");
    txtvalue.disabled = true;
    txtvalue2.disabled = true;
-    let abbi = document.querySelectorAll('.send');
-               abbi[0].setAttribute('data-publish', 'none');
-               abbi[1].setAttribute('data-publish', 'none');
+ //   let abbi = document.querySelectorAll('.send');
+  //             abbi[0].setAttribute('data-publish', 'none');
+   //            abbi[1].setAttribute('data-publish', 'none');
     let a = document.querySelector('div#playContainer #kresti');
    if(a)a.className = "";
    let sa = document.querySelector("#kartinasvg");

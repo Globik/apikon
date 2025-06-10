@@ -805,7 +805,7 @@ function on_msg(msg) {
         break;
        
       default:
-     // goMedia(msg);
+      goMedia(msg);
         break
     }
 	
