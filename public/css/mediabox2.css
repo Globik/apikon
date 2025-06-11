@@ -11,7 +11,7 @@ div.icon-change-cam-div{
 	display:flex;
 	position:absolute;
 	right:10px;
-	top:40%;
+	top:5%;
 	width:42px;
 	height:42px;
 	border:1px solid black;
@@ -23,7 +23,7 @@ img.icon-change-cam{
 	
 }
 #kartinasvg{
-	background:#4e8b84;
+	bckground:#4e8b84;
 	padding:3px;
 	border-radius:2px;
 	
