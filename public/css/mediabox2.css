@@ -7,6 +7,27 @@ html,body{
 		:root {
     --mobilewidth: 452px;/*452px;*/
 }
+div.icon-change-cam-div{
+	display:flex;
+	position:absolute;
+	right:10px;
+	top:40%;
+	width:42px;
+	height:42px;
+	border:1px solid black;
+	border-radius: 2px;
+	background: rgba(255, 255, 255, 0.5);
+	cursor:pointer;
+}
+img.icon-change-cam{
+	
+}
+#kartinasvg{
+	background:#4e8b84;
+	padding:3px;
+	border-radius:2px;
+	
+}
 #mygameoutput{
 	width:80%;
 	clor:red;
@@ -1684,7 +1705,7 @@ top:25%;
 left:25%;
 	width:50%;
 	height:50%;
-	fill: rgba(34,23,44,0.2);
+	fill: rgba(167,67,12,0.2);
 	z-index:1;
 }
 div#playContainer #kresti{

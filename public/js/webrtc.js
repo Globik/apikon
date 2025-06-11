@@ -79,7 +79,7 @@ window.streami = undefined;
 		L()=='zh'?'首先按“开始”':
 		L()=='id'?'Tekan pertama "mulai"':'';
 		note({ content: s, type: "warn", time: 5 });
-		panelOpen();
+		//panelOpen();
 		return;
 	}
 	
@@ -109,7 +109,7 @@ window.streami = undefined;
 		isShow = true;
 	local.srcObject = stream;	
 	window.streami = stream;
-	panelOpen();
+	//panelOpen();
 	
 	if(!pc) {
 		return;
@@ -164,6 +164,7 @@ window.streami = undefined;
 	).catch(handleError)
 	isShow = false;
 }
+
 var isSharing =false;
 async function doSharing(el){
 	let ismobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
