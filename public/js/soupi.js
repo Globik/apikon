@@ -276,7 +276,13 @@ function stopMedia(el) {
  //window.location.href='#confirmAGE';
 async function publish(el) {
 	console.warn('publish');
-    if (SENDER) return;
+	//alert('sender '+SENDER);
+    if (SENDER) {
+		
+		unpublish();
+		
+		return;
+	}
     //alert(isLogin.value);
     
 console.log("after sender")
@@ -763,7 +769,9 @@ async function consume(transport, trackKind) {
 
 
 function unpublish() {
+//	alert("senderi "+SENDER);
     if (!SENDER) {
+		//alert("senderi "+SENDER);
         return;
     }
     wsend({ type: "stop", request: "mediasoup"});
@@ -784,6 +792,7 @@ function unpublish() {
         producerTransport.close(); // localStream will stop
         producerTransport = null;
     }
+    stopMedia();
     updateButtons();
     // updateButtons2();
     SENDER = false;

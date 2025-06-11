@@ -609,7 +609,7 @@ removeAudioConsumer(id);
     // --- clenaup all consumers ---
     //console.log('---- cleanup clenaup all consumers ---');
     removeAllConsumers();
-   // if(router){router.close(); router=null;}
+    if(router){router.close(); router=null;}
     
     if(worker){worker.close();worker=null;}
     
