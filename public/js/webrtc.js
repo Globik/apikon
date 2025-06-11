@@ -1854,7 +1854,7 @@ window.addEventListener("online", function(e) {
 	
 	   }else if(HELP == 2){
 	//	if(Prem.value=="n")   window.location.href = "#myGame";
-	 if(Prem.value=="n")getReklama();
+	// if(Prem.value=="n")getReklama();
 	 HELP = 0;
 		//window.location.href = "#ozeniteHREF";
 	   }else if(HELP == 5){

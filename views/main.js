@@ -1026,8 +1026,9 @@ ababa();
    <!-- <script src="/js/mediasoupadmin.js"></script> -->
     <script src="/js/vkapp.js"></script>
     
-    <script>/*
+    <script>
 window.addEventListener("load", () => {
+	if(Prem.value !="n") return;
     const render = (imageId) => {
         return new Promise((resolve, reject) => {
             window.yaContextCb.push(() => {
@@ -1061,7 +1062,7 @@ window.addEventListener("load", () => {
         }
     }
     renderInImage(2, Array.from(document.querySelectorAll(".Vid")))
-}, { once: true })*/
+}, { once: true })
 </script>
     
     
