@@ -220,6 +220,7 @@ function pauseVideo(element) {
 }
 
 function startMedia(el) {
+	if(remote.srcObject)console.error('remote srcObject already exist!');
     if (local.srcObject) {
         console.warn('WARN: local media ALREADY started');
         let s = L()=="ru"?"Нажмите сперва на стоп, а потом уже запускайте трансляцию!":
@@ -240,13 +241,13 @@ PSENDER = true;
 		window.location.href = "#banned";
 		return;
 	}
-   if(!sock)get_socket();
+ //  if(!sock)get_socket();
 
     navigator.mediaDevices.getUserMedia({audio: true, video: true })
         .then((stream) => {
 			loci = stream;
             remote.srcObject = stream;
-          
+         // alert('start');
             remote.volume = 0;
              remote.play();
            // playVideo(localVideo, localStream);
@@ -541,7 +542,7 @@ async function subscribe(el) {
         return;
     }
      if(!sock){
-		 get_socket();
+		// get_socket();
 	 }
     //alert("SUBSCRIBE");
     try {
@@ -780,6 +781,7 @@ function unpublish() {
         stopLocalStream(loci);
         loci = null;
     }
+    remote.srcObject = null;
     if (videoProducer) {
         videoProducer.close();
         videoProducer = null;
@@ -946,6 +948,7 @@ function disableElement(id) {
 }
 
 function beginTranslation(el){
+	//alert('begin');
 	if (SENDER) {
 		
 		unpublish();
@@ -961,7 +964,7 @@ function beginTranslation(el){
 		L()=='zh'?'启用流吗？很多观众都会看你的！':
 		L()=='id'?'Aktifkan streaming? Banyak pemirsa akan menonton Anda!':'')
 	//	alert(L());
-	if(is_dialogi()){
+	if(!is_dialogi()){
 	gid('inbox').innerHTML=s;
      gid('mydialog').showModal();
      gid('mydialog').addEventListener("close", function(e){
