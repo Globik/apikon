@@ -946,6 +946,12 @@ function disableElement(id) {
 }
 
 function beginTranslation(el){
+	if (SENDER) {
+		
+		unpublish();
+		
+		return;
+	}
 	//alert(1);
 	//alert("Сервис временно не работает");
 	//return;
