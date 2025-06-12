@@ -1954,12 +1954,16 @@ if(msg.request == "mediasoup"){
       case "write":
       case "unwrite":
       case "gift":
+      
      // msg.vip = socket.vip
         sendToPeer(socket, msg)
         break
       //  case "mediasoup" :
          //       handleMediasoup.handleMediasoup(socket, msg, webSocket, wsServer, pool).mediasoup_t();
      //  break
+     case "target":
+     sendtotarget(msg);
+     break
         case "helloServer":
         socket.userId = msg.userId;
         socket.nick = msg.nick;
@@ -2111,7 +2115,14 @@ function broadcast_admin(obj){
 	}
 }
 
-
+function sendtotarget(obj){
+	for (let el of wsServer.clients) {
+		if(el.id == obj.target){
+			wsend(el, obj);
+			return;
+		}
+	}
+}
 function getPairsCount(){
 	var kk=0;
 	for (let el of wsServer.clients) {

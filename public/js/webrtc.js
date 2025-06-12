@@ -5,6 +5,7 @@ var new_uri;
 var kK = 0;
 var sock = null;
 var pc = null;
+var pc2 = null;
 var MYIP = '23.23.22.35';
 var HELP = 0;
 var connectionState = "closed";
@@ -20,6 +21,7 @@ var OPENCLAIM = false;
 var videoInput1, videoInput2;
 const IPS = new Map();
 var partnerId;
+var TARGETID = null;
 var MYSOCKETID = null;
 var someIp = null;
 var remote = gid("remote");
@@ -798,6 +800,23 @@ function on_msg(msg) {
         case 'error':
         note({ content: msg.err, type: "error", time: 5 });
         break;
+        case 'target':
+        if(msg.subtype == 'callinkognito'){
+			createInkognitoOffer(msg);
+		}else if(msg.subtype == 'video-offer'){
+			createInkognitoAnswer(msg);
+		}else if(msg.subtype == 'video-answer' ){
+			handleInkognitoVideoAnswer(msg);
+		}else if(msg.subtype == 'new-ice-candidate'){
+        handleIncognitoNewIceCandidate(msg);
+		}else if(msg.subtype == 'bye-inkognito'){
+			//alert("bye");
+			inkognitocloseVideoCall();
+		}else if(msg.subtype == 'inkognito-busy'){
+			//alert("busy");
+			note({ content: "Занято!", type: "info", time: 5 });
+		}else{}
+		break;
         case 'vip':
         someIp = msg.vip;
         MYIP = msg.vip;
@@ -815,6 +834,257 @@ function checkIp(ip){
 	let a = IPS.has(ip);
 	return a;
 }
+
+var ISINC = false;
+
+function callInkognito(el){
+	console.log("MYSOCKETID ", MYSOCKETID);
+	
+	if(pc)return;
+	let a = el.getAttribute('data-pid');
+	if(!a)return;
+	//alert(a);
+	console.log("target ", a);
+	if(a == MYSOCKETID)return;
+	TARGETID = a;
+	wsend({ type: "target", subtype: "callinkognito", from: MYSOCKETID, target: a });
+}
+
+async function createInkognitoOffer(obj){
+	
+	if(!local.srcObject)return;
+	if(pc2){
+		wsend({ type: 'target', subtype: 'inkognito-busy', from: MYSOCKETID, target: obj.from });
+		return;
+	}
+	ISINC = true;
+	try{
+		pc2 = createInkognitoPeerConnection();
+	const offer = await pc2.createOffer(offerOpts)
+		await pc2.setLocalDescription(offer);
+	TARGETID = obj.from;
+		wsend({ type:'target', subtype: 'video-offer', data: pc2.localDescription, target: obj.from, from: MYSOCKETID });
+	
+	}catch(err){
+		console.error(err);
+		
+	}
+}
+
+async function createInkognitoAnswer(obj){
+	
+	try{
+	pc2 = createInkognitoPeerConnection();
+		
+	await pc2.setRemoteDescription(obj.data);
+	
+	const answer =	await pc2.createAnswer();
+		
+			await pc2.setLocalDescription(answer);
+		
+				wsend({type: 'target', subtype: 'video-answer', target: obj.from, from: MYSOCKETID , data: pc2.localDescription});
+	
+	
+	}catch(err){
+		console.error(err);
+	}
+	
+}
+ function handleInkognitoVideoAnswer(obj){
+	 //if(pc && pc.signalingState == "stable") return;
+	 console.log("handle video answer");
+	 if(pc2.signalingState=="have-local-offer"){
+	 	pc2.setRemoteDescription(obj.data).then(function(){
+			
+		}).catch(function handleError(er){
+			console.error(er);
+		});
+	}
+ }
+ function handleIncognitoNewIceCandidate(obj){
+	 if(pc2){
+	if(obj.data){
+		pc2.addIceCandidate(obj.data).then(function(){
+			
+		}).catch(function handleError(er){
+			
+			console.error(er);
+		});
+	}
+	}
+ }
+ function createInkognitoPeerConnection(){
+	 try{
+    pc2 = new RTCPeerConnection(iceServers);
+}catch(er){
+	console.error(er);
+	//alert(er);
+	return;
+}
+ if(local.srcObject)inkognitoaddLocalStream ();
+ 	if('ontrack' in pc2){
+	pc2.ontrack = inkognitoaddStream;
+}else{
+	/*
+	pc2.addStream(window.streami);
+	pc2.onaddstream = function(e){
+		alert('stream onadd');
+		//remote.srcObject = e.stream;
+	}*/
+}
+    pc2.addEventListener('icecandidate', inkogintoiceCandidateHandler, false);
+    pc2.addEventListener('iceconnectionstatechange', inkognitoiceConnectionStateChangeHandler, false);
+    pc2.addEventListener('icegatheringstatechange', inkognitoiceGatheringStateChangeHandler, false);
+    pc2.addEventListener('signalingstatechange', inkognitosignalingStateChangeHandler, false);
+    pc2.addEventListener('negotiationneeded', inkognitonegotiationNeededHandler, false);
+    pc2.addEventListener('track', inkognitotrackHandler, false);
+    pc2.addEventListener('removetrack ', inkognitoremoveTrackHandler, false);
+    pc2.addEventListener('onicecandidateerror', inkognitoiceCandidateError, false);
+    return pc2;
+ }
+   
+function inkognitoaddStream({ track, streams }){
+	
+	var videoBox = gid("videoBox");
+	if(videoBox && videoBox.srcObject){
+		//alert('object!');
+		return;
+	}
+	const anotherdiv = gid("whosonlinecontent");
+	const div = document.createElement('div');
+	div.className = "videoboxdiv";
+	div.setAttribute ("id", "VideoDivi");
+	let btn = document.createElement('button');
+	btn.className = "btn-video-box";
+	//btn.setAttribute("data-box");
+	btn.setAttribute('onclick', "stopInkognito(this);");
+	btn.textContent = "stop";
+	//div.appendChild(btn);
+	  let el = document.createElement('video');
+	  el.className = "video-box";
+	  el.id = "videoBox";
+    el.setAttribute('playsinline', true);
+    el.setAttribute('autoplay', true);
+    el.setAttribute('muted', true);
+    if(el.srcObject)return;
+    el.srcObject = streams[0];
+
+	div.appendChild(el);
+	div.appendChild(btn);
+	//div.innerHTML=`<video srcObject="${streams[0]}" id="videoBox" class="video-box" playsinline autoplay muted></video><button onclick="stopInkognito(this);">stop</button> `;
+	  // el.volume = 1.0;
+	   anotherdiv.appendChild(div);
+	   setTimeout(function(){
+		   //alert(2);
+		  // gid("VideoDiv").remove();
+	   }, 2000);
+}
+function stopInkognito(){
+	inkognitocloseVideoCall()
+}
+ function inkognitoaddLocalStream () {
+    var streami = window.streami;
+ try{
+    streami.getTracks().forEach(function(track){
+	pc2.addTrack(track, streami);
+	})
+}catch(e){
+	console.error(e);
+	}
+  }
+
+ function inkogintoiceCandidateHandler(event){
+	 if (event.candidate) {
+    wsend({type: 'target', subtype: 'new-ice-candidate', data: event.candidate, target: TARGETID, from: MYSOCKETID })
+  }
+ }
+ function inkognitoiceConnectionStateChangeHandler(event){
+	 
+  switch (event.target.iceConnectionState) {
+    case 'connected':
+   console.log('connected');
+    break;
+    case 'complete':
+      console.log('complete');
+      break;
+    case 'closed':
+    console.log('ice closed');
+    inkognitocloseVideoCall()
+    break;
+    case 'failed':
+    console.log('ice failed');
+  inkognitocloseVideoCall()
+     break;
+    case 'disconnected':
+   
+    console.log('ice disconnected');
+    inkognitocloseVideoCall()
+      break;
+  }
+ }
+  
+ function inkognitocloseVideoCall() {
+ 
+console.log("PC2*** ")
+console.log("MYSOCKETID ", MYSOCKETID);
+	console.log("target ", TARGETID);
+  if (!pc2) {
+	  console.log("!pc2 return");
+    return
+  }
+var videoBox = gid("videoBox")
+  if (videoBox && videoBox.srcObject) {
+    videoBox.srcObject.getTracks().forEach(track => {
+		console.log("track stop");
+    
+      track.stop()
+    
+    videoBox.srcObject = null;
+    
+  })
+}
+
+var suka = document.querySelector(".videoboxdiv");//gid("VideoDivi")
+if(suka){
+	//alert(1);
+	//videoBox.remove();
+	console.log(suka);
+	//suka.style.position="relative";
+	//suka.innerHTML="";
+	suka.remove();
+	//const node = document.getElementById("child");
+	//while (suka.firstChild) {
+ // suka.removeChild(suka.firstChild);
+//}
+
+}
+
+  console.log('Closing the peer connection...');
+  pc2.removeEventListener('icecandidate', iceCandidateHandler);
+  pc2.removeEventListener('iceconnectionstatechange', iceConnectionStateChangeHandler);
+  pc2.removeEventListener('icegatheringstatechange', iceGatheringStateChangeHandler);
+  pc2.removeEventListener('signalingstatechange', signalingStateChangeHandler);
+  pc2.removeEventListener('negotiationneeded', negotiationNeededHandler);
+  pc2.removeEventListener('track', trackHandler);
+  pc2.removeEventListener('removetrack ', removeTrackHandler);
+
+//const anotherdiv = gid("whosonlinecontent");
+//anotherdiv.removeChild(videoBox)
+wsend({ type: 'target', subtype: 'bye-inkognito', target: TARGETID })
+  pc2.close();
+  pc2 = null;
+  TARGETID = null;
+  console.log("good");
+}
+
+ function inkognitoiceGatheringStateChangeHandler(){}
+ function inkognitosignalingStateChangeHandler(){}
+ function inkognitonegotiationNeededHandler(){}
+ function inkognitotrackHandler(){}
+ function inkognitoremoveTrackHandler(){}
+ function inkognitoiceCandidateError(){}
+ 
+ 
 function  handleMessage(msg, bool){
 	//alert(1);
 	

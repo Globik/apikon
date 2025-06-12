@@ -20,7 +20,7 @@ function handleDynamic(obj){
 		let d = document.createElement("div");
 		d.className="dynamicbox";
 		d.setAttribute("data-id", el[1].id);
-		d.innerHTML=`<div class="caption">${el[1].nick}</div><div class="dynamicImgHalter"><img data-pid="${el[1].id}" onerror="loadError(this);" src="${el[1].src}"/></div>`;
+		d.innerHTML=`<div class="caption">${el[1].nick}</div><div class="dynamicImgHalter"><img data-pid="${el[1].id}" onclick="callInkognito(this);" onerror="loadError(this);" src="${el[1].src}"/></div>`;
 		whosonlinecontent.appendChild(d);
 	})
 	}else if(obj.sub == "remove"){
@@ -37,7 +37,7 @@ function handleDynamic(obj){
 		let d = document.createElement("div");
 		d.className="dynamicbox";
 		d.setAttribute("data-id", obj.id);
-		d.innerHTML=`<div class="caption">${obj.nick}</div><div class="dynamicImgHalter"><img data-pid="${obj.id}" src="${obj.src}" onerror="loadError(this);"/></div>`;
+		d.innerHTML=`<div class="caption">${obj.nick}</div><div class="dynamicImgHalter"><img data-pid="${obj.id}" onclick="callInkognito(this);" src="${obj.src}" onerror="loadError(this);"/></div>`;
 		whosonlinecontent.appendChild(d);
 		camsCount.textContent = obj.camcount;
 		 webcams2.textContent = obj.camcount;
