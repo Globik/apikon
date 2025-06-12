@@ -839,11 +839,11 @@ var ISINC = false;
 
 function callInkognito(el){
 	console.log("MYSOCKETID ", MYSOCKETID);
-	
+	alert(MYSOCKETID);
 	if(pc)return;
 	let a = el.getAttribute('data-pid');
 	if(!a)return;
-	//alert(a);
+	alert(a);
 	console.log("target ", a);
 	if(a == MYSOCKETID)return;
 	TARGETID = a;
