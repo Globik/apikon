@@ -2159,12 +2159,12 @@ function Screenshot() {
   // cnv.width = w;
    // cnv.height = h;
     let c = cnv.getContext('2d');
-    var ww = local.videoWidth;
-    var hh = local.videoHeight;
+    var ww = local.videoWidth/4;
+    var hh = local.videoHeight/4;
      cnv.width = ww;
     cnv.height = hh;
     c.drawImage(local, 0, 0, ww, hh);
-    var imgdata = cnv.toDataURL('image/jpeg', 1.0);
+    var imgdata = cnv.toDataURL('image/jpeg', 5.0);
     cnv.remove();
     return imgdata;
     
