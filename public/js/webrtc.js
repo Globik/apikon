@@ -17,6 +17,7 @@ var F = false;
 //var VK_USER = false;
 var isShow = false;
 var someInterval;
+var goAg;
 var OPENCLAIM = false;
 var videoInput1, videoInput2;
 const IPS = new Map();
@@ -1662,6 +1663,10 @@ async function removeMedia(){
 	 if(sock)sock.close();
 
 }
+function goAgain(){
+	//alert('go');
+	wsend({type: "hang-up", ignore: false, sub: 'here' });
+}
 async function closeAll(el){
 	removeMedia();
 	if(tru)tru.mode = "disabled";
@@ -1686,6 +1691,8 @@ while(whosonlinecontent.firstChild){
 	gid('conns2').textContent = 0;
 CONNECTED = false;
 clearInterval(someInterval);
+//if(goAg)
+clearInterval(goAg);
 someInterval = null;
 	local.srcObject = null;
 	window.streami = undefined;
@@ -2175,6 +2182,19 @@ window.addEventListener("online", function(e) {
  partnernick = undefined;
  if(claimMenu)claimMenu.setAttribute("data-vip","");
  //giftsContainer.style.display="block";
+ //if(!goAg){
+	 goAg = setInterval(function(){
+		// alert('yes');
+		 if(!CONNECTED){
+			 console.warn("NO CONNECTED");
+			 goAgain();
+			  let imgdata3 = Screenshot();
+			  wsend( { type:'search-peer', nick: (NICK?NICK:"Anoni"), src: imgdata3, ignores: (ignores?[...ignores]:[[0,{}]]) });
+		 }else{
+			 console.warn("CONNECTED");
+		 }
+	 }, 11000);
+ //}
     }
     
     
@@ -2203,6 +2223,8 @@ function iceConnectionStateChangeHandler (event) {
   switch (event.target.iceConnectionState) {
     case 'connected':
    // if(esWar == 'remoteOffer')
+  // if(goAg)
+   clearInterval(goAg);
     wsend({ type: "connected" });
     SUECH = false;
     vax('post','/zartoone', { value: 300, id: gid('userId').value }, on_zar, on_zar_error, null, false);
@@ -2296,6 +2318,7 @@ console.log("PC*** ")
     return
   }
 //nextbtn.disabled = true;
+CONNECTED = false;
   console.log('Closing the peer connection...');
   pc.removeEventListener('icecandidate', iceCandidateHandler);
   pc.removeEventListener('iceconnectionstatechange', iceConnectionStateChangeHandler);
