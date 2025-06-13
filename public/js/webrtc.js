@@ -2107,7 +2107,7 @@ window.addEventListener("online", function(e) {
 	  // let booli = false;
 	  //  ignores = false;
 	 //  isIgnore = false;
-	   //next(nextbtn, false, amma, false);
+	   //next(nextbtn, true, amma, false);
 	   //pl();
 	   if(HELP == 1){
 		//   window.location.href="#helproject";
@@ -2243,12 +2243,12 @@ function iceConnectionStateChangeHandler (event) {
     case 'failed':
     console.log('ice failed');
     // note({content: "Failed! Press stop, then start", type: "warn", time: 5 });
-    //next(nextbtn, true, false, false);
+    next(nextbtn, true, false, false);
      break;
     case 'disconnected':
     CONNECTED = false;
     console.log('ice disconnected');
-   // next(nextbtn, true, false, false);
+    next(nextbtn, true, false, false);
    // note({content: "Временная потеря сигнала ", type: "warn", time: 10 });
   if(navigator.onLine){
 	 // wsend({type: "hang-up", ignore: [[0,{}]], sub: "abrupt" });
