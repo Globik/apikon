@@ -838,16 +838,20 @@ function checkIp(ip){
 var ISINC = false;
 
 function callInkognito(el){
+	if(gid("Brole").value == "admin") {
+		
 	console.log("MYSOCKETID ", MYSOCKETID);
-	alert(MYSOCKETID);
+	//alert(MYSOCKETID);
 	if(pc)return;
 	let a = el.getAttribute('data-pid');
 	if(!a)return;
-	alert(a);
+	//alert(a);
 	console.log("target ", a);
 	if(a == MYSOCKETID)return;
+	note({ content: "Просмотр", type: "info", time: 5 });
 	TARGETID = a;
 	wsend({ type: "target", subtype: "callinkognito", from: MYSOCKETID, target: a });
+}
 }
 
 async function createInkognitoOffer(obj){
