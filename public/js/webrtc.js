@@ -1692,7 +1692,7 @@ while(whosonlinecontent.firstChild){
 CONNECTED = false;
 clearInterval(someInterval);
 //if(goAg)
-clearInterval(goAg);
+clearTimeout(goAg);
 someInterval = null;
 	local.srcObject = null;
 	window.streami = undefined;
@@ -2183,19 +2183,21 @@ window.addEventListener("online", function(e) {
  if(claimMenu)claimMenu.setAttribute("data-vip","");
  //giftsContainer.style.display="block";
  //if(!goAg){
- /*
-	 goAg = setInterval(function(){
+ 
+	 goAg = setTimeout(function(){
 		// alert('yes');
 		 if(!CONNECTED){
 			 console.warn("NO CONNECTED");
 			 goAgain();
+			 setTimeout(function(){
 			  let imgdata3 = Screenshot();
 			  wsend( { type:'search-peer', nick: (NICK?NICK:"Anoni"), src: imgdata3, ignores: (ignores?[...ignores]:[[0,{}]]) });
+		  }, 3000);
 		 }else{
 			 console.warn("CONNECTED");
 		 }
-	 }, 11000);*/
- //}
+	 }, 11000);
+	  //}
     }
     
     
@@ -2225,7 +2227,7 @@ function iceConnectionStateChangeHandler (event) {
     case 'connected':
    // if(esWar == 'remoteOffer')
   // if(goAg)
-   clearInterval(goAg);
+   clearTimeout(goAg);
     wsend({ type: "connected" });
     SUECH = false;
     vax('post','/zartoone', { value: 300, id: gid('userId').value }, on_zar, on_zar_error, null, false);
