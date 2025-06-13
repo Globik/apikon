@@ -2183,6 +2183,7 @@ window.addEventListener("online", function(e) {
  if(claimMenu)claimMenu.setAttribute("data-vip","");
  //giftsContainer.style.display="block";
  //if(!goAg){
+ /*
 	 goAg = setInterval(function(){
 		// alert('yes');
 		 if(!CONNECTED){
@@ -2193,7 +2194,7 @@ window.addEventListener("online", function(e) {
 		 }else{
 			 console.warn("CONNECTED");
 		 }
-	 }, 11000);
+	 }, 11000);*/
  //}
     }
     
