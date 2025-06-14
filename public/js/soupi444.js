@@ -49,10 +49,12 @@ function goMedia(data){
 		//alert('p');
       //  disableElement("startMediaBtn");
       //  disableElement("stopMediaBtn");
-      gid("playContainer").setAttribute("data-state", "busy");
+    //  gid("playContainer").setAttribute("data-state", "busy");
       //if(!FLAGVK)  
      // alert('published '+data.img_data);
-      gid('kartina').setAttribute('poster',  data.img_data);
+     let ka = gid('kartina');
+     ka.setAttribute('poster',  data.img_data);
+     ka.style.zIndex="1000";
         publishedId = data.publishedId;
         let a = document.querySelector('div#playContainer svg');
         if(a) a.style.fill = 'rgba(234,223,244,0.6)';
@@ -606,7 +608,10 @@ async function subscribe(el) {
             L()=='zh'?"您订阅了翻译！":
             L()=='id'?"Anda berlangganan terjemahan!":'';
                 note({content: s, type: "info", time: 5});
-                gid("playContainer").setAttribute("data-state", "subscribed");
+               let bida =  gid("playContainer");
+                bida.setAttribute("data-state", "subscribed");
+                bida.style.zIndex = "1000";
+                
                 gid("txtvalue2").setAttribute("data-publish", "publish");
                 gid("txtvalue").setAttribute("data-publish", "publish");
                 txtvalue.disabled = false;
@@ -953,7 +958,7 @@ function beginTranslation(el){
 	//alert('begin');
 	if (SENDER) {
 		
-		unpublish();
+		//unpublish();
 		
 		return;
 	}
