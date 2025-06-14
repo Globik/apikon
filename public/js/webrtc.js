@@ -2248,16 +2248,8 @@ function iceConnectionStateChangeHandler (event) {
     case 'disconnected':
     CONNECTED = false;
     console.log('ice disconnected');
-    next(nextbtn, true, false, false);
+    next(nextbtn, false, false, false);
    // note({content: "Временная потеря сигнала ", type: "warn", time: 10 });
-  if(navigator.onLine){
-	 // wsend({type: "hang-up", ignore: [[0,{}]], sub: "abrupt" });
-	 // next(nextbtn, false, false, false);
-   }else{
-	   
-	// if(sock)  sock.close();
-	// closeAll(startbtn);
-   }
       break;
   }
 }
