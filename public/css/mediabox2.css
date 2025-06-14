@@ -113,8 +113,8 @@ height:100%;
 object-fit:cover;
 }
 div.caption{
-	overflow-x: scroll;
-	width:100%;
+	/*overflow-x: scroll;
+	width:100%;*/
 }
 #zaroutput{
 	background:#fff1f1;

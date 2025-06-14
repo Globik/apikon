@@ -1810,7 +1810,7 @@ return imgdata22;
 	//	notes.play(261.63, nows);
 		console.log("local onloaded");
 		if(isShow)return;
-	//	setTimeout(function(){
+		setTimeout(function(){
 		let imgdata = Screenshot();
 //	alert('d4 '+imgdata);
 
@@ -1818,8 +1818,8 @@ return imgdata22;
 	//if(IPS.size > 0) amap = IPS;
 	//console.error("amap", amap, IPS);
 		wsend({ type:'search-peer', nick: (NICK?NICK:'Anonym'), src: imgdata , ignores: [...IPS] });
-	//}, 2000);
-	someInterval = setInterval(doScreenshot, 1000 * 61);
+	}, 3000);
+	//someInterval = setInterval(doScreenshot, 1000 * 61);
 		somespinner.className="show";
 		mobileloader.className="active";
 		
@@ -2188,7 +2188,7 @@ window.addEventListener("online", function(e) {
 	 goAg = setTimeout(function(){
 		// alert('yes');
 		 if(!CONNECTED){
-			 note({ content: "NO CONNECTED", type:"info", time: 5});
+			// note({ content: "NO CONNECTED", type:"info", time: 5});
 			 
 			 goAgain();
 			 setTimeout(function(){
