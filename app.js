@@ -1495,7 +1495,7 @@ async function searchPeer (socket, msg, source) {
     
     let peerSocket = getPeerSocket(peerId)
      if(peerSocket){
-		 console.log("**** PEER SOCKET ***");
+	//	 console.log("**** PEER SOCKET ***");
 		 
 		 if(amap.has(peerSocket.userId)){
 			// console.log("*** HAS ignore!!! ***");
@@ -1503,7 +1503,7 @@ async function searchPeer (socket, msg, source) {
 			 break;
 		 }
 	 }
-  console.log("waiting 2", waitingQueue);
+ // console.log("waiting 2", waitingQueue);
     waitingQueue.splice(index, 1)
 //console.log("search peer 2")
     if (peerSocket) {
@@ -1523,12 +1523,13 @@ async function searchPeer (socket, msg, source) {
       socket.send(el);
      // console.log(`#${socket.id} matches #${peerId}`)
      if(!onLine.has(socket.id)) {
+		
 	 onLine.set(socket.id, { id: socket.id, /*src: source.src,*/ nick: socket.nick, status: 'busy' });
 	// broadcast({ type: "dynamic", sub: "add", id: socket.id, partnerid: peerId, nick: socket.nick, status: 'busy', camcount: onLine.size});
 	 broadcast_admin({ type: "dynamic", sub: "add", id: socket.id, partnerid: peerId,/* src: source.src,*/ nick: socket.nick, status: 'busy', camcount: onLine.size, waiting: waitingQueue });
 	 if(isEven(matchedIds.size)) broadcasti({ type: "connected2", size: matchedIds.size/2 });
-	 
-	 console.log("*************** MATCHEDIDS ****************, ", matchedIds);
+	 // console.log('ONLINE ', onLine);
+	// console.log("*************** MATCHEDIDS ****************, ", matchedIds);
 	 
 	
 	 
@@ -1544,9 +1545,11 @@ async function searchPeer (socket, msg, source) {
   
  if(!onLine.has(socket.id)) {
 	// console.log("*** ONLINE *** ", onLine.has(socket.id));
+	 
 	 onLine.set(socket.id, { id: socket.id,/* src: source.src,*/ nick: socket.nick, status: 'free' });
 	// broadcast({ type: "dynamic", sub: "add", id: socket.id, nick: socket.nick, status: 'free', camcount: onLine.size });
 	 broadcast_admin({ type: "dynamic", sub: "add", id: socket.id, /*src: source.src,*/ nick: socket.nick, status: 'free', camcount: onLine.size });
+	 //console.log('ONLINE 2', onLine);
 //	if(isEven(matchedIds.size))
 //broadcasti({ type: "connected2", size: matchedIds.size });
 //console.log("*************** MATCHEDIDS_3 ****************, ", matchedIds);
@@ -1714,13 +1717,13 @@ function machConnected(socket){
   //  let peerSocket = getPeerSocket(peerId)
 }
 if(isEven(matchedIds.size))broadcasti({ type: "connected2", size: matchedIds.size / 2 });
-console.log("*************** MATCHEDIDS_4 ****************, ", matchedIds);
+//console.log("*************** MATCHEDIDS_4 ****************, ", matchedIds);
 }
 
 function  machdisconnect(socket){
-	console.log('""""" disconnection ****');
-	connected--;
-	 console.log('isEven(connected) ', connected, isEven(connected));
+	//console.log('""""" disconnection ****');
+	//connected--;
+	// console.log('isEven(connected) ', connected, isEven(connected));
 	//if(isEven(matchedIds.size/*connected*/)) 
 //	broadcasti({ type: "connected2", size: matchedIds.size/*connected/2 */});
 	
@@ -1746,7 +1749,7 @@ function hangUp (socketId, msg, bool, abrupt) {
 
     matchedIds.delete(socketId)
     matchedIds.delete(peerId)
-    console.log('isEven(connected) ',isEven(connected));
+   // console.log('isEven(connected) ',isEven(connected));
    if(isEven(matchedIds.size)) broadcasti({ type: "connected2", size: matchedIds.size/2 });
   //  console.log("*************** MATCHEDIDS ****************, ", matchedIds);
    
