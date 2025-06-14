@@ -560,7 +560,7 @@ async function subscribe(el) {
 			wsend({ type: 'clearproducer' });
 			gid('kartina').setAttribute('poster',  "");
        publishedId = null;
-       gid("playContainer").setAttribute("data-state", "niemand");
+      // gid("playContainer").setAttribute("data-state", "niemand");
         //pauseVideo(remote);
          let a = document.querySelector('div#playContainer #kresti');
          if(a)a.className = "";
