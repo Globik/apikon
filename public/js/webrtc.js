@@ -793,6 +793,7 @@ function on_msg(msg) {
         let conns2 = gid("conns2");
         connects.textContent = msg.size;
         conns2.textContent = msg.size;
+        gid("camsCount").textContent = msg.camcount;
         //alert(msg.size);
         break;
         case 'dynamic':

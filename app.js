@@ -1716,7 +1716,7 @@ function machConnected(socket){
 	//broadcasti({ type: "connected2", size: matchedIds.size });
   //  let peerSocket = getPeerSocket(peerId)
 }
-if(isEven(matchedIds.size))broadcasti({ type: "connected2", size: matchedIds.size / 2 });
+if(isEven(matchedIds.size))broadcasti({ type: "connected2", size: matchedIds.size / 2, camcount: matchedIds.size  });
 //console.log("*************** MATCHEDIDS_4 ****************, ", matchedIds);
 }
 
@@ -1739,7 +1739,7 @@ function hangUp (socketId, msg, bool, abrupt) {
 		onLine.delete(socketId);
 		//broadcasti({ type: "dynamic", sub: "remove", id: socketId, camcount: onLine.size });
 		broadcast_admin({ type: "dynamic", sub: "remove", id: socketId, camcount: onLine.size });
-		 if(isEven(matchedIds.size)) broadcasti({ type: "connected2", size: matchedIds.size /2 });
+		 if(isEven(matchedIds.size)) broadcasti({ type: "connected2", size: matchedIds.size /2 , camcount: matchedIds.size});
 	}
 }
   if (matchedIds.has(socketId)) {
@@ -1750,7 +1750,7 @@ function hangUp (socketId, msg, bool, abrupt) {
     matchedIds.delete(socketId)
     matchedIds.delete(peerId)
    // console.log('isEven(connected) ',isEven(connected));
-   if(isEven(matchedIds.size)) broadcasti({ type: "connected2", size: matchedIds.size/2 });
+   if(isEven(matchedIds.size)) broadcasti({ type: "connected2", size: matchedIds.size/2 , camcount: matchedIds.size });
   //  console.log("*************** MATCHEDIDS ****************, ", matchedIds);
    
     
@@ -1917,7 +1917,7 @@ wsend(socket, { type:'vip', vip: r })
   
    broadcasti({ type: 'online', online: wsServer.clients.size, imgData: imgData.img_data })
    console.log('isEven(connected) ', connected,isEven(connected));
-  if(isEven(matchedIds.size /*connected)*/)) broadcasti({ type: "connected2", size:matchedIds.size/2/* connected/2 */});
+  if(isEven(matchedIds.size /*connected)*/)) broadcasti({ type: "connected2", size:matchedIds.size/2/* connected/2 */, camcount: matchedIds.size});
 
 
   
