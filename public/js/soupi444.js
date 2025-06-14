@@ -65,9 +65,10 @@ function goMedia(data){
         //alert(data.img_data);
     } else if (data.type == "perror") {
 
-      if(!FLAGVK)  note({content: data.info, type: "error", time: 5});
+      //if(!FLAGVK)  
+      note({content: data.info, type: "error", time: 5});
     } else {
-        console.warn("Unknown type: ", data.type);
+       // console.warn("Unknown type: ", data.type);
     }
 }
 function sendRequest(obj) {
@@ -284,9 +285,9 @@ async function publish(el) {
 	//alert('sender '+SENDER);
     if (SENDER) {
 		
-		unpublish();
+		//unpublish();
 		
-		return;
+		//return;
 	}
     //alert(isLogin.value);
     
