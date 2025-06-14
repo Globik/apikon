@@ -2187,7 +2187,8 @@ window.addEventListener("online", function(e) {
 	 goAg = setTimeout(function(){
 		// alert('yes');
 		 if(!CONNECTED){
-			 console.warn("NO CONNECTED");
+			 note({ content: "NO CONNECTED", type:"info", time: 5});
+			 
 			 goAgain();
 			 setTimeout(function(){
 			  let imgdata3 = Screenshot();
@@ -2242,10 +2243,12 @@ function iceConnectionStateChangeHandler (event) {
     break;
     case 'failed':
     console.log('ice failed');
+    note({ content: "Failed", type: "info", time: 5 });
     // note({content: "Failed! Press stop, then start", type: "warn", time: 5 });
-    next(nextbtn, true, false, false);
+    next(nextbtn, false, false, false);
      break;
     case 'disconnected':
+    note({ content: "Disconnected", type: "info", time: 5 });
     CONNECTED = false;
     console.log('ice disconnected');
     next(nextbtn, false, false, false);
