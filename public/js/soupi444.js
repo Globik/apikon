@@ -24,7 +24,7 @@ function goMedia(data){
        if (vV) vV.textContent = 0;
      if(gid('kartina'))  gid('kartina').setAttribute('poster',  "");
        publishedId = null;
-      if(gid('playContainer')) gid("playContainer").setAttribute("data-state", "niemand");
+     // if(gid('playContainer')) gid("playContainer").setAttribute("data-state", "niemand");
         pauseVideo(remote);
          let a = document.querySelector('div#playContainer #kresti');
          if(a)a.className = "";//a.classList.toggle('show');
@@ -627,13 +627,14 @@ async function subscribe(el) {
                if(sa) sa.style.display="none";
                 break;
             case 'disconnected':
+            alert('disconnected 3');
                 note({content: 'Disconnected!', type: 'info', time: 5});
                 CONNECTED = false;
                 PSENDER = false;
                 if (vV) vV.textContent = 0;
        gid('kartina').setAttribute('poster',  "");
        publishedId = null;
-       gid("playContainer").setAttribute("data-state", "niemand");
+      // gid("playContainer").setAttribute("data-state", "niemand");
        gid("txtvalue2").setAttribute("data-publish", "none");
        gid("txtvalue").setAttribute("data-publish", "none");
         txtvalue.disabled = true;
@@ -812,7 +813,7 @@ alert("Unpublished")
     CONNECTED = false;
     if (vV) vV.textContent = 0;
    // disableElement("stopTranslation");
-   playContainer.setAttribute("data-state", "niemand");
+ //  playContainer.setAttribute("data-state", "niemand");
    PSENDER = false;
    let s = L()=="ru"?"Вы закончили трансляцию.":
    L()=='en'?"You finished translation!":
