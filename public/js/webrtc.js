@@ -2201,8 +2201,8 @@ window.addEventListener("online", function(e) {
 			 goAgain();
 			 setTimeout(function(){
 			  let imgdata3 = Screenshot();
-			  wsend( { type:'search-peer', nick: (NICK?NICK:"Anoni"), src: imgdata3, ignores: (ignores?[...ignores]:[[0,{}]]) });
-		  }, 3000);
+			  wsend( { type:'search-peer', nick: (NICK?NICK:"Anoni")/*, src: imgdata3,*/, ignores: (ignores?[...ignores]:[[0,{}]]) });
+		  }, 6000);
 		 }else{
 			 console.warn("CONNECTED");
 		 }
