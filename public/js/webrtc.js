@@ -1205,7 +1205,7 @@ function handleNewIceCandidate(msg) {
 			if(!CONNECTED) {
 				setTimeout(function(){
 		 console.log('complete but not connected ice candidate , next');
-		 next(nextbtn, false, false, false);
+		// next(nextbtn, false, false, false);
 	 
   },3000)
 		}});
@@ -2273,7 +2273,7 @@ function iceGatheringStateChangeHandler (event) {
 	  setTimeout(function(){
 	 if(!CONNECTED) {
 		 console.log('complete but not connected, next');
-		 next(nextbtn, false, false, false);
+		// next(nextbtn, false, false, false);
 	 }
   },6000)
 	  }
