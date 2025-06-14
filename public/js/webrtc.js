@@ -1204,7 +1204,7 @@ function handleNewIceCandidate(msg) {
 			console.error(er);
 			if(!CONNECTED) {
 				setTimeout(function(){
-		 console.log('complete but not connected, next');
+		 console.log('complete but not connected ice candidate , next');
 		 next(nextbtn, false, false, false);
 	 
   },3000)
@@ -1674,7 +1674,7 @@ async function removeMedia(){
 }
 function goAgain(){
 	//alert('go');
-	wsend({type: "hang-up", ignore: false, sub: 'here' });
+	wsend({type: "hang-up", ignore: false });
 }
 async function closeAll(el){
 	removeMedia();
@@ -2275,7 +2275,7 @@ function iceGatheringStateChangeHandler (event) {
 		 console.log('complete but not connected, next');
 		 next(nextbtn, false, false, false);
 	 }
-  },3000)
+  },6000)
 	  }
 }
 
