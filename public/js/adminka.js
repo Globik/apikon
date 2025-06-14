@@ -255,7 +255,7 @@ function setConnects(n){
 	}
 }
 function handleDynamic(obj){
-	
+	return;
 //	console.log(obj);
 	if(obj.sub == "total"){
 		camsCount.textContent = obj.cams.length;

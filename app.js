@@ -1523,9 +1523,9 @@ async function searchPeer (socket, msg, source) {
       socket.send(el);
      // console.log(`#${socket.id} matches #${peerId}`)
      if(!onLine.has(socket.id)) {
-	 onLine.set(socket.id, { id: socket.id, src: source.src, nick: socket.nick, status: 'busy' });
+	 onLine.set(socket.id, { id: socket.id, /*src: source.src,*/ nick: socket.nick, status: 'busy' });
 	// broadcast({ type: "dynamic", sub: "add", id: socket.id, partnerid: peerId, nick: socket.nick, status: 'busy', camcount: onLine.size});
-	 broadcast_admin({ type: "dynamic", sub: "add", id: socket.id, partnerid: peerId, src: source.src, nick: socket.nick, status: 'busy', camcount: onLine.size, waiting: waitingQueue });
+	 broadcast_admin({ type: "dynamic", sub: "add", id: socket.id, partnerid: peerId,/* src: source.src,*/ nick: socket.nick, status: 'busy', camcount: onLine.size, waiting: waitingQueue });
 	 if(isEven(matchedIds.size)) broadcasti({ type: "connected2", size: matchedIds.size/2 });
 	 
 	 console.log("*************** MATCHEDIDS ****************, ", matchedIds);
@@ -1544,9 +1544,9 @@ async function searchPeer (socket, msg, source) {
   
  if(!onLine.has(socket.id)) {
 	// console.log("*** ONLINE *** ", onLine.has(socket.id));
-	 onLine.set(socket.id, { id: socket.id, src: source.src, nick: socket.nick, status: 'free' });
+	 onLine.set(socket.id, { id: socket.id,/* src: source.src,*/ nick: socket.nick, status: 'free' });
 	// broadcast({ type: "dynamic", sub: "add", id: socket.id, nick: socket.nick, status: 'free', camcount: onLine.size });
-	 broadcast_admin({ type: "dynamic", sub: "add", id: socket.id, src: source.src, nick: socket.nick, status: 'free', camcount: onLine.size });
+	 broadcast_admin({ type: "dynamic", sub: "add", id: socket.id, /*src: source.src,*/ nick: socket.nick, status: 'free', camcount: onLine.size });
 //	if(isEven(matchedIds.size))
 //broadcasti({ type: "connected2", size: matchedIds.size });
 //console.log("*************** MATCHEDIDS_3 ****************, ", matchedIds);

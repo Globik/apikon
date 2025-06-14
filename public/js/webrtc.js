@@ -679,7 +679,7 @@ function on_msg(msg) {
       case 'online':
         onlineCount.textContent = msg.online
         if(!msg.imgData){
-			console.log('no imgData');
+			//console.log('no imgData');
 		partnernick = null;
 			let a44 = gid("kartina");
 			//a44.setAttribute("poster", "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7");
@@ -1805,20 +1805,20 @@ return imgdata22;
 		
 		setTimeout(function(){
 	var imgdata3=Screenshota();
-	wsend({type:"telegascreenshot",nick:(NICK?NICK:'Anonym'), src: imgdata3});
+	//wsend({type:"telegascreenshot",nick:(NICK?NICK:'Anonym'), src: imgdata3});
 	}, 4000);
 	//	notes.play(261.63, nows);
 		console.log("local onloaded");
 		if(isShow)return;
-		setTimeout(function(){
+	//	setTimeout(function(){
 		let imgdata = Screenshot();
 //	alert('d4 '+imgdata); some change
 
 		let amap=[['0',{}]];
 	//if(IPS.size > 0) amap = IPS;
 	//console.error("amap", amap, IPS);
-		wsend({ type:'search-peer', nick: (NICK?NICK:'Anonym'), src: imgdata , ignores: [...IPS] });
-	}, 3000);
+		wsend({ type:'search-peer', nick: (NICK?NICK:'Anonym'),/* src: imgdata ,*/ ignores: [...IPS] });
+	//}, 3000);
 	//someInterval = setInterval(doScreenshot, 1000 * 61);
 		somespinner.className="show";
 		mobileloader.className="active";
@@ -2156,7 +2156,7 @@ window.addEventListener("online", function(e) {
 	}
       let imgdata = Screenshot();
      // alert(JSON.stringify({a: [...ignores]}));
-     wsend( { type:'search-peer', nick: (NICK?NICK:"Anoni"), src: imgdata, ignores: (ignores?[...ignores]:[[0,{}]]) });
+     wsend( { type:'search-peer', nick: (NICK?NICK:"Anoni"), /*src: imgdata,*/ ignores: (ignores?[...ignores]:[[0,{}]]) });
       chatbox.innerHTML="";
 	  chatbox2.innerHTML="";
 	mobileChat.className = "hide";
