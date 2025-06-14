@@ -1812,7 +1812,7 @@ return imgdata22;
 		if(isShow)return;
 		setTimeout(function(){
 		let imgdata = Screenshot();
-//	alert('d4 '+imgdata);
+//	alert('d4 '+imgdata); some change
 
 		let amap=[['0',{}]];
 	//if(IPS.size > 0) amap = IPS;
