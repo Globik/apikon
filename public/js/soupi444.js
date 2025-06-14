@@ -150,7 +150,7 @@ function addRemoteTrack(id, track) {
    
     let video = findRemoteVideo(id);
     // if (!video) {
-    video = addRemoteVideo(id);
+    video = addRemoteVideo();
     // }
 
     if (video.srcObject) {
@@ -171,14 +171,16 @@ function addRemoteTrack(id, track) {
 }
 
 
-function addRemoteVideo(id) {
-    let element = document.getElementById('remote');
-    element.width = 240;
-    element.height = 180;
-    element.volume = 0;
+function addRemoteVideo() {
+   // var elementi = gid("remote");
+   var elementi = document.querySelector('.Vid');
+    console.log('elementi ', elementi);
+    elementi.width = 240;
+    elementi.height = 180;
+    elementi.volume = 0;
     //element.controls = true;
-    element.style = 'border: solid black 1px;';
-    return element;
+    elementi.style = 'border: solid black 1px;';
+    return elementi;
 }
 
 function findRemoteVideo(id) {
