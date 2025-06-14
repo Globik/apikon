@@ -418,6 +418,7 @@ console.log("after sender")
                 break;
 
             case 'disconnected':
+            alert('disconnected 2');
                 note({content: "Disconnected!", type: "info", time: 5});
                 if (producerTransport) producerTransport.close();
                // el.removeAttribute('disabled');
@@ -425,6 +426,7 @@ console.log("after sender")
                 break;
 
             case 'failed':
+            alert('failed 2');
              s = L()=="ru"?"Не удалось сконнектиться с сервером!":L()=='en'?"No luck connect to server":
              L()=='zh'?'没有运气连接到服务器':
              L()=='id'?'Tidak berhasil terhubung ke server':'';
@@ -779,6 +781,7 @@ async function consume(transport, trackKind) {
 
 function unpublish() {
 //	alert("senderi "+SENDER);
+alert("Unpublished")
     if (!SENDER) {
 		//alert("senderi "+SENDER);
         return;
