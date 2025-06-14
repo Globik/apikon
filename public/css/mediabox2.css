@@ -1756,7 +1756,7 @@ border:2px solid rgba(34,23,44,0.2);
 }
 div#playContainer #kresti.show{
 	display:flex;
-	z-index:10000;
+	z-index:999;
 }
 div#playContainer #kresti #kres{
 	font-size:16px;

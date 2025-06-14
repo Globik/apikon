@@ -960,7 +960,7 @@ function beginTranslation(el){
 		
 		//unpublish();
 		
-		return;
+		//return;
 	}
 	//alert(1);
 	//alert("Сервис временно не работает");

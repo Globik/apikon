@@ -1028,7 +1028,7 @@ ababa();
     
     <script>
 window.addEventListener("load", () => {
-	return;
+	//return;
 	if(Prem.value !="n") return;
     const render = (imageId) => {
         return new Promise((resolve, reject) => {
