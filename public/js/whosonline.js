@@ -4,6 +4,7 @@ function showWhosOnline(){
 }
 
 function handleDynamic(obj){
+	return;
 	let whosonlinecontent = gid('whosonlinecontent');
 	//console.log(obj);
 	let conns2 = gid("conns2");
