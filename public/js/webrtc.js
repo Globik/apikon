@@ -679,10 +679,11 @@ function on_msg(msg) {
       case 'online':
         onlineCount.textContent = msg.online
         if(!msg.imgData){
+			alert('no imgData');
 		partnernick = null;
 			let a44 = gid("kartina");
-			a44.setAttribute("poster", "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7");
-			gid("playContainer").setAttribute("data-state", "niemand");
+			//a44.setAttribute("poster", "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7");
+			//gid("playContainer").setAttribute("data-state", "niemand");
 		if(claimMenu)	claimMenu.setAttribute("data-was", "");
 			if(claimMenu)claimMenu.setAttribute("data-vip", "0");
 		}
