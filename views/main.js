@@ -452,7 +452,7 @@ lang=='zh'?'连接':
 lang=='id'?'koneksi':''}:</b> <span id="connects">0</span></div>
  <div class="settingspanel"><a href="#setPrem" onclick="panelOpen();">Премиум аккаунт</a></div>
 <!-- ${lang=='ru'&&!n.VK ?`<div class="settingspanel"  onclick="purchaseTokens(this);">Купить сердечки &#x1f496;</div>`:''} -->
-<div class="settingspanel" onclick="showWhosOnline();">Who's online</div>
+<!-- <div class="settingspanel" onclick="showWhosOnline();">Who's online</div> -->
 ${n.user?`<div class="settingspanel">
 <div class="some doh"style="overflow-x:auto;" >${n.user?n.user.name:'anon6'}  Ваш доход&nbsp;&nbsp;<span id="dohod">${n.user? n.user.zar:'0'}</span>&nbsp;руб.</div>
 <div class="du" onclick="getPayout(this);"><div>Получить</div> <div id="coinContainer">${getCoin()}</div></div>
@@ -486,15 +486,19 @@ ${n.user && !n.VK?`<div class="settingspanel" onclick="logout(this);">${lang=='r
 
 
 
-
+<!--
  ${n.imgData && n.imgData.img_data?'<style>div#playContainer svg{fill:rgba(234,223,244,0.6);}</style>':''}
-    <div id="playContainer" class="${lang=='en'?'eng':lang=='zh'?'溪流':lang=='id'?'id':''}" data-state="${n.imgData && n.imgData.img_data?'busy':'niemand'}" onclick="beginTranslation(this);"><!-- <img  src="/img/play2.svg"/>-->
+ 
+    <div id="playContainer" class="${lang=='en'?'eng':lang=='zh'?'溪流':lang=='id'?'id':''}" data-state="${n.imgData && n.imgData.img_data?'busy':'niemand'}" onclick="beginTranslation(this);">
 <svg version="1.1" id="kartinasvg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000" xml:space="preserve" >
 <metadata> Svg Vector Icons : http://www.onlinewebfonts.com/icon </metadata>
 <g><path d="M500,10C229.4,10,10,229.4,10,500s219.4,490,490,490c270.6,0,490-219.4,490-490S770.6,10,500,10z M500,881.1c-210.5,0-381.1-170.6-381.1-381.1S289.5,118.9,500,118.9c210.5,0,381.1,170.6,381.1,381.1S710.5,881.1,500,881.1z"/><path d="M390.2,282.2l326.7,218.6L390.2,719.5V282.2z"/></g>
 </svg>
-<div id="kresti"><b id="kres">&#x274E;</b></div>
+<div id="kresti"><b id="kres">&#x274E;</b></div> 
 <video id="kartina" ${n.imgData && n.imgData.img_data?` poster=${n.imgData.img_data}`:`data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"`} playsinline ></video></div>
+-->
+
+
     <div class="icon-change-cam-div" onclick="toggleCam(this);" title="change cam"><img class="icon-change-cam" src="/icons/change.svg"/></div>
    
    <!-- <section id="claimContainer" onclick="openClaim(this);"><div id="claimBox">!</div></section>

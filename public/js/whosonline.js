@@ -12,7 +12,7 @@ function handleDynamic(obj){
 	let webcams2 = gid("webcams2");
 	if(obj.sub == "total"){
 		camsCount.textContent = obj.cams.length;
-		webcams2.textContent = obj.cams.length;
+		//webcams2.textContent = obj.cams.length;
 		
 		let b = setConnects(obj.cams.length);
 		//if(b){
@@ -30,7 +30,7 @@ function handleDynamic(obj){
 	}else if(obj.sub == "remove"){
 		//return;
 		camsCount.textContent = obj.camcount;
-				webcams2.textContent = obj.camcount;
+				//webcams2.textContent = obj.camcount;
 				
 		let b = setConnects(obj.camcount);
 		return;
@@ -48,7 +48,7 @@ function handleDynamic(obj){
 		d.innerHTML=`<div class="caption">${obj.nick}</div><div class="dynamicImgHalter"><img data-pid="${obj.id}" onclick="callInkognito(this);" src="${obj.src}" onerror="loadError(this);"/></div>`;
 		whosonlinecontent.appendChild(d);*/
 		camsCount.textContent = obj.camcount;
-		 webcams2.textContent = obj.camcount;
+		// webcams2.textContent = obj.camcount;
 		let b = setConnects(obj.camcount);
 		
 		//connects.textContent = b;
