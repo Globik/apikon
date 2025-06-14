@@ -24,7 +24,7 @@ function goMedia(data){
        if (vV) vV.textContent = 0;
      if(gid('kartina'))  gid('kartina').setAttribute('poster',  "");
        publishedId = null;
-     // if(gid('playContainer')) gid("playContainer").setAttribute("data-state", "niemand");
+      if(gid('playContainer')) gid("playContainer").setAttribute("data-state", "niemand");
         pauseVideo(remote);
          let a = document.querySelector('div#playContainer #kresti');
          if(a)a.className = "";//a.classList.toggle('show');
@@ -46,15 +46,15 @@ function goMedia(data){
       //  enableElement("startMediaBtn");
        // enableElement("stopMediaBtn");
     } else if (data.type == "producer_published") {
-		//alert('p');
+		//alert('published');
       //  disableElement("startMediaBtn");
       //  disableElement("stopMediaBtn");
-    //  gid("playContainer").setAttribute("data-state", "busy");
+      gid("playContainer").setAttribute("data-state", "busy");
       //if(!FLAGVK)  
      // alert('published '+data.img_data);
      let ka = gid('kartina');
      ka.setAttribute('poster',  data.img_data);
-     ka.style.zIndex="1000";
+    // ka.style.zIndex="999";
         publishedId = data.publishedId;
         let a = document.querySelector('div#playContainer svg');
         if(a) a.style.fill = 'rgba(234,223,244,0.6)';
@@ -549,7 +549,7 @@ async function subscribe(el) {
         return;
     }
      if(!sock){
-		// get_socket();
+		 get_socket();
 	 }
     //alert("SUBSCRIBE");
     try {
@@ -563,7 +563,7 @@ async function subscribe(el) {
 			wsend({ type: 'clearproducer' });
 			gid('kartina').setAttribute('poster',  "");
        publishedId = null;
-      // gid("playContainer").setAttribute("data-state", "niemand");
+       gid("playContainer").setAttribute("data-state", "niemand");
         //pauseVideo(remote);
          let a = document.querySelector('div#playContainer #kresti');
          if(a)a.className = "";
@@ -634,7 +634,7 @@ async function subscribe(el) {
                 if (vV) vV.textContent = 0;
        gid('kartina').setAttribute('poster',  "");
        publishedId = null;
-      // gid("playContainer").setAttribute("data-state", "niemand");
+       gid("playContainer").setAttribute("data-state", "niemand");
        gid("txtvalue2").setAttribute("data-publish", "none");
        gid("txtvalue").setAttribute("data-publish", "none");
         txtvalue.disabled = true;
@@ -782,7 +782,7 @@ async function consume(transport, trackKind) {
 
 function unpublish() {
 //	alert("senderi "+SENDER);
-alert("Unpublished")
+//alert("Unpublished")
     if (!SENDER) {
 		//alert("senderi "+SENDER);
         return;
@@ -813,7 +813,7 @@ alert("Unpublished")
     CONNECTED = false;
     if (vV) vV.textContent = 0;
    // disableElement("stopTranslation");
- //  playContainer.setAttribute("data-state", "niemand");
+   playContainer.setAttribute("data-state", "niemand");
    PSENDER = false;
    let s = L()=="ru"?"Вы закончили трансляцию.":
    L()=='en'?"You finished translation!":
@@ -995,7 +995,7 @@ function beginTranslation(el){
 		return;
 	}
 			startMedia(el);
-			//el.setAttribute("data-state", "begin");
+			el.setAttribute("data-state", "begin");
 		}
 	 }
 		
