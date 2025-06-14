@@ -730,6 +730,7 @@ function on_msg(msg) {
         break
       case 'peer-matched':
       //alert(msg.isprem+' '+msg.nick);
+      console.log('peer matched');
         console.log(msg.vip, " nick ", msg.partnerId,msg.nick);
         partnerId = msg.partnerId;
         partnernick = msg.nick;
@@ -739,9 +740,9 @@ function on_msg(msg) {
       if(claimMenu)  claimMenu.setAttribute("data-vip", msg.partnerId);
        // let a3 = checkIp(msg.vip);
         let a3 = checkIp(msg.partnerId);
-        console.warn("a3", a3);
+      //  console.warn("a3", a3);
        // if(!a3){
-			console.warn("was isch");
+		//	console.warn("was isch");
 		handlePeerMatched();
 	//}
 	/*else{
@@ -1201,7 +1202,13 @@ function handleNewIceCandidate(msg) {
 		}).catch(function handleError(er){
 			//console.log("ignoreOffer ? ", ignoreOffer);
 			console.error(er);
-		});
+			if(!CONNECTED) {
+				setTimeout(function(){
+		 console.log('complete but not connected, next');
+		 next(nextbtn, false, false, false);
+	 
+  },3000)
+		}});
 	}
 	}
 
@@ -2190,7 +2197,7 @@ window.addEventListener("online", function(e) {
 		// alert('yes');
 		 if(!CONNECTED){
 			// note({ content: "NO CONNECTED", type:"info", time: 5});
-			 
+			 console.log("NO CONNECTED");
 			 goAgain();
 			 setTimeout(function(){
 			  let imgdata3 = Screenshot();
@@ -2233,7 +2240,7 @@ function iceConnectionStateChangeHandler (event) {
    clearTimeout(goAg);
     wsend({ type: "connected" });
     SUECH = false;
-    vax('post','/zartoone', { value: 300, id: gid('userId').value }, on_zar, on_zar_error, null, false);
+   // vax('post','/zartoone', { value: 300, id: gid('userId').value }, on_zar, on_zar_error, null, false);
     break;
     case 'complete':
       connectionState = 'open'
@@ -2262,7 +2269,14 @@ function iceConnectionStateChangeHandler (event) {
 function iceGatheringStateChangeHandler (event) {
 	// todo ???? hangs up on complete
   console.log('*** ICE gathering state changed to: ' + event.target.iceGatheringState)
-//  if(event.target.iceGatheringState=="complete")next(nextbtn);
+  if(event.target.iceGatheringState == "complete"){
+	  setTimeout(function(){
+	 if(!CONNECTED) {
+		 console.log('complete but not connected, next');
+		 next(nextbtn, false, false, false);
+	 }
+  },3000)
+	  }
 }
 
 function signalingStateChangeHandler (event) {
