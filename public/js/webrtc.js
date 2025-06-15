@@ -2260,7 +2260,8 @@ function iceConnectionStateChangeHandler (event) {
     note({ content: "Disconnected", type: "info", time: 5 });
     CONNECTED = false;
     console.log('ice disconnected');
-    next(nextbtn, true, false, false);
+    next(nextbtn, false, false, false);
+     // wsend( { type:'search-peer', nick: (NICK?NICK:"Anoni")/*, src: imgdata3,*/, ignores: [[0,{}]] });
    // note({content: "Временная потеря сигнала ", type: "warn", time: 10 });
       break;
   }
