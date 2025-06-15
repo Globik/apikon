@@ -1197,6 +1197,7 @@ function handleNewIceCandidate(msg) {
 	if(pc){
 		//var cand = new RTCIceCandidate(msg);
 	if(msg){
+		console.log("in ice cand obj msg ", msg);
 		pc.addIceCandidate(msg).then(function(){
 			
 		}).catch(function handleError(er){
@@ -1204,10 +1205,10 @@ function handleNewIceCandidate(msg) {
 			console.error(er);
 			if(!CONNECTED) {
 				setTimeout(function(){
-		 console.log('complete but not connected ice candidate , next');
+		 //console.log('complete but not connected ice candidate , next');
 		// next(nextbtn, false, false, false);
 	 
-  },3000)
+  },0)
 		}});
 	}
 	}
