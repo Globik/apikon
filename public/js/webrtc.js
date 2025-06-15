@@ -2202,7 +2202,7 @@ window.addEventListener("online", function(e) {
 			 setTimeout(function(){
 			  let imgdata3 = Screenshot();
 			  wsend( { type:'search-peer', nick: (NICK?NICK:"Anoni")/*, src: imgdata3,*/, ignores: (ignores?[...ignores]:[[0,{}]]) });
-		  }, 6000);
+		  }, 0);
 		 }else{
 			 console.warn("CONNECTED");
 		 }
@@ -2236,8 +2236,7 @@ function iceConnectionStateChangeHandler (event) {
   switch (event.target.iceConnectionState) {
     case 'connected':
    // if(esWar == 'remoteOffer')
-  // if(goAg)
-   clearTimeout(goAg);
+   if(goAg)clearTimeout(goAg);
     wsend({ type: "connected" });
     SUECH = false;
    // vax('post','/zartoone', { value: 300, id: gid('userId').value }, on_zar, on_zar_error, null, false);
@@ -2272,8 +2271,8 @@ function iceGatheringStateChangeHandler (event) {
   if(event.target.iceGatheringState == "complete"){
 	  setTimeout(function(){
 	 if(!CONNECTED) {
-		 console.log('complete but not connected, next');
-		 next(nextbtn, true, false, false);
+		// console.log('complete but not connected, next');
+		 //next(nextbtn, true, false, false);
 	 }
   },6000)
 	  }
