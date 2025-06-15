@@ -1197,7 +1197,7 @@ function handleNewIceCandidate(msg) {
 	if(pc){
 		//var cand = new RTCIceCandidate(msg);
 	if(msg){
-		console.log("in ice cand obj msg ", msg);
+		//console.log("in ice cand obj msg ", msg);
 		pc.addIceCandidate(msg).then(function(){
 			
 		}).catch(function handleError(er){
