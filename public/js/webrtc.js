@@ -2165,7 +2165,7 @@ window.addEventListener("online", function(e) {
 	}
       let imgdata = Screenshot();
      // alert(JSON.stringify({a: [...ignores]}));
-     console.warn('imgdata ', imgdata);
+    // console.warn('imgdata ', imgdata);
      wsend( { type:'search-peer', nick: (NICK?NICK:"Anon"), src: imgdata, ignores: (ignores?[...ignores]:[[0,{}]]) });
       chatbox.innerHTML="";
 	  chatbox2.innerHTML="";

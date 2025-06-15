@@ -45,7 +45,7 @@ function handleDynamic(obj){
 		let d = document.createElement("div");
 		d.className="dynamicbox";
 		d.setAttribute("data-id", obj.id);
-		console.log('obj.src ', obj.src);
+		//console.log('obj.src ', obj.src);
 		d.innerHTML=`<div class="caption">${obj.nick}</div><div class="dynamicImgHalter"><img data-pid="${obj.id}" onclick="callInkognito(this);" src="${obj.src}" onerror="loadError(this);"/></div>`;
 		whosonlinecontent.appendChild(d);
 		camsCount.textContent = obj.camcount;
