@@ -2260,7 +2260,7 @@ function iceConnectionStateChangeHandler (event) {
     note({ content: "Disconnected", type: "info", time: 5 });
     CONNECTED = false;
     console.log('ice disconnected');
-    next(nextbtn, false, false, false);
+   // next(nextbtn, false, false, false);
    // note({content: "Временная потеря сигнала ", type: "warn", time: 10 });
       break;
   }
