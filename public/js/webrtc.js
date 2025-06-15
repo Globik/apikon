@@ -1214,7 +1214,7 @@ function handleNewIceCandidate(msg) {
 
 }
  async function handleVideoOffer(msg){
-	
+	if(!msg)return;
 	if(isNegotiating){
 		console.warn("already made an isNegotiating ");
 	//	return;
@@ -2198,7 +2198,7 @@ window.addEventListener("online", function(e) {
 		 if(!CONNECTED){
 			// note({ content: "NO CONNECTED", type:"info", time: 5});
 			 console.log("NO CONNECTED");
-			 goAgain();
+			// goAgain();
 			 setTimeout(function(){
 			  let imgdata3 = Screenshot();
 			  wsend( { type:'search-peer', nick: (NICK?NICK:"Anoni")/*, src: imgdata3,*/, ignores: (ignores?[...ignores]:[[0,{}]]) });
@@ -2260,7 +2260,7 @@ function iceConnectionStateChangeHandler (event) {
     note({ content: "Disconnected", type: "info", time: 5 });
     CONNECTED = false;
     console.log('ice disconnected');
-   // next(nextbtn, false, false, false);
+    next(nextbtn, true, false, false);
    // note({content: "Временная потеря сигнала ", type: "warn", time: 10 });
       break;
   }
@@ -2273,7 +2273,7 @@ function iceGatheringStateChangeHandler (event) {
 	  setTimeout(function(){
 	 if(!CONNECTED) {
 		 console.log('complete but not connected, next');
-		// next(nextbtn, false, false, false);
+		 next(nextbtn, true, false, false);
 	 }
   },6000)
 	  }
