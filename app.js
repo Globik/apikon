@@ -1484,7 +1484,7 @@ console.log('suka ', ed2, " ", ign.size)
 console.log("isEven(1) ", isEven(1))
 async function searchPeer (socket, msg, source) {
 	//console.log('msg****',msg);
-
+//searchPeer(socket, { type: 'peer-matched' }, { src: msg.src, ignores: msg.ignores })
 	//	console.log("search peer 1",  waitingQueue.length, waitingQueue);
 	//	console.log("*** MSG>IGNORES ***",  msg, " ", source.ignores);
   while (waitingQueue.length) {
@@ -1530,9 +1530,9 @@ async function searchPeer (socket, msg, source) {
      // console.log(`#${socket.id} matches #${peerId}`)
      if(!onLine.has(socket.id)) {
 		
-	 onLine.set(socket.id, { id: socket.id, src: source.src, nick: socket.nick });
+if(source.src)	 onLine.set(socket.id, { id: socket.id, src: source.src, nick: socket.nick });
 	// broadcast({ type: "dynamic", sub: "add", id: socket.id, partnerid: peerId, nick: socket.nick, status: 'busy', camcount: onLine.size});
-	 broadcast_admin({ type: "dynamic", sub: "add", id: socket.id, partnerid: peerId, src: source.src, nick: socket.nick, status: 'busy', camcount: onLine.size, waiting: waitingQueue });
+	if(source.src) broadcast_admin({ type: "dynamic", sub: "add", id: socket.id, partnerid: peerId, src: source.src, nick: socket.nick, status: 'busy', camcount: onLine.size, waiting: waitingQueue });
 	 if(isEven(matchedIds.size)) broadcasti({ type: "connected2", size: matchedIds.size/2 });
 	 // console.log('ONLINE ', onLine);
 	// console.log("*************** MATCHEDIDS ****************, ", matchedIds);
@@ -1554,7 +1554,7 @@ async function searchPeer (socket, msg, source) {
 	 
 	 onLine.set(socket.id, { id: socket.id, src: source.src, nick: socket.nick });
 	// broadcast({ type: "dynamic", sub: "add", id: socket.id, nick: socket.nick, status: 'free', camcount: onLine.size });
-	 broadcast_admin({ type: "dynamic", sub: "add", id: socket.id, src: source.src, nick: socket.nick, camcount: onLine.size });
+	if(source.src) broadcast_admin({ type: "dynamic", sub: "add", id: socket.id, src: source.src, nick: socket.nick, camcount: onLine.size });
 	 //console.log('ONLINE 2', onLine);
 //	if(isEven(matchedIds.size))
 //broadcasti({ type: "connected2", size: matchedIds.size });

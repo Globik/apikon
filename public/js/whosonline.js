@@ -41,7 +41,7 @@ function handleDynamic(obj){
 	}else if(obj.sub == "add"){
 		//return;
 		//alert('add');
-		
+		if(!obj.src)return;
 		let d = document.createElement("div");
 		d.className="dynamicbox";
 		d.setAttribute("data-id", obj.id);
@@ -75,5 +75,5 @@ function loadError(ma){
 	if(!a)return;
 	let elu = document.querySelector(`[data-id="${a}"]`);
 	if(elu)elu.remove();
-	//vax('post','/removePrizrak', { id: a }, function(){}, function(){}, null, false);
+	vax('post','/removePrizrak', { id: a }, function(){}, function(){}, null, false);
 }
