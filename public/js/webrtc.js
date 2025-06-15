@@ -2273,7 +2273,7 @@ function iceGatheringStateChangeHandler (event) {
 	  setTimeout(function(){
 	 if(!CONNECTED) {
 		 console.log('complete but not connected, next');
-		// next(nextbtn, false, false, false);
+		 next(nextbtn, false, false, false);
 	 }
   },6000)
 	  }
