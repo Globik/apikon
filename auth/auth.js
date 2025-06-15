@@ -22,10 +22,10 @@ passport.deserializeUser(async function(user, cb){
 	//console.log("deserialize user", user);
 		try{
 			let useri = await db.query('select id,name,zar,entr,vkid,tgid,brole,heart,theart,prem,mon,grund from users left join ban on users.id=ban.usid where users.id=(?)', [ user ]);
-			console.log("USERI ", useri[0]);
+			//console.log("USERI ", useri[0]);
 		return cb(null, useri[0]);
 	}catch(er){
-		console.log(er);
+		//console.log(er);
 		return cb(er,null);
 	}
 	
@@ -98,8 +98,8 @@ async function(username, password, done){
 
 
 passport.use('local-signup', new LocalStrategy({usernameField: 'name', passReqToCallback: true}, async(req,username, password, done)=>{
-	console.log("username , paswword: ", username, password);
-	console.log('***BODY*** ', req.body);
+//	console.log("username , paswword: ", username, password);
+//	console.log('***BODY*** ', req.body);
 	let ty = req.body.type;
 	console.log('ty ', ty);
 	
@@ -118,13 +118,13 @@ passport.use('local-signup', new LocalStrategy({usernameField: 'name', passReqTo
 	}
 try{
 	
-	console.log(" *** IP *** ", req.ip);
+//	console.log(" *** IP *** ", req.ip);
 	var ipaddress = req.ip;
 	const reg = /([0-9]{1,3}[\.]){3}[0-9]{1,3}/;
 	if(process.env.DEVELOPMENT != "yes"){
 		let ad = ipaddress.match(reg);
 let rip = ad[0];
-console.log("*** IP2 *** ", rip);
+//console.log("*** IP2 *** ", rip);
 let resultat = await db.query(`select * from ban where ip=(?)`, [ rip ]);
 if(resultat.length  > 0){
 	return done(null, false, { message: "Вы забанены", grund: resultat[0].grund, usid: resultat[0].usid, status: 409 });
@@ -153,7 +153,7 @@ return done(null, false, {error:true, message: "Ник " + username + " уже �
 	
 }			
 }else if(ty == "tg"){
-	console.log("body ", req.body);
+	//console.log("body ", req.body);
 	let tgid = req.body.tgid;
 	let name = req.body.name;
 	if(!tgid){
@@ -168,11 +168,11 @@ return done(null, false, {error:true, message: "Ник " + username + " уже �
 		return done(null, result2.insertId.toString(), { username: '@'+ name, status: 200, message: "Success!" });
 	}
 }catch(err){
-	console.log(err);
+	//console.log(err);
 	return done(null, false, { error: true, message: err.message, status: 405 })
 }
 }else if(ty == "vk"){
-		console.log("body ", req.body);
+	//	console.log("body ", req.body);
 		var { user_id, name } = req.body;
 		
 		try{
@@ -184,7 +184,7 @@ return done(null, false, {error:true, message: "Ник " + username + " уже �
 		return done(null, result5.insertId.toString(), { username: name, status: 200, message: "Success!"});
 	}
 }catch(err){
-	console.log(err);
+	//console.log(err);
 	return done(null, false, { error: true, message: err.message, status: 405 })
 }
 		
@@ -196,7 +196,7 @@ return done(null, false, {error:true, message: "Ник " + username + " уже �
 passport.use(new TelegramStrategy({
 botToken:	tg_api
 }, (userData, done)=>{
-	console.log('userData ', userData);
+	//console.log('userData ', userData);
 	if(userData){
 		
 	}

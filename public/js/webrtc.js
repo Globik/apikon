@@ -794,7 +794,7 @@ function on_msg(msg) {
         let conns2 = gid("conns2");
         connects.textContent = msg.size;
         conns2.textContent = msg.size;
-        gid("camsCount").textContent = msg.camcount;
+       // gid("camsCount").textContent = msg.camcount;
         //alert(msg.size);
         break;
         case 'dynamic':
@@ -1819,16 +1819,16 @@ return imgdata22;
 	//	notes.play(261.63, nows);
 		console.log("local onloaded");
 		if(isShow)return;
-	//	setTimeout(function(){
+		setTimeout(function(){
 		let imgdata = Screenshot();
 //	alert('d4 '+imgdata); some change
 
 		let amap=[['0',{}]];
 	//if(IPS.size > 0) amap = IPS;
 	//console.error("amap", amap, IPS);
-		wsend({ type:'search-peer', nick: (NICK?NICK:'Anonym'),/* src: imgdata ,*/ ignores: [...IPS] });
-	//}, 3000);
-	//someInterval = setInterval(doScreenshot, 1000 * 61);
+		wsend({ type:'search-peer', nick: (NICK?NICK:'Anonym'), src: imgdata , ignores: [...IPS] });
+	}, 3000);
+	someInterval = setInterval(doScreenshot, 1000 * 61);
 		somespinner.className="show";
 		mobileloader.className="active";
 		
@@ -1857,7 +1857,7 @@ return imgdata22;
 		
  tru=ev.target.addTextTrack("captions", "Titles", "ru");
    tru.mode="showing";
-   let cue=new VTTCue(0.0,100090.9, partnernick + '  '+ (partnerpremium=="y"?'👑':''));
+   let cue=new VTTCue(0.0,100090.9, (partnernick?partnernick:'Anon') + '  '+ (partnerpremium=="y"?'👑':''));
    cue.snapToLines=false;
    cue.lineAlign='center';
    //cue.vertical="rl"
@@ -2165,7 +2165,7 @@ window.addEventListener("online", function(e) {
 	}
       let imgdata = Screenshot();
      // alert(JSON.stringify({a: [...ignores]}));
-     wsend( { type:'search-peer', nick: (NICK?NICK:"Anoni"), /*src: imgdata,*/ ignores: (ignores?[...ignores]:[[0,{}]]) });
+     wsend( { type:'search-peer', nick: (NICK?NICK:"Anon"), src: imgdata, ignores: (ignores?[...ignores]:[[0,{}]]) });
       chatbox.innerHTML="";
 	  chatbox2.innerHTML="";
 	mobileChat.className = "hide";
@@ -2202,7 +2202,7 @@ window.addEventListener("online", function(e) {
 			// goAgain();
 			 setTimeout(function(){
 			  let imgdata3 = Screenshot();
-			  wsend( { type:'search-peer', nick: (NICK?NICK:"Anoni")/*, src: imgdata3,*/, ignores: (ignores?[...ignores]:[[0,{}]]) });
+			  wsend( { type:'search-peer', nick: (NICK?NICK:"Anoni"), src: imgdata3, ignores: (ignores?[...ignores]:[[0,{}]]) });
 		  }, 0);
 		 }else{
 			 console.warn("CONNECTED");

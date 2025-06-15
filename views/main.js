@@ -292,7 +292,7 @@ function getZar(){
   //}
 }
 //window.location.href="#setPrem";
-   getZar();
+  // getZar();
    function han(ev){
 	 //  alert('regeln');
 	   window.location.href="#regeln";
@@ -450,9 +450,9 @@ lang=='id'?'kamera web':''}:</b> <span id="camsCount">0</span> | <b>${lang=='ru'
 lang=='en'?'Connects':
 lang=='zh'?'连接':
 lang=='id'?'koneksi':''}:</b> <span id="connects">0</span></div>
- <div class="settingspanel"><a href="#setPrem" onclick="panelOpen();">Премиум аккаунт</a></div>
+ 
 <!-- ${lang=='ru'&&!n.VK ?`<div class="settingspanel"  onclick="purchaseTokens(this);">Купить сердечки &#x1f496;</div>`:''} -->
-<!-- <div class="settingspanel" onclick="showWhosOnline();">Who's online</div> -->
+ <div class="settingspanel" onclick="showWhosOnline();">Кто онлайн</div> 
 ${n.user?`<div class="settingspanel">
 <div class="some doh"style="overflow-x:auto;" >${n.user?n.user.name:'anon6'}  Ваш доход&nbsp;&nbsp;<span id="dohod">${n.user? n.user.zar:'0'}</span>&nbsp;руб.</div>
 <div class="du" onclick="getPayout(this);"><div>Получить</div> <div id="coinContainer">${getCoin()}</div></div>
@@ -465,7 +465,8 @@ lang=='id'?'Telegram kami':''}</a></div> -->`:''}
 ${lang=='ru' && !n.VK ? `<div class="settingspanel" ><a href="#ozeniteHREF" onclick="ozenite(this);"><span class="ozenka">Оцените приложение</span></a></div>`:''}
  
  ${!n.VK?`<!-- <div class="settingspanel"  id="donatis">Помочь проекту<br>
- <iframe src="https://yoomoney.ru/quickpay/fundraise/button?billNumber=AWVMCQLpAcY.240125&" width="330" height="50" frameborder="0" allowtransparency="true" scrolling="no"></iframe></div> --> `:''}
+ <iiiframe src="https://yoomoney.ru/quickpay/fundraise/button?billNumber=AWVMCQLpAcY.240125&" width="330" height="50" frameborder="0" allowtransparency="true" scrolling="no"></iframe></div> --> `:''}
+ <div class="settingspanel"><a href="#setPrem" onclick="panelOpen();">Премиум аккаунт</a></div>
 ${n.user && !n.VK?`<div class="settingspanel" onclick="logout(this);">${lang=='ru'?'Выйти':lang=='en'?'Logout':lang=='zh'?'登出':lang=='id'?'keluar':''}</div>`:
 `${!n.VK ? `<div class="settingspanel"><a href="#login" onclick="panelOpen();">${lang=='ru'?'Войти':lang=='en'?'Log in':lang=='zh'?'登录':
 	lang=='id'?'Gabung':''}</a></div>`:''}`}

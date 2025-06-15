@@ -28,7 +28,7 @@ const { handleMediasoup, ev , handleAdminMedia } = require("./libs/mediasoup_hel
 
 const axios = require('axios').default;
 
-//const TelegramBot = require('node-telegram-bot-api');
+
 const tg_api = '7129138329:AAGl9GvZlsK3RsL9Vb3PQGoXOdeoc97lpJ4';
 const grid = '-1002095475544';
 //var f = new FormData()
@@ -123,14 +123,14 @@ try{
 			testshopsecret = a[0].testshopsecret;
 			//console.log("here ",testshopid, testshopsecret);
 			istestheart = a[0].istestHeart;
-			console.log("istest heart ",  istestheart, (istestheart==1?true:false));
+			//console.log("istest heart ",  istestheart, (istestheart==1?true:false));
 			yoomoney_client_id = a[0].yoomoney_client_id;
 			yoomoney_secret = a[0].yoomoney_secret;
-			console.log("yoomoney_client_id: ", yoomoney_client_id);
+			//console.log("yoomoney_client_id: ", yoomoney_client_id);
 			yoomoney_token = a[0].yoomoney_token;
-			console.log('token : ', yoomoney_token);
+			//console.log('token : ', yoomoney_token);
 			y_notif = a[0].y_notif;
-			console.log('y_notif', y_notif);
+			//console.log('y_notif', y_notif);
 			//var quant_n=5;
 			//var userid='5';
 			//await pool.query('update users set theart=theart+(?),heart=1 where id=(?)', [ quant_n, userid ]);
@@ -145,7 +145,7 @@ app.use(passport.session());
 app.use(async(req, res, next)=>{
 	req.app.locals.user = req.user;
 	var isln = req.get('Accept-Language');
-	var langstr = 'ru';//(isln&&isln.includes('ru')? 'ru':isln.includes('zh')?'zh': 'en');
+	var langstr = (isln&&isln.includes('ru')? 'ru':isln&&isln.includes('zh')?'zh': 'en');
 	//console.log('langstr ',req.get('Accept-Language') );
   req.app.locals.ln =  langstr;
 	req.app.locals.stun = stun;
@@ -220,7 +220,7 @@ app.get("/about", async(req, res)=>{
 		try{
 			//access_token
 		let r = await axios.get(getUservkUrl, { params:{access_token: skey, user_ids:[req.query.vk_user_id],fields: [req.query.nickname], lang:'ru', v: vparam}});
-		console.log("DATA ", r.data);
+		//console.log("DATA ", r.data);
 		if(r.data.response && r.data.response.length > 0){
 			//id, first_name
 			
@@ -228,18 +228,18 @@ app.get("/about", async(req, res)=>{
 	let result4 = await db.query(`select*from users where vkid=(?)`, [ r.data.response[0].id ]);
 	
 	if(result4.length > 0){
-		console.log('result4 ', result4[0]);
+		//console.log('result4 ', result4[0]);
 		result4[0].vkid=result4[0].vkid.toString();
-		console.log('result4 ', result4[0].id);
+		//console.log('result4 ', result4[0].id);
 		//let babu=result4[0]
 		let suki = await db.query('select id,name,entr,vkid,tgid,brole,heart,theart,prem,mon,grund from users left join ban on users.id=ban.usid where users.id=(?)',[result4[0].id]);
 		let babu=suki[0];
 	 return res.rendel('main', { mediasoupadmin: mediasoupadmin, imgData: imgData, lang: 'ru', yacount: JETZT , user: babu,buser:babu, FUCKER:'FUCKER', VK: true });
 	}else{
 		let result5 = await db.query(`insert into users(name, vkid, password) values(?,?,'1234')`, [ r.data.response[0].first_name, r.data.response[0].id ]);
-		console.log("INSERT ", result5);
+		//console.log("INSERT ", result5);
 		let result6 = await db.query(`select*from users where id=(?)`, [ result5.insertId.toString() ]);
-		console.log('result6 ', result6[0]);
+		//console.log('result6 ', result6[0]);
 		result6[0].id = result5.insertId.toString();
 		let dabu = result6[0];
 		return res.rendel('main', { mediasoupadmin: mediasoupadmin, imgData: imgData, lang: 'ru', yacount: JETZT , user: dabu, buser: dabu, FUCKER2:'FUCKER2', VK: true });
@@ -250,19 +250,19 @@ app.get("/about", async(req, res)=>{
 			
 		}else{
 			//some error
-			cosnsole.log('error in vk axios ', r.data);
+			//cosnsole.log('error in vk axios ', r.data);
 			return res.rendel('errnotfound',{});
 		}
 	
 	}catch(e){console.log(e);}
 }else{
 	//return 404 not found
-	console.log("VK NOT OK!");
+	//console.log("VK NOT OK!");
 	return res.rendel('errnotfound',{});
 }
 }
 //Object.assign(req,{user:{name:'alik', id:333}})
-	console.log("*** USER *** ", req.user);
+	//console.log("*** USER *** ", req.user);
 	//console.log('req.app.locals ', req.app.locals.testshopid, ' ', req.app.locals.testshopsecret);
 	//res.rendel('errnotfound',{});
 	res.rendel('main', { mediasoupadmin: mediasoupadmin, imgData: imgData, lang: 'ru', yacount: JETZT, uuid: crypto.randomUUID(), VK:false });
@@ -292,7 +292,7 @@ app.get("/about", async(req, res)=>{
 //const s22 = `vk_access_token_settings=${obj6.vk_access_token_settings}&vk_app_id=${obj6.vk_app_id}&vk_are_notifications_enabled=${obj6.vk_are_notifications_enabled}&vk_is_app_user=${obj6.vk_is_app_user}&vk_is_favorite=${obj6.vk_is_favorite}&vk_language=${obj6.vk_language}&vk_platform=${obj6.vk_platform}&vk_ref=${obj6.vk_ref}&vk_ts=${obj6.vk_ts}&vk_user_id=${obj6.vk_user_id}`;
 
 function checkSign(ob){
-	console.log("OBJECT ", ob);
+//	console.log("OBJECT ", ob);
 const sign = ob.sign;
 delete ob.sign;
 var ordered = '';
@@ -304,13 +304,13 @@ ordered=ordered.substring(0, ordered.length-1);
 let sha12_ha = sign;
 let sh2 = crypto.createHmac('sha256', vkey);
 let li2 = sh2.update(ordered).digest().toString('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/=$/, '');
-console.log('li2: ',li2)
-console.log('sha2:', sha12_ha)
+//console.log('li2: ',li2)
+//console.log('sha2:', sha12_ha)
 if(li2==sha12_ha){
-	console.log("vk OK");
+	//console.log("vk OK");
 	return true
 }else{
-	console.log('vk not ok');
+	//console.log('vk not ok');
 	return false;
 }
 }
@@ -364,7 +364,7 @@ app.post('/zartoone', checkAuth, async(req, res)=>{
 		await db.query(`update users set zar=zar+(?) where id=(?)`, [ Number(value), id ]);
 		res.json({ info: 'ok', value, id });
 	}catch(err){
-		console.log(err);
+		//console.log(err);
 		res.json({ error: err });
 	}
 	
@@ -381,7 +381,7 @@ app.get('/photos', async(req,res)=>{
 })
 
 app.get(`/photos/:okno`, async(req, res)=>{
-	console.log('params ', req.params);
+//	console.log('params ', req.params);
 //	https://yandex.<domain>/images-xml? [folderid=<folder_ID>]& [apikey=<API_key>]& [text=<search_query_text>]
 let url = 'https://yandex.ru/images-xml';
 let apikey = 'AQVN0YlnPMjLYRxiynUSly0V06GDVLd0HNb0FJIw';
@@ -397,7 +397,7 @@ try{
 	 return res.status(404).send(jObj.yandexsearch.response.error);
  }
 }catch(e){
-	console.log('error ', e);
+	//console.log('error ', e);
 	return res.status(404).send(e);
 }
 
@@ -421,7 +421,7 @@ app.post('/api/getMax', async(req, res)=>{
 		
 		res.json({ info:su });
 	}catch(e){
-		console.log('err ', e);
+		//console.log('err ', e);
 		res.json({ error: e });
 	}
 })
@@ -436,7 +436,7 @@ app.post('/api/setyacount', async(req, res)=>{
 })
 app.post('/api/auth', (req, res, next)=>{
 	passport.authenticate("local", (err, user, info)=>{
-		console.log("err, user, info: ", err, user, info);
+		//console.log("err, user, info: ", err, user, info);
 		if(err){
 			return next(err);
 		}
@@ -508,25 +508,25 @@ app.get('/cb1', async(req, res)=>{
     'content-type': 'application/x-www-form-urlencoded' 
     }
     });
-    console.log("data : ", r.data);
+   // console.log("data : ", r.data);
     if(r.data.access_token){
 		let a = r.data.access_token;
-		console.log("YES access_token: ", a);
+	//	console.log("YES access_token: ", a);
 		yoomoney_token = a;
 		req.yoomoney_token = a;
 		await db.query('update sets set yoomoney_token=(?)', [ a ] );
 		res.rendel('atoken', { message: "Получили токен " + a });
 	}else{
-		console.log("no access_token");
+		//console.log("no access_token");
 		res.rendel('atoken', { message: "Неудача:  " + r.data.error  });
 	}
 		}catch(err){
-			console.log(err);
+		//	console.log(err);
 			res.rendel('atoken', { message: err });
 		}
 		
 	}else{
-	res.rendel('atoken', { message: req.query.error});
+	res.rendel('atoken', { message: req.query.error });
 }
 })
 /*
@@ -687,16 +687,16 @@ var wi={
 //const fucker = 'ZmV0Y7SBS8z1b0CIEWhKb9Qk';//ZmV0Y7SBS8z1b0CIEWhKb9Qk
 const fucker = 'ZmV0Y7SBz1b0CIEWhKb9Qk';//LXLMTe9hgGIJcBTFfClIEMR4'
 const s2 = `${wi.notification_type}&${wi.operation_id}&${wi.amount}&${wi.currency}&${wi.datetime}&${wi.sender}&${wi.codepro}&${fucker}&${wi.label}`;
-console.log('si2 ', s2)
+//console.log('si2 ', s2)
 let sha1_ha = wi.sha1_hash;
 let sh = crypto.createHash('sha1')
 let li = sh.update(s2).digest('hex')
-console.log('li: ',li)
-console.log('sha:', sha1_ha)
+//console.log('li: ',li)
+//console.log('sha:', sha1_ha)
 if(li==sha1_ha){
-	console.log("OK");
+	//console.log("OK");
 }else{
-	console.log('not ok');
+	//console.log('not ok');
 }
 
 
@@ -705,8 +705,10 @@ async function setPrem(){
 //	let a = await pool.query(`update users set prem="y", mon=(?) where id=5`, [ Date.now() ]);
 	let a = await pool.query('select prem, mon from users');
 	//let a = await pool.query('update users set prem="n", mon=null where id=5', [])
-	console.log(a);
-}catch(e){console.log(e)}
+	//console.log(a);
+}catch(e){
+	console.log(e)
+	}
 }
 //setPrem()
 
@@ -714,7 +716,7 @@ var iii2 = 0;
 const dummy2 = new Map();
 
 app.post('/testyoomoney1', async(req, res)=>{
-	console.log("*** CALLBACK! *** ", req.body);
+	//console.log("*** CALLBACK! *** ", req.body);
 let { notification_type,
 		operation_id,
 		amount,
@@ -740,10 +742,10 @@ let str = `${notification_type}&${operation_id}&${amount}&${currency}&${datetime
 	let db = req.db;
 let sh = crypto.createHash('sha1')
 let li = sh.update(str).digest('hex')
-console.log('li: ',li)
-console.log('sha:', sha1_hash)
+//console.log('li: ',li)
+//console.log('sha:', sha1_hash)
 if(li == sha1_hash){
-console.log('HASH IS GUET')
+//console.log('HASH IS GUET')
 let userid = paramStr.get('id');
 let quant = paramStr.get('c');
 let prem = paramStr.get('p');
@@ -751,7 +753,7 @@ let enti = paramStr.get('enti');
 let quant_n = Number(quant);
 if(unaccepted == 'false'){
 try{
-	console.log("updating users in db");
+	//console.log("updating users in db");
 	if(quant){
 	await db.query('update users set theart=theart+(?),heart=1 where id=(?)', [ quant_n, userid ]);
 }
@@ -759,7 +761,7 @@ try{
 	try{
 		await db.query(`update users set prem="y",mon=(?) where id=(?)`, [ Date.now(), userid ]);
 	}catch(e){
-		console.log(e);
+		//console.log(e);
 		return res.status(200).send({ message: "not ok" });
 		}
 		if(prem && Number(prem) == 300){
@@ -769,7 +771,7 @@ try{
 				await db.query(`delete from ban where usid=(?)`, [ userid ]);
 				await db.query(`update users set brole='non' where id=(?)`, [ userid ]);
 			}catch(e){
-				console.log(e);
+			//	console.log(e);
 				return res.status(200).send({ message: "not ok" });
 			}
 		}
@@ -781,7 +783,7 @@ if(enti){
 }
 
 }catch(err){
-	console.log(err);
+	//console.log(err);
 	var gri = '887539364';
 	sendTelega({ grid: gri, txt: err});
 	return res.status(200).send({ message: "not ok" });
@@ -791,7 +793,7 @@ if(enti){
 }
 }else{
 	let si = "HASH IS NOT GUET";
-	console.log(si);
+	//console.log(si);
 	const gri = '887539364';
 	sendTelega({ grid: gri, txt: si});
 	return res.status(200).send({ message: "not ok" });
@@ -811,7 +813,7 @@ app.post('/api/removePremium', checkAuth, async(req, res)=>{
 		try{
 		await db.query('update users set prem="n", mon=null where id=(?)', [ usid ]);
 	}catch(e){
-		console.log(e);
+		//console.log(e);
 	}
 	}
 	res.json({ message: 'ok' });
@@ -827,7 +829,7 @@ app.post('/api/checkBanned', checkAuth, async(req, res)=>{
 			await db.query(`insert into ban(usid,ip,grund) values((?),(?),(?))`, [ usid, myip, 1 ]);
 		}
 	}catch(e){
-		console.log(e);
+		//console.log(e);
 	}
 	res.json({ message: 'ok' });
 })
@@ -842,7 +844,7 @@ var iii3 = 0;
 
 
 app.post('/cb/tgwebhook', async(req, res)=>{
-	console.log("*** CALLBACK from TELEGA! *** ", req.body);
+	//console.log("*** CALLBACK from TELEGA! *** ", req.body);
 	//dummy3.set(iii3, req.body);
 	iii3++;
 	const grid = '887539364';
@@ -879,7 +881,7 @@ app.post('/cb/tgwebhook', async(req, res)=>{
 	//f2.append('parse_mode', 'html');
 	//693967662-3076.jpg
 	let fn1 = `https://rouletka.ru/img/gold/${name}`;
-	console.log('fn1 ', fn1);
+	//console.log('fn1 ', fn1);
 	f2.append('photo_url', fn1);
 	await axios.post(`https://api.telegram.org/bot${tg_api}/sendInvoice`, f2); 
 	await axios.post(`https://api.telegram.org/bot${tg_api}/sendMessage`, {
@@ -899,9 +901,9 @@ app.post('/cb/tgwebhook', async(req, res)=>{
 					await downloadF({ path: file_path, file_name: name });
 					let f3 = new FormData();
 					const rouletteGroup = "-1002247446123";
-					console.log('nick ', nick);
+		//			console.log('nick ', nick);
 					let suka1 = `nick=${nick}&fotolink=${name}&usid=${usid}&action=zwezda`;
-					console.log('suka1 ', suka1);
+			//		console.log('suka1 ', suka1);
 					let whom = callback_query.from.id;
 	f3.append('chat_id', whom);
 	f3.append('title','Подписка на ' + nick);
@@ -912,7 +914,7 @@ app.post('/cb/tgwebhook', async(req, res)=>{
 	//f2.append('parse_mode', 'html');
 	//693967662-3076.jpg
 	let fn1 = `https://rouletka.ru/img/gold/${name}`;
-	console.log('fn1 ', fn1);
+	//console.log('fn1 ', fn1);
 	f3.append('photo_url', fn1);
 	await axios.post(`https://api.telegram.org/bot${tg_api}/sendInvoice`, f3); 
 				
@@ -928,7 +930,9 @@ app.post('/cb/tgwebhook', async(req, res)=>{
 		chat_id: tgid,
 		text: (lang=='ru'?'Вы отписались от ' + nick : 'You unsubscribed from ' + nick)
 	});
-		}catch(e){console.log(e);}
+		}catch(e){
+			//console.log(e);
+			}
 		}else if(action == "ban"){
 			let usid = paramStr.get('usid');
 			let vip = paramStr.get('ip');
@@ -950,46 +954,46 @@ app.post('/cb/tgwebhook', async(req, res)=>{
 				await pool.query(`insert into ban(usid,nick,grund) values((?),(?),(?))`, [ usid, nick2, numb ]);
 				sendTelega({ grid: grid, txt: "OK, banned " + usid});
 			}catch(e){
-				console.log(e);
+			//	console.log(e);
 				sendTelega({ grid: grid, txt: e.toString() });
 				// sendTelega({ grid: '887539364', txt: e.toString() });
 			}
 		}
 	}	
 	}}
-	console.log('^^^^^^^^^^^^^^^^^^^^^^ ', pre_checkout_query );
+//	console.log('^^^^^^^^^^^^^^^^^^^^^^ ', pre_checkout_query );
 	if(pre_checkout_query){
 		let { invoice_payload } = pre_checkout_query;
-		console.log('******************** invoice_payload  ', invoice_payload );
+	//	console.log('******************** invoice_payload  ', invoice_payload );
 		if(invoice_payload){
 		const paramStr2 = new URLSearchParams(invoice_payload);
 		let action = paramStr2.get('action');
-		console.log('**** ACTION ', action);
+		//console.log('**** ACTION ', action);
 		if(action == "zwezda"){
-			console.log("ZWEZDA!");
+			//console.log("ZWEZDA!");
 			let nick = paramStr2.get('nick');
 			var usid = paramStr2.get('usid');
 			var fotolink = paramStr2.get('fotolink');
 			var tgid = pre_checkout_query.from.id;
 			
 			var lang = pre_checkout_query.from.language_code;
-			console.log('tgid language code ', tgid, ' ', lang);
+			//console.log('tgid language code ', tgid, ' ', lang);
 			var r6 = await pool.query('select * from usergold where usid=(?) and tgid=(?)', [ usid, tgid]);
-			console.log('r6 ', r6);
+			//console.log('r6 ', r6);
 			if(r6.length > 0){
 		let a2 = await axios.post(`https://api.telegram.org/bot${tg_api}/answerPreCheckoutQuery`, {
 		pre_checkout_query_id: pre_checkout_query.id,
 		ok: false,
 		error_message: (lang == 'ru'?'Вы уже купили подписку на этого человека!':'You already subscribed to this user')
 	});
-	console.log('a ', a.data);
+	//console.log('a ', a.data);
 			}else{
 		let r7 = await axios.post(`https://api.telegram.org/bot${tg_api}/answerPreCheckoutQuery`, {
 		pre_checkout_query_id: pre_checkout_query.id,
 		ok: true,
 		
 	});
-	console.log('r7 ', r7.data);
+	//console.log('r7 ', r7.data);
 	//SuccessfulPayment
 	/*
 	{update_id: 693967775,
@@ -1024,7 +1028,7 @@ app.post('/cb/tgwebhook', async(req, res)=>{
 	}
 	}
 	if(message && message.successful_payment){
-		console.log("SUCCESSFUL PAYMENT");
+		//console.log("SUCCESSFUL PAYMENT");
 		let payload = message.successful_payment.invoice_payload;
 		const paramStr3 = new URLSearchParams(payload);
 		const fromid = message.from.id;
@@ -1045,7 +1049,7 @@ lang varchar(3) not null
 	});
 	}
 }catch(e){
-	console.log('hier error6666 ', e);
+	//console.log('hier error6666 ', e);
 	await axios.post(`https://api.telegram.org/bot${tg_api}/sendMessage`, {
 		chat_id: grid,
 		text: 'Облом! ' + (e.response?JSON.stringify(e.response.data):e.toString())
@@ -1063,7 +1067,9 @@ async function sendTelega(obj){
 		chat_id: obj.grid,
 		text: obj.txt
 	});
-	}catch(e){console.log(e);}
+	}catch(e){
+		//console.log(e);
+		}
 }
 app.post('/api/takeCb3', async(req, res)=>{
 	let a = (dummy3.size==0?"Nothing": [...dummy3]);
@@ -1073,12 +1079,12 @@ app.get('/admin', async(req,res)=>{
 	res.rendel('admin', {});
 })
 app.post('/newfucker', async(req,res)=>{
-	console.log("***ASOME BODY *** ", req.body);
+	//console.log("***ASOME BODY *** ", req.body);
 	res.json({message:'ok'});
 })
 app.post('/api/register', (req, res, next)=>{
 	passport.authenticate("local-signup", (err, user, info)=>{
-		console.log("err, user, info: ", err, user, info);
+		//console.log("err, user, info: ", err, user, info);
 		if(err){
 			return next(err);
 		}
@@ -1106,10 +1112,10 @@ app.get("/dashboard", secured, isAdmin(['admin']), async(req, res)=>{
 	let a;let b;
 	try{
 		a = await db.query('select COUNT(*) from users');
-	console.log("a: ", a[0]['COUNT(*)'].toString());
+	//console.log("a: ", a[0]['COUNT(*)'].toString());
 	b = await db.query('select COUNT(*) from processTest');
 	}catch(err){
-		console.log(err);
+		//console.log(err);
 	}
 	res.rendel('dashboard', { mediasoupadmin: mediasoupadmin, usercount: (a?a[0]['COUNT(*)'].toString():0), giftcount: (b?b[0]['COUNT(*)'].toString():0) });
 })
@@ -1160,7 +1166,7 @@ app.post('/api/setstun', checkAuth, checkRole(['admin']), async(req, res)=>{
 	}
 		res.json({ message: "OK, saved!" });
 	}catch(err){
-		console.log("Error ", err);
+		//console.log("Error ", err);
 		res.status(400).send({ message: err.name });
 	}
 })
@@ -1183,7 +1189,7 @@ const mybtcaddress = "bc1qjd6sdgd23h9vknhfd2l3gt3elsw3w8v9ngpj5t";
  */ 
 app.post("/api/getInvoice", checkAuth, async(req,res)=>{
 	let { userid, inv=0 }  = req.body;
-	console.log('body ', req.body);
+	//console.log('body ', req.body);
 	if(!userid){
 		return res.json({error:"No userid"});
 	}
@@ -1191,9 +1197,9 @@ app.post("/api/getInvoice", checkAuth, async(req,res)=>{
 	//WHERE creation_date < NOW() - INTERVAL '15' MINUTE select * from invoice WHERE crat > current_timestamp -  INTERVAL '6' MINUTE; 
 	try{
 		let su = await db.query(`select*from invoice where inv=(?) and crAt > current_timestamp -  INTERVAL '6' MINUTE`, [inv]);
-		console.log("****SU**** ",su);
+	//	console.log("****SU**** ",su);
 		if(su.length > 0){
-			console.log("bbbbbb ",su);
+		//	console.log("bbbbbb ",su);
 			return res.json({ error: "Already pressed the button", status: 1 });
 		}
 	}catch(err){
@@ -1205,13 +1211,13 @@ app.post("/api/getInvoice", checkAuth, async(req,res)=>{
 	d.confirmations = 3;
 	try{
 		let rr = await axios.post(btcurl+"create/payment/address", d); 
-		console.log('rr ', rr.data);
+		//console.log('rr ', rr.data);
 		sendTelega({ grid: '887539364', txt: JSON.stringify(rr.data) });
-		console.log(rr.data.response?rr.data.responce:'');
+		//console.log(rr.data.response?rr.data.responce:'');
 		await db.query(`insert into invoice(usid,inv,pc) values((?),(?),(?))`, [ userid,rr.data.invoice,rr.data.payment_code]);
 		return res.json({ message:"ok", btcad: rr.data.address, inv:rr.data.invoice });
 	}catch(err){
-		console.log(err);
+		//console.log(err);
 		return res.json({error: err.toString()});
 	}
 	
@@ -1237,7 +1243,7 @@ app.post('/btccb', async (req, res)=>{
 res.status(200).send(invoice)
 })
 app.post('/api/setviewdvk', async(req, res)=>{
-	console.log('body ', req.body);
+	//console.log('body ', req.body);
 	let { vkid } = req.body;
 	if(!vkid){
 		return res.json({message: "No vkid"});
@@ -1246,7 +1252,7 @@ app.post('/api/setviewdvk', async(req, res)=>{
 	try{
 		await db.query(`update users set entr=1 where vkid=(?)`, [ vkid ]);
 	}catch(e){
-		console.log(e);
+		//console.log(e);
 	}
 	res.json({ message:"OK"});
 })
@@ -1265,10 +1271,10 @@ app.post("/api/setTestPayment" , checkAuth, checkRole(['admin']), async(req, res
 	let db = req.db;
 	try{
 let a = await db.query(`update sets set testshopid=(?),testshopsecret=(?)`, [ testshopid, testshopsecret ]);
-		console.log('a: ', a);
+	//	console.log('a: ', a);
 		res.json({ message: "OK! Saved!" });
 	}catch(er){
-		console.log("er: ", er);
+		//console.log("er: ", er);
 		res.status(400).send({ message: er.name });
 	}
 })
@@ -1292,18 +1298,18 @@ app.post('/api/filesupload'/*, checkAuth*/, async(req, res)=>{
 	const file = req.files.video;
 	const thumb = req.files.thumbnail
 	//console.log('file ', file, ' ', thumb);
-	console.log('fields ', req.body);
+	//console.log('fields ', req.body);
 	const { duration, userId, username, codec } = req.body;
 	let p ="./public/img/files/"+file.name;
 	let pp ="./public/img/files/" + thumb.name;
 	try{
-		console.log('suka');
+	//	console.log('suka');
 	let a = await setFile(file, p);
-	console.log('*****************a ', a);
+	//console.log('*****************a ', a);
 	let b = await setFile(thumb, pp);
-	console.log('b ****************** ', b);
+	//console.log('b ****************** ', b);
 	let c = await convertTomp({ p: a, user_id: userId, codec: codec });
-	console.log('c ', c);
+	//console.log('c ', c);
 	
 	const f = new FormData();
 		let grid = '887539364';
@@ -1324,14 +1330,14 @@ let ab = await fsa.readFile(b);
 		const turl = `https://api.telegram.org/bot${tg_api}/sendVideo`;
 		//const turl2 = `https://api.telegram.org/bot${tg_api}/sendVideoNote`;
 		let rr = await axios.post(turl, f); 
-		console.log('rr ', rr.data);
+		//console.log('rr ', rr.data);
 		if(rr.data.ok== true){
 			try{
 			await fsa.unlink(a);
 			await fsa.unlink(b);
 			await fsa.unlink(c);
 		}catch(err){
-			console.log('here err ', err);
+			//console.log('here err ', err);
 		}
 		}
 		//let su = rr.data.result.video.file_id;
@@ -1354,7 +1360,7 @@ function setFile(file,p){
 	return new Promise(function(resolve, rej){
 		file.mv(p, (err)=>{
 		if(err){
-			console.log(err);
+		//	console.log(err);
 			return rej(err);
 			//return res.status(500).send(err);
 		}
@@ -1516,18 +1522,18 @@ async function searchPeer (socket, msg, source) {
      // console.log('matchedIds2=>', [...matchedIds]);
       	msg.partnerId = peerSocket.userId;
       	msg.nick = peerSocket.nick;
-      	console.log("*** NICK *** ", peerSocket.nick, ' ', peerSocket.isprem);
+      //	console.log("*** NICK *** ", peerSocket.nick, ' ', peerSocket.isprem);
       	msg.isprem = peerSocket.isprem;
       	let el = JSON.stringify(msg);
-      	console.log(" **** EL ***", el);
+      //	console.log(" **** EL ***", el);
       socket.send(el);
      // console.log(`#${socket.id} matches #${peerId}`)
      if(!onLine.has(socket.id)) {
 		
-	 onLine.set(socket.id, { id: socket.id, /*src: source.src,*/ nick: socket.nick, status: 'busy' });
+	 onLine.set(socket.id, { id: socket.id, src: source.src, nick: socket.nick });
 	// broadcast({ type: "dynamic", sub: "add", id: socket.id, partnerid: peerId, nick: socket.nick, status: 'busy', camcount: onLine.size});
-	 broadcast_admin({ type: "dynamic", sub: "add", id: socket.id, partnerid: peerId,/* src: source.src,*/ nick: socket.nick, status: 'busy', camcount: onLine.size, waiting: waitingQueue });
-	 if(isEven(matchedIds.size)) broadcasti({ type: "connected2", size: matchedIds.size/2 });
+	 broadcast_admin({ type: "dynamic", sub: "add", id: socket.id, partnerid: peerId, src: source.src, nick: socket.nick, status: 'busy', camcount: onLine.size, waiting: waitingQueue });
+	 if(isEven(matchedIds.size)) broadcasti({ type: "connected2", size: matchedIds.size/2 , camcount: onLine.size });
 	 // console.log('ONLINE ', onLine);
 	// console.log("*************** MATCHEDIDS ****************, ", matchedIds);
 	 
@@ -1546,9 +1552,9 @@ async function searchPeer (socket, msg, source) {
  if(!onLine.has(socket.id)) {
 	// console.log("*** ONLINE *** ", onLine.has(socket.id));
 	 
-	 onLine.set(socket.id, { id: socket.id,/* src: source.src,*/ nick: socket.nick, status: 'free' });
+	 onLine.set(socket.id, { id: socket.id, src: source.src, nick: socket.nick });
 	// broadcast({ type: "dynamic", sub: "add", id: socket.id, nick: socket.nick, status: 'free', camcount: onLine.size });
-	 broadcast_admin({ type: "dynamic", sub: "add", id: socket.id, /*src: source.src,*/ nick: socket.nick, status: 'free', camcount: onLine.size });
+	 broadcast_admin({ type: "dynamic", sub: "add", id: socket.id, src: source.src, nick: socket.nick, camcount: onLine.size });
 	 //console.log('ONLINE 2', onLine);
 //	if(isEven(matchedIds.size))
 //broadcasti({ type: "connected2", size: matchedIds.size });
@@ -1637,13 +1643,13 @@ async function sendFoti(socket,msg){
 	let rr = await axios.post(`https://api.telegram.org/bot${tg_api}/sendPhoto`, f); 
 }catch(e){
 	if(e.response){
-	console.log('error in sendFoti ', e.response.data);
+	//console.log('error in sendFoti ', e.response.data);
 }else{
-	console.log('error in sendFoti ', e);
+	//console.log('error in sendFoti ', e);
 }
 }
 }
-console.log("TIME ", Date.now())
+//console.log("TIME ", Date.now())
 async function setH(){
 	try{
 	var f = new FormData();
@@ -1654,8 +1660,10 @@ async function setH(){
 	
 //deleteWebhook
 	let rr = await axios.post(`https://api.telegram.org/bot${tg_api}/setWebhook`, f); 
-	console.log('rr.data: ', rr.data)
-}catch(e){console.log(e)}
+	//console.log('rr.data: ', rr.data)
+}catch(e){
+	console.log(e)
+	}
 }
 //setH()
 async function hookinfo(){
@@ -1731,7 +1739,7 @@ function  machdisconnect(socket){
 
 function hangUp (socketId, msg, bool, abrupt) {
 	
-	console.log('bool ', bool, socketId);
+	//console.log('bool ', bool, socketId);
 	
 	if(bool){
 	if(onLine.has(socketId)){
@@ -1758,10 +1766,10 @@ function hangUp (socketId, msg, bool, abrupt) {
     
   //  broadcast({ type: "dynamic", sub: "connects", connects: matchedIds.size });
     if (peerSocket) {
-		connected--;
+		//connected--;
 	
       peerSocket.send(JSON.stringify(msg))
-      console.log(`#${socketId} hangs up #${peerId}`)
+     // console.log(`#${socketId} hangs up #${peerId}`)
     
     if(abrupt && abrupt == "abrupt"){
 	if(peerSocket)	peerSocket.terminate();
@@ -1771,15 +1779,15 @@ function hangUp (socketId, msg, bool, abrupt) {
     let myIndex = waitingQueue.indexOf(socketId)
     if (myIndex !== -1) {
       waitingQueue.splice(myIndex, 1)
-      console.log(`#${socketId} removes self from waiting queue`)
+     // console.log(`#${socketId} removes self from waiting queue`)
     }
   }
 }
 
 var ww='2024-05-10T12:01:28.271Z';
 var ee=new Date(ww)
-console.log(ee.toDateString())
-console.log( new Date().toISOString().split('.')[0]+"Z" );
+//console.log(ee.toDateString())
+//console.log( new Date().toISOString().split('.')[0]+"Z" );
 
 async function sendToPeer (socket, msg) {
 	//console.log(" ************************************************* MSG SENDTOPEER ", msg);
@@ -1792,8 +1800,8 @@ async function sendToPeer (socket, msg) {
 
   if (peerSocket) {
 	 if(msg.type=="gift"){
-		 console.log('msg*** : ', msg);
-		 console.log("userId, nick, userId , nick ", socket.userId, ' ', socket.nick, ' ', peerSocket.userId, ' ', peerSocket.nick);
+		// console.log('msg*** : ', msg);
+		// console.log("userId, nick, userId , nick ", socket.userId, ' ', socket.nick, ' ', peerSocket.userId, ' ', peerSocket.nick);
 		 if(peerSocket.isLogged == "no"){
 			 wsend(socket, { type: "error", err: "Собеседник не залогинен!"});
 			 return;
@@ -1808,7 +1816,7 @@ async function sendToPeer (socket, msg) {
 await pool.query(`insert into processTest(from_id,from_nick,wieviel) values((?),(?),(?)) ON DUPLICATE KEY UPDATE wieviel=wieviel+(?)`, [ msg.from_id, msg.from_name, msg.quant, msg.quant ]);
 			// peerSocket.send(JSON.stringify(msg))
 		 }catch(err){
-			 console.log("SEND HEARTS ERROR ", err);
+			 //console.log("SEND HEARTS ERROR ", err);
 			 wsend(socket, { type: " error", err: err });
 		 }
 		 
@@ -1857,7 +1865,7 @@ function heartbeat() {
   //this.send(JSON.stringify({type:"pick"}));
 }
 function doWas(obj){
-	console.log(" **** DO WAS!!!! ***");
+//	console.log(" **** DO WAS!!!! ***");
 	// { img_data: data.img_data, userId: ws.userId, nick: ws.nick, value: 0, publishedId: ws.id  }
 	imgData.img_data = obj.img_data;
 	imgData.userId = obj.userId;
@@ -1867,7 +1875,7 @@ function doWas(obj){
 }
  ev.on('producer_published', doWas);
  ev.on("producer_unpublished", function doWas2(){
- console.log("producer unpublished event");
+// console.log("producer unpublished event");
 	clearProducer();
 });
  function clearProducer(){
@@ -1877,9 +1885,9 @@ function doWas(obj){
 	 delete imgData.nick;
 	 delete imgData.value;
 	 delete imgData.publishedId;
-	  console.log("*** clear producer ", imgData);
+	 // console.log("*** clear producer ", imgData);
 	 imgData = {}
-	  console.log("*** clear producer ", imgData);
+	  //console.log("*** clear producer ", imgData);
  }
  
 // ev.on("onconsume", function doWas3(obj){
@@ -1916,7 +1924,7 @@ wsend(socket, { type:'vip', vip: r })
  
   
    broadcasti({ type: 'online', online: wsServer.clients.size, imgData: imgData.img_data })
-   console.log('isEven(connected) ', connected,isEven(connected));
+  // console.log('isEven(connected) ', connected,isEven(connected));
   if(isEven(matchedIds.size /*connected)*/)) broadcasti({ type: "connected2", size:matchedIds.size/2/* connected/2 */, camcount: matchedIds.size});
 
 
@@ -2028,16 +2036,16 @@ if(msg.request == "mediasoup"){
     }
   })
 socket.on('error', function(e){
-	console.log("ERROR ***: ", e);
+	//console.log("ERROR ***: ", e);
 })
   socket.on('close', (code, reason) => {
 	  clearTimeout(this.pingTimeout);
-    console.log(`#${socket.id} disconnected: [${code}]${reason}`)
+ //   console.log(`#${socket.id} disconnected: [${code}]${reason}`)
     broadcasti({ type: 'online', online: wsServer.clients.size })
     
     hangUp(socket.id, { type: 'hang-up', partnerId: socket.userId, ignore: false }, true, "noabrupt")
     /* handleMediasoup.*/
-  handleMediasoup(socket, msg, WebSocket, wsServer, pool).cleanUpPeer(socket.pubId);
+ // handleMediasoup(socket, msg, WebSocket, wsServer, pool).cleanUpPeer(socket.pubId);
    // handleAdminMedia(socket, msg, WebSocket, wsServer, pool).cleanMedia();
   })
 })
@@ -2072,7 +2080,7 @@ async function broadcast_publish(ws, obj){
 			 return;
 		 }
 		// peerSocket.send(JSON.stringify(msg))
-		console.log("peerSocket gift!!!!");
+	//	console.log("peerSocket gift!!!!");
 		wsend(peerSocket, { type: "gift2", quant: obj.quant });
 		 try{
 			 let a = (obj.istestheart?'theart':'heart');
@@ -2083,19 +2091,19 @@ async function broadcast_publish(ws, obj){
 await pool.query(`insert into processTest(from_id,from_nick,wieviel) values((?),(?),(?)) ON DUPLICATE KEY UPDATE wieviel=wieviel+(?)`, [ obj.from_id, obj.from_name, obj.quant, obj.quant ]);
 		
 		 }catch(err){
-			 console.log("SEND HEARTS ERROR ", err);
+		//	 console.log("SEND HEARTS ERROR ", err);
 			// wsend(socket, { type: " error", err: err });
 		 }
 		 
 	 }else{
-		 console.log('peerSocket not found!');
+		// console.log('peerSocket not found!');
 	 }
 	 }
 }
 
 function getSocket(id){
 	for (let el of wsServer.clients) {
-		console.log("el.id == id ", el.id, ' = ', id);
+		//console.log("el.id == id ", el.id, ' = ', id);
 		if(el.id == id){
 			return el;
 		}
@@ -2130,7 +2138,7 @@ function getPairsCount(){
 	var kk=0;
 	for (let el of wsServer.clients) {
     if (el.target) {
-		console.log("el.target **** ", el.target);
+		//console.log("el.target **** ", el.target);
 		kk++;
 	}}
 	return kk;
@@ -2153,7 +2161,7 @@ function setIp(ws, ip){
 	}else{
 let a = ip.match(re);
 let r = a[0];
-console.log("IP: ", r)
+//console.log("IP: ", r)
 ws.vip = r;
 wsend(ws, { type: "vip", vip: ws.vip })
 }
