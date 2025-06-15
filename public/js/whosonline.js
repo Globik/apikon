@@ -30,7 +30,7 @@ function handleDynamic(obj){
 	}else if(obj.sub == "remove"){
 		//return;
 		camsCount.textContent = obj.camcount;
-				webcams2.textContent = obj.camcount;
+		webcams2.textContent = obj.camcount;
 				
 		let b = setConnects(obj.camcount);
 		//return;
@@ -74,5 +74,5 @@ function loadError(ma){
 	if(!a)return;
 	let elu = document.querySelector(`[data-id="${a}"]`);
 	if(elu)elu.remove();
-	vax('post','/removePrizrak', { id: a }, function(){}, function(){}, null, false);
+	//vax('post','/removePrizrak', { id: a }, function(){}, function(){}, null, false);
 }

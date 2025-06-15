@@ -1826,7 +1826,7 @@ return imgdata22;
 		let amap=[['0',{}]];
 	//if(IPS.size > 0) amap = IPS;
 	//console.error("amap", amap, IPS);
-		wsend({ type:'search-peer', nick: (NICK?NICK:'Anonym'), src: imgdata , ignores: [...IPS] });
+		wsend({ type:'search-peer', nick: (NICK?NICK:'Anon'), src: imgdata , ignores: [...IPS] });
 	}, 3000);
 	someInterval = setInterval(doScreenshot, 1000 * 61);
 		somespinner.className="show";
