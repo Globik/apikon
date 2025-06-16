@@ -855,6 +855,8 @@ function on_msg(msg) {
 			}
 		}else if(msg.subtype == 'lateroffer'){
 			inkognitoSetRemoteDescription(msg);
+		}else if(msg.subtype == 'incognitoconnected'){
+			note({ content: "Вы в эфире!", type: "info", time: 5 });
 		}else{}
 		break;
         case 'vip':
@@ -1161,6 +1163,7 @@ wsend({ type: 'target', subtype: 'bye-inkognito', target: TARGETID })
  function callme(el){
 	 //alert('call');
 	 wsend({ type: "target", subtype: "inkognitosetcall", target: TARGETID, from: MYSOCKETID });
+	 el.disabled = true;
  }
  
  function callAnfrage(obj){
@@ -2003,7 +2006,9 @@ return imgdata22;
 		hideChat();
 		duka2.className="";
 		CONNECTED = true;
-		
+		if(INCOGNITOWAIT){
+			wsend({ type: 'target', subtype: 'incognitoconnected', from: MYSOCKETID, target: MYINCOGNITOPARNERID });
+		}
  tru = ev.target.addTextTrack("captions", "Titles", "ru");
    tru.mode="showing";
    let cue = new VTTCue(0.0,100090.9, (partnernick?partnernick:'anon') + '  '+ (partnerpremium=="y"?'👑':''));
