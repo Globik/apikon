@@ -19,6 +19,9 @@ var isShow = false;
 var someInterval;
 var goAg;
 var OPENCLAIM = false;
+var MAKEINCOGNITOCALL = false;
+var INCOGNITOWAIT = false;
+var MYINCOGNITOPARNERID = null;
 var videoInput1, videoInput2;
 const IPS = new Map();
 var partnerId;
@@ -162,6 +165,22 @@ window.streami = undefined;
 	  }).catch(handleError);
 	  
   }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	 
  }
 	).catch(handleError)
@@ -709,6 +728,7 @@ function on_msg(msg) {
 	//	wsend({type: "hang-up", subi: "here" });
 	let amap=[[0,{}]];
 	if(IPS.size > 0) amap = IPS;
+	alert('abba');
 	next(nextbtn, true, IPS, true);
 	}
         break
@@ -819,6 +839,22 @@ function on_msg(msg) {
 		}else if(msg.subtype == 'inkognito-busy'){
 			//alert("busy");
 			note({ content: "Занято!", type: "info", time: 5 });
+		}else if(msg.subtype == 'inkognitosetcall'){
+			callAnfrage(msg);
+		}else if(msg.subtype == 'info'){
+			note({ content: msg.info, type: 'info', time: 6 });
+		}else if(msg.subtype == 'pleasedocall'){
+			console.warn('pleasedocall');
+			pleaseDoCall(msg);
+		}else if(msg.subtype == 'notfound'){
+			console.warn('not FOUND');
+			if(INCOGNITOWAIT){
+				//INCOGNITOWAIT = true;
+				console.warn('calling next');
+				//next(nextbtn, false, false, false);
+			}
+		}else if(msg.subtype == 'lateroffer'){
+			inkognitoSetRemoteDescription(msg);
 		}else{}
 		break;
         case 'vip':
@@ -842,11 +878,14 @@ function checkIp(ip){
 var ISINC = false;
 
 function callInkognito(el){
-	if(gid("Brole").value == "admin") {
+	if(gid("Brole").value == "admin" || gid("Prem").value == "y") {
 		
 	console.log("MYSOCKETID ", MYSOCKETID);
 	//alert(MYSOCKETID);
-	if(pc)return;
+	if(pc){
+		note({ content: "Сперва отключите камеру", type: "info", time: 5 });
+		return;
+	}
 	let a = el.getAttribute('data-pid');
 	if(!a)return;
 	//alert(a);
@@ -952,7 +991,8 @@ async function createInkognitoAnswer(obj){
  }
    
 function inkognitoaddStream({ track, streams }){
-	
+	if(!INCOGNITOWAIT){
+		//alert(4);
 	var videoBox = gid("videoBox");
 	if(videoBox && videoBox.srcObject){
 		//alert('object!');
@@ -966,7 +1006,16 @@ function inkognitoaddStream({ track, streams }){
 	btn.className = "btn-video-box";
 	//btn.setAttribute("data-box");
 	btn.setAttribute('onclick', "stopInkognito(this);");
-	btn.textContent = "stop";
+	//const newText = document.createTextNode("&#x274C;");
+	const newText = document.createTextNode(String.fromCodePoint(0x274C));
+	const newText2 = document.createTextNode(String.fromCodePoint(0x1F4DE));
+	//btn.textContent = "&#x274C;";
+	btn.appendChild(newText);
+	const btncall = document.createElement('button');
+			btncall.className = "btn-call";
+			btncall.setAttribute('onclick', "callme(this);");
+			//btncall.textContent = "call";
+			btncall.appendChild(newText2);
 	//div.appendChild(btn);
 	  let el = document.createElement('video');
 	  el.className = "video-box";
@@ -979,13 +1028,14 @@ function inkognitoaddStream({ track, streams }){
 
 	div.appendChild(el);
 	div.appendChild(btn);
-	//div.innerHTML=`<video srcObject="${streams[0]}" id="videoBox" class="video-box" playsinline autoplay muted></video><button onclick="stopInkognito(this);">stop</button> `;
+	div.appendChild(btncall);
+	
 	  // el.volume = 1.0;
 	   anotherdiv.appendChild(div);
-	   setTimeout(function(){
-		   //alert(2);
-		  // gid("VideoDiv").remove();
-	   }, 2000);
+	  }else{
+		  //alert(3);
+		  addStream({ track, streams })
+	  }
 }
 function stopInkognito(){
 	inkognitocloseVideoCall()
@@ -1003,7 +1053,7 @@ function stopInkognito(){
 
  function inkogintoiceCandidateHandler(event){
 	 if (event.candidate) {
-    wsend({type: 'target', subtype: 'new-ice-candidate', data: event.candidate, target: TARGETID, from: MYSOCKETID })
+    wsend({ type: 'target', subtype: 'new-ice-candidate', data: event.candidate, target: TARGETID, from: MYSOCKETID })
   }
  }
  function inkognitoiceConnectionStateChangeHandler(event){
@@ -1051,6 +1101,17 @@ var videoBox = gid("videoBox")
     
   })
 }
+if(!INCOGNITOWAIT){
+if(window.streami){
+	window.streami.getTracks().forEach(track => {
+		console.log("track stop");
+    
+      track.stop()
+    
+  })
+  window.streami = null;
+}
+}
 
 var suka = document.querySelector(".videoboxdiv");//gid("VideoDivi")
 if(suka){
@@ -1083,6 +1144,11 @@ wsend({ type: 'target', subtype: 'bye-inkognito', target: TARGETID })
   pc2 = null;
   TARGETID = null;
   console.log("good");
+  if(INCOGNITOWAIT){
+	  INCOGNITOWAIT = false;
+	  if(tru)tru.mode = "hidden";
+	 next(nextbtn, false, false, false);
+  }
 }
 
  function inkognitoiceGatheringStateChangeHandler(){}
@@ -1092,7 +1158,86 @@ wsend({ type: 'target', subtype: 'bye-inkognito', target: TARGETID })
  function inkognitoremoveTrackHandler(){}
  function inkognitoiceCandidateError(){}
  
+ function callme(el){
+	 //alert('call');
+	 wsend({ type: "target", subtype: "inkognitosetcall", target: TARGETID, from: MYSOCKETID });
+ }
  
+ function callAnfrage(obj){
+	// alert(1);
+	 if(!pc){
+		// alert(2);
+		 INCOGNITOWAIT = true;
+		 MYINCOGNITOPARNERID = obj.from;
+		 wsend({ type: "hang-up"});
+		 wsend({ type:'target', subtype: 'pleasedocall', from: MYSOCKETID, target: MYINCOGNITOPARNERID });
+	 }else{
+		 if(!INCOGNITOWAIT){
+			 INCOGNITOWAIT = true;
+			 MYINCOGNITOPARNERID = obj.from;
+			 wsend({ type: 'target', subtype: 'info', info: "Как только закончит сеанс с собеседником соединим вас", from: MYSOCKETID, target: obj.from });
+		 }else{
+			 wsend({ type: 'target', subtype: 'info', info: "Как только закончит сеанс с собеседником соединим вас", from: MYSOCKETID, target: obj.from });
+		 }
+	 }
+ }
+ 
+ function answerToIncognito(){
+	 if(pc2){
+		if(MYINCOGNITOPARNERID){
+			wsend({ type:'target', subtype: 'pleasedocall', from: MYSOCKETID, target: MYINCOGNITOPARNERID });
+		} 
+	 }else{
+		 next(nextbtn, false, false, false);
+	 }
+ }
+ 
+async function pleaseDoCall(msg){
+	 if(pc2){
+		 try{
+		 console.warn('pc2!');
+		 let constraintsi = {
+		audio:true , 
+	video: {deviceId: videoInput1 ? {exact: videoInput1} : undefined,
+		width:320, height:240, 
+		}
+		};
+	
+	
+	
+	
+	const stream = await navigator.mediaDevices.getUserMedia(constraintsi);
+	window.streami = stream;
+	inkognitoaddLocalStream();
+	
+	const offer = await pc2.createOffer();
+	await pc2.setLocalDescription(offer);
+	wsend({ type: 'target', subtype: 'lateroffer', from: MYSOCKETID, target: msg.from, sdp: offer });
+
+		}catch(err){
+			
+			console.log(err);//permission denied NotAllowedError
+			if(err.name == "NotFoundError" || err.name == "DevicesNotFoundError"){
+				note({ content: "Вебкамера или микрофон не найдены", type: "warn", time: 5 });
+			
+			}else if(err.name == "NotAllowedError" || err.name == "PermissionDeniedError"){
+				note({ content: "Пожалуйста, разрешите браузеру использовать камеру и микрофон.", type: "warn", time: 5 });
+			}else{
+				console.error(err);
+				note({content: err.name + err,type:"warn", time: 5 });
+			}
+		}
+		
+		
+	 }
+ }
+ function inkognitoSetRemoteDescription(msg){
+	 pc2.setRemoteDescription(msg.sdp).then(function(){
+			
+		}).catch(function handleError(er){
+			console.error(er);
+		});
+ }
 function  handleMessage(msg, bool){
 	//alert(1);
 	
@@ -1486,6 +1631,8 @@ try{
 			}
 			el.disabled = false;
 		});
+		
+		
 }
 }else{
 	kuku=0;
@@ -1707,6 +1854,8 @@ someInterval = null;
 	local.srcObject = null;
 	window.streami = undefined;
 	closeVideoCall();
+	INCOGNITOWAIT = null;
+	MYINCOGNITOPARNERID = null;
 	wsend({type: "hang-up", ignore: false, sub: 'here' });
 	el.disabled = false;
 	nextbtn.disabled = true;
@@ -1855,9 +2004,9 @@ return imgdata22;
 		duka2.className="";
 		CONNECTED = true;
 		
- tru=ev.target.addTextTrack("captions", "Titles", "ru");
+ tru = ev.target.addTextTrack("captions", "Titles", "ru");
    tru.mode="showing";
-   let cue=new VTTCue(0.0,100090.9, (partnernick?partnernick:'Anon') + '  '+ (partnerpremium=="y"?'👑':''));
+   let cue = new VTTCue(0.0,100090.9, (partnernick?partnernick:'anon') + '  '+ (partnerpremium=="y"?'👑':''));
    cue.snapToLines=false;
    cue.lineAlign='center';
    //cue.vertical="rl"
@@ -2114,6 +2263,7 @@ window.addEventListener("online", function(e) {
 	//   if(SUECH) return;
 	//   SUECH = true;
 	   console.log('next');
+	 //  return;
 	  // let booli = false;
 	  //  ignores = false;
 	 //  isIgnore = false;
@@ -2166,7 +2316,7 @@ window.addEventListener("online", function(e) {
       let imgdata = Screenshot();
      // alert(JSON.stringify({a: [...ignores]}));
     // console.warn('imgdata ', imgdata);
-     wsend( { type:'search-peer', nick: (NICK?NICK:"Anon"), src: imgdata, ignores: (ignores?[...ignores]:[[0,{}]]) });
+     if(!INCOGNITOWAIT)wsend( { type:'search-peer', nick: (NICK?NICK:"Anon"), src: imgdata, ignores: (ignores?[...ignores]:[[0,{}]]) });
       chatbox.innerHTML="";
 	  chatbox2.innerHTML="";
 	mobileChat.className = "hide";
@@ -2186,6 +2336,7 @@ window.addEventListener("online", function(e) {
      // sectionTextArea.classList.add('hide');
       textarea2.classList.add('hide');
          polite = true;
+         if(tru)tru.mode = "hidden";
  makingOffer = false;
  ignoreOffer = false;
  isSettingRemoteAnswerPending = false;
@@ -2194,9 +2345,12 @@ window.addEventListener("online", function(e) {
  if(claimMenu)claimMenu.setAttribute("data-vip","");
  //giftsContainer.style.display="block";
  //if(!goAg){
- 
+ if(INCOGNITOWAIT){
+	 answerToIncognito();
+ }
 	 goAg = setTimeout(function(){
 		// alert('yes');
+		if(INCOGNITOWAIT) return;
 		 if(!CONNECTED){
 			// note({ content: "NO CONNECTED", type:"info", time: 5});
 			 console.log("NO CONNECTED");

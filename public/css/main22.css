@@ -170,7 +170,7 @@ body.ondialog {
     cursor: default;
     transition: height .45s ease-in-out;
     pointer-events: none;
-    z-index: 1;
+    z-index: 10000;
 }
 /*
 .note-item {

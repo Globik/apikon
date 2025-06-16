@@ -159,7 +159,7 @@ app.use(async(req, res, next)=>{
 	req.yoomoney_token = yoomoney_token;
 	
 	req.y_notif = y_notif;
-	console.log("method ", req.method, " path ",  req.path);
+	//console.log("method ", req.method, " path ",  req.path);
 	//console.log("HERE 2 ",stun,testshopid,testshopsecret, req.app.locals.testshopid, req.app.locals.testshopsecret);
 	//console.log(testshopsecret);
 	if(req.method == "POST"){
@@ -169,7 +169,7 @@ app.use(async(req, res, next)=>{
 				stun = JSON.stringify(req.body, null, 2);
 				req.app.locals.stun = stun;
 			}catch(err){
-				console.log(err);
+				//console.log(err);
 				stun = null;
 			}
 			}else if(req.path == "/api/setTestPayment"){
@@ -188,7 +188,7 @@ app.use(async(req, res, next)=>{
 					req.yoomoney_client_id = yoomoney_client_id;
 					req.yoomoney_secret = yoomoney_secret;
 				}}else if(req.path == "/admin/saveNotif"){
-					console.log("*** REALLY",req.body.y_notif );
+					//console.log("*** REALLY",req.body.y_notif );
 				y_notif = req.body.y_notif;
 					req.y_notif = y_notif;
 				}else{}
@@ -213,7 +213,7 @@ app.get('/errnotfound', async(req,res)=>{
 	res.rendel('errnotfound',{});
 })
 app.get("/about", async(req, res)=>{
-	console.log("REQ.QUERY: ", req.query);
+	//console.log("REQ.QUERY: ", req.query);
 	let db = req.db;
 	if(req.query.vk_app_id){
 		if(checkSign(req.query)){
@@ -1743,7 +1743,7 @@ function hangUp (socketId, msg, bool, abrupt) {
 	
 	if(bool){
 	if(onLine.has(socketId)){
-	console.log('online has ', socketId);
+//	console.log('online has ', socketId);
 		onLine.delete(socketId);
 		//broadcasti({ type: "dynamic", sub: "remove", id: socketId, camcount: onLine.size });
 		broadcast_admin({ type: "dynamic", sub: "remove", id: socketId, camcount: onLine.size });
@@ -2132,6 +2132,7 @@ function sendtotarget(obj){
 			wsend(el, obj);
 			return;
 		}
+		//wsend(el, { type: "target", subtype: "notfound" });
 	}
 }
 function getPairsCount(){
