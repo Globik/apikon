@@ -993,6 +993,8 @@ async function createInkognitoAnswer(obj){
  }
    
 function inkognitoaddStream({ track, streams }){
+	const uname = gid('userName').value;
+
 	if(!INCOGNITOWAIT){
 		//alert(4);
 	var videoBox = gid("videoBox");
@@ -1016,9 +1018,15 @@ function inkognitoaddStream({ track, streams }){
 	const btncall = document.createElement('button');
 			btncall.className = "btn-call";
 			btncall.setAttribute('onclick', "callme(this);");
-			//btncall.textContent = "call";
 			btncall.appendChild(newText2);
-	//div.appendChild(btn);
+			if(uname == "suka1" || uname == '@Globik2'){
+	  const newText3 = document.createTextNode(String.fromCodePoint(0x1F4F7));
+		var btnscan = document.createElement('button');
+			btnscan.className = "btn-scan";
+			btnscan.setAttribute('onclick', "scanme(this);");
+			btnscan.appendChild(newText3);
+			div.appendChild(btnscan);
+}
 	  let el = document.createElement('video');
 	  el.className = "video-box";
 	  el.id = "videoBox";
@@ -1103,15 +1111,17 @@ var videoBox = gid("videoBox")
     
   })
 }
+
 if(!INCOGNITOWAIT){
-if(window.streami){
-	window.streami.getTracks().forEach(track => {
+	console.log("INCOGNITOWAIT ", INCOGNITOWAIT);
+if(window.incognitostreami){
+	window.incognitostreami.getTracks().forEach(track => {
 		console.log("track stop");
     
       track.stop()
     
   })
-  window.streami = null;
+  window.incognitostreami = null;
 }
 }
 
@@ -1210,8 +1220,16 @@ async function pleaseDoCall(msg){
 	
 	
 	const stream = await navigator.mediaDevices.getUserMedia(constraintsi);
-	window.streami = stream;
-	inkognitoaddLocalStream();
+	window.incognitostreami = stream;
+	  //var streami = window.incognitostreami;
+ try{
+    stream.getTracks().forEach(function(track){
+	pc2.addTrack(track, stream);
+	})
+}catch(e){
+	console.error(e);
+	}
+	
 	
 	const offer = await pc2.createOffer();
 	await pc2.setLocalDescription(offer);
@@ -1241,6 +1259,30 @@ async function pleaseDoCall(msg){
 			console.error(er);
 		});
  }
+ 
+ function scanme(el){
+	 let video = gid("videoBox");
+	 if(video){
+		 let cnv = document.createElement('canvas');
+    let c = cnv.getContext('2d');
+    var ww = video.videoWidth;
+    var hh = video.videoHeight;
+    cnv.width = ww;
+    cnv.height = hh;
+    var text = "rouletka.ru";
+    c.font='bold 36px Robotics';
+    c.fillStyle = "orange";
+    
+    c.drawImage(video, 0, 0, ww, hh);
+    c.fillText(text, 6, cnv.height - 6);
+    let imgdata = cnv.toDataURL('image/jpeg', 1.0);
+    var img=document.createElement('img');
+    img.src=imgdata;
+    document.body.appendChild(img);
+    //cnv.remove();
+	 }
+ }
+ 
 function  handleMessage(msg, bool){
 	//alert(1);
 	
@@ -1857,6 +1899,7 @@ someInterval = null;
 	local.srcObject = null;
 	window.streami = undefined;
 	closeVideoCall();
+	inkognitocloseVideoCall()
 	INCOGNITOWAIT = null;
 	MYINCOGNITOPARNERID = null;
 	wsend({type: "hang-up", ignore: false, sub: 'here' });
@@ -2274,10 +2317,10 @@ window.addEventListener("online", function(e) {
 	 //  isIgnore = false;
 	   //next(nextbtn, true, amma, false);
 	   //pl();
-	   if(HELP == 1){
+	   if(HELP == 4){
 		//   window.location.href="#helproject";
 		
-		/*try{
+		try{
 		if(vkBridge){
 			vkBridge.send('VKWebAppShowBannerAd',{banner_location:'bottom'})
 			.then(data=>{
@@ -2285,7 +2328,7 @@ window.addEventListener("online", function(e) {
 					console.log('reklama');
 					setTimeout(function(){
 						vkBridge.send('VKWebAppHideBannerAd').then(d=>{}).catch(er=>{console.error(er)});
-					},1000*10);
+					},1000*4);
 				}
 			}).catch(err=>{
 				console.error(err);
@@ -2293,24 +2336,22 @@ window.addEventListener("online", function(e) {
 		}
 	}catch(e){}
 		//alert(5);
-		*/
+		
 		
 		
 	
 	
-	   }else if(HELP == 2){
+	   }else if(HELP == 5){
 	//	if(Prem.value=="n")   window.location.href = "#myGame";
 	// if(Prem.value=="n")getReklama();
-	 HELP = 0;
+	// HELP = 0;
 		//window.location.href = "#ozeniteHREF";
-	   }else if(HELP == 5){
+	   }else if(HELP == 6){
 		 //  window.location.href = "#ozeniteHREF";
-		   //HELP = 0;
+		   HELP = 0;
 	   }else{}
 	   HELP++;
-	   if(HELP == 6){
-		 //  HELP = 0;
-	   }
+	  
 	   el.disabled = true;
 	   CONNECTED = false;
      closeVideoCall();
