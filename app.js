@@ -1493,7 +1493,7 @@ async function searchPeer (socket, msg, source) {
     let peerId = waitingQueue[index]
     if(socket.id == peerId) return;
     
-    // console.log("*** MSG>IGNORES ***",  msg, " ", source.ignores);
+   //  console.log("*** MSG>IGNORES ***",  msg, " ", source.ignores);
     let amap = new Map(source.ignores);
     
    
@@ -1503,10 +1503,11 @@ async function searchPeer (socket, msg, source) {
      if(peerSocket){
 	//	 console.log("**** PEER SOCKET ***");
 		 
-		 if(amap.has(peerSocket.userId)){
+		 if(amap.has(peerSocket.id)){
 			// console.log("*** HAS ignore!!! ***");
 			 amap.clear();
-			 break;
+			 return;
+			// break;
 		 }
 	 }
  // console.log("waiting 2", waitingQueue);
@@ -1519,6 +1520,7 @@ async function searchPeer (socket, msg, source) {
       matchedIds.set(peerId, socket.id)
      // console.log("IP: ", socket.vip);
       msg.vip = peerSocket.vip;
+      msg.partnersocketid = peerSocket.id;
      // console.log('matchedIds2=>', [...matchedIds]);
       	msg.partnerId = peerSocket.userId;
       	msg.nick = peerSocket.nick;
@@ -1825,7 +1827,9 @@ await pool.query(`insert into processTest(from_id,from_nick,wieviel) values((?),
       	//console.log("*** NICK *** ", peerSocket.nick, ' ', peerSocket.isprem);
       	//msg.isprem = peerSocket.isprem;
       	let el = JSON.stringify(msg);
-    peerSocket.send(JSON.stringify({ type: msg.type, vip: msg.vip, isprem: socket.isprem, nick: socket.nick,partnerId: socket.userId, data: msg.data }))
+      	
+    //  	console.log("msg from ", msg.from);
+    peerSocket.send(JSON.stringify({ from: msg.from,type: msg.type, vip: msg.vip, isprem: socket.isprem, nick: socket.nick,partnerId: socket.userId, data: msg.data }))
    }
   }
 }
@@ -1965,6 +1969,7 @@ if(msg.request == "mediasoup"){
       case "write":
       case "unwrite":
       case "gift":
+      case 'addignore':
       
      // msg.vip = socket.vip
         sendToPeer(socket, msg)

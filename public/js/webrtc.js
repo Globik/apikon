@@ -27,6 +27,7 @@ const IPS = new Map();
 var partnerId;
 var TARGETID = null;
 var MYSOCKETID = null;
+var PARTNERSOCKETID = null;
 var someIp = null;
 var remote = gid("remote");
 var local = gid("local");
@@ -383,7 +384,7 @@ function openClaim(el){
 function sendClaim(el){
 	if(!CONNECTED){
 		note({ content: "Дождитесь собеседника", type: "info", time: 5});
-		return;
+		//return;
 	}
 	let d = el.getAttribute("data-claim");
 	if(d == "ignor"){
@@ -411,16 +412,22 @@ function sendClaim(el){
 		note({ content: s, type: "info", time: 5 });
 	}
 	openClaim(claimContainer);
-	let l = claimMenu.getAttribute("data-vip");
-	if(l)insertIgnore(l);
+	//let l = claimMenu.getAttribute("data-vip");
+	//alert('parn sock id'+ PARTNERSOCKETID);//PARTNERSOCKETID
+	if(PARTNERSOCKETID)insertIgnore(PARTNERSOCKETID);
 }
 function insertIgnore(ip){
 	if(!remote.srcObject){
 		return;
 	}
-	if(!IPS.has(ip))IPS.set(ip, {});
+	if(!IPS.has(ip)){
+		//alert(ip);
+		IPS.set(ip, {});
+	}
+	//alert("partnersocketid ", PARTNERSOCKETID);
 	console.log("pressing next");
-	next(nextbtn, true, IPS, true);
+	wsend({type:'addignore', to: PARTNERSOCKETID , from: MYSOCKETID });
+	//next(nextbtn, true, IPS, true);
 }
 
 function banit(el){
@@ -695,6 +702,13 @@ function on_msg(msg) {
 			 gid("Grund").value = 4;
 		 }
 		 break
+		 case 'addignore':
+		 console.log('addignore ',msg);
+		 if(!IPS.has(msg.from)){
+			// alert('addignore '+ msg.from);
+			 IPS.set(msg.from, {});
+		 }
+		 break
       case 'online':
         onlineCount.textContent = msg.online
         if(!msg.imgData){
@@ -716,11 +730,11 @@ function on_msg(msg) {
        // claimMenu.setAttribute("data-vip", msg.vip);
       if(claimMenu) claimMenu.setAttribute("data-vip", msg.partnerId);
        partnernick = msg.nick;
-       
-       //alert(msg.nick);
+       PARTNERSOCKETID = msg.from;
+    //   alert('videoffer partner sock id '+msg.from+msg.nick);
       partnerpremium = msg.isprem;
        //  let a = checkIp(msg.vip);
-        let a = checkIp(msg.partnerId);
+        let a = checkIp(msg.partnersocketid);
         if(!a){
         handleVideoOffer(msg.data)
 	}else{
@@ -728,8 +742,8 @@ function on_msg(msg) {
 	//	wsend({type: "hang-up", subi: "here" });
 	let amap=[[0,{}]];
 	if(IPS.size > 0) amap = IPS;
-	alert('abba');
-	next(nextbtn, true, IPS, true);
+	console.log('in ignor');
+	//next(nextbtn, true, IPS, true);
 	}
         break
       case 'video-answer':
@@ -750,7 +764,8 @@ function on_msg(msg) {
         break
       case 'peer-matched':
       //alert(msg.isprem+' '+msg.nick);
-      console.log('peer matched');
+     //alert('peer matched parnersocketid '+ msg.partnersocketid);
+      PARTNERSOCKETID = msg.partnersocketid;
         console.log(msg.vip, " nick ", msg.partnerId,msg.nick);
         partnerId = msg.partnerId;
         partnernick = msg.nick;
@@ -759,20 +774,20 @@ function on_msg(msg) {
        // claimMenu.setAttribute("data-vip", msg.vip);
       if(claimMenu)  claimMenu.setAttribute("data-vip", msg.partnerId);
        // let a3 = checkIp(msg.vip);
-        let a3 = checkIp(msg.partnerId);
+        let a3 = checkIp(msg.partnersocketid);
       //  console.warn("a3", a3);
-       // if(!a3){
+       if(!a3){
 		//	console.warn("was isch");
 		handlePeerMatched();
-	//}
-	/*else{
+	}else{
+	//	alert('ignor');
 		console.error("some ignor");
 		//wsend({ type: "hang-up" });
 		let amap=[[0,{}]];
 	if(IPS.size > 0) amap = IPS;
-	next(nextbtn, true, IPS, true);
+	//next(nextbtn, true, IPS, true);
 		
-	}*/
+	}
         break
       case 'message':
         handleMessage(msg.data)
@@ -1481,7 +1496,7 @@ function handleNewIceCandidate(msg) {
 		//return 
 		await pc.setLocalDescription(offer);
 	//}).then(function(){
-		wsend({'type': 'video-offer', nick: userName.value, isprem: Prem.value, vip: someIp, data: pc.localDescription/*, target: target, from: clientId*/});
+		wsend({'type': 'video-offer',from: MYSOCKETID, nick: userName.value, isprem: Prem.value, vip: someIp, data: pc.localDescription/*, target: target, from: clientId*/});
 	//}).
 	}catch(err){
 		console.error(err);
@@ -2319,7 +2334,7 @@ window.addEventListener("online", function(e) {
 	   //pl();
 	   if(HELP == 4){
 		//   window.location.href="#helproject";
-		
+		/*
 		try{
 		if(vkBridge){
 			vkBridge.send('VKWebAppShowBannerAd',{banner_location:'bottom'})
@@ -2335,7 +2350,7 @@ window.addEventListener("online", function(e) {
 			});
 		}
 	}catch(e){}
-		//alert(5);
+		*/
 		
 		
 		
@@ -2362,7 +2377,7 @@ window.addEventListener("online", function(e) {
       let imgdata = Screenshot();
      // alert(JSON.stringify({a: [...ignores]}));
     // console.warn('imgdata ', imgdata);
-     if(!INCOGNITOWAIT)wsend( { type:'search-peer', nick: (NICK?NICK:"Anon"), src: imgdata, ignores: (ignores?[...ignores]:[[0,{}]]) });
+     if(!INCOGNITOWAIT)wsend( { type:'search-peer', nick: (NICK?NICK:"Anon"), src: imgdata, ignores: [...IPS] });
       chatbox.innerHTML="";
 	  chatbox2.innerHTML="";
 	mobileChat.className = "hide";
@@ -2403,7 +2418,8 @@ window.addEventListener("online", function(e) {
 			// goAgain();
 			 setTimeout(function(){
 			  let imgdata3 = Screenshot();
-			  wsend( { type:'search-peer', nick: (NICK?NICK:"Anoni"), src: imgdata3, ignores: (ignores?[...ignores]:[[0,{}]]) });
+			  //let lala = IPS
+			  wsend( { type:'search-peer', nick: (NICK?NICK:"Anoni"), src: imgdata3, ignores: [...IPS]});
 		  }, 0);
 		 }else{
 			 console.warn("CONNECTED");
@@ -2696,6 +2712,7 @@ window.onunload = function(e){
   function wsend(obj){
 	if(!sock) return;
 	let d;
+	obj.from = MYSOCKETID;
 	try{
 		d = JSON.stringify(obj);
 		if(sock.readyState == WebSocket.OPEN)sock.send(d);

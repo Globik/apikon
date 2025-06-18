@@ -502,16 +502,17 @@ ${n.user && !n.VK?`<div class="settingspanel" onclick="logout(this);">${lang=='r
 
     <div class="icon-change-cam-div" onclick="toggleCam(this);" title="change cam"><img class="icon-change-cam" src="/icons/change.svg"/></div>
    
-   <!-- <section id="claimContainer" onclick="openClaim(this);"><div id="claimBox">!</div></section>
+    <section id="claimContainer" onclick="openClaim(this);"><div id="claimBox">!</div></section>
     <div id="claimMenu" data-was="${n.imgData&&n.imgData.img_data?'dataPublish':''}"
-     data-vip="${n.imgData&&n.imgData.img_data?n.imgData.userId:''}"><div data-claim="ignor" onclick="sendClaim(this);">${lang=='ru'?'В игнор':lang=='en'?'To ignore':
+     data-vip="${n.imgData&&n.imgData.img_data?n.imgData.userId:''}">
+     <!-- <div data-claim="ignor" onclick="sendClaim(this);">${lang=='ru'?'В игнор':lang=='en'?'To ignore':
     lang=='zh'?'忽略':
-    lang=='id'?'untuk mengabaikan':''}!</div>
+    lang=='id'?'untuk mengabaikan':''}!</div>-->
     <div data-claim="claim" onclick="sendClaim(this);">${lang=='ru'?'Пожаловаться':lang=='en'?'Abuse':
     lang=='zh'?'虐待':
-    lang=='id'?'melecehkan':''}!</div>
+    lang=='id'?'melecehkan':''}!</div> 
     ${n.user&&n.user.brole=="admin"?`<div onclick="banit(this);">Забанить</div>`:''}
-    </div> -->
+    </div> 
     <section id="mobileloader"><div class="loader"></div></section>
     
     <video id="remote"  class="Vid" autoplay playsinline poster="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"></video>
