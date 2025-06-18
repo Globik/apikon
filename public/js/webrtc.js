@@ -384,7 +384,7 @@ function openClaim(el){
 function sendClaim(el){
 	if(!CONNECTED){
 		note({ content: "Дождитесь собеседника", type: "info", time: 5});
-		//return;
+		return;
 	}
 	let d = el.getAttribute("data-claim");
 	if(d == "ignor"){
