@@ -1,8 +1,15 @@
 function showWhosOnline(){
 	window.location.href = "#whosonline";
+	wsend({ type: 'getList'});
 	panelOpen();
 }
-
+function removeList(){
+	wsend({ type: "removeList"});
+	let whosonlinecontent = gid('whosonlinecontent');
+	while(whosonlinecontent.firstChild){
+		whosonlinecontent.firstChild.remove();
+	}
+}
 function handleDynamic(obj){
 	//return;
 	//alert('dynamo');

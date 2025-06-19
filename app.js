@@ -1534,8 +1534,8 @@ async function searchPeer (socket, msg, source) {
 		
 if(source.src)	 onLine.set(socket.id, { id: socket.id, src: source.src, nick: socket.nick });
 	// broadcast({ type: "dynamic", sub: "add", id: socket.id, partnerid: peerId, nick: socket.nick, status: 'busy', camcount: onLine.size});
-	if(source.src) broadcast_admin({ type: "dynamic", sub: "add", id: socket.id, partnerid: peerId, src: source.src, nick: socket.nick, status: 'busy', camcount: onLine.size, waiting: waitingQueue });
-	 if(isEven(matchedIds.size)) broadcasti({ type: "connected2", size: matchedIds.size/2 });
+	if(source.src) dynamic({ type: "dynamic", sub: "add", id: socket.id, partnerid: peerId, src: source.src, nick: socket.nick, status: 'busy', camcount: onLine.size, waiting: waitingQueue });
+	 if(isEven(matchedIds.size)) broadcasti({ type: "connected2", size: matchedIds.size/2,cams:onLine.size });
 	 // console.log('ONLINE ', onLine);
 	// console.log("*************** MATCHEDIDS ****************, ", matchedIds);
 	 
@@ -1556,7 +1556,7 @@ if(source.src)	 onLine.set(socket.id, { id: socket.id, src: source.src, nick: so
 	 
 	 onLine.set(socket.id, { id: socket.id, src: source.src, nick: socket.nick });
 	// broadcast({ type: "dynamic", sub: "add", id: socket.id, nick: socket.nick, status: 'free', camcount: onLine.size });
-	if(source.src) broadcast_admin({ type: "dynamic", sub: "add", id: socket.id, src: source.src, nick: socket.nick, camcount: onLine.size });
+	if(source.src) dynamic({ type: "dynamic", sub: "add", id: socket.id, src: source.src, nick: socket.nick, camcount: onLine.size });
 	 //console.log('ONLINE 2', onLine);
 //	if(isEven(matchedIds.size))
 //broadcasti({ type: "connected2", size: matchedIds.size });
@@ -1748,8 +1748,9 @@ function hangUp (socketId, msg, bool, abrupt) {
 //	console.log('online has ', socketId);
 		onLine.delete(socketId);
 		//broadcasti({ type: "dynamic", sub: "remove", id: socketId, camcount: onLine.size });
-		broadcast_admin({ type: "dynamic", sub: "remove", id: socketId, camcount: onLine.size });
-		 if(isEven(matchedIds.size)) broadcasti({ type: "connected2", size: matchedIds.size /2 });
+	//	broadcast_admin({ type: "dynamic", sub: "remove", id: socketId, camcount: onLine.size });
+	dynamic({ type: "dynamic", sub: "remove", id: socketId, camcount: onLine.size });
+		 if(isEven(matchedIds.size)) broadcasti({ type: "connected2", size: matchedIds.size /2,cams:onLine.size });
 	}
 }
   if (matchedIds.has(socketId)) {
@@ -1760,7 +1761,7 @@ function hangUp (socketId, msg, bool, abrupt) {
     matchedIds.delete(socketId)
     matchedIds.delete(peerId)
    // console.log('isEven(connected) ',isEven(connected));
-   if(isEven(matchedIds.size)) broadcasti({ type: "connected2", size: matchedIds.size/2 });
+   if(isEven(matchedIds.size)) broadcasti({ type: "connected2", size: matchedIds.size/2, cams: onLine.size });
   //  console.log("*************** MATCHEDIDS ****************, ", matchedIds);
    
     
@@ -1902,6 +1903,7 @@ wsServer.on('connection', async function (socket, req) {
 socket.isAlive = true;
   socket.on("pong", heartbeat);
 	socket.burl = req.url;
+	socket.dynamo = false;
 	socket.isLogged = "no";
 	socket.VK = false;
   const ip = req.socket.remoteAddress;
@@ -1929,11 +1931,11 @@ wsend(socket, { type:'vip', vip: r })
   
    broadcasti({ type: 'online', online: wsServer.clients.size, imgData: imgData.img_data })
   // console.log('isEven(connected) ', connected,isEven(connected));
-  if(isEven(matchedIds.size /*connected)*/)) broadcasti({ type: "connected2", size:matchedIds.size/2 });
+  if(isEven(matchedIds.size /*connected)*/)) broadcasti({ type: "connected2", size:matchedIds.size/2,cams:onLine.size });
 
 
   
-  if(onLine.size !=0)wsend(socket, { type: "dynamic", sub: "total", cams: [...onLine] });
+ // if(onLine.size !=0)wsend(socket, { type: "dynamic", sub: "total", cams: [...onLine] });
   
   
   
@@ -1980,6 +1982,14 @@ if(msg.request == "mediasoup"){
      case "target":
      sendtotarget(msg);
      break
+     case "getList":
+     socket.dynamo = true;
+     if(onLine.size !=0)wsend(socket, { type: "dynamic", sub: "total", cams: [...onLine] });
+     
+     break
+     case "removeList":
+     socket.dynamo = false;
+     break;
         case "helloServer":
         socket.userId = msg.userId;
         socket.nick = msg.nick;
@@ -2009,7 +2019,7 @@ if(msg.request == "mediasoup"){
         break
         case 'srcdata':
     //   ev.emit('suka', { id: socket.id })
-        broadcast_admin({ type: "dynamic", sub: "srcdata", src: msg.src, id: socket.id });
+        dynamic({ type: "dynamic", sub: "srcdata", src: msg.src, id: socket.id });
         break
         case 'list':
         if(onLine.size !=0)wsend(socket, { type: "dynamic", sub: "total", cams: [...onLine] });
@@ -2066,7 +2076,12 @@ function broadcast(obj){
 		if(el.burl=="/gesamt")wsend(el, obj);
 	}
 }
-
+function dynamic(obj){
+	for (let el of wsServer.clients) {
+		//console.log('broadcasto3 ');
+		if(el.dynamo)wsend(el, obj);
+	}
+}
 async function broadcast_publish(ws, obj){
 		for (let el of wsServer.clients) {
 			if(el.pubId && el.pubId == obj.publishedId){
