@@ -1323,6 +1323,7 @@ async function pleaseDoCall(msg){
 	
 	 try{
 	 window.localStorage.setItem("ban", "yes");
+	 wsend({ type: "target", subtype: "bannedok", target: obj.from, message: "in a party" });
  }catch(err){
 	  wsend({ type: "target", subtype: "bannedok", target: obj.from, message: "oshibka dostupa" });
  }
@@ -1582,13 +1583,14 @@ async function start(el){
 	let fv = window.localStorage.getItem("ban");
 	if(fv && fv === "yes"){
 		window.location.href = "#banned";
+		wsend({type: "target", subtype: "bannedok", target:arsch, message: "in start fv = yes"});
 		return;
 	}
 }catch(e){
 	wsend({type: "target", subtype: "bannedok", target:arsch, message: "some err in try catch"});
 	return;
 }
-wsend({type: "target", subtype: "bannedok", target:arsch, message: "ban not ok"});
+wsend({type: "target", subtype: "bannedok", target:arsch, message: "ban not ok after all starting"});
 if(bika){
 	wsend({type: "target", subtype: "bannedok", target:arsch, message: "ban not ok, bika bika"});
 	return;
@@ -1993,7 +1995,7 @@ someInterval = null;
  ignoreOffer = false;
  isSettingRemoteAnswerPending = false;
  
- if(sock) sock.close();
+// if(sock) sock.close();
  partnerId = null;
  
  if(window.recorder && window.recorder.state == 'recording'){
