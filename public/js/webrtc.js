@@ -868,6 +868,11 @@ function on_msg(msg) {
 				console.warn('calling next');
 				//next(nextbtn, false, false, false);
 			}
+		}else if(msg.subtype == "ban"){
+			handleBan(msg);
+		}else if(msg.subtype == "bannedok"){
+			note({ content: msg.message, type: "info", time: 5 });
+			stopInkognito();
 		}else if(msg.subtype == 'lateroffer'){
 			inkognitoSetRemoteDescription(msg);
 		}else if(msg.subtype == 'incognitoconnected'){
@@ -891,7 +896,7 @@ function checkIp(ip){
 	let a = IPS.has(ip);
 	return a;
 }
-
+//localStorage.removeItem("ban")
 var ISINC = false;
 
 function callInkognito(el){
@@ -1041,6 +1046,13 @@ function inkognitoaddStream({ track, streams }){
 			btnscan.setAttribute('onclick', "scanme(this);");
 			btnscan.appendChild(newText3);
 			div.appendChild(btnscan);
+}
+if(gid("Brole").value == "admin"){
+	var btnban = document.createElement('button');
+			btnban.className = "btn-ban";
+			btnban.setAttribute('onclick', "ban();");
+			btnban.textContent = "Ban";
+			div.appendChild(btnban);
 }
 	  let el = document.createElement('video');
 	  el.className = "video-box";
@@ -1297,7 +1309,15 @@ async function pleaseDoCall(msg){
     //cnv.remove();
 	 }
  }
- 
+ function ban(){
+	 wsend({ type: "target", subtype: "ban", from: MYSOCKETID, target: TARGETID  });
+ }
+ function handleBan(obj){
+	 closeAll(startbtn);
+	 localStorage.setItem("ban", "yes");
+	 window.location.href = "#banned";
+	 wsend({ type: "target", subtype: "bannedok", target: obj.from, message: "OK, banned!" });
+ }
 function  handleMessage(msg, bool){
 	//alert(1);
 	
@@ -1545,7 +1565,12 @@ function on_check_banned_error(){}
 //window.location.href="#myGame";
 var kuku = 0;
 async function start(el){
-	
+	let fv = localStorage.getItem("ban");
+	if(fv && fv == "yes"){
+		window.location.href = "#banned";
+		return;
+	}
+	if(local)
 	var gg = G();
 	var brole = gid('Brole');
 	console.log('brole ', brole.value);
