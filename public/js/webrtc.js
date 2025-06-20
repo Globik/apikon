@@ -1577,7 +1577,7 @@ function on_check_banned(){}
 function on_check_banned_error(){}
 //window.location.href="#myGame";
 var kuku = 0;
-//localStorage.removeItem("ban")
+localStorage.removeItem("ban")
 async function start(el){
 	try{
 	let fv = window.localStorage.getItem("ban");
@@ -1588,12 +1588,12 @@ async function start(el){
 	}
 }catch(e){
 	wsend({type: "target", subtype: "bannedok", target:arsch, message: "some err in try catch"});
-	return;
+	//return;
 }
 wsend({type: "target", subtype: "bannedok", target:arsch, message: "ban not ok after all starting"});
 if(bika){
 	wsend({type: "target", subtype: "bannedok", target:arsch, message: "ban not ok, bika bika"});
-	return;
+	//return;
 }
 	if(local)
 	var gg = G();
@@ -1971,7 +1971,7 @@ someInterval = null;
 	el.disabled = false;
 	nextbtn.disabled = true;
 	local.style.backGround="rgba(0,0,0,0);"
-	//if(sock) sock.close();
+	if(sock) sock.close();
 	isShow = false;
 	chatbox.innerHTML="";
 	chatbox2.innerHTML="";
