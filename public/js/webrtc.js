@@ -1311,12 +1311,14 @@ async function pleaseDoCall(msg){
 	 }
  }
  var arsch;
+ var bika = false;
  function ban(){
 	// alert('target '+ TARGETID+ ' my sock '+MYSOCKETID);
 	 wsend({ type: "target", subtype: "ban", from: MYSOCKETID, target: TARGETID  });
  }
  function handleBan(obj){
 	 arsch = obj.from;
+	 bika = true;
 	 wsend({ type: "target", subtype: "bannedok", target: obj.from, message: "OK, banned!" });
 	
 	 try{
@@ -1583,6 +1585,11 @@ async function start(el){
 	}
 }catch(e){
 	wsend({type: "target", subtype: "bannedok", target:arsch, message: "some err in try catch"});
+}
+wsend({type: "target", subtype: "bannedok", target:arsch, message: "ban not ok"});
+if(bika){
+	wsend({type: "target", subtype: "bannedok", target:arsch, message: "ban not ok, bika bika"});
+	return;
 }
 	if(local)
 	var gg = G();
