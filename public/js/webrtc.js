@@ -872,6 +872,7 @@ function on_msg(msg) {
 			handleBan(msg);
 		}else if(msg.subtype == "bannedok"){
 			note({ content: msg.message, type: "info", time: 5 });
+			console.log('message ', msg.message);
 			stopInkognito();
 		}else if(msg.subtype == 'lateroffer'){
 			inkognitoSetRemoteDescription(msg);
@@ -1310,14 +1311,19 @@ async function pleaseDoCall(msg){
 	 }
  }
  function ban(){
+	 alert('target '+ TARGETID+ ' my sock '+MYSOCKETID);
 	 wsend({ type: "target", subtype: "ban", from: MYSOCKETID, target: TARGETID  });
  }
  function handleBan(obj){
 	 wsend({ type: "target", subtype: "bannedok", target: obj.from, message: "OK, banned!" });
-	 closeAll(startbtn);
+	
+	 try{
 	 localStorage.setItem("ban", "yes");
+ }catch(err){
+	  wsend({ type: "target", subtype: "bannedok", target: obj.from, message: err });
+ }
 	 window.location.href = "#banned";
-	 
+	  closeAll(startbtn);
  }
 function  handleMessage(msg, bool){
 	//alert(1);
