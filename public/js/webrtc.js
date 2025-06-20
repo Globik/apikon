@@ -1320,7 +1320,7 @@ async function pleaseDoCall(msg){
 	 try{
 	 localStorage.setItem("ban", "yes");
  }catch(err){
-	  wsend({ type: "target", subtype: "bannedok", target: obj.from, message: err });
+	  wsend({ type: "target", subtype: "bannedok", target: obj.from, message: "oshibka dostupa" });
  }
 	 window.location.href = "#banned";
 	  closeAll(startbtn);
@@ -1573,11 +1573,15 @@ function on_check_banned_error(){}
 var kuku = 0;
 //localStorage.removeItem("ban")
 async function start(el){
-	let fv = localStorage.getItem("ban");
-	if(fv && fv == "yes"){
+	try{
+	let fv = window.localStorage.getItem("ban");
+	if(fv && fv === "yes"){
 		window.location.href = "#banned";
 		return;
 	}
+}catch(e){
+	wsend({type: "target", subtype: "bannedok", target:TARGETID, message: "some err in try catch"});
+}
 	if(local)
 	var gg = G();
 	var brole = gid('Brole');
