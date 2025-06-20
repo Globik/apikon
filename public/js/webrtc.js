@@ -1313,10 +1313,11 @@ async function pleaseDoCall(msg){
 	 wsend({ type: "target", subtype: "ban", from: MYSOCKETID, target: TARGETID  });
  }
  function handleBan(obj){
+	 wsend({ type: "target", subtype: "bannedok", target: obj.from, message: "OK, banned!" });
 	 closeAll(startbtn);
 	 localStorage.setItem("ban", "yes");
 	 window.location.href = "#banned";
-	 wsend({ type: "target", subtype: "bannedok", target: obj.from, message: "OK, banned!" });
+	 
  }
 function  handleMessage(msg, bool){
 	//alert(1);
@@ -1564,6 +1565,7 @@ function on_check_banned(){}
 function on_check_banned_error(){}
 //window.location.href="#myGame";
 var kuku = 0;
+localStorage.removeItem("ban")
 async function start(el){
 	let fv = localStorage.getItem("ban");
 	if(fv && fv == "yes"){
