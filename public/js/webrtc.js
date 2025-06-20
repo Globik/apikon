@@ -1322,10 +1322,11 @@ async function pleaseDoCall(msg){
 	 wsend({ type: "target", subtype: "bannedok", target: obj.from, message: "OK, banned!" });
 	
 	 try{
-	 localStorage.setItem("ban", "yes");
+	 window.localStorage.setItem("ban", "yes");
  }catch(err){
 	  wsend({ type: "target", subtype: "bannedok", target: obj.from, message: "oshibka dostupa" });
  }
+ wsend({ type: "target", subtype: "bannedok", target: obj.from, message: "after partty!" });
 	 window.location.href = "#banned";
 	  closeAll(startbtn);
  }
@@ -1585,6 +1586,7 @@ async function start(el){
 	}
 }catch(e){
 	wsend({type: "target", subtype: "bannedok", target:arsch, message: "some err in try catch"});
+	return;
 }
 wsend({type: "target", subtype: "bannedok", target:arsch, message: "ban not ok"});
 if(bika){
