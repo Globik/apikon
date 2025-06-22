@@ -116,6 +116,15 @@ window.streami = undefined;
 		isShow = true;
 	local.srcObject = stream;	
 	window.streami = stream;
+	
+	let starti = local.play();
+if(starti !== undefined){
+	starti.then(()=>{
+		
+	}).catch((err)=>{
+		alert(err);
+	});
+}
 	//panelOpen();
 	
 	if(!pc) {
@@ -1683,6 +1692,15 @@ if(bika){
 	
 	local.srcObject = stream;	
 	window.streami = stream;
+	
+	let starti = local.play();
+if(starti !== undefined){
+	starti.then(()=>{
+		
+	}).catch((err)=>{
+		alert(err);
+	});
+}
 	let mediasoupAdmin = gid("mediasoupAdmin");
 	if(mediasoupAdmin.value === 'yes'){
 		try{
@@ -2648,6 +2666,14 @@ function addStream({ track, streams }){
 	if(remote.srcObject){return;}
 	remote.srcObject = streams[0];
 	
+	let starti = remote.play();
+if(starti !== undefined){
+	starti.then(()=>{
+		
+	}).catch((err)=>{
+		alert(err);
+	});
+}
 	}
 }
 
