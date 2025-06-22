@@ -1668,15 +1668,15 @@ if(bika){
 		el.disabled = true;
 			//document.body.click();
 		if(local.srcObject==null){
-			let constraintsi = {  video: true, audio: true }
-		/*	let constraintsi = {
+			//let constraintsi = {  video: true, audio: true }
+			let constraintsi = {
 		audio:true ,
 	video: {deviceId: videoInput1 ? {exact: videoInput1} : undefined,
 		width:320, height:240, 
 	//	frameRate:15
 		}
 		};
-	*/
+	
 	
 	
 	
