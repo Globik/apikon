@@ -1663,27 +1663,20 @@ if(bika){
 	//vax('post','/api/checkBanned', sdata, on_check_banned, on_check_banned_error, null, false);
 	
 	
-	if(el.getAttribute("data-start")=="no"){
+	if(el.getAttribute("data-start") == "no"){
 	//	pl();
 		el.disabled = true;
-			document.body.click();
+			//document.body.click();
 		if(local.srcObject==null){
-			let constraintsi = {
-		audio:true /*{
-			
-      echoCancellation: true,
-      autoGainControl: true,
-      noiseSuppression: true,
-      channelCount: 1,
-      sampleRate:48000,
-      sampleSize: 16
-    }*/, 
+			let constraintsi = {  video: true, audio: true }
+		/*	let constraintsi = {
+		audio:true ,
 	video: {deviceId: videoInput1 ? {exact: videoInput1} : undefined,
 		width:320, height:240, 
 	//	frameRate:15
 		}
 		};
-	
+	*/
 	
 	
 	
