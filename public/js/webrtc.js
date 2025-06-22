@@ -1682,9 +1682,9 @@ if(bika){
 	
 	navigator.mediaDevices.getUserMedia(constraintsi).then(async function(stream){
 
-	
-	local.srcObject = stream;	
 	window.streami = stream;
+	local.srcObject = stream;	
+	
 	
 	let starti = local.play();
 if(starti !== undefined){
@@ -1739,7 +1739,7 @@ try{
 		
 	}catch(e){}
 		}).catch(err=>{
-			//alert(err);
+			alert(err);
 			console.log(err);//permission denied NotAllowedError
 			if(err.name == "NotFoundError" || err.name == "DevicesNotFoundError"){
 				note({ content: "Вебкамера или микрофон не найдены", type: "warn", time: 5 });
