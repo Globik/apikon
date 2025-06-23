@@ -193,6 +193,7 @@ ${process.env.DEVELOPMENT == "yes" ? '':`<!-- Yandex.Metrika counter -->
     function setA(){
     let isage = localStorage.getItem("myAge");
 	if(!isage && isage !=="y"){
+	//alert('age');
 		window.location.href="#confirmAGE";
 	 const faka = document.querySelector('.overlay:target');
 if(faka){
@@ -200,10 +201,12 @@ if(faka){
 		e.preventDefault();
 	}
 }
+}
  }
- setA();
+ 
    
     window.onload=function(){
+		setA();
 	let islogin = localStorage.getItem("islogin");
 	console.warn('islogin ', islogin);
 		//get_socket(); 
@@ -215,7 +218,7 @@ if(faka){
  myAgeForm2.addEventListener('submit', confirm_agenot, false);
  var agi = localStorage.getItem("myAge2");
 if(agi) myAgeForm.bday.value = agi;
-}}else{
+}else{
 	showSomething();
 }
 
