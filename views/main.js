@@ -190,12 +190,8 @@ ${process.env.DEVELOPMENT == "yes" ? '':`<!-- Yandex.Metrika counter -->
    // alert("UNDEFINED");
     var NICK = "anon";
     //location.href="#login2"
-   
-    window.onload=function(){
-	let islogin = localStorage.getItem("islogin");
-	console.warn('islogin ', islogin);
-		//get_socket(); 
-	let isage = localStorage.getItem("myAge");
+    function setA(){
+    let isage = localStorage.getItem("myAge");
 	if(!isage && isage !=="y"){
 		window.location.href="#confirmAGE";
 	 const faka = document.querySelector('.overlay:target');
@@ -204,7 +200,14 @@ if(faka){
 		e.preventDefault();
 	}
 }
-	 
+ }
+ setA();
+   
+    window.onload=function(){
+	let islogin = localStorage.getItem("islogin");
+	console.warn('islogin ', islogin);
+		//get_socket(); 
+	
 	
 	
 	const myAgeForm2 = document.forms.verifyageform;
