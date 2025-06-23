@@ -7,6 +7,18 @@ html,body{
 		:root {
     --mobilewidth: 452px;/*452px;*/
 }
+.agecontainer{
+	display:flex;
+	 justify-content: space-around;
+		align-items: center;
+}
+.agebtn{
+	height:40px;
+	width:50px;
+	background:violet;
+	color:white;
+	font-weight:bold;
+}
 div.icon-change-cam-div{
 	display:flex;
 	position:absolute;
@@ -662,7 +674,7 @@ background-image: linear-gradient(147deg, #000000 0%, #434343 74%);
 	#local,.Vid{
 	display:block;
 		width:100%;
-		
+		transform:scaleX(-1);
 		border-bottom-right-radius:10px 10px;
 	border-bottom-left-radius: 10px 10px;
 		object-fit:contain;
@@ -1931,7 +1943,7 @@ transform:translateY(5px);
 #confirmageoutput{
 	font-size:1rem;
 	line-height:1.5;
-	width:30%;
+	width:99%;
 }
 #confirmageoutput form{
 	margin-top:10px;

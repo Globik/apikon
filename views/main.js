@@ -197,7 +197,7 @@ ${process.env.DEVELOPMENT == "yes" ? '':`<!-- Yandex.Metrika counter -->
 		//get_socket(); 
 	let isage = localStorage.getItem("myAge");
 	if(!isage && isage !=="y"){
-	//	window.location.href="#confirmAGE";
+		window.location.href="#confirmAGE";
 	 const faka = document.querySelector('.overlay:target');
 if(faka){
 	faka.onclick=function(e){
@@ -750,13 +750,17 @@ ababa();
 	 
  <a href="#."  class="overlay" id="confirmAGE"></a>
     <output id="confirmageoutput" class="popi">
-    <form name="verifyageform"><h2>Предупреждение</h2>
-    <span>Чат рулетка может содержать контент, неприемлемый для несовершеннолетних.</span><span> Поэтому, чтобы продолжить, введите дату Bашего рождения</span>
-    <input type="date" name="bday" required min="1940-01-01" max="2014-01-01" autocomplete />
-    <input type="submit" name="contin" value="Продолжить"/>
-    </form>
-    <span id="outputing" style="visibility:hidden;color:red;">Вам нет 18-ти лет. Покиньте чат.</span>
+  <!--  <form name="verifyageform"><h2>Предупреждение</h2> -->
+    <span>Чат рулетка может содержать контент, неприемлемый для несовершеннолетних.</span><span> Вам есть 18?</span>
+  <!-- <input type="date" name="bday" required min="1940-01-01" max="2014-01-01" autocomplete />
+    <input type="submit" name="contin" value="Продолжить"/> 
     
+    </form>
+    <span id="outputing" style="visibility:hidden;color:red;">Вам нет 18-ти лет. Покиньте чат.</span> -->
+    <div class="agecontainer">
+    <button class="agebtn" onclick="handleYes();">Да</button>
+    <button class="agebtn" onclick="handleNo();">Нет</button>
+    </div>
     </output>
     
    <!--

@@ -21,10 +21,17 @@ vkBridge.supportsAsync('VKWebAppResizeWindow').then(res=>{
  var agi = localStorage.getItem("myAge");
 if(agi) myAgeForm.bday.value = agi;
 }
-
+function handleYes(){
+	localStorage.setItem("myAge", "y");
+	window.location.href="#";
+}
+function handleNo(){
+	window.location.href="https://yandex.ru";
+}
 async function confirm_age(ev){
-	ev.preventDefault();
-	
+	//ev.preventDefault();
+	//alert('ok');
+	/*
 	try{
 	//alert(ev.target.bday.value);
 	if(isover18(new Date(ev.target.bday.value))){
@@ -53,6 +60,7 @@ async function confirm_age(ev){
 	console.log(e);
 }
 VK_USER = false;
+*/ 
 }
 
  function onsetviewd(){}
