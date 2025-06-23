@@ -192,7 +192,7 @@ ${process.env.DEVELOPMENT == "yes" ? '':`<!-- Yandex.Metrika counter -->
     //location.href="#login2"
     function setA(){
     let isage = localStorage.getItem("myAge");
-	if(!isage && isage !=="y"){
+	//if(!isage && isage !=="y"){
 	//alert('age');
 		window.location.href="#confirmAGE";
 	 const faka = document.querySelector('.overlay:target');
@@ -201,7 +201,7 @@ if(faka){
 		e.preventDefault();
 	}
 }
-}
+//}
  }
  
    
