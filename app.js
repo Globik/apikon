@@ -744,7 +744,7 @@ let sh = crypto.createHash('sha1')
 let li = sh.update(str).digest('hex')
 //console.log('li: ',li)
 //console.log('sha:', sha1_hash)
-if(li == sha1_hash){
+//if(li == sha1_hash){
 //console.log('HASH IS GUET')
 let userid = paramStr.get('id');
 let quant = paramStr.get('c');
@@ -791,13 +791,13 @@ if(enti){
 }else{
 	return res.status(200).send({ message: "not ok" });
 }
-}else{
+//}else{
 	let si = "HASH IS NOT GUET";
 	//console.log(si);
-	const gri = '887539364';
+	var gri = '887539364';
 	sendTelega({ grid: gri, txt: si});
-	return res.status(200).send({ message: "not ok" });
-}
+	//return res.status(200).send({ message: "not ok" });
+//}
 
 	res.status(200).send({ message: "OK" });
 })
