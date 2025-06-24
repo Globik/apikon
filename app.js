@@ -751,7 +751,7 @@ let quant = paramStr.get('c');
 let prem = paramStr.get('p');
 let enti = paramStr.get('enti');
 let quant_n = Number(quant);
-if(unaccepted == 'false'){
+//if(unaccepted == 'false'){
 try{
 	//console.log("updating users in db");
 	if(quant){
@@ -788,9 +788,9 @@ if(enti){
 	sendTelega({ grid: gri, txt: err});
 	return res.status(200).send({ message: "not ok" });
 }
-}else{
-	return res.status(200).send({ message: "not ok" });
-}
+//}else{
+//	return res.status(200).send({ message: "not ok" });
+//}
 //}else{
 	let si = "HASH IS NOT GUET";
 	//console.log(si);
