@@ -673,7 +673,14 @@ background-image: linear-gradient(147deg, #000000 0%, #434343 74%);
 	.yourmsg.he2{
 		background:rgb(40,60,24);
 	}
-	#local,.Vid{
+	.Vid{
+	display:block;
+		width:100%;
+		
+		border-bottom-right-radius:10px 10px;
+	border-bottom-left-radius: 10px 10px;	
+	}
+	#local{
 	display:block;
 		width:100%;
 		transform:scaleX(-1);

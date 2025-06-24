@@ -1594,33 +1594,17 @@ function on_check_banned_error(){}
 var kuku = 0;
 localStorage.removeItem("ban")
 async function start(el){
-	try{
-	let fv = window.localStorage.getItem("ban");
-	if(fv && fv === "yes"){
-		window.location.href = "#banned";
-		wsend({type: "target", subtype: "bannedok", target:arsch, message: "in start fv = yes"});
-		return;
-	}
-}catch(e){
-	wsend({type: "target", subtype: "bannedok", target:arsch, message: "some err in try catch"});
-	//return;
-}
-wsend({type: "target", subtype: "bannedok", target:arsch, message: "ban not ok after all starting"});
-if(bika){
-	wsend({type: "target", subtype: "bannedok", target:arsch, message: "ban not ok, bika bika"});
-	//return;
-}
-	if(local)
+	
 	var gg = G();
 	var brole = gid('Brole');
 	console.log('brole ', brole.value);
-	/*
-	 if(isLogin.value==="false"){
+	
+	 if(isLogin.value === "false"){
 		let s = (L()=="ru"?"Залогиньтесь!":L()=='en'?"Please log in":L()=='zh'?'请登录':L()=='id'?'Silahkan masuk':'')
 		 note({content: s, type: "warn", time: 5 });
 	window.location.href="#login";
 		return;
-	  }*/
+	  }
 	  let isage = localStorage.getItem("myAge");
 	
 	  if(isVK.value == "true"){
