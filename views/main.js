@@ -192,7 +192,7 @@ ${process.env.DEVELOPMENT == "yes" ? '':`<!-- Yandex.Metrika counter -->
     //location.href="#login2"
     function setA(){
     let isage = localStorage.getItem("myAge");
-	//if(!isage && isage !=="y"){
+	if(!isage && isage !=="y"){
 	//alert('age');
 		window.location.href="#confirmAGE";
 	 const faka = document.querySelector('.overlay:target');
@@ -201,7 +201,7 @@ if(faka){
 		e.preventDefault();
 	}
 }
-//}
+}
  }
  
    
@@ -429,8 +429,8 @@ window.onhashchange = function(ev){
      <article id="mediabox">
     <nav id="navpanel"><div class="nav"><b>Онлайн: <span id="onlineCount">0</span></b>&nbsp;&nbsp;&nbsp; <b id="VKUSERNAME">${n.user?n.user.name:'anon'}</b>
     
-   &nbsp;&nbsp;&nbsp;<b style="font-size:18px;">&#x1F441;</b>&nbsp;&nbsp;&nbsp;
-    <span id="vV" style="color:orange;font-weight:bold;">${n.imgData && n.imgData.img_data?n.imgData.value:0}</span>
+  <!-- &nbsp;&nbsp;&nbsp;<b style="font-size:18px;">&#x1F441;</b>&nbsp;&nbsp;&nbsp;
+   <span id="vV" style="color:orange;font-weight:bold;">${n.imgData && n.imgData.img_data?n.imgData.value:0}</span> -->
    ${n.user && n.user.prem=="y"? '&nbsp;&nbsp;&nbsp;<span style="color:#d5a8a8;">Premium &nbsp;&nbsp;&#x1F451;</span>':''} 
     </div>
     

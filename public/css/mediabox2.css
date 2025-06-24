@@ -168,8 +168,10 @@ background: linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0
 		box-shadow: 0 8px 32px 0 rgba(31,38,135,0.15);
 }
 .dynamicImgHalter{
-	width:calc(150px / 3);
-	height:calc(150px / 3);
+	wdth:calc(150px / 2);
+	hight:calc(150px / 2);
+	width:100px;
+	height:100px;
 	brder: 1px solid red;
 	object-fit:cover;
 }
@@ -1710,6 +1712,9 @@ form menu button[value=confirm]{
   opacity: 0.75;
 }
 @media screen and (max-width: 452px) and (orientation: portrait){
+#confirmageoutput{
+	width:99%;
+}
 	output#ozenite{
 	width:98%;
 	}
@@ -1943,7 +1948,7 @@ transform:translateY(5px);
 #confirmageoutput{
 	font-size:1rem;
 	line-height:1.5;
-	width:99%;
+	width:45%;
 }
 #confirmageoutput form{
 	margin-top:10px;

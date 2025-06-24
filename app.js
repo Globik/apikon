@@ -1535,7 +1535,8 @@ async function searchPeer (socket, msg, source) {
 if(source.src)	 onLine.set(socket.id, { id: socket.id, src: source.src, nick: socket.nick });
 	// broadcast({ type: "dynamic", sub: "add", id: socket.id, partnerid: peerId, nick: socket.nick, status: 'busy', camcount: onLine.size});
 	if(source.src) dynamic({ type: "dynamic", sub: "add", id: socket.id, partnerid: peerId, src: source.src, nick: socket.nick, status: 'busy', camcount: onLine.size, waiting: waitingQueue });
-	 if(isEven(matchedIds.size)) broadcasti({ type: "connected2", size: matchedIds.size/2,cams:onLine.size });
+	 if(isEven(matchedIds.size)) broadcasti({ type: "connected2", size: matchedIds.size/2 });
+	 broadcasti({ type: 'connected3', cams: onLine.size });
 	 // console.log('ONLINE ', onLine);
 	// console.log("*************** MATCHEDIDS ****************, ", matchedIds);
 	 
@@ -1558,7 +1559,8 @@ if(source.src)	 onLine.set(socket.id, { id: socket.id, src: source.src, nick: so
 	// broadcast({ type: "dynamic", sub: "add", id: socket.id, nick: socket.nick, status: 'free', camcount: onLine.size });
 	if(source.src) dynamic({ type: "dynamic", sub: "add", id: socket.id, src: source.src, nick: socket.nick, camcount: onLine.size });
 	 //console.log('ONLINE 2', onLine);
-//	if(isEven(matchedIds.size))
+	  broadcasti({ type: 'connected3', cams: onLine.size });
+    if(isEven(matchedIds.size))broadcasti({ type: "connected2", size: matchedIds.size/2 });
 //broadcasti({ type: "connected2", size: matchedIds.size });
 //console.log("*************** MATCHEDIDS_3 ****************, ", matchedIds);
  }}
@@ -1751,6 +1753,7 @@ function hangUp (socketId, msg, bool, abrupt) {
 	//	broadcast_admin({ type: "dynamic", sub: "remove", id: socketId, camcount: onLine.size });
 	dynamic({ type: "dynamic", sub: "remove", id: socketId, camcount: onLine.size });
 		 if(isEven(matchedIds.size)) broadcasti({ type: "connected2", size: matchedIds.size /2,cams:onLine.size });
+		  broadcasti({ type: 'connected3', cams: onLine.size });
 	}
 }
   if (matchedIds.has(socketId)) {
@@ -1763,6 +1766,7 @@ function hangUp (socketId, msg, bool, abrupt) {
    // console.log('isEven(connected) ',isEven(connected));
    if(isEven(matchedIds.size)) broadcasti({ type: "connected2", size: matchedIds.size/2, cams: onLine.size });
   //  console.log("*************** MATCHEDIDS ****************, ", matchedIds);
+   broadcasti({ type: 'connected3', cams: onLine.size });
    
     
     
@@ -1933,7 +1937,7 @@ wsend(socket, { type:'vip', vip: r })
   // console.log('isEven(connected) ', connected,isEven(connected));
   if(isEven(matchedIds.size /*connected)*/)) broadcasti({ type: "connected2", size:matchedIds.size/2,cams:onLine.size });
 
-
+ broadcasti({ type: 'connected3', cams: onLine.size });
   
  // if(onLine.size !=0)wsend(socket, { type: "dynamic", sub: "total", cams: [...onLine] });
   

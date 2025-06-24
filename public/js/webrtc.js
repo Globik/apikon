@@ -836,10 +836,16 @@ function on_msg(msg) {
         break;
         case 'connected2':
         let conns2 = gid("conns2");
-        connects.textContent = msg.size;
+        gid('connects').textContent = msg.size;
         conns2.textContent = msg.size;
-       gid("camsCount").textContent = msg.cams;
+        //gid('webcams2').textContent =;
+       // gid('cons2').textContent = ;
+      // gid("camsCount").textContent = msg.cams;
         //alert(msg.size);
+        break;
+        case 'connected3':
+        gid('webcams2').textContent = msg.cams;
+        gid("camsCount").textContent = msg.cams;
         break;
         case 'dynamic':
        // alert('dynamic');
