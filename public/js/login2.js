@@ -266,8 +266,9 @@ if(c && d){
 	async function ati(){
 		try{
 			//alert('device3 ', d);
+			await fetch('/newfucker', {method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify({code: c, device: d })});
 let som5=await VKID.Auth.exchangeCode(c, d);
-//await fetch('/newfucker', {method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify(som5)});
+
 //console.log('som5 ', som5);
 
 //alert('som5 '+JSON.stringify(som5))
@@ -314,12 +315,14 @@ window.location.href="#."
 //location.reload();
 }
 }catch(e){
+	/*
 	userName.value = "Uknown";
 	isLogin.value="true";
 	userId.value="X";
 	console.error(e);
-	alert('err '+JSON.stringify(e));
-	await fetch('/newfucker', {method: "POST",headers: {"Content-Type": "application/json",}, body: JSON.stringify(e) });
+	*/ 
+	alert("Что-то пошло не так. Попробуйте войти через телеграм");
+	//await fetch('/newfucker', {method: "POST",headers: {"Content-Type": "application/json",}, body: JSON.stringify(e) });
 	setTimeout(() => {
           errormsg.textContent = "";
         }, 3500)
