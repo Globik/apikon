@@ -1719,6 +1719,9 @@ form menu button[value=confirm]{
   opacity: 0.75;
 }
 @media screen and (max-width: 452px) and (orientation: portrait){
+output#bannedoutput{
+		width:98%;
+	}
 #confirmageoutput{
 	width:99%;
 }

@@ -1596,18 +1596,23 @@ function on_check_banned(){}
 function on_check_banned_error(){}
 //window.location.href="#myGame";
 var kuku = 0;
-localStorage.removeItem("ban")
+//localStorage.removeItem("ban")
 async function start(el){
 	
 	var gg = G();
 	var brole = gid('Brole');
 	console.log('brole ', brole.value);
 	
-	 if(gid('isLogin').value == "false"/*|| gid('userName').value =="anon"*/){
+	 if(gid('isLogin').value == "false" || gid('userName').value =="anon"){
 		let s = (L()=="ru"?"Залогиньтесь!":L()=='en'?"Please log in":L()=='zh'?'请登录':L()=='id'?'Silahkan masuk':'')
 		 note({content: s, type: "warn", time: 5 });
 	window.location.href="#login";
 		return;
+	  }
+	  let rf = localStorage.getItem("ban");
+	  if(rf&&rf=="yes"){
+		  window.location.href='#banned';
+		  return;
 	  }
 	  let isage = localStorage.getItem("myAge");
 	
