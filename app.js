@@ -718,7 +718,11 @@ const dummy2 = new Map();
 //	sendTelega({ grid: gridi, txt: "jemand buy partner vsnos"});
 app.post('/testyoomoney1', async(req, res)=>{
 	var gridi = '887539364';
-	sendTelega({grid:gridi, txt: "*** CALLBACK! *** test youmany" });
+	try{
+	sendTelega({grid:gridi, txt: "*** CALLBACK! *** test youmany"+JSON.stringify(req.body) });
+}catch(e){
+	sendTelega({grid:gridi, txt: "not ok cb "+e});
+}
 let { notification_type,
 		operation_id,
 		amount,
@@ -761,19 +765,22 @@ try{
 }
 	if(prem){
 	try{
+		sendTelega({grid:gridi, txt: "pokupka premiu acc "+userid});
 		await db.query(`update users set prem="y",mon=(?) where id=(?)`, [ Date.now(), userid ]);
 	}catch(e){
 		//console.log(e);
+		sendTelega({grid:gridi, txt: "not ok prem "+e});
 		return res.status(200).send({ message: "not ok" });
 		}
 		if(prem && Number(prem) == 300){
 			try{
 				let ipi = paramStr.get('ip');
-				
+				sendTelega({grid:gridi, txt: " ok ban "+userid});
 				await db.query(`delete from ban where usid=(?)`, [ userid ]);
 				await db.query(`update users set brole='non' where id=(?)`, [ userid ]);
 			}catch(e){
 			//	console.log(e);
+			sendTelega({grid:gridi, txt: "not ok for ban "+e});
 				return res.status(200).send({ message: "not ok" });
 			}
 		}
