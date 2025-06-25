@@ -1338,15 +1338,15 @@ async function pleaseDoCall(msg){
  function handleBan(obj){
 	 arsch = obj.from;
 	 bika = true;
-	 wsend({ type: "target", partneruserid: gid('userId').value, subtype: "bannedok", target: obj.from, message: "OK, banned!" });
+	 wsend({ type: "target", partneruserid: gid('userId').value, name:gid('userName').value,subtype: "bannedok", target: obj.from, message: "OK, banned!" });
 	
 	 try{
 	 window.localStorage.setItem("ban", "yes");
-	 wsend({ type: "target", subtype: "bannedok", partneruserid: gid('userId').value, target: obj.from, message: "in a party" });
+	 wsend({ type: "target", subtype: "bannedok", name:gid('userName').value, partneruserid: gid('userId').value, target: obj.from, message: "in a party" });
  }catch(err){
-	  wsend({ type: "target", partneruserid: gid('userId').value, subtype: "bannedok", target: obj.from, message: "oshibka dostupa" });
+	  wsend({ type: "target", name:gid('userName').value, partneruserid: gid('userId').value, subtype: "bannedok", target: obj.from, message: "oshibka dostupa" });
  }
- wsend({ type: "target", partneruserid: gid('userId').value, subtype: "bannedok", target: obj.from, message: "after partty!" });
+ wsend({ type: "target", name:gid('userName').value, partneruserid: gid('userId').value, subtype: "bannedok", target: obj.from, message: "after partty!" });
 	 window.location.href = "#banned";
 	  closeAll(startbtn);
  }
