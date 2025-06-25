@@ -1602,12 +1602,19 @@ async function start(el){
 	var gg = G();
 	var brole = gid('Brole');
 	console.log('brole ', brole.value);
-	
-	 if(gid('isLogin').value == "false" || gid('userName').value =="Uknown" || gid('userName').value == undefined){
+	let userName=gid('userName').value;
+	 if(gid('isLogin').value == "false" || userName =="Unknown" || userName == undefined){
 		let s = (L()=="ru"?"Залогиньтесь!":L()=='en'?"Please log in":L()=='zh'?'请登录':L()=='id'?'Silahkan masuk':'')
 		 note({content: s, type: "warn", time: 5 });
 	window.location.href="#login";
 		return;
+	  }
+	  
+	  if(userName == undefined){
+		 let si = (L()=="ru"?"Залогиньтесь!":L()=='en'?"Please log in":L()=='zh'?'请登录':L()=='id'?'Silahkan masuk':'')
+		 note({content: si, type: "warn", time: 5 });
+	window.location.href="#login";
+		return; 
 	  }
 	  let rf = localStorage.getItem("ban");
 	  if(rf&&rf=="yes"){

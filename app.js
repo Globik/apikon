@@ -711,7 +711,14 @@ async function setPrem(){
 	}
 }
 //setPrem()
-
+var sis="false";
+var ww='Unknown';
+var bh;
+if(sis=="false"||ww=='Unknown'|| bh==undefined){
+	console.log('bh please login ', bh);
+}else{
+	console.log('yes');
+}
 var iii2 = 0;
 const dummy2 = new Map();
 //var gridi = '887539364';
