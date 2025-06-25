@@ -1600,7 +1600,7 @@ async function start(el){
 	var brole = gid('Brole');
 	console.log('brole ', brole.value);
 	
-	 if(isLogin.value == "false"|| gid('userName').value =="anon"){
+	 if(gid('isLogin').value == "false"/*|| gid('userName').value =="anon"*/){
 		let s = (L()=="ru"?"Залогиньтесь!":L()=='en'?"Please log in":L()=='zh'?'请登录':L()=='id'?'Silahkan masuk':'')
 		 note({content: s, type: "warn", time: 5 });
 	window.location.href="#login";
