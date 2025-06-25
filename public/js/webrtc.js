@@ -1596,7 +1596,7 @@ function on_check_banned(){}
 function on_check_banned_error(){}
 //window.location.href="#myGame";
 var kuku = 0;
-//localStorage.removeItem("ban")
+localStorage.removeItem("ban")
 async function start(el){
 	
 	var gg = G();
