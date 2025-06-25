@@ -267,7 +267,7 @@ if(c && d){
 		try{
 			//alert('device3 ', d);
 let som5=await VKID.Auth.exchangeCode(c, d);
-await fetch('/newfucker', {method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify(som5)});
+//await fetch('/newfucker', {method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify(som5)});
 //console.log('som5 ', som5);
 
 //alert('som5 '+JSON.stringify(som5))
@@ -275,7 +275,7 @@ await fetch('/newfucker', {method: "POST", headers: {"Content-Type": "applicatio
 
 let usinfo = await VKID.Auth.userInfo(som5.access_token);
 console.log('usinfo ', usinfo);
-await fetch('/newfucker', {method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify(usinfo)});
+//await fetch('/newfucker', {method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify(usinfo)});
 //alert('ok '+usinfo.ok)
 //alert('usinfo '+JSON.stringify(usinfo))
 //usinfo.type = "vk";
