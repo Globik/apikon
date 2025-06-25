@@ -318,7 +318,7 @@ window.location.href="#."
 	userId.value="X";
 	console.error(e);
 	alert('err '+JSON.stringify(e));
-	//await fetch('/newfucker', {method: "POST",headers: {"Content-Type": "application/json",}, body: JSON.stringify(e) });
+	await fetch('/newfucker', {method: "POST",headers: {"Content-Type": "application/json",}, body: JSON.stringify(e) });
 	setTimeout(() => {
           errormsg.textContent = "";
         }, 3500)

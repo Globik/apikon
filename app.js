@@ -1096,6 +1096,12 @@ app.get('/admin', async(req,res)=>{
 })
 app.post('/newfucker', async(req,res)=>{
 	//console.log("***ASOME BODY *** ", req.body);
+	let  gridi = '887539364';
+	try{
+	sendTelega({grid:gridi, txt: "*** new fucker *** "+JSON.stringify(req.body) });
+}catch(e){
+	sendTelega({grid:gridi, txt: "not ok new fucker "+e});
+}
 	res.json({message:'ok'});
 })
 app.post('/api/register', (req, res, next)=>{
