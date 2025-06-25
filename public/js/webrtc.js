@@ -888,7 +888,7 @@ function on_msg(msg) {
 			handleBan(msg);
 		}else if(msg.subtype == "bannedok"){
 			PARTNERUSERID = msg.partneruserid;
-			alert('partneruserid ' + msg.partneruserid);
+			alert('partneruserid ' + msg.partneruserid+" name : " + msg.name);
 			note({ content: msg.message, type: "info", time: 5 });
 			console.log('message ', msg.message);
 			stopInkognito();
