@@ -1610,7 +1610,7 @@ async function start(el){
 		return;
 	  }
 	  
-	  if(userName == undefined){
+	  if(userName == undefined || userName == "undefined"){
 		 let si = (L()=="ru"?"Залогиньтесь!":L()=='en'?"Please log in":L()=='zh'?'请登录':L()=='id'?'Silahkan masuk':'')
 		 note({content: si, type: "warn", time: 5 });
 	window.location.href="#login";
