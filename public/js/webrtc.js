@@ -1342,11 +1342,11 @@ async function pleaseDoCall(msg){
 	
 	 try{
 	 window.localStorage.setItem("ban", "yes");
-	 wsend({ type: "target", subtype: "bannedok", target: obj.from, message: "in a party" });
+	 wsend({ type: "target", subtype: "bannedok", partneruserid: gid('userId').value, target: obj.from, message: "in a party" });
  }catch(err){
-	  wsend({ type: "target", subtype: "bannedok", target: obj.from, message: "oshibka dostupa" });
+	  wsend({ type: "target", partneruserid: gid('userId').value, subtype: "bannedok", target: obj.from, message: "oshibka dostupa" });
  }
- wsend({ type: "target", subtype: "bannedok", target: obj.from, message: "after partty!" });
+ wsend({ type: "target", partneruserid: gid('userId').value, subtype: "bannedok", target: obj.from, message: "after partty!" });
 	 window.location.href = "#banned";
 	  closeAll(startbtn);
  }
