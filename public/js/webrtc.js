@@ -685,6 +685,7 @@ return window.location.href='#purchaseHREF';
 var tr = undefined;
 get_socket();
 var pingTimeout;
+var PARTNERUSERID;
 /*
 function heartbeat(){
 	clearTimeout(pingTimeout);
@@ -886,6 +887,8 @@ function on_msg(msg) {
 		}else if(msg.subtype == "ban"){
 			handleBan(msg);
 		}else if(msg.subtype == "bannedok"){
+			PARTNERUSERID = msg.partneruserid;
+			alert('partneruserid ' + msg.partneruserid);
 			note({ content: msg.message, type: "info", time: 5 });
 			console.log('message ', msg.message);
 			stopInkognito();
@@ -1329,13 +1332,13 @@ async function pleaseDoCall(msg){
  var bika = false;
  function ban(){
 	// alert('target '+ TARGETID+ ' my sock '+MYSOCKETID);
-	alert('userId '+gid('userId').value);
+	//alert('userId '+gid('userId').value);
 	 wsend({ type: "target", subtype: "ban", from: MYSOCKETID, target: TARGETID  });
  }
  function handleBan(obj){
 	 arsch = obj.from;
 	 bika = true;
-	 wsend({ type: "target", subtype: "bannedok", target: obj.from, message: "OK, banned!" });
+	 wsend({ type: "target", partneruserid: gid('userId').value, subtype: "bannedok", target: obj.from, message: "OK, banned!" });
 	
 	 try{
 	 window.localStorage.setItem("ban", "yes");
