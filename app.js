@@ -714,9 +714,11 @@ async function setPrem(){
 
 var iii2 = 0;
 const dummy2 = new Map();
-
+//var gridi = '887539364';
+//	sendTelega({ grid: gridi, txt: "jemand buy partner vsnos"});
 app.post('/testyoomoney1', async(req, res)=>{
-	//console.log("*** CALLBACK! *** ", req.body);
+	var gridi = '887539364';
+	sendTelega({grid:gridi, txt: "*** CALLBACK! *** test youmany" });
 let { notification_type,
 		operation_id,
 		amount,
@@ -1068,7 +1070,7 @@ async function sendTelega(obj){
 		text: obj.txt
 	});
 	}catch(e){
-		//console.log(e);
+		console.log(e);
 		}
 }
 app.post('/api/takeCb3', async(req, res)=>{
