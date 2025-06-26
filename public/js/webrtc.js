@@ -1603,6 +1603,7 @@ async function start(el){
 	var brole = gid('Brole');
 	console.log('brole ', brole.value);
 	let userName=gid('userName').value;
+	/*
 	 if(gid('isLogin').value == "false"){
 		let s = (L()=="ru"?"Залогиньтесь!":L()=='en'?"Please log in":L()=='zh'?'请登录':L()=='id'?'Silahkan masuk':'')
 		 note({content: s, type: "warn", time: 5 });
@@ -1618,7 +1619,7 @@ async function start(el){
 		return; 
 	  }else{
 		  //await fetch('/newfucker', {method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify({txt:"username 2 defined?"+ userName })});
-	  }
+	  }*/
 	  let rf = localStorage.getItem("ban");
 	  if(rf&&rf=="yes"){
 		  window.location.href='#banned';
