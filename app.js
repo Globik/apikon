@@ -844,7 +844,7 @@ if(enti){
 	let si = "HASH IS NOT GUET";
 	//console.log(si);
 	var gri = '887539364';
-	sendTelega({ grid: gri, txt: si});
+	//sendTelega({ grid: gri, txt: si});
 	//return res.status(200).send({ message: "not ok" });
 //}
 
