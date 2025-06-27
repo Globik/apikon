@@ -32,6 +32,14 @@ function handleDynamic(obj){
 		d.className="dynamicbox";
 		d.setAttribute("data-id", el[1].id);
 		d.innerHTML=`<div class="caption">${el[1].nick}</div><div class="dynamicImgHalter"><img data-pid="${el[1].id}" onclick="callInkognito(this);" onerror="loadError(this);" src="${el[1].src}"/></div>`;
+		if(Brole.value == 'admin'){
+			let kdiv = document.createElement('div');
+			kdiv.className = "kdiv";
+			kdiv.innerHTML = `${String.fromCodePoint(0x274C)}`;
+			kdiv.setAttribute("onclick", "banv(this);");
+			kdiv.setAttribute('data-rid',el[1].id);
+			d.appendChild(kdiv);
+		}
 		whosonlinecontent.appendChild(d);
 	})
 	}else if(obj.sub == "remove"){
@@ -54,6 +62,14 @@ function handleDynamic(obj){
 		d.setAttribute("data-id", obj.id);
 		//console.log('obj.src ', obj.src);
 		d.innerHTML=`<div class="caption">${obj.nick}</div><div class="dynamicImgHalter"><img data-pid="${obj.id}" onclick="callInkognito(this);" src="${obj.src}" onerror="loadError(this);"/></div>`;
+		if(Brole.value == 'admin'){
+			let kdiv = document.createElement('div');
+			kdiv.className = "kdiv";
+			kdiv.setAttribute("onclick", "banv(this);");
+			kdiv.setAttribute('data-rid',obj.id);
+			kdiv.innerHTML = `${String.fromCodePoint(0x274C)}`
+			d.appendChild(kdiv);
+		}
 		whosonlinecontent.appendChild(d);
 		//camsCount.textContent = obj.camcount;
 		 webcams2.textContent = obj.camcount;
@@ -83,4 +99,26 @@ function loadError(ma){
 	let elu = document.querySelector(`[data-id="${a}"]`);
 	if(elu)elu.remove();
 	vax('post','/removePrizrak', { id: a }, function(){}, function(){}, null, false);
+}
+function banv(el){
+	if(confirm("Забанить по айпи адресу?")){
+	let a = el.getAttribute('data-rid');
+	//alert(a);
+	wsend({ type: "target", subtype: "ban", from: MYSOCKETID, target: a });
+}
+}
+function handleBanIp(msg){
+let d = {};
+d.ip = msg.ip;
+ vax('post','/admin/setBan', d, on_handleban, on_handleban_error, null, false);
+}
+function  on_handleban(l, ev){
+	if(l.error){
+		note({ content: l.message, type: 'error', time: 5 });
+		return;
+	}
+	note({ content: l.message, type: 'info', time: 5 });
+} 
+function on_handleban_error(l, ev){
+	alert(l);
 }

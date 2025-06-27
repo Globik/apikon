@@ -2,7 +2,10 @@
 const getSeoText = require('./getSeoText.js')
 const { zar } = require('./zar.js')
 const { whosonline } = require('./whosonline.js')
+const { banus } = require('./banus.js')
+const { banip } = require('./banip.js')
 function main(n){
+	const BAN = 0;
 	let istestheart = (n.istestheart==1?true:false);
 	const { lang , buser, user } = n;
 	//console.log("N ",n);
@@ -171,6 +174,7 @@ ${process.env.DEVELOPMENT == "yes" ? '':`<!-- Yandex.Metrika counter -->
     </noscript>
    <input type="hidden" id="isLogin" value="${n.user?true:false}"/>
     <input type="hidden" id="userId" value="${n.user?n.user.id:0}">
+    <input type="hidden" id="userIp" value="${n.ip?n.ip:'noip'}"/>
     <input type="hidden" id="userName" value="${n.user?n.user.name:'anon'}">
     <input type="hidden" id="isTestHeart" value="${istestheart}">
     <input type="hidden" id="publishedid" value="${n.imgData && n.imgData.img_data?n.imgData.publishedId:null}" >
@@ -843,26 +847,8 @@ ababa();
 	
 	
     </output>
-    
-     <a href="#."  class="overlay" id="banned"></a>
-    <output id="bannedoutput" class="popi">
-    ${lang=='ru'?`
-    <p>Вы забанены за нарушение правил чата!<!-- ${n.user?n.user.grund=="1"?'темный экран, за закрытый экран, за демонстрацию мебели':n.user.grund=="2"?'онанизм':'':''} --></p>
-    <p>Чтобы разбанить себя, оплатите 6 рублей штрафа.</p>
-    <form id="bannedForm" method="post" action="https://yoomoney.ru/quickpay/confirm" name="ordertodo">
-    <div><input type="hidden"  placeholder="Получатель yoomoney" name="receiver" value="4100118676103827" required/> </div>
-	<input type="hidden" name="label" value="id=${n.user?n.user.id:'0'}&p=300?ip=${n.user?n.user.ip?n.user.ip:undefined:undefined}"/>
-    <input type="hidden" name="quickpay-form" value="button" />
-    <input type="hidden" name="successURL" value="https://rouletka.ru/about" />
-    <input type="hidden" name="formcomment" value="Разбан" />
-    <input type="hidden" name="targets" value="Разбан" />
-    <div><input class="number"  type="hidden" name="sum" value="6.00" required data-type="number"/></div>
-   <input  class="input" type="hidden" checked name="paymentType" value="PC" /></div>
-   <div><input  class="input" type="hidden" name="paymentType" value="AC" /></div>
-   <div class="bandiv"><input type="submit"  value="Разбанить"/></div>
-    </form>
-    `:''}
-    </output>
+    ${BAN==0?banip(n):banus(n)}
+   
      <a href="#."  class="overlay" id="helproject"></a>
     <output id="helpoutput" class="popi">
     <div>Пожалуйста, перечислите финансы на развитие проекта. Вы будете перенаправлены в yoomoney</div><br><br><br>

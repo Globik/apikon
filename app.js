@@ -215,6 +215,7 @@ app.get('/errnotfound', async(req,res)=>{
 app.get("/about", async(req, res)=>{
 	//console.log("REQ.QUERY: ", req.query);
 	let db = req.db;
+	let ip = req.ip;
 	if(req.query.vk_app_id){
 		if(checkSign(req.query)){
 		try{
@@ -234,7 +235,7 @@ app.get("/about", async(req, res)=>{
 		//let babu=result4[0]
 		let suki = await db.query('select id,name,entr,vkid,tgid,brole,heart,theart,prem,mon,grund from users left join ban on users.id=ban.usid where users.id=(?)',[result4[0].id]);
 		let babu=suki[0];
-	 return res.rendel('main', { mediasoupadmin: mediasoupadmin, imgData: imgData, lang: 'ru', yacount: JETZT , user: babu,buser:babu, FUCKER:'FUCKER', VK: true });
+	 return res.rendel('main', { ip: ip, mediasoupadmin: mediasoupadmin, imgData: imgData, lang: 'ru', yacount: JETZT , user: babu,buser:babu, FUCKER:'FUCKER', VK: true });
 	}else{
 		let result5 = await db.query(`insert into users(name, vkid, password) values(?,?,'1234')`, [ r.data.response[0].first_name, r.data.response[0].id ]);
 		//console.log("INSERT ", result5);
@@ -242,7 +243,7 @@ app.get("/about", async(req, res)=>{
 		//console.log('result6 ', result6[0]);
 		result6[0].id = result5.insertId.toString();
 		let dabu = result6[0];
-		return res.rendel('main', { mediasoupadmin: mediasoupadmin, imgData: imgData, lang: 'ru', yacount: JETZT , user: dabu, buser: dabu, FUCKER2:'FUCKER2', VK: true });
+		return res.rendel('main', { ip: ip, mediasoupadmin: mediasoupadmin, imgData: imgData, lang: 'ru', yacount: JETZT , user: dabu, buser: dabu, FUCKER2:'FUCKER2', VK: true });
 		// result5.insertId.toString(), { user
 		
 	}
@@ -265,7 +266,7 @@ app.get("/about", async(req, res)=>{
 	//console.log("*** USER *** ", req.user);
 	//console.log('req.app.locals ', req.app.locals.testshopid, ' ', req.app.locals.testshopsecret);
 	//res.rendel('errnotfound',{});
-	res.rendel('main', { mediasoupadmin: mediasoupadmin, imgData: imgData, lang: 'ru', yacount: JETZT, uuid: crypto.randomUUID(), VK:false });
+	res.rendel('main', { ip: ip, mediasoupadmin: mediasoupadmin, imgData: imgData, lang: 'ru', yacount: JETZT, uuid: crypto.randomUUID(), VK:false });
 })
 
 
@@ -336,14 +337,14 @@ if(li2==sha12_ha){
 
 */
 app.get('/about/en', async(req, res)=>{
-	
-res.rendel('main', { imgData: imgData, lang: 'en', yacount: JETZT, uuid: crypto.randomUUID() });
+	let ip = req.ip;
+res.rendel('main', { ip, imgData: imgData, lang: 'en', yacount: JETZT, uuid: crypto.randomUUID() });
 })
 app.get('/about/zh', async(req, res)=>{
-	res.rendel('main', { imgData: imgData, lang: 'zh', yacount: JETZT, uuid: crypto.randomUUID() });
+	res.rendel('main', { ip:req.ip, imgData: imgData, lang: 'zh', yacount: JETZT, uuid: crypto.randomUUID() });
 })
 app.get('/about/id', async(req, res)=>{
-	res.rendel('main', { imgData: imgData, lang: 'id', yacount: JETZT, uuid: crypto.randomUUID() });
+	res.rendel('main', {ip: req.ip, imgData: imgData, lang: 'id', yacount: JETZT, uuid: crypto.randomUUID() });
 })
 app.get("/", async(req, res)=>{
 	//oni((req.user?req.user.name:'anonym'), " on about");
@@ -355,6 +356,27 @@ app.get('/lolo', async(req,res)=>{
 //const {convertXML, createAST} = require("simple-xml-to-json")
 
 //const myJson = convertXML(myXMLString)
+
+app.post('/checkip', async(req, res)=>{
+	//console.log(req.body);
+	let { ip } = req.body;
+	if(!ip){
+		return res.json({ error: true, message: 'no ip' });
+	}
+	let db = req.db;
+	let result;
+	try{
+		result = await db.query('select*from banip where ip=(?)', [ ip ]);
+		if(result.length > 0){
+			return res.json({ message: result[0].ip});
+		}
+	}catch(e){
+	//	console.log(e);
+		return res.json({ error: true, message: e });
+	}
+	res.json({ message: 'nothing'});
+})
+
 
 app.post('/zartoone', checkAuth, async(req, res)=>{
 	console.log('body: ', req.body);
@@ -771,6 +793,7 @@ try{
 	await db.query('update users set theart=theart+(?),heart=1 where id=(?)', [ quant_n, userid ]);
 }
 	if(prem){
+		if(prem && Number(prem)==100){
 	try{
 		sendTelega({grid:gridi, txt: "pokupka premiu acc "+userid});
 		await db.query(`update users set prem="y",mon=(?) where id=(?)`, [ Date.now(), userid ]);
@@ -779,7 +802,8 @@ try{
 		sendTelega({grid:gridi, txt: "not ok prem "+e});
 		return res.status(200).send({ message: "not ok" });
 		}
-		if(prem && Number(prem) == 300){
+		
+		}else if(prem && Number(prem) == 300){
 			try{
 				let ipi = paramStr.get('ip');
 				sendTelega({grid:gridi, txt: " ok ban "+userid});
@@ -789,6 +813,15 @@ try{
 			//	console.log(e);
 			sendTelega({grid:gridi, txt: "not ok for ban "+e});
 				return res.status(200).send({ message: "not ok" });
+			}
+		}else if(prem && Number(prem) == 900){
+			let ipi = paramStr.get('ip');
+			try{
+				sendTelega({grid:gridi, txt: " кто-то разбанивает свой айпи адрес "});
+				await db.query(`delete from banip where ip=(?)`, [ ipi ]);
+			}catch(e){
+				sendTelega({grid:gridi, txt: "not ok for ban out ip "+e});
+				return res.status(200).send({ message: "not ok ban out ip" });
 			}
 		}
 }

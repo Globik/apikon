@@ -180,6 +180,17 @@ width:100%;
 height:100%;
 object-fit:cover;
 }
+.dynamicbox{
+	position:relative;
+}
+.kdiv{
+width:35px;
+height:35px;
+	position:absolute;
+	top:20px;
+	right:-10px;
+	cursor:pointer;
+}
 div.caption{
 	/*overflow-x: scroll;
 	width:100%;*/
@@ -1722,6 +1733,7 @@ form menu button[value=confirm]{
 output#bannedoutput{
 		width:98%;
 	}
+	
 #confirmageoutput{
 	width:99%;
 }

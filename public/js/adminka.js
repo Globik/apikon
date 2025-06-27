@@ -338,8 +338,26 @@ function getAllBanned(el){
 	clearWindows();
 	vax('get','/admin/getBanned', {}, getSomeContent, on_error, el, false);
 }
- 
-
+ function getIps(el){
+	 clearWindows();
+	 vax('get','/admin/getBannedIps', {}, getSomeContent, on_error, el, false);
+ }
+function deleteIps(el){
+	vax('post','/admin/deleteBannedIps', {}, ondeleteIps, on_error, el, false);
+	el.className = 'puls';
+}
+function ondeleteIps(l, ev){
+	ev.className = "";
+	if(l.error){
+		note({ content: l.message, type: "error", time: 5 });
+		return;
+	}
+	note({ content: l.message, type: "info", time: 5 });
+	let d = gid('fips');
+	while(d.firstChild){
+		d.firstChild.remove();
+	}
+}
 function banOutThat(el){
 	let a = el.getAttribute("data-usid");
 	if(!a)return;

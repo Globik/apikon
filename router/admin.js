@@ -336,6 +336,44 @@ router.post('/banoutAll', checkAuth, isAdmin(['admin']), async(req, res) => {
 		res.json({ error: err.name });
 	}
 });
+
+router.post('/setBan', checkAuth, isAdmin(['admin']), async(req, res)=>{
+	let db = req.db;
+	let { ip } = req.body;
+	if(!ip)return res.json({ error: true, message: "No ip" });
+	let result;
+	try{
+		result = await db.query('select*from banip where ip=(?)', [ip]);
+		if(result&&result.length > 0){
+			return res.json({  message: "Уже забанили" });
+		}else{
+			await db.query('insert into banip(ip) values((?))', [ ip ]);
+		}
+	}catch(e){
+		return res.json({ error: true, message: e });
+	}
+	res.json({ message: "Ок, забанили" });
+})
+router.get('/getBannedIps', checkAuth, isAdmin(['admin']), async(req, res)=>{
+	let db = req.db;
+	let a;
+	try{
+		a = await db.query(`select*from banip`, []);
+		
+	}catch(e){
+		console.log(e);
+	}
+	res.json({ content: res.compile('vBanips', { count: a })});
+})
+router.post('/deleteBannedIps', checkAuth, isAdmin(['admin']), async(req, res)=>{
+	let db = req.db;
+	try{
+		await db.query(`delete from banip`, []);
+	}catch(e){
+		return res.json({ error: true, message: e});
+	}
+	res.json({ message: "OK" });
+})
 module.exports = router
 
 function checkAuth(req, res, next){

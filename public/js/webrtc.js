@@ -888,9 +888,10 @@ function on_msg(msg) {
 			handleBan(msg);
 		}else if(msg.subtype == "bannedok"){
 			PARTNERUSERID = msg.partneruserid;
-			alert('partneruserid ' + msg.partneruserid+" name : " + msg.name);
-			note({ content: msg.message, type: "info", time: 5 });
+			//alert('user ip ' + msg.ip);
+			//note({ content: msg.message, type: "info", time: 5 });
 			console.log('message ', msg.message);
+			handleBanIp(msg);
 			stopInkognito();
 		}else if(msg.subtype == 'lateroffer'){
 			inkognitoSetRemoteDescription(msg);
@@ -1338,8 +1339,8 @@ async function pleaseDoCall(msg){
  function handleBan(obj){
 	 arsch = obj.from;
 	 bika = true;
-	 wsend({ type: "target", partneruserid: gid('userId').value, name:gid('userName').value,subtype: "bannedok", target: obj.from, message: "OK, banned!" });
-	
+	 wsend({ type: "target",ip: gid('userIp').value, partneruserid: gid('userId').value, name:gid('userName').value,subtype: "bannedok", target: obj.from, message: "OK, banned!" });
+	/*
 	 try{
 	 window.localStorage.setItem("ban", "yes");
 	 wsend({ type: "target", subtype: "bannedok", name:gid('userName').value, partneruserid: gid('userId').value, target: obj.from, message: "in a party" });
@@ -1347,8 +1348,9 @@ async function pleaseDoCall(msg){
 	  wsend({ type: "target", name:gid('userName').value, partneruserid: gid('userId').value, subtype: "bannedok", target: obj.from, message: "oshibka dostupa" });
  }
  wsend({ type: "target", name:gid('userName').value, partneruserid: gid('userId').value, subtype: "bannedok", target: obj.from, message: "after partty!" });
+	*/
 	 window.location.href = "#banned";
-	  closeAll(startbtn);
+	 closeAll(startbtn);
  }
 function  handleMessage(msg, bool){
 	//alert(1);
@@ -1603,6 +1605,9 @@ async function start(el){
 	var brole = gid('Brole');
 	console.log('brole ', brole.value);
 	let userName=gid('userName').value;
+	let usip = gid('userIp').value;
+	//alert(usip);
+	
 	/*
 	 if(gid('isLogin').value == "false"){
 		let s = (L()=="ru"?"Залогиньтесь!":L()=='en'?"Please log in":L()=='zh'?'请登录':L()=='id'?'Silahkan masuk':'')
@@ -1670,11 +1675,28 @@ async function start(el){
 	let sdata = {};
 	sdata.myip = MYIP;
 	sdata.usid = gid('userId').value;
-	//vax('post','/api/checkBanned', sdata, on_check_banned, on_check_banned_error, null, false);
+	//('povaxst','/api/checkBanned', sdata, on_check_banned, on_check_banned_error, null, false);
 	
 	
 	if(el.getAttribute("data-start") == "no"){
 	//	pl();
+	try{
+	let sip = 	await fetch('/checkip', {method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify({ip: usip })});
+	  if(sip.ok){
+		  let di = await sip.json();
+		  if(di.error){
+			  console.error(di.message);
+		  }
+		  if(di.message == usip){
+			  window.location.href = "#banned";
+			  return;
+		  }else{
+			  console.log('ip ok clear');
+		  }
+	  }
+	}catch(e){
+		console.error(e);
+	}
 		el.disabled = true;
 			//document.body.click();
 		if(local.srcObject==null){

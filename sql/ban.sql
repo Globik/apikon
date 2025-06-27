@@ -1,7 +1,7 @@
  -- source /home/globi/apikon/sql/ban.sql
 -- source /root/apikon/sql/ban.sql
 -- sudo mysql -u root -p
--- user roulet
+-- use roulet
 
 drop table if exists ban cascade;
 CREATE TABLE IF NOT EXISTS ban(
