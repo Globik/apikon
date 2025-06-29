@@ -1117,7 +1117,7 @@ async function sendTelega(obj){
 		text: obj.txt
 	});
 	}catch(e){
-		console.log(e);
+		//console.log(e);
 		}
 }
 app.post('/api/takeCb3', async(req, res)=>{

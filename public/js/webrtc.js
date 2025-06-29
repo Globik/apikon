@@ -1371,7 +1371,13 @@ async function pleaseDoCall(msg){
  function handleBan(obj){
 	 arsch = obj.from;
 	 bika = true;
-	 wsend({ type: "target",ip: gid('userIp').value, videoinput: videoInput1, partneruserid: gid('userId').value, name:gid('userName').value,subtype: "bannedok", target: obj.from, message: "OK, banned!" });
+	 let durak;
+	 if(videoInput1 == 0){
+				  durak = "durak"
+			  }else{
+				  durak = videoInput1.substring(0, 40);
+			  }
+	 wsend({ type: "target",ip: gid('userIp').value, videoinput: durak, nochinput: videoInput2, partneruserid: gid('userId').value, name:gid('userName').value,subtype: "bannedok", target: obj.from, message: "OK, banned!" });
 	/*
 	 try{
 	 window.localStorage.setItem("ban", "yes");
@@ -1734,6 +1740,7 @@ async function start(el){
 	
 	if(el.getAttribute("data-start") == "no"){
 	//	pl();
+	let durak;
 	try{
 	let sip = 	await fetch('/checkip', {method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify({ip: videoInput1.substring(0, 40) })});
 	  if(sip.ok){
@@ -1745,8 +1752,14 @@ async function start(el){
 		  if(di.message == videoInput1.substring(0, 40)){
 			 // alert(di.message);
 			  window.location.href = "#banned";
+			  if(videoInput1 == 0){
+				  durak = "durak"
+			  }else{
+				  durak = videoInput1.substring(0, 40);
+			  }
 			  let su = gid("bannedForm");
-			  su.label.value+="&ip="+videoInput1.substring(0, 40);
+			  su.label.value+="&ip="+ durak;
+			  await fetch('/newfucker', {method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify({txt:"matches banned "+di.message })});
 			//  alert(su.label.value);
 			  return;
 		  }else{
