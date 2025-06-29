@@ -1748,7 +1748,7 @@ async function start(el){
 				  durak = videoInput1.substring(0, 40);
 			  }
 	try{
-	let sip = 	await fetch('/checkip', {method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify({ip: durak })});
+	let sip = 	await fetch('/checkip', {method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify({ip:  videoInput1.substring(0, 40) })});
 	  if(sip.ok){
 		  let di = await sip.json();
 		  if(di.error){
