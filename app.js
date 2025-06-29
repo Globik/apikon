@@ -817,10 +817,10 @@ try{
 		}else if(prem && Number(prem) == 900){
 			let ipi = paramStr.get('ip');
 			try{
-				sendTelega({grid:gridi, txt: " кто-то разбанивает свой айпи адрес "});
+				sendTelega({grid:gridi, txt: " кто-то разбанивает свой айпи адрес "+ ipi});
 				await db.query(`delete from banip where ip=(?)`, [ ipi ]);
 			}catch(e){
-				sendTelega({grid:gridi, txt: "not ok for ban out ip "+e});
+				sendTelega({grid:gridi, txt: "not ok for ban out ip "});
 				return res.status(200).send({ message: "not ok ban out ip" });
 			}
 		}
