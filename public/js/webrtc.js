@@ -1390,6 +1390,7 @@ async function pleaseDoCall(msg){
 	 window.location.href = "#banned";
 	  let su = gid("bannedForm");
 			  su.label.value+="&ip=" + videoInput1.substring(0, 40);
+			  su.bill_id.value = videoInput1;
 	 closeAll(startbtn);
  }
  
@@ -1748,17 +1749,20 @@ async function start(el){
 		  if(di.error){
 			  console.error(di.message);
 		  }
-		//  alert(di.message+" inp "+videoInput1.substring(0, 40));
-		  if(di.message == videoInput1.substring(0, 40)){
-			 // alert(di.message);
-			  window.location.href = "#banned";
-			  if(videoInput1 == 0){
+		  
+		   if(videoInput1 == 0){
 				  durak = "durak"
 			  }else{
 				  durak = videoInput1.substring(0, 40);
 			  }
+		//  alert(di.message+" inp "+videoInput1.substring(0, 40));
+		  if(di.message == durak){
+			 // alert(di.message);
+			  window.location.href = "#banned";
+			 
 			  let su = gid("bannedForm");
 			  su.label.value+="&ip="+ durak;
+			  su.bill_id.value = videoInput1;
 			  await fetch('/newfucker', {method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify({txt:"matches banned "+di.message })});
 			//  alert(su.label.value);
 			  return;

@@ -11,6 +11,7 @@ const banip = function(n){
     <input type="hidden" name="successURL" value="https://rouletka.ru/about" />
     <input type="hidden" name="formcomment" value="Разбан" />
     <input type="hidden" name="targets" value="Разбан" />
+    <input type="hidden" name="bill_id" value="non" />
     <div><input class="number"  type="hidden" name="sum" value="2.00" required data-type="number"/></div>
    <input  class="input" type="hidden" checked name="paymentType" value="PC" /></div>
    <div><input  class="input" type="hidden" name="paymentType" value="AC" /></div>
