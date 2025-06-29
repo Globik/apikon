@@ -1047,7 +1047,10 @@ function inkognitoaddStream({ track, streams }){
 			audioel.className = "audioel";
 			audioel.srcObject = streams[0];
 			audioel.autoplay = true;
+			audioel.muted = false;
 			document.body.appendChild(audioel);
+			audioel.play();
+			audioel.volume = 1.0;
 			alert('audioel');
 		}
 	var videoBox = gid("videoBox");
