@@ -1742,19 +1742,20 @@ async function start(el){
 	if(el.getAttribute("data-start") == "no"){
 	//	pl();
 	let durak;
+	 if(videoInput1 == 0){
+				  durak = "durak"
+			  }else{
+				  durak = videoInput1.substring(0, 40);
+			  }
 	try{
-	let sip = 	await fetch('/checkip', {method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify({ip: videoInput1.substring(0, 40) })});
+	let sip = 	await fetch('/checkip', {method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify({ip: durak })});
 	  if(sip.ok){
 		  let di = await sip.json();
 		  if(di.error){
 			  console.error(di.message);
 		  }
 		  
-		   if(videoInput1 == 0){
-				  durak = "durak"
-			  }else{
-				  durak = videoInput1.substring(0, 40);
-			  }
+		  
 		//  alert(di.message+" inp "+videoInput1.substring(0, 40));
 		  if(di.message == durak){
 			 // alert(di.message);
