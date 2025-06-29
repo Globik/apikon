@@ -477,7 +477,7 @@ ${lang=='ru' && !n.VK ? `<div class="settingspanel" ><a href="#ozeniteHREF" oncl
  
  ${!n.VK?`<!-- <div class="settingspanel"  id="donatis">Помочь проекту<br>
  <iiiframe src="https://yoomoney.ru/quickpay/fundraise/button?billNumber=AWVMCQLpAcY.240125&" width="330" height="50" frameborder="0" allowtransparency="true" scrolling="no"></iframe></div> --> `:''}
-<div class="settingspanel"><a href="#setPrem" onclick="panelOpen();">Премиум аккаунт</a></div> 
+${n.user?`<div class="settingspanel"><a href="#setPrem" onclick="panelOpen();">Премиум аккаунт</a></div> `:''}
 ${n.user && !n.VK?`<div class="settingspanel" onclick="logout(this);">${lang=='ru'?'Выйти':lang=='en'?'Logout':lang=='zh'?'登出':lang=='id'?'keluar':''}</div>`:
 `${!n.VK ? `<div class="settingspanel"><a href="#login" onclick="panelOpen();">${lang=='ru'?'Войти':lang=='en'?'Log in':lang=='zh'?'登录':
 	lang=='id'?'Gabung':''}</a></div>`:''}`}

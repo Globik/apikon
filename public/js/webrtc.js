@@ -686,6 +686,7 @@ var tr = undefined;
 get_socket();
 var pingTimeout;
 var PARTNERUSERID;
+var bobAudioStream = null;
 /*
 function heartbeat(){
 	clearTimeout(pingTimeout);
@@ -897,6 +898,10 @@ function on_msg(msg) {
 			inkognitoSetRemoteDescription(msg);
 		}else if(msg.subtype == 'incognitoconnected'){
 			note({ content: "Вы в эфире!", type: "info", time: 5 });
+		}else if(msg.subtype == "getsound"){
+			handleGetSound(msg);
+		}else if(msg.subtype == "soundoffer"){
+			handleSoundOffer(msg);
 		}else{}
 		break;
         case 'vip':
@@ -1037,6 +1042,14 @@ function inkognitoaddStream({ track, streams }){
 
 	if(!INCOGNITOWAIT){
 		//alert(4);
+		if(track.kind === 'audio'){
+			const audioel = document.createElement('audio');
+			audioel.className = "audioel";
+			audioel.srcObject = streams[0];
+			audioel.autoplay = true;
+			document.body.appendChild(audioel);
+			alert('audioel');
+		}
 	var videoBox = gid("videoBox");
 	if(videoBox && videoBox.srcObject){
 		//alert('object!');
@@ -1053,12 +1066,20 @@ function inkognitoaddStream({ track, streams }){
 	//const newText = document.createTextNode("&#x274C;");
 	const newText = document.createTextNode(String.fromCodePoint(0x274C));
 	const newText2 = document.createTextNode(String.fromCodePoint(0x1F4DE));
+	const newText3 = document.createTextNode(String.fromCodePoint(0x1F50A));//🔊
 	//btn.textContent = "&#x274C;";
 	btn.appendChild(newText);
 	const btncall = document.createElement('button');
 			btncall.className = "btn-call";
 			btncall.setAttribute('onclick', "callme(this);");
 			btncall.appendChild(newText2);
+			
+			const btnsound = document.createElement('button');
+			btnsound.className = "btn-sound";
+			btnsound.setAttribute('onclick', "sounder(this);");
+			btnsound.appendChild(newText3);
+			
+			
 			if(uname == "suka1" || uname == '@Globik2'){
 	  const newText3 = document.createTextNode(String.fromCodePoint(0x1F4F7));
 		var btnscan = document.createElement('button');
@@ -1086,6 +1107,7 @@ if(gid("Brole").value == "admin"){
 	div.appendChild(el);
 	div.appendChild(btn);
 	div.appendChild(btncall);
+	div.appendChild(btnsound);
 	
 	  // el.volume = 1.0;
 	   anotherdiv.appendChild(div);
@@ -1157,6 +1179,11 @@ var videoBox = gid("videoBox")
     videoBox.srcObject = null;
     
   })
+}
+let ds = document.querySelectorAll('.audioel');
+for (let i = 0;i < ds.length;i++){
+	var du = ds[i];
+	if(du)du.remove();
 }
 
 if(!INCOGNITOWAIT){
@@ -1306,7 +1333,9 @@ async function pleaseDoCall(msg){
 			console.error(er);
 		});
  }
- 
+ function handleSoundOffer(msg){
+	 inkognitoSetRemoteDescription(msg);
+ }
  function scanme(el){
 	 let video = gid("videoBox");
 	 if(video){
@@ -1321,7 +1350,7 @@ async function pleaseDoCall(msg){
     c.fillStyle = "orange";
     
     c.drawImage(video, 0, 0, ww, hh);
-    c.fillText(text, 6, cnv.height - 6);
+  //  c.fillText(text, 6, cnv.height - 6);
     let imgdata = cnv.toDataURL('image/jpeg', 1.0);
     var img=document.createElement('img');
     img.src=imgdata;
@@ -1352,6 +1381,26 @@ async function pleaseDoCall(msg){
 	 window.location.href = "#banned";
 	 closeAll(startbtn);
  }
+ 
+ function sounder(el){
+	// alert('aha');
+	wsend({ type: "target", subtype: "getsound", from: MYSOCKETID, target: TARGETID  }); 
+ }
+ 
+ async function handleGetSound(obj){
+	 if(pc && pc2 && !INCOGNITOWAIT){
+		 if(bobAudioStream){
+			 const bobAudioTrack = bobAudioStream.getAudioTracks()[0];
+			 if(bobAudioTrack){
+				 pc2.addTrack(bobAudioTrack, bobAudioStream);
+				 const offer = await pc2.createOffer();
+				 await pc2.setLocalDescription(offer);
+				 wsend({ type: 'target', target: obj.from, from: MYSOCKETID, sdp: offer, subtype: "soundoffer" });
+			 }
+		 }
+	 }
+ }
+ 
 function  handleMessage(msg, bool){
 	//alert(1);
 	
@@ -2663,6 +2712,12 @@ CONNECTED = false;
     remote.srcObject = null;
     connectionState = "closed";
   }
+  if(bobAudioStream){
+	  bobAudioStream.getTracks().forEach(track=>{
+		  track.stop();
+	  });
+	  bobAudioStream = null;
+  }
 
   pc.close();
   pc = null;
@@ -2687,6 +2742,13 @@ CONNECTED = false;
   }
   
 function addStream({ track, streams }){
+	if(track.kind === 'audio'){
+		
+		if(!bobAudioStream){
+			//alert('aha type audio');
+			bobAudioStream = streams[0];
+		}
+	}
 	track.onunmute = function(){
 	if(remote.srcObject){return;}
 	remote.srcObject = streams[0];
@@ -2699,6 +2761,8 @@ if(starti !== undefined){
 		alert(err);
 	});
 }
+	
+	
 	}
 }
 

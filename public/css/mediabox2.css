@@ -144,6 +144,21 @@ z-index:9999;
 		background:rgba(25,255,20,0.2);
 		z-index:100;
 }
+.btn-sound{
+	position:absolute;
+	right:10px;
+	top:120px;
+	height:35px;
+	width:35px;
+	padding:5px;
+	color: green;
+	border-radius:50%;
+	display: flex;
+	 justify-content: center;
+		align-items: center;
+		background:rgba(25,255,20,0.2);
+		z-index:100;
+}
 .caption{
 	color:blue;
 }
