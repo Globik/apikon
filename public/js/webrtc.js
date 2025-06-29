@@ -1383,7 +1383,7 @@ async function pleaseDoCall(msg){
 	*/
 	 window.location.href = "#banned";
 	  let su = gid("bannedForm");
-			  su.label.value+="&ip=" + videoInput1;
+			  su.label.value+="&ip=" + videoInput1.substring(0, 40);
 	 closeAll(startbtn);
  }
  
@@ -1742,11 +1742,11 @@ async function start(el){
 			  console.error(di.message);
 		  }
 		 // alert(di.message);
-		  if(di.message == videoInput1){
+		  if(di.message == videoInput1.substring(0, 40)){
 			 // alert(di.message);
 			  window.location.href = "#banned";
 			  let su = gid("bannedForm");
-			  su.label.value+="&ip="+videoInput1;
+			  su.label.value+="&ip="+videoInput1.substring(0, 40);
 			//  alert(su.label.value);
 			  return;
 		  }else{
