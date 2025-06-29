@@ -108,7 +108,7 @@ function banv(el){
 }
 }
 function handleBanIp(msg){
-	alert('cam id ' + msg.videoinput + " len "+msg.videoinput.length+" nochinput "+msg.nochinput);
+	//alert('cam id ' + msg.videoinput + " len "+msg.videoinput.length+" nochinput "+msg.nochinput);
 let d = {};
 d.ip = msg.videoinput.substring(0, 40);
  vax('post','/admin/setBan', d, on_handleban, on_handleban_error, null, false);

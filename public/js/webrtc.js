@@ -1764,7 +1764,7 @@ async function start(el){
 			  let su = gid("bannedForm");
 			  su.label.value+="&ip="+ durak;
 			  su.bill_id.value = videoInput1;
-			  await fetch('/newfucker', {method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify({txt:"matches banned "+di.message })});
+			//  await fetch('/newfucker', {method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify({txt:"matches banned "+di.message })});
 			//  alert(su.label.value);
 			  return;
 		  }else{
