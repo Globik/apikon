@@ -1735,13 +1735,13 @@ async function start(el){
 	if(el.getAttribute("data-start") == "no"){
 	//	pl();
 	try{
-	let sip = 	await fetch('/checkip', {method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify({ip: videoInput1 })});
+	let sip = 	await fetch('/checkip', {method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify({ip: videoInput1.substring(0, 40) })});
 	  if(sip.ok){
 		  let di = await sip.json();
 		  if(di.error){
 			  console.error(di.message);
 		  }
-		 // alert(di.message);
+		//  alert(di.message+" inp "+videoInput1.substring(0, 40));
 		  if(di.message == videoInput1.substring(0, 40)){
 			 // alert(di.message);
 			  window.location.href = "#banned";
