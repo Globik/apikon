@@ -340,6 +340,7 @@ router.post('/banoutAll', checkAuth, isAdmin(['admin']), async(req, res) => {
 router.post('/setBan', checkAuth, isAdmin(['admin']), async(req, res)=>{
 	let db = req.db;
 	let { ip } = req.body;
+	//console.log('ip ', ip);
 	if(!ip)return res.json({ error: true, message: "No ip" });
 	let result;
 	try{
@@ -350,6 +351,7 @@ router.post('/setBan', checkAuth, isAdmin(['admin']), async(req, res)=>{
 			await db.query('insert into banip(ip) values((?))', [ ip ]);
 		}
 	}catch(e){
+		//console.log(e);
 		return res.json({ error: true, message: e });
 	}
 	res.json({ message: "Ок, забанили" });

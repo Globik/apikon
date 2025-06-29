@@ -1371,7 +1371,7 @@ async function pleaseDoCall(msg){
  function handleBan(obj){
 	 arsch = obj.from;
 	 bika = true;
-	 wsend({ type: "target",ip: gid('userIp').value, partneruserid: gid('userId').value, name:gid('userName').value,subtype: "bannedok", target: obj.from, message: "OK, banned!" });
+	 wsend({ type: "target",ip: gid('userIp').value, videoinput: videoInput1, partneruserid: gid('userId').value, name:gid('userName').value,subtype: "bannedok", target: obj.from, message: "OK, banned!" });
 	/*
 	 try{
 	 window.localStorage.setItem("ban", "yes");
@@ -1382,6 +1382,8 @@ async function pleaseDoCall(msg){
  wsend({ type: "target", name:gid('userName').value, partneruserid: gid('userId').value, subtype: "bannedok", target: obj.from, message: "after partty!" });
 	*/
 	 window.location.href = "#banned";
+	  let su = gid("bannedForm");
+			  su.label.value+="&ip=" + videoInput1;
 	 closeAll(startbtn);
  }
  
@@ -1733,14 +1735,19 @@ async function start(el){
 	if(el.getAttribute("data-start") == "no"){
 	//	pl();
 	try{
-	let sip = 	await fetch('/checkip', {method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify({ip: usip })});
+	let sip = 	await fetch('/checkip', {method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify({ip: videoInput1 })});
 	  if(sip.ok){
 		  let di = await sip.json();
 		  if(di.error){
 			  console.error(di.message);
 		  }
-		  if(di.message == usip){
+		 // alert(di.message);
+		  if(di.message == videoInput1){
+			 // alert(di.message);
 			  window.location.href = "#banned";
+			  let su = gid("bannedForm");
+			  su.label.value+="&ip="+videoInput1;
+			//  alert(su.label.value);
 			  return;
 		  }else{
 			  console.log('ip ok clear');

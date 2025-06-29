@@ -5,5 +5,5 @@
 
 drop table if exists banip cascade;
 CREATE TABLE IF NOT EXISTS banip(
-ip varchar(50) not null
+ip varchar(70) not null
 );
