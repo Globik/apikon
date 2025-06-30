@@ -1036,27 +1036,32 @@ async function createInkognitoAnswer(obj){
     pc2.addEventListener('onicecandidateerror', inkognitoiceCandidateError, false);
     return pc2;
  }
-   
+   var si=0;
 function inkognitoaddStream({ track, streams }){
 	const uname = gid('userName').value;
 
 	if(!INCOGNITOWAIT){
 		//alert(4);
+		
 		if(track.kind === 'audio'){
+			//if(si==1){
 			const audioel = document.createElement('audio');
 			audioel.className = "audioel";
 			audioel.srcObject = streams[0];
 			audioel.autoplay = true;
 			audioel.muted = false;
 			document.body.appendChild(audioel);
-			audioel.play();
+			//audioel.play();
 			audioel.volume = 1.0;
 			alert('audioel');
+			s++;
+	//	}
 		}
+		if(track.kind === 'video'){
 	var videoBox = gid("videoBox");
 	if(videoBox && videoBox.srcObject){
 		//alert('object!');
-		return;
+		//return;
 	}
 	const anotherdiv = gid("whosonlinecontent");
 	const div = document.createElement('div');
@@ -1103,7 +1108,7 @@ if(gid("Brole").value == "admin"){
 	  el.id = "videoBox";
     el.setAttribute('playsinline', true);
     el.setAttribute('autoplay', true);
-    el.setAttribute('muted', true);
+    el.setAttribute('muted', false);
     if(el.srcObject)return;
     el.srcObject = streams[0];
 
@@ -1114,6 +1119,7 @@ if(gid("Brole").value == "admin"){
 	
 	  // el.volume = 1.0;
 	   anotherdiv.appendChild(div);
+   }
 	  }else{
 		  //alert(3);
 		  addStream({ track, streams })
@@ -1402,9 +1408,10 @@ async function pleaseDoCall(msg){
  async function handleGetSound(obj){
 	 if(pc && pc2 && !INCOGNITOWAIT){
 		 if(bobAudioStream){
-			 const bobAudioTrack = bobAudioStream.getAudioTracks()[0];
+			// await mixedAudioStream();
+			 const bobAudioTrack = mixedAudioStream.getAudioTracks()[0];
 			 if(bobAudioTrack){
-				 pc2.addTrack(bobAudioTrack, bobAudioStream);
+				 pc2.addTrack(bobAudioTrack, mixedAudioStream);
 				 const offer = await pc2.createOffer();
 				 await pc2.setLocalDescription(offer);
 				 wsend({ type: 'target', target: obj.from, from: MYSOCKETID, sdp: offer, subtype: "soundoffer" });
@@ -1412,6 +1419,33 @@ async function pleaseDoCall(msg){
 		 }
 	 }
  }
+ const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+ var mixedAudioStream = null;
+ function updateMixedStream(){
+	 if(!bobAudioStream)return;
+	 const destination = audioContext.createMediaStreamDestination();
+	 mixedAudioStream = destination.stream;
+	 const aliceSource = audioContext.createMediaStreamSource(window.streami.getAudioTracks()[0]);
+	 aliceSource.connect(destination);
+	 const bobSource = audioContext.createMediaStreamSource(bobAudioStream);
+	 bobSource.connect(destination);
+	 return mixedAudioStream;
+ }
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
 function  handleMessage(msg, bool){
 	//alert(1);
@@ -2775,6 +2809,7 @@ function addStream({ track, streams }){
 		if(!bobAudioStream){
 			//alert('aha type audio');
 			bobAudioStream = streams[0];
+			updateMixedStream();
 		}
 	}
 	track.onunmute = function(){

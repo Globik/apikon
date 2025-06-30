@@ -526,7 +526,7 @@ ${n.user && !n.VK?`<div class="settingspanel" onclick="logout(this);">${lang=='r
     </div> 
     <section id="mobileloader"><div class="loader"></div></section>
     
-    <video id="remote"  class="Vid" autoplay playsinline poster="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"></video>
+    <video id="remote"  class="Vid" autoplay playsinline  poster="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"></video>
      <div id="duka2">Жизнь как рулетка. Никогда не узнаешь, кого встретишь следующим...</div>
      <!-- MOBILE! -->
  <section id="mobileChat" class="hide">
