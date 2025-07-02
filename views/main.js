@@ -526,11 +526,11 @@ ${n.user && !n.VK?`<div class="settingspanel" onclick="logout(this);">${lang=='r
     </div> 
     <section id="mobileloader"><div class="loader"></div></section>
     
-    <video id="remote"  class="Vid" autoplay playsinline  poster="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"></video>
+    <video id="remote"  class="Vid" autoplay playsinline poster="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"></video>
      <div id="duka2">Жизнь как рулетка. Никогда не узнаешь, кого встретишь следующим...</div>
      <!-- MOBILE! -->
  <section id="mobileChat" class="hide">
-		<div id="hidechat" onclick="hideChat(this);"><img class="chaticon" src="/img/chat.svg"/></div>
+		<div id="hidechat" onclick="hideChat(this);"><img  class="chaticon" src="/img/chat.svg"/></div>
 		
 		<div id="znakChat2">
 	<div id="znakPrint2" class="typing hidden">
@@ -1019,7 +1019,7 @@ ababa();
     </dialog>
     
     
-    
+    <audio style="display:none;" id="auel" autoplay></audio> 
     
    <script src="/js/login2.js"></script>
    

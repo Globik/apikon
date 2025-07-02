@@ -48,9 +48,10 @@ var isNegotiating = false;
 var SUECH = true;
 function L(){ return Lang.value; }
 const heartcountels = document.querySelectorAll("div.heartcount");
-var context = new (window.AudioContext || window.webkitAudioContext)();
+
+var audioContext;// = new (window.AudioContext || window.webkitAudioContext)();
 //var notes = new Sound(context);
-var nows = context.currentTime;
+//var nows = audioContext.currentTime;
 var tru;
 //const streamvideo = remote.captureStream();
 var partnernick;
@@ -924,9 +925,9 @@ function checkIp(ip){
 //localStorage.removeItem("ban")
 var ISINC = false;
 
-function callInkognito(el){
-	if(gid("Brole").value == "admin" || gid("Prem").value == "y") {
-		
+async function callInkognito(el){
+	//if(gid("Brole").value == "admin" || gid("Prem").value == "y") {
+		if(gid("Brole").value == "admin"){
 	console.log("MYSOCKETID ", MYSOCKETID);
 	//alert(MYSOCKETID);
 	if(pc){
@@ -941,6 +942,12 @@ function callInkognito(el){
 	note({ content: "Просмотр", type: "info", time: 5 });
 	TARGETID = a;
 	wsend({ type: "target", subtype: "callinkognito", from: MYSOCKETID, target: a });
+	try{
+		//await audioContext.resume();
+	}catch(e){
+		console.error(e);
+		alert(e);
+	}
 }
 }
 
@@ -1036,32 +1043,66 @@ async function createInkognitoAnswer(obj){
     pc2.addEventListener('onicecandidateerror', inkognitoiceCandidateError, false);
     return pc2;
  }
+ 
    var si=0;
-function inkognitoaddStream({ track, streams }){
+   var aliceAudioSource, bobAudioSource;
+   var destination;
+   var alice, bob;
+async function inkognitoaddStream({ track, streams }){
 	const uname = gid('userName').value;
-
+	const auel = gid('auel');
+//alert(track.kind)
 	if(!INCOGNITOWAIT){
 		//alert(4);
 		
 		if(track.kind === 'audio'){
-			//if(si==1){
+			//if(si==0){
+			/*
+			if(!audioContext){
+				await  setupAudioContext();
+			}
+			try{
+			var audioSource = audioContext.createMediaStreamSource(streams[0]);
+			//const audioSource = audioContext.createMediaStreamSource(streams[0]);
+			//const destination = audioContext.createMediaStreamDestination();
+			if(!aliceAudioSource.numberOfInputs){
+				
+				audioSource.connect(aliceAudioSource).connect(destination);
+			}else{
+				//bobAudioSource = audioContext.createMediaStreamSource(streams[0]);
+				//const gainNode = audioContext.createGain();
+				//gainNode.gain.value = 1.0;
+				audioSource.connect(bobAudioSource).connect(destination);
+				
+			}
+			
+			
 			const audioel = document.createElement('audio');
 			audioel.className = "audioel";
-			audioel.srcObject = streams[0];
+			audioel.srcObject = destination.stream;//streams[0];
 			audioel.autoplay = true;
 			audioel.muted = false;
 			document.body.appendChild(audioel);
-			//audioel.play();
-			audioel.volume = 1.0;
-			alert('audioel');
-			s++;
-	//	}
-		}
+			audioel.play().catch(er=>{alert(er)});
+			//audioel.volume = 1.0;
+			//alert('audioel '+si);
+			*/
+		//}
+		if(!alice){
+			alice = 'somedata';
+		}else{
+			bob ="data";
+			auel.srcObject = streams[0];
+			auel.play().catch(er=>{alert(er)});
+		}}
+	si++;
+//}catch(e){alert(e)}
+		//}
 		if(track.kind === 'video'){
 	var videoBox = gid("videoBox");
 	if(videoBox && videoBox.srcObject){
 		//alert('object!');
-		//return;
+		return;
 	}
 	const anotherdiv = gid("whosonlinecontent");
 	const div = document.createElement('div');
@@ -1109,7 +1150,7 @@ if(gid("Brole").value == "admin"){
     el.setAttribute('playsinline', true);
     el.setAttribute('autoplay', true);
     el.setAttribute('muted', false);
-    if(el.srcObject)return;
+   // if(el.srcObject)return;
     el.srcObject = streams[0];
 
 	div.appendChild(el);
@@ -1120,20 +1161,39 @@ if(gid("Brole").value == "admin"){
 	  // el.volume = 1.0;
 	   anotherdiv.appendChild(div);
    }
+
 	  }else{
 		  //alert(3);
 		  addStream({ track, streams })
 	  }
 }
+async function setupAudioContext(){
+	try{
+	audioContext = new (window.AudioContext || window.webkitAudioContext)();
+	destination = audioContext.createMediaStreamDestination();
+	aliceAudioSource = audioContext.createGain();
+	bobAudioSource = audioContext.createGain();
+	aliceAudioSource.gain.value = 1.0;
+	bobAudioSource.gain.value = 0.8;
+}catch(e){
+	alert(e);
+}
+}
+
 function stopInkognito(){
 	inkognitocloseVideoCall()
 }
+
  function inkognitoaddLocalStream () {
     var streami = window.streami;
  try{
     streami.getTracks().forEach(function(track){
 	pc2.addTrack(track, streami);
 	})
+	if(bobAudioStream){
+		const bobAudioTrack = bobAudioStream.getAudioTracks()[0];
+		pc2.addTrack(bobAudioTrack, bobAudioStream);
+	}
 }catch(e){
 	console.error(e);
 	}
@@ -1189,11 +1249,23 @@ var videoBox = gid("videoBox")
     
   })
 }
+bob = null;
+alice = null;
+const auel = gid('auel');
+if(auel.srcObject){
+	auel.srcObject.getTracks().forEach(track => {
+		console.log("track stop");
+    
+      track.stop()
+    })
+    auel.srcObject = null;
+}
+/*
 let ds = document.querySelectorAll('.audioel');
 for (let i = 0;i < ds.length;i++){
 	var du = ds[i];
 	if(du)du.remove();
-}
+}*/
 
 if(!INCOGNITOWAIT){
 	console.log("INCOGNITOWAIT ", INCOGNITOWAIT);
@@ -1400,9 +1472,12 @@ async function pleaseDoCall(msg){
 	 closeAll(startbtn);
  }
  
- function sounder(el){
+async function sounder(el){
+	 if(audioContext.state==='suspended'){
+		await audioContext.resume(); 
+	 }
 	// alert('aha');
-	wsend({ type: "target", subtype: "getsound", from: MYSOCKETID, target: TARGETID  }); 
+	//wsend({ type: "target", subtype: "getsound", from: MYSOCKETID, target: TARGETID  }); 
  }
  
  async function handleGetSound(obj){
@@ -1419,7 +1494,7 @@ async function pleaseDoCall(msg){
 		 }
 	 }
  }
- const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+ 
  var mixedAudioStream = null;
  function updateMixedStream(){
 	 if(!bobAudioStream)return;
@@ -2264,8 +2339,8 @@ return imgdata22;
 		mobileloader.className="";
 		txtvalue.disabled = false;
 		txtvalue2.disabled = false;
-		//mobileChat.className = "";
-		hideChat();
+		//mobileChat.className = "hide";
+		//hideChat();
 		duka2.className="";
 		CONNECTED = true;
 		if(INCOGNITOWAIT){
@@ -2289,7 +2364,7 @@ return imgdata22;
 	}
 	
 	function hideChat(el){
-		
+		//alert(mobChat);
 		if(!mobChat){
 		mobileChat.className = "";
 		textarea2.className = "";
@@ -2809,7 +2884,7 @@ function addStream({ track, streams }){
 		if(!bobAudioStream){
 			//alert('aha type audio');
 			bobAudioStream = streams[0];
-			updateMixedStream();
+			//updateMixedStream();
 		}
 	}
 	track.onunmute = function(){
