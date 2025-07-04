@@ -1851,10 +1851,19 @@ async function start(el){
 	if(el.getAttribute("data-start") == "no"){
 	//	pl();
 	let durak;
+	console.warn('FINGERPRINT ', fingerPrint);
 	 if(videoInput1 == 0){
-				  durak = fingerPrint.substring(0, 40);
+				if(fingerPrint) {
+					 durak = fingerPrint.substring(0, 40);
+				 }else{
+					 durak = 'no data'
+				 }
 			  }else{
-				  durak = videoInput1.substring(0, 40);
+				 if(videoInput1) {
+					 durak = videoInput1.substring(0, 40);
+				 }else{
+					 durak = 'no videoinput';
+				 }
 			  }
 	try{
 	let sip = 	await fetch('/checkip', { method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify({ip:  durak })});
@@ -3502,7 +3511,8 @@ function on_getInvoice_error(l,v){
 	
 }
 function getFingerPrint(){
-	if(videoInput1 != 0)return null;
+	alert(videoInput1);
+	if(videoInput1&&videoInput1 !=0)return null;
 	const canv = document.createElement('canvas');
 	const gl = canv.getContext('webgl') || canv.getContext('experimental-webgl');
 	if(!gl) return null;
@@ -3539,7 +3549,7 @@ async function setFingerPrint(){
 			  console.error(di.message);
 			  return;
 		  }
-		 // alert(di.str);
+		 alert(di.str);
 		 fingerPrint = di.str;
 	  }}catch(e){
 		  console.error(e);
