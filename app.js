@@ -816,9 +816,11 @@ try{
 			}
 		}else if(prem && Number(prem) == 900){
 			let ipi = paramStr.get('ip');
+			let coma = 'c';
 			try{
-				sendTelega({grid:gridi, txt: " кто-то разбанивает свой айпи адрес "+ ipi});
-				await db.query(`delete from banip where ip=(?)`, [ ipi ]);
+				
+				coma = await db.query(`delete from banip where ip=(?)`, [ ipi ]);
+				sendTelega({grid:gridi, txt: " кто-то разбанивает свой айпи адрес "+ ipi + ' coma ' + coma });
 			}catch(e){
 				sendTelega({grid:gridi, txt: "not ok for ban out ip "});
 				return res.status(200).send({ message: "not ok ban out ip" });
@@ -867,7 +869,22 @@ app.post('/api/removePremium', checkAuth, async(req, res)=>{
 	}
 	res.json({ message: 'ok' });
 })
-
+app.post('/setfingerprint', async(req, res)=>{
+	let { str } = req.body;
+	if(!str){
+		return res.json({ error: true, message: 'no string' });
+	}
+	let a;
+	try{
+		a = sha1(str);
+		res.json({ message: 'ok', str: a });
+	}catch(e){
+		res.json({ error: true, message: e});
+	}
+})
+function sha1(str){
+	return crypto.createHash('sha1').update(str).digest('hex');
+}
 app.post('/api/checkBanned', checkAuth, async(req, res)=>{
 	let { usid, myip } = req.body;
 	let db = req.db;

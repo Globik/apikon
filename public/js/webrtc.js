@@ -12,7 +12,7 @@ var connectionState = "closed";
 var mobChat = false;
 var isOpen = false;
 var PSENDER = false;
-
+var fingerPrint;
 var F = false;
 //var VK_USER = false;
 var isShow = false;
@@ -1852,12 +1852,12 @@ async function start(el){
 	//	pl();
 	let durak;
 	 if(videoInput1 == 0){
-				  durak = "durak"
+				  durak = fingerPrint.substring(0, 40);
 			  }else{
 				  durak = videoInput1.substring(0, 40);
 			  }
 	try{
-	let sip = 	await fetch('/checkip', {method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify({ip:  videoInput1.substring(0, 40) })});
+	let sip = 	await fetch('/checkip', { method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify({ip:  durak })});
 	  if(sip.ok){
 		  let di = await sip.json();
 		  if(di.error){
@@ -3501,3 +3501,49 @@ function on_getInvoice_error(l,v){
 	v.disabled = false;
 	
 }
+function getFingerPrint(){
+	if(videoInput1 != 0)return null;
+	const canv = document.createElement('canvas');
+	const gl = canv.getContext('webgl') || canv.getContext('experimental-webgl');
+	if(!gl) return null;
+	const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+	if(debugInfo){
+		var vendor = gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL);
+		var renderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
+		console.log('gpu vendor ', vendor);
+		console.log('gpu renderer ', renderer);
+		
+	}
+	gl.clearColor(0.0,0.0,0.0,1.0);
+	gl.clear(gl.COLOR_BUFFER_BIT);
+	const pixels = new Uint8Array(4);
+	gl.readPixels(0,0,1,1, gl.RGBA, gl.UNSIGNED_BYTE, pixels);
+	return {
+		vendor,
+		renderer,
+		pixels: Array.from(pixels),
+		canvasData: canv.toDataURL()
+	}
+}
+
+async function setFingerPrint(){
+	let a = getFingerPrint();
+	if(a){
+		console.log(a);
+		let str = `${a.vendor}&${a.renderer}&${a.pixels}&${a.canvasData}`;
+		try{
+	let sip = 	await fetch('/setfingerprint', {method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify({str:  str })});
+	  if(sip.ok){
+		  let di = await sip.json();
+		  if(di.error){
+			  console.error(di.message);
+			  return;
+		  }
+		 // alert(di.str);
+		 fingerPrint = di.str;
+	  }}catch(e){
+		  console.error(e);
+	  }
+	}
+}
+setFingerPrint()
