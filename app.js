@@ -820,7 +820,9 @@ try{
 			try{
 				
 				coma = await db.query(`delete from banip where ip=(?)`, [ ipi ]);
-				sendTelega({grid:gridi, txt: " кто-то разбанивает свой айпи адрес "+ ipi + ' coma ' + coma });
+				try{
+				sendTelega({grid:gridi, txt: " кто-то разбанивает свой айпи адрес "+ ipi + ' coma ' + JSON.stringify(coma) });
+			}catch(e){}
 			}catch(e){
 				sendTelega({grid:gridi, txt: "not ok for ban out ip "});
 				return res.status(200).send({ message: "not ok ban out ip" });
@@ -2172,7 +2174,7 @@ async function broadcast_publish(ws, obj){
 		 if(peerSocket){
 		// console.log("userId, nick, userId , nick ", socket.userId, ' ', socket.nick, ' ', peerSocket.userId, ' ', peerSocket.nick);
 		 if(peerSocket.isLogged == "no"){
-			 console.log('peerSocket NO logged!!!!');
+			// console.log('peerSocket NO logged!!!!');
 			 wsend(ws, { type: "error", err: "Собеседник не залогинен!"});
 			 return;
 		 }
