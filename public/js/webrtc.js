@@ -3511,7 +3511,7 @@ function on_getInvoice_error(l,v){
 	
 }
 function getFingerPrint(){
-	alert(videoInput1);
+//	alert(videoInput1);
 	if(videoInput1&&videoInput1 !=0)return null;
 	const canv = document.createElement('canvas');
 	const gl = canv.getContext('webgl') || canv.getContext('experimental-webgl');

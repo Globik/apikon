@@ -1553,7 +1553,7 @@ var ign=new Map(ed);
 var ed2=ign.has(3)
 console.log('suka ', ed2, " ", ign.size)
 //var bb=[...ign].some((l)=>l==2)
-console.log("isEven(1) ", isEven(1))
+//console.log("isEven(1) ", isEven(1))
 async function searchPeer (socket, msg, source) {
 	//console.log('msg****',msg);
 //searchPeer(socket, { type: 'peer-matched' }, { src: msg.src, ignores: msg.ignores })
@@ -2127,7 +2127,8 @@ if(msg.request == "mediasoup"){
     }
   })
 socket.on('error', function(e){
-	//console.log("ERROR ***: ", e);
+	console.log("ERROR ***: ", e);
+	socket.terminate();
 })
   socket.on('close', (code, reason) => {
 	  clearTimeout(this.pingTimeout);
