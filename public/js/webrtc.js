@@ -1451,11 +1451,20 @@ async function pleaseDoCall(msg){
 	 bika = true;
 	 let durak;
 	 if(videoInput1 == 0){
-				  durak = "durak"
+				if(fingerPrint) {
+					 durak = fingerPrint.substring(0, 40);
+				 }else{
+					 durak = 'no data'
+				 }
 			  }else{
-				  durak = videoInput1.substring(0, 40);
+				 if(videoInput1) {
+					 durak = videoInput1.substring(0, 40);
+				 }else{
+					 durak = 'no videoinput';
+				 }
 			  }
-	 wsend({ type: "target",ip: gid('userIp').value, videoinput: durak, nochinput: videoInput2, partneruserid: gid('userId').value, name:gid('userName').value,subtype: "bannedok", target: obj.from, message: "OK, banned!" });
+	 wsend({ type: "target",ip: gid('userIp').value,
+		  videoinput: durak, nochinput: videoInput2, partneruserid: gid('userId').value, name:gid('userName').value,subtype: "bannedok", target: obj.from, message: "OK, banned!" });
 	/*
 	 try{
 	 window.localStorage.setItem("ban", "yes");
