@@ -3549,7 +3549,7 @@ async function setFingerPrint(){
 			  console.error(di.message);
 			  return;
 		  }
-		 alert(di.str);
+		// alert(di.str);
 		 fingerPrint = di.str;
 	  }}catch(e){
 		  console.error(e);
