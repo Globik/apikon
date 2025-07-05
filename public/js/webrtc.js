@@ -1449,15 +1449,21 @@ async function pleaseDoCall(msg){
  function handleBan(obj){
 	 arsch = obj.from;
 	 bika = true;
-	 let durak;
+	 let durak = "some";
 	 if(videoInput1 == 0){
 				if(fingerPrint) {
 					 durak = fingerPrint.substring(0, 40);
 				 }else{
 					 durak = 'no data'
 				 }
+			  }else if(videoInput1 == undefined){
+				  if(fingerPrint) {
+					 durak = fingerPrint.substring(0, 40);
+				 }else{
+					 durak = 'no data'
+				 }
 			  }else{
-				 if(videoInput1) {
+				 if(videoInput1 !=0) {
 					 durak = videoInput1.substring(0, 40);
 				 }else{
 					 durak = 'no videoinput';
@@ -1867,8 +1873,14 @@ async function start(el){
 				 }else{
 					 durak = 'no data'
 				 }
+			  }else if(videoInput1 == undefined){
+				  if(fingerPrint) {
+					 durak = fingerPrint.substring(0, 40);
+				 }else{
+					 durak = 'no data'
+				 }
 			  }else{
-				 if(videoInput1) {
+				 if(videoInput1 !=0) {
 					 durak = videoInput1.substring(0, 40);
 				 }else{
 					 durak = 'no videoinput';

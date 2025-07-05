@@ -351,7 +351,7 @@ router.post('/setBan', checkAuth, isAdmin(['admin']), async(req, res)=>{
 			await db.query('insert into banip(ip) values((?))', [ ip ]);
 		}
 	}catch(e){
-		//console.log(e);
+		console.log(e);
 		return res.json({ error: true, message: e });
 	}
 	res.json({ message: "Ок, забанили" });

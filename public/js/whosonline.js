@@ -115,6 +115,7 @@ d.ip = msg.videoinput.substring(0, 40);
 }
 function  on_handleban(l, ev){
 	if(l.error){
+		alert(l.message);
 		note({ content: l.message, type: 'error', time: 5 });
 		return;
 	}
