@@ -1252,6 +1252,10 @@ console.log("MYSOCKETID ", MYSOCKETID);
   }
 var videoBox = gid("videoBox")
   if (videoBox && videoBox.srcObject) {
+	  if(window.recorder && window.recorder.state == 'recording'){
+	// note({content: "Closing rec", type: "info", time: 5 });
+ window.recorder.stop();
+}
 	  someVideoSource = null;
     videoBox.srcObject.getTracks().forEach(track => {
 		console.log("track stop");

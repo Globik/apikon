@@ -1451,9 +1451,9 @@ function convertTomp(obj){
 		if(obj.codec == 'video/webm;codecs=h264,opus'){
 		 du = ['-y','-i',obj.p,'-c:v','copy','./public/img/files/'+ obj.user_id+'.mp4'];
 	 }else if(obj.codec == 'video/webm;codecs=vp9,opus'){
-		 du = ['-y', '-i',obj.p,'-movflags','faststart','-profile:v','high','-level','4.2','-crf','18','./public/img/files/'+obj.user_id +'.mp4'];
+		 du = ['-y', '-i',obj.p,'-movflags','faststart','-profile:v','high','-level','4.2','-async', '1','-vsync','1','-crf','18','./public/img/files/'+obj.user_id +'.mp4'];
 	 }else if(obj.codec == 'video/webm;codecs=vp8,opus'){
-		 du = ['-y', '-i',obj.p,'-movflags','faststart','-profile:v','high','-level','4.2','-crf','18','./public/img/files/'+obj.user_id +'.mp4'];
+		 du = ['-y', '-i',obj.p,'-movflags','faststart','-profile:v','high','-level','4.2','-async','1','-vsync','1','-crf','18','./public/img/files/'+obj.user_id +'.mp4'];
 	 }else{}
 		const ls = spawn('ffmpeg', du);
 		ls.stderr.on('data', data=>{
