@@ -2117,7 +2117,7 @@ function makeRecord(stream){
 }catch(err){
 		alert('err in rec start '+err);
 }
-	recorder.start();
+	recorder.start(100);
 		setTimeout(function(){
 		imgdata2 = Screenshota();
 		imd = screeni();
@@ -2149,7 +2149,7 @@ function recordError(e){
 		window.removeEventListener('beforeunload', mama);
 	}
 function dataAvailable(e){
-	console.log('dataavailable ', e.data);
+	//console.log('dataavailable ', e.data);
 	if(e.data.size > 0) {
 		allChunks.push(e.data);
 		}
