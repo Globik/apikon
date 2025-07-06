@@ -821,7 +821,7 @@ try{
 				
 				coma = await db.query(`delete from banip where ip=(?)`, [ ipi ]);
 				try{
-				sendTelega({grid:gridi, txt: " кто-то разбанивает свой айпи адрес "+ ipi + ' coma ' + JSON.stringify(coma) });
+				sendTelega({grid:gridi, txt: " кто-то разбанивает свой айпи адрес "+ ipi });
 			}catch(e){}
 			}catch(e){
 				sendTelega({grid:gridi, txt: "not ok for ban out ip "});
@@ -1397,8 +1397,8 @@ let ab = await fsa.readFile(b);
 		//if(imgdata2)
 		f.append('thumbnail', new Blob([ab]));
 		f.append('duration', duration);
-		f.append('disable_notification', true);
-		f.append('caption', "Это я - <b>" + username + '</b> (' + userId + ') - зажигаю не по-детски в чат рулетке  на <a href="https://rouletka.ru/about">https://rouletka.ru</a>\n  Больше эротики в группе <a href="https://t.me/roulette7776">Рулетка</a>');
+		f.append('disable_notification', false);
+		//f.append('caption', "Это я - <b>" + username + '</b> (' + userId + ') - зажигаю не по-детски в чат рулетке  на <a href="https://rouletka.ru/about">https://rouletka.ru</a>\n  Больше эротики в группе <a href="https://t.me/roulette7776">Рулетка</a>');
 		f.append('parse_mode', 'html');
 		
 		const turl = `https://api.telegram.org/bot${tg_api}/sendVideo`;
@@ -1709,14 +1709,14 @@ async function sendFoti(socket,msg){
 	var f = new FormData();
 	f.append('chat_id', grid);
 	f.append('parse_mode', 'html');
-	f.append('caption', '<b>'+ socket.nick + ' (' + socket.userId + ')</b>'+ ' VK ' + socket.VK + ' \n <a href="https://rouletka.ru/about">https://rouletka.ru</a>');
+	//f.append('caption', '<b>'+ socket.nick + ' (' + socket.userId + ')</b>'+ ' VK ' + socket.VK + ' \n <a href="https://rouletka.ru/about">https://rouletka.ru</a>');
 	f.append('disable_notification', true);
 	f.append('photo', new Blob([buf]));
-	f.append('reply_markup', `{"inline_keyboard":[
+	/*f.append('reply_markup', `{"inline_keyboard":[
 	[{"text":"Make it gold","callback_data":"usid=${socket.userId}&action=gold&nick=${socket.nick}"}],
 	[{"text":"vual","callback_data":"usid=${socket.userId}&action=ban&grund=vual&ip=${socket.vip}&nick=${socket.nick}"}],
 	[{"text":"wix","callback_data":"usid=${socket.userId}&action=ban&grund=wix&ip=${socket.vip}&nick=${socket.nick}"}]
-	]}`);
+	]}`);*/
 	try{
 	let rr = await axios.post(`https://api.telegram.org/bot${tg_api}/sendPhoto`, f); 
 }catch(e){

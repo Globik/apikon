@@ -16,6 +16,7 @@ var fingerPrint;
 var F = false;
 //var VK_USER = false;
 var isShow = false;
+var someVideoSource;
 var someInterval;
 var goAg;
 var OPENCLAIM = false;
@@ -1049,6 +1050,7 @@ async function createInkognitoAnswer(obj){
    var destination;
    var alice, bob;
 async function inkognitoaddStream({ track, streams }){
+	
 	const uname = gid('userName').value;
 	const auel = gid('auel');
 //alert(track.kind)
@@ -1100,10 +1102,16 @@ async function inkognitoaddStream({ track, streams }){
 		//}
 		if(track.kind === 'video'){
 	var videoBox = gid("videoBox");
+	
 	if(videoBox && videoBox.srcObject){
 		//alert('object!');
+		//someVideoSource = streams[0];
 		return;
+	}else{
+		//alert(2);
+		someVideoSource = streams[0];
 	}
+	
 	const anotherdiv = gid("whosonlinecontent");
 	const div = document.createElement('div');
 	div.className = "videoboxdiv";
@@ -1116,6 +1124,7 @@ async function inkognitoaddStream({ track, streams }){
 	const newText = document.createTextNode(String.fromCodePoint(0x274C));
 	const newText2 = document.createTextNode(String.fromCodePoint(0x1F4DE));
 	const newText3 = document.createTextNode(String.fromCodePoint(0x1F50A));//🔊
+	const newText4 = document.createTextNode(String.fromCodePoint(0x1F4F9));
 	//btn.textContent = "&#x274C;";
 	btn.appendChild(newText);
 	const btncall = document.createElement('button');
@@ -1123,10 +1132,7 @@ async function inkognitoaddStream({ track, streams }){
 			btncall.setAttribute('onclick', "callme(this);");
 			btncall.appendChild(newText2);
 			
-			const btnsound = document.createElement('button');
-			btnsound.className = "btn-sound";
-			btnsound.setAttribute('onclick', "sounder(this);");
-			btnsound.appendChild(newText3);
+			
 			
 			
 			if(uname == "suka1" || uname == '@Globik2'){
@@ -1136,6 +1142,12 @@ async function inkognitoaddStream({ track, streams }){
 			btnscan.setAttribute('onclick', "scanme(this);");
 			btnscan.appendChild(newText3);
 			div.appendChild(btnscan);
+			
+			const btnsound = document.createElement('button');
+			btnsound.className = "btn-sound";
+			btnsound.setAttribute('onclick', "sounder(this);");
+			btnsound.appendChild(newText4);
+			div.appendChild(btnsound);
 }
 if(gid("Brole").value == "admin"){
 	var btnban = document.createElement('button');
@@ -1156,7 +1168,7 @@ if(gid("Brole").value == "admin"){
 	div.appendChild(el);
 	div.appendChild(btn);
 	div.appendChild(btncall);
-	div.appendChild(btnsound);
+	
 	
 	  // el.volume = 1.0;
 	   anotherdiv.appendChild(div);
@@ -1240,6 +1252,7 @@ console.log("MYSOCKETID ", MYSOCKETID);
   }
 var videoBox = gid("videoBox")
   if (videoBox && videoBox.srcObject) {
+	  someVideoSource = null;
     videoBox.srcObject.getTracks().forEach(track => {
 		console.log("track stop");
     
@@ -1266,6 +1279,8 @@ for (let i = 0;i < ds.length;i++){
 	var du = ds[i];
 	if(du)du.remove();
 }*/
+
+
 
 if(!INCOGNITOWAIT){
 	console.log("INCOGNITOWAIT ", INCOGNITOWAIT);
@@ -1433,12 +1448,33 @@ async function pleaseDoCall(msg){
     c.drawImage(video, 0, 0, ww, hh);
   //  c.fillText(text, 6, cnv.height - 6);
     let imgdata = cnv.toDataURL('image/jpeg', 1.0);
+    wsend({ type: "telegascreenshot", nick: (NICK?NICK:'Anonym'), src: imgdata });
     var img=document.createElement('img');
     img.src=imgdata;
     document.body.appendChild(img);
     //cnv.remove();
 	 }
  }
+ 
+ function screeni(){
+	  let video = gid("videoBox");
+	 if(video){
+		 let cnv = document.createElement('canvas');
+    let c = cnv.getContext('2d');
+    var ww = video.videoWidth;
+    var hh = video.videoHeight;
+    cnv.width = ww;
+    cnv.height = hh;
+    var text = "rouletka.ru";
+    c.font='bold 36px Robotics';
+    c.fillStyle = "orange";
+    
+    c.drawImage(video, 0, 0, ww, hh);
+  //  c.fillText(text, 6, cnv.height - 6);
+    let imgdata = cnv.toDataURL('image/jpeg', 1.0);
+    return imgdata;
+ }
+}
  var arsch;
  var bika = false;
  function ban(){
@@ -1487,12 +1523,11 @@ async function pleaseDoCall(msg){
 	 closeAll(startbtn);
  }
  
-async function sounder(el){
-	 if(audioContext.state==='suspended'){
-		await audioContext.resume(); 
-	 }
-	// alert('aha');
-	//wsend({ type: "target", subtype: "getsound", from: MYSOCKETID, target: TARGETID  }); 
+function sounder(el){
+	 //if(audioContext.state==='suspended'){await audioContext.resume(); }
+//alert(1)
+if(!someVideoSource)return;
+	makeRecord(someVideoSource)
  }
  
  async function handleGetSound(obj){
@@ -2049,6 +2084,7 @@ function onfoci(){
 
 var allChunks = [];
 var bubu;
+var imd;
 function makeRecord(stream){
 	
 	if(MediaRecorder.isTypeSupported('video/webm;codecs=h264,opus')){
@@ -2072,18 +2108,19 @@ function makeRecord(stream){
 	'video/webm;codecs=h264,opus',
 	'video/mp4;codecs=h264,aac'
 	*/ 
-	console.log('aaa ', aaa);
+	console.log('aaa ', bubu);
 	//note({ content: "type "+JSON.stringify(aaa), type: 'info', time: 20 });
 	var recorder;
 	try{
 	recorder = new MediaRecorder(stream, { mimeType: bubu });
 	window.recorder = recorder;
 }catch(err){
-//	alert('err in rec start '+err);
+		alert('err in rec start '+err);
 }
 	recorder.start();
 		setTimeout(function(){
 		imgdata2 = Screenshota();
+		imd = screeni();
 	},0)
 
 	
@@ -2094,6 +2131,7 @@ function makeRecord(stream){
 }	
 
  function recordStart(){
+	 note({ content: "Запись", type: "info", time: 5 });
 		dtimer = setInterval(function(){
 			DURATION++;
 			if(DURATION == 11) {
@@ -2124,7 +2162,8 @@ function dataAvailable(e){
 	 }
 		try{
 			clearInterval(dtimer);
-		const fullBlob = new Blob(allChunks, { bubu });
+			//someVideoSource = null;
+		const fullBlob = new Blob(allChunks,  {type:bubu} );
 		allChunks = [];
 		let b11;let blo;
 		if(imgdata2){
@@ -2132,9 +2171,15 @@ function dataAvailable(e){
     
 		//alert(b11);
 		blo = base64ToBlob(b11, 'image/jpg');
+	}else{
+		if(imd){
+			b11 = imd.split(',')[1];
+			blo = base64ToBlob(b11, 'image/jpg');
+		}
 	}
+	mediaRecorder = null;
 		const f = new FormData();
-		//console.log('fuulblob ', fullBlob);
+		console.log('fuulblob ', fullBlob , 'bubu ', bubu);
 		f.append('video', fullBlob, userId.value + '.webm');
 		f.append('thumbnail', blo, userId.value + '.jpg');
 		f.append('duration', DURATION);
@@ -2145,8 +2190,11 @@ function dataAvailable(e){
 		
 		const turl = "/api/filesupload";
 		let r = await fetch(turl, {method: 'POST', body: f});
+		if(r.ok){
 		let fd = await r.json();
 		console.log(fd);
+		note({ content: fd.message, type: "info", time: 5 });
+	}
 		window.removeEventListener('beforeunload', mama);
 	}catch(e){
 		console.error(e);
