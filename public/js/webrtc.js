@@ -1956,7 +1956,7 @@ async function start(el){
 		audio:true ,
 	video: {deviceId: videoInput1 ? {exact: videoInput1} : undefined,
 		width:320, height:240, 
-		frameRate:15
+		frameRate: 30
 		}
 		};
 	
@@ -2112,7 +2112,7 @@ function makeRecord(stream){
 	//note({ content: "type "+JSON.stringify(aaa), type: 'info', time: 20 });
 	var recorder;
 	try{
-	recorder = new MediaRecorder(stream, { mimeType: bubu });
+	recorder = new MediaRecorder(stream, { mimeType: bubu, videoBitsPerSecond: 5000000 });
 	window.recorder = recorder;
 }catch(err){
 		alert('err in rec start '+err);
