@@ -2099,13 +2099,14 @@ var bubu;
 var imd;
 function makeRecord(stream){
 	//video/webm;codecs=h264,opus
-	alert('video/webm;codecs=h264,opus ' + MediaRecorder.isTypeSupported('video/webm;codecs=h264,opus'));
-	alert('video/mp4;codecs=h264,aac ' + MediaRecorder.isTypeSupported('video/mp4;codecs=h264,aac'));
+	//alert('video/webm;codecs=h264,opus ' + MediaRecorder.isTypeSupported('video/webm;codecs=h264,opus'));
+	//alert('video/mp4;codecs=h264,aac ' + MediaRecorder.isTypeSupported('video/mp4;codecs=h264,aac'));
 	//( 'video/webm;codecs=vp8,opus ' , MediaRecorder.isTypeSupported('video/webm;codecs=vp8,opus'));
 	//alert('video/mp4;codecs=h264,aac ', MediaRecorder.isTypeSupported('video/mp4;codecs=h264,aac'));
+	/*
 	if(MediaRecorder.isTypeSupported('video/webm;codecs=h264,opus')){
 		bubu = 'video/webm;codecs=h264,opus';
-		bubu = 'video/webm;codecs=vp8,opus';
+	//	bubu = 'video/webm;codecs=vp8,opus';
 	}else if(MediaRecorder.isTypeSupported('video/webm;codecs=vp9,opus')){
 		bubu = 'video/webm;codecs=vp9,opus';
 	}else if(MediaRecorder.isTypeSupported('video/webm;codecs=vp8,opus')){
@@ -2115,6 +2116,19 @@ function makeRecord(stream){
 		// bubu = 'video/webm;codecs=vp8,opus';
 	}else{
 		bubu = "nothing supported";
+	}
+	*/ 
+	if(MediaRecorder.isTypeSupported('video/webm;codecs=vp8,opus')){
+		bubu = 'video/webm;codecs=vp8,opus';
+	}
+	if(MediaRecorder.isTypeSupported('video/webm;codecs=vp9,opus')){
+	bubu = 'video/webm;codecs=vp9,opus';	
+	}
+	if(MediaRecorder.isTypeSupported('video/webm;codecs=h264,opus')){
+		bubu = 'video/webm;codecs=h264,opus';
+	}
+	if(MediaRecorder.isTypeSupported('video/mp4;codecs=h264,aac')){
+		bubu = 'video/mp4;codecs=h264,aac';
 	}
 	//note({content: bubu, type: "info", time: 20 });
 	let aaa = gettypes();
