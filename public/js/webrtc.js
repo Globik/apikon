@@ -889,12 +889,19 @@ function on_msg(msg) {
 			}
 		}else if(msg.subtype == "ban"){
 			handleBan(msg);
+		}else if(msg.subtype == "ban2"){
+		//	alert('ban2');
+			handleBan2(msg);
 		}else if(msg.subtype == "bannedok"){
 			PARTNERUSERID = msg.partneruserid;
 			//alert('user ip ' + msg.ip);
 			//note({ content: msg.message, type: "info", time: 5 });
 			console.log('message ', msg.message);
 			handleBanIp(msg);
+			stopInkognito();
+		}else if(msg.subtype == "bannedok2"){
+		//	alert('bnok2');
+			note({ content: "Забанили суку", type: "info", time: 5 });
 			stopInkognito();
 		}else if(msg.subtype == 'lateroffer'){
 			inkognitoSetRemoteDescription(msg);
@@ -1118,8 +1125,8 @@ async function inkognitoaddStream({ track, streams }){
 	div.setAttribute ("id", "VideoDivi");
 	let btn = document.createElement('button');
 	btn.className = "btn-video-box";
-	//btn.setAttribute("data-box");
 	btn.setAttribute('onclick', "stopInkognito(this);");
+	
 	//const newText = document.createTextNode("&#x274C;");
 	const newText = document.createTextNode(String.fromCodePoint(0x274C));
 	const newText2 = document.createTextNode(String.fromCodePoint(0x1F4DE));
@@ -1155,6 +1162,12 @@ if(gid("Brole").value == "admin"){
 			btnban.setAttribute('onclick', "ban();");
 			btnban.textContent = "Ban";
 			div.appendChild(btnban);
+			
+			var btnban2 = document.createElement('button');
+			btnban2.className = "btn-ban2";
+			btnban2.setAttribute('onclick', "ban2();");
+			btnban2.textContent = "Ban2";
+			div.appendChild(btnban2);
 }
 	  let el = document.createElement('video');
 	  el.className = "video-box";
@@ -1486,6 +1499,43 @@ async function pleaseDoCall(msg){
 	//alert('userId '+gid('userId').value);
 	 wsend({ type: "target", subtype: "ban", from: MYSOCKETID, target: TARGETID  });
  }
+ 
+  function ban2(){
+	//alert('target '+ TARGETID+ ' my sock '+MYSOCKETID);
+	//alert('userId '+gid('userId').value);
+	 wsend({ type: "target", subtype: "ban2", from: MYSOCKETID, target: TARGETID  });
+ }
+ 
+ function handleBan2(obj){
+	 //alert(obj.from);
+	 let durak = "some";
+	 if(videoInput1 == 0){
+				if(fingerPrint) {
+					 durak = fingerPrint.substring(0, 40);
+				 }else{
+					 durak = 'no data'
+				 }
+			  }else if(videoInput1 == undefined){
+				  if(fingerPrint) {
+					 durak = fingerPrint.substring(0, 40);
+				 }else{
+					 durak = 'no data'
+				 }
+			  }else{
+				 if(videoInput1 !=0) {
+					 durak = videoInput1.substring(0, 40);
+				 }else{
+					 durak = 'no videoinput';
+				 }
+			  }
+	 window.location.href = "#banned";
+	  let sud = gid("lValue");
+			  sud.value+="&ip=" + durak;
+		wsend({ type: "target", subtype: "bannedok2", target: obj.from , from: MYSOCKETID});	 
+	 closeAll(startbtn);
+	 
+ }
+ 
  function handleBan(obj){
 	 arsch = obj.from;
 	 bika = true;
