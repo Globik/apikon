@@ -2098,7 +2098,11 @@ var allChunks = [];
 var bubu;
 var imd;
 function makeRecord(stream){
-	
+	//video/webm;codecs=h264,opus
+	alert('video/webm;codecs=h264,opus ' + MediaRecorder.isTypeSupported('video/webm;codecs=h264,opus'));
+	alert('video/mp4;codecs=h264,aac ' + MediaRecorder.isTypeSupported('video/mp4;codecs=h264,aac'));
+	//( 'video/webm;codecs=vp8,opus ' , MediaRecorder.isTypeSupported('video/webm;codecs=vp8,opus'));
+	//alert('video/mp4;codecs=h264,aac ', MediaRecorder.isTypeSupported('video/mp4;codecs=h264,aac'));
 	if(MediaRecorder.isTypeSupported('video/webm;codecs=h264,opus')){
 		bubu = 'video/webm;codecs=h264,opus';
 		bubu = 'video/webm;codecs=vp8,opus';
