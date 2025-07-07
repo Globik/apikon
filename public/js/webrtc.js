@@ -1520,10 +1520,13 @@ async function pleaseDoCall(msg){
  }
  wsend({ type: "target", name:gid('userName').value, partneruserid: gid('userId').value, subtype: "bannedok", target: obj.from, message: "after partty!" });
 	*/
+	if(!durak){
+		return;
+	}
 	 window.location.href = "#banned";
 	  let su = gid("bannedForm");
-			  su.label.value+="&ip=" + videoInput1.substring(0, 40);
-			  su.bill_id.value = videoInput1;
+			  su.label.value+="&ip=" + durak;
+			 // su.bill_id.value = videoInput1;
 	 closeAll(startbtn);
  }
  
@@ -1904,7 +1907,7 @@ async function start(el){
 	
 	if(el.getAttribute("data-start") == "no"){
 	//	pl();
-	let durak;
+	//let videoInput1=null;
 	console.warn('FINGERPRINT ', fingerPrint);
 	 if(videoInput1 == 0){
 				if(fingerPrint) {
@@ -1925,6 +1928,7 @@ async function start(el){
 					 durak = 'no videoinput';
 				 }
 			  }
+			  
 	try{
 	let sip = 	await fetch('/checkip', { method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify({ip:  durak })});
 	  if(sip.ok){
@@ -1937,11 +1941,15 @@ async function start(el){
 		//  alert(di.message+" inp "+videoInput1.substring(0, 40));
 		  if(di.message == durak){
 			 // alert(di.message);
+			 if(!durak){
+				 alert("Вы забанены");
+				 return;
+			 }
 			  window.location.href = "#banned";
 			 
 			  let su = gid("bannedForm");
 			  su.label.value+="&ip="+ durak;
-			  su.bill_id.value = videoInput1;
+			 // su.bill_id.value = videoInput1;
 			//  await fetch('/newfucker', {method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify({txt:"matches banned "+di.message })});
 			//  alert(su.label.value);
 			  return;
