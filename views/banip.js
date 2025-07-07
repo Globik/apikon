@@ -6,7 +6,7 @@ const banip = function(n){
     <p>Чтобы разбанить его, оплатите 150 рубля штрафа.</p>
     <form id="bannedForm" method="post" action="https://yoomoney.ru/quickpay/confirm" name="ordertodo">
     <div><input type="hidden"  placeholder="Получатель yoomoney" name="receiver" value="4100118676103827" required/> </div>
-	<input type="hidden" name="label" value="id=${n.user?n.user.id:'0'}&p=900"/>
+	<input type="hidden" id="lValue" name="label" value="id=${n.user?n.user.id:'0'}&p=900"/>
     <input type="hidden" name="quickpay-form" value="button" />
     <input type="hidden" name="successURL" value="https://rouletka.ru/about" />
     <input type="hidden" name="formcomment" value="Разбан" />

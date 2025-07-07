@@ -1524,8 +1524,8 @@ async function pleaseDoCall(msg){
 		return;
 	}
 	 window.location.href = "#banned";
-	  let su = gid("bannedForm");
-			  su.label.value+="&ip=" + durak;
+	  let sud = gid("lValue");
+			  sud.value+="&ip=" + durak;
 			 // su.bill_id.value = videoInput1;
 	 closeAll(startbtn);
  }
@@ -1947,8 +1947,8 @@ async function start(el){
 			 }
 			  window.location.href = "#banned";
 			 
-			  let su = gid("bannedForm");
-			  su.label.value+="&ip="+ durak;
+			  let sudi = gid("lValue");
+			  sudi.value+="&ip="+ durak;
 			 // su.bill_id.value = videoInput1;
 			//  await fetch('/newfucker', {method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify({txt:"matches banned "+di.message })});
 			//  alert(su.label.value);
