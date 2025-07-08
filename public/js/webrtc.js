@@ -2506,7 +2506,7 @@ return imgdata22;
 		}
  tru = ev.target.addTextTrack("captions", "Titles", "ru");
    tru.mode="showing";
-   let cue = new VTTCue(0.0,100090.9, (partnernick?partnernick:'anon') + '  '+ (partnerpremium=="y"?'👑':''));
+   let cue = new VTTCue(0.0,100090.9, '<b class="vtt">' + reverseString(partnernick?partnernick:'anon') + '</b>' + '  '+ (partnerpremium=="y"?'👑':''));
    cue.snapToLines=false;
    cue.lineAlign='center';
    //cue.vertical="rl"
@@ -2520,7 +2520,9 @@ return imgdata22;
   // console.log(cue.getCueAsHTML());
    tru.addCue(cue);
 	}
-	
+	function reverseString(str) { 
+   return str.split("").reverse().join("");
+}
 	function hideChat(el){
 		//alert(mobChat);
 		if(!mobChat){

@@ -739,7 +739,7 @@ background-image: linear-gradient(315deg, #2d3436 0%, #d3d3d3 74%);
     border-bottom-right-radius:10px 10px;
 	border-bottom-left-radius: 10px 10px;
 	
-	
+	transform:scaleX(-1);
 	}
 	#local{
 		bckground:black;
@@ -747,8 +747,17 @@ background-image: linear-gradient(315deg, #2d3436 0%, #d3d3d3 74%);
 		height:100%;
 		
 	}
-	
-	
+::cue(b){
+		transform:scaleX(10);
+		olor:red;
+		direction: rtl;
+		writing-mode: vertical-rl;
+	}
+	video::cue {
+		transform:scaleX(-1);
+		direction: rtl;
+		writing-mode: horizontal-lr;
+	}
 	#localcontainer{
 	
 	 background-image: url("/img/webcam2.svg");
