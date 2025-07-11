@@ -1523,7 +1523,14 @@ servi = https
     console.log('Started on https://rouletka.ru:' + port);
   });
 }
-const wsServer = new WebSocket.Server({server: servi/*, perMessageDeflate:{zlibDeflateOptions:3},zlibInflateOptions:{chunkSize:512}, threshold: 512 */});
+const ORIGINAL = "https://rouletka.ru";
+const wsServer = new WebSocket.Server({server: servi, verifyClient:(info,cb)=>{
+	console.log('info.origin: ', info.origin);
+if(process.env.DEVELOPMENT === "yes"){cb(true);return;}else{
+if(info.origin === ORIGINAL){cb(true);return;}
+cb(false);
+	}
+	},/*, perMessageDeflate:{zlibDeflateOptions:3},zlibInflateOptions:{chunkSize:512}, threshold: 512 */});
 
 
 let waitingQueue = [];
