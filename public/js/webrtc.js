@@ -1913,7 +1913,7 @@ async function start(el){
 	let usip = gid('userIp').value;
 	//alert(usip);
 	if( userName === "anon"){
-		  await fetch('/newfucker', {method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify({txt:"username "+userName +" id "+ gid('userId').value })});
+		//  await fetch('/newfucker', {method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify({txt:"username "+userName +" id "+ gid('userId').value })});
 	}
 	 if(gid('isLogin').value == "false" || userName == "anon"){
 		let s = (L()=="ru"?"Залогиньтесь!":L()=='en'?"Please log in":L()=='zh'?'请登录':L()=='id'?'Silahkan masuk':'')
@@ -1922,8 +1922,8 @@ async function start(el){
 		return;
 	  }
 	  
-	  if( userName === "undefined"){
-		  await fetch('/newfucker', {method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify({txt:"username "+userName })});
+	  if( userName === "undefined" || userName == "anon"){
+		  await fetch('/newfucker', {method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify({txt:"username "+userName+' id '+ gid('userId').value})});
 		 //let si = (L()=="ru"?"Залогиньтесь!":L()=='en'?"Please log in":L()=='zh'?'请登录':L()=='id'?'Silahkan masuk':'')
 		// note({content: si, type: "warn", time: 5 });
 	//window.location.href="#login";
