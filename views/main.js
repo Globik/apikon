@@ -463,7 +463,7 @@ lang=='zh'?'连接':
 lang=='id'?'koneksi':''}:</b> <span id="connects">0</span></div>
  
 <!-- ${lang=='ru'&&!n.VK ?`<div class="settingspanel"  onclick="purchaseTokens(this);">Купить сердечки &#x1f496;</div>`:''} -->
- <div class="settingspanel" onclick="showWhosOnline();">Кто онлайн</div> 
+ <div class="settingspanel" onclick="showWhosOnline();">${lang=='ru'?'Кто онлайн':`Who's online`}</div> 
 ${n.user?`<!-- <div class="settingspanel">
 <div class="some doh"style="overflow-x:auto;" >${n.user?n.user.name:'anon6'}  Ваш доход&nbsp;&nbsp;<span id="dohod">${n.user? n.user.zar:'0'}</span>&nbsp;руб.</div>
 <div class="du" onclick="getPayout(this);"><div>Получить</div> <div id="coinContainer">${getCoin()}</div></div>

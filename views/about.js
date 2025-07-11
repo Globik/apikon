@@ -76,7 +76,7 @@ ${lang=='id'?'':'<a href="/about/id" hreflang="id">'}<img title="Индонез�
             <div class="logoЧатРулетка"></div>
             <h1 class="hero__title">${ln=='ru'?ru.herotitle:ln=='zh'?zh.herotitle:en.herotitle}</h1>
             <h2 id="sukaK" class="hero__subtitle">${ln=='ru'?ru.herosubtitle:ln=='zh'?zh.herosubtitle:en.herosubtitle}</h2>
-            <button class="btn btn_orange" id="start_chat_btn">${ln=='ru'?ru.knopka:ln=='zh'?zh.knopka:`Start chatting`}</button>
+            <a href="${ln=='ru'?'/about':ln=='zh'?'/about/zh':'/about/en'}"><button class="btn btn_orange" id="start_chat_btn">${ln=='ru'?ru.knopka:ln=='zh'?zh.knopka:`Start chatting`}</button></a>
             <div class="hero__mobile-btn only-mobile">
                 <a href="https://play.google.com/store/apps/details?id=ru.rouletka.pwa" class="btn btn_play-market only-mobile">
                     <svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="google-play" class="svg-inline--fa fa-google-play fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -314,9 +314,9 @@ let scene = document.querySelector('#scene');
 let parallaxInstance = new Parallax(scene);
 
 let start_chat_btn = document.querySelector('#start_chat_btn');
-start_chat_btn.onclick = suka;
+//start_chat_btn.onclick = suka;
 function suka(){
-	window.location.href="/about";
+	//window.location.href="/about";
 }
 </script>
 
