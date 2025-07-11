@@ -892,6 +892,8 @@ function on_msg(msg) {
 		}else if(msg.subtype == "ban2"){
 		//	alert('ban2');
 			handleBan2(msg);
+		}else if(msg.subtype == "ban3"){
+			handleBan3(msg);
 		}else if(msg.subtype == "bannedok"){
 			PARTNERUSERID = msg.partneruserid;
 			//alert('user ip ' + msg.ip);
@@ -903,6 +905,10 @@ function on_msg(msg) {
 		//	alert('bnok2');
 			note({ content: "Забанили суку", type: "info", time: 5 });
 			stopInkognito();
+		}else if(msg.subtype == 'bannedok3'){
+			note({ content: "Забанили суку по нику", type: "info", time: 5 });
+			banOk3(msg);
+			//stopInkognito();
 		}else if(msg.subtype == 'lateroffer'){
 			inkognitoSetRemoteDescription(msg);
 		}else if(msg.subtype == 'incognitoconnected'){
@@ -1161,13 +1167,13 @@ if(gid("Brole").value == "admin"){
 			btnban.className = "btn-ban";
 			btnban.setAttribute('onclick', "ban();");
 			btnban.textContent = "Ban";
-			div.appendChild(btnban);
+			//div.appendChild(btnban);
 			
 			var btnban2 = document.createElement('button');
 			btnban2.className = "btn-ban2";
 			btnban2.setAttribute('onclick', "ban2();");
 			btnban2.textContent = "Ban2";
-			div.appendChild(btnban2);
+			//div.appendChild(btnban2);
 }
 	  let el = document.createElement('video');
 	  el.className = "video-box";
@@ -1495,6 +1501,10 @@ async function pleaseDoCall(msg){
  var arsch;
  var bika = false;
  function ban(){
+	 if(gid("BAN").value === "1"){
+		 banus(TARGETID);
+		 return;
+	 }
 	// alert('target '+ TARGETID+ ' my sock '+MYSOCKETID);
 	//alert('userId '+gid('userId').value);
 	 wsend({ type: "target", subtype: "ban", from: MYSOCKETID, target: TARGETID  });
@@ -1505,7 +1515,25 @@ async function pleaseDoCall(msg){
 	//alert('userId '+gid('userId').value);
 	 wsend({ type: "target", subtype: "ban2", from: MYSOCKETID, target: TARGETID  });
  }
- 
+ function banus(TARG){
+	// alert('banus'+TARG);
+	 wsend({ type: "target", subtype: "ban3", from: MYSOCKETID, target: TARG  });
+ }
+ function handleBan3(obj){
+	// alert('handleban3');
+	 window.location.href = "#banned";
+	 gid("Grund").value = 1;
+	 wsend({ type: "target", subtype: "bannedok3", target: obj.from , nick: gid('userName').value, usid: gid('userId').value, from: MYSOCKETID });	
+	  closeAll(startbtn);
+ }
+ function banOk3(obj){
+	 note({ content: obj.nick + " : " + obj.usid, type: "info", time: 5 });
+	 let d = {};
+	 d.nick = obj.nick;
+	 d.usid = obj.usid;
+	 d.numb = 1;
+	 vax('post','/admin/OneBanned', d, on_ban_it, on_ban_it_error, null, false);
+ }
  function handleBan2(obj){
 	 //alert(obj.from);
 	 let durak = "some";

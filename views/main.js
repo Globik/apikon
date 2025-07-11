@@ -5,7 +5,7 @@ const { whosonline } = require('./whosonline.js')
 const { banus } = require('./banus.js')
 const { banip } = require('./banip.js')
 function main(n){
-	const BAN = 0;
+	const BAN = 1;
 	let istestheart = (n.istestheart==1?true:false);
 	const { lang , buser, user } = n;
 	//console.log("N ",n);
@@ -172,6 +172,7 @@ ${process.env.DEVELOPMENT == "yes" ? '':`<!-- Yandex.Metrika counter -->
     <noscript>
       <strong>We're sorry but chatroulette doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
+    <input type="hidden" id="BAN" value="${BAN==1?'1':'0'}" />
    <input type="hidden" id="isLogin" value="${n.user?true:false}"/>
     <input type="hidden" id="userId" value="${n.user?n.user.id:0}">
     <input type="hidden" id="userIp" value="${n.ip?n.ip:'noip'}"/>

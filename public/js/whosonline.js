@@ -101,8 +101,13 @@ function loadError(ma){
 	vax('post','/removePrizrak', { id: a }, function(){}, function(){}, null, false);
 }
 function banv(el){
-	if(confirm("Забанить по айпи адресу?")){
 	let a = el.getAttribute('data-rid');
+	 if(gid("BAN").value === "1"){
+		if(a) banus(a);
+		 return;
+	 }
+	if(confirm("Забанить по айпи адресу?")){
+	
 	//alert(a);
 	wsend({ type: "target", subtype: "ban", from: MYSOCKETID, target: a });
 }
