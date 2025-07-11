@@ -1912,9 +1912,10 @@ async function start(el){
 	let userName=gid('userName').value;
 	let usip = gid('userIp').value;
 	//alert(usip);
-	
-	
-	 if(gid('isLogin').value == "false"){
+	if( userName === "anon"){
+		  await fetch('/newfucker', {method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify({txt:"username "+userName +" id "+ gid('userId').value })});
+	}
+	 if(gid('isLogin').value == "false" || userName == "anon"){
 		let s = (L()=="ru"?"Залогиньтесь!":L()=='en'?"Please log in":L()=='zh'?'请登录':L()=='id'?'Silahkan masuk':'')
 		 note({content: s, type: "warn", time: 5 });
 	window.location.href="#login";
