@@ -1525,7 +1525,7 @@ servi = https
 }
 const ORIGINAL = "https://rouletka.ru";
 const wsServer = new WebSocket.Server({server: servi, verifyClient:(info,cb)=>{
-	console.log('info.origin: ', info.origin);
+	//console.log('info.origin: ', info.origin);
 if(process.env.DEVELOPMENT === "yes"){cb(true);return;}else{
 if(info.origin === ORIGINAL){cb(true);return;}
 cb(false);
@@ -1564,6 +1564,17 @@ console.log('suka ', ed2, " ", ign.size)
 //var bb=[...ign].some((l)=>l==2)
 //console.log("isEven(1) ", isEven(1))
 async function searchPeer (socket, msg, source) {
+	if(socket.nick === 'anon'){
+		
+		if(onLine.has(socket.id)) {
+			onLine.delete(socket.id)
+			dynamic({ type: "dynamic", sub: "remove", id: socket.id, camcount: onLine.size });
+		 if(isEven(matchedIds.size)) broadcasti({ type: "connected2", size: matchedIds.size /2,cams:onLine.size });
+		  broadcasti({ type: 'connected3', cams: onLine.size });
+		}
+		socket.terminate();
+		return;
+	}
 	//console.log('msg****',msg);
 //searchPeer(socket, { type: 'peer-matched' }, { src: msg.src, ignores: msg.ignores })
 	//	console.log("search peer 1",  waitingQueue.length, waitingQueue);
