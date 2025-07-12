@@ -98,7 +98,7 @@ lang=='id'?`Terbukanya dunia komunikasi dan kenalan baru baik jiwa raga, maupun 
  <script src="/js/adapter-latest.js"></script> 
 <!-- <script src="/js/sound.js"></script> -->
  ${process.env.DEVELOPMENT=="yes"?'':`
- <script src="https://apis.google.com/js/platform.js" async defer></script>
+ <script src="https://apis.google.com/js/platform.js?onload=vrinit" async defer></script>
  <script src="https://unpkg.com/@vkid/sdk@2.3.0/dist-sdk/umd/index.js"></script>
  <script>
 
@@ -112,7 +112,20 @@ VKID.Config.init({
 	scope:'email',
 	mode:VKID.ConfigAuthMode.InNewTab
 });
-</script>`}
+</script>
+<script>
+function vrinit(){
+	gapi.load('auth2', function(){
+		gapi,auth2.init({
+			client_id:"670345469807-00tg40l1deqkmqqkc9db01r76tva6ien.apps.googleusercontent.com"
+		}).then(function{}).catch(function(e){
+			console.error(e);
+		});
+	});
+}
+</script>
+
+`}
 
  ${n.settings.env=="production"?`<script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script> `:''}
 <!-- <script src="https://vk.com/js/api/share.js?93"></script> -->
