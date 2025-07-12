@@ -29,7 +29,8 @@ return `
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- <meta name="viewport" content="width=device-width,initial-scale=1.0"> -->
     <meta name="viewport" content="width=device-width,user-scalable=no" />
-    <meta name="google-signing-client_id" content="670345469807-00tg40l1deqkmqqkc9db01r76tva6ien.apps.googleusercontent.com">
+    <meta name="google-signin-client_id" content="670345469807-00tg40l1deqkmqqkc9db01r76tva6ien.apps.googleusercontent.com">
+    <meta name="google-signin-use_fdcm" content="true">
     <link rel="icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
 		<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
