@@ -352,9 +352,29 @@ async function handleCredentialResponse(response){
 		}
 		//alert(c);
 		console.warn(c);
+		let da2 = {};
+da2.password='123456';
+da2.user_id = c.userid;
+da2.name = c.name;
+
+da2.type = "gl";
+let abba=JSON.stringify(da2);
+
+let res3 = await fetch('/api/register', { method: "POST",headers: {  "Content-Type": "application/json",},body: abba});
+if(res3.ok){
+		console.log('ok');
+		let data = await res3.json();
+		//console.log('data: ', data);
+		if(data.error){
+			note({ content: data.message, type: "error", time: 5 });
+return;
 	}
+	window.location.href="#."
+	window.location.reload(true);
+}
+}
 }catch(e){
-	alert(e);
+	note({ content: e, type: 'error', time: 5 });
 }
 	
 }

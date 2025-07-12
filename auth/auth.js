@@ -21,7 +21,7 @@ passport.deserializeUser(async function(user, cb){
 	
 	//console.log("deserialize user", user);
 		try{
-			let useri = await db.query('select id,name,zar,entr,vkid,tgid, brole,heart,theart,prem,mon,grund from users left join ban on users.id=ban.usid where users.id=(?)', [ user ]);
+			let useri = await db.query('select id,name,zar,entr,vkid,tgid,glid, brole,heart,theart,prem,mon,grund from users left join ban on users.id=ban.usid where users.id=(?)', [ user ]);
 			//console.log("USERI ", useri[0]);
 		return cb(null, useri[0]);
 	}catch(er){
@@ -181,6 +181,24 @@ return done(null, false, {error:true, message: "Ник " + username + " уже �
 		return done(null, result4[0].id, { message: "ok", status:200, name: result4[0].name, id: result4[0].id });
 	}else{
 		let result5 = await db.query(`insert into users(name, vkid, password) values(?,?,'1234')`, [ name, user_id ]);
+		return done(null, result5.insertId.toString(), { username: name, status: 200, message: "Success!"});
+	}
+}catch(err){
+	//console.log(err);
+	return done(null, false, { error: true, message: err.message, status: 405 })
+}
+		
+		
+}else if(ty == "gl"){
+	//	console.log("body ", req.body);
+		var { user_id, name } = req.body;
+		
+		try{
+	let result4 = await db.query(`select*from users where glid=(?)`, [ user_id ]);
+	if(result4.length > 0){
+		return done(null, result4[0].id, { message: "ok", status:200, name: result4[0].name, id: result4[0].id });
+	}else{
+		let result5 = await db.query(`insert into users(name, glid, password) values(?,?,'1234')`, [ name, user_id ]);
 		return done(null, result5.insertId.toString(), { username: name, status: 200, message: "Success!"});
 	}
 }catch(err){

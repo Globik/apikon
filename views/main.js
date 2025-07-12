@@ -985,9 +985,9 @@ ababa();
  ${n.VK?'':`<script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="RouletkaBot" data-size="large" data-onauth="onTelega(user)"  data-request-access="write"></script>`}
  
           </div><br><br>
-          <div id="VkIdSdkOAuthList"></div>
+          <div id="VkIdSdkOAuthList"></div><br><br>
           <script src="https://accounts.google.com/gsi/client" async defer></script>
-          <div id="g_id_onload" data-client_id="670345469807-00tg40l1deqkmqqkc9db01r76tva6ien.apps.googleusercontent.com" data-callback="handleCredentialResponse"></div>
+          <div id="g_id_onload" data-client_id="670345469807-00tg40l1deqkmqqkc9db01r76tva6ien.apps.googleusercontent.com" data-callback="handleCredentialResponse" data-auto_prompt="false"></div>
           <div class="g_id_signin" data-type="standart"></div>
         </div>
     </output>

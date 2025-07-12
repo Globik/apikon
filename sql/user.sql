@@ -26,6 +26,7 @@ alter table users add column entr int not null default 0;
 alter table users drop column tgid;
 alter table users add column tgid bigint;
 alter table users add column vkid bigint;
+alter table users add column glid bigint;
 alter table users add column zar bigint not null default 0;
 
 DROP INDEX IF EXISTS name ON users; 
