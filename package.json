@@ -32,6 +32,7 @@
     "express-fileupload": "^1.5.1",
     "express-session": "^1.17.3",
     "fast-xml-parser": "^4.5.0",
+    "google-auth-library": "^10.1.0",
     "mariadb": "^3.2.2",
     "mediasoup": "^3.14.7",
     "mediasoup-client": "^3.7.12",

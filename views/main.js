@@ -29,6 +29,7 @@ return `
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- <meta name="viewport" content="width=device-width,initial-scale=1.0"> -->
     <meta name="viewport" content="width=device-width,user-scalable=no" />
+    <meta name="google-signing-client_id" content="670345469807-00tg40l1deqkmqqkc9db01r76tva6ien.apps.googleusercontent.com">
     <link rel="icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
 		<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
@@ -96,7 +97,9 @@ lang=='id'?`Terbukanya dunia komunikasi dan kenalan baru baik jiwa raga, maupun 
 <!-- <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script> -->
  <script src="/js/adapter-latest.js"></script> 
 <!-- <script src="/js/sound.js"></script> -->
- ${process.env.DEVELOPMENT=="yes"?'':`<script src="https://unpkg.com/@vkid/sdk@2.3.0/dist-sdk/umd/index.js"></script>
+ ${process.env.DEVELOPMENT=="yes"?'':`
+ <script src="https://apis.google.com/js/platform.js" async defer></script>
+ <script src="https://unpkg.com/@vkid/sdk@2.3.0/dist-sdk/umd/index.js"></script>
  <script>
 
 const VK_APP_ID = 52271555;
@@ -979,6 +982,7 @@ ababa();
  
           </div><br><br>
           <div id="VkIdSdkOAuthList"></div>
+          <div class="g-signin2" data-onsuccess="onGoogle"></div>
         </div>
     </output>
     
@@ -1022,7 +1026,7 @@ ababa();
     
     <audio style="display:none;" id="auel" autoplay></audio> 
     
-   <script src="/js/login2.js"></script>
+   <script src="/js/login3.js"></script>
    
     <script src="/js/webrtc2.js"></script>
     <script src="/js/whosonline.js"></script>

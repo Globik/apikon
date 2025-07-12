@@ -1244,6 +1244,26 @@ app.post('/api/setstun', checkAuth, checkRole(['admin']), async(req, res)=>{
 		res.status(400).send({ message: err.name });
 	}
 })
+
+const { OAuth2Client } = require('google-auth-library');
+const cl = new OAuth2Client();
+app.post('/checkGoogle', async(req, res)=>{
+	let { token, name } = req.body;
+	if(!token || !name){
+		return res.json({ error: true, message: 'no token or name' });
+	}
+	try{
+	const ticket = await cl.verifyIdToken({
+		idToken: token,
+		audience: "670345469807-00tg40l1deqkmqqkc9db01r76tva6ien.apps.googleusercontent.com"
+	});
+	const payload = ticket.getPayload();
+	const userid = payload['sub'];
+	res.json({ userid: userid });
+}catch(e){
+	res.json({ error: true, message: e });
+}
+})
 const btcurl = "https://api.bitaps.com/btc/v1/";
 const mybtcaddress = "bc1qjd6sdgd23h9vknhfd2l3gt3elsw3w8v9ngpj5t";
 /* rr  {

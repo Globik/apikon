@@ -289,7 +289,7 @@ da2.name = usinfo.user.first_name;
 da2.type = "vk";
 let abba=JSON.stringify(da2);
 //alert('abba '+abba)
-let res3 = await fetch('/api/register', {method: "POST",headers: {  "Content-Type": "application/json",},body: abba});
+let res3 = await fetch('/api/register', { method: "POST",headers: {  "Content-Type": "application/json",},body: abba});
 if(res3.ok){
 		console.log('ok');
 		let data=await res3.json();
@@ -335,3 +335,52 @@ ati();
 
 }
 }catch(e){console.warn(e)}
+
+async function onGoogle(googleUser){
+	try{
+	let profile = googleUser.getBasicProfile();
+	alert(profile.getName());
+	let id_token = googleUser.getAuthResponse().id_token;
+	alert('id_token '+id_token);
+	let b = await fetch('/checkGoogle', {method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify({name: profile.getName(), token: id_token })});
+	if(b.ok){
+		
+		alert(b);
+	}
+}catch(e){
+	alert(e);
+}
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
