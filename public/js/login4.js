@@ -342,7 +342,7 @@ async function handleCredentialResponse(response){
 	//alert(response);
 	console.warn(response);
 	let id_token = response.credential;
-	alert('id_token '+id_token);
+	//alert('id_token '+id_token);
 	let b = await fetch('/checkGoogle', {method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify({name: 'm', token: id_token })});
 	if(b.ok){
 		let c = await b.json();
