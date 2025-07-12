@@ -336,11 +336,11 @@ ati();
 }
 }catch(e){console.warn(e)}
 
-async function onGoogle(googleUser){
+async function handleCredentialResponse(response){
 	try{
-	let profile = googleUser.getBasicProfile();
+	let profile = response.getBasicProfile();
 	alert(profile.getName());
-	let id_token = googleUser.getAuthResponse().id_token;
+	let id_token = response.credential;
 	alert('id_token '+id_token);
 	let b = await fetch('/checkGoogle', {method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify({name: profile.getName(), token: id_token })});
 	if(b.ok){
