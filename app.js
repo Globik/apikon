@@ -1248,8 +1248,8 @@ app.post('/api/setstun', checkAuth, checkRole(['admin']), async(req, res)=>{
 const { OAuth2Client } = require('google-auth-library');
 const cl = new OAuth2Client();
 app.post('/checkGoogle', async(req, res)=>{
-	let { token, name } = req.body;
-	if(!token || !name){
+	let { token } = req.body;
+	if(!token){
 		return res.json({ error: true, message: 'no token or name' });
 	}
 	try{
@@ -1259,7 +1259,8 @@ app.post('/checkGoogle', async(req, res)=>{
 	});
 	const payload = ticket.getPayload();
 	const userid = payload['sub'];
-	res.json({ userid: userid });
+	const name = payload['name'];
+	res.json({ userid: userid, name: name });
 }catch(e){
 	res.json({ error: true, message: e });
 }
