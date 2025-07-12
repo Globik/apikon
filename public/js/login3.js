@@ -338,11 +338,12 @@ ati();
 
 async function handleCredentialResponse(response){
 	try{
-	let profile = response.getBasicProfile();
-	alert(profile.getName());
+	//let profile = response.getBasicProfile();
+	alert(response);
+	console.warn(response);
 	let id_token = response.credential;
 	alert('id_token '+id_token);
-	let b = await fetch('/checkGoogle', {method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify({name: profile.getName(), token: id_token })});
+	let b = await fetch('/checkGoogle', {method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify({name: 'm', token: id_token })});
 	if(b.ok){
 		
 		alert(b);
