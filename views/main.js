@@ -118,7 +118,7 @@ function vrinit(){
 	gapi.load('auth2', function(){
 		gapi,auth2.init({
 			client_id:"670345469807-00tg40l1deqkmqqkc9db01r76tva6ien.apps.googleusercontent.com"
-		}).then(function{}).catch(function(e){
+		}).then(function(){}).catch(function(e){
 			console.error(e);
 		});
 	});
