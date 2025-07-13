@@ -31,7 +31,7 @@ function handleDynamic(obj){
 		let d = document.createElement("div");
 		d.className="dynamicbox";
 		d.setAttribute("data-id", el[1].id);
-		d.innerHTML=`<div class="caption">${el[1].nick}</div><div class="dynamicImgHalter"><img data-pid="${el[1].id}" onclick="callInkognito(this);" onerror="loadError(this);" src="${el[1].src}"/></div>`;
+		d.innerHTML=`<div class="caption">${el[1].nick.substring(0,5)}</div><div class="dynamicImgHalter"><img data-pid="${el[1].id}" onclick="callInkognito(this);" onerror="loadError(this);" src="${el[1].src}"/></div>`;
 		if(Brole.value == 'admin'){
 			let kdiv = document.createElement('div');
 			kdiv.className = "kdiv";
@@ -61,7 +61,7 @@ function handleDynamic(obj){
 		d.className="dynamicbox";
 		d.setAttribute("data-id", obj.id);
 		//console.log('obj.src ', obj.src);
-		d.innerHTML=`<div class="caption">${obj.nick}</div><div class="dynamicImgHalter"><img data-pid="${obj.id}" onclick="callInkognito(this);" src="${obj.src}" onerror="loadError(this);"/></div>`;
+		d.innerHTML=`<div class="caption">${obj.nick.substring(0,5)}</div><div class="dynamicImgHalter"><img data-pid="${obj.id}" onclick="callInkognito(this);" src="${obj.src}" onerror="loadError(this);"/></div>`;
 		if(Brole.value == 'admin'){
 			let kdiv = document.createElement('div');
 			kdiv.className = "kdiv";

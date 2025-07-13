@@ -2535,7 +2535,7 @@ return imgdata22;
 		}
  tru = ev.target.addTextTrack("captions", "Titles", "ru");
    tru.mode="showing";
-   let cue = new VTTCue(0.0,100090.9, '<b class="vtt">' + reverseString(partnernick?partnernick:'anon') + '</b>' + '  '+ (partnerpremium=="y"?'👑':''));
+   let cue = new VTTCue(0.0,100090.9, '<b class="vtt">' + reverseString(partnernick?partnernick.substring(0,5):'anon') + '</b>' + '  '+ (partnerpremium=="y"?'👑':''));
    cue.snapToLines=false;
    cue.lineAlign='center';
    //cue.vertical="rl"
