@@ -1167,13 +1167,13 @@ if(gid("Brole").value == "admin"){
 			btnban.className = "btn-ban";
 			btnban.setAttribute('onclick', "ban();");
 			btnban.textContent = "Ban";
-			//div.appendChild(btnban);
+			div.appendChild(btnban);
 			
 			var btnban2 = document.createElement('button');
 			btnban2.className = "btn-ban2";
 			btnban2.setAttribute('onclick', "ban2();");
 			btnban2.textContent = "Ban2";
-			//div.appendChild(btnban2);
+			div.appendChild(btnban2);
 }
 	  let el = document.createElement('video');
 	  el.className = "video-box";
@@ -1915,15 +1915,16 @@ async function start(el){
 	if( userName === "anon"){
 		//  await fetch('/newfucker', {method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify({txt:"username "+userName +" id "+ gid('userId').value })});
 	}
+	/*
 	 if(gid('isLogin').value == "false" || userName == "anon"){
 		let s = (L()=="ru"?"Залогиньтесь!":L()=='en'?"Please log in":L()=='zh'?'请登录':L()=='id'?'Silahkan masuk':'')
 		 note({content: s, type: "warn", time: 5 });
 	window.location.href="#login";
 		return;
 	  }
-	  
+	  */
 	  if( userName === "undefined" || userName == "anon"){
-		  await fetch('/newfucker', {method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify({txt:"username "+userName+' id '+ gid('userId').value})});
+		//  await fetch('/newfucker', {method: "POST", headers: {"Content-Type": "application/json",},body: JSON.stringify({txt:"username "+userName+' id '+ gid('userId').value})});
 		 //let si = (L()=="ru"?"Залогиньтесь!":L()=='en'?"Please log in":L()=='zh'?'请登录':L()=='id'?'Silahkan masuk':'')
 		// note({content: si, type: "warn", time: 5 });
 	//window.location.href="#login";

@@ -1585,7 +1585,7 @@ console.log('suka ', ed2, " ", ign.size)
 //var bb=[...ign].some((l)=>l==2)
 //console.log("isEven(1) ", isEven(1))
 async function searchPeer (socket, msg, source) {
-	if(socket.nick === 'anon'){
+/*	if(socket.nick === 'anon'){
 		
 		if(onLine.has(socket.id)) {
 			onLine.delete(socket.id)
@@ -1595,7 +1595,7 @@ async function searchPeer (socket, msg, source) {
 		}
 		socket.terminate();
 		return;
-	}
+	}*/
 	//console.log('msg****',msg);
 //searchPeer(socket, { type: 'peer-matched' }, { src: msg.src, ignores: msg.ignores })
 	//	console.log("search peer 1",  waitingQueue.length, waitingQueue);

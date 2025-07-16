@@ -5,7 +5,7 @@ const { whosonline } = require('./whosonline.js')
 const { banus } = require('./banus.js')
 const { banip } = require('./banip.js')
 function main(n){
-	const BAN = 1;
+	const BAN = 0;
 	let istestheart = (n.istestheart==1?true:false);
 	const { lang , buser, user } = n;
 	//console.log("N ",n);
