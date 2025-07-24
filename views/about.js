@@ -171,7 +171,14 @@ ${lang=='id'?'':'<a href="/about/id" hreflang="id">'}<img title="Индонез�
             </div>
 
     </section>
-    <div><a href="/photos">rouletka.ru</a></div>
+     <output id="mygameoutput" class="popi"><div><a href="#" style="font-size:1.1rem;color:blue;">Закрыть</a></div>
+    <section id="fotocont"><img id="chatik" src="/img/chatikon.png"/>
+    <header>Групповой Видеочат</header>
+    <section class="flgame"><p> <a target="_blank" href="https://chatikon.ru"> Перейти на <span class="chatikon">chatikon.ru</span></a></p></section>
+  
+    </section>
+    </output>
+    
    <!-- <div id="yandex_rtb_R-A-12098170-6"></div>
     <script>
     window.yaContextCb.push(()=>{

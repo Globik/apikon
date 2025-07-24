@@ -84,7 +84,15 @@ a:hover {
 ul li {
     list-style: none;
 }
-
+#fotocont{
+	font-size: 20px;
+	background:#efa3ef;
+	padding:10px;
+}
+#chatik{
+	width:100px;
+	height:100px;
+}
 img {
     vertical-align: top;
 }

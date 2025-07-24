@@ -32,6 +32,26 @@ div.icon-change-cam-div{
 	cursor:pointer;
 	z-index:1;
 }
+#fotocont{
+position:relative;
+	width:50;
+	height:50px;
+	font-size:10px;
+}
+#fotocont p{
+	font-size:24px;
+}
+#chatik{
+poition:absolute;
+top:0;
+left:0;
+	width:100px;
+	height:100px;
+}
+.flgame{
+	width:50%;
+	font-size:18px;
+}
 img.icon-change-cam{
 	
 }

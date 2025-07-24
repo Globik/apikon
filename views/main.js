@@ -535,6 +535,11 @@ ${n.user && !n.VK?`<div class="settingspanel" onclick="logout(this);">${lang=='r
     <section id="mobileloader"><div class="loader"></div></section>
     
     <video id="remote"  class="Vid" autoplay playsinline poster="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"></video>
+    <section id="fotocont"><img id="chatik" src="/img/chatikon.png"/>
+    <header>Групповой Видеочат</header>
+    <section class="flgame"><p> <a target="_blank" href="https://chatikon.ru"> Перейти на <span class="chatikon">chatikon.ru</span></a></p></section>
+  
+    </section>
      <div id="duka2">Жизнь как рулетка. Никогда не узнаешь, кого встретишь следующим...</div>
      <!-- MOBILE! -->
  <section id="mobileChat" class="hide">
@@ -1056,7 +1061,7 @@ window.addEventListener("load", () => {
                     "altCallback": reject,
                     "onClose": function(){
 						console.warn("reklama in Image closed");
-						setTimeout(function(){
+					c	setTimeout(function(){
 							console.warn("REKLAMA IN IMAGE MUST BE SHOWED");
 							renderInImage(2, Array.from(document.querySelectorAll(".Vid")))
 						}, 1000 * 60 * 1);
