@@ -1585,6 +1585,15 @@ console.log('suka ', ed2, " ", ign.size)
 //var bb=[...ign].some((l)=>l==2)
 //console.log("isEven(1) ", isEven(1))
 async function searchPeer (socket, msg, source) {
+	let finger = socket.fingerPrint;
+	try{
+		let result = await db.query('select*from banip where ip=(?)', [ finger ]);
+		if(result.length > 0){
+			return;
+		}
+	}catch(e){
+		
+	}
 /*	if(socket.nick === 'anon'){
 		
 		if(onLine.has(socket.id)) {
@@ -1645,7 +1654,7 @@ async function searchPeer (socket, msg, source) {
      // console.log(`#${socket.id} matches #${peerId}`)
      if(!onLine.has(socket.id)) {
 		
-if(source.src)	 onLine.set(socket.id, { id: socket.id, src: source.src, nick: socket.nick });
+if(source.src)	 onLine.set(socket.id, { id: socket.id, finger: socket.fingerPrint, src: source.src, nick: socket.nick });
 	// broadcast({ type: "dynamic", sub: "add", id: socket.id, partnerid: peerId, nick: socket.nick, status: 'busy', camcount: onLine.size});
 	if(source.src) dynamic({ type: "dynamic", sub: "add", id: socket.id, partnerid: peerId, src: source.src, nick: socket.nick, status: 'busy', camcount: onLine.size, waiting: waitingQueue });
 	 if(isEven(matchedIds.size)) broadcasti({ type: "connected2", size: matchedIds.size/2 });
@@ -1668,7 +1677,7 @@ if(source.src)	 onLine.set(socket.id, { id: socket.id, src: source.src, nick: so
  if(!onLine.has(socket.id)) {
 	// console.log("*** ONLINE *** ", onLine.has(socket.id));
 	 
-	 onLine.set(socket.id, { id: socket.id, src: source.src, nick: socket.nick });
+	 onLine.set(socket.id, { id: socket.id, src: source.src, finger: socket.fingerPrint, nick: socket.nick });
 	// broadcast({ type: "dynamic", sub: "add", id: socket.id, nick: socket.nick, status: 'free', camcount: onLine.size });
 	if(source.src) dynamic({ type: "dynamic", sub: "add", id: socket.id, src: source.src, nick: socket.nick, camcount: onLine.size });
 	 //console.log('ONLINE 2', onLine);

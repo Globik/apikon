@@ -31,6 +31,7 @@ function handleDynamic(obj){
 		let d = document.createElement("div");
 		d.className="dynamicbox";
 		d.setAttribute("data-id", el[1].id);
+		d.setAttribute("data-finger", el[1].finger);
 		d.innerHTML=`<div class="caption">${el[1].nick.substring(0,5)}</div><div class="dynamicImgHalter"><img data-pid="${el[1].id}" onclick="callInkognito(this);" onerror="loadError(this);" src="${el[1].src}"/></div>`;
 		if(Brole.value == 'admin'){
 			let kdiv = document.createElement('div');
@@ -38,6 +39,7 @@ function handleDynamic(obj){
 			kdiv.innerHTML = `${String.fromCodePoint(0x274C)}`;
 			kdiv.setAttribute("onclick", "banv(this);");
 			kdiv.setAttribute('data-rid',el[1].id);
+			kdiv.setAttribute('data-rfinger', el[1].finger);
 			d.appendChild(kdiv);
 		}
 		whosonlinecontent.appendChild(d);
@@ -60,6 +62,7 @@ function handleDynamic(obj){
 		let d = document.createElement("div");
 		d.className="dynamicbox";
 		d.setAttribute("data-id", obj.id);
+		d.setAttribute("data-finger", obj.finger);
 		//console.log('obj.src ', obj.src);
 		d.innerHTML=`<div class="caption">${obj.nick.substring(0,5)}</div><div class="dynamicImgHalter"><img data-pid="${obj.id}" onclick="callInkognito(this);" src="${obj.src}" onerror="loadError(this);"/></div>`;
 		if(Brole.value == 'admin'){
@@ -67,6 +70,7 @@ function handleDynamic(obj){
 			kdiv.className = "kdiv";
 			kdiv.setAttribute("onclick", "banv(this);");
 			kdiv.setAttribute('data-rid',obj.id);
+			kdiv.setAttribute('data-rfinger',obj.finger);
 			kdiv.innerHTML = `${String.fromCodePoint(0x274C)}`
 			d.appendChild(kdiv);
 		}

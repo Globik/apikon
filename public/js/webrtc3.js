@@ -1513,6 +1513,7 @@ async function pleaseDoCall(msg){
   function ban2(){
 	//alert('target '+ TARGETID+ ' my sock '+MYSOCKETID);
 	//alert('userId '+gid('userId').value);
+	
 	 wsend({ type: "target", subtype: "ban2", from: MYSOCKETID, target: TARGETID  });
  }
  function banus(TARG){
@@ -2503,7 +2504,7 @@ return imgdata22;
 		let amap=[['0',{}]];
 	//if(IPS.size > 0) amap = IPS;
 	//console.error("amap", amap, IPS);
-		wsend({ type:'search-peer', nick: (NICK?NICK:'Anon'), src: imgdata , ignores: [...IPS] });
+		wsend({ type:'search-peer', nick: (NICK?NICK:'Anon'), src: imgdata , ignores: [...IPS], fingerPrint: (fingerPrint?fingerPrint.substring(0,40):'finger') });
 	}, 3000);
 	someInterval = setInterval(doScreenshot, 60*1000 );
 		somespinner.className="show";

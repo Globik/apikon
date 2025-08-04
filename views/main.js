@@ -535,11 +535,11 @@ ${n.user && !n.VK?`<div class="settingspanel" onclick="logout(this);">${lang=='r
     <section id="mobileloader"><div class="loader"></div></section>
     
     <video id="remote"  class="Vid" autoplay playsinline poster="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"></video>
-    <section id="fotocont"><img id="chatik" src="/img/chatikon.png"/>
+   <!-- <section id="fotocont"><img id="chatik" src="/img/chatikon.png"/>
     <header>Групповой Видеочат</header>
     <section class="flgame"><p> <a target="_blank" href="https://chatikon.ru"> Перейти на <span class="chatikon">chatikon.ru</span></a></p></section>
   
-    </section>
+    </section> -->
      <div id="duka2">Жизнь как рулетка. Никогда не узнаешь, кого встретишь следующим...</div>
      <!-- MOBILE! -->
  <section id="mobileChat" class="hide">
@@ -730,7 +730,7 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
 	 "platform":"touch",
 	 "onClose":function(){
 			console.log("Reklama closed")
-			
+			setTimeout(function(){ababa();}, 1000*60)
 			//if(isLogin.value=="true")
 			//window.location.href="#setPrem";
 			}
@@ -744,7 +744,7 @@ window.yaContextCb.push(()=>{
 	 "platform":"desktop",
 	 "onClose":function(){
 			console.log("Reklama closed")
-			
+			setTimeout(function(){ababa();}, 1000*60)
 			//if(isLogin.value=="true")
 			//window.location.href="#setPrem";
 			}
