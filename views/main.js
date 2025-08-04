@@ -692,6 +692,7 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
 			"platform":"desktop",
 			"onClose":function(){
 			console.log("Reklama closed")
+			setTimeout(function(){getReklama();}, 1000 * 500)
 			if(kkk == 1){
 				//if(isLogin.value=="true")
 			//	window.location.href="#setPrem";
@@ -707,6 +708,7 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
 			"platform":"touch",
 			"onClose":function(){
 			console.log("Reklama closed")
+			setTimeout(function(){getReklama();}, 1000 * 500)
 			if(kkk == 1){
 			//if(isLogin.value=="true")
 		//	window.location.href="#setPrem";
@@ -717,7 +719,7 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
 	 }
 	 })
  }
-//if(isLogin.value=="false") getReklama();
+if(isLogin.value=="false") getReklama();
 	 </script> 
 	 <script>
 	 function ababa(){
