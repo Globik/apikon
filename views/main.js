@@ -1061,7 +1061,7 @@ window.addEventListener("load", () => {
                     "altCallback": reject,
                     "onClose": function(){
 						console.warn("reklama in Image closed");
-					c	setTimeout(function(){
+						setTimeout(function(){
 							console.warn("REKLAMA IN IMAGE MUST BE SHOWED");
 							renderInImage(2, Array.from(document.querySelectorAll(".Vid")))
 						}, 1000 * 60 * 1);
