@@ -729,7 +729,7 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
 	 "type":"fullscreen",
 	 "platform":"touch",
 	 "onClose":function(){
-			console.log("Reklama closed")
+			console.log("Reklama fullscreen closed")
 			setTimeout(function(){ababa();}, 1000*60)
 			//if(isLogin.value=="true")
 			//window.location.href="#setPrem";
@@ -743,7 +743,7 @@ window.yaContextCb.push(()=>{
 	 "type":"fullscreen",
 	 "platform":"desktop",
 	 "onClose":function(){
-			console.log("Reklama closed")
+			console.log("Reklama fullscreen closed")
 			setTimeout(function(){ababa();}, 1000*60)
 			//if(isLogin.value=="true")
 			//window.location.href="#setPrem";
