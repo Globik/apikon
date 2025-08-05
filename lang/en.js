@@ -1,7 +1,7 @@
 const en = {
-	name: `Chat roulette`,
-	title: `Chat roulette - video chat for communication, online dating.`,
-	descr: `Chat roulette for users from all over the world. Random encounters in video chat. Got a webcam? Find a partner in chat roulette!`,
+	name: `Chatroulette`,
+	title: `Chatroulette - free no registration video chat for communication, online dating.`,
+	descr: `Chatroulette for users from all over the world. Random encounters in video chat 18+. Got a webcam? Find a partner in chat roulette! Omegle`,
 	herotitle: `Video chat — random encounters.`,
 	herosubtitle: `Meet new people right now!`,
 	knopka: `Start chatting`,
