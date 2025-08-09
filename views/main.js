@@ -723,6 +723,8 @@ if(isLogin.value=="false") getReklama();
 	 </script> 
 	 <script>
 	 function getTop(){
+	 if(Brole.value==="admin") return;
+	  if(Prem.value !="n") return;
 		 window.yaContextCb.push(()=>{
 	 Ya.Context.AdvManager.render({
 	 "blockId":"R-A-12098170-11",
@@ -730,6 +732,7 @@ if(isLogin.value=="false") getReklama();
  })
 })
 	 }
+	 getTop();
 	 function ababa(){
 	  if(Brole.value==="admin") return;
 	  if(Prem.value !="n") return;
