@@ -439,7 +439,7 @@ window.onhashchange = function(ev){
 		 })
 	 })
 	 </script> -->
-	 <script>
+	<!-- <script>
 	 function getTop(){
 	 if(Brole.value==="admin") return;
 	 // if(Prem.value !="n") return;
@@ -451,7 +451,7 @@ window.onhashchange = function(ev){
 })
 	 }
 	 getTop();
-	 </script>
+	 </script> -->
      <article id="mediabox">
     <nav id="navpanel"><div class="nav"><b>Онлайн: <span id="onlineCount">0</span></b>&nbsp;&nbsp;&nbsp; <b id="VKUSERNAME">${n.user?n.user.name:'anon'}</b>
     
@@ -705,7 +705,7 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
 			"platform":"desktop",
 			"onClose":function(){
 			console.log("Reklama closed")
-			setTimeout(function(){getReklama();}, 1000 * 50)
+			setTimeout(function(){getReklama();}, 1000 * 5)
 			if(kkk == 1){
 				//if(isLogin.value=="true")
 			//	window.location.href="#setPrem";
@@ -721,7 +721,7 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
 			"platform":"touch",
 			"onClose":function(){
 			console.log("Reklama closed")
-			setTimeout(function(){getReklama();}, 1000 * 50)
+			setTimeout(function(){getReklama();}, 1000 * 5)
 			if(kkk == 1){
 			//if(isLogin.value=="true")
 		//	window.location.href="#setPrem";
@@ -747,7 +747,7 @@ if(isLogin.value=="false") getReklama();
 	 "onClose":function(){
 			console.log("Reklama fullscreen closed")
 			setTimeout(function(){console.warn("must fullscreen show");ababa();}, 1000*60)
-			setTimeout(function(){console.warn("must fullscreen show");getTop();}, 1000*3)
+			//setTimeout(function(){console.warn("must fullscreen show");getTop();}, 1000*3)
 			//if(isLogin.value=="true")
 			//window.location.href="#setPrem";
 			}
