@@ -439,19 +439,22 @@ window.onhashchange = function(ev){
 		 })
 	 })
 	 </script> -->
-	<!-- <script>
+	 <script>
 	 function getTop(){
 	 if(Brole.value==="admin") return;
 	 // if(Prem.value !="n") return;
 		 window.yaContextCb.push(()=>{
 	 Ya.Context.AdvManager.render({
 	 "blockId":"R-A-12098170-11",
-	 "type":"topAd"
+	 "type":"topAd",
+	 "onClose":function(){
+			console.log("Reklama closed")
+			setTimeout(function(){getTop();}, 1000 * 5)}
  })
 })
 	 }
 	 getTop();
-	 </script> -->
+	 </script> 
      <article id="mediabox">
     <nav id="navpanel"><div class="nav"><b>Онлайн: <span id="onlineCount">0</span></b>&nbsp;&nbsp;&nbsp; <b id="VKUSERNAME">${n.user?n.user.name:'anon'}</b>
     
@@ -714,6 +717,7 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
 			},
 		 })
 	 }else{
+	 /*
 		 kkk++;
 		 Ya.Context.AdvManager.render({
 		 "blockId":"R-A-12098170-5",
@@ -729,7 +733,7 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
 		}
 			}
 		})
-	 }
+	*/ }
 	 })
  }
 if(isLogin.value=="false") getReklama();
