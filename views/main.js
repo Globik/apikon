@@ -453,7 +453,7 @@ window.onhashchange = function(ev){
  })
 })
 	 }
-	 getTop();
+	// getTop();
 	 </script> 
      <article id="mediabox">
     <nav id="navpanel"><div class="nav"><b>Онлайн: <span id="onlineCount">0</span></b>&nbsp;&nbsp;&nbsp; <b id="VKUSERNAME">${n.user?n.user.name:'anon'}</b>
@@ -717,7 +717,7 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
 			},
 		 })
 	 }else{
-	 /*
+	 
 		 kkk++;
 		 Ya.Context.AdvManager.render({
 		 "blockId":"R-A-12098170-5",
@@ -725,7 +725,7 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
 			"platform":"touch",
 			"onClose":function(){
 			console.log("Reklama closed")
-			setTimeout(function(){getReklama();}, 1000 * 5)
+			setTimeout(function(){getReklama();}, 1000 * 50)
 			if(kkk == 1){
 			//if(isLogin.value=="true")
 		//	window.location.href="#setPrem";
@@ -733,7 +733,7 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
 		}
 			}
 		})
-	*/ }
+	}
 	 })
  }
 if(isLogin.value=="false") getReklama();
