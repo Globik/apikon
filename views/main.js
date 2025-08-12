@@ -725,7 +725,7 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
 			"platform":"touch",
 			"onClose":function(){
 			console.log("Reklama closed")
-			setTimeout(function(){getReklama();}, 1000 * 50)
+			setTimeout(function(){getReklama();}, 1000 * 30)
 			if(kkk == 1){
 			//if(isLogin.value=="true")
 		//	window.location.href="#setPrem";
