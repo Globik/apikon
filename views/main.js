@@ -453,7 +453,7 @@ window.onhashchange = function(ev){
  })
 })
 	 }
-	// getTop();
+	getTop();
 	 </script> 
      <article id="mediabox">
     <nav id="navpanel"><div class="nav"><b>Онлайн: <span id="onlineCount">0</span></b>&nbsp;&nbsp;&nbsp; <b id="VKUSERNAME">${n.user?n.user.name:'anon'}</b>
@@ -700,7 +700,7 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
 		 if(Brole.value==="admin") return;
      window.yaContextCb.push(()=>{
      if(Ya.Context.AdvManager.getPlatform()==='desktop'){
-		 kkk++;
+		/* kkk++;
 		 Ya.Context.AdvManager.render({
 			 "blockId":"R-A-12098170-3",
 			// "renderTo":"yandex_rtb_R-A-12098170-1
@@ -716,7 +716,7 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
 		}
 			},
 		 })
-	 }else{
+	 */}else{
 	 
 		 kkk++;
 		 Ya.Context.AdvManager.render({

@@ -2049,7 +2049,7 @@ async function start(el){
 		audio:true ,
 	video: {deviceId: videoInput1 ? {exact: videoInput1} : undefined,
 		width:320, height:240, 
-		frameRate: 30
+		//frameRate: 30
 		}
 		};
 	
