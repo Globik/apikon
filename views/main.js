@@ -449,11 +449,11 @@ window.onhashchange = function(ev){
 	 "type":"topAd",
 	 "onClose":function(){
 			console.log("Reklama closed")
-			setTimeout(function(){getTop();}, 1000 * 5)}
+			setTimeout(function(){getTop();}, 1000 * 30)}
  })
 })
 	 }
-	//getTop();
+	getTop();
 	 </script> 
      <article id="mediabox">
     <nav id="navpanel"><div class="nav"><b>Онлайн: <span id="onlineCount">0</span></b>&nbsp;&nbsp;&nbsp; <b id="VKUSERNAME">${n.user?n.user.name:'anon'}</b>
@@ -717,6 +717,7 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
 			},
 		 })
 	 }else{
+	 /*
 	 
 		 kkk++;
 		 Ya.Context.AdvManager.render({
@@ -733,6 +734,7 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
 		}
 			}
 		})
+	*/
 	}
 	 })
  }
