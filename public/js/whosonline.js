@@ -2,7 +2,17 @@ function showWhosOnline(){
 	window.location.href = "#whosonline";
 	wsend({ type: 'getList'});
 	panelOpen();
-	setbanner();
+	
+      if(Brole.value==="admin") return;
+     window.yaContextCb.push(()=>{
+		 Ya.Context.AdvManager.render({
+			 "blockId":"R-A-12098170-9",
+			 "renderTo":"yandex_rtb_R-A-12098170-9",
+			  "onClose":function(){
+			console.log("Reklama closed")
+			//setTimeout(function(){setbanner();}, 1000 * 30)}
+		 })
+	 })
 }
 function removeList(){
 	wsend({ type: "removeList"});
