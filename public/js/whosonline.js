@@ -10,7 +10,8 @@ function showWhosOnline(){
 			 "renderTo":"yandex_rtb_R-A-12098170-9",
 			  "onClose":function(){
 			console.log("Reklama closed")
-			//setTimeout(function(){setbanner();}, 1000 * 30)}
+			//setTimeout(function(){setbanner();}, 1000 * 30)
+			}
 		 })
 	 })
 }
