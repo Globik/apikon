@@ -19,7 +19,7 @@ const whosonline = function(n){
 		 })
 	 })
  }
- setbanner();
+ //setbanner();
 	 </script> 
     <section id="whosonlinecontent">
     
