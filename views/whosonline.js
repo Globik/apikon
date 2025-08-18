@@ -7,12 +7,19 @@ const whosonline = function(n){
       <div id="yandex_rtb_R-A-12098170-9"></div>
      <script>
      // https://yandex.ru/support2/partner/ru/web/units/sizes
+     function setbanner(){
+      if(Brole.value==="admin") return;
      window.yaContextCb.push(()=>{
 		 Ya.Context.AdvManager.render({
 			 "blockId":"R-A-12098170-9",
-			 "renderTo":"yandex_rtb_R-A-12098170-9"
+			 "renderTo":"yandex_rtb_R-A-12098170-9",
+			  "onClose":function(){
+			console.log("Reklama closed")
+			setTimeout(function(){setbanner();}, 1000 * 30)}
 		 })
 	 })
+ }
+ setbanner();
 	 </script> 
     <section id="whosonlinecontent">
     
