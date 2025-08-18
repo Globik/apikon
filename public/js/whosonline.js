@@ -2,6 +2,7 @@ function showWhosOnline(){
 	window.location.href = "#whosonline";
 	wsend({ type: 'getList'});
 	panelOpen();
+	setbanner();
 }
 function removeList(){
 	wsend({ type: "removeList"});
@@ -9,6 +10,8 @@ function removeList(){
 	while(whosonlinecontent.firstChild){
 		whosonlinecontent.firstChild.remove();
 	}
+	let mu = gid("yandex_rtb_R-A-12098170-9");
+	if(mu)mu.innerHTML = "";
 }
 function handleDynamic(obj){
 	//return;
