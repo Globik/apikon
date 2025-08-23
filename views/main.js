@@ -449,7 +449,7 @@ window.onhashchange = function(ev){
 	 "type":"topAd",
 	 "onClose":function(){
 			console.log("Reklama closed")
-			//setTimeout(function(){getTop();}, 1000 * 30)
+			//setTimeout(function(){getTop();}, 1000 * 60*2)
 			}
  })
 })
@@ -718,7 +718,7 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
 			},
 		 })
 	 }else{
-	 /*
+	 
 	 
 		 kkk++;
 		 Ya.Context.AdvManager.render({
@@ -727,7 +727,7 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
 			"platform":"touch",
 			"onClose":function(){
 			console.log("Reklama closed")
-			//setTimeout(function(){getReklama();}, 1000 * 10)
+			setTimeout(function(){getReklama();}, 1000 * 60*2)
 			if(kkk == 1){
 			//if(isLogin.value=="true")
 		//	window.location.href="#setPrem";
@@ -735,7 +735,7 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
 		}
 			}
 		})
-	*/
+	
 	}
 	 })
  }
