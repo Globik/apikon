@@ -454,7 +454,7 @@ window.onhashchange = function(ev){
  })
 })
 	 }
-	getTop();
+	//getTop();
 	 </script> 
      <article id="mediabox">
     <nav id="navpanel"><div class="nav"><b>Онлайн: <span id="onlineCount">0</span></b>&nbsp;&nbsp;&nbsp; <b id="VKUSERNAME">${n.user?n.user.name:'anon'}</b>
