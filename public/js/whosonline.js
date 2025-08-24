@@ -24,6 +24,11 @@ function removeList(){
 	let mu = gid("yandex_rtb_R-A-12098170-9");
 	if(mu)mu.innerHTML = "";
 }
+function closeRek(el){
+	el.remove();
+	let mu = gid("yandex_rtb_R-A-12098170-9");
+	if(mu)mu.innerHTML = "";
+}
 function handleDynamic(obj){
 	//return;
 	//alert('dynamo');
