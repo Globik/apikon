@@ -2941,13 +2941,13 @@ function iceConnectionStateChangeHandler (event) {
     console.log('ice failed');
     note({ content: "Failed", type: "info", time: 5 });
     // note({content: "Failed! Press stop, then start", type: "warn", time: 5 });
-    next(nextbtn, false, false, false);
+    //next(nextbtn, false, false, false);
      break;
     case 'disconnected':
     note({ content: "Disconnected", type: "info", time: 5 });
     CONNECTED = false;
     console.log('ice disconnected');
-    next(nextbtn, false, false, false);
+    //next(nextbtn, false, false, false);
      // wsend( { type:'search-peer', nick: (NICK?NICK:"Anoni")/*, src: imgdata3,*/, ignores: [[0,{}]] });
    // note({content: "Временная потеря сигнала ", type: "warn", time: 10 });
       break;
