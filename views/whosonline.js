@@ -6,7 +6,7 @@ const whosonline = function(n){
     <span id="conns2">0</span></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#." class="krestik-two" onclick="removeList();">&#x274C;</a></div>
      <div id="yandex_rtb_R-A-12098170-9"></div>
      <div onclick="closeRek(this);">close ad</div>
-     <script>
+   <!--  <script>
      // https://yandex.ru/support2/partner/ru/web/units/sizes
      function setbanner(){
       if(Brole.value==="admin") return;
@@ -21,7 +21,7 @@ const whosonline = function(n){
 	 })
  }
  //setbanner();
-	 </script> 
+	 </script> -->
     <section id="whosonlinecontent">
     
     </section>
