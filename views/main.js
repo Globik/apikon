@@ -5,7 +5,7 @@ const { whosonline } = require('./whosonline.js')
 const { banus } = require('./banus.js')
 const { banip } = require('./banip.js')
 function main(n){
-	const BAN = 0;
+	const BAN = 1;
 	let istestheart = (n.istestheart==1?true:false);
 	const { lang , buser, user } = n;
 	//console.log("N ",n);
@@ -454,7 +454,7 @@ window.onhashchange = function(ev){
  })
 })
 	 }
-	//getTop();
+	getTop();
 	 </script> 
      <article id="mediabox">
     <nav id="navpanel"><div class="nav"><b>Онлайн: <span id="onlineCount">0</span></b>&nbsp;&nbsp;&nbsp; <b id="VKUSERNAME">${n.user?n.user.name:'anon'}</b>
@@ -488,7 +488,7 @@ lang=='zh'?'连接':
 lang=='id'?'koneksi':''}:</b> <span id="connects">0</span></div>
  
 <!-- ${lang=='ru'&&!n.VK ?`<div class="settingspanel"  onclick="purchaseTokens(this);">Купить сердечки &#x1f496;</div>`:''} -->
- <div class="settingspanel" onclick="showWhosOnline();">${lang=='ru'?'Кто онлайн':`Who's online`}</div> 
+${n.user&&n.user.brole=='admin'?` <div class="settingspanel" onclick="showWhosOnline();">${lang=='ru'?'Кто онлайн':`Who's online`}</div>`:''} 
  <div class="settingspanel"><a href="https://chatroulett.ru" style="color:red;">Опробывать новый чат</a></div> 
 ${n.user?`<!-- <div class="settingspanel">
 <div class="some doh"style="overflow-x:auto;" >${n.user?n.user.name:'anon6'}  Ваш доход&nbsp;&nbsp;<span id="dohod">${n.user? n.user.zar:'0'}</span>&nbsp;руб.</div>
@@ -719,7 +719,7 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
 			},
 		 })
 	 }else{
-	 
+	 /*
 	 
 		 kkk++;
 		 Ya.Context.AdvManager.render({
@@ -736,7 +736,7 @@ if(gid("giftbox2"))gid('giftbox2').style.display='none';
 		}
 			}
 		})
-	
+	*/
 	}
 	 })
  }
