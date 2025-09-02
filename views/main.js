@@ -418,9 +418,9 @@ window.onhashchange = function(ev){
 		},
 	{urls:[
 	"turn:rouletka.ru:3479?transport=udp",
-		"turn:rouletka.ru:3479?transport=tcp", 
+		//"turn:rouletka.ru:3479?transport=tcp", 
 		"turn:rouletka.ru:5348?transport=udp",
-		"turn:rouletka.ru:5348?transport=tcp" //no stun
+		//"turn:rouletka.ru:5348?transport=tcp" //no stun
 		]
 		,username:"alik",credential:"1234"}]};
 		/*
