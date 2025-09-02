@@ -402,7 +402,7 @@ window.onhashchange = function(ev){
   //  var ICESERVERS =n.stun?n.stun:null
  // vkBridge.send('VKWebAppInit').then(data=>{}).catch(function(er){})
   const DEVELOPMENT = "${process.env.DEVELOPMENT === "yes"?"yes":"no"}";
-  
+ /* 
   var ICESERVERS = {
   //iceTransportPolicy:"relay",
 	"iceServers":[
@@ -423,6 +423,19 @@ window.onhashchange = function(ev){
 		//"turn:rouletka.ru:5348?transport=tcp" //no stun
 		]
 		,username:"alik",credential:"1234"}]};
+		*/
+var ICESERVERS = {
+//iceTransportPolicy:"relay",
+iceServers:
+[
+{urls:"stun:stun.l.google.com:19302"},
+{
+urls:["turn:eu-0.turn.peerjs.com:3478","turn:us-0.turn.peerjs.com:3478"],
+username:"peerjs",credential:"peerjsp"
+}
+],
+sdpSemantics:"unified-plan"
+};
 
   
      </script>
