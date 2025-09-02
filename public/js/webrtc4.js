@@ -2927,6 +2927,7 @@ function iceConnectionStateChangeHandler (event) {
    if(goAg)clearTimeout(goAg);
     wsend({ type: "connected" });
     SUECH = false;
+    CONNECTED = true;
    // vax('post','/zartoone', { value: 300, id: gid('userId').value }, on_zar, on_zar_error, null, false);
     break;
     case 'complete':
@@ -2947,7 +2948,7 @@ function iceConnectionStateChangeHandler (event) {
     note({ content: "Disconnected", type: "info", time: 5 });
     CONNECTED = false;
     console.log('ice disconnected');
-    //next(nextbtn, false, false, false);
+    next(nextbtn, false, false, false);
      // wsend( { type:'search-peer', nick: (NICK?NICK:"Anoni")/*, src: imgdata3,*/, ignores: [[0,{}]] });
    // note({content: "Временная потеря сигнала ", type: "warn", time: 10 });
       break;
