@@ -2927,7 +2927,7 @@ function iceConnectionStateChangeHandler (event) {
    if(goAg)clearTimeout(goAg);
     wsend({ type: "connected" });
     SUECH = false;
-    CONNECTED = true;
+    //CONNECTED = true;
    // vax('post','/zartoone', { value: 300, id: gid('userId').value }, on_zar, on_zar_error, null, false);
     break;
     case 'complete':
