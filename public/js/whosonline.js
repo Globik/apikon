@@ -125,6 +125,7 @@ function loadError(ma){
 }
 function banv(el){
 	let a = el.getAttribute('data-rid');
+	/*
 	 if(gid("BAN").value === "1"){
 		 if(confirm("Забанить по нику?")){
 		if(a) banus(a);
@@ -132,6 +133,7 @@ function banv(el){
 	 }
 	 return;
 	 }
+	 */ 
 	if(confirm("Забанить по айпи адресу?")){
 	
 	//alert(a);
