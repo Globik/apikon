@@ -2945,7 +2945,7 @@ function iceConnectionStateChangeHandler (event) {
     //next(nextbtn, false, false, false);
      break;
     case 'disconnected':
-    note({ content: "Disconnected", type: "info", time: 5 });
+    //note({ content: "Disconnected", type: "info", time: 5 });
     CONNECTED = false;
     console.log('ice disconnected');
     next(nextbtn, false, false, false);
