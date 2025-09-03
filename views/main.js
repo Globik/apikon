@@ -403,7 +403,7 @@ window.onhashchange = function(ev){
  // vkBridge.send('VKWebAppInit').then(data=>{}).catch(function(er){})
   const DEVELOPMENT = "${process.env.DEVELOPMENT === "yes"?"yes":"no"}";
  
-  var ICESERVERS66 = {
+  var ICESERVERS = {
   iceTransportPolicy:"relay",
 	"iceServers":[
 	{
