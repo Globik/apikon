@@ -404,7 +404,7 @@ window.onhashchange = function(ev){
   const DEVELOPMENT = "${process.env.DEVELOPMENT === "yes"?"yes":"no"}";
  
   var ICESERVERS = {
-  iceTransportPolicy:"relay",
+ // iceTransportPolicy:"relay",
 	"iceServers":[
 	{
       "urls": "stun:stun.l.google.com:19302"
