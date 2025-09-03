@@ -404,7 +404,7 @@ window.onhashchange = function(ev){
   const DEVELOPMENT = "${process.env.DEVELOPMENT === "yes"?"yes":"no"}";
  
   var ICESERVERS = {
- // iceTransportPolicy:"relay",
+  //iceTransportPolicy:"relay",
 	"iceServers":[
 	{
       "urls": "stun:stun.l.google.com:19302"
@@ -422,19 +422,19 @@ window.onhashchange = function(ev){
 		"turn:rouletka.ru:5348",
 		//"turn:rouletka.ru:5348?transport=tcp" //no stun
 		]
-		,username:"alik",credential:"1234"}]};
+		,username:"alik4",credential:"4321"}]};
 		
-		var ICESERVERS666 = {
+		var ICESERVERS4 = {
 iceTransportPolicy:"relay",
 iceServers:
 [
 {urls:"stun:stun.l.google.com:19302"},
 {
-urls:["turn:eu-0.turn.peerjs.com:3478","turn:us-0.turn.peerjs.com:3478"],
-username:"peerjs",credential:"peerjsp"
+urls:["turn:turn00.natpro.ru:3478","turn:turn00.natpro.ru:5349"],
+username:"test_09", credential:"test_09"
 }
 ],
-sdpSemantics:"unified-plan"
+
 };
 
   

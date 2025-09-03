@@ -1851,6 +1851,7 @@ function handleNewIceCandidate(msg) {
 	//  if(makingOffer) return;
     try{
 		makingOffer = true;
+		console.log(offerOpts, pc);
 	const offer = await pc.createOffer(offerOpts)
 	//.then(function(offer){
 		//return 
@@ -2929,6 +2930,15 @@ function iceConnectionStateChangeHandler (event) {
     SUECH = false;
     //CONNECTED = true;
    // vax('post','/zartoone', { value: 300, id: gid('userId').value }, on_zar, on_zar_error, null, false);
+   setTimeout(function(){
+	   pc.getStats().then(function(stats){
+		   stats.forEach(function(report){
+			   if(report.type === 'local-candidate' || report.type === 'remote-candidate'){
+				   note({ content: report.candidateType, type: 'info', time: 5 });
+			   }
+		   });
+	   });
+   }, 2000);
     break;
     case 'complete':
       connectionState = 'open'
@@ -3106,7 +3116,7 @@ function iceCandidateError(e) {
     try{
     pc = new RTCPeerConnection(iceServers);
 }catch(er){
-	//alert(er);
+console.error(er);
 	return;
 }
 addLocalStream ();
