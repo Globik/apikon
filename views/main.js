@@ -422,7 +422,7 @@ window.onhashchange = function(ev){
 		"turn:rouletka.ru:5348",
 		//"turn:rouletka.ru:5348?transport=tcp" //no stun
 		]
-		,username:"alik4",credential:"4321"}]};
+		,username:"alik4",credential:"43212"}]};
 		
 		var ICESERVERS4 = {
 iceTransportPolicy:"relay",
