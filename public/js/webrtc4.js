@@ -2934,7 +2934,7 @@ function iceConnectionStateChangeHandler (event) {
 	   pc.getStats().then(function(stats){
 		   stats.forEach(function(report){
 			   if(report.type === 'local-candidate' || report.type === 'remote-candidate'){
-				   note({ content: report.candidateType, type: 'info', time: 5 });
+				   console.log(report.candidateType);
 			   }
 		   });
 	   });
